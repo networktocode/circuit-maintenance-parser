@@ -1,0 +1,19 @@
+{
+  "account": "137.035999173",
+  "end": 1444644000,
+  "maintenance_id": "WorkOrder-31415",
+  "circuits": [
+    {
+      "impact": "NO-IMPACT",
+      "circuit_id": "acme-widgets-as-a-service"
+    }
+  ],
+  "organizer": "mailto:noone@example.com",
+  "provider": "example.com",
+  "sequence": 3,
+  "stamp": 1444608600,
+  "start": 1444636800,
+  "status": "CANCELLED",
+  "summary": "Maint Note Example",
+  "uid": "42"
+}

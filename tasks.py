@@ -16,6 +16,7 @@ def is_truthy(arg):
     Examples:
         >>> is_truthy('yes')
         True
+
     Args:
         arg (str): Truthy string (True values are y, yes, t, true, on and 1; false values are n, no,
         f, false, off and 0. Raises ValueError if val is anything else.
@@ -24,13 +25,14 @@ def is_truthy(arg):
         return arg
     return bool(strtobool(arg))
 
+
 PYPROJECT_CONFIG = toml.load("pyproject.toml")
 TOOL_CONFIG = PYPROJECT_CONFIG["tool"]["poetry"]
 
 # Can be set to a separate Python version to be used for launching or building image
 PYTHON_VER = os.getenv("PYTHON_VER", "3.8")
 # Name of the docker image/image
-IMAGE_NAME = os.getenv("IMAGE_NAME", TOOL_CONFIG['name'])
+IMAGE_NAME = os.getenv("IMAGE_NAME", TOOL_CONFIG["name"])
 # Tag for the image
 IMAGE_VER = os.getenv("IMAGE_VER", f"{TOOL_CONFIG['version']}-py{PYTHON_VER}")
 # Gather current working directory for Docker commands
@@ -61,9 +63,7 @@ def run_cmd(context, exec_cmd, local=INVOKE_LOCAL):
 
 
 @task
-def build(
-    context, nocache=False, forcerm=False, hide=False
-):  # pylint: disable=too-many-arguments
+def build(context, nocache=False, forcerm=False, hide=False):
     """Build a Docker image.
 
     Args:
@@ -116,7 +116,7 @@ def pytest(context, local=INVOKE_LOCAL):
         context (obj): Used to run specific commands
         local (bool): Define as `True` to execute locally
     """
-    exec_cmd = "pytest -vv"
+    exec_cmd = "pytest"
     run_cmd(context, exec_cmd, local)
 
 
