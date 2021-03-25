@@ -2,7 +2,7 @@
 import os
 import sys
 from distutils.util import strtobool
-from invoke import task
+from invoke import task  # type: ignore
 
 try:
     import toml
@@ -16,6 +16,7 @@ def is_truthy(arg):
     Examples:
         >>> is_truthy('yes')
         True
+
     Args:
         arg (str): Truthy string (True values are y, yes, t, true, on and 1; false values are n, no,
         f, false, off and 0. Raises ValueError if val is anything else.
@@ -24,13 +25,14 @@ def is_truthy(arg):
         return arg
     return bool(strtobool(arg))
 
+
 PYPROJECT_CONFIG = toml.load("pyproject.toml")
 TOOL_CONFIG = PYPROJECT_CONFIG["tool"]["poetry"]
 
 # Can be set to a separate Python version to be used for launching or building image
 PYTHON_VER = os.getenv("PYTHON_VER", "3.8")
 # Name of the docker image/image
-IMAGE_NAME = os.getenv("IMAGE_NAME", TOOL_CONFIG['name'])
+IMAGE_NAME = os.getenv("IMAGE_NAME", TOOL_CONFIG["name"])
 # Tag for the image
 IMAGE_VER = os.getenv("IMAGE_VER", f"{TOOL_CONFIG['version']}-py{PYTHON_VER}")
 # Gather current working directory for Docker commands
@@ -61,9 +63,7 @@ def run_cmd(context, exec_cmd, local=INVOKE_LOCAL):
 
 
 @task
-def build(
-    context, nocache=False, forcerm=False, hide=False
-):  # pylint: disable=too-many-arguments
+def build(context, nocache=False, forcerm=False, hide=False):
     """Build a Docker image.
 
     Args:
@@ -116,7 +116,7 @@ def pytest(context, local=INVOKE_LOCAL):
         context (obj): Used to run specific commands
         local (bool): Define as `True` to execute locally
     """
-    exec_cmd = "pytest -vv"
+    exec_cmd = "pytest"
     run_cmd(context, exec_cmd, local)
 
 
@@ -141,6 +141,21 @@ def flake8(context, local=INVOKE_LOCAL):
         local (bool): Define as `True` to execute locally
     """
     exec_cmd = "flake8 ."
+    run_cmd(context, exec_cmd, local)
+
+
+@task
+def mypy(context, local=INVOKE_LOCAL):
+    """This will run mypy for the specified name and Python version.
+
+    Args:
+        context (obj): Used to run specific commands
+        image_ver (str): Define image version
+        local (bool): Define as `True` to execute locally
+    """
+    # pty is set to true to properly run the docker commands due to the invocation process of docker
+    # https://docs.pyinvoke.org/en/latest/api/runners.html - Search for pty for more information
+    exec_cmd = 'find . -name "*.py" | xargs mypy --show-error-codes'
     run_cmd(context, exec_cmd, local)
 
 
@@ -218,5 +233,6 @@ def tests(context, local=INVOKE_LOCAL):
     pydocstyle(context, local)
     bandit(context, local)
     pytest(context, local)
+    mypy(context, local)
 
     print("All tests have passed!")

@@ -8,9 +8,12 @@ authors = ["Network to Code, LLC <info@networktocode.com>"]
 python = "^3.8"
 pydantic = {version = "^1.7.2", extras = ["dotenv"]}
 toml = "0.10.1"
+icalendar = "^4.0.7"
+bs4 = "^0.0.1"
+lxml = "^4.6.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.4.1"
+pytest = "^6.2.2"
 requests_mock = "^1.7.0"
 pyyaml = "^5.3"
 black = "^19.10b0"
@@ -21,18 +24,10 @@ bandit = "^1.6.2"
 invoke = "^1.4.1"
 toml = "0.10.1"
 flake8 = "^3.8.3"
+mypy = "^0.812"
 
 [tool.poetry.scripts]
 circuitmaint_parser = 'circuitmaint_parser.cli:main'
-
-[tool.circuitmaint_parser]
-string_required = "some string"
-array_default = ["a", "b", "c"]
-url_default = "http://localhost"
-ip_address = "192.168.0.1"
-ip_network = "2001:db8:3c4d:15::/64"
-file = "README.md"
-
 
 [tool.black]
 line-length = 120
@@ -60,6 +55,9 @@ exclude = '''
 [tool.pylint.basic]
 # No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.
 no-docstring-rgx="^(_|test_|Meta$)"
+extension-pkg-whitelist = [
+    "pydantic",
+]
 
 [tool.pylint.messages_control]
 # Line length is enforced by Black, so pylint doesn't need to check it.
@@ -82,5 +80,4 @@ build-backend = "poetry.masonry.api"
 
 [tool.pytest.ini_options]
 python_paths = "./"
-testpaths = "tests/"
-adopts = "-vv"
+addopts = "-vv --doctest-modules"

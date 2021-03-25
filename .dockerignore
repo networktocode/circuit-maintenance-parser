@@ -1,9 +1,0 @@
-**/*.pyc
-**/*.pyo
-**/*.log
-.git/
-.gitignore
-Dockerfile
-docker-compose.yml
-.env
-docs/_build
