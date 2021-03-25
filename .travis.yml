@@ -4,21 +4,22 @@ stages:
   - "lint"
   - "test"
 
-if: "type IN (pull_request)"  # Add in "branch" as an option if desired for branch testing as well
-language: "python"
-services:
-  - "docker"
+if: "type IN (pull_request)" # Add in "branch" as an option if desired for branch testing as well
 
-env:
-  matrix:
-    - "PYTHON_VER=3.7"
-    - "PYTHON_VER=3.8"
-    - "PYTHON_VER=3.9"
+language: "python"
+
+python:
+  - 3.6
+  - 3.7
+  - 3.8
+  - 3.9
+
+# Script & Before Script for test stage
 before_script:
   - "pip install invoke poetry toml"
-  - "invoke build --nocache"
+  - "poetry install"
 script:
-  - "invoke pytest"
+  - "invoke pytest --local"
 
 jobs:
   include:
@@ -26,11 +27,14 @@ jobs:
       env:
         - "INVOKE_LOCAL=True"
       before_script:
-        - "pip install invoke toml"
+        - "pip install invoke poetry toml"
+        - "poetry install --no-interaction --no-ansi --no-root"
       script:
         - "invoke black"
-        - "invoke bandit"  # Bandit fails to function on > Py3.8 https://github.com/PyCQA/bandit/issues/639
+        - "invoke bandit" # Bandit fails to function on > Py3.8 https://github.com/PyCQA/bandit/issues/639
         - "invoke pydocstyle"
+        - "invoke mypy"
         - "invoke flake8"
         - "invoke yamllint"
         - "invoke pylint"
+      python: 3.7
