@@ -2,6 +2,8 @@
 
 from typing import Iterable
 import base64
+import calendar
+import datetime
 
 from pydantic import BaseModel, ValidationError
 from icalendar import Calendar  # type: ignore
@@ -79,6 +81,11 @@ class MaintenanceNotification(BaseModel):
     def process(self) -> Iterable[Maintenance]:
         """Method that returns a list of Maintenance objects."""
         raise NotImplementedError
+
+    @staticmethod
+    def dt2ts(date_time: datetime.datetime) -> int:
+        """Converts a datetime object to UTC timestamp. Naive datetime will be considered UTC."""
+        return calendar.timegm(date_time.utctimetuple())
 
 
 class ICal(MaintenanceNotification):

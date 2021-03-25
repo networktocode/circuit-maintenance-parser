@@ -1,6 +1,6 @@
 {
   "account": "clientX",
-  "end": 1601028000,
+  "end": 1601035200,
   "maintenance_id": "TTN-00000000",
   "circuits": [
     {
@@ -11,8 +11,8 @@
   "organizer": "mr@zayo.com",
   "provider": "zayo",
   "sequence": 1,
-  "stamp": 1599429600,
-  "start": 1601010000,
+  "stamp": 1599436800,
+  "start": 1601017200,
   "status": "CONFIRMED",
   "summary": "Zayo will implement planned maintenance to troubleshoot and restore degraded span",
   "uid": "0"

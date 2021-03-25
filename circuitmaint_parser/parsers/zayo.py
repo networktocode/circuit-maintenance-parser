@@ -1,5 +1,4 @@
 """Zayo parser."""
-import datetime
 from typing import Iterable, Union, Dict
 import bs4  # type: ignore
 import dateutil.parser as parser
@@ -41,15 +40,15 @@ class ParserZayo(Html):
                             if "( GMT )" in sibling.text:
                                 window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                                 start = parser.parse(window.pop(0))
-                                data["start"] = int(datetime.datetime.timestamp(start))
+                                data["start"] = self.dt2ts(start)
                                 end = parser.parse(window.pop(0))
-                                data["end"] = int(datetime.datetime.timestamp(end))
+                                data["end"] = self.dt2ts(end)
                                 break
                     elif line.text.lower().strip().startswith("reason for maintenance:"):
                         data["summary"] = self.clean_line(line.next_sibling)
                     elif line.text.lower().strip().startswith("date notice sent:"):
-                        stamp = start = parser.parse(self.clean_line(line.next_sibling))
-                        data["stamp"] = int(datetime.datetime.timestamp(stamp))
+                        stamp = parser.parse(self.clean_line(line.next_sibling))
+                        data["stamp"] = self.dt2ts(stamp)
                     elif line.text.lower().strip().startswith("customer:"):
                         data["account"] = self.clean_line(line.next_sibling)
 
