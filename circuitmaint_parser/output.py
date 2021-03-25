@@ -51,7 +51,7 @@ class Status(str, Enum):
 class CircuitImpact(BaseModel):
     """CircuitImpact class.
 
-    Each Circuit Mainteinance can contain multiple affected circuits, and each one can have a different level of impact.
+    Each Circuit Maintenance can contain multiple affected circuits, and each one can have a different level of impact.
 
     Attributes:
         circuit_id: Circuit unique identifier.

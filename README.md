@@ -25,7 +25,7 @@ and the use the standarised output to handle the circuit maintenances in a much 
 # Getting started
 
 ```python
-from circuitmaint_parser import MaintenanceNotification, get_parser
+from circuitmaint_parser import init_notification_parser
 
 raw_text = """BEGIN:VCALENDAR
 VERSION:2.0
@@ -50,15 +50,13 @@ END:VCALENDAR
 """
 
 data = {
-    "subject": "this is a circuit maintenance from some NSP",
-    "sender": "support@networkserviceprovider.com",
-    "source": "gmail",
-    "raw": raw_text,
+  "subject": "this is a circuit maintenance from some NSP",
+  "sender": "support@networkserviceprovider.com",
+  "source": "gmail",
+  "raw": raw_text,
 }
 
-notification = MaintenanceNotification(**data)
-
-parser = get_parser(notification.provider_type)(**notification.__dict__)
+parser = init_notification_parser(**data)
 
 parsed_notifications = parser.process()
 
@@ -93,20 +91,13 @@ print(parsed_notifications[0].to_json())
 
 ## Requirements
 
-* Install `poetry`
-* Install dependencies and library locally: `poetry install`
-* Run CI tests locally: `invoke tests`
+- Install `poetry`
+- Install dependencies and library locally: `poetry install`
+- Run CI tests locally: `invoke tests`
 
 ## How to add a new Circuit Maintenance parser?
 
 1. Add a Circuit Maintenance integration test for the new provider parser, with at least one test case under `tests/integration/data`.
 2. Within `circuitmaint_parser/parsers`, add your new parser, inheriting from generic `MaintenanceNotification` class or
-custom ones such as ` ICal` or `Html`.
+   custom ones such as ` ICal` or `Html`.
 3. Expose the new parser class updating the map `SUPPORTED_PROVIDER_PARSERS` in `circuitmaint_parser/__init__.py` to officially expose the parser.
-
-
-# TODO:
-
-* CI
-* logging, structlog
-* entrypoint

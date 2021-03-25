@@ -19,9 +19,9 @@ class MaintenanceNotification(BaseModel):
 
     Attributes:
         raw: Raw notification message
+        provider_type: Identifier of the provider of the notification
         sender: Identifier of the source of the notification (default "")
         subject: Subject of the notification (default "")
-        provider_type: Identifier of the provider of the notification (default "")
         source: Identifier of the source where this notification was obtained (default "")
 
     Examples:
@@ -32,10 +32,14 @@ class MaintenanceNotification(BaseModel):
         ...     source="gmail",
         ...     provider_type="ntt",
         ... )
-        MaintenanceNotification(raw='raw_message', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', provider_type='ntt', source='gmail')
+        MaintenanceNotification(raw='raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
 
         >>> MaintenanceNotification(raw="raw_message")
-        MaintenanceNotification(raw='raw_message', sender='', subject='', provider_type='ical', source='')
+        Traceback (most recent call last):
+        ...
+        pydantic.error_wrappers.ValidationError: 1 validation error for MaintenanceNotification
+        provider_type
+          field required (type=value_error.missing)
 
         >>> MaintenanceNotification("raw_message")
         Traceback (most recent call last):
@@ -45,9 +49,9 @@ class MaintenanceNotification(BaseModel):
     """
 
     raw: str
+    provider_type: str
     sender: str = ""
     subject: str = ""
-    provider_type: str = "ical"
     source: str = ""
 
     # Internal placeholder for parser customization
@@ -82,6 +86,8 @@ class ICal(MaintenanceNotification):
 
     Reference: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-00
     """
+
+    provider_type: str = "ical"
 
     # Internal placeholder for parser customization
     _default_provider = "ical"

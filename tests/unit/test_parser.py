@@ -3,7 +3,7 @@ import os
 
 import pytest
 
-from circuitmaint_parser import get_parser, get_parser_from_sender, get_provider_data_type
+from circuitmaint_parser import init_notification_parser, get_parser, get_parser_from_sender, get_provider_data_type
 from circuitmaint_parser import ICal
 from circuitmaint_parser.errors import NonexistentParserError
 from circuitmaint_parser.parsers.ntt import ParserNTT
@@ -12,6 +12,27 @@ from circuitmaint_parser.parsers.zayo import ParserZayo
 from circuitmaint_parser.parsers.eunetworks import ParserEUNetworks
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
+
+
+@pytest.mark.parametrize(
+    "raw, provider_type, result_type",
+    [
+        ("raw_text", "wrong", None),
+        ("raw_text", "", ICal),
+        ("raw_text", "ical", ICal),
+        ("raw_text", "ntt", ParserNTT),
+        ("raw_text", "packetfabric", ParserPacketFabric),
+        ("raw_text", "eunetworks", ParserEUNetworks),
+        ("raw_text", "zayo", ParserZayo),
+    ],
+)
+def test_init_notification_parser(raw, provider_type, result_type):
+    """Tests for init_notification_parser."""
+    result = init_notification_parser(raw=raw, provider_type=provider_type)
+    if result_type:
+        assert isinstance(result, result_type)
+    else:
+        assert result is None
 
 
 @pytest.mark.parametrize(

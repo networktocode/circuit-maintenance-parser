@@ -1,6 +1,6 @@
 """Notifications parser init."""
 
-from typing import Type
+from typing import Type, Optional
 
 from .errors import NonexistentParserError
 from .parser import MaintenanceNotification, ICal
@@ -20,6 +20,19 @@ SUPPORTED_PROVIDER_PARSERS = (
 
 SUPPORTED_PROVIDER_NAMES = [parser.get_default_provider() for parser in SUPPORTED_PROVIDER_PARSERS]
 SUPPORTED_ORGANIZER_EMAILS = [parser.get_default_organizer() for parser in SUPPORTED_PROVIDER_PARSERS]
+
+
+def init_notification_parser(**kwargs) -> Optional[MaintenanceNotification]:
+    """Returns an instance of the corresponding Notification Parser."""
+    try:
+        provider_type = kwargs.get("provider_type")
+        if not provider_type:
+            provider_type = "ical"
+        parser_type = get_parser(provider_type)
+        return parser_type(**kwargs)
+
+    except NonexistentParserError:
+        return None
 
 
 def get_parser(provider_name: str) -> Type[MaintenanceNotification]:
@@ -67,4 +80,4 @@ def get_provider_data_type(provider_name: str) -> str:
     return parser.get_data_type()
 
 
-__all__ = ["get_parser", "get_parser_from_sender", "get_provider_data_type"]
+__all__ = ["init_notification_parser", "get_parser", "get_parser_from_sender", "get_provider_data_type"]

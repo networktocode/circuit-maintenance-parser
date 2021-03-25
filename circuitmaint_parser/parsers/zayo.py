@@ -14,6 +14,8 @@ from circuitmaint_parser.parser import Html, Impact, CircuitImpact, Maintenance,
 class ParserZayo(Html):
     """Notifications Parser for Zayo notifications."""
 
+    provider_type: str = "zayo"
+
     # Default values for Zayo notifications
     _default_provider = "zayo"
     _default_organizer = "mr@zayo.com"
