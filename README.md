@@ -25,7 +25,7 @@ and the use the standarised output to handle the circuit maintenances in a much 
 # Getting started
 
 ```python
-from circuitmaint_parser import init_notification_parser
+from circuitmaint_parser import init_parser
 
 raw_text = """BEGIN:VCALENDAR
 VERSION:2.0
@@ -56,7 +56,7 @@ data = {
   "raw": raw_text,
 }
 
-parser = init_notification_parser(**data)
+parser = init_parser(**data)
 
 parsed_notifications = parser.process()
 

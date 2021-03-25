@@ -22,7 +22,7 @@ SUPPORTED_PROVIDER_NAMES = [parser.get_default_provider() for parser in SUPPORTE
 SUPPORTED_ORGANIZER_EMAILS = [parser.get_default_organizer() for parser in SUPPORTED_PROVIDER_PARSERS]
 
 
-def init_notification_parser(**kwargs) -> Optional[MaintenanceNotification]:
+def init_parser(**kwargs) -> Optional[MaintenanceNotification]:
     """Returns an instance of the corresponding Notification Parser."""
     try:
         provider_type = kwargs.get("provider_type")
@@ -80,4 +80,4 @@ def get_provider_data_type(provider_name: str) -> str:
     return parser.get_data_type()
 
 
-__all__ = ["init_notification_parser", "get_parser", "get_parser_from_sender", "get_provider_data_type"]
+__all__ = ["init_parser", "get_parser", "get_parser_from_sender", "get_provider_data_type"]

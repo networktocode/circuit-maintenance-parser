@@ -3,7 +3,7 @@ import os
 
 import pytest
 
-from circuitmaint_parser import init_notification_parser, get_parser, get_parser_from_sender, get_provider_data_type
+from circuitmaint_parser import init_parser, get_parser, get_parser_from_sender, get_provider_data_type
 from circuitmaint_parser import ICal
 from circuitmaint_parser.errors import NonexistentParserError
 from circuitmaint_parser.parsers.ntt import ParserNTT
@@ -26,9 +26,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ("raw_text", "zayo", ParserZayo),
     ],
 )
-def test_init_notification_parser(raw, provider_type, result_type):
-    """Tests for init_notification_parser."""
-    result = init_notification_parser(raw=raw, provider_type=provider_type)
+def test_init_parser(raw, provider_type, result_type):
+    """Tests for init_parser."""
+    result = init_parser(raw=raw, provider_type=provider_type)
     if result_type:
         assert isinstance(result, result_type)
     else:
