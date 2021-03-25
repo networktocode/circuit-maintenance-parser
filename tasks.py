@@ -2,7 +2,7 @@
 import os
 import sys
 from distutils.util import strtobool
-from invoke import task
+from invoke import task  # type: ignore
 
 try:
     import toml
@@ -145,6 +145,21 @@ def flake8(context, local=INVOKE_LOCAL):
 
 
 @task
+def mypy(context, local=INVOKE_LOCAL):
+    """This will run mypy for the specified name and Python version.
+
+    Args:
+        context (obj): Used to run specific commands
+        image_ver (str): Define image version
+        local (bool): Define as `True` to execute locally
+    """
+    # pty is set to true to properly run the docker commands due to the invocation process of docker
+    # https://docs.pyinvoke.org/en/latest/api/runners.html - Search for pty for more information
+    exec_cmd = 'find . -name "*.py" | xargs mypy --show-error-codes'
+    run_cmd(context, exec_cmd, local)
+
+
+@task
 def pylint(context, local=INVOKE_LOCAL):
     """Run pylint for the specified name and Python version.
 
@@ -218,5 +233,6 @@ def tests(context, local=INVOKE_LOCAL):
     pydocstyle(context, local)
     bandit(context, local)
     pytest(context, local)
+    mypy(context, local)
 
     print("All tests have passed!")

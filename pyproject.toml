@@ -24,6 +24,7 @@ bandit = "^1.6.2"
 invoke = "^1.4.1"
 toml = "0.10.1"
 flake8 = "^3.8.3"
+mypy = "^0.812"
 
 [tool.poetry.scripts]
 circuitmaint_parser = 'circuitmaint_parser.cli:main'

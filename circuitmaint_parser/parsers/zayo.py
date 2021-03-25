@@ -1,7 +1,7 @@
 """Zayo parser."""
 import datetime
-from typing import Iterable
-import bs4
+from typing import Iterable, Union, Dict
+import bs4  # type: ignore
 import dateutil.parser as parser
 from pydantic import ValidationError
 
@@ -22,7 +22,7 @@ class ParserZayo(Html):
 
     def process(self) -> Iterable[Maintenance]:
         """Execute parsing."""
-        data = {
+        data: Dict[str, Union[int, str, Iterable]] = {
             "provider": self._default_provider,
             "organizer": self._default_organizer,
         }

@@ -4,7 +4,7 @@ from typing import Iterable
 import base64
 
 from pydantic import BaseModel, ValidationError
-from icalendar import Calendar
+from icalendar import Calendar  # type: ignore
 
 from circuitmaint_parser.errors import ParsingError, MissingMandatoryFields
 from circuitmaint_parser.output import Maintenance, Status, Impact, CircuitImpact
