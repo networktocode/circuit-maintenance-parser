@@ -5,8 +5,8 @@ description = "Python library to parse Circuit Maintenance notifications and ret
 authors = ["Network to Code, LLC <info@networktocode.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-pydantic = {version = "^1.7.2", extras = ["dotenv"]}
+python = "^3.6.1"
+pydantic = {version = "^1.8.1", extras = ["dotenv"]}
 toml = "0.10.1"
 icalendar = "^4.0.7"
 bs4 = "^0.0.1"
