@@ -2,7 +2,7 @@
 
 from typing import Type, Optional
 
-from .errors import NonexistentParserError
+from .errors import NonexistentParserError, ParsingError
 from .parser import MaintenanceNotification, ICal
 from .parsers.eunetworks import ParserEUNetworks
 from .parsers.ntt import ParserNTT
