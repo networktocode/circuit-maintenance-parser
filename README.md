@@ -1,15 +1,18 @@
 # circuit-maintenance-parser
 
-Every network depends on external circuits provided by Network Service Providers (NSPs) who interconnect them to
-Internet, to office branches or to external service providers such as Public Clouds.
+`circuit-maintenance-parser is a Python library that converts NSP(Network Service Provider)'s maintenance notification,
+from heterogenuous formats to anq structured format.
 
-Obviously, these NSP's services will require operations to upgrade or to fix issues, and these disrupts should be
+Every network depends on external circuits provided by NSPs who interconnect them to Internet, to office branches or to
+external service providers such as Public Clouds.
+
+Obviously, these NSP's services will require operation windows to upgrade or to fix issues, and these disrupts should be
 notified back to the customers via notifications to take actions to minimize the impact on the regular usage of these
 circuits.
 
-The problem this library is trying to solve is to provide a way to given a raw notification text and a provider type,
-it would handle the text using a custom parser to return a standardised object that will make easier to combine
-notifications from different providers into the same regular structure.
+The problem multiple customers are facing is that mostly every NSP defines its own maintenance format, even in the end
+the base and relevant information is actually the same across them. This library is parsing some of those notification
+formats from several provider to return always the same object struct that will make easier to process them afterwards.
 
 The format of this output is following the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) defined
 during a NANOG meeting that aimed to promote the usage of the iCalendar format. Indeed, if the NSP is using the
@@ -23,6 +26,18 @@ You can leverage on this library in your automation framework to fetch circuit m
 and the use the standarised output to handle the circuit maintenances in a much simplier way.
 
 # Getting started
+
+## How to install
+
+### Pip
+
+`pip install circuit-maintenance-parser`
+
+### Poetry
+
+`poetry install`
+
+## How to use it
 
 ```python
 from circuit_maintenance_parser import init_parser
