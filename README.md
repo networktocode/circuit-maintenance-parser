@@ -1,4 +1,4 @@
-# Circuitmaint-parser
+# circuit-maintenance-parser
 
 Every network depends on external circuits provided by Network Service Providers (NSPs) who interconnect them to
 Internet, to office branches or to external service providers such as Public Clouds.
@@ -25,7 +25,7 @@ and the use the standarised output to handle the circuit maintenances in a much 
 # Getting started
 
 ```python
-from circuitmaint_parser import init_parser
+from circuit_maintenance_parser import init_parser
 
 raw_text = """BEGIN:VCALENDAR
 VERSION:2.0
@@ -98,6 +98,6 @@ print(parsed_notifications[0].to_json())
 ## How to add a new Circuit Maintenance parser?
 
 1. Add a Circuit Maintenance integration test for the new provider parser, with at least one test case under `tests/integration/data`.
-2. Within `circuitmaint_parser/parsers`, add your new parser, inheriting from generic `MaintenanceNotification` class or
+2. Within `circuit_maintenance_parser/parsers`, add your new parser, inheriting from generic `MaintenanceNotification` class or
    custom ones such as ` ICal` or `Html`.
-3. Expose the new parser class updating the map `SUPPORTED_PROVIDER_PARSERS` in `circuitmaint_parser/__init__.py` to officially expose the parser.
+3. Expose the new parser class updating the map `SUPPORTED_PROVIDER_PARSERS` in `circuit_maintenance_parser/__init__.py` to officially expose the parser.

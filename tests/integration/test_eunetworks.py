@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from circuitmaint_parser.parsers.eunetworks import ParserEUNetworks
+from circuit_maintenance_parser.parsers.eunetworks import ParserEUNetworks
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
