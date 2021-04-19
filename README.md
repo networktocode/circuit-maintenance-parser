@@ -1,43 +1,38 @@
 # circuit-maintenance-parser
 
-`circuit-maintenance-parser is a Python library that converts NSP(Network Service Provider)'s maintenance notification,
-from heterogenuous formats to anq structured format.
+`circuit-maintenance-parser` is a Python library that parses and converts NSP(Network Service Provider)'s maintenance notification, from heterogenuous formats to an well-defined structured format.
+
+## Context
 
 Every network depends on external circuits provided by NSPs who interconnect them to Internet, to office branches or to
 external service providers such as Public Clouds.
 
-Obviously, these NSP's services will require operation windows to upgrade or to fix issues, and these disrupts should be
-notified back to the customers via notifications to take actions to minimize the impact on the regular usage of these
-circuits.
+Obviously, these services require from operation windows to upgrade or to fix related issues, and usually they come in
+format of **circuit maintenances** that should be notified back to the customers via notifications to take actions to minimize the impact on the regular usage of the related circuits.
 
-The problem multiple customers are facing is that mostly every NSP defines its own maintenance format, even in the end
-the base and relevant information is actually the same across them. This library is parsing some of those notification
-formats from several provider to return always the same object struct that will make easier to process them afterwards.
+The challenge myriad of customers are facing is that mostly every NSP defines its own maintenance format, even in the
+end the relevant information is mostly the same across them. This library is built to parse notification formats from
+several providers and to return always the same object struct that will make easier to process them afterwards.
 
 The format of this output is following the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) defined
 during a NANOG meeting that aimed to promote the usage of the iCalendar format. Indeed, if the NSP is using the
 proposed iCalendar format, the parser is straight-forward and no need to defined a custom logic, but this library
 enables supporting other providers that are not using this proposed practice, getting the same outcome.
 
-Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to understand the meaning
-of the output attributes.
+You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised output to handle your received circuit maintenances in a simple way.
 
-You can leverage on this library in your automation framework to fetch circuit maintenance notifications, parse them
-and the use the standarised output to handle the circuit maintenances in a much simplier way.
+## Installation
 
-# Getting started
+### Using Pip
 
-## How to install
-
-### Pip
-
+The library is available as a Python package in pypi and can be installed with pip:
 `pip install circuit-maintenance-parser`
 
-### Poetry
+### Using Poetry
 
-`poetry install`
+The library can be installed with `poetry`: `poetry install`
 
-## How to use it
+## Usage
 
 ```python
 from circuit_maintenance_parser import init_parser
@@ -99,20 +94,38 @@ print(parsed_notifications[0].to_json())
   "summary": "Maint Note Example",
   "uid": "42"
 }
-
 ```
 
-# Local Development
+> Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to understand the meaning
+> of the output attributes.
 
-## Requirements
+# Contributing
+
+Pull requests are welcomed and automatically built and tested against multiple version of Python through TravisCI.
+
+The project is following Network to Code software development guideline and is leveraging:
+
+- Black, Pylint, Mypy, Bandit and pydocstyle for Python linting and formatting.
+- Unit and integration test to ensure the library is working properly.
+
+## Local Development
+
+### Requirements
 
 - Install `poetry`
 - Install dependencies and library locally: `poetry install`
 - Run CI tests locally: `invoke tests --local`
 
-## How to add a new Circuit Maintenance parser?
+### How to add a new Circuit Maintenance parser?
 
-1. Add a Circuit Maintenance integration test for the new provider parser, with at least one test case under `tests/integration/data`.
-2. Within `circuit_maintenance_parser/parsers`, add your new parser, inheriting from generic `MaintenanceNotification` class or
-   custom ones such as ` ICal` or `Html`.
-3. Expose the new parser class updating the map `SUPPORTED_PROVIDER_PARSERS` in `circuit_maintenance_parser/__init__.py` to officially expose the parser.
+1. Within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
+   `MaintenanceNotification` class or custom ones such as `ICal` or `Html`.
+2. Add a Circuit Maintenance **integration test for the new provider parser**, with at least one test case under
+   `tests/integration/data`.
+3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDER_PARSERS` in
+   `circuit_maintenance_parser/__init__.py` to officially expose the parser.
+
+## Questions
+
+For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
+Sign up [here](http://slack.networktocode.com/)
