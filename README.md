@@ -93,7 +93,7 @@ print(parsed_notifications[0].to_json())
 
 - Install `poetry`
 - Install dependencies and library locally: `poetry install`
-- Run CI tests locally: `invoke tests`
+- Run CI tests locally: `invoke tests --local`
 
 ## How to add a new Circuit Maintenance parser?
 
