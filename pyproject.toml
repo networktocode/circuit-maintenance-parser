@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "circuit_maintenance_parser"
+name = "circuit-maintenance-parser"
 version = "0.0.1"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code, LLC <info@networktocode.com>"]
@@ -27,7 +27,7 @@ flake8 = "^3.8.3"
 mypy = "^0.812"
 
 [tool.poetry.scripts]
-circuit_maintenance_parser = 'circuit_maintenance_parser.cli:main'
+circuit-maintenance-parser = 'circuit_maintenance_parser.cli:main'
 
 [tool.black]
 line-length = 120
