@@ -4,8 +4,8 @@ import bs4  # type: ignore
 import dateutil.parser as parser
 from pydantic import ValidationError
 
-from circuitmaint_parser.errors import ParsingError, MissingMandatoryFields
-from circuitmaint_parser.parser import Html, Impact, CircuitImpact, Maintenance, Status
+from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
+from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Maintenance, Status
 
 # pylint: disable=too-many-nested-blocks,no-member, too-many-branches
 

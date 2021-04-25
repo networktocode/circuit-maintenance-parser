@@ -8,8 +8,8 @@ import datetime
 from pydantic import BaseModel, ValidationError
 from icalendar import Calendar  # type: ignore
 
-from circuitmaint_parser.errors import ParsingError, MissingMandatoryFields
-from circuitmaint_parser.output import Maintenance, Status, Impact, CircuitImpact
+from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
+from circuit_maintenance_parser.output import Maintenance, Status, Impact, CircuitImpact
 
 # pylint: disable=no-member
 

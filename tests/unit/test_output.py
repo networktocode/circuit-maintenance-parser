@@ -4,7 +4,7 @@ import os
 import pytest
 from pydantic import ValidationError
 
-from circuitmaint_parser.output import Maintenance, CircuitImpact
+from circuit_maintenance_parser.output import Maintenance, CircuitImpact
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))

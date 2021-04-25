@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from circuitmaint_parser.parsers.packetfabric import ParserPacketFabric
+from circuit_maintenance_parser.parsers.packetfabric import ParserPacketFabric
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

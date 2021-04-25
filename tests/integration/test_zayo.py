@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from circuitmaint_parser.parsers.zayo import ParserZayo
-from circuitmaint_parser.errors import MissingMandatoryFields, ParsingError
+from circuit_maintenance_parser.parsers.zayo import ParserZayo
+from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

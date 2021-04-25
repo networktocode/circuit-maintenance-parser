@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from circuitmaint_parser.parser import ICal
-from circuitmaint_parser.errors import MissingMandatoryFields, ParsingError
+from circuit_maintenance_parser.parser import ICal
+from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))

@@ -3,13 +3,13 @@ import os
 
 import pytest
 
-from circuitmaint_parser import init_parser, get_parser, get_parser_from_sender, get_provider_data_type
-from circuitmaint_parser import ICal
-from circuitmaint_parser.errors import NonexistentParserError
-from circuitmaint_parser.parsers.ntt import ParserNTT
-from circuitmaint_parser.parsers.packetfabric import ParserPacketFabric
-from circuitmaint_parser.parsers.zayo import ParserZayo
-from circuitmaint_parser.parsers.eunetworks import ParserEUNetworks
+from circuit_maintenance_parser import init_parser, get_parser, get_parser_from_sender, get_provider_data_type
+from circuit_maintenance_parser import ICal
+from circuit_maintenance_parser.errors import NonexistentParserError
+from circuit_maintenance_parser.parsers.ntt import ParserNTT
+from circuit_maintenance_parser.parsers.packetfabric import ParserPacketFabric
+from circuit_maintenance_parser.parsers.zayo import ParserZayo
+from circuit_maintenance_parser.parsers.eunetworks import ParserEUNetworks
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

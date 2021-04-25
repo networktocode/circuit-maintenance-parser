@@ -80,4 +80,4 @@ def get_provider_data_type(provider_name: str) -> str:
     return parser.get_data_type()
 
 
-__all__ = ["init_parser", "get_parser", "get_parser_from_sender", "get_provider_data_type"]
+__all__ = ["init_parser", "get_parser", "get_parser_from_sender", "get_provider_data_type", "ParsingError"]
