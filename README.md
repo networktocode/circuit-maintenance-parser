@@ -1,36 +1,30 @@
 # circuit-maintenance-parser
 
-`circuit-maintenance-parser` is a Python library that parses NSP(Network Service Provider)'s maintenance notifications, converting heterogenuous formats to a well-defined structured format.
+`circuit-maintenance-parser` is a Python library that parses circuit maintenance notifications from Network Service Providers (NSPs), converting heterogeneous formats to a well-defined structured format.
 
 ## Context
 
-Every network depends on external circuits provided by NSPs who interconnect them to Internet, to office branches or to
+Every network depends on external circuits provided by NSPs who interconnect them to the Internet, to office branches or to
 external service providers such as Public Clouds.
 
-Obviously, these services require from operation windows to upgrade or to fix related issues, and usually they come in
-format of **circuit maintenances** that should be notified back to the customers via notifications to take actions to minimize the impact on the regular usage of the related circuits.
+Obviously, these services occasionally require operation windows to upgrade or to fix related issues, and usually they happen in the form of **circuit maintenance periods**.
+NSPs generally notify customers of these upcoming events so that customers can take actions to minimize the impact on the regular usage of the related circuits.
 
-The challenge myriad of customers are facing is that mostly every NSP defines its own maintenance format, even in the
-end the relevant information is mostly the same across them. This library is built to parse notification formats from
-several providers and to return always the same object struct that will make easier to process them afterwards.
+The challenge faced by many customers is that mostly every NSP defines its own maintenance notification format, even though in the
+end the relevant information is mostly the same across NSPs. This library is built to parse notification formats from
+several providers and to return always the same object struct that will make it easier to process them afterwards.
 
 The format of this output is following the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) defined
 during a NANOG meeting that aimed to promote the usage of the iCalendar format. Indeed, if the NSP is using the
-proposed iCalendar format, the parser is straight-forward and no need to defined a custom logic, but this library
+proposed iCalendar format, the parser is straight-forward and there is no need to define custom logic, but this library
 enables supporting other providers that are not using this proposed practice, getting the same outcome.
 
-You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised output to handle your received circuit maintenances in a simple way.
+You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised output to handle your received circuit maintenance notifications in a simple way.
 
 ## Installation
 
-### Using Pip
-
 The library is available as a Python package in pypi and can be installed with pip:
 `pip install circuit-maintenance-parser`
-
-### Using Poetry
-
-The library can be installed with `poetry`: `poetry install`
 
 ## Usage
 
@@ -101,12 +95,12 @@ print(parsed_notifications[0].to_json())
 
 # Contributing
 
-Pull requests are welcomed and automatically built and tested against multiple version of Python through TravisCI.
+Pull requests are welcomed and automatically built and tested against multiple versions of Python through Travis CI.
 
-The project is following Network to Code software development guideline and is leveraging:
+The project is following Network to Code software development guidelines and is leveraging:
 
 - Black, Pylint, Mypy, Bandit and pydocstyle for Python linting and formatting.
-- Unit and integration test to ensure the library is working properly.
+- Unit and integration tests to ensure the library is working properly.
 
 ## Local Development
 
