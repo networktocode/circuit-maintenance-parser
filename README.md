@@ -1,6 +1,6 @@
 # circuit-maintenance-parser
 
-`circuit-maintenance-parser` is a Python library that parses and converts NSP(Network Service Provider)'s maintenance notification, from heterogenuous formats to an well-defined structured format.
+`circuit-maintenance-parser` is a Python library that parses NSP(Network Service Provider)'s maintenance notifications, converting heterogenuous formats to a well-defined structured format.
 
 ## Context
 
