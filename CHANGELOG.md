@@ -1,5 +1,5 @@
 # Changelog
 
-## v0.0.1 - 2021-04-29
+## v1.0.0 - 2021-04-29
 
 Initial release
