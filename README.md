@@ -21,6 +21,13 @@ enables supporting other providers that are not using this proposed practice, ge
 
 You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised output to handle your received circuit maintenance notifications in a simple way.
 
+## Supported Providers
+
+- EuNetworks
+- NTT
+- PacketFabric
+- Zayo
+
 ## Installation
 
 The library is available as a Python package in pypi and can be installed with pip:
