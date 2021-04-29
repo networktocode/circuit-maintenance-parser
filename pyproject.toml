@@ -2,7 +2,23 @@
 name = "circuit-maintenance-parser"
 version = "0.0.1"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
-authors = ["Network to Code, LLC <info@networktocode.com>"]
+authors = ["Network to Code <opensource@networktocode.com>"]
+license = "Apache-2.0"
+homepage = "https://github.com/networktocode/circuit-maintenance-parser"
+repository = "https://github.com/networktocode/circuit-maintenance-parser"
+readme = "README.md"
+keywords = ["parser", "circuit", "maintenance"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+]
+include = [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+]
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
@@ -25,9 +41,6 @@ invoke = "^1.4.1"
 toml = "0.10.1"
 flake8 = "^3.8.3"
 mypy = "^0.812"
-
-[tool.poetry.scripts]
-circuit-maintenance-parser = 'circuit_maintenance_parser.cli:main'
 
 [tool.black]
 line-length = 120
