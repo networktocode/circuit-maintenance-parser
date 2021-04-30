@@ -4,9 +4,9 @@ stages:
   - "lint"
   - "test"
   - name: "deploy-github"
-    if: "tag IS present"
+    if: "branch = main"
   - name: "deploy-pypi"
-    if: "tag IS present"
+    if: "branch = main"
 
 language: "python"
 
@@ -53,8 +53,10 @@ jobs:
         file_glob: true
         file: "dist/*"
         skip_cleanup: true
-        "on":
-          all_branches: true
+        on:
+          tags: true
+          branch: "main"
+          python: 3.7
 
     - stage: "deploy-pypi"
       before_script:
