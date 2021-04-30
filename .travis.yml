@@ -53,7 +53,7 @@ jobs:
         file_glob: true
         file: "dist/*"
         skip_cleanup: true
-        on:
+        "on":
           tags: true
           branch: "main"
           python: 3.7
@@ -67,8 +67,8 @@ jobs:
       deploy:
         provider: "pypi"
         username: "__token__"
-        password: $PYPI_TOKEN
-        on:
+        password: "$PYPI_TOKEN"
+        "on":
           tags: true
           branch: "main"
           python: 3.7
