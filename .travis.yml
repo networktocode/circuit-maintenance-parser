@@ -3,9 +3,10 @@
 stages:
   - "lint"
   - "test"
-
-# Add in "branch" as an option if desired for branch testing as well
-if: "type IN (pull_request)"
+  - name: "deploy-github"
+    if: "tag IS present"
+  - name: "deploy-pypi"
+    if: "tag IS present"
 
 language: "python"
 
@@ -39,3 +40,26 @@ jobs:
         - "invoke yamllint"
         - "invoke pylint"
       python: 3.7
+
+    - stage: "deploy-github"
+      before_script:
+        - "pip install poetry"
+      script:
+        - "poetry version $TRAVIS_TAG"
+        - "poetry build"
+      deploy:
+        provider: "releases"
+        api_key: "$GITHUB_AUTH_TOKEN"
+        file_glob: true
+        file: "dist/*"
+        skip_cleanup: true
+        "on":
+          all_branches: true
+
+    - stage: "deploy-pypi"
+      before_script:
+        - "pip install poetry"
+      script:
+        - "poetry version $TRAVIS_TAG"
+        - "poetry config pypi-token.pypi $PYPI_TOKEN"
+        - "poetry publish --build"
