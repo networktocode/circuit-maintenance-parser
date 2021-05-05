@@ -35,6 +35,11 @@ The library is available as a Python package in pypi and can be installed with p
 
 ## Usage
 
+> Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to understand the meaning
+> of the output attributes.
+
+## Python Library
+
 ```python
 from circuit_maintenance_parser import init_parser
 
@@ -97,8 +102,31 @@ print(parsed_notifications[0].to_json())
 }
 ```
 
-> Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to understand the meaning
-> of the output attributes.
+## CLI
+
+```bash
+$ circuit-maintenance-parser --raw-file tests/integration/data/ical/ical1
+Circuit Maintenance Notification #0
+{
+  "account": "137.035999173",
+  "circuits": [
+    {
+      "circuit_id": "acme-widgets-as-a-service",
+      "impact": "NO-IMPACT"
+    }
+  ],
+  "end": 1444471200,
+  "maintenance_id": "WorkOrder-31415",
+  "organizer": "mailto:noone@example.com",
+  "provider": "example.com",
+  "sequence": 1,
+  "stamp": 1444435800,
+  "start": 1444464000,
+  "status": "TENTATIVE",
+  "summary": "Maint Note Example",
+  "uid": "42"
+}
+```
 
 # Contributing
 
