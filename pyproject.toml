@@ -22,6 +22,7 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
+click = "^7.1"
 pydantic = {version = "^1.8.1", extras = ["dotenv"]}
 toml = "0.10.1"
 icalendar = "^4.0.7"
@@ -41,6 +42,9 @@ invoke = "^1.4.1"
 toml = "0.10.1"
 flake8 = "^3.8.3"
 mypy = "^0.812"
+
+[tool.poetry.scripts]
+circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
 
 [tool.black]
 line-length = 120
