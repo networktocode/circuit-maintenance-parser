@@ -4,9 +4,9 @@ stages:
   - "lint"
   - "test"
   - name: "deploy-github"
-    if: "branch = main AND tag IS present"
+    if: "tag IS present"
   - name: "deploy-pypi"
-    if: "branch = main AND tag IS present"
+    if: "tag IS present"
 
 language: "python"
 
@@ -55,7 +55,6 @@ jobs:
         skip_cleanup: true
         "on":
           tags: true
-          branch: "main"
           python: 3.7
 
     - stage: "deploy-pypi"
@@ -70,5 +69,4 @@ jobs:
         password: "$PYPI_TOKEN"
         "on":
           tags: true
-          branch: "main"
           python: 3.7
