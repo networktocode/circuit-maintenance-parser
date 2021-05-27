@@ -50,6 +50,8 @@ class MaintenanceNotification(BaseModel):
 
     """
 
+    # TODO: should `raw` actually be a bytes() rather than a str()? Let the parser decode to string
+    # if that's applicable to the particular data format being processed?
     raw: str
     provider_type: str
     sender: str = ""
@@ -185,4 +187,5 @@ class Html(MaintenanceNotification):
             line = line.text.strip()
         except AttributeError:
             line = line.strip()
+        # TODO: below may not be needed if we use `quopri.decodestring()` on the initial email file?
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")

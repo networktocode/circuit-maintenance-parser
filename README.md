@@ -128,6 +128,30 @@ Circuit Maintenance Notification #0
 }
 ```
 
+```bash
+$ circuit-maintenance-parser --raw-file tests/integration/data/zayo/zayo1.html --parser zayo
+Circuit Maintenance Notification #0
+{
+  "account": "clientX",
+  "circuits": [
+    {
+      "circuit_id": "/OGYX/000000/ /ZYO /",
+      "impact": "OUTAGE"
+    }
+  ],
+  "end": 1601035200,
+  "maintenance_id": "TTN-00000000",
+  "organizer": "mr@zayo.com",
+  "provider": "zayo",
+  "sequence": 1,
+  "stamp": 1599436800,
+  "start": 1601017200,
+  "status": "CONFIRMED",
+  "summary": "Zayo will implement planned maintenance to troubleshoot and restore degraded span",
+  "uid": "0"
+}
+```
+
 # Contributing
 
 Pull requests are welcomed and automatically built and tested against multiple versions of Python through Travis CI.

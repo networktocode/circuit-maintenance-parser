@@ -6,14 +6,17 @@ from pathlib import Path
 import pytest
 
 from circuit_maintenance_parser.parsers.zayo import ParserZayo
-from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
+from circuit_maintenance_parser.errors import MissingMandatoryFields
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 @pytest.mark.parametrize(
     "raw_file, results_file",
-    [(Path(dir_path, "data", "zayo", "zayo1.html"), Path(dir_path, "data", "zayo", "zayo1_result.json"),),],
+    [
+        (Path(dir_path, "data", "zayo", "zayo1.html"), Path(dir_path, "data", "zayo", "zayo1_result.json"),),
+        (Path(dir_path, "data", "zayo", "zayo2.html"), Path(dir_path, "data", "zayo", "zayo2_result.json"),),
+    ],
 )
 def test_complete_parsing(raw_file, results_file):
     """Tests for Zayo parser."""
@@ -33,7 +36,7 @@ def test_complete_parsing(raw_file, results_file):
     "raw_file, exception",
     [
         (Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"), MissingMandatoryFields,),
-        (Path(dir_path, "data", "zayo", "zayo_bad_html.html"), ParsingError,),
+        (Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
     ],
 )
 def test_errored_parsing(raw_file, exception):
