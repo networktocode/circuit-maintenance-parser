@@ -1,6 +1,10 @@
 # Changelog
 
-## v1.0.3
+## v1.1.0
+
+### Added
+
+- #16 - changed `MaintenanceNotification.raw` from `str` to `bytes`
 
 ## v1.0.2 - 2021-05-05
 
