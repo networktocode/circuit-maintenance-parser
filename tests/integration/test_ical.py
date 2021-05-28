@@ -24,7 +24,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 )
 def test_complete_parsing(raw_file, results_file):
     """Tests for Ical parser."""
-    with open(raw_file) as file_obj:
+    with open(raw_file, "rb") as file_obj:
         parser = ICal(raw=file_obj.read())
 
     parsed_notifications = parser.process()[0]
@@ -47,7 +47,7 @@ def test_complete_parsing(raw_file, results_file):
 )
 def test_errored_parsing(raw_file, exception):
     """Tests for Ical parser."""
-    with open(raw_file) as file_obj:
+    with open(raw_file, "rb") as file_obj:
         parser = ICal(raw=file_obj.read())
 
     with pytest.raises(exception):

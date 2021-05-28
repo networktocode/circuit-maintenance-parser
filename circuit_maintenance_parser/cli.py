@@ -15,16 +15,18 @@ from . import SUPPORTED_PROVIDER_PARSERS, init_parser, ParsingError
     default="ical",
     help="Parser type.",
 )
-def main(raw_file, parser):
+@click.option("-v", "--verbose", count=True, help="Increase logging verbosity (repeatable)")
+def main(raw_file, parser, verbose):
     """Entrypoint into CLI app."""
-    # TODO add verbosity flags to manage the logging level.
-    logging.basicConfig(level=logging.INFO)
+    # Default logging level is WARNING; specifying -v/--verbose repeatedly can lower the threshold.
+    verbosity = logging.WARNING - (10 * verbose)
+    logging.basicConfig(level=verbosity)
 
-    with open(raw_file) as raw_filename:
-        raw_text = raw_filename.read()
+    with open(raw_file, "rb") as raw_filename:
+        raw_bytes = raw_filename.read()
 
     data = {
-        "raw": raw_text,
+        "raw": raw_bytes,
         "provider_type": parser,
     }
 

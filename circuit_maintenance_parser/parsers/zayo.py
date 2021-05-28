@@ -32,9 +32,7 @@ class ParserZayo(Html):
             "organizer": self._default_organizer,
         }
         try:
-            # TODO: quopri requires a bytes input but self.raw is a str.
-            # For now we just encode it back to bytes ourself
-            soup = bs4.BeautifulSoup(quopri.decodestring(self.raw.encode()), features="lxml")
+            soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
             for line in soup.find_all("b"):
                 if isinstance(line, bs4.element.Tag):
                     if line.text.lower().strip().startswith("maintenance ticket #:"):
@@ -44,8 +42,10 @@ class ParserZayo(Html):
                         if urgency == "Planned":
                             data["status"] = Status("CONFIRMED")
                     elif "activity date" in line.text.lower():
+                        logger.info("Found 'activity date': %s", line.text)
                         for sibling in line.next_siblings:
                             text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
+                            logger.debug("Checking for GMT date/timestamp in sibling: %s", text)
                             if "( GMT )" in text:
                                 window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                                 start = parser.parse(window.pop(0))

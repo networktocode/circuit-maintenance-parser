@@ -20,7 +20,7 @@ class MaintenanceNotification(BaseModel):
     This is the base class that is created from a Circuit Maintenance notification containing
 
     Attributes:
-        raw: Raw notification message
+        raw: Raw notification message (bytes)
         provider_type: Identifier of the provider of the notification
         sender: Identifier of the source of the notification (default "")
         subject: Subject of the notification (default "")
@@ -28,31 +28,29 @@ class MaintenanceNotification(BaseModel):
 
     Examples:
         >>> MaintenanceNotification(
-        ...     raw="raw_message",
+        ...     raw=b"raw_message",
         ...     sender="my_email@example.com",
         ...     subject="Urgent notification for circuits X and Y",
         ...     source="gmail",
         ...     provider_type="ntt",
         ... )
-        MaintenanceNotification(raw='raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
+        MaintenanceNotification(raw=b'raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
 
-        >>> MaintenanceNotification(raw="raw_message")
+        >>> MaintenanceNotification(raw=b"raw_message")
         Traceback (most recent call last):
         ...
         pydantic.error_wrappers.ValidationError: 1 validation error for MaintenanceNotification
         provider_type
           field required (type=value_error.missing)
 
-        >>> MaintenanceNotification("raw_message")
+        >>> MaintenanceNotification(b"raw_message")
         Traceback (most recent call last):
         ...
         TypeError: __init__() takes exactly 1 positional argument (2 given)
 
     """
 
-    # TODO: should `raw` actually be a bytes() rather than a str()? Let the parser decode to string
-    # if that's applicable to the particular data format being processed?
-    raw: str
+    raw: bytes
     provider_type: str
     sender: str = ""
     subject: str = ""
