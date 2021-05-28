@@ -1,5 +1,8 @@
 """Zayo parser."""
+import logging
+import quopri
 from typing import Iterable, Union, Dict
+
 import bs4  # type: ignore
 import dateutil.parser as parser
 from pydantic import ValidationError
@@ -8,6 +11,9 @@ from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFiel
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Maintenance, Status
 
 # pylint: disable=too-many-nested-blocks,no-member, too-many-branches
+
+
+logger = logging.getLogger(__name__)
 
 
 class ParserZayo(Html):
@@ -26,7 +32,7 @@ class ParserZayo(Html):
             "organizer": self._default_organizer,
         }
         try:
-            soup = bs4.BeautifulSoup(self.raw, features="lxml")
+            soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
             for line in soup.find_all("b"):
                 if isinstance(line, bs4.element.Tag):
                     if line.text.lower().strip().startswith("maintenance ticket #:"):
@@ -36,8 +42,11 @@ class ParserZayo(Html):
                         if urgency == "Planned":
                             data["status"] = Status("CONFIRMED")
                     elif "activity date" in line.text.lower():
+                        logger.info("Found 'activity date': %s", line.text)
                         for sibling in line.next_siblings:
-                            if "( GMT )" in sibling.text:
+                            text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
+                            logger.debug("Checking for GMT date/timestamp in sibling: %s", text)
+                            if "( GMT )" in text:
                                 window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                                 start = parser.parse(window.pop(0))
                                 data["start"] = self.dt2ts(start)
@@ -65,19 +74,20 @@ class ParserZayo(Html):
     def process_circuit_table(self, soup: bs4.BeautifulSoup) -> Iterable[CircuitImpact]:
         """Handles the circuit tables and returns a list of Circuit Impacts."""
         circuits = []
-        tables = soup.find("table")
+        tables = soup.find_all("table")
         for table in tables:
-            head_row = table.findAll("th")
-            if (
-                self.clean_line(head_row[0]) != "Circuit Id"
-                or self.clean_line(head_row[1]) != "Expected Impact"
-                or self.clean_line(head_row[2]) != "A Location CLLI"
-                or self.clean_line(head_row[3]) != "Z Location CLLI"
-                or self.clean_line(head_row[4]) != "Legacy Circuit Id"
-            ):
-                raise AssertionError("Table headers are not correct")
+            head_row = table.find_all("th")
+            if len(head_row) < 5 or [self.clean_line(line) for line in head_row[:5]] != [
+                "Circuit Id",
+                "Expected Impact",
+                "A Location CLLI",
+                "Z Location CLLI",
+                "Legacy Circuit Id",
+            ]:
+                logger.warning("Table headers are not as expected: %s", head_row)
+                continue
 
-            data_rows = table.findAll("td")
+            data_rows = table.find_all("td")
             if len(data_rows) % 5 != 0:
                 raise AssertionError("Table format is not correct")
             number_of_circuits = int(len(data_rows) / 5)

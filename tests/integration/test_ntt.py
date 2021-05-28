@@ -16,7 +16,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 )
 def test_complete_parsing(raw_file, results_file):
     """Tests for NTT parser."""
-    with open(raw_file) as file_obj:
+    with open(raw_file, "rb") as file_obj:
         parser = ParserNTT(raw=file_obj.read())
 
     parsed_notifications = parser.process()[0]
