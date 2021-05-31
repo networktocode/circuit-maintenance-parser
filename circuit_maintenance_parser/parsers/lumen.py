@@ -88,7 +88,7 @@ class ParserLumen(Html):
                     if "account" not in data:
                         data["account"] = cells[idx * num_columns].string
                     if num_columns == 10:
-                        if cells[idx * num_columns - 1].string == "Completed":
+                        if cells[idx * num_columns + 9].string == "Completed":
                             data["status"] = Status("COMPLETED")
 
                     data_circuit = {}

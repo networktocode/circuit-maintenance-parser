@@ -12,7 +12,10 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 @pytest.mark.parametrize(
     "raw_file, results_file",
-    [(Path(dir_path, "data", "lumen", "lumen1.html"), Path(dir_path, "data", "lumen", "lumen1_result.json"),),],
+    [
+        (Path(dir_path, "data", "lumen", "lumen1.html"), Path(dir_path, "data", "lumen", "lumen1_result.json"),),
+        (Path(dir_path, "data", "lumen", "lumen2.html"), Path(dir_path, "data", "lumen", "lumen2_result.json"),),
+    ],
 )
 def test_complete_parsing(raw_file, results_file):
     """Tests for Lumen parser."""
