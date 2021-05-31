@@ -5,6 +5,7 @@ from typing import Type, Optional
 from .errors import NonexistentParserError, ParsingError
 from .parser import MaintenanceNotification, ICal
 from .parsers.eunetworks import ParserEUNetworks
+from .parsers.lumen import ParserLumen
 from .parsers.ntt import ParserNTT
 from .parsers.packetfabric import ParserPacketFabric
 from .parsers.zayo import ParserZayo
@@ -12,6 +13,7 @@ from .parsers.zayo import ParserZayo
 
 SUPPORTED_PROVIDER_PARSERS = (
     ParserEUNetworks,
+    ParserLumen,
     ParserNTT,
     ParserPacketFabric,
     ParserZayo,

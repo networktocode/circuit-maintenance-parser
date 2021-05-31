@@ -24,9 +24,12 @@ You can leverage on this library in your automation framework to process circuit
 ## Supported Providers
 
 - EuNetworks
+- Lumen\*
 - NTT
 - PacketFabric
-- Zayo
+- Zayo\*
+
+> Note\*: These providers are not supporting the BCOP standard natively, thus maybe they have some gaps on the implemented parser that will be refined with new test cases.
 
 ## Installation
 
