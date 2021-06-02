@@ -37,22 +37,23 @@ class ParserLumen(Html):
         """Parse Span tag."""
         for line in spans:
             if isinstance(line, bs4.element.Tag):
-                if line.text.lower().strip().startswith("scheduled maintenance window #:"):
-                    data["maintenance_id"] = line.text.lower().strip().split("#: ")[-1]
-                elif line.text.lower().strip().startswith("summary:"):
+                line_text = line.text.lower().strip()
+                if line_text.startswith("scheduled maintenance window #:"):
+                    data["maintenance_id"] = line_text.split("#: ")[-1]
+                elif line_text.startswith("summary:"):
                     for sibling in line.next_siblings:
-                        text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
-                        if text.strip() != "":
-                            data["summary"] = text.strip()
+                        text_sibling = sibling.text.strip() if isinstance(sibling, bs4.element.Tag) else sibling.strip()
+                        if text_sibling != "":
+                            data["summary"] = text_sibling
                             break
-                elif line.text.lower().strip().startswith("updates:"):
+                elif line_text.startswith("updates:"):
                     for sibling in line.next_siblings:
-                        text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
-                        if text.strip() != "":
-                            if "The scheduled maintenance work has begun" in text.strip():
+                        text_sibling = sibling.text.strip() if isinstance(sibling, bs4.element.Tag) else sibling.strip()
+                        if text_sibling != "":
+                            if "The scheduled maintenance work has begun" in text_sibling:
                                 data["status"] = "IN-PROCESS"
-                            if "GMT" in text.strip():
-                                stamp = parser.parse(text.strip().split(" GMT")[0])
+                            if "GMT" in text_sibling:
+                                stamp = parser.parse(text_sibling.split(" GMT")[0])
                                 data["stamp"] = self.dt2ts(stamp)
                             break
 
@@ -63,12 +64,11 @@ class ParserLumen(Html):
             cells = table.find_all("td")
             if cells[0].string == "Start" and cells[1].string == "End":
                 num_columns = 2
-                num_rows = int(len(cells) / num_columns - 1)
-                for idx in range(1, num_rows + 1):
-                    if "GMT" in cells[idx * num_columns].string and "GMT" in cells[idx * num_columns + 1].string:
-                        start = parser.parse(cells[idx * num_columns].string.split(" GMT")[0])
+                for idx in range(num_columns, len(cells), num_columns):
+                    if "GMT" in cells[idx].string and "GMT" in cells[idx + 1].string:
+                        start = parser.parse(cells[idx].string.split(" GMT")[0])
                         data["start"] = self.dt2ts(start)
-                        end = parser.parse(cells[idx * num_columns + 1].string.split(" GMT")[0])
+                        end = parser.parse(cells[idx + 1].string.split(" GMT")[0])
                         data["end"] = self.dt2ts(end)
                         break
 
@@ -82,18 +82,17 @@ class ParserLumen(Html):
                 else:
                     logger.error("Unexpected table format: %s", cells)
 
-                num_rows = int(len(cells) / num_columns - 1)
-                for idx in range(1, num_rows + 1):
+                for idx in range(num_columns, len(cells), num_columns):
                     # Account and Status are defined per Circuit ID but we understand that are consistent
                     if "account" not in data:
-                        data["account"] = cells[idx * num_columns].string
+                        data["account"] = cells[idx].string
                     if num_columns == 10:
-                        if cells[idx * num_columns + 9].string == "Completed":
+                        if cells[idx + 9].string == "Completed":
                             data["status"] = Status("COMPLETED")
 
                     data_circuit = {}
-                    data_circuit["circuit_id"] = cells[idx * num_columns + 1].string
-                    impact = cells[idx * num_columns + 6].string
+                    data_circuit["circuit_id"] = cells[idx + 1].string
+                    impact = cells[idx + 6].string
                     if "outage" in impact.lower():
                         data_circuit["impact"] = Impact("OUTAGE")
                         circuits.append(CircuitImpact(**data_circuit))
