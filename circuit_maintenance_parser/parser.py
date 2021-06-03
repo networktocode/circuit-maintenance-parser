@@ -1,9 +1,13 @@
 """Definition of Mainentance Notification base classes."""
 
-from typing import Iterable
 import base64
 import calendar
 import datetime
+import quopri
+from typing import Iterable, Union, Dict, Mapping
+
+import bs4  # type: ignore
+from bs4.element import ResultSet  # type: ignore
 
 from pydantic import BaseModel, ValidationError
 from icalendar import Calendar  # type: ignore
@@ -175,7 +179,28 @@ class Html(MaintenanceNotification):
     _data_type = "text/html"
 
     def process(self) -> Iterable[Maintenance]:
-        """Method that returns a list of Maintenance objects."""
+        """Execute parsing."""
+        result = []
+
+        data_base: Dict[str, Union[int, str, Iterable]] = {
+            "provider": self._default_provider,
+            "organizer": self._default_organizer,
+        }
+        try:
+            soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
+
+            # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
+            # return of `parse_html` as an Iterable object to accommodate this potential case.
+            for data in self.parse_html(soup, data_base):
+                result.append(Maintenance(**data))
+
+            return result
+
+        except ValidationError as exc:
+            raise MissingMandatoryFields from exc
+
+    def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
+        """Custom HTML parsing."""
         raise NotImplementedError
 
     @staticmethod

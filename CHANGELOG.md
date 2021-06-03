@@ -5,6 +5,7 @@
 ### Added
 
 - #16 - changed `MaintenanceNotification.raw` from `str` to `bytes`
+- #17 - added **Lumen** parser and refactor HTML parser `process` method
 
 ## v1.0.2 - 2021-05-05
 
