@@ -189,8 +189,8 @@ class Html(MaintenanceNotification):
         try:
             soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
 
-            # Even we have not noticed any HTML notification with more than one maintenance yes, we define the
-            # return of `parse_html` as a multiple object, even for now we only return a list of one object.
+            # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
+            # return of `parse_html` as an Iterable object to accommodate this potential case.
             for data in self.parse_html(soup, data_base):
                 result.append(Maintenance(**data))
 
