@@ -135,7 +135,7 @@ class Maintenance(BaseModel):
     organizer: StrictStr
 
     # Non mandatory attributes
-    stamp: Union[StrictInt, None] = None
+    stamp: Optional[StrictInt] = None
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
