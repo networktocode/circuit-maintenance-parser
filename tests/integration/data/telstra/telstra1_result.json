@@ -1,0 +1,19 @@
+{
+    "account": "Generic Account, Inc.",
+    "circuits": [
+        {
+            "circuit_id": "123 456 789",
+            "impact": "OUTAGE"
+        }
+    ],
+    "end": 1622584800,
+    "maintenance_id": "987654321-1",
+    "organizer": "gpen@team.telstra.com",
+    "provider": "telstra",
+    "sequence": 1,
+    "stamp": null,
+    "start": 1622563140,
+    "status": "CONFIRMED",
+    "summary": "Telstra Planned Maintenance Activity 3409132. Telstra will perform planned maintenance activity for transmission work - Australia",
+    "uid": "0"
+}
