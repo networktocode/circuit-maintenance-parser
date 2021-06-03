@@ -24,11 +24,14 @@ class ParserLumen(Html):
     _default_provider = "lumen"
     _default_organizer = "smc@lumen.com"
 
-    def parse_html(self, soup, data):
+    def parse_html(self, soup, data_base):
         """Execute parsing."""
+        data = data_base.copy()
         try:
             self.parse_spans(soup.find_all("span"), data)
             self.parse_tables(soup.find_all("table"), data)
+
+            return [data]
 
         except Exception as exc:
             raise ParsingError from exc

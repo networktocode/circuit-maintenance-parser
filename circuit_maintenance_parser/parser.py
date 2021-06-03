@@ -4,7 +4,7 @@ import base64
 import calendar
 import datetime
 import quopri
-from typing import Iterable, Union, Dict
+from typing import Iterable, Union, Dict, Mapping
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -180,21 +180,26 @@ class Html(MaintenanceNotification):
 
     def process(self) -> Iterable[Maintenance]:
         """Execute parsing."""
-        data: Dict[str, Union[int, str, Iterable]] = {
+        result = []
+
+        data_base: Dict[str, Union[int, str, Iterable]] = {
             "provider": self._default_provider,
             "organizer": self._default_organizer,
         }
         try:
             soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
 
-            self.parse_html(soup, data)
+            # Even we have not noticed any HTML notification with more than one maintenance yes, we define the
+            # return of `parse_html` as a multiple object, even for now we only return a list of one object.
+            for data in self.parse_html(soup, data_base):
+                result.append(Maintenance(**data))
 
-            return [Maintenance(**data)]
+            return result
 
         except ValidationError as exc:
             raise MissingMandatoryFields from exc
 
-    def parse_html(self, soup: ResultSet, data: Dict):
+    def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
         """Custom HTML parsing."""
         raise NotImplementedError
 

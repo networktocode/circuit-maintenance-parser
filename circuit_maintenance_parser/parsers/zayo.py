@@ -25,11 +25,14 @@ class ParserZayo(Html):
     _default_provider = "zayo"
     _default_organizer = "mr@zayo.com"
 
-    def parse_html(self, soup, data):
+    def parse_html(self, soup, data_base):
         """Execute parsing."""
+        data = data_base.copy()
         try:
             self.parse_bs(soup.find_all("b"), data)
             self.parse_tables(soup.find_all("table"), data)
+
+            return [data]
 
         except Exception as exc:
             raise ParsingError from exc
