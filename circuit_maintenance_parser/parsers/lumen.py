@@ -9,7 +9,7 @@ from bs4.element import ResultSet  # type: ignore
 from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
-# pylint: disable=too-many-nested-blocks,no-member, too-many-branches
+# pylint: disable=too-many-nested-blocks, too-many-branches
 
 
 logger = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ class ParserLumen(Html):
                         text_sibling = sibling.text.strip() if isinstance(sibling, bs4.element.Tag) else sibling.strip()
                         if text_sibling != "":
                             if "The scheduled maintenance work has begun" in text_sibling:
-                                data["status"] = "IN-PROCESS"
+                                data["status"] = Status("IN-PROCESS")
                             if "GMT" in text_sibling:
                                 stamp = parser.parse(text_sibling.split(" GMT")[0])
                                 data["stamp"] = self.dt2ts(stamp)
