@@ -10,6 +10,7 @@ from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingErr
 from circuit_maintenance_parser.parsers.eunetworks import ParserEUNetworks
 from circuit_maintenance_parser.parser import ICal
 from circuit_maintenance_parser.parsers.lumen import ParserLumen
+from circuit_maintenance_parser.parsers.megaport import ParserMegaport
 from circuit_maintenance_parser.parsers.ntt import ParserNTT
 from circuit_maintenance_parser.parsers.packetfabric import ParserPacketFabric
 from circuit_maintenance_parser.parsers.telstra import ParserTelstra
@@ -44,6 +45,17 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             ParserLumen,
             Path(dir_path, "data", "lumen", "lumen2.html"),
             Path(dir_path, "data", "lumen", "lumen2_result.json"),
+        ),
+        # Megaport
+        (
+            ParserMegaport,
+            Path(dir_path, "data", "megaport", "megaport1.html"),
+            Path(dir_path, "data", "megaport", "megaport1_result.json"),
+        ),
+        (
+            ParserMegaport,
+            Path(dir_path, "data", "megaport", "megaport2.html"),
+            Path(dir_path, "data", "megaport", "megaport2_result.json"),
         ),
         # NTT
         (ParserNTT, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),

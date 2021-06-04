@@ -5,6 +5,7 @@ See: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-0
 
 import json
 from enum import Enum
+
 from typing import List, Optional
 
 from pydantic import BaseModel, validator, StrictStr, StrictInt
@@ -135,6 +136,7 @@ class Maintenance(BaseModel):
     organizer: StrictStr
 
     # Non mandatory attributes
+
     stamp: Optional[StrictInt] = None
     uid: StrictStr = "0"
     sequence: StrictInt = 1
