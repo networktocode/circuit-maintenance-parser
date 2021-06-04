@@ -12,6 +12,8 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 
 logger = logging.getLogger(__name__)
 
+# pylint: disable=too-many-branches
+
 
 class ParserMegaport(Html):
     """Notifications Parser for Megaport notifications."""
@@ -48,15 +50,21 @@ class ParserMegaport(Html):
                     data["maintenance_id"] = p_elem.find("b").string
                     data["status"] = Status("CONFIRMED")
                 elif p_text.startswith("Hi "):
-                    data["account"] = re.search("Hi (.*)", p_text).group(1)
+                    re_search = re.search("Hi (.*)", p_text)
+                    if re_search is not None:
+                        data["account"] = re_search.group(1)
                 elif p_text.startswith("Purpose of Maintenance:"):
                     data["summary"] = p_text.split("Purpose of Maintenance: ")[-1]
                 elif p_text.startswith("Start Date and Time:"):
-                    start = parser.parse(re.search("Start Date and Time: (.*) UTC", p_text).group(1))
-                    data["start"] = self.dt2ts(start)
+                    re_search = re.search("Start Date and Time: (.*) UTC", p_text)
+                    if re_search:
+                        start = parser.parse(re_search.group(1))
+                        data["start"] = self.dt2ts(start)
                 elif p_text.startswith("End Date and Time:"):
-                    end = parser.parse(re.search("End Date and Time: (.*) UTC", p_text).group(1))
-                    data["end"] = self.dt2ts(end)
+                    re_search = re.search("End Date and Time: (.*) UTC", p_text)
+                    if re_search:
+                        end = parser.parse(re_search.group(1))
+                        data["end"] = self.dt2ts(end)
 
             circuit_table = tr_elem.find("table")
             if circuit_table and circuit_table.find("th").string == "Service ID":
@@ -66,4 +74,6 @@ class ParserMegaport(Html):
                 for idx in range(0, len(cells), num_columns):
                     data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=cells[idx].a.string))
 
-                return
+                # Once we have all the data we drop because other tables could have object that don't implement some
+                # of the used methods
+                break
