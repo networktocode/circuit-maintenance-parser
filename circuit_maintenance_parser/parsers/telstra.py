@@ -50,12 +50,13 @@ class ParserTelstra(Html):
                 if not th_element.string:
                     continue
                 th_text = th_element.string.strip()
+                th_sibling = th_element.next_sibling.next_sibling
                 if th_text == "To:":
-                    data["account"] = th_element.next_sibling.next_sibling.string
+                    data["account"] = th_sibling.string
                 elif th_text == "Change Reference:":
-                    data["maintenance_id"] = th_element.next_sibling.next_sibling.string
+                    data["maintenance_id"] = th_sibling.string
                 elif th_text == "Maintenance Window:":
-                    text_dates = th_element.next_sibling.next_sibling.string.split("(UTC) to ")
+                    text_dates = th_sibling.string.split("(UTC) to ")
                     start = parser.parse(text_dates[0])
                     data["start"] = self.dt2ts(start)
                     end = parser.parse(text_dates[1].strip("(UTC)"))
@@ -63,7 +64,7 @@ class ParserTelstra(Html):
                 elif th_text == "Service(s) Impacted:":
                     data["circuits"] = []
                     # TODO: This split is just an assumption of the multiple service, to be checked with more samples
-                    impacted_circuits = th_element.next_sibling.next_sibling.text.split(", ")
+                    impacted_circuits = th_sibling.text.split(", ")
                     for circuit_id in impacted_circuits:
                         data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))
                 elif th_text == "Maintenance Details:":
@@ -74,5 +75,6 @@ class ParserTelstra(Html):
                         if element.string and element.string not in ["\n", "", "\xa0"] + sentences:
                             sentences.append(element.string)
                     if sentences:
+                        # First sentence containts 'Maintenance Details:' so we skip it
                         data["summary"] = ". ".join(sentences[1:])
             break
