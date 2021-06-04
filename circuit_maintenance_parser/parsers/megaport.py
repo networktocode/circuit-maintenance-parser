@@ -46,7 +46,7 @@ class ParserMegaport(Html):
                 p_text = p_elem.text
                 if not p_text:
                     continue
-                if p_text.startswith("This is a reminder that Planned maintenance"):
+                if p_text.startswith("This is a reminder"):
                     data["maintenance_id"] = p_elem.find("b").string
                     data["status"] = Status("CONFIRMED")
                 elif p_text.startswith("Hi "):

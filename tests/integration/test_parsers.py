@@ -52,6 +52,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "megaport", "megaport1.html"),
             Path(dir_path, "data", "megaport", "megaport1_result.json"),
         ),
+        (
+            ParserMegaport,
+            Path(dir_path, "data", "megaport", "megaport2.html"),
+            Path(dir_path, "data", "megaport", "megaport2_result.json"),
+        ),
         # NTT
         (ParserNTT, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
         # PacketFabric
