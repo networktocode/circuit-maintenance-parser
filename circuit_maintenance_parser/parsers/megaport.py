@@ -1,5 +1,6 @@
 """Megaport parser."""
 import logging
+import re
 from typing import Dict
 
 import dateutil.parser as parser
@@ -47,14 +48,14 @@ class ParserMegaport(Html):
                     data["maintenance_id"] = p_elem.find("b").string
                     data["status"] = Status("CONFIRMED")
                 elif p_text.startswith("Hi "):
-                    data["account"] = p_text.split("Hi ")[-1]
+                    data["account"] = re.search("Hi (.*)", p_text).group(1)
                 elif p_text.startswith("Purpose of Maintenance:"):
                     data["summary"] = p_text.split("Purpose of Maintenance: ")[-1]
                 elif p_text.startswith("Start Date and Time:"):
-                    start = parser.parse(p_text.split("Start Date and Time: ")[-1].strip(" UTC"))
+                    start = parser.parse(re.search("Start Date and Time: (.*) UTC", p_text).group(1))
                     data["start"] = self.dt2ts(start)
                 elif p_text.startswith("End Date and Time:"):
-                    end = parser.parse(p_text.split("End Date and Time: ")[-1].strip(" UTC"))
+                    end = parser.parse(re.search("End Date and Time: (.*) UTC", p_text).group(1))
                     data["end"] = self.dt2ts(end)
 
             circuit_table = tr_elem.find("table")
