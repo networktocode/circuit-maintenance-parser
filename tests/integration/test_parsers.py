@@ -20,7 +20,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 @pytest.mark.parametrize(
-    "parser, raw_file, results_file",
+    "parser_class, raw_file, results_file",
     [
         # EUNetworks
         (
@@ -77,10 +77,10 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ),
     ],
 )
-def test_complete_parsing(parser, raw_file, results_file):
-    """Tests parser."""
+def test_complete_parsing(parser_class, raw_file, results_file):
+    """Tests various parser."""
     with open(raw_file, "rb") as file_obj:
-        parser = parser(raw=file_obj.read())
+        parser = parser_class(raw=file_obj.read())
 
     parsed_notifications = parser.process()[0]
 
@@ -91,7 +91,7 @@ def test_complete_parsing(parser, raw_file, results_file):
 
 
 @pytest.mark.parametrize(
-    "parser, raw_file, exception",
+    "parser_class, raw_file, exception",
     [
         # ICal
         (ICal, Path(dir_path, "data", "ical", "ical_no_account"), MissingMandatoryFields,),
@@ -104,10 +104,10 @@ def test_complete_parsing(parser, raw_file, results_file):
         (ParserZayo, Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
     ],
 )
-def test_errored_parsing(parser, raw_file, exception):
-    """Tests for Ical parser."""
+def test_errored_parsing(parser_class, raw_file, exception):
+    """Negative tests for various parsers."""
     with open(raw_file, "rb") as file_obj:
-        parser = parser(raw=file_obj.read())
+        parser = parser_class(raw=file_obj.read())
 
     with pytest.raises(exception):
         parser.process()
