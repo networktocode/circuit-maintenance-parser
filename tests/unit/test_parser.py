@@ -17,13 +17,13 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 @pytest.mark.parametrize(
     "raw, provider_type, result_type",
     [
-        ("raw_text", "wrong", None),
-        ("raw_text", "", ICal),
-        ("raw_text", "ical", ICal),
-        ("raw_text", "ntt", ParserNTT),
-        ("raw_text", "packetfabric", ParserPacketFabric),
-        ("raw_text", "eunetworks", ParserEUNetworks),
-        ("raw_text", "zayo", ParserZayo),
+        (b"raw_bytes", "wrong", None),
+        (b"raw_bytes", "", ICal),
+        (b"raw_bytes", "ical", ICal),
+        (b"raw_bytes", "ntt", ParserNTT),
+        (b"raw_bytes", "packetfabric", ParserPacketFabric),
+        (b"raw_bytes", "eunetworks", ParserEUNetworks),
+        (b"raw_bytes", "zayo", ParserZayo),
     ],
 )
 def test_init_parser(raw, provider_type, result_type):

@@ -1,0 +1,19 @@
+{
+  "account": "Generic Account, Inc.",
+  "circuits": [
+    {
+      "circuit_id": "/XYZA/123456/   /ZYO /",
+      "impact": "OUTAGE"
+    }
+  ],
+  "end": 1614423600,
+  "maintenance_id": "TTN-0001234567",
+  "organizer": "mr@zayo.com",
+  "provider": "zayo",
+  "sequence": 1,
+  "stamp": 1614297600,
+  "start": 1614405600,
+  "status": "CONFIRMED",
+  "summary": "Zayo will implement network maintenance to enhance service reliability.",
+  "uid": "0"
+}

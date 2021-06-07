@@ -1,0 +1,19 @@
+{
+    "account": "Generic Account, Inc.",
+    "circuits": [
+        {
+            "circuit_id": "123456789",
+            "impact": "OUTAGE"
+        }
+    ],
+    "end": 1620817200,
+    "maintenance_id": "987654321-1",
+    "organizer": "support@megaport.com",
+    "provider": "megaport",
+    "sequence": 1,
+    "stamp": null,
+    "start": 1620813600,
+    "status": "CONFIRMED",
+    "summary": "Please be advised that Megaport will be performing hardware and software upgrades to our route servers that will affect the secondary route server for MegaIX lax-tx1 on the date and times mentioned below:\r\nDate and time:: 10: 00 - 11: 00 UTC, 12/05/21\r\nExpected impact: The secondary route server for services at lax-tx1 (1.1.1.1) will be unavailable during the maintenance window.\r\nPlease note that bilateral sessions and sessions with the primary route server (1.1.1.2) will not be affected. Peers that have not yet configured BGP sessions to both the primary and the secondary route servers are encouraged to do so before the maintenance.\r\nIf you have any questions concerning this activity, please enquire via email to support@megaport.com citing reference 987654321-1.",
+    "uid": "0"
+}

@@ -1,9 +1,13 @@
 """Definition of Mainentance Notification base classes."""
 
-from typing import Iterable
 import base64
 import calendar
 import datetime
+import quopri
+from typing import Iterable, Union, Dict, Mapping
+
+import bs4  # type: ignore
+from bs4.element import ResultSet  # type: ignore
 
 from pydantic import BaseModel, ValidationError
 from icalendar import Calendar  # type: ignore
@@ -20,7 +24,7 @@ class MaintenanceNotification(BaseModel):
     This is the base class that is created from a Circuit Maintenance notification containing
 
     Attributes:
-        raw: Raw notification message
+        raw: Raw notification message (bytes)
         provider_type: Identifier of the provider of the notification
         sender: Identifier of the source of the notification (default "")
         subject: Subject of the notification (default "")
@@ -28,29 +32,29 @@ class MaintenanceNotification(BaseModel):
 
     Examples:
         >>> MaintenanceNotification(
-        ...     raw="raw_message",
+        ...     raw=b"raw_message",
         ...     sender="my_email@example.com",
         ...     subject="Urgent notification for circuits X and Y",
         ...     source="gmail",
         ...     provider_type="ntt",
         ... )
-        MaintenanceNotification(raw='raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
+        MaintenanceNotification(raw=b'raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
 
-        >>> MaintenanceNotification(raw="raw_message")
+        >>> MaintenanceNotification(raw=b"raw_message")
         Traceback (most recent call last):
         ...
         pydantic.error_wrappers.ValidationError: 1 validation error for MaintenanceNotification
         provider_type
           field required (type=value_error.missing)
 
-        >>> MaintenanceNotification("raw_message")
+        >>> MaintenanceNotification(b"raw_message")
         Traceback (most recent call last):
         ...
         TypeError: __init__() takes exactly 1 positional argument (2 given)
 
     """
 
-    raw: str
+    raw: bytes
     provider_type: str
     sender: str = ""
     subject: str = ""
@@ -175,7 +179,28 @@ class Html(MaintenanceNotification):
     _data_type = "text/html"
 
     def process(self) -> Iterable[Maintenance]:
-        """Method that returns a list of Maintenance objects."""
+        """Execute parsing."""
+        result = []
+
+        data_base: Dict[str, Union[int, str, Iterable]] = {
+            "provider": self._default_provider,
+            "organizer": self._default_organizer,
+        }
+        try:
+            soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
+
+            # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
+            # return of `parse_html` as an Iterable object to accommodate this potential case.
+            for data in self.parse_html(soup, data_base):
+                result.append(Maintenance(**data))
+
+            return result
+
+        except ValidationError as exc:
+            raise MissingMandatoryFields from exc
+
+    def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
+        """Custom HTML parsing."""
         raise NotImplementedError
 
     @staticmethod
@@ -185,4 +210,5 @@ class Html(MaintenanceNotification):
             line = line.text.strip()
         except AttributeError:
             line = line.strip()
+        # TODO: below may not be needed if we use `quopri.decodestring()` on the initial email file?
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")

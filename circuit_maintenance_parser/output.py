@@ -5,7 +5,8 @@ See: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-0
 
 import json
 from enum import Enum
-from typing import List
+
+from typing import List, Optional
 
 from pydantic import BaseModel, validator, StrictStr, StrictInt
 
@@ -120,9 +121,9 @@ class Maintenance(BaseModel):
         ...     start=1533704400,
         ...     status="COMPLETED",
         ...     summary="This is a maintenance notification",
-        ...     uid="VNOC-1-99999999999",
+        ...     uid="1111",
         ... )
-        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], status=<Status.COMPLETED: 'COMPLETED'>, start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='VNOC-1-99999999999', sequence=1, summary='This is a maintenance notification')
+        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], status=<Status.COMPLETED: 'COMPLETED'>, start=1533704400, end=1533712380, organizer='myemail@example.com', stamp=1533595768, uid='1111', sequence=1, summary='This is a maintenance notification')
     """
 
     provider: StrictStr
@@ -132,9 +133,11 @@ class Maintenance(BaseModel):
     status: Status
     start: StrictInt
     end: StrictInt
-    stamp: StrictInt
     organizer: StrictStr
 
+    # Non mandatory attributes
+
+    stamp: Optional[StrictInt] = None
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
