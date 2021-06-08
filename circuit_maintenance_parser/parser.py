@@ -199,6 +199,9 @@ class Html(MaintenanceNotification):
         except ValidationError as exc:
             raise MissingMandatoryFields from exc
 
+        except Exception as exc:
+            raise ParsingError from exc
+
     def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
         """Custom HTML parsing."""
         raise NotImplementedError
