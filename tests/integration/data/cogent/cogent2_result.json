@@ -1,0 +1,19 @@
+{
+    "account": "Cogent Customer",
+    "circuits": [
+        {
+            "circuit_id": "1-123456789",
+            "impact": "OUTAGE"
+        }
+    ],
+    "end": 1636167600,
+    "maintenance_id": "AB987654321-1",
+    "organizer": "support@cogentco.com",
+    "provider": "cogent",
+    "sequence": 1,
+    "stamp": null,
+    "start": 1636156800,
+    "status": "CONFIRMED",
+    "summary": "Router Code Upgrade Planned Network Maintenance",
+    "uid": "0"
+}

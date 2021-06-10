@@ -1,0 +1,75 @@
+"""Cogent parser."""
+import logging
+import re
+from typing import Dict
+
+from datetime import datetime
+from bs4.element import ResultSet  # type: ignore
+
+from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
+
+
+logger = logging.getLogger(__name__)
+
+# pylint: disable=too-many-branches
+
+
+class ParserCogent(Html):
+    """Notifications Parser for Cogent notifications."""
+
+    provider_type: str = "cogent"
+
+    # Default values for cogent notifications
+    _default_provider = "cogent"
+    _default_organizer = "support@cogentco.com"
+
+    def parse_html(self, soup, data_base):
+        """Execute parsing."""
+        data = data_base.copy()
+        try:
+            self.parse_br(soup.find_all("br"), data)
+            return [data]
+
+        except Exception as exc:
+            raise ParsingError from exc
+
+    def parse_br(self, br_results: ResultSet, data: Dict):
+        """Parse <br> tag."""
+        for br in br_results:
+            div_text = br.parent.text
+            for line in re.split(r"\n", div_text):
+                if line.endswith("Network Maintenance"):
+                    if "Planned" in line:
+                        data["status"] = Status("CONFIRMED")
+                    else:
+                        data["status"] = Status("TENTATIVE")
+                    data["summary"] = line
+                elif line.startswith("Dear"):
+                    match = re.search("Dear (.*),", line)
+                    if match:
+                        data["account"] = match.group(1)
+                    else:
+                        data["account"] = "Cogent Customer"
+                elif line.startswith("Start time:"):
+                    match = re.search("Start time: (.*) \(local time\) (\d+/\d+/\d+)", line)
+                    if match:
+                        start_str = " ".join(match.groups())
+                    start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
+                    data["start"] = self.dt2ts(start)
+                elif line.startswith("End time:"):
+                    match = re.search("End time: (.*) \(local time\) (\d+/\d+/\d+)", line)
+                    if match:
+                        end_str = " ".join(match.groups())
+                    end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
+                    data["end"] = self.dt2ts(end)
+                elif line.startswith("Work order number:"):
+                    match = re.search("Work order number: (.*)\s+", line)
+                    if match:
+                        data["maintenance_id"] = match.group(1)
+                elif line.startswith("Order ID(s) impacted:"):
+                    data["circuits"] = []
+                    match = re.search("Order ID\(s\) impacted: (.*)\s+", line)
+                    if match:
+                        data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=match.group(1)))
+            break  # only need first <br> to get the main <div>

@@ -1,4 +1,5 @@
 """Tests generic for parser."""
+from circuit_maintenance_parser.parsers.cogent import ParserCogent
 import json
 import os
 from pathlib import Path
@@ -86,6 +87,16 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             ParserZayo,
             Path(dir_path, "data", "zayo", "zayo2.html"),
             Path(dir_path, "data", "zayo", "zayo2_result.json"),
+        ),
+        (
+            ParserCogent,
+            Path(dir_path, "data", "cogent", "cogent1.html"),
+            Path(dir_path, "data", "cogent", "cogent1_result.json"),
+        ),
+        (
+            ParserCogent,
+            Path(dir_path, "data", "cogent", "cogent2.html"),
+            Path(dir_path, "data", "cogent", "cogent2_result.json"),
         ),
     ],
 )

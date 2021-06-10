@@ -1,0 +1,19 @@
+{
+    "account": "Cogent Customer",
+    "circuits": [
+        {
+            "circuit_id": "123456789",
+            "impact": "OUTAGE"
+        }
+    ],
+    "end": 1638770400,
+    "maintenance_id": "987654321-1",
+    "organizer": "support@cogentco.com",
+    "provider": "cogent",
+    "sequence": 1,
+    "stamp": null,
+    "start": 1638748800,
+    "status": "CONFIRMED",
+    "summary": "ASR9K Code Upgrade Planned Network Maintenance",
+    "uid": "0"
+}
