@@ -29,6 +29,7 @@ class ParserCogent(Html):
         data = data_base.copy()
         try:
             self.parse_br(soup.find_all("br"), data)
+            self.parse_title(soup.find_all("title"), data)
             return [data]
 
         except Exception as exc:
@@ -40,28 +41,22 @@ class ParserCogent(Html):
             div_text = br.parent.text
             for line in re.split(r"\n", div_text):
                 if line.endswith("Network Maintenance"):
-                    if "Planned" in line:
-                        data["status"] = Status("CONFIRMED")
-                    else:
-                        data["status"] = Status("TENTATIVE")
                     data["summary"] = line
                 elif line.startswith("Dear"):
                     match = re.search("Dear (.*),", line)
                     if match:
                         data["account"] = match.group(1)
-                    else:
-                        data["account"] = "Cogent Customer"
                 elif line.startswith("Start time:"):
                     match = re.search("Start time: (.*) \(local time\) (\d+/\d+/\d+)", line)
                     if match:
                         start_str = " ".join(match.groups())
-                    start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
+                        start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
                     data["start"] = self.dt2ts(start)
                 elif line.startswith("End time:"):
                     match = re.search("End time: (.*) \(local time\) (\d+/\d+/\d+)", line)
                     if match:
                         end_str = " ".join(match.groups())
-                    end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
+                        end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
                     data["end"] = self.dt2ts(end)
                 elif line.startswith("Work order number:"):
                     match = re.search("Work order number: (.*)\s+", line)
@@ -70,6 +65,16 @@ class ParserCogent(Html):
                 elif line.startswith("Order ID(s) impacted:"):
                     data["circuits"] = []
                     match = re.search("Order ID\(s\) impacted: (.*)\s+", line)
-                    if match:
-                        data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=match.group(1)))
+                    for circuit_id in match.group(1).split(","):
+                        data["circuits"].append(
+                            CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip().strip())
+                        )
             break  # only need first <br> to get the main <div>
+
+    def parse_title(self, title_results: ResultSet, data: Dict):
+        """Parse <title> tag."""
+        for title in title_results:
+            if title.text.startswith("Correction"):
+                data["status"] = Status("RE-SCHEDULED")
+            elif "Planned" in title.text:
+                data["status"] = Status("CONFIRMED")

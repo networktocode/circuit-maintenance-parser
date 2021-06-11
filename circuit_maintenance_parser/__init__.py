@@ -11,6 +11,7 @@ from .parsers.ntt import ParserNTT
 from .parsers.packetfabric import ParserPacketFabric
 from .parsers.telstra import ParserTelstra
 from .parsers.zayo import ParserZayo
+from .parsers.cogent import ParserCogent
 
 
 SUPPORTED_PROVIDER_PARSERS = (
@@ -22,6 +23,7 @@ SUPPORTED_PROVIDER_PARSERS = (
     ParserTelstra,
     ParserZayo,
     ICal,
+    ParserCogent,
 )
 
 SUPPORTED_PROVIDER_NAMES = [parser.get_default_provider() for parser in SUPPORTED_PROVIDER_PARSERS]
