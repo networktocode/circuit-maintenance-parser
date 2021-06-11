@@ -28,18 +28,17 @@ class ParserCogent(Html):
         """Execute parsing."""
         data = data_base.copy()
         try:
-            self.parse_br(soup.find_all("br"), data)
+            self.parse_div(soup.find_all("div", class_="a3s aiL"), data)
             self.parse_title(soup.find_all("title"), data)
             return [data]
 
         except Exception as exc:
             raise ParsingError from exc
 
-    def parse_br(self, br_results: ResultSet, data: Dict):
-        """Parse <br> tag."""
-        for br in br_results:
-            div_text = br.parent.text
-            for line in re.split(r"\n", div_text):
+    def parse_div(self, divs: ResultSet, data: Dict):
+        """Parse <div> tag."""
+        for div in divs:
+            for line in div.text.splitlines():
                 if line.endswith("Network Maintenance"):
                     data["summary"] = line
                 elif line.startswith("Dear"):
@@ -59,17 +58,15 @@ class ParserCogent(Html):
                         end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
                         data["end"] = self.dt2ts(end)
                 elif line.startswith("Work order number:"):
-                    match = re.search("Work order number: (.*)\s+", line)
+                    match = re.search("Work order number: (.*)", line)
                     if match:
                         data["maintenance_id"] = match.group(1)
                 elif line.startswith("Order ID(s) impacted:"):
                     data["circuits"] = []
-                    match = re.search("Order ID\(s\) impacted: (.*)\s+", line)
+                    match = re.search("Order ID\(s\) impacted: (.*)", line)
                     for circuit_id in match.group(1).split(","):
-                        data["circuits"].append(
-                            CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip().strip())
-                        )
-            break  # only need first <br> to get the main <div>
+                        data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip()))
+            break  # only need first <div>
 
     def parse_title(self, title_results: ResultSet, data: Dict):
         """Parse <title> tag."""

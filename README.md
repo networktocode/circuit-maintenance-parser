@@ -31,11 +31,11 @@ You can leverage on this library in your automation framework to process circuit
 
 ### Supported providers based on other parsers
 
+- Cogent
 - Lumen
 - Megaport
 - Telstra
 - Zayo
-- Cogent
 
 > Note: Because these providers do not support the BCOP standard natively, maybe there are some gaps on the implemented parser that will be refined with new test cases. We encourage you to report related **issues**!
 

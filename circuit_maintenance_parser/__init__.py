@@ -15,6 +15,7 @@ from .parsers.cogent import ParserCogent
 
 
 SUPPORTED_PROVIDER_PARSERS = (
+    ParserCogent,
     ParserEUNetworks,
     ParserLumen,
     ParserMegaport,
@@ -23,7 +24,6 @@ SUPPORTED_PROVIDER_PARSERS = (
     ParserTelstra,
     ParserZayo,
     ICal,
-    ParserCogent,
 )
 
 SUPPORTED_PROVIDER_NAMES = [parser.get_default_provider() for parser in SUPPORTED_PROVIDER_PARSERS]
