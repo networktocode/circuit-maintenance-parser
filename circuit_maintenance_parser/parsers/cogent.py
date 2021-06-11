@@ -51,13 +51,13 @@ class ParserCogent(Html):
                     if match:
                         start_str = " ".join(match.groups())
                         start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
-                    data["start"] = self.dt2ts(start)
+                        data["start"] = self.dt2ts(start)
                 elif line.startswith("End time:"):
                     match = re.search("End time: (.*) \(local time\) (\d+/\d+/\d+)", line)
                     if match:
                         end_str = " ".join(match.groups())
                         end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
-                    data["end"] = self.dt2ts(end)
+                        data["end"] = self.dt2ts(end)
                 elif line.startswith("Work order number:"):
                     match = re.search("Work order number: (.*)\s+", line)
                     if match:
