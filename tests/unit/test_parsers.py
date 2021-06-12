@@ -7,14 +7,11 @@ import pytest
 
 from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
 
-from circuit_maintenance_parser.parsers.eunetworks import ParserEUNetworks
 from circuit_maintenance_parser.parser import ICal
-from circuit_maintenance_parser.parsers.lumen import ParserLumen
-from circuit_maintenance_parser.parsers.megaport import ParserMegaport
-from circuit_maintenance_parser.parsers.ntt import ParserNTT
-from circuit_maintenance_parser.parsers.packetfabric import ParserPacketFabric
-from circuit_maintenance_parser.parsers.telstra import ParserTelstra
-from circuit_maintenance_parser.parsers.zayo import ParserZayo
+from circuit_maintenance_parser.parsers.lumen import ParserLumenHtml1
+from circuit_maintenance_parser.parsers.megaport import ParserMegaportHtml1
+from circuit_maintenance_parser.parsers.telstra import ParserTelstraHtml1
+from circuit_maintenance_parser.parsers.zayo import ParserZayoHtml1
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -23,12 +20,6 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 @pytest.mark.parametrize(
     "parser_class, raw_file, results_file",
     [
-        # EUNetworks
-        (
-            ParserEUNetworks,
-            Path(dir_path, "data", "eunetworks", "eunetworks1"),
-            Path(dir_path, "data", "eunetworks", "eunetworks1_result.json"),
-        ),
         # iCal
         (ICal, Path(dir_path, "data", "ical", "ical1"), Path(dir_path, "data", "ical", "ical1_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical2"), Path(dir_path, "data", "ical", "ical2_result.json"),),
@@ -37,53 +28,47 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
         # Lumen
         (
-            ParserLumen,
+            ParserLumenHtml1,
             Path(dir_path, "data", "lumen", "lumen1.html"),
             Path(dir_path, "data", "lumen", "lumen1_result.json"),
         ),
         (
-            ParserLumen,
+            ParserLumenHtml1,
             Path(dir_path, "data", "lumen", "lumen2.html"),
             Path(dir_path, "data", "lumen", "lumen2_result.json"),
         ),
         # Megaport
         (
-            ParserMegaport,
+            ParserMegaportHtml1,
             Path(dir_path, "data", "megaport", "megaport1.html"),
             Path(dir_path, "data", "megaport", "megaport1_result.json"),
         ),
         (
-            ParserMegaport,
+            ParserMegaportHtml1,
             Path(dir_path, "data", "megaport", "megaport2.html"),
             Path(dir_path, "data", "megaport", "megaport2_result.json"),
         ),
         # NTT
-        (ParserNTT, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
-        # PacketFabric
-        (
-            ParserPacketFabric,
-            Path(dir_path, "data", "packetfabric", "packetfabric1"),
-            Path(dir_path, "data", "packetfabric", "packetfabric1_result.json"),
-        ),
+        (ICal, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
         # Telstra
         (
-            ParserTelstra,
+            ParserTelstraHtml1,
             Path(dir_path, "data", "telstra", "telstra1.html"),
             Path(dir_path, "data", "telstra", "telstra1_result.json"),
         ),
         (
-            ParserTelstra,
+            ParserTelstraHtml1,
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
         ),
         # Zayo
         (
-            ParserZayo,
+            ParserZayoHtml1,
             Path(dir_path, "data", "zayo", "zayo1.html"),
             Path(dir_path, "data", "zayo", "zayo1_result.json"),
         ),
         (
-            ParserZayo,
+            ParserZayoHtml1,
             Path(dir_path, "data", "zayo", "zayo2.html"),
             Path(dir_path, "data", "zayo", "zayo2_result.json"),
         ),
@@ -112,8 +97,8 @@ def test_complete_parsing(parser_class, raw_file, results_file):
         (ICal, Path(dir_path, "data", "ical", "ical_no_start"), ParsingError,),
         (ICal, Path(dir_path, "data", "ical", "ical_no_end"), ParsingError,),
         # Zayo
-        (ParserZayo, Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"), MissingMandatoryFields,),
-        (ParserZayo, Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
+        (ParserZayoHtml1, Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"), MissingMandatoryFields,),
+        (ParserZayoHtml1, Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
     ],
 )
 def test_errored_parsing(parser_class, raw_file, exception):

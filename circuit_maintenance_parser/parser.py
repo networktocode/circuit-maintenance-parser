@@ -33,19 +33,13 @@ class MaintenanceNotification(BaseModel):
     Examples:
         >>> MaintenanceNotification(
         ...     raw=b"raw_message",
-        ...     sender="my_email@example.com",
-        ...     subject="Urgent notification for circuits X and Y",
-        ...     source="gmail",
         ...     provider_type="ntt",
+        ...     default_organizer="noc@us.ntt.net"
         ... )
-        MaintenanceNotification(raw=b'raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
+        MaintenanceNotification(raw=b'raw_message', provider_type='ntt', default_organizer='noc@us.ntt.net')
 
         >>> MaintenanceNotification(raw=b"raw_message")
-        Traceback (most recent call last):
-        ...
-        pydantic.error_wrappers.ValidationError: 1 validation error for MaintenanceNotification
-        provider_type
-          field required (type=value_error.missing)
+        MaintenanceNotification(raw=b'raw_message', provider_type='unknown', default_organizer='unknown')
 
         >>> MaintenanceNotification(b"raw_message")
         Traceback (most recent call last):
@@ -55,14 +49,8 @@ class MaintenanceNotification(BaseModel):
     """
 
     raw: bytes
-    provider_type: str
-    sender: str = ""
-    subject: str = ""
-    source: str = ""
-
-    # Internal placeholder for parser customization
-    _default_organizer = "unknown"
-    _default_provider = "unknown"
+    provider_type: str = "unknown"
+    default_organizer: str = "unknown"
 
     # Data Type used as payload
     _data_type = "text/plain"
@@ -71,16 +59,6 @@ class MaintenanceNotification(BaseModel):
     def get_data_type(cls) -> str:
         """Return the expected data type."""
         return cls._data_type
-
-    @classmethod
-    def get_default_provider(cls) -> str:
-        """Return the default provider."""
-        return cls._default_provider
-
-    @classmethod
-    def get_default_organizer(cls) -> str:
-        """Return the default organizer."""
-        return cls._default_organizer
 
     def process(self) -> Iterable[Maintenance]:
         """Method that returns a list of Maintenance objects."""
@@ -124,7 +102,7 @@ class ICal(MaintenanceNotification):
             for component in gcal.walk():
                 if component.name == "VEVENT":
                     organizer = (
-                        str(component.get("ORGANIZER")) if component.get("ORGANIZER") else self._default_organizer
+                        str(component.get("ORGANIZER")) if component.get("ORGANIZER") else self.default_organizer
                     )
                     provider = (
                         str(component.get("X-MAINTNOTE-PROVIDER"))
@@ -183,8 +161,8 @@ class Html(MaintenanceNotification):
         result = []
 
         data_base: Dict[str, Union[int, str, Iterable]] = {
-            "provider": self._default_provider,
-            "organizer": self._default_organizer,
+            "provider": self.provider_type,
+            "organizer": self.default_organizer,
         }
         try:
             soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")

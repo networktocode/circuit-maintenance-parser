@@ -11,7 +11,7 @@ from . import SUPPORTED_PROVIDER_PARSERS, init_parser, ParsingError
 @click.option("--raw-file", required=True, help="File containing raw data to parse.")
 @click.option(
     "--parser",
-    type=click.Choice([parser.get_default_provider() for parser in SUPPORTED_PROVIDER_PARSERS]),
+    type=click.Choice([parser.get_provider_type() for parser in SUPPORTED_PROVIDER_PARSERS]),
     default="ical",
     help="Parser type.",
 )
