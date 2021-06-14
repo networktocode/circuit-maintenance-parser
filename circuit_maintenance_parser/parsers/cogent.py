@@ -2,13 +2,13 @@
 import logging
 import re
 from typing import Dict
-
+from pytz import timezone, UTC
 from datetime import datetime
 from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
-
+from circuit_maintenance_parser.util import city_timezone
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +37,18 @@ class ParserCogent(Html):
 
     def parse_div(self, divs: ResultSet, data: Dict):
         """Parse <div> tag."""
+        start_str = ""
+        end_str = ""
+
         for div in divs:
+            # if not div.get("class"):
+            #     continue
+            # div_class = " ".join(div.get("class"))
+            # if div_class == "ha":
+            #     match = re.search("(.*)[^A-Z\d-]+", div.text)
+            #     if match:
+
+            # elif div_class == "a3s aiL":
             for line in div.text.splitlines():
                 if line.endswith("Network Maintenance"):
                     data["summary"] = line
@@ -46,17 +57,31 @@ class ParserCogent(Html):
                     if match:
                         data["account"] = match.group(1)
                 elif line.startswith("Start time:"):
-                    match = re.search("Start time: (.*) \(local time\) (\d+/\d+/\d+)", line)
+                    match = re.search("Start time: (.*) \([A-Za-z\s]+\) (\d+/\d+/\d+)", line)
                     if match:
                         start_str = " ".join(match.groups())
-                        start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
-                        data["start"] = self.dt2ts(start)
                 elif line.startswith("End time:"):
-                    match = re.search("End time: (.*) \(local time\) (\d+/\d+/\d+)", line)
+                    match = re.search("End time: (.*) \([A-Za-z\s]+\) (\d+/\d+/\d+)", line)
                     if match:
                         end_str = " ".join(match.groups())
+                elif line.startswith("Cogent customers receiving service"):
+                    match = re.search(r"[^Cogent].*?((\b[A-Z][a-z\s-]+)+, ([A-Za-z-]+[\s-]))", line)
+                    if match:
+                        parsed_timezone = city_timezone(match.group(1).strip())
+                        local_timezone = timezone(parsed_timezone)
+                        # set start time using the local city timezone
+                        start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
+                        local_time = local_timezone.localize(start)
+                        # set start time to UTC
+                        utc_start = local_time.astimezone(UTC)
+                        data["start"] = self.dt2ts(utc_start)
+
+                        # set end time using the local city timezone
                         end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
-                        data["end"] = self.dt2ts(end)
+                        local_time = local_timezone.localize(end)
+                        # set end time to UTC
+                        utc_end = local_time.astimezone(UTC)
+                        data["end"] = self.dt2ts(utc_end)
                 elif line.startswith("Work order number:"):
                     match = re.search("Work order number: (.*)", line)
                     if match:
@@ -66,7 +91,7 @@ class ParserCogent(Html):
                     match = re.search("Order ID\(s\) impacted: (.*)", line)
                     for circuit_id in match.group(1).split(","):
                         data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip()))
-            break  # only need first <div>
+            break
 
     def parse_title(self, title_results: ResultSet, data: Dict):
         """Parse <title> tag."""

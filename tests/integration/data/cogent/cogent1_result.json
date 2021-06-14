@@ -6,13 +6,13 @@
             "impact": "OUTAGE"
         }
     ],
-    "end": 1638770400,
+    "end": 1638799200,
     "maintenance_id": "987654321-1",
     "organizer": "support@cogentco.com",
     "provider": "cogent",
     "sequence": 1,
     "stamp": null,
-    "start": 1638748800,
+    "start": 1638777600,
     "status": "CONFIRMED",
     "summary": "ASR9K Code Upgrade Planned Network Maintenance",
     "uid": "0"
