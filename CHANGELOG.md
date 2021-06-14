@@ -1,6 +1,12 @@
 # Changelog
 
-## v1.1.0
+## v1.2.0
+
+### Added
+
+- #26 - Multiple Parsers per Provider, even combining ICal with custom HTML.
+
+## v1.1.0 - 2021-06-09
 
 ### Added
 

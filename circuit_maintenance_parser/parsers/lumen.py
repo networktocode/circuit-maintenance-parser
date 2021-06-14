@@ -15,7 +15,7 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 logger = logging.getLogger(__name__)
 
 
-class ParserLumenHtml1(Html):
+class HtmlParserLumen1(Html):
     """Notifications Parser for Lumen notifications."""
 
     def parse_html(self, soup, data_base):

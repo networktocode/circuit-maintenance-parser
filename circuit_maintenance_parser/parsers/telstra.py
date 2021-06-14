@@ -14,7 +14,7 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 logger = logging.getLogger(__name__)
 
 
-class ParserTelstraHtml1(Html):
+class HtmlParserTelstra1(Html):
     """Notifications Parser for Telstra notifications."""
 
     def parse_html(self, soup, data_base):

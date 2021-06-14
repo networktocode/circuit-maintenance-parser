@@ -1,5 +1,5 @@
 """Definition of Mainentance Notification base classes."""
-
+import logging
 import base64
 import calendar
 import datetime
@@ -16,6 +16,8 @@ from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFiel
 from circuit_maintenance_parser.output import Maintenance, Status, Impact, CircuitImpact
 
 # pylint: disable=no-member
+
+logger = logging.getLogger(__name__)
 
 
 class Parser(BaseModel):
@@ -142,6 +144,8 @@ class ICal(Parser):
         except Exception as exc:
             raise ParsingError from exc
 
+        logger.debug("Successfull parsing for %s", self.__class__.__name__)
+
         return result
 
 
@@ -165,6 +169,8 @@ class Html(Parser):
             # return of `parse_html` as an Iterable object to accommodate this potential case.
             for data in self.parse_html(soup, data_base):
                 result.append(Maintenance(**data))
+
+            logger.debug("Successfull parsing for %s", self.__class__.__name__)
 
             return result
 

@@ -8,10 +8,10 @@ import pytest
 from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
 
 from circuit_maintenance_parser.parser import ICal
-from circuit_maintenance_parser.parsers.lumen import ParserLumenHtml1
-from circuit_maintenance_parser.parsers.megaport import ParserMegaportHtml1
-from circuit_maintenance_parser.parsers.telstra import ParserTelstraHtml1
-from circuit_maintenance_parser.parsers.zayo import ParserZayoHtml1
+from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
+from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -28,23 +28,23 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
         # Lumen
         (
-            ParserLumenHtml1,
+            HtmlParserLumen1,
             Path(dir_path, "data", "lumen", "lumen1.html"),
             Path(dir_path, "data", "lumen", "lumen1_result.json"),
         ),
         (
-            ParserLumenHtml1,
+            HtmlParserLumen1,
             Path(dir_path, "data", "lumen", "lumen2.html"),
             Path(dir_path, "data", "lumen", "lumen2_result.json"),
         ),
         # Megaport
         (
-            ParserMegaportHtml1,
+            HtmlParserMegaport1,
             Path(dir_path, "data", "megaport", "megaport1.html"),
             Path(dir_path, "data", "megaport", "megaport1_result.json"),
         ),
         (
-            ParserMegaportHtml1,
+            HtmlParserMegaport1,
             Path(dir_path, "data", "megaport", "megaport2.html"),
             Path(dir_path, "data", "megaport", "megaport2_result.json"),
         ),
@@ -52,23 +52,23 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (ICal, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
         # Telstra
         (
-            ParserTelstraHtml1,
+            HtmlParserTelstra1,
             Path(dir_path, "data", "telstra", "telstra1.html"),
             Path(dir_path, "data", "telstra", "telstra1_result.json"),
         ),
         (
-            ParserTelstraHtml1,
+            HtmlParserTelstra1,
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
         ),
         # Zayo
         (
-            ParserZayoHtml1,
+            HtmlParserZayo1,
             Path(dir_path, "data", "zayo", "zayo1.html"),
             Path(dir_path, "data", "zayo", "zayo1_result.json"),
         ),
         (
-            ParserZayoHtml1,
+            HtmlParserZayo1,
             Path(dir_path, "data", "zayo", "zayo2.html"),
             Path(dir_path, "data", "zayo", "zayo2_result.json"),
         ),
@@ -97,8 +97,8 @@ def test_complete_parsing(parser_class, raw_file, results_file):
         (ICal, Path(dir_path, "data", "ical", "ical_no_start"), ParsingError,),
         (ICal, Path(dir_path, "data", "ical", "ical_no_end"), ParsingError,),
         # Zayo
-        (ParserZayoHtml1, Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"), MissingMandatoryFields,),
-        (ParserZayoHtml1, Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
+        (HtmlParserZayo1, Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"), MissingMandatoryFields,),
+        (HtmlParserZayo1, Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
     ],
 )
 def test_errored_parsing(parser_class, raw_file, exception):

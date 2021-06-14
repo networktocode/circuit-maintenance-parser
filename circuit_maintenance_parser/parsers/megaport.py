@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 # pylint: disable=too-many-branches
 
 
-class ParserMegaportHtml1(Html):
+class HtmlParserMegaport1(Html):
     """Notifications Parser for Megaport notifications."""
 
     def parse_html(self, soup, data_base):

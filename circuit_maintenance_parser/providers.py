@@ -1,4 +1,5 @@
 """Definition of Provider class as the entry point to the library."""
+import logging
 from typing import Iterable, Type
 
 from pydantic import BaseModel
@@ -6,12 +7,15 @@ from pydantic import BaseModel
 from circuit_maintenance_parser.output import Maintenance
 
 from circuit_maintenance_parser.parser import Parser, ICal
-from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
 
-from circuit_maintenance_parser.parsers.lumen import ParserLumenHtml1
-from circuit_maintenance_parser.parsers.megaport import ParserMegaportHtml1
-from circuit_maintenance_parser.parsers.telstra import ParserTelstraHtml1
-from circuit_maintenance_parser.parsers.zayo import ParserZayoHtml1
+from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
+from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
+
+
+logger = logging.getLogger(__name__)
 
 
 class GenericProvider(BaseModel):
@@ -59,15 +63,24 @@ class GenericProvider(BaseModel):
         """Return the Provider Types."""
         return {parser_class.get_data_type() for parser_class in cls._parser_classes}
 
-    def process(self) -> Iterable[Maintenance]:
-        """Method that returns a list of Maintenance objects."""
+    def process(self, data_type: str = "") -> Iterable[Maintenance]:
+        """Method that returns a list of Maintenance objects.
+
+        Attributes:
+            data_type: Hint to limit the parsing to specific data types. (default "")
+
+        """
         for parser_class in self._parser_classes:
             try:
                 parser = parser_class(
                     raw=self.raw, provider_type=self.get_provider_type(), default_organizer=self._default_organizer,
                 )
-                return parser.process()
-            except ParsingError:  # pylint: disable=broad-except
+                if data_type and data_type == parser.get_data_type() or not data_type:
+                    return parser.process()
+            except (ParsingError, MissingMandatoryFields):
+                logger.debug(
+                    "Parser %s for provider %s was not successful", parser_class.__name__, self.__class__.__name__
+                )
                 continue
         raise ParsingError("None of the parsers was able to parse the notification")
 
@@ -86,14 +99,14 @@ class EUNetworks(GenericProvider):
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [ICal, ParserLumenHtml1]
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserLumen1]
     _default_organizer = "smc@lumen.com"
 
 
 class Megaport(GenericProvider):
     """Megaport provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [ICal, ParserMegaportHtml1]
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserMegaport1]
     _default_organizer = "support@megaport.com"
 
 
@@ -112,12 +125,12 @@ class PacketFabric(GenericProvider):
 class Telstra(GenericProvider):
     """Telstra provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [ICal, ParserTelstraHtml1]
+    _parser_classes: Iterable[Type[Parser]] = [ICal, HtmlParserTelstra1]
     _default_organizer = "gpen@team.telstra.com"
 
 
 class Zayo(GenericProvider):
     """Zayo provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [ICal, ParserZayoHtml1]
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserZayo1]
     _default_organizer = "mr@zayo.com"

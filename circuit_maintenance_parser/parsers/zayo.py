@@ -16,7 +16,7 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 logger = logging.getLogger(__name__)
 
 
-class ParserZayoHtml1(Html):
+class HtmlParserZayo1(Html):
     """Notifications Parser for Zayo notifications."""
 
     def parse_html(self, soup, data_base):
