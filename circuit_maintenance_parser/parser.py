@@ -18,30 +18,26 @@ from circuit_maintenance_parser.output import Maintenance, Status, Impact, Circu
 # pylint: disable=no-member
 
 
-class MaintenanceNotification(BaseModel):
-    """MaintenanceNotification class.
-
-    This is the base class that is created from a Circuit Maintenance notification containing
+class Parser(BaseModel):
+    """Parser class.
 
     Attributes:
         raw: Raw notification message (bytes)
-        provider_type: Identifier of the provider of the notification
-        sender: Identifier of the source of the notification (default "")
-        subject: Subject of the notification (default "")
-        source: Identifier of the source where this notification was obtained (default "")
+        default_provider: Identifier of the provider of the notification
+        default_organizer: Identifier of the organizer of the notification
 
     Examples:
-        >>> MaintenanceNotification(
+        >>> Parser(
         ...     raw=b"raw_message",
-        ...     provider_type="ntt",
+        ...     default_provider="ntt",
         ...     default_organizer="noc@us.ntt.net"
         ... )
-        MaintenanceNotification(raw=b'raw_message', provider_type='ntt', default_organizer='noc@us.ntt.net')
+        Parser(raw=b'raw_message', default_provider='ntt', default_organizer='noc@us.ntt.net')
 
-        >>> MaintenanceNotification(raw=b"raw_message")
-        MaintenanceNotification(raw=b'raw_message', provider_type='unknown', default_organizer='unknown')
+        >>> Parser(raw=b"raw_message")
+        Parser(raw=b'raw_message', default_provider='unknown', default_organizer='unknown')
 
-        >>> MaintenanceNotification(b"raw_message")
+        >>> Parser(b"raw_message")
         Traceback (most recent call last):
         ...
         TypeError: __init__() takes exactly 1 positional argument (2 given)
@@ -49,7 +45,7 @@ class MaintenanceNotification(BaseModel):
     """
 
     raw: bytes
-    provider_type: str = "unknown"
+    default_provider: str = "unknown"
     default_organizer: str = "unknown"
 
     # Data Type used as payload
@@ -70,16 +66,11 @@ class MaintenanceNotification(BaseModel):
         return calendar.timegm(date_time.utctimetuple())
 
 
-class ICal(MaintenanceNotification):
+class ICal(Parser):
     """Standard Notifications Parser based on ICal notifications.
 
     Reference: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-00
     """
-
-    provider_type: str = "ical"
-
-    # Internal placeholder for parser customization
-    _default_provider = "ical"
 
     _data_type = "text/calendar"
 
@@ -92,7 +83,10 @@ class ICal(MaintenanceNotification):
         try:
             gcal = Calendar.from_ical(base64.b64decode(self.raw))
         except ValueError:
-            gcal = Calendar.from_ical(self.raw)
+            try:
+                gcal = Calendar.from_ical(self.raw)
+            except ValueError as exc:
+                raise ParsingError from exc
 
         if not gcal:
             raise ParsingError("Not a valid iCalendar data received")
@@ -107,7 +101,7 @@ class ICal(MaintenanceNotification):
                     provider = (
                         str(component.get("X-MAINTNOTE-PROVIDER"))
                         if component.get("X-MAINTNOTE-PROVIDER")
-                        else self._default_provider
+                        else self.default_provider
                     )
 
                     data = {
@@ -151,7 +145,7 @@ class ICal(MaintenanceNotification):
         return result
 
 
-class Html(MaintenanceNotification):
+class Html(Parser):
     """Html parser."""
 
     _data_type = "text/html"
@@ -161,7 +155,7 @@ class Html(MaintenanceNotification):
         result = []
 
         data_base: Dict[str, Union[int, str, Iterable]] = {
-            "provider": self.provider_type,
+            "provider": self.default_provider,
             "organizer": self.default_organizer,
         }
         try:

@@ -182,7 +182,7 @@ The project is following Network to Code software development guidelines and is 
 ### How to add a new Circuit Maintenance parser?
 
 1. Within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
-   `MaintenanceNotification` class or custom ones such as `ICal` or `Html`.
+   `Parser` class or custom ones such as `ICal` or `Html`.
 2. Add a Circuit Maintenance **integration test for the new provider parser**, with at least one test case under
    `tests/integration/data`.
 3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDER_PARSERS` in

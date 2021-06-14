@@ -15,7 +15,6 @@ from .providers import (
     Zayo,
 )
 
-
 SUPPORTED_PROVIDER_PARSERS = (
     GenericProvider,
     EUNetworks,

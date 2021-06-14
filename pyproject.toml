@@ -82,6 +82,7 @@ extension-pkg-whitelist = [
 disable = """,
     line-too-long,
     bad-continuation,
+    duplicate-code,
     """
 
 [tool.pylint.miscellaneous]
