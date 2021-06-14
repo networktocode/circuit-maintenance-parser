@@ -26,15 +26,12 @@ class GenericProvider(BaseModel):
     Attributes:
         raw: Raw notification message (bytes)
         provider_type: Identifier of the provider of the notification
-        sender: Identifier of the source of the notification (default "")
-        subject: Subject of the notification (default "")
-        source: Identifier of the source where this notification was obtained (default "")
 
     Examples:
         >>> GenericProvider(
         ...     raw=b"raw_message",
         ... )
-        GenericProvider(raw=b'raw_message', sender='', subject='', source='')
+        GenericProvider(raw=b'raw_message')
     """
 
     # _parser_classes contain the Parser Classes that will be tried, in a specific order
@@ -44,9 +41,6 @@ class GenericProvider(BaseModel):
     _default_organizer: str = "unknown"
 
     raw: bytes
-    sender: str = ""
-    subject: str = ""
-    source: str = ""
 
     @classmethod
     def get_default_organizer(cls) -> str:
