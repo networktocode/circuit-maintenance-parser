@@ -12,5 +12,5 @@ def city_timezone(city: str) -> str:
     """
     geolocator = Nominatim(user_agent="circuit_maintenance")
     location = geolocator.geocode(city)
-    tz = tzwhere.tzwhere()  # TODO: quite slow. Look for better alternative
-    return tz.tzNameAt(location.latitude, location.longitude)
+    timezone = tzwhere.tzwhere()  # TODO: quite slow. Look for better alternative
+    return timezone.tzNameAt(location.latitude, location.longitude)

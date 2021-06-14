@@ -1,5 +1,4 @@
 """Tests generic for parser."""
-from circuit_maintenance_parser.parsers.cogent import ParserCogent
 import json
 import os
 from pathlib import Path
@@ -16,7 +15,7 @@ from circuit_maintenance_parser.parsers.ntt import ParserNTT
 from circuit_maintenance_parser.parsers.packetfabric import ParserPacketFabric
 from circuit_maintenance_parser.parsers.telstra import ParserTelstra
 from circuit_maintenance_parser.parsers.zayo import ParserZayo
-
+from circuit_maintenance_parser.parsers.cogent import ParserCogent
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
