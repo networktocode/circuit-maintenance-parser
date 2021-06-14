@@ -184,12 +184,12 @@ The project is following Network to Code software development guidelines and is 
 - Install dependencies and library locally: `poetry install`
 - Run CI tests locally: `invoke tests --local`
 
-### How to add a new Circuit Maintenance parser?
+### How to add a new Circuit Maintenance provider?
 
-1. Within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
-   `Parser` class or custom ones such as `ICal` or `Html`.
-2. Add a Circuit Maintenance **integration test for the new provider parser**, with at least one test case under
-   `tests/integration/data`.
+1. If your Provider requires a custom parser, within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
+   `Parser` class or custom ones such as `ICal` or `Html` and add a **unit test for the new provider parser**, with at least one test case under
+   `tests/unit/data`.
+2. Add new class in `providers.py` with the custom info, defining in `_parser_classes` the list of parsers that you will use, using the generic `ICal` and/or your custom parsers.
 3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDER_PARSERS` in
    `circuit_maintenance_parser/__init__.py` to officially expose the parser.
 
