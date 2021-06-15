@@ -67,13 +67,26 @@ class ParserCogent(Html):
                         # set start time to UTC
                         utc_start = local_time.astimezone(UTC)
                         data["start"] = self.dt2ts(utc_start)
-
+                        logger.info(
+                            "Mapped start time %s at %s (%s), to %s (UTC)",
+                            start_str,
+                            match.group(1).strip(),
+                            local_timezone,
+                            utc_start,
+                        )
                         # set end time using the local city timezone
                         end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
                         local_time = local_timezone.localize(end)
                         # set end time to UTC
                         utc_end = local_time.astimezone(UTC)
                         data["end"] = self.dt2ts(utc_end)
+                        logger.info(
+                            "Mapped end time %s at %s (%s), to %s (UTC)",
+                            end_str,
+                            match.group(1).strip(),
+                            local_timezone,
+                            utc_end,
+                        )
                 elif line.startswith("Work order number:"):
                     match = re.search("Work order number: (.*)", line)
                     if match:
@@ -81,8 +94,11 @@ class ParserCogent(Html):
                 elif line.startswith("Order ID(s) impacted:"):
                     data["circuits"] = []
                     match = re.search(r"Order ID\(s\) impacted: (.*)", line)
-                    for circuit_id in match.group(1).split(","):
-                        data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip()))
+                    if match:
+                        for circuit_id in match.group(1).split(","):
+                            data["circuits"].append(
+                                CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip())
+                            )
             break
 
     def parse_title(self, title_results: ResultSet, data: Dict):  # pylint: disable=no-self-use

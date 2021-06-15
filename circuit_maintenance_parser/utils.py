@@ -1,7 +1,7 @@
-""" Utility functions for the Circuit Maintenance parsers """
+"""Utility functions for the Circuit Maintenance parsers."""
 
-from geopy.geocoders import Nominatim
-from tzwhere import tzwhere
+from geopy.geocoders import Nominatim  # type: ignore
+from tzwhere import tzwhere  # type: ignore
 
 
 def city_timezone(city: str) -> str:
