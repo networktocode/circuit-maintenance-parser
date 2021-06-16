@@ -97,11 +97,12 @@ class ParserCogent(Html):
                     if match:
                         for circuit_id in match.group(1).split(","):
                             data["circuits"].append(
-                                CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.lstrip())
+                                CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip())
                             )
             break
 
-    def parse_title(self, title_results: ResultSet, data: Dict):  # pylint: disable=no-self-use
+    @staticmethod
+    def parse_title(title_results: ResultSet, data: Dict):
         """Parse <title> tag."""
         for title in title_results:
             if title.text.startswith("Correction"):
