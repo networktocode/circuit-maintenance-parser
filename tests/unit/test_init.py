@@ -5,8 +5,8 @@ import pytest
 
 from circuit_maintenance_parser import (
     init_parser,
-    get_provider_parser_class,
-    get_provider_parser_class_from_sender,
+    get_provider_class,
+    get_provider_class_from_sender,
     get_provider_data_types,
 )
 from circuit_maintenance_parser.errors import NonexistentParserError
@@ -57,13 +57,13 @@ def test_init_parser(raw, provider_type, result_type):
         ("wrong", None, NonexistentParserError),
     ],
 )
-def test_get_provider_parser_class(provider_name, result, error):
+def test_get_provider_class(provider_name, result, error):
     """Tests for generic parser."""
     if result:
-        assert get_provider_parser_class(provider_name) == result
+        assert get_provider_class(provider_name) == result
     elif error:
         with pytest.raises(NonexistentParserError):
-            get_provider_parser_class(provider_name)
+            get_provider_class(provider_name)
 
 
 @pytest.mark.parametrize(
@@ -76,13 +76,13 @@ def test_get_provider_parser_class(provider_name, result, error):
         ("wrong", None, NonexistentParserError),
     ],
 )
-def test_get_provider_parser_class_from_email(email_sender, result, error):
+def test_get_provider_class_from_email(email_sender, result, error):
     """Tests for parser from email."""
     if result:
-        assert get_provider_parser_class_from_sender(email_sender) == result
+        assert get_provider_class_from_sender(email_sender) == result
     elif error:
         with pytest.raises(NonexistentParserError):
-            get_provider_parser_class_from_sender(email_sender)
+            get_provider_class_from_sender(email_sender)
 
 
 @pytest.mark.parametrize(

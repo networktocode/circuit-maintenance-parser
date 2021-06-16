@@ -19,18 +19,17 @@ from circuit_maintenance_parser.providers import (
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+GENERIC_ICAL_DATA_PATH = Path(dir_path, "data", "ical", "ical1")
+GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
+
 
 @pytest.mark.parametrize(
     "provider_class, raw_file, results_file",
     [
         # GenericProvider
-        (
-            GenericProvider,
-            Path(dir_path, "data", "ical", "ical1"),
-            Path(dir_path, "data", "ical", "ical1_result.json"),
-        ),
+        (GenericProvider, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # EUNetworks
-        (EUNetworks, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        (EUNetworks, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # Lumen
         (Lumen, Path(dir_path, "data", "lumen", "lumen1.html"), Path(dir_path, "data", "lumen", "lumen1_result.json"),),
         (Lumen, Path(dir_path, "data", "lumen", "lumen2.html"), Path(dir_path, "data", "lumen", "lumen2_result.json"),),
@@ -47,8 +46,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ),
         # NTT
         (NTT, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        (NTT, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # PacketFabric
-        (PacketFabric, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        (PacketFabric, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # Telstra
         (
             Telstra,
@@ -60,7 +60,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
         ),
-        (Telstra, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        (Telstra, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # Zayo
         (Zayo, Path(dir_path, "data", "zayo", "zayo1.html"), Path(dir_path, "data", "zayo", "zayo1_result.json"),),
         (Zayo, Path(dir_path, "data", "zayo", "zayo2.html"), Path(dir_path, "data", "zayo", "zayo2_result.json"),),
@@ -77,7 +77,9 @@ def test_complete_parsing(provider_class, raw_file, results_file):
         expected_result = json.load(res_file)
 
     # The parser result don't have the default organizer that comes from the Provider class
-    if provider_class == GenericProvider:
+    # If the Provider test is using the GENERIC_ICAL_DATA_PATH it comes with a well-defined 'organizer'
+    # from the notificaction.
+    if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
         expected_result["organizer"] = "mailto:noone@example.com"
     else:
         expected_result["organizer"] = provider.get_default_organizer()

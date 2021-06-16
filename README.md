@@ -190,7 +190,7 @@ The project is following Network to Code software development guidelines and is 
    `Parser` class or custom ones such as `ICal` or `Html` and add a **unit test for the new provider parser**, with at least one test case under
    `tests/unit/data`.
 2. Add new class in `providers.py` with the custom info, defining in `_parser_classes` the list of parsers that you will use, using the generic `ICal` and/or your custom parsers.
-3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDER_PARSERS` in
+3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDERS` in
    `circuit_maintenance_parser/__init__.py` to officially expose the parser.
 
 ## Questions

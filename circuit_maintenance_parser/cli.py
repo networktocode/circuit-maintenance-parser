@@ -4,14 +4,14 @@ import sys
 
 import click
 
-from . import SUPPORTED_PROVIDER_PARSERS, init_parser, ParsingError
+from . import SUPPORTED_PROVIDERS, init_parser, ParsingError
 
 
 @click.command()
 @click.option("--raw-file", required=True, help="File containing raw data to parse.")
 @click.option(
     "--parser",
-    type=click.Choice([parser.get_provider_type() for parser in SUPPORTED_PROVIDER_PARSERS]),
+    type=click.Choice([parser.get_provider_type() for parser in SUPPORTED_PROVIDERS]),
     default="ical",
     help="Parser type.",
 )
