@@ -31,6 +31,7 @@ You can leverage on this library in your automation framework to process circuit
 
 ### Supported providers based on other parsers
 
+- Cogent
 - Lumen
 - Megaport
 - Telstra

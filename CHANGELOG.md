@@ -1,5 +1,9 @@
 # Changelog
 
+### Added
+
+- #25 - added **Cogent**
+
 ## v1.1.0
 
 ### Added

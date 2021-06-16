@@ -15,7 +15,7 @@ from circuit_maintenance_parser.parsers.ntt import ParserNTT
 from circuit_maintenance_parser.parsers.packetfabric import ParserPacketFabric
 from circuit_maintenance_parser.parsers.telstra import ParserTelstra
 from circuit_maintenance_parser.parsers.zayo import ParserZayo
-
+from circuit_maintenance_parser.parsers.cogent import ParserCogent
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -86,6 +86,16 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             ParserZayo,
             Path(dir_path, "data", "zayo", "zayo2.html"),
             Path(dir_path, "data", "zayo", "zayo2_result.json"),
+        ),
+        (
+            ParserCogent,
+            Path(dir_path, "data", "cogent", "cogent1.html"),
+            Path(dir_path, "data", "cogent", "cogent1_result.json"),
+        ),
+        (
+            ParserCogent,
+            Path(dir_path, "data", "cogent", "cogent2.html"),
+            Path(dir_path, "data", "cogent", "cogent2_result.json"),
         ),
     ],
 )

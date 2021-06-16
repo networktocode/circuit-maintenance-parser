@@ -28,6 +28,8 @@ toml = "0.10.1"
 icalendar = "^4.0.7"
 bs4 = "^0.0.1"
 lxml = "^4.6.2"
+geopy = "^2.1.0"
+tzwhere = "^3.0.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
