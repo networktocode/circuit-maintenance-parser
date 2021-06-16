@@ -84,6 +84,12 @@ class GenericProvider(BaseModel):
 ####################
 
 
+class Cogent(GenericProvider):
+    """EUNetworks provider custom class."""
+
+    _default_organizer = "support@cogentco.com"
+
+
 class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
 

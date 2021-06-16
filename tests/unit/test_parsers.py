@@ -8,6 +8,7 @@ import pytest
 from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
 
 from circuit_maintenance_parser.parser import ICal
+from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
@@ -26,6 +27,17 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (ICal, Path(dir_path, "data", "ical", "ical3"), Path(dir_path, "data", "ical", "ical3_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical4"), Path(dir_path, "data", "ical", "ical4_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
+        # Cogent
+        (
+            HtmlParserCogent1,
+            Path(dir_path, "data", "cogent", "cogent1.html"),
+            Path(dir_path, "data", "cogent", "cogent1_result.json"),
+        ),
+        (
+            HtmlParserCogent1,
+            Path(dir_path, "data", "cogent", "cogent2.html"),
+            Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        ),
         # Lumen
         (
             HtmlParserLumen1,

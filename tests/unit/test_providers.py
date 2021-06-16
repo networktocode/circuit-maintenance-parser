@@ -8,6 +8,7 @@ import pytest
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.providers import (
     GenericProvider,
+    Cogent,
     EUNetworks,
     Lumen,
     Megaport,
@@ -28,6 +29,17 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
     [
         # GenericProvider
         (GenericProvider, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        # Cogent
+        (
+            Cogent,
+            Path(dir_path, "data", "cogent", "cogent1.html"),
+            Path(dir_path, "data", "cogent", "cogent1_result.json"),
+        ),
+        (
+            Cogent,
+            Path(dir_path, "data", "cogent", "cogent2.html"),
+            Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        ),
         # EUNetworks
         (EUNetworks, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # Lumen

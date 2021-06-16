@@ -4,6 +4,7 @@
 
 ### Added
 
+- #25 - added **Cogent** parser
 - #26 - Multiple Parsers per Provider, even combining ICal with custom HTML.
 
 ## v1.1.0 - 2021-06-09

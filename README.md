@@ -38,6 +38,7 @@ Each provider could use the standard ICal format commented above or define its c
 
 #### Supported providers based on other parsers
 
+- Cogent
 - Lumen
 - Megaport
 - Telstra

@@ -3,6 +3,7 @@
 from typing import Type, Optional, Iterable
 
 from .errors import NonexistentParserError, ParsingError
+<<<<<<< HEAD
 
 from .providers import (
     GenericProvider,
@@ -24,6 +25,29 @@ SUPPORTED_PROVIDERS = (
     PacketFabric,
     Telstra,
     Zayo,
+=======
+from .parser import MaintenanceNotification, ICal
+from .parsers.eunetworks import ParserEUNetworks
+from .parsers.lumen import ParserLumen
+from .parsers.megaport import ParserMegaport
+from .parsers.ntt import ParserNTT
+from .parsers.packetfabric import ParserPacketFabric
+from .parsers.telstra import ParserTelstra
+from .parsers.zayo import ParserZayo
+from .parsers.cogent import ParserCogent
+
+
+SUPPORTED_PROVIDER_PARSERS = (
+    ParserCogent,
+    ParserEUNetworks,
+    ParserLumen,
+    ParserMegaport,
+    ParserNTT,
+    ParserPacketFabric,
+    ParserTelstra,
+    ParserZayo,
+    ICal,
+>>>>>>> orIGin/develop
 )
 
 SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
