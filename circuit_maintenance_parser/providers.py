@@ -9,6 +9,7 @@ from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.parser import Parser, ICal
 from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
 
+from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
@@ -87,6 +88,7 @@ class GenericProvider(BaseModel):
 class Cogent(GenericProvider):
     """EUNetworks provider custom class."""
 
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserCogent1]
     _default_organizer = "support@cogentco.com"
 
 

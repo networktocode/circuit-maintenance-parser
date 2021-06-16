@@ -3,10 +3,10 @@
 from typing import Type, Optional, Iterable
 
 from .errors import NonexistentParserError, ParsingError
-<<<<<<< HEAD
 
 from .providers import (
     GenericProvider,
+    Cogent,
     EUNetworks,
     Lumen,
     Megaport,
@@ -18,6 +18,7 @@ from .providers import (
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    Cogent,
     EUNetworks,
     Lumen,
     Megaport,
@@ -25,29 +26,6 @@ SUPPORTED_PROVIDERS = (
     PacketFabric,
     Telstra,
     Zayo,
-=======
-from .parser import MaintenanceNotification, ICal
-from .parsers.eunetworks import ParserEUNetworks
-from .parsers.lumen import ParserLumen
-from .parsers.megaport import ParserMegaport
-from .parsers.ntt import ParserNTT
-from .parsers.packetfabric import ParserPacketFabric
-from .parsers.telstra import ParserTelstra
-from .parsers.zayo import ParserZayo
-from .parsers.cogent import ParserCogent
-
-
-SUPPORTED_PROVIDER_PARSERS = (
-    ParserCogent,
-    ParserEUNetworks,
-    ParserLumen,
-    ParserMegaport,
-    ParserNTT,
-    ParserPacketFabric,
-    ParserTelstra,
-    ParserZayo,
-    ICal,
->>>>>>> orIGin/develop
 )
 
 SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
@@ -100,7 +78,6 @@ def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
 def get_provider_data_types(provider_name: str) -> Iterable[str]:
     """Returns the expected data types for each provider."""
     provider_name = provider_name.lower()
-
     for provider in SUPPORTED_PROVIDERS:
         if provider.get_provider_type() == provider_name:
             break
