@@ -144,7 +144,7 @@ class ICal(Parser):
         except Exception as exc:
             raise ParsingError from exc
 
-        logger.debug("Successfull parsing for %s", self.__class__.__name__)
+        logger.debug("Successful parsing for %s", self.__class__.__name__)
 
         return result
 
@@ -170,7 +170,7 @@ class Html(Parser):
             for data in self.parse_html(soup, data_base):
                 result.append(Maintenance(**data))
 
-            logger.debug("Successfull parsing for %s", self.__class__.__name__)
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
 
             return result
 
