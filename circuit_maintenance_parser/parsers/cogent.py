@@ -15,14 +15,8 @@ logger = logging.getLogger(__name__)
 # pylint: disable=too-many-branches
 
 
-class ParserCogent(Html):
+class HtmlParserCogent1(Html):
     """Notifications Parser for Cogent notifications."""
-
-    provider_type: str = "cogent"
-
-    # Default values for cogent notifications
-    _default_provider = "cogent"
-    _default_organizer = "support@cogentco.com"
 
     def parse_html(self, soup, data_base):
         """Execute parsing."""
