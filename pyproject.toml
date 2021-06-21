@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
-version = "1.1.0"
+version = "1.2.0"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code <opensource@networktocode.com>"]
 license = "Apache-2.0"
