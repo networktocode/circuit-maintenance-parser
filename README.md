@@ -21,16 +21,24 @@ enables supporting other providers that are not using this proposed practice, ge
 
 You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised output to handle your received circuit maintenance notifications in a simple way.
 
-## Supported Providers
+## How does it work?
 
-### Supported providers using the BCOP standard
+Starting from a Provider parsing class, **multiple** parsers can be attached (in a specific order) and specific provider information (such as the default email used from the provider).
+
+Each provider could use the standard ICal format commented above or define its custom HTML parsers, supporting multiple notification types for the same provider that could be transitioning from one type to another.
+
+### Supported Providers
+
+#### Supported providers using the BCOP standard
 
 - EuNetworks
 - NTT
 - PacketFabric
+- Telstra
 
-### Supported providers based on other parsers
+#### Supported providers based on other parsers
 
+- Cogent
 - Lumen
 - Megaport
 - Telstra
@@ -76,10 +84,8 @@ END:VCALENDAR
 """
 
 data = {
-  "subject": "this is a circuit maintenance from some NSP",
-  "sender": "support@networkserviceprovider.com",
-  "source": "gmail",
   "raw": raw_text,
+  "provider_type": "NTT"
 }
 
 parser = init_parser(**data)
@@ -179,13 +185,13 @@ The project is following Network to Code software development guidelines and is 
 - Install dependencies and library locally: `poetry install`
 - Run CI tests locally: `invoke tests --local`
 
-### How to add a new Circuit Maintenance parser?
+### How to add a new Circuit Maintenance provider?
 
-1. Within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
-   `MaintenanceNotification` class or custom ones such as `ICal` or `Html`.
-2. Add a Circuit Maintenance **integration test for the new provider parser**, with at least one test case under
-   `tests/integration/data`.
-3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDER_PARSERS` in
+1. If your Provider requires a custom parser, within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
+   `Parser` class or custom ones such as `ICal` or `Html` and add a **unit test for the new provider parser**, with at least one test case under
+   `tests/unit/data`.
+2. Add new class in `providers.py` with the custom info, defining in `_parser_classes` the list of parsers that you will use, using the generic `ICal` and/or your custom parsers.
+3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDERS` in
    `circuit_maintenance_parser/__init__.py` to officially expose the parser.
 
 ## Questions

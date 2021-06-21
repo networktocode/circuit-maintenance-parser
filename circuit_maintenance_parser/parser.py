@@ -1,5 +1,5 @@
 """Definition of Mainentance Notification base classes."""
-
+import logging
 import base64
 import calendar
 import datetime
@@ -17,37 +17,29 @@ from circuit_maintenance_parser.output import Maintenance, Status, Impact, Circu
 
 # pylint: disable=no-member
 
+logger = logging.getLogger(__name__)
 
-class MaintenanceNotification(BaseModel):
-    """MaintenanceNotification class.
 
-    This is the base class that is created from a Circuit Maintenance notification containing
+class Parser(BaseModel):
+    """Parser class.
 
     Attributes:
         raw: Raw notification message (bytes)
-        provider_type: Identifier of the provider of the notification
-        sender: Identifier of the source of the notification (default "")
-        subject: Subject of the notification (default "")
-        source: Identifier of the source where this notification was obtained (default "")
+        default_provider: Identifier of the provider of the notification
+        default_organizer: Identifier of the organizer of the notification
 
     Examples:
-        >>> MaintenanceNotification(
+        >>> Parser(
         ...     raw=b"raw_message",
-        ...     sender="my_email@example.com",
-        ...     subject="Urgent notification for circuits X and Y",
-        ...     source="gmail",
-        ...     provider_type="ntt",
+        ...     default_provider="ntt",
+        ...     default_organizer="noc@us.ntt.net"
         ... )
-        MaintenanceNotification(raw=b'raw_message', provider_type='ntt', sender='my_email@example.com', subject='Urgent notification for circuits X and Y', source='gmail')
+        Parser(raw=b'raw_message', default_provider='ntt', default_organizer='noc@us.ntt.net')
 
-        >>> MaintenanceNotification(raw=b"raw_message")
-        Traceback (most recent call last):
-        ...
-        pydantic.error_wrappers.ValidationError: 1 validation error for MaintenanceNotification
-        provider_type
-          field required (type=value_error.missing)
+        >>> Parser(raw=b"raw_message")
+        Parser(raw=b'raw_message', default_provider='unknown', default_organizer='unknown')
 
-        >>> MaintenanceNotification(b"raw_message")
+        >>> Parser(b"raw_message")
         Traceback (most recent call last):
         ...
         TypeError: __init__() takes exactly 1 positional argument (2 given)
@@ -55,14 +47,8 @@ class MaintenanceNotification(BaseModel):
     """
 
     raw: bytes
-    provider_type: str
-    sender: str = ""
-    subject: str = ""
-    source: str = ""
-
-    # Internal placeholder for parser customization
-    _default_organizer = "unknown"
-    _default_provider = "unknown"
+    default_provider: str = "unknown"
+    default_organizer: str = "unknown"
 
     # Data Type used as payload
     _data_type = "text/plain"
@@ -71,16 +57,6 @@ class MaintenanceNotification(BaseModel):
     def get_data_type(cls) -> str:
         """Return the expected data type."""
         return cls._data_type
-
-    @classmethod
-    def get_default_provider(cls) -> str:
-        """Return the default provider."""
-        return cls._default_provider
-
-    @classmethod
-    def get_default_organizer(cls) -> str:
-        """Return the default organizer."""
-        return cls._default_organizer
 
     def process(self) -> Iterable[Maintenance]:
         """Method that returns a list of Maintenance objects."""
@@ -92,16 +68,11 @@ class MaintenanceNotification(BaseModel):
         return calendar.timegm(date_time.utctimetuple())
 
 
-class ICal(MaintenanceNotification):
+class ICal(Parser):
     """Standard Notifications Parser based on ICal notifications.
 
     Reference: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-00
     """
-
-    provider_type: str = "ical"
-
-    # Internal placeholder for parser customization
-    _default_provider = "ical"
 
     _data_type = "text/calendar"
 
@@ -114,7 +85,10 @@ class ICal(MaintenanceNotification):
         try:
             gcal = Calendar.from_ical(base64.b64decode(self.raw))
         except ValueError:
-            gcal = Calendar.from_ical(self.raw)
+            try:
+                gcal = Calendar.from_ical(self.raw)
+            except ValueError as exc:
+                raise ParsingError from exc
 
         if not gcal:
             raise ParsingError("Not a valid iCalendar data received")
@@ -124,12 +98,12 @@ class ICal(MaintenanceNotification):
             for component in gcal.walk():
                 if component.name == "VEVENT":
                     organizer = (
-                        str(component.get("ORGANIZER")) if component.get("ORGANIZER") else self._default_organizer
+                        str(component.get("ORGANIZER")) if component.get("ORGANIZER") else self.default_organizer
                     )
                     provider = (
                         str(component.get("X-MAINTNOTE-PROVIDER"))
                         if component.get("X-MAINTNOTE-PROVIDER")
-                        else self._default_provider
+                        else self.default_provider
                     )
 
                     data = {
@@ -170,10 +144,12 @@ class ICal(MaintenanceNotification):
         except Exception as exc:
             raise ParsingError from exc
 
+        logger.debug("Successful parsing for %s", self.__class__.__name__)
+
         return result
 
 
-class Html(MaintenanceNotification):
+class Html(Parser):
     """Html parser."""
 
     _data_type = "text/html"
@@ -183,8 +159,8 @@ class Html(MaintenanceNotification):
         result = []
 
         data_base: Dict[str, Union[int, str, Iterable]] = {
-            "provider": self._default_provider,
-            "organizer": self._default_organizer,
+            "provider": self.default_provider,
+            "organizer": self.default_organizer,
         }
         try:
             soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
@@ -194,10 +170,15 @@ class Html(MaintenanceNotification):
             for data in self.parse_html(soup, data_base):
                 result.append(Maintenance(**data))
 
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
+
             return result
 
         except ValidationError as exc:
             raise MissingMandatoryFields from exc
+
+        except Exception as exc:
+            raise ParsingError from exc
 
     def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
         """Custom HTML parsing."""

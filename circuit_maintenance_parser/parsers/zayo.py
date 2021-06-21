@@ -16,14 +16,8 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 logger = logging.getLogger(__name__)
 
 
-class ParserZayo(Html):
+class HtmlParserZayo1(Html):
     """Notifications Parser for Zayo notifications."""
-
-    provider_type: str = "zayo"
-
-    # Default values for Zayo notifications
-    _default_provider = "zayo"
-    _default_organizer = "mr@zayo.com"
 
     def parse_html(self, soup, data_base):
         """Execute parsing."""

@@ -1,52 +1,56 @@
 """Notifications parser init."""
 
-from typing import Type, Optional
+from typing import Type, Optional, Iterable
 
 from .errors import NonexistentParserError, ParsingError
-from .parser import MaintenanceNotification, ICal
-from .parsers.eunetworks import ParserEUNetworks
-from .parsers.lumen import ParserLumen
-from .parsers.megaport import ParserMegaport
-from .parsers.ntt import ParserNTT
-from .parsers.packetfabric import ParserPacketFabric
-from .parsers.telstra import ParserTelstra
-from .parsers.zayo import ParserZayo
 
-
-SUPPORTED_PROVIDER_PARSERS = (
-    ParserEUNetworks,
-    ParserLumen,
-    ParserMegaport,
-    ParserNTT,
-    ParserPacketFabric,
-    ParserTelstra,
-    ParserZayo,
-    ICal,
+from .providers import (
+    GenericProvider,
+    Cogent,
+    EUNetworks,
+    Lumen,
+    Megaport,
+    NTT,
+    PacketFabric,
+    Telstra,
+    Zayo,
 )
 
-SUPPORTED_PROVIDER_NAMES = [parser.get_default_provider() for parser in SUPPORTED_PROVIDER_PARSERS]
-SUPPORTED_ORGANIZER_EMAILS = [parser.get_default_organizer() for parser in SUPPORTED_PROVIDER_PARSERS]
+SUPPORTED_PROVIDERS = (
+    GenericProvider,
+    Cogent,
+    EUNetworks,
+    Lumen,
+    Megaport,
+    NTT,
+    PacketFabric,
+    Telstra,
+    Zayo,
+)
+
+SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
+SUPPORTED_ORGANIZER_EMAILS = [provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS]
 
 
-def init_parser(**kwargs) -> Optional[MaintenanceNotification]:
+def init_parser(**kwargs) -> Optional[GenericProvider]:
     """Returns an instance of the corresponding Notification Parser."""
     try:
         provider_type = kwargs.get("provider_type")
         if not provider_type:
-            provider_type = "ical"
-        parser_type = get_parser(provider_type)
-        return parser_type(**kwargs)
+            provider_type = GenericProvider.get_provider_type()
+        provider_parser_class = get_provider_class(provider_type)
+        return provider_parser_class(**kwargs)
 
     except NonexistentParserError:
         return None
 
 
-def get_parser(provider_name: str) -> Type[MaintenanceNotification]:
-    """Returns the notification parser class for a specific provider."""
+def get_provider_class(provider_name: str) -> Type[GenericProvider]:
+    """Returns the Provider parser class for a specific provider_type."""
     provider_name = provider_name.lower()
 
-    for parser in SUPPORTED_PROVIDER_PARSERS:
-        if parser.get_default_provider() == provider_name:
+    for provider_parser in SUPPORTED_PROVIDERS:
+        if provider_parser.get_provider_type() == provider_name:
             break
     else:
 
@@ -54,36 +58,41 @@ def get_parser(provider_name: str) -> Type[MaintenanceNotification]:
             f"{provider_name} is not a currently supported parser. Only {', '.join(SUPPORTED_PROVIDER_NAMES)}"
         )
 
-    return parser
+    return provider_parser
 
 
-def get_parser_from_sender(email_sender: str) -> Type[MaintenanceNotification]:
+def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
     """Returns the notification parser class for an email sender address."""
 
-    for parser in SUPPORTED_PROVIDER_PARSERS:
-        if parser.get_default_organizer() == email_sender:
+    for provider_parser in SUPPORTED_PROVIDERS:
+        if provider_parser.get_default_organizer() == email_sender:
             break
     else:
         raise NonexistentParserError(
-            f"{email_sender} is not a currently supported parser. Only {', '.join(SUPPORTED_ORGANIZER_EMAILS)}"
+            f"{email_sender} is not a currently supported provider parser. Only {', '.join(SUPPORTED_ORGANIZER_EMAILS)}"
         )
 
-    return parser
+    return provider_parser
 
 
-def get_provider_data_type(provider_name: str) -> str:
-    """Returns the expected data type for each provider."""
+def get_provider_data_types(provider_name: str) -> Iterable[str]:
+    """Returns the expected data types for each provider."""
     provider_name = provider_name.lower()
-
-    for parser in SUPPORTED_PROVIDER_PARSERS:
-        if parser.get_default_provider() == provider_name:
+    for provider in SUPPORTED_PROVIDERS:
+        if provider.get_provider_type() == provider_name:
             break
     else:
         raise NonexistentParserError(
-            f"{provider_name} is not a currently supported parser. Only {', '.join(SUPPORTED_PROVIDER_NAMES)}"
+            f"{provider_name} is not a currently supported provider. Only {', '.join(SUPPORTED_PROVIDER_NAMES)}"
         )
 
-    return parser.get_data_type()
+    return provider.get_data_types()
 
 
-__all__ = ["init_parser", "get_parser", "get_parser_from_sender", "get_provider_data_type", "ParsingError"]
+__all__ = [
+    "init_parser",
+    "get_provider_class",
+    "get_provider_class_from_sender",
+    "get_provider_data_types",
+    "ParsingError",
+]
