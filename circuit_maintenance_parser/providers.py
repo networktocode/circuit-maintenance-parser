@@ -2,7 +2,7 @@
 import logging
 from typing import Iterable, Type
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 from circuit_maintenance_parser.output import Maintenance
 
@@ -19,14 +19,13 @@ from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 logger = logging.getLogger(__name__)
 
 
-class GenericProvider(BaseModel):
+class GenericProvider(BaseModel, extra=Extra.forbid):
     """Base class for the Providers Parsers.
 
     This is the base class that is created for a Circuit Maintenance Parser
 
     Attributes:
         raw: Raw notification message (bytes)
-        provider_type: Identifier of the provider of the notification
 
     Examples:
         >>> GenericProvider(
