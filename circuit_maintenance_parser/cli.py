@@ -4,7 +4,7 @@ import sys
 
 import click
 
-from . import SUPPORTED_PROVIDERS, init_parser, ParsingError
+from . import SUPPORTED_PROVIDERS, init_provider, ParsingError
 
 
 @click.command()
@@ -30,7 +30,7 @@ def main(raw_file, parser, verbose):
         "provider_type": parser,
     }
 
-    parser = init_parser(**data)
+    parser = init_provider(**data)
     if not parser:
         click.echo(f"Parser type {parser} is not supported.", err=True)
         sys.exit(1)

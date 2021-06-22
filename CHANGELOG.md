@@ -4,6 +4,7 @@
 
 ### Fix
 
+- #32 - Fix backwards compatibility with version 1.1.0 that was broken in 1.2.0
 - #31 - Fix consistent provider (and other attributes) usage in all the classes
 
 ## v1.2.0 - 2021-06-21

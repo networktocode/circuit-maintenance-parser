@@ -59,7 +59,7 @@ The library is available as a Python package in pypi and can be installed with p
 ## Python Library
 
 ```python
-from circuit_maintenance_parser import init_parser
+from circuit_maintenance_parser import init_provider
 
 raw_text = """BEGIN:VCALENDAR
 VERSION:2.0
@@ -88,7 +88,7 @@ data = {
   "provider_type": "NTT"
 }
 
-parser = init_parser(**data)
+parser = init_provider(**data)
 
 parsed_notifications = parser.process()
 
