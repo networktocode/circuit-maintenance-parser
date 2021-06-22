@@ -8,7 +8,7 @@ from enum import Enum
 
 from typing import List, Optional
 
-from pydantic import BaseModel, validator, StrictStr, StrictInt
+from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra
 
 
 class Impact(str, Enum):
@@ -49,7 +49,7 @@ class Status(str, Enum):
     RE_SCHEDULED = "RE-SCHEDULED"
 
 
-class CircuitImpact(BaseModel):
+class CircuitImpact(BaseModel, extra=Extra.forbid):
     """CircuitImpact class.
 
     Each Circuit Maintenance can contain multiple affected circuits, and each one can have a different level of impact.
@@ -88,7 +88,7 @@ class CircuitImpact(BaseModel):
         return value
 
 
-class Maintenance(BaseModel):
+class Maintenance(BaseModel, extra=Extra.forbid):
     """Maintenance class.
 
     Mandatory attributes:

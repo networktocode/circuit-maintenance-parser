@@ -4,7 +4,7 @@ import os
 import pytest
 
 from circuit_maintenance_parser import (
-    init_parser,
+    init_provider,
     get_provider_class,
     get_provider_class_from_sender,
     get_provider_data_types,
@@ -34,9 +34,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (b"raw_bytes", "zayo", Zayo),
     ],
 )
-def test_init_parser(raw, provider_type, result_type):
-    """Tests for init_parser."""
-    result = init_parser(raw=raw, provider_type=provider_type)
+def test_init_provider(raw, provider_type, result_type):
+    """Tests for init_provider."""
+    result = init_provider(raw=raw, provider_type=provider_type)
     if result_type:
         assert isinstance(result, result_type)
     else:
