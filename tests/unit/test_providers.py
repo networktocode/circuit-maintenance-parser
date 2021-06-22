@@ -95,5 +95,6 @@ def test_complete_parsing(provider_class, raw_file, results_file):
         expected_result["organizer"] = "mailto:noone@example.com"
     else:
         expected_result["organizer"] = provider.get_default_organizer()
+        expected_result["provider"] = provider.get_provider_type()
 
     assert json.loads(parsed_notifications.to_json()) == expected_result
