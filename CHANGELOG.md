@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.1
+
+### Fix
+
+- #31 - Fix consistent provider (and other attributes) usage in all the classes
+
 ## v1.2.0 - 2021-06-21
 
 ### Added
