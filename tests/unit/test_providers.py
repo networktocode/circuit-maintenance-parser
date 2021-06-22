@@ -94,7 +94,9 @@ def test_complete_parsing(provider_class, raw_file, results_file):
     if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
         expected_result["organizer"] = "mailto:noone@example.com"
     else:
-        expected_result["organizer"] = provider.get_default_organizer()
-        expected_result["provider"] = provider.get_provider_type()
+        if expected_result["organizer"] == "unknown":
+            expected_result["organizer"] = provider.get_default_organizer()
+        if expected_result["provider"] == "unknown":
+            expected_result["provider"] = provider.get_provider_type()
 
     assert json.loads(parsed_notifications.to_json()) == expected_result
