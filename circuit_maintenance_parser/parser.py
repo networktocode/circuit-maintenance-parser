@@ -9,7 +9,7 @@ from typing import Iterable, Union, Dict, Mapping
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, Extra
 from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
@@ -20,7 +20,7 @@ from circuit_maintenance_parser.output import Maintenance, Status, Impact, Circu
 logger = logging.getLogger(__name__)
 
 
-class Parser(BaseModel):
+class Parser(BaseModel, extra=Extra.forbid):
     """Parser class.
 
     Attributes:
