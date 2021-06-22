@@ -134,10 +134,7 @@ class ICal(Parser):
                         ]
                     else:
                         data["circuits"] = [
-                            CircuitImpact(
-                                circuit_id=circuits,
-                                impact=Impact(component.get("X-MAINTNOTE-IMPACT")),
-                            )
+                            CircuitImpact(circuit_id=circuits, impact=Impact(component.get("X-MAINTNOTE-IMPACT")),)
                         ]
                     result.append(Maintenance(**data))
 
