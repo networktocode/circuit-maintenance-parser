@@ -2,7 +2,7 @@
 import logging
 from typing import Dict
 
-import dateutil.parser as parser
+from dateutil import parser
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
