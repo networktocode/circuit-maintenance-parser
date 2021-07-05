@@ -2,7 +2,7 @@
 import logging
 from typing import Dict, List
 
-import dateutil.parser as parser
+from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.errors import ParsingError
