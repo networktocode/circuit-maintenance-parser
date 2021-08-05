@@ -126,7 +126,7 @@ class PacketFabric(GenericProvider):
 
 
 class Telia(GenericProvider):
-    """Telstra provider custom class."""
+    """Telia provider custom class."""
 
     _parser_classes: Iterable[Type[Parser]] = [ICal]
     _default_organizer = "ncm@teliacompany.com"
