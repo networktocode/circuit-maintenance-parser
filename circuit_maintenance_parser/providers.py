@@ -80,10 +80,10 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
                 logger.debug(
                     "Parser %s for provider %s was not successful: %s", parser_name, provider_name, exc,
                 )
-                error_message += f"Parser Class {parser_name} from {provider_name} failed due: {exc}\n"
+                error_message += f"- Parser class {parser_name} from {provider_name} failed due: {exc}\n"
                 continue
         raise ParsingError(
-            f"None of the {provider_name} parsers was able to parse the notification.\nDetails: {error_message}"
+            f"None of the {provider_name} parsers was able to parse the notification.\nDetails:\n{error_message}"
         )
 
 

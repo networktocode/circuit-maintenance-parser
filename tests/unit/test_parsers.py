@@ -100,23 +100,60 @@ def test_complete_parsing(parser_class, raw_file, results_file):
 
 
 @pytest.mark.parametrize(
-    "parser_class, raw_file, exception",
+    "parser_class, raw_file, exception, error_message",
     [
         # ICal
-        (ICal, Path(dir_path, "data", "ical", "ical_no_account"), MissingMandatoryFields,),
-        (ICal, Path(dir_path, "data", "ical", "ical_no_maintenance_id"), MissingMandatoryFields,),
-        (ICal, Path(dir_path, "data", "ical", "ical_no_stamp"), ParsingError,),
-        (ICal, Path(dir_path, "data", "ical", "ical_no_start"), ParsingError,),
-        (ICal, Path(dir_path, "data", "ical", "ical_no_end"), ParsingError,),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical_no_account"),
+            MissingMandatoryFields,
+            "1 validation error for Maintenance\naccount\n  String is empty or 'None' (type=value_error)",
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical_no_maintenance_id"),
+            MissingMandatoryFields,
+            "1 validation error for Maintenance\nmaintenance_id\n  String is empty or 'None' (type=value_error)",
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical_no_stamp"),
+            ParsingError,
+            "'NoneType' object has no attribute 'dt'",
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical_no_start"),
+            ParsingError,
+            "'NoneType' object has no attribute 'dt'",
+        ),
+        (ICal, Path(dir_path, "data", "ical", "ical_no_end"), ParsingError, "'NoneType' object has no attribute 'dt'"),
         # Zayo
-        (HtmlParserZayo1, Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"), MissingMandatoryFields,),
-        (HtmlParserZayo1, Path(dir_path, "data", "zayo", "zayo_bad_html.html"), MissingMandatoryFields,),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"),
+            MissingMandatoryFields,
+            "1 validation error for Maintenance\nmaintenance_id\n  field required (type=value_error.missing)",
+        ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo_bad_html.html"),
+            MissingMandatoryFields,
+            (
+                "6 validation errors for Maintenance\naccount\n  field required (type=value_error.missing)\n"
+                "maintenance_id\n  field required (type=value_error.missing)\ncircuits\n  At least one circuit has to "
+                "be included in the maintenance (type=value_error)\nstatus\n  field required (type=value_error.missing)"
+                "\nstart\n  field required (type=value_error.missing)\nend\n  field required (type=value_error.missing)"
+            ),
+        ),
     ],
 )
-def test_errored_parsing(parser_class, raw_file, exception):
+def test_errored_parsing(parser_class, raw_file, exception, error_message):
     """Negative tests for various parsers."""
     with open(raw_file, "rb") as file_obj:
         parser = parser_class(raw=file_obj.read())
 
-    with pytest.raises(exception):
+    with pytest.raises(exception) as exc:
         parser.process()
+
+    assert str(exc.value) == error_message
