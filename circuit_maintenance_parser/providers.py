@@ -64,7 +64,10 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
             data_type: Hint to limit the parsing to specific data types. (default "")
 
         """
+        error_message = ""
+        provider_name = self.__class__.__name__
         for parser_class in self._parser_classes:
+            parser_name = parser_class.__name__
             try:
                 parser = parser_class(
                     raw=self.raw,
@@ -73,12 +76,15 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
                 )
                 if data_type and data_type == parser.get_data_type() or not data_type:
                     return parser.process()
-            except (ParsingError, MissingMandatoryFields):
+            except (ParsingError, MissingMandatoryFields) as exc:
                 logger.debug(
-                    "Parser %s for provider %s was not successful", parser_class.__name__, self.__class__.__name__
+                    "Parser %s for provider %s was not successful: %s", parser_name, provider_name, exc,
                 )
+                error_message += f"Parser Class {parser_name} from {provider_name} failed due: {exc}\n"
                 continue
-        raise ParsingError("None of the parsers was able to parse the notification")
+        raise ParsingError(
+            f"None of the {provider_name} parsers was able to parse the notification.\nDetails: {error_message}"
+        )
 
 
 ####################
