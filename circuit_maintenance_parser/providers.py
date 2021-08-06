@@ -1,5 +1,6 @@
 """Definition of Provider class as the entry point to the library."""
 import logging
+import traceback
 from typing import Iterable, Type
 
 from pydantic import BaseModel, Extra
@@ -78,9 +79,12 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
                     return parser.process()
             except (ParsingError, MissingMandatoryFields) as exc:
                 logger.debug(
-                    "Parser %s for provider %s was not successful: %s", parser_name, provider_name, exc,
+                    "Parser %s for provider %s was not successful:\n%s",
+                    parser_name,
+                    provider_name,
+                    traceback.format_exc(),
                 )
-                error_message += f"- Parser class {parser_name} from {provider_name} failed due: {exc}\n"
+                error_message += f"- Parser class {parser_name} from {provider_name} failed due to: {exc.__cause__}\n"
                 continue
         raise ParsingError(
             f"None of the {provider_name} parsers was able to parse the notification.\nDetails:\n{error_message}"

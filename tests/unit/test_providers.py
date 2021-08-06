@@ -111,11 +111,11 @@ def test_complete_provider_process(provider_class, raw_file, results_file):
             GenericProvider,
             Path(dir_path, "data", "ical", "ical_no_account"),
             ParsingError,
-            (
-                "None of the GenericProvider parsers was able to parse the notification.\nDetails:\n- Parser class ICal"
-                " from GenericProvider failed due: 1 validation error for Maintenance\naccount\n  String is empty or "
-                "'None' (type=value_error)\n"
-            ),
+            """\
+None of the GenericProvider parsers was able to parse the notification.
+Details:
+- Parser class ICal from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  String is empty or 'None' (type=value_error)
+""",
         ),
     ],
 )

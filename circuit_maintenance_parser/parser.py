@@ -139,10 +139,10 @@ class ICal(Parser):
                     result.append(Maintenance(**data))
 
         except ValidationError as exc:
-            raise MissingMandatoryFields(exc)  # pylint: disable=W0707
+            raise MissingMandatoryFields from exc
 
         except Exception as exc:
-            raise ParsingError(exc)  # pylint: disable=W0707
+            raise ParsingError from exc
 
         logger.debug("Successful parsing for %s", self.__class__.__name__)
 
@@ -175,10 +175,10 @@ class Html(Parser):
             return result
 
         except ValidationError as exc:
-            raise MissingMandatoryFields(exc)  # pylint: disable=W0707
+            raise MissingMandatoryFields from exc
 
         except Exception as exc:
-            raise ParsingError(exc)  # pylint: disable=W0707
+            raise ParsingError from exc
 
     def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
         """Custom HTML parsing."""
