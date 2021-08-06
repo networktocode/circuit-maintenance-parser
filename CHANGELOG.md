@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.2 -
+
+### Added
+
+- #42 - Improve error and debug messages to ease troubleshooting of parsing issues
+
 ## v1.2.1 - 2021-06-22
 
 ### Fix
