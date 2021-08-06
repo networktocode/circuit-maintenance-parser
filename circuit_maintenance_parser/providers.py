@@ -67,6 +67,7 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
         """
         error_message = ""
         provider_name = self.__class__.__name__
+        related_exceptions = []
         for parser_class in self._parser_classes:
             parser_name = parser_class.__name__
             try:
@@ -85,9 +86,11 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
                     traceback.format_exc(),
                 )
                 error_message += f"- Parser class {parser_name} from {provider_name} failed due to: {exc.__cause__}\n"
+                related_exceptions.append(exc)
                 continue
         raise ParsingError(
-            f"None of the {provider_name} parsers was able to parse the notification.\nDetails:\n{error_message}"
+            f"None of the {provider_name} parsers was able to parse the notification.\nDetails:\n{error_message}",
+            related_exceptions=related_exceptions,
         )
 
 

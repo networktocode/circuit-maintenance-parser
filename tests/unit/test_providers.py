@@ -117,6 +117,29 @@ Details:
 - Parser class ICal from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  String is empty or 'None' (type=value_error)
 """,
         ),
+        (
+            Telstra,
+            Path(dir_path, "data", "ical", "ical_no_account"),
+            ParsingError,
+            """\
+None of the Telstra parsers was able to parse the notification.
+Details:
+- Parser class ICal from Telstra failed due to: 1 validation error for Maintenance\naccount\n  String is empty or 'None' (type=value_error)
+- Parser class HtmlParserTelstra1 from Telstra failed due to: 6 validation errors for Maintenance
+account
+  field required (type=value_error.missing)
+maintenance_id
+  field required (type=value_error.missing)
+circuits
+  field required (type=value_error.missing)
+status
+  field required (type=value_error.missing)
+start
+  field required (type=value_error.missing)
+end
+  field required (type=value_error.missing)
+""",
+        ),
     ],
 )
 def test_errored_provider_process(provider_class, raw_file, exception, error_message):
@@ -127,4 +150,5 @@ def test_errored_provider_process(provider_class, raw_file, exception, error_mes
     with pytest.raises(exception) as exc:
         provider.process()
 
+    assert len(exc.value.related_exceptions) == len(provider_class._parser_classes)  # pylint: disable=protected-access
     assert str(exc.value) == error_message
