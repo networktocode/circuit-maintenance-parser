@@ -1,19 +1,21 @@
-{
-    "account": "Generic Account, Inc.",
-    "circuits": [
-        {
-            "circuit_id": "123456789",
-            "impact": "OUTAGE"
-        }
-    ],
-    "end": 1621512000,
-    "maintenance_id": "987654321-1",
-    "organizer": "unknown",
-    "provider": "unknown",
-    "sequence": 1,
-    "stamp": 1621494021,
-    "start": 1621494000,
-    "status": "COMPLETED",
-    "summary": "Lumen intends to carry out internal maintenance within its network.  This has been designated as EMERGENCY.  The nature of this work is to replace faulty hardware and is required in order to improve network reliability and continue providing optimal service for our clients.",
-    "uid": "0"
-}
+[
+    {
+        "account": "Generic Account, Inc.",
+        "circuits": [
+            {
+                "circuit_id": "123456789",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1621512000,
+        "maintenance_id": "987654321-1",
+        "organizer": "unknown",
+        "provider": "unknown",
+        "sequence": 1,
+        "stamp": 1621494021,
+        "start": 1621494000,
+        "status": "COMPLETED",
+        "summary": "Lumen intends to carry out internal maintenance within its network.  This has been designated as EMERGENCY.  The nature of this work is to replace faulty hardware and is required in order to improve network reliability and continue providing optimal service for our clients.",
+        "uid": "0"
+    }
+]

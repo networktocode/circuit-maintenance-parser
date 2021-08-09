@@ -4,6 +4,7 @@
 
 ### Added
 
+- #41 - Added new provider `Telia` using `Ical`
 - #42 - Improve error and debug messages to ease troubleshooting of parsing issues
 
 ## v1.2.1 - 2021-06-22

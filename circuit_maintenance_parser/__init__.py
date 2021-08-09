@@ -13,6 +13,7 @@ from .providers import (
     Megaport,
     NTT,
     PacketFabric,
+    Telia,
     Telstra,
     Zayo,
 )
@@ -25,6 +26,7 @@ SUPPORTED_PROVIDERS = (
     Megaport,
     NTT,
     PacketFabric,
+    Telia,
     Telstra,
     Zayo,
 )

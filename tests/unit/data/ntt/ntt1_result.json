@@ -1,31 +1,33 @@
-{
-  "account": "12345000",
-  "end": 1533712380,
-  "maintenance_id": "VNOC-1-99999999999",
-  "circuits": [
-    {
-      "impact": "NO-IMPACT",
-      "circuit_id": "999999"
-    },
-    {
-      "impact": "OUTAGE",
-      "circuit_id": "000001"
-    },
-    {
-      "impact": "OUTAGE",
-      "circuit_id": "098776"
-    },
-    {
-      "impact": "OUTAGE",
-      "circuit_id": "112131"
-    }
-  ],
-  "organizer": "unknown",
-  "provider": "NTT Communications (AS2914)",
-  "sequence": 1,
-  "stamp": 1533595768,
-  "start": 1533704400,
-  "status": "COMPLETED",
-  "summary": "NTT Communications (AS2914) URGENT Maintenance Notification: Completed [VNOC-1-99999999999]",
-  "uid": "VNOC-1-99999999999"
-}
+[
+  {
+    "account": "12345000",
+    "end": 1533712380,
+    "maintenance_id": "VNOC-1-99999999999",
+    "circuits": [
+      {
+        "impact": "NO-IMPACT",
+        "circuit_id": "999999"
+      },
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "000001"
+      },
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "098776"
+      },
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "112131"
+      }
+    ],
+    "organizer": "unknown",
+    "provider": "NTT Communications (AS2914)",
+    "sequence": 1,
+    "stamp": 1533595768,
+    "start": 1533704400,
+    "status": "COMPLETED",
+    "summary": "NTT Communications (AS2914) URGENT Maintenance Notification: Completed [VNOC-1-99999999999]",
+    "uid": "VNOC-1-99999999999"
+  }
+]

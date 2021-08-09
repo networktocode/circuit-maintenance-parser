@@ -16,6 +16,7 @@ from circuit_maintenance_parser.providers import (
     Megaport,
     NTT,
     PacketFabric,
+    Telia,
     Telstra,
     Zayo,
 )
@@ -63,6 +64,9 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (NTT, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # PacketFabric
         (PacketFabric, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        # Telia
+        (Telia, Path(dir_path, "data", "telia", "telia1"), Path(dir_path, "data", "telia", "telia1_result.json"),),
+        (Telia, Path(dir_path, "data", "telia", "telia2"), Path(dir_path, "data", "telia", "telia2_result.json"),),
         # Telstra
         (
             Telstra,
@@ -85,23 +89,27 @@ def test_complete_provider_process(provider_class, raw_file, results_file):
     with open(raw_file, "rb") as file_obj:
         provider = provider_class(raw=file_obj.read())
 
-    parsed_notifications = provider.process()[0]
+    parsed_notifications = provider.process()
+    notifications_json = []
+    for parsed_notification in parsed_notifications:
+        notifications_json.append(json.loads(parsed_notification.to_json()))
 
     with open(results_file) as res_file:
-        expected_result = json.load(res_file)
+        expected_results = json.load(res_file)
 
     # The parser result don't have the default organizer that comes from the Provider class
     # If the Provider test is using the GENERIC_ICAL_DATA_PATH it comes with a well-defined 'organizer'
     # from the notificaction.
-    if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
-        expected_result["organizer"] = "mailto:noone@example.com"
-    else:
-        if expected_result["organizer"] == "unknown":
-            expected_result["organizer"] = provider.get_default_organizer()
-        if expected_result["provider"] == "unknown":
-            expected_result["provider"] = provider.get_provider_type()
+    for index, _ in enumerate(expected_results):
+        if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
+            expected_results[index]["organizer"] = "mailto:noone@example.com"
+        else:
+            if expected_results[index]["organizer"] == "unknown":
+                expected_results[index]["organizer"] = provider.get_default_organizer()
+            if expected_results[index]["provider"] == "unknown":
+                expected_results[index]["provider"] = provider.get_provider_type()
 
-    assert json.loads(parsed_notifications.to_json()) == expected_result
+    assert notifications_json == expected_results
 
 
 @pytest.mark.parametrize(
