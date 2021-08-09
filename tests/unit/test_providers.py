@@ -103,20 +103,21 @@ def test_complete_provider_process(provider_class, raw_file, results_file):
         notifications_json.append(json.loads(parsed_notification.to_json()))
 
     with open(results_file) as res_file:
-        expected_result = json.load(res_file)
+        expected_results = json.load(res_file)
 
     # The parser result don't have the default organizer that comes from the Provider class
     # If the Provider test is using the GENERIC_ICAL_DATA_PATH it comes with a well-defined 'organizer'
     # from the notificaction.
-    if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
-        expected_result[0]["organizer"] = "mailto:noone@example.com"
-    else:
-        if expected_result[0]["organizer"] == "unknown":
-            expected_result[0]["organizer"] = provider.get_default_organizer()
-        if expected_result[0]["provider"] == "unknown":
-            expected_result[0]["provider"] = provider.get_provider_type()
+    for index in range(len(expected_results)):
+        if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
+            expected_results[index]["organizer"] = "mailto:noone@example.com"
+        else:
+            if expected_results[index]["organizer"] == "unknown":
+                expected_results[index]["organizer"] = provider.get_default_organizer()
+            if expected_results[index]["provider"] == "unknown":
+                expected_results[index]["provider"] = provider.get_provider_type()
 
-    assert notifications_json == expected_result
+    assert notifications_json == expected_results
 
 
 @pytest.mark.parametrize(
