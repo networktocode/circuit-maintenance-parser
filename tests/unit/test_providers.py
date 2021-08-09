@@ -100,7 +100,7 @@ def test_complete_provider_process(provider_class, raw_file, results_file):
     # The parser result don't have the default organizer that comes from the Provider class
     # If the Provider test is using the GENERIC_ICAL_DATA_PATH it comes with a well-defined 'organizer'
     # from the notificaction.
-    for index in range(len(expected_results)):
+    for index, _ in enumerate(expected_results):
         if provider_class == GenericProvider or raw_file == GENERIC_ICAL_DATA_PATH:
             expected_results[index]["organizer"] = "mailto:noone@example.com"
         else:
