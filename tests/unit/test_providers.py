@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pytest
 
+from circuit_maintenance_parser.errors import ParsingError
+
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.providers import (
     GenericProvider,
@@ -90,8 +92,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (Zayo, Path(dir_path, "data", "zayo", "zayo2.html"), Path(dir_path, "data", "zayo", "zayo2_result.json"),),
     ],
 )
-def test_complete_parsing(provider_class, raw_file, results_file):
-    """Tests various parser."""
+def test_complete_provider_process(provider_class, raw_file, results_file):
+    """Tests various providers."""
     with open(raw_file, "rb") as file_obj:
         provider = provider_class(raw=file_obj.read())
 
@@ -115,3 +117,53 @@ def test_complete_parsing(provider_class, raw_file, results_file):
             expected_result[0]["provider"] = provider.get_provider_type()
 
     assert notifications_json == expected_result
+
+
+@pytest.mark.parametrize(
+    "provider_class, raw_file, exception, error_message",
+    [
+        (
+            GenericProvider,
+            Path(dir_path, "data", "ical", "ical_no_account"),
+            ParsingError,
+            """\
+None of the GenericProvider parsers was able to parse the notification.
+Details:
+- Parser class ICal from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  String is empty or 'None' (type=value_error)
+""",
+        ),
+        (
+            Telstra,
+            Path(dir_path, "data", "ical", "ical_no_account"),
+            ParsingError,
+            """\
+None of the Telstra parsers was able to parse the notification.
+Details:
+- Parser class ICal from Telstra failed due to: 1 validation error for Maintenance\naccount\n  String is empty or 'None' (type=value_error)
+- Parser class HtmlParserTelstra1 from Telstra failed due to: 6 validation errors for Maintenance
+account
+  field required (type=value_error.missing)
+maintenance_id
+  field required (type=value_error.missing)
+circuits
+  field required (type=value_error.missing)
+status
+  field required (type=value_error.missing)
+start
+  field required (type=value_error.missing)
+end
+  field required (type=value_error.missing)
+""",
+        ),
+    ],
+)
+def test_errored_provider_process(provider_class, raw_file, exception, error_message):
+    """Negative tests for various parsers."""
+    with open(raw_file, "rb") as file_obj:
+        provider = provider_class(raw=file_obj.read())
+
+    with pytest.raises(exception) as exc:
+        provider.process()
+
+    assert len(exc.value.related_exceptions) == len(provider_class._parser_classes)  # pylint: disable=protected-access
+    assert str(exc.value) == error_message
