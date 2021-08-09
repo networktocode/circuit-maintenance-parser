@@ -65,16 +65,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         # PacketFabric
         (PacketFabric, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # Telia
-        (
-            Telia,
-            Path(dir_path,  "data", "telia", "telia1"),
-            Path(dir_path,  "data", "telia", "telia1_result.json"),
-        ),
-        (
-            Telia,
-            Path(dir_path,  "data", "telia", "telia2"),
-            Path(dir_path,  "data", "telia", "telia2_result.json"),
-        ),
+        (Telia, Path(dir_path, "data", "telia", "telia1"), Path(dir_path, "data", "telia", "telia1_result.json"),),
+        (Telia, Path(dir_path, "data", "telia", "telia2"), Path(dir_path, "data", "telia", "telia2_result.json"),),
         # Telstra
         (
             Telstra,
