@@ -34,6 +34,7 @@ Each provider could use the standard ICal format commented above or define its c
 - EuNetworks
 - NTT
 - PacketFabric
+- Telia
 - Telstra
 
 #### Supported providers based on other parsers

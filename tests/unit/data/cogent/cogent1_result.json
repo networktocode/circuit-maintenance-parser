@@ -1,19 +1,21 @@
-{
-    "account": "Cogent Customer",
-    "circuits": [
-        {
-            "circuit_id": "123456789",
-            "impact": "OUTAGE"
-        }
-    ],
-    "end": 1638799200,
-    "maintenance_id": "987654321-1",
-    "organizer": "unknown",
-    "provider": "unknown",
-    "sequence": 1,
-    "stamp": null,
-    "start": 1638777600,
-    "status": "CONFIRMED",
-    "summary": "ASR9K Code Upgrade Planned Network Maintenance",
-    "uid": "0"
-}
+[
+    {
+        "account": "Cogent Customer",
+        "circuits": [
+            {
+                "circuit_id": "123456789",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1638799200,
+        "maintenance_id": "987654321-1",
+        "organizer": "unknown",
+        "provider": "unknown",
+        "sequence": 1,
+        "stamp": null,
+        "start": 1638777600,
+        "status": "CONFIRMED",
+        "summary": "ASR9K Code Upgrade Planned Network Maintenance",
+        "uid": "0"
+    }
+]

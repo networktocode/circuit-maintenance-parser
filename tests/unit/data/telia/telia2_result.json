@@ -21,5 +21,28 @@
         "status": "CANCELLED",
         "summary": "PWIC111111.1: Planned work notification from Telia Carrier",
         "uid": "PWIC111111.1@teliacarrier.com"
+    },
+    {
+        "account": "1111",
+        "circuits": [
+            {
+                "circuit_id": "IC-111111",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "IC-222222",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628596800,
+        "maintenance_id": "PWIC111111.2",
+        "organizer": "mailto:carrier-csc@teliacompany.com",
+        "provider": "teliacarrier.com",
+        "sequence": 34,
+        "stamp": 1627891506,
+        "start": 1628568000,
+        "status": "CANCELLED",
+        "summary": "PWIC111111.2: Planned work notification from Telia Carrier",
+        "uid": "PWIC111111.2@teliacarrier.com"
     }
 ]

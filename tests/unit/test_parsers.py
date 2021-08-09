@@ -91,12 +91,15 @@ def test_complete_parsing(parser_class, raw_file, results_file):
     with open(raw_file, "rb") as file_obj:
         parser = parser_class(raw=file_obj.read())
 
-    parsed_notifications = parser.process()[0]
+    parsed_notifications = parser.process()
+    notifications_json = []
+    for parsed_notification in parsed_notifications:
+        notifications_json.append(json.loads(parsed_notification.to_json()))
 
     with open(results_file) as res_file:
         expected_result = json.load(res_file)
 
-    assert json.loads(parsed_notifications.to_json()) == expected_result
+    assert notifications_json == expected_result
 
 
 @pytest.mark.parametrize(

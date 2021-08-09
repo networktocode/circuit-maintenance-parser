@@ -129,7 +129,7 @@ class Telia(GenericProvider):
     """Telia provider custom class."""
 
     _parser_classes: Iterable[Type[Parser]] = [ICal]
-    _default_organizer = "ncm@teliacompany.com"
+    _default_organizer = "carrier-csc@teliacompany.com"
 
 
 class Telstra(GenericProvider):
