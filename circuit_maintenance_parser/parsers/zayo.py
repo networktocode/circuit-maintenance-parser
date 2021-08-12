@@ -5,7 +5,7 @@ from typing import Dict
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-import dateutil.parser as parser
+from dateutil import parser
 
 from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
-version = "1.2.1"
+version = "1.2.2"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code <opensource@networktocode.com>"]
 license = "Apache-2.0"
@@ -22,9 +22,9 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
-click = "^7.1"
+click = "^8.0"
 pydantic = {version = "^1.8.2", extras = ["dotenv"]}
-toml = "0.10.1"
+toml = "0.10.2"
 icalendar = "^4.0.7"
 bs4 = "^0.0.1"
 lxml = "^4.6.2"
@@ -37,11 +37,11 @@ requests_mock = "^1.7.0"
 pyyaml = "^5.3"
 black = "^19.10b0"
 pylint = "^2.4.4"
-pydocstyle = "^5.0.2"
+pydocstyle = "^6.0.0"
 yamllint = "^1.20.0"
 bandit = "^1.6.2"
 invoke = "^1.4.1"
-toml = "0.10.1"
+toml = "0.10.2"
 flake8 = "^3.8.3"
 mypy = "^0.812"
 
