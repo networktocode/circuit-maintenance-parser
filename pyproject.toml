@@ -22,7 +22,7 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
-click = "^8.0"
+click = "^7.1"
 pydantic = {version = "^1.8.2", extras = ["dotenv"]}
 toml = "0.10.2"
 icalendar = "^4.0.7"
