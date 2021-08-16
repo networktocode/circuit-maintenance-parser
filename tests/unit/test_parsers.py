@@ -49,6 +49,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "lumen", "lumen2.html"),
             Path(dir_path, "data", "lumen", "lumen2_result.json"),
         ),
+        (
+            HtmlParserLumen1,
+            Path(dir_path, "data", "lumen", "lumen3.html"),
+            Path(dir_path, "data", "lumen", "lumen3_result.json"),
+        ),
         # Megaport
         (
             HtmlParserMegaport1,
