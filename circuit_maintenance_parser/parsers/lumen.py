@@ -11,7 +11,6 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
-import traceback
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +27,6 @@ class HtmlParserLumen1(Html):
             return [data]
 
         except Exception as exc:
-            traceback.print_exc()
             raise ParsingError from exc
 
     def parse_spans(self, spans: ResultSet, data: Dict):
@@ -65,39 +63,40 @@ class HtmlParserLumen1(Html):
         circuits = []
         for table in tables:
             cells = table.find_all("td")
-            if cells:
-                if cells[0].string == "Start" and cells[1].string == "End":
-                    num_columns = 2
-                    for idx in range(num_columns, len(cells), num_columns):
-                        if "GMT" in cells[idx].string and "GMT" in cells[idx + 1].string:
-                            start = parser.parse(cells[idx].string.split(" GMT")[0])
-                            data["start"] = self.dt2ts(start)
-                            end = parser.parse(cells[idx + 1].string.split(" GMT")[0])
-                            data["end"] = self.dt2ts(end)
-                            break
+            if not cells:
+                continue
+            if cells[0].string == "Start" and cells[1].string == "End":
+                num_columns = 2
+                for idx in range(num_columns, len(cells), num_columns):
+                    if "GMT" in cells[idx].string and "GMT" in cells[idx + 1].string:
+                        start = parser.parse(cells[idx].string.split(" GMT")[0])
+                        data["start"] = self.dt2ts(start)
+                        end = parser.parse(cells[idx + 1].string.split(" GMT")[0])
+                        data["end"] = self.dt2ts(end)
+                        break
 
-                elif cells[0].string == "Customer Name":
-                    # There are tables with 8 columns or 9 columns with "Status" at the end
-                    num_columns = 1
-                    if len(cells) % 10 == 0:
-                        num_columns = 10
-                    elif len(cells) % 9 == 0:
-                        num_columns = 9
-                    else:
-                        logger.error("Unexpected table format: %s", cells)
+            elif cells[0].string == "Customer Name":
+                # There are tables with 8 columns or 9 columns with "Status" at the end
+                num_columns = 1
+                if len(cells) % 10 == 0:
+                    num_columns = 10
+                elif len(cells) % 9 == 0:
+                    num_columns = 9
+                else:
+                    logger.error("Unexpected table format: %s", cells)
 
-                    for idx in range(num_columns, len(cells), num_columns):
-                        # Account and Status are defined per Circuit ID but we understand that are consistent
-                        if "account" not in data:
-                            data["account"] = cells[idx].string
-                        if num_columns == 10:
-                            if cells[idx + 9].string == "Completed":
-                                data["status"] = Status("COMPLETED")
+                for idx in range(num_columns, len(cells), num_columns):
+                    # Account and Status are defined per Circuit ID but we understand that are consistent
+                    if "account" not in data:
+                        data["account"] = cells[idx].string
+                    if num_columns == 10:
+                        if cells[idx + 9].string == "Completed":
+                            data["status"] = Status("COMPLETED")
 
-                        data_circuit = {}
-                        data_circuit["circuit_id"] = cells[idx + 1].string
-                        impact = cells[idx + 6].string
-                        if "outage" in impact.lower():
-                            data_circuit["impact"] = Impact("OUTAGE")
-                            circuits.append(CircuitImpact(**data_circuit))
-                    data["circuits"] = circuits
+                    data_circuit = {}
+                    data_circuit["circuit_id"] = cells[idx + 1].string
+                    impact = cells[idx + 6].string
+                    if "outage" in impact.lower():
+                        data_circuit["impact"] = Impact("OUTAGE")
+                        circuits.append(CircuitImpact(**data_circuit))
+                data["circuits"] = circuits
