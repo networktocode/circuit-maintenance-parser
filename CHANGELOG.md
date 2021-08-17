@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.3 - 2021-08-12
+
+### Fixed
+
+- #46 - Accept <8.0 Click version to avoid dependency issues with other client packages
+
 ## v1.2.2 - 2021-08-12
 
 ### Added
