@@ -24,7 +24,6 @@ class HtmlParserLumen1(Html):
         try:
             self.parse_spans(soup.find_all("span"), data)
             self.parse_tables(soup.find_all("table"), data)
-
             return [data]
 
         except Exception as exc:
@@ -35,7 +34,9 @@ class HtmlParserLumen1(Html):
         for line in spans:
             if isinstance(line, bs4.element.Tag):
                 line_text = line.text.lower().strip()
-                if line_text.startswith("scheduled maintenance window #:"):
+                if line_text.startswith("scheduled maintenance #:") or line_text.startswith(
+                    "scheduled maintenance window #:"
+                ):
                     data["maintenance_id"] = line_text.split("#: ")[-1]
                 elif line_text.startswith("summary:"):
                     for sibling in line.next_siblings:
@@ -47,7 +48,10 @@ class HtmlParserLumen1(Html):
                     for sibling in line.next_siblings:
                         text_sibling = sibling.text.strip() if isinstance(sibling, bs4.element.Tag) else sibling.strip()
                         if text_sibling != "":
-                            if "The scheduled maintenance work has begun" in text_sibling:
+                            if (
+                                "This maintenance is scheduled" in text_sibling
+                                or "The scheduled maintenance work has begun" in text_sibling
+                            ):
                                 data["status"] = Status("IN-PROCESS")
                             if "GMT" in text_sibling:
                                 stamp = parser.parse(text_sibling.split(" GMT")[0])
@@ -59,6 +63,8 @@ class HtmlParserLumen1(Html):
         circuits = []
         for table in tables:
             cells = table.find_all("td")
+            if not cells:
+                continue
             if cells[0].string == "Start" and cells[1].string == "End":
                 num_columns = 2
                 for idx in range(num_columns, len(cells), num_columns):
