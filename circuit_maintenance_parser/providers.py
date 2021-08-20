@@ -14,6 +14,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 
 
@@ -150,6 +151,13 @@ class Telstra(GenericProvider):
 
     _parser_classes: Iterable[Type[Parser]] = [ICal, HtmlParserTelstra1]
     _default_organizer = "gpen@team.telstra.com"
+
+
+class Verizon(GenericProvider):
+    """Verizon provider custom class."""
+
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserVerizon1]
+    _default_organizer = "NO-REPLY-sched-maint@EMEA.verizonbusiness.com"
 
 
 class Zayo(GenericProvider):

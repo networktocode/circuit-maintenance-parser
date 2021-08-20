@@ -1,0 +1,25 @@
+[
+    {
+        "account": "Verizon Customer",
+        "circuits": [
+            {
+                "circuit_id": "C12345678",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "E23456789",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628337600,
+        "maintenance_id": "987654321-1",
+        "organizer": "unknown",
+        "provider": "unknown",
+        "sequence": 1,
+        "stamp": null,
+        "start": 1628312400,
+        "status": "CANCELLED",
+        "summary": "We will be performing cable maintenance to relocate a damaged fiber optic section.",
+        "uid": "0"
+    }
+]
