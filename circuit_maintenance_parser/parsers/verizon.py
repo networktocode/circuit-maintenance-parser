@@ -20,7 +20,7 @@ class HtmlParserVerizon1(Html):
         """Execute parsing."""
         data = data_base.copy()
         try:
-            logger.debug("PARSING")
+            logger.debug("Parsing Verizon HTML notification.")
             self.parse_tables(soup.find_all("table"), data)
             self.parse_p(soup.find_all("p"), data)
             return [data]
