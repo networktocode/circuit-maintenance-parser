@@ -74,8 +74,7 @@ class HtmlParserVerizon1(Html):
         """Parse <p> tag."""
         for p_tag in p_tags:
             p_text = p_tag.text.strip()
-            if p_text.startswith("Dear"):
-                match = re.search(r"Dear (.*),", p_text)
-                if match:
-                    data["account"] = match.group(1)
-                    break
+            match = re.match(r"Dear (.*),", p_text)
+            if match:
+                data["account"] = match.group(1)
+                break
