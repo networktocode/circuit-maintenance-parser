@@ -12,6 +12,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 
 
@@ -77,6 +78,22 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserTelstra1,
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
+        ),
+        # Verizon
+        (
+            HtmlParserVerizon1,
+            Path(dir_path, "data", "verizon", "verizon1.html"),
+            Path(dir_path, "data", "verizon", "verizon1_result.json"),
+        ),
+        (
+            HtmlParserVerizon1,
+            Path(dir_path, "data", "verizon", "verizon2.html"),
+            Path(dir_path, "data", "verizon", "verizon2_result.json"),
+        ),
+        (
+            HtmlParserVerizon1,
+            Path(dir_path, "data", "verizon", "verizon3.html"),
+            Path(dir_path, "data", "verizon", "verizon3_result.json"),
         ),
         # Zayo
         (

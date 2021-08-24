@@ -15,6 +15,7 @@ from .providers import (
     PacketFabric,
     Telia,
     Telstra,
+    Verizon,
     Zayo,
 )
 
@@ -28,6 +29,7 @@ SUPPORTED_PROVIDERS = (
     PacketFabric,
     Telia,
     Telstra,
+    Verizon,
     Zayo,
 )
 

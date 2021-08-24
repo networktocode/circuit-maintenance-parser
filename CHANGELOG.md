@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.3 - 2021-08-23
+
+### Added
+
+- #41 - Added new provider `Verizon` using `Html`
+
 ## v1.2.3 - 2021-08-12
 
 ### Fixed

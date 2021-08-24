@@ -18,6 +18,7 @@ from circuit_maintenance_parser.providers import (
     PacketFabric,
     Telia,
     Telstra,
+    Verizon,
     Zayo,
 )
 
@@ -79,6 +80,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
         ),
         (Telstra, GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        # Verizon
+        (
+            Verizon,
+            Path(dir_path, "data", "verizon", "verizon1.html"),
+            Path(dir_path, "data", "verizon", "verizon1_result.json"),
+        ),
+        (
+            Verizon,
+            Path(dir_path, "data", "verizon", "verizon2.html"),
+            Path(dir_path, "data", "verizon", "verizon2_result.json"),
+        ),
+        (
+            Verizon,
+            Path(dir_path, "data", "verizon", "verizon3.html"),
+            Path(dir_path, "data", "verizon", "verizon3_result.json"),
+        ),
         # Zayo
         (Zayo, Path(dir_path, "data", "zayo", "zayo1.html"), Path(dir_path, "data", "zayo", "zayo1_result.json"),),
         (Zayo, Path(dir_path, "data", "zayo", "zayo2.html"), Path(dir_path, "data", "zayo", "zayo2_result.json"),),

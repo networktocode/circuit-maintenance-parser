@@ -43,6 +43,7 @@ Each provider could use the standard ICal format commented above or define its c
 - Lumen
 - Megaport
 - Telstra
+- Verizon
 - Zayo
 
 > Note: Because these providers do not support the BCOP standard natively, maybe there are some gaps on the implemented parser that will be refined with new test cases. We encourage you to report related **issues**!
