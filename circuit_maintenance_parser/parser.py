@@ -154,6 +154,9 @@ class Html(Parser):
 
     _data_type = "text/html"
 
+    def remove_hex_characters(self, string):
+        return string.encode('ascii', errors='ignore').decode("utf-8")
+
     def process(self) -> Iterable[Maintenance]:
         """Execute parsing."""
         result = []

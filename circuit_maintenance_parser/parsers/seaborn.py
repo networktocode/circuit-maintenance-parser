@@ -48,3 +48,39 @@ class HtmlParserSeaborn1(Html):
             elif "AFFECTED CIRCUIT" in element.text:
                 circuit_id = element.text.split(": ")[1]
                 data["circuits"] = [(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))]
+
+
+class HtmlParserSeaborn2(Html):
+    """Notifications Parser for Seaborn notifications."""
+
+    def parse_html(self, soup, data_base):
+        """Execute parsing."""
+        data = data_base.copy()
+        try:
+            self.parse_body(soup, data)
+            return [data]
+
+        except Exception as exc:
+            raise ParsingError from exc
+
+    def parse_body(self, body, data):
+        div_elements = body.find_all("div")
+        for element in div_elements:
+            if "Be advised" in element.text:
+                if "been rescheduled" in element.text:
+                    data["status"] = Status["RE_SCHEDULED"]
+                elif "been scheduled" in element.text:
+                    data["status"] = Status["CONFIRMED"]
+            elif "Description" in element.text:
+                pass
+            elif "Seaborn Ticket" in element.text:
+                data["maintenance_id"] = element.text.split(":")[1]
+            elif "Start date" in element.text:
+                start = element.text.split(": ")[1]
+                data["start"] = self.dt2ts(parser.parse(start))
+            elif "Finish date" in element.text:
+                end = element.text.split(": ")[1]
+                data["end"] = self.dt2ts(parser.parse(end))
+            elif "Circuit impacted" in element.text:
+                circuit_id = self.remove_hex_characters(element.text).split(":")[1]
+                data["circuits"] = [(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))]
