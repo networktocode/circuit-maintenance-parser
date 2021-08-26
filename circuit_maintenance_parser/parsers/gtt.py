@@ -1,9 +1,7 @@
 """GTT parser."""
 import logging
-from typing import Dict, List
 
 from dateutil import parser
-from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
@@ -51,6 +49,6 @@ class HtmlParserGTT1(Html):
             if num_columns:
                 data["circuits"] = []
                 cells = table.find_all("td")
-                for idx in range(0, len(cells), num_columns):
+                for idx in range(0, len(cells), num_columns):  # pylint: disable=unused-variable
                     data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=cells[1].text.strip()))
                     data["account"] = cells[2].text.strip()
