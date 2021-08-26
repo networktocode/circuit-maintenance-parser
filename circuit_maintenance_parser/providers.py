@@ -13,6 +13,7 @@ from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFiel
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
@@ -125,6 +126,13 @@ class Megaport(GenericProvider):
 
     _parser_classes: Iterable[Type[Parser]] = [HtmlParserMegaport1]
     _default_organizer = "support@megaport.com"
+
+
+class Momentum(GenericProvider):
+    """Momentum provider custom class."""
+
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserMomentum1]
+    _default_organizer = "maintenance@momentumtelecom.com"
 
 
 class NTT(GenericProvider):
