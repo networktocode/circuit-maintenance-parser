@@ -35,6 +35,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "cogent", "cogent1.html"),
             Path(dir_path, "data", "cogent", "cogent1_result.json"),
         ),
+        (
+            HtmlParserCogent1,
+            Path(dir_path, "data", "cogent", "cogent2.html"),
+            Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        ),
         # GTT
         (
             HtmlParserGTT1,
@@ -47,9 +52,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "gtt", "gtt2_result.json"),
         ),
         (
-            HtmlParserCogent1,
-            Path(dir_path, "data", "cogent", "cogent2.html"),
-            Path(dir_path, "data", "cogent", "cogent2_result.json"),
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt3.html"),
+            Path(dir_path, "data", "gtt", "gtt3_result.json"),
         ),
         # Lumen
         (
