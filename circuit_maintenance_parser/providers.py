@@ -13,6 +13,7 @@ from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFiel
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.seaborn import HtmlParserSeaborn1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 
@@ -136,6 +137,13 @@ class PacketFabric(GenericProvider):
     """PacketFabric provider custom class."""
 
     _default_organizer = "support@packetfabric.com"
+
+
+class Seaborn(GenericProvider):
+    """Seaborn provider custom class."""
+
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserSeaborn1]
+    _default_organizer = "NOC@seabornnetworks.com"
 
 
 class Telia(GenericProvider):
