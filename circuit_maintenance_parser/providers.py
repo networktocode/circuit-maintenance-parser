@@ -11,6 +11,7 @@ from circuit_maintenance_parser.parser import Parser, ICal
 from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
 
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
+from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
@@ -111,6 +112,13 @@ class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
 
     _default_organizer = "noc@eunetworks.com"
+
+
+class GTT(GenericProvider):
+    """GTT provider custom class."""
+
+    _parser_classes: Iterable[Type[Parser]] = [HtmlParserGTT1]
+    _default_organizer = "InfraCo.CM@gttcorp.org"
 
 
 class Lumen(GenericProvider):
