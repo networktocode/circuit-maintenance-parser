@@ -1,0 +1,25 @@
+[
+    {
+        "account": "PO # CID000000001",
+        "circuits": [
+            {
+                "circuit_id": "111111-5555555",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "222222-6666666",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628895600,
+        "maintenance_id": "111111111",
+        "organizer": "unknown",
+        "provider": "unknown",
+        "sequence": 1,
+        "stamp": null,
+        "start": 1628877600,
+        "status": "CONFIRMED",
+        "summary": "",
+        "uid": "0"
+    }
+]

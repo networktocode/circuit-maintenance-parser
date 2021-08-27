@@ -9,6 +9,7 @@ from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingErr
 
 from circuit_maintenance_parser.parser import ICal
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
+from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
@@ -38,6 +39,22 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserCogent1,
             Path(dir_path, "data", "cogent", "cogent2.html"),
             Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        ),
+        # GTT
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt1.html"),
+            Path(dir_path, "data", "gtt", "gtt1_result.json"),
+        ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt2.html"),
+            Path(dir_path, "data", "gtt", "gtt2_result.json"),
+        ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt3.html"),
+            Path(dir_path, "data", "gtt", "gtt3_result.json"),
         ),
         # Lumen
         (
