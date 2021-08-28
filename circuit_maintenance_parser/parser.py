@@ -4,7 +4,7 @@ import base64
 import calendar
 import datetime
 import quopri
-from typing import Iterable, Union, Dict, Mapping
+from typing import Iterable, Union, Dict, Mapping, List
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -13,7 +13,7 @@ from pydantic import BaseModel, ValidationError, Extra
 from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
-from circuit_maintenance_parser.output import Maintenance, Status, Impact, CircuitImpact
+from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
 
 # pylint: disable=no-member
 
@@ -23,42 +23,20 @@ logger = logging.getLogger(__name__)
 class Parser(BaseModel, extra=Extra.forbid):
     """Parser class.
 
-    Attributes:
-        raw: Raw notification message (bytes)
-        default_provider: Identifier of the provider of the notification
-        default_organizer: Identifier of the organizer of the notification
-
-    Examples:
-        >>> Parser(
-        ...     raw=b"raw_message",
-        ...     default_provider="ntt",
-        ...     default_organizer="noc@us.ntt.net"
-        ... )
-        Parser(raw=b'raw_message', default_provider='ntt', default_organizer='noc@us.ntt.net')
-
-        >>> Parser(raw=b"raw_message")
-        Parser(raw=b'raw_message', default_provider='unknown', default_organizer='unknown')
-
-        >>> Parser(b"raw_message")
-        Traceback (most recent call last):
-        ...
-        TypeError: __init__() takes exactly 1 positional argument (2 given)
-
+    A Parser depend on a expected data type and depending on the implementation of the `run(raw)` method will
+    parse the `raw` data in order to identify some of the data that will eventually be used to create a
+    Maintenance.
     """
 
-    raw: bytes
-    default_provider: str = "unknown"
-    default_organizer: str = "unknown"
-
-    # Data Type used as payload
-    _data_type = "text/plain"
+    # Data Type are used to match the type of parser to be used for each type of data
+    _data_types = ["text/plain", "plain"]
 
     @classmethod
-    def get_data_type(cls) -> str:
+    def get_data_types(cls) -> List[str]:
         """Return the expected data type."""
-        return cls._data_type
+        return cls._data_types
 
-    def process(self) -> Iterable[Maintenance]:
+    def run(self, raw: bytes) -> List[Dict]:
         """Method that returns a list of Maintenance objects."""
         raise NotImplementedError
 
@@ -74,19 +52,19 @@ class ICal(Parser):
     Reference: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-00
     """
 
-    _data_type = "text/calendar"
+    _data_types = ["text/calendar", "ical", "icalendar"]
 
-    def process(self) -> Iterable[Maintenance]:
+    def run(self, raw: bytes) -> List[Dict]:
         """Method that returns a list of Maintenance objects."""
         result = []
 
         # iCalendar data sometimes comes encoded with base64
         # TODO: add a test case
         try:
-            gcal = Calendar.from_ical(base64.b64decode(self.raw))
+            gcal = Calendar.from_ical(base64.b64decode(raw))
         except ValueError:
             try:
-                gcal = Calendar.from_ical(self.raw)
+                gcal = Calendar.from_ical(raw)
             except ValueError as exc:
                 raise ParsingError from exc
 
@@ -94,17 +72,11 @@ class ICal(Parser):
             raise ParsingError("Not a valid iCalendar data received")
 
         try:
-            gcal = Calendar.from_ical(self.raw)
+            gcal = Calendar.from_ical(raw)
             for component in gcal.walk():
                 if component.name == "VEVENT":
-                    organizer = (
-                        str(component.get("ORGANIZER")) if component.get("ORGANIZER") else self.default_organizer
-                    )
-                    provider = (
-                        str(component.get("X-MAINTNOTE-PROVIDER"))
-                        if component.get("X-MAINTNOTE-PROVIDER")
-                        else self.default_provider
-                    )
+                    organizer = str(component.get("ORGANIZER"))
+                    provider = str(component.get("X-MAINTNOTE-PROVIDER"))
 
                     data = {
                         "circuits": [],
@@ -136,7 +108,7 @@ class ICal(Parser):
                         data["circuits"] = [
                             CircuitImpact(circuit_id=circuits, impact=Impact(component.get("X-MAINTNOTE-IMPACT")),)
                         ]
-                    result.append(Maintenance(**data))
+                    result.append(data)
 
         except ValidationError as exc:
             raise MissingMandatoryFields from exc
@@ -152,23 +124,20 @@ class ICal(Parser):
 class Html(Parser):
     """Html parser."""
 
-    _data_type = "text/html"
+    _data_types = ["text/html", "html"]
 
-    def process(self) -> Iterable[Maintenance]:
+    def run(self, raw: bytes) -> List[Dict]:
         """Execute parsing."""
         result = []
 
-        data_base: Dict[str, Union[int, str, Iterable]] = {
-            "provider": self.default_provider,
-            "organizer": self.default_organizer,
-        }
+        data_base: Dict[str, Union[int, str, Iterable]] = {}
         try:
-            soup = bs4.BeautifulSoup(quopri.decodestring(self.raw), features="lxml")
+            soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
 
             # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
             # return of `parse_html` as an Iterable object to accommodate this potential case.
             for data in self.parse_html(soup, data_base):
-                result.append(Maintenance(**data))
+                result.append(data)
 
             logger.debug("Successful parsing for %s", self.__class__.__name__)
 

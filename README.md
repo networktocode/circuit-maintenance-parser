@@ -62,9 +62,9 @@ The library is available as a Python package in pypi and can be installed with p
 ## Python Library
 
 ```python
-from circuit_maintenance_parser import init_provider
+from circuit_maintenance_parser import init_provider, NotificationData
 
-raw_text = """BEGIN:VCALENDAR
+raw_data = b"""BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Maint Note//https://github.com/maint-notification//
 BEGIN:VEVENT
@@ -86,14 +86,11 @@ END:VEVENT
 END:VCALENDAR
 """
 
-data = {
-  "raw": raw_text,
-  "provider_type": "NTT"
-}
+ntt_provider = init_provider("ntt")
 
-parser = init_provider(**data)
+data_to_process = NotificationData.init("ical", raw_data)
 
-parsed_notifications = parser.process()
+parsed_notifications = ntt_provider.process_notification(data_to_process)
 
 print(parsed_notifications[0].to_json())
 {
@@ -124,7 +121,7 @@ print(parsed_notifications[0].to_json())
 ## CLI
 
 ```bash
-$ circuit-maintenance-parser --raw-file tests/integration/data/ical/ical1
+$ circuit-maintenance-parser --data-file tests/unit/data/ical/ical1 --data-type ical
 Circuit Maintenance Notification #0
 {
   "account": "137.035999173",
@@ -148,7 +145,7 @@ Circuit Maintenance Notification #0
 ```
 
 ```bash
-$ circuit-maintenance-parser --raw-file tests/integration/data/zayo/zayo1.html --parser zayo
+$ circuit-maintenance-parser --data-file tests/unit/data/zayo/zayo1.html --data-type html --provider-type zayo
 Circuit Maintenance Notification #0
 {
   "account": "clientX",

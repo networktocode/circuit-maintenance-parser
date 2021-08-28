@@ -1,14 +1,16 @@
 """Definition of Provider class as the entry point to the library."""
 import logging
 import traceback
-from typing import Iterable, Type
+
+from typing import Iterable
 
 from pydantic import BaseModel, Extra
 
 from circuit_maintenance_parser.output import Maintenance
-
-from circuit_maintenance_parser.parser import Parser, ICal
-from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
+from circuit_maintenance_parser.data import NotificationData
+from circuit_maintenance_parser.parser import ICal
+from circuit_maintenance_parser.errors import ProcessorError, ProviderError
+from circuit_maintenance_parser.processor import SimpleProcessor, GenericProcessor
 
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -23,27 +25,49 @@ logger = logging.getLogger(__name__)
 
 
 class GenericProvider(BaseModel, extra=Extra.forbid):
-    """Base class for the Providers Parsers.
+    """Base class for the Providers.
 
     This is the base class that is created for a Circuit Maintenance Parser
 
-    Attributes:
-        raw: Raw notification message (bytes)
-
     Examples:
-        >>> GenericProvider(
-        ...     raw=b"raw_message",
-        ... )
-        GenericProvider(raw=b'raw_message')
+        >>> GenericProvider()
+        GenericProvider()
     """
 
-    # _parser_classes contain the Parser Classes that will be tried, in a specific order
-    _parser_classes: Iterable[Type[Parser]] = [ICal]
+    _processors: Iterable[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
 
     # Default values for parsing notifications
     _default_organizer: str = "unknown"
 
-    raw: bytes
+    def process_notification(self, data: NotificationData) -> Iterable[Maintenance]:
+        """Method that will get all the data parts from `data` and using the `_processors` will create Maintenances."""
+        provider_name = self.__class__.__name__
+        error_message = ""
+        related_exceptions = []
+        extended_data = {"organizer": self.get_default_organizer(), "provider": self.get_provider_type()}
+
+        for processor in self._processors:
+            try:
+                return processor.run(data, extended_data)
+            except ProcessorError as exc:
+                processor_name = processor.__class__.__name__
+                logger.debug(
+                    "Processor %s for provider %s was not successful:\n%s",
+                    processor_name,
+                    provider_name,
+                    traceback.format_exc(),
+                )
+                error_message += f"- Processor {processor_name} from {provider_name} failed due to: {exc.__cause__}\n"
+                related_exceptions.append(exc)
+                continue
+
+        raise ProviderError(
+            (
+                f"Not enough information available to create Maintenance notification for {provider_name} .\n"
+                f"Details:\n{error_message}"
+            ),
+            related_exceptions=related_exceptions,
+        )
 
     @classmethod
     def get_default_organizer(cls) -> str:
@@ -55,56 +79,18 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
         """Return the Provider Type."""
         return cls.__name__.lower()
 
-    @classmethod
-    def get_data_types(cls) -> Iterable[str]:
-        """Return the Provider Types."""
-        return {parser_class.get_data_type() for parser_class in cls._parser_classes}
-
-    def process(self, data_type: str = "") -> Iterable[Maintenance]:
-        """Method that returns a list of Maintenance objects.
-
-        Attributes:
-            data_type: Hint to limit the parsing to specific data types. (default "")
-
-        """
-        error_message = ""
-        provider_name = self.__class__.__name__
-        related_exceptions = []
-        for parser_class in self._parser_classes:
-            parser_name = parser_class.__name__
-            try:
-                parser = parser_class(
-                    raw=self.raw,
-                    default_provider=self.get_provider_type(),
-                    default_organizer=self.get_default_organizer(),
-                )
-                if data_type and data_type == parser.get_data_type() or not data_type:
-                    return parser.process()
-            except (ParsingError, MissingMandatoryFields) as exc:
-                logger.debug(
-                    "Parser %s for provider %s was not successful:\n%s",
-                    parser_name,
-                    provider_name,
-                    traceback.format_exc(),
-                )
-                error_message += f"- Parser class {parser_name} from {provider_name} failed due to: {exc.__cause__}\n"
-                related_exceptions.append(exc)
-                continue
-        raise ParsingError(
-            f"None of the {provider_name} parsers was able to parse the notification.\nDetails:\n{error_message}",
-            related_exceptions=related_exceptions,
-        )
-
 
 ####################
-# PROVIDER PARSERS #
+# PROVIDERS        #
 ####################
 
 
 class Cogent(GenericProvider):
     """EUNetworks provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [HtmlParserCogent1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserCogent1]),
+    ]
     _default_organizer = "support@cogentco.com"
 
 
@@ -117,21 +103,27 @@ class EUNetworks(GenericProvider):
 class GTT(GenericProvider):
     """GTT provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [HtmlParserGTT1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserGTT1]),
+    ]
     _default_organizer = "InfraCo.CM@gttcorp.org"
 
 
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [HtmlParserLumen1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserLumen1]),
+    ]
     _default_organizer = "smc@lumen.com"
 
 
 class Megaport(GenericProvider):
     """Megaport provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [HtmlParserMegaport1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserMegaport1]),
+    ]
     _default_organizer = "support@megaport.com"
 
 
@@ -150,26 +142,32 @@ class PacketFabric(GenericProvider):
 class Telia(GenericProvider):
     """Telia provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [ICal]
     _default_organizer = "carrier-csc@teliacompany.com"
 
 
 class Telstra(GenericProvider):
     """Telstra provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [ICal, HtmlParserTelstra1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[ICal]),
+        SimpleProcessor(data_parsers=[HtmlParserTelstra1]),
+    ]
     _default_organizer = "gpen@team.telstra.com"
 
 
 class Verizon(GenericProvider):
     """Verizon provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [HtmlParserVerizon1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserVerizon1]),
+    ]
     _default_organizer = "NO-REPLY-sched-maint@EMEA.verizonbusiness.com"
 
 
 class Zayo(GenericProvider):
     """Zayo provider custom class."""
 
-    _parser_classes: Iterable[Type[Parser]] = [HtmlParserZayo1]
+    _processors: Iterable[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserZayo1]),
+    ]
     _default_organizer = "mr@zayo.com"
