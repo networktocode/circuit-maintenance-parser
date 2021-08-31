@@ -47,7 +47,7 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
     def _post_process(self):
         """Hook to add a post parsing process logic."""
 
-    def run(self, data: NotificationData, extended_data: Dict) -> Iterable[Maintenance]:
+    def process(self, data: NotificationData, extended_data: Dict) -> Iterable[Maintenance]:
         """Using the data_parsers, with a custom logic, will try to generate one or more Maintenances."""
         self.extended_data = extended_data
 
@@ -56,7 +56,7 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
             if data_part.type in data_parser.get_data_types():
                 some_parsing_happened = True
                 try:
-                    self._handle_extracted_data(data_parser().run(data_part.content))
+                    self._handle_extracted_data(data_parser().parse(data_part.content))
 
                 except (ParsingError, ValidationError) as exc:
                     parser_name = data_parser.__name__

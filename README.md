@@ -90,9 +90,9 @@ ntt_provider = init_provider("ntt")
 
 data_to_process = NotificationData.init("ical", raw_data)
 
-parsed_notifications = ntt_provider.process_notification(data_to_process)
+maintenances = ntt_provider.maintenances(data_to_process)
 
-print(parsed_notifications[0].to_json())
+print(maintenances[0].to_json())
 {
   "account": "137.035999173",
   "circuits": [

@@ -39,7 +39,7 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
     # Default values for parsing notifications
     _default_organizer: str = "unknown"
 
-    def process_notification(self, data: NotificationData) -> Iterable[Maintenance]:
+    def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
         """Method that will get all the data parts from `data` and using the `_processors` will create Maintenances."""
         provider_name = self.__class__.__name__
         error_message = ""
@@ -48,7 +48,7 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
 
         for processor in self._processors:
             try:
-                return processor.run(data, extended_data)
+                return processor.process(data, extended_data)
             except ProcessorError as exc:
                 processor_name = processor.__class__.__name__
                 logger.debug(

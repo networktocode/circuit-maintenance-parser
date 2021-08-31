@@ -36,7 +36,7 @@ class Parser(BaseModel, extra=Extra.forbid):
         """Return the expected data type."""
         return cls._data_types
 
-    def run(self, raw: bytes) -> List[Dict]:
+    def parse(self, raw: bytes) -> List[Dict]:
         """Method that returns a list of Maintenance objects."""
         raise NotImplementedError
 
@@ -54,7 +54,7 @@ class ICal(Parser):
 
     _data_types = ["text/calendar", "ical", "icalendar"]
 
-    def run(self, raw: bytes) -> List[Dict]:
+    def parse(self, raw: bytes) -> List[Dict]:
         """Method that returns a list of Maintenance objects."""
         result = []
 
@@ -126,7 +126,7 @@ class Html(Parser):
 
     _data_types = ["text/html", "html"]
 
-    def run(self, raw: bytes) -> List[Dict]:
+    def parse(self, raw: bytes) -> List[Dict]:
         """Execute parsing."""
         result = []
 

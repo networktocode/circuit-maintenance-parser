@@ -43,7 +43,7 @@ def main(provider_type, data_file, data_type, verbose):
         data = NotificationData().init(data_type, raw_bytes)
 
     try:
-        parsed_notifications = provider.process_notification(data)
+        parsed_notifications = provider.get_maintenances(data)
     except ParsingError as parsing_error:
         click.echo(f"Parsing failed: {parsing_error}", err=True)
         sys.exit(1)
