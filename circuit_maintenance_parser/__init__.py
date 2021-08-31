@@ -3,7 +3,7 @@
 from typing import Type, Optional
 
 from .errors import NonexistentParserError, ParsingError, NonexistentProviderError
-from .providers import (
+from .provider import (
     GenericProvider,
     Cogent,
     EUNetworks,

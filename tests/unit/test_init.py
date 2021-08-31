@@ -10,7 +10,7 @@ from circuit_maintenance_parser import (
     get_provider_data_types,
 )
 from circuit_maintenance_parser.errors import NonexistentParserError
-from circuit_maintenance_parser.providers import (
+from circuit_maintenance_parser.provider import (
     GenericProvider,
     EUNetworks,
     NTT,
