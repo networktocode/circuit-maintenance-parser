@@ -11,7 +11,6 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
-
 logger = logging.getLogger(__name__)
 
 
