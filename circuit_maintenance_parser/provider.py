@@ -50,22 +50,16 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
             try:
                 return processor.process(data, extended_data)
             except ProcessorError as exc:
-                processor_name = processor.__class__.__name__
-                logger.debug(
-                    "Processor %s for provider %s was not successful:\n%s",
-                    processor_name,
-                    provider_name,
-                    traceback.format_exc(),
+                process_error_message = (
+                    f"- Processor {processor.__class__.__name__} from {provider_name} failed due to: %s\n"
                 )
-                error_message += f"- Processor {processor_name} from {provider_name} failed due to: {exc.__cause__}\n"
+                logger.debug(process_error_message, traceback.format_exc())
+                error_message += process_error_message % exc.__cause__
                 related_exceptions.append(exc)
                 continue
 
         raise ProviderError(
-            (
-                f"Not enough information available to create Maintenance notification for {provider_name} .\n"
-                f"Details:\n{error_message}"
-            ),
+            (f"Failed creating Maintenance notification for {provider_name} .\nDetails:\n{error_message}"),
             related_exceptions=related_exceptions,
         )
 

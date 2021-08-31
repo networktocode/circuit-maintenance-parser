@@ -41,11 +41,13 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
 
         if not data_part_and_parser_combinations:
             error_message = (
-                "None of the supported parsers: "
-                f"{', '.join([data_parser.__name__ for data_parser in self.data_parsers])} was matching any of the "
-                f"provided data types: {', '.join([data_part.type for data_part in data.get_data_parts()])}."
+                f"None of the supported parsers for processor {self.__class__.__name__} ("
+                f"{', '.join([data_parser.__name__ for data_parser in self.data_parsers])}) was matching any of the "
+                f"provided data types ({', '.join([data_part.type for data_part in data.get_data_parts()])})."
             )
+
             logger.debug(error_message)
+            # TODO: fix the __cause__ error
             raise ProcessorError(error_message)
 
         for data_part, data_parser in data_part_and_parser_combinations:
@@ -53,22 +55,12 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
                 self._process_hook(data_parser().parse(data_part.content))
 
             except (ParsingError, ValidationError) as exc:
-                # parser_name = data_parser.__name__
-                # processor_name = self.__class__.__name__
-                # logger.debug(
-                #     "Parser %s for processor %s was not successful:\n%s",
-                #     parser_name,
-                #     processor_name,
-                #     traceback.format_exc(),
-                # )
-                # TODO QUESTION: I'm considering unify the logger and exception string format to simplify the code understanding
-                # that this is not a library for super heavy computational effort and it makes the code simpler, but
-                # open to other toughts
+
                 error_message = (
-                    f"Parser class {data_parser.__name__} from {self.__class__.__name__} failed due to: %s\n"
+                    f"Parser class {data_parser.__name__} from {self.__class__.__name__} was not successful."
                 )
-                logger.debug(error_message, traceback.format_exc())
-                raise ProcessorError(error_message, exc.__cause__) from exc
+                logger.debug(error_message + "\n" + traceback.format_exc())
+                raise ProcessorError(error_message) from exc
 
         self._post_process_hook()
 

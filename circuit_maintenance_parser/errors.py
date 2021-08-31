@@ -2,7 +2,7 @@
 
 
 class ProviderError(Exception):
-    """Unable to successfully parse the notification."""
+    """Error in the Provider."""
 
     def __init__(
         self, *args, related_exceptions=None, **kwargs,
@@ -13,11 +13,11 @@ class ProviderError(Exception):
 
 
 class ProcessorError(Exception):
-    """Nonexistent Notification Provider."""
+    """Error in the Processor."""
 
 
 class ParsingError(Exception):
-    """Nonexistent Notification Provider."""
+    """Error in the Parser."""
 
 
 class MissingMandatoryFields(Exception):
