@@ -53,16 +53,17 @@ class HtmlParserTurkcell1(Html):
                         #   Eth-Trunk1.1               up      up       111111111111111|01-CUSTOMER|LOCATION|LINK
                         if re.match(r".+[ \t]([0-1]+\|.+\|.+\|.+)", element.text.strip()):
                             groups = re.search(r".+[ \t]([0-1]+\|.+\|.+\|.+)", element.text.strip())
-                            details = groups.group(1).split("|")
-                            data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=details[0]))
-                            data["account"] = details[1]
+                            if groups:
+                                details = groups.group(1).split("|")
+                                data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=details[0]))
+                                data["account"] = details[1]
 
         # Circuit table
         # Possibility that there could be a table inside the first table.
         if len(tables) == 2:
             tr_elements = tables[1].find_all("tr")
             data["circuits"] = []
-            for tr in tr_elements:
-                line = tr.text.strip().split("\n\n\n")
+            for tr_element in tr_elements:
+                line = tr_element.text.strip().split("\n\n\n")
                 data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=line[0]))
                 data["account"] = line[1]
