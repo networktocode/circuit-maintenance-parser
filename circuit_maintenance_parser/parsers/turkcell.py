@@ -3,9 +3,8 @@ import logging
 import re
 from typing import Dict
 
-from dateutil import parser
-import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
+from dateutil import parser
 
 from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
@@ -29,23 +28,23 @@ class HtmlParserTurkcell1(Html):
         except Exception as exc:
             raise ParsingError from exc
 
-    def parse_tables(self, tables, data):
+    def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse tables."""
         # Main table
         td_elements = tables[0].find_all("td")
-        for idx, td in enumerate(td_elements):
-            if "Dear Customer" in td.text.strip():
-                if "planned" in td.text.strip():
+        for idx, td_element in enumerate(td_elements):
+            if "Dear Customer" in td_element.text.strip():
+                if "planned" in td_element.text.strip():
                     data["status"] = Status["CONFIRMED"]
                 else:
                     data["status"] = Status["CONFIRMED"]
-            if "Maintenance Number" in td.text.strip():
+            if "Maintenance Number" in td_element.text.strip():
                 data["maintenance_id"] = td_elements[idx + 1].text.strip()
-            elif "Start" in td.text.strip():
+            elif "Start" in td_element.text.strip():
                 data["start"] = self.dt2ts(parser.parse(td_elements[idx + 1].text.strip()))
-            elif "End" in td.text.strip():
+            elif "End" in td_element.text.strip():
                 data["end"] = self.dt2ts(parser.parse(td_elements[idx + 1].text.strip()))
-            elif "Impact of the maintenance" in td.text.strip():
+            elif "Impact of the maintenance" in td_element.text.strip():
                 data["summary"] = td_elements[idx + 1].span.text.strip()
                 if len(tables) == 1:
                     data["circuits"] = []
