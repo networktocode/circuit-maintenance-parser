@@ -23,9 +23,9 @@ logger = logging.getLogger(__name__)
 class Parser(BaseModel, extra=Extra.forbid):
     """Parser class.
 
-    A Parser depend on a expected data type and depending on the implementation of the `run(raw)` method will
-    parse the `raw` data in order to identify some of the data that will eventually be used to create a
-    Maintenance.
+    A Parser handles one or more specific data type(s) (specified in `_data_types`).
+    The `parse(raw)` method must be implemented to parse the `raw` data to extract the
+    (possibly partial/incomplete) data that will eventually be used to create a Maintenance object.
     """
 
     # Data Type are used to match the type of parser to be used for each type of data
@@ -37,7 +37,7 @@ class Parser(BaseModel, extra=Extra.forbid):
         return cls._data_types
 
     def parse(self, raw: bytes) -> List[Dict]:
-        """Method that returns a list of Maintenance objects."""
+        """Extract a list of data that partially or completely describes a series of Maintenance objects."""
         raise NotImplementedError
 
     @staticmethod

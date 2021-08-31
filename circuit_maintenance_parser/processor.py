@@ -96,7 +96,7 @@ class SimpleProcessor(GenericProcessor):
 
 
 class CombinedProcessor(GenericProcessor):
-    """Processor for parse multiple DataParts to get a Maintenance notification."""
+    """Processor for combining the parsed output of multiple DataParts to get a single unified Maintenance notification."""
 
     # The CombinedProcessor will consolidate all the parsed data into this variable
     combined_maintenance_data: Dict = {}
@@ -105,10 +105,7 @@ class CombinedProcessor(GenericProcessor):
         """All the parsers contribute with a subset of data that is extended."""
         # We only expect one data object from these parsers
         if len(maintenances_extracted_data) == 1:
-            self.combined_maintenance_data = {
-                **self.combined_maintenance_data,
-                **maintenances_extracted_data[0],
-            }
+            self.combined_maintenance_data.update(maintenances_extracted_data[0])
         else:
             raise ParsingError(f"Unexpected data retrieved from parser: {maintenances_extracted_data}")
 

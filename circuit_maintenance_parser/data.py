@@ -15,7 +15,7 @@ DataPart = namedtuple("DataPart", "type content")
 
 
 class NotificationData(BaseModel, extra=Extra.forbid):
-    """Base class for Notificaiton Data types."""
+    """Base class for Notification Data types."""
 
     _data_parts: List[DataPart] = []
 
