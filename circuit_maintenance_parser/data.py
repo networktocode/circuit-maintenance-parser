@@ -6,7 +6,7 @@ import email
 from pydantic import BaseModel, Extra
 
 
-DataPart = namedtuple("DataPart", "type content")
+DataPart = namedtuple("DataPart", ["type", "content"])
 
 
 class NotificationData(BaseModel, extra=Extra.forbid):
