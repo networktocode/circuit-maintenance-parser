@@ -11,7 +11,7 @@ from pydantic.error_wrappers import ValidationError
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.parser import Parser
-from circuit_maintenance_parser.errors import ParsingError, ProcessorError, ProviderError
+from circuit_maintenance_parser.errors import ParserError, ProcessorError
 
 
 logger = logging.getLogger(__name__)
@@ -51,14 +51,13 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
             )
 
             logger.debug(error_message)
-            # TODO: fix the __cause__ error
             raise ProcessorError(error_message)
 
         for data_part, data_parser in data_part_and_parser_combinations:
             try:
                 self.process_hook(data_parser().parse(data_part.content), maintenances_data)
 
-            except (ParsingError, ValidationError) as exc:
+            except (ParserError, ValidationError) as exc:
                 error_message = "Parser class %s from %s was not successful.\n%s"
                 logger.debug(error_message, data_parser.__name__, self.__class__.__name__, traceback.format_exc())
                 raise ProcessorError from exc
@@ -76,14 +75,9 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
 
     def extend_processor_data(self, current_maintenance_data):
         """Method used to extend Maintenance data with some defaults."""
-        current_maintenance_data["organizer"] = (
-            self.extended_data.get("organizer")
-            if "organizer" not in current_maintenance_data
-            else current_maintenance_data.get("organizer")
-        )
-
-        if "provider" not in current_maintenance_data:
-            current_maintenance_data["provider"] = self.extended_data.get("provider")
+        temp_res = current_maintenance_data.copy()
+        current_maintenance_data.update(self.extended_data)
+        current_maintenance_data.update(temp_res)
 
 
 class SimpleProcessor(GenericProcessor):
@@ -116,4 +110,4 @@ class CombinedProcessor(GenericProcessor):
         try:
             maintenances_data.append(Maintenance(**self.combined_maintenance_data))
         except ValidationError as exc:
-            raise ProviderError("Not enough information available to create a Maintenance notification.") from exc
+            raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc

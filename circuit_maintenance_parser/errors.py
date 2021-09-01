@@ -16,7 +16,7 @@ class ProcessorError(Exception):
     """Error in the Processor."""
 
 
-class ParsingError(Exception):
+class ParserError(Exception):
     """Error in the Parser."""
 
 

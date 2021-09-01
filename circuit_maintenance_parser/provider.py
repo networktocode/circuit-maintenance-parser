@@ -4,7 +4,9 @@ import traceback
 
 from typing import Iterable, List
 
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
+
+from circuit_maintenance_parser.utils import rgetattr
 
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.data import NotificationData
@@ -24,7 +26,7 @@ from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 logger = logging.getLogger(__name__)
 
 
-class GenericProvider(BaseModel, extra=Extra.forbid):
+class GenericProvider(BaseModel):
     """Base class for the Providers.
 
     This is the entry object to the library and it offers the `get_maintenances` method to process notifications.
@@ -38,7 +40,7 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
 
     Examples:
         >>> GenericProvider()
-        GenericProvider(_processors=[SimpleProcessor(data_parsers=[<class 'circuit_maintenance_parser.parser.ICal'>], extended_data={})])
+        GenericProvider()
     """
 
     _processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
@@ -58,7 +60,8 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
                     f"- Processor {processor.__class__.__name__} from {provider_name} failed due to: %s\n"
                 )
                 logger.debug(process_error_message, traceback.format_exc())
-                related_exc = exc.__cause__ if exc.__cause__ else exc
+
+                related_exc = rgetattr(exc, "__cause__")
                 error_message += process_error_message % related_exc
                 related_exceptions.append(exc)
                 continue

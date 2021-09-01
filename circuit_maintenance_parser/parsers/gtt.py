@@ -4,7 +4,7 @@ import re
 
 from dateutil import parser
 
-from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-branches
@@ -24,7 +24,7 @@ class HtmlParserGTT1(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_tables(self, tables, data):
         """Parse HTML tables."""

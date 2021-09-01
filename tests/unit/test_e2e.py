@@ -185,6 +185,52 @@ Details:
 """,
         ),
         (
+            GenericProvider,
+            "ical",
+            Path(dir_path, "data", "ical", "ical_no_maintenance_id"),
+            ProviderError,
+            """\
+Failed creating Maintenance notification for GenericProvider.
+Details:
+- Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance
+maintenance_id
+  field required (type=value_error.missing)
+""",
+        ),
+        (
+            GenericProvider,
+            "ical",
+            Path(dir_path, "data", "ical", "ical_no_stamp"),
+            ProviderError,
+            """\
+Failed creating Maintenance notification for GenericProvider.
+Details:
+- Processor SimpleProcessor from GenericProvider failed due to: 'NoneType' object has no attribute 'dt'
+""",
+        ),
+        (
+            GenericProvider,
+            "ical",
+            Path(dir_path, "data", "ical", "ical_no_start"),
+            ProviderError,
+            """\
+Failed creating Maintenance notification for GenericProvider.
+Details:
+- Processor SimpleProcessor from GenericProvider failed due to: 'NoneType' object has no attribute 'dt'
+""",
+        ),
+        (
+            GenericProvider,
+            "ical",
+            Path(dir_path, "data", "ical", "ical_no_end"),
+            ProviderError,
+            """\
+Failed creating Maintenance notification for GenericProvider.
+Details:
+- Processor SimpleProcessor from GenericProvider failed due to: 'NoneType' object has no attribute 'dt'
+""",
+        ),
+        (
             Telstra,
             "ical",
             Path(dir_path, "data", "ical", "ical_no_account"),
@@ -194,6 +240,43 @@ Failed creating Maintenance notification for Telstra.
 Details:
 - Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
 - Processor SimpleProcessor from Telstra failed due to: None of the supported parsers for processor SimpleProcessor (HtmlParserTelstra1) was matching any of the provided data types (ical).
+""",
+        ),
+        # Zayo
+        (
+            Zayo,
+            "html",
+            Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"),
+            ProviderError,
+            """\
+Failed creating Maintenance notification for Zayo.
+Details:
+- Processor SimpleProcessor from Zayo failed due to: 1 validation error for Maintenance
+maintenance_id
+  field required (type=value_error.missing)
+""",
+        ),
+        (
+            Zayo,
+            "html",
+            Path(dir_path, "data", "zayo", "zayo_bad_html.html"),
+            ProviderError,
+            """\
+Failed creating Maintenance notification for Zayo.
+Details:
+- Processor SimpleProcessor from Zayo failed due to: 6 validation errors for Maintenance
+account
+  field required (type=value_error.missing)
+maintenance_id
+  field required (type=value_error.missing)
+circuits
+  At least one circuit has to be included in the maintenance (type=value_error)
+status
+  field required (type=value_error.missing)
+start
+  field required (type=value_error.missing)
+end
+  field required (type=value_error.missing)
 """,
         ),
     ],

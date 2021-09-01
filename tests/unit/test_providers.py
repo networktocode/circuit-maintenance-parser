@@ -1,31 +1,31 @@
 """Tests for Provider."""
-import json
-import os
-from pathlib import Path
+# import json
+# import os
+# from pathlib import Path
 
-import pytest
+# import pytest
 
-from circuit_maintenance_parser.data import NotificationData
+# from circuit_maintenance_parser.data import NotificationData
 
-# pylint: disable=duplicate-code
-from circuit_maintenance_parser.provider import (
-    GenericProvider,
-    Cogent,
-    EUNetworks,
-    Lumen,
-    Megaport,
-    NTT,
-    PacketFabric,
-    Telia,
-    Telstra,
-    Verizon,
-    Zayo,
-)
+# # pylint: disable=duplicate-code
+# from circuit_maintenance_parser.provider import (
+#     GenericProvider,
+#     Cogent,
+#     EUNetworks,
+#     Lumen,
+#     Megaport,
+#     NTT,
+#     PacketFabric,
+#     Telia,
+#     Telstra,
+#     Verizon,
+#     Zayo,
+# )
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+# dir_path = os.path.dirname(os.path.realpath(__file__))
 
-GENERIC_ICAL_DATA_PATH = Path(dir_path, "data", "ical", "ical1")
-GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
+# GENERIC_ICAL_DATA_PATH = Path(dir_path, "data", "ical", "ical1")
+# GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
 
 
 # @pytest.mark.parametrize(
@@ -175,7 +175,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
 #         (
 #             GenericProvider,
 #             Path(dir_path, "data", "ical", "ical_no_account"),
-#             ParsingError,
+#             ParserError,
 #             """\
 # None of the GenericProvider parsers was able to parse the notification.
 # Details:
@@ -185,7 +185,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
 #         (
 #             Telstra,
 #             Path(dir_path, "data", "ical", "ical_no_account"),
-#             ParsingError,
+#             ParserError,
 #             """\
 # None of the Telstra parsers was able to parse the notification.
 # Details:

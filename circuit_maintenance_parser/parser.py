@@ -9,10 +9,10 @@ from typing import Iterable, Union, Dict, List
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-from pydantic import BaseModel, ValidationError, Extra
+from pydantic import BaseModel, Extra
 from icalendar import Calendar  # type: ignore
 
-from circuit_maintenance_parser.errors import ParsingError, MissingMandatoryFields
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
 
 # pylint: disable=no-member
@@ -66,10 +66,10 @@ class ICal(Parser):
             try:
                 gcal = Calendar.from_ical(raw)
             except ValueError as exc:
-                raise ParsingError from exc
+                raise ParserError from exc
 
         if not gcal:
-            raise ParsingError("Not a valid iCalendar data received")
+            raise ParserError("Not a valid iCalendar data received")
 
         try:
             gcal = Calendar.from_ical(raw)
@@ -109,11 +109,8 @@ class ICal(Parser):
                         ]
                     result.append(data)
 
-        except ValidationError as exc:
-            raise MissingMandatoryFields from exc
-
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
         logger.debug("Successful parsing for %s", self.__class__.__name__)
 
@@ -142,11 +139,8 @@ class Html(Parser):
 
             return result
 
-        except ValidationError as exc:
-            raise MissingMandatoryFields from exc
-
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_html(self, soup: ResultSet, data_base: Dict) -> List[Dict]:
         """Custom HTML parsing."""

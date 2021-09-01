@@ -1,229 +1,114 @@
 """Tests for Processor."""
 
 
-import json
+import copy
 import os
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
+from pydantic.error_wrappers import ValidationError
 
-from circuit_maintenance_parser.processor import SimpleProcessor
-from circuit_maintenance_parser.data import NotificationData
+from circuit_maintenance_parser.output import Maintenance
+from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
+from circuit_maintenance_parser.data import DataPart, NotificationData
+from circuit_maintenance_parser.errors import ProcessorError
 
-from circuit_maintenance_parser.parser import ICal
-from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
-from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
-from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
-from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
-from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
-from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
+
+from circuit_maintenance_parser.parser import Parser
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+GENERIC_ICAL_DATA_PATH = Path(dir_path, "data", "ical", "ical1")
+GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
+with open(GENERIC_ICAL_DATA_PATH, "rb") as file_obj:
+    ical_data = NotificationData.init("ical", file_obj.read())
 
-@pytest.mark.parametrize(
-    "processor_class, data_parsers, data_type, data_file, result_parse_file",
-    [
-        # iCal
-        (
-            SimpleProcessor,
-            [ICal],
-            "ical",
-            Path(dir_path, "data", "ical", "ical1"),
-            Path(dir_path, "data", "ical", "ical1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [ICal],
-            "ical",
-            Path(dir_path, "data", "ical", "ical2"),
-            Path(dir_path, "data", "ical", "ical2_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [ICal],
-            "ical",
-            Path(dir_path, "data", "ical", "ical3"),
-            Path(dir_path, "data", "ical", "ical3_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [ICal],
-            "ical",
-            Path(dir_path, "data", "ical", "ical4"),
-            Path(dir_path, "data", "ical", "ical4_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [ICal],
-            "ical",
-            Path(dir_path, "data", "ical", "ical5"),
-            Path(dir_path, "data", "ical", "ical5_result.json"),
-        ),
-        # Cogent
-        (
-            SimpleProcessor,
-            [HtmlParserCogent1],
-            "html",
-            Path(dir_path, "data", "cogent", "cogent1.html"),
-            Path(dir_path, "data", "cogent", "cogent1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserCogent1],
-            "html",
-            Path(dir_path, "data", "cogent", "cogent2.html"),
-            Path(dir_path, "data", "cogent", "cogent2_result.json"),
-        ),
-        # GTT
-        (
-            SimpleProcessor,
-            [HtmlParserGTT1],
-            "html",
-            Path(dir_path, "data", "gtt", "gtt1.html"),
-            Path(dir_path, "data", "gtt", "gtt1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserGTT1],
-            "html",
-            Path(dir_path, "data", "gtt", "gtt2.html"),
-            Path(dir_path, "data", "gtt", "gtt2_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserGTT1],
-            "html",
-            Path(dir_path, "data", "gtt", "gtt3.html"),
-            Path(dir_path, "data", "gtt", "gtt3_result.json"),
-        ),
-        # # Lumen
-        (
-            SimpleProcessor,
-            [HtmlParserLumen1],
-            "html",
-            Path(dir_path, "data", "lumen", "lumen1.html"),
-            Path(dir_path, "data", "lumen", "lumen1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserLumen1],
-            "html",
-            Path(dir_path, "data", "lumen", "lumen2.html"),
-            Path(dir_path, "data", "lumen", "lumen2_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserLumen1],
-            "html",
-            Path(dir_path, "data", "lumen", "lumen3.html"),
-            Path(dir_path, "data", "lumen", "lumen3_result.json"),
-        ),
-        # Megaport
-        (
-            SimpleProcessor,
-            [HtmlParserMegaport1],
-            "html",
-            Path(dir_path, "data", "megaport", "megaport1.html"),
-            Path(dir_path, "data", "megaport", "megaport1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserMegaport1],
-            "html",
-            Path(dir_path, "data", "megaport", "megaport2.html"),
-            Path(dir_path, "data", "megaport", "megaport2_result.json"),
-        ),
-        # NTT
-        (
-            SimpleProcessor,
-            [ICal],
-            "ical",
-            Path(dir_path, "data", "ntt", "ntt1"),
-            Path(dir_path, "data", "ntt", "ntt1_result.json"),
-        ),
-        # Telstra
-        (
-            SimpleProcessor,
-            [HtmlParserTelstra1],
-            "html",
-            Path(dir_path, "data", "telstra", "telstra1.html"),
-            Path(dir_path, "data", "telstra", "telstra1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserTelstra1],
-            "html",
-            Path(dir_path, "data", "telstra", "telstra2.html"),
-            Path(dir_path, "data", "telstra", "telstra2_result.json"),
-        ),
-        # Verizon
-        (
-            SimpleProcessor,
-            [HtmlParserVerizon1],
-            "html",
-            Path(dir_path, "data", "verizon", "verizon1.html"),
-            Path(dir_path, "data", "verizon", "verizon1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserVerizon1],
-            "html",
-            Path(dir_path, "data", "verizon", "verizon2.html"),
-            Path(dir_path, "data", "verizon", "verizon2_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserVerizon1],
-            "html",
-            Path(dir_path, "data", "verizon", "verizon3.html"),
-            Path(dir_path, "data", "verizon", "verizon3_result.json"),
-        ),
-        # Zayo
-        (
-            SimpleProcessor,
-            [HtmlParserZayo1],
-            "html",
-            Path(dir_path, "data", "zayo", "zayo1.html"),
-            Path(dir_path, "data", "zayo", "zayo1_result.json"),
-        ),
-        (
-            SimpleProcessor,
-            [HtmlParserZayo1],
-            "html",
-            Path(dir_path, "data", "zayo", "zayo2.html"),
-            Path(dir_path, "data", "zayo", "zayo2_result.json"),
-        ),
-    ],
-)
-def test_processor(  # pylint: disable=too-many-locals
-    processor_class, data_parsers, data_type, data_file, result_parse_file
-):
-    """Tests various processors."""
-    extended_data = {"provider": "some provider", "organizer": "some organizer"}
-    # TODO: check how to make data optional from Pydantic do not initialized?
-    default_maintenance_data = {"stamp": None, "uid": "0", "sequence": 1, "summary": ""}
-    extended_data.update(default_maintenance_data)
 
-    with open(data_file, "rb") as file_obj:
-        if data_type in ["ical", "html"]:
-            data = NotificationData.init(data_type, file_obj.read())
-        # TODO: Add EML testing
+PARSED_DATA = [{"a": "b"}, {"c": "d"}]
+EXTENDED_DATA = {"z": "x"}
 
-    parsed_notifications = processor_class(data_parsers=data_parsers).process(data, extended_data)
 
-    notifications_json = []
-    for parsed_notification in parsed_notifications:
-        notifications_json.append(json.loads(parsed_notification.to_json()))
+class FakeParser(Parser):
+    "Fake class to simulate a Parser."
+    _parsed_data = PARSED_DATA
+    _data_type = "fake_type"
 
-    with open(result_parse_file) as res_file:
-        expected_result = json.load(res_file)
+    @classmethod
+    def get_data_types(cls):
+        return [cls._data_type]
 
-    for result in expected_result:
-        temp_res = result.copy()
-        result.update(extended_data)
-        result.update(temp_res)
+    def parse(self, *args, **kwargs):  # pylint: disable=unused-argument
+        return copy.deepcopy(self._parsed_data)
 
-    assert notifications_json == expected_result
+
+class FakeParser0(FakeParser):
+    "Fake class to simulate another Parser."
+    _data_type = "fake_type_0"
+    _parsed_data = copy.deepcopy([PARSED_DATA[0]])
+
+
+class FakeParser1(FakeParser):
+    "Fake class to simulate yet another Parser."
+    _data_type = "fake_type_1"
+    _parsed_data = copy.deepcopy([PARSED_DATA[1]])
+
+
+# Fake data used for SimpleProcessor
+fake_data = NotificationData.init("fake_type", b"fake data")
+# Fake data used for CombinedProcessor
+fake_data_for_combined = NotificationData.init("fake_type_0", b"fake data")
+fake_data_for_combined.data_parts.append(DataPart("fake_type_1", b"fake data"))
+
+
+def test_simpleprocessor():
+    """Tests SimpleProcessor."""
+    processor = SimpleProcessor(data_parsers=[FakeParser])
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
+        processor.process(fake_data, EXTENDED_DATA)
+        assert mock_maintenance.call_count == len(PARSED_DATA)
+        for parsed_data_element in PARSED_DATA:
+            parsed_data_element.update(EXTENDED_DATA)
+            mock_maintenance.assert_any_call(**parsed_data_element)
+
+
+def test_simpleprocessor_without_matching_type():
+    """Tests SimpleProcessor without matching data types."""
+    processor = SimpleProcessor(data_parsers=[FakeParser])
+    with pytest.raises(ProcessorError) as e_info:
+        processor.process(fake_data_for_combined, EXTENDED_DATA)
+    assert "None of the supported parsers for processor SimpleProcessor (FakeParser)" in str(e_info)
+
+
+def test_combinedprocessor_multiple_data():
+    """Tests CombinedProcessor wrong parsed data, with multiple entities."""
+    processor = CombinedProcessor(data_parsers=[FakeParser])
+    with pytest.raises(ProcessorError) as e_info:
+        # Using the fake_data that returns mutliple maintenances that are not expected in this processor type
+        processor.process(fake_data, EXTENDED_DATA)
+    assert "Unexpected data retrieved from parser" in str(e_info)
+
+
+def test_combinedprocessor():
+    """Tests CombinedProcessor."""
+    processor = CombinedProcessor(data_parsers=[FakeParser0, FakeParser1])
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
+        processor.process(fake_data_for_combined, EXTENDED_DATA)
+        assert mock_maintenance.call_count == 1
+        mock_maintenance.assert_any_call(**{**PARSED_DATA[0], **PARSED_DATA[1], **EXTENDED_DATA})
+
+
+def test_combinedprocessor_missing_data():
+    """Tests CombinedProcessor when there is not enough info to create a Maintenance."""
+    processor = CombinedProcessor(data_parsers=[FakeParser0, FakeParser1])
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
+        mock_maintenance.side_effect = ValidationError(errors=["whatever"], model=Maintenance)
+        with pytest.raises(ProcessorError) as e_info:
+            # Using the fake_data that returns mutliple maintenances that are not expected in this processor type
+            processor.process(fake_data_for_combined, EXTENDED_DATA)
+
+        assert "Not enough information available to create a Maintenance notification" in str(e_info)
