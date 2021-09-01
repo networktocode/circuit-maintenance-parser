@@ -5,8 +5,6 @@ from pathlib import Path
 
 import pytest
 
-from circuit_maintenance_parser.errors import MissingMandatoryFields, ParsingError
-
 from circuit_maintenance_parser.parser import ICal
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -128,91 +126,89 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 def test_complete_parsing(parser_class, raw_file, results_file):
     """Tests various parser."""
     with open(raw_file, "rb") as file_obj:
-        parser = parser_class(raw=file_obj.read())
+        raw_data = file_obj.read()
 
-    parsed_notifications = parser.process()
-    notifications_json = []
-    for parsed_notification in parsed_notifications:
-        notifications_json.append(json.loads(parsed_notification.to_json()))
+    parsed_notifications = parser_class().parse(raw_data)
 
     with open(results_file) as res_file:
         expected_result = json.load(res_file)
 
-    assert notifications_json == expected_result
+    assert parsed_notifications == expected_result
 
 
-@pytest.mark.parametrize(
-    "parser_class, raw_file, exception, error_message",
-    [
-        # ICal
-        (
-            ICal,
-            Path(dir_path, "data", "ical", "ical_no_account"),
-            MissingMandatoryFields,
-            """\
-1 validation error for Maintenance
-account
-  String is empty or 'None' (type=value_error)""",
-        ),
-        (
-            ICal,
-            Path(dir_path, "data", "ical", "ical_no_maintenance_id"),
-            MissingMandatoryFields,
-            """\
-1 validation error for Maintenance
-maintenance_id
-  String is empty or 'None' (type=value_error)""",
-        ),
-        (
-            ICal,
-            Path(dir_path, "data", "ical", "ical_no_stamp"),
-            ParsingError,
-            "'NoneType' object has no attribute 'dt'",
-        ),
-        (
-            ICal,
-            Path(dir_path, "data", "ical", "ical_no_start"),
-            ParsingError,
-            "'NoneType' object has no attribute 'dt'",
-        ),
-        (ICal, Path(dir_path, "data", "ical", "ical_no_end"), ParsingError, "'NoneType' object has no attribute 'dt'"),
-        # Zayo
-        (
-            HtmlParserZayo1,
-            Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"),
-            MissingMandatoryFields,
-            """\
-1 validation error for Maintenance
-maintenance_id
-  field required (type=value_error.missing)""",
-        ),
-        (
-            HtmlParserZayo1,
-            Path(dir_path, "data", "zayo", "zayo_bad_html.html"),
-            MissingMandatoryFields,
-            """\
-6 validation errors for Maintenance
-account
-  field required (type=value_error.missing)
-maintenance_id
-  field required (type=value_error.missing)
-circuits
-  At least one circuit has to be included in the maintenance (type=value_error)
-status
-  field required (type=value_error.missing)
-start
-  field required (type=value_error.missing)
-end
-  field required (type=value_error.missing)""",
-        ),
-    ],
-)
-def test_errored_parsing(parser_class, raw_file, exception, error_message):
-    """Negative tests for various parsers."""
-    with open(raw_file, "rb") as file_obj:
-        parser = parser_class(raw=file_obj.read())
+# TODO: Move this test to Provider level
+# @pytest.mark.parametrize(
+#     "parser_class, raw_file, exception, error_message",
+#     [
+#         # ICal
+#         (
+#             ICal,
+#             Path(dir_path, "data", "ical", "ical_no_account"),
+#             ParsingError,
+#             """\
+# 1 validation error for Maintenance
+# account
+#   String is empty or 'None' (type=value_error)""",
+#         ),
+#         (
+#             ICal,
+#             Path(dir_path, "data", "ical", "ical_no_maintenance_id"),
+#             ParsingError,
+#             """\
+# 1 validation error for Maintenance
+# maintenance_id
+#   String is empty or 'None' (type=value_error)""",
+#         ),
+#         (
+#             ICal,
+#             Path(dir_path, "data", "ical", "ical_no_stamp"),
+#             ParsingError,
+#             "'NoneType' object has no attribute 'dt'",
+#         ),
+#         (
+#             ICal,
+#             Path(dir_path, "data", "ical", "ical_no_start"),
+#             ParsingError,
+#             "'NoneType' object has no attribute 'dt'",
+#         ),
+#         (ICal, Path(dir_path, "data", "ical", "ical_no_end"), ParsingError, "'NoneType' object has no attribute 'dt'"),
+#         # Zayo
+#         (
+#             HtmlParserZayo1,
+#             Path(dir_path, "data", "zayo", "zayo_missing_maintenance_id.html"),
+#             ParsingError,
+#             """\
+# 1 validation error for Maintenance
+# maintenance_id
+#   field required (type=value_error.missing)""",
+#         ),
+#         (
+#             HtmlParserZayo1,
+#             Path(dir_path, "data", "zayo", "zayo_bad_html.html"),
+#             ParsingError,
+#             """\
+# 6 validation errors for Maintenance
+# account
+#   field required (type=value_error.missing)
+# maintenance_id
+#   field required (type=value_error.missing)
+# circuits
+#   At least one circuit has to be included in the maintenance (type=value_error)
+# status
+#   field required (type=value_error.missing)
+# start
+#   field required (type=value_error.missing)
+# end
+#   field required (type=value_error.missing)""",
+#         ),
+#     ],
+# )
+# def test_errored_parsing(parser_class, raw_file, exception, error_message):
+#     """Negative tests for various parsers."""
+#     with open(raw_file, "rb") as file_obj:
+#         raw_data = file_obj.read()
 
-    with pytest.raises(exception) as exc:
-        parser.process()
+#     with pytest.raises(exception) as exc:
+#         parser_class().parse(raw_data)
 
-    assert str(exc.value.__cause__) == error_message
+#     assert str(exc.value.__cause__) == error_message

@@ -5,7 +5,8 @@ import email
 import click
 from circuit_maintenance_parser.data import NotificationData
 
-from . import SUPPORTED_PROVIDERS, init_provider, ParsingError
+from . import SUPPORTED_PROVIDERS, init_provider
+from .provider import ProviderError
 
 
 @click.command()
@@ -32,7 +33,7 @@ def main(provider_type, data_file, data_type, verbose):
         if str.lower(data_file[-3:]) == "eml":
             with open(data_file) as email_file:
                 msg = email.message_from_file(email_file)
-            data = NotificationData().init_from_emailmessage(msg)
+            data = NotificationData.init_from_emailmessage(msg)
         else:
             click.echo("File format not supported, only *.eml", err=True)
             sys.exit(1)
@@ -40,12 +41,12 @@ def main(provider_type, data_file, data_type, verbose):
     else:
         with open(data_file, "rb") as raw_filename:
             raw_bytes = raw_filename.read()
-        data = NotificationData().init(data_type, raw_bytes)
+        data = NotificationData.init(data_type, raw_bytes)
 
     try:
         parsed_notifications = provider.get_maintenances(data)
-    except ParsingError as parsing_error:
-        click.echo(f"Parsing failed: {parsing_error}", err=True)
+    except ProviderError as exc:
+        click.echo(f"Provider processing failed: {exc}", err=True)
         sys.exit(1)
 
     for idx, parsed_notification in enumerate(parsed_notifications):

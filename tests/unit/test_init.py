@@ -7,15 +7,13 @@ from circuit_maintenance_parser import (
     init_provider,
     get_provider_class,
     get_provider_class_from_sender,
-    get_provider_data_types,
 )
-from circuit_maintenance_parser.errors import NonexistentParserError
+from circuit_maintenance_parser.errors import NonexistentProviderError
 from circuit_maintenance_parser.provider import (
     GenericProvider,
     EUNetworks,
     NTT,
     PacketFabric,
-    Telstra,
     Zayo,
 )
 
@@ -24,23 +22,23 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 @pytest.mark.parametrize(
-    "raw, provider_type, result_type",
+    "provider_type, result_type",
     [
-        (b"raw_bytes", "wrong", None),
-        (b"raw_bytes", "", GenericProvider),
-        (b"raw_bytes", "ntt", NTT),
-        (b"raw_bytes", "packetfabric", PacketFabric),
-        (b"raw_bytes", "eunetworks", EUNetworks),
-        (b"raw_bytes", "zayo", Zayo),
+        ("wrong", None),
+        ("", GenericProvider),
+        ("ntt", NTT),
+        ("packetfabric", PacketFabric),
+        ("eunetworks", EUNetworks),
+        ("zayo", Zayo),
     ],
 )
-def test_init_provider(raw, provider_type, result_type):
+def test_init_provider(provider_type, result_type):
     """Tests for init_provider."""
-    result = init_provider(raw=raw, provider_type=provider_type)
+    provider = init_provider(provider_type=provider_type)
     if result_type:
-        assert isinstance(result, result_type)
+        assert isinstance(provider, result_type)
     else:
-        assert result is None
+        assert provider is None
 
 
 @pytest.mark.parametrize(
@@ -54,7 +52,7 @@ def test_init_provider(raw, provider_type, result_type):
         ("Zayo", Zayo, None),
         ("euNetworks", EUNetworks, None),
         ("EUNetworks", EUNetworks, None),
-        ("wrong", None, NonexistentParserError),
+        ("wrong", None, NonexistentProviderError),
     ],
 )
 def test_get_provider_class(provider_name, result, error):
@@ -62,7 +60,7 @@ def test_get_provider_class(provider_name, result, error):
     if result:
         assert get_provider_class(provider_name) == result
     elif error:
-        with pytest.raises(NonexistentParserError):
+        with pytest.raises(error):
             get_provider_class(provider_name)
 
 
@@ -73,7 +71,7 @@ def test_get_provider_class(provider_name, result, error):
         (NTT.get_default_organizer(), NTT, None),
         (Zayo.get_default_organizer(), Zayo, None),
         (EUNetworks.get_default_organizer(), EUNetworks, None),
-        ("wrong", None, NonexistentParserError),
+        ("wrong", None, NonexistentProviderError),
     ],
 )
 def test_get_provider_class_from_email(email_sender, result, error):
@@ -81,30 +79,5 @@ def test_get_provider_class_from_email(email_sender, result, error):
     if result:
         assert get_provider_class_from_sender(email_sender) == result
     elif error:
-        with pytest.raises(NonexistentParserError):
+        with pytest.raises(error):
             get_provider_class_from_sender(email_sender)
-
-
-@pytest.mark.parametrize(
-    "provider_name, result, error",
-    [
-        ("packetfabric", PacketFabric.get_data_types(), None),
-        ("pAcketfabrIc", PacketFabric.get_data_types(), None),
-        ("ntt", NTT.get_data_types(), None),
-        ("NTT", NTT.get_data_types(), None),
-        ("zayo", Zayo.get_data_types(), None),
-        ("Zayo", Zayo.get_data_types(), None),
-        ("euNetworks", EUNetworks.get_data_types(), None),
-        ("EUNetworks", EUNetworks.get_data_types(), None),
-        ("TelstRa", Telstra.get_data_types(), None),
-        ("Telstra", Telstra.get_data_types(), None),
-        ("wrong", None, NonexistentParserError),
-    ],
-)
-def test_get_provider_data_types(provider_name, result, error):
-    """Tests for to validate the data types for each provider"""
-    if result:
-        assert get_provider_data_types(provider_name) == result
-    elif error:
-        with pytest.raises(NonexistentParserError):
-            get_provider_data_types(provider_name)

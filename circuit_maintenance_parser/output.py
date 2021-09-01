@@ -99,10 +99,10 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         status: defines the overall status or confirmation for the maintenance
         start: timestamp that defines the start date of the maintenance in GMT
         end: timestamp that defines the end date of the maintenance in GMT
-        stamp: timestamp that defines the update date of the maintenance in GMT
         organizer: defines the contact information included in the original notification
 
     Optional attributes:
+        stamp: timestamp that defines the update date of the maintenance in GMT
         summary: description of the maintenace notification
         uid: specific unique identifier for each notification
         sequence: sequence number - initially zero - to serialize updates in case they are received or processed out of

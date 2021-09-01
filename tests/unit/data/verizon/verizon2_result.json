@@ -21,13 +21,8 @@
         ],
         "end": 1629039600,
         "maintenance_id": "987654321-1",
-        "organizer": "unknown",
-        "provider": "unknown",
-        "sequence": 1,
-        "stamp": null,
         "start": 1629003600,
         "status": "CONFIRMED",
-        "summary": "We will be performing cable maintenance to relocate a damaged fiber optic section.",
-        "uid": "0"
+        "summary": "We will be performing cable maintenance to relocate a damaged fiber optic section."
     }
 ]

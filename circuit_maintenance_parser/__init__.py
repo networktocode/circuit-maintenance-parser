@@ -2,7 +2,7 @@
 
 from typing import Type, Optional
 
-from .errors import NonexistentParserError, ParsingError, NonexistentProviderError
+from .errors import NonexistentProviderError
 from .provider import (
     GenericProvider,
     Cogent,
@@ -72,7 +72,7 @@ def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
         if provider_parser.get_default_organizer() == email_sender:
             break
     else:
-        raise NonexistentParserError(
+        raise NonexistentProviderError(
             f"{email_sender} is not a currently supported provider parser. Only {', '.join(SUPPORTED_ORGANIZER_EMAILS)}"
         )
 
@@ -83,5 +83,4 @@ __all__ = [
     "init_provider",
     "get_provider_class",
     "get_provider_class_from_sender",
-    "ParsingError",
 ]

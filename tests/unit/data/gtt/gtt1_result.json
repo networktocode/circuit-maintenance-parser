@@ -13,13 +13,7 @@
         ],
         "end": 1628895600,
         "maintenance_id": "111111111",
-        "organizer": "unknown",
-        "provider": "unknown",
-        "sequence": 1,
-        "stamp": null,
         "start": 1628877600,
-        "status": "RE-SCHEDULED",
-        "summary": "",
-        "uid": "0"
+        "status": "RE-SCHEDULED"
     }
 ]

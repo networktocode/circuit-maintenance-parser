@@ -4,7 +4,7 @@ import base64
 import calendar
 import datetime
 import quopri
-from typing import Iterable, Union, Dict, Mapping, List
+from typing import Iterable, Union, Dict, List
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 class Parser(BaseModel, extra=Extra.forbid):
     """Parser class.
 
-    A Parser handles one or more specific data type(s) (specified in `_data_types`).
+    A Parser handles one or more specific data type(s) (specified in `data_types`).
     The `parse(raw)` method must be implemented to parse the `raw` data to extract the
     (possibly partial/incomplete) data that will eventually be used to create a Maintenance object.
     """
@@ -75,12 +75,8 @@ class ICal(Parser):
             gcal = Calendar.from_ical(raw)
             for component in gcal.walk():
                 if component.name == "VEVENT":
-                    organizer = str(component.get("ORGANIZER"))
-                    provider = str(component.get("X-MAINTNOTE-PROVIDER"))
-
                     data = {
-                        "circuits": [],
-                        "provider": provider,
+                        "provider": str(component.get("X-MAINTNOTE-PROVIDER")),
                         "account": str(component.get("X-MAINTNOTE-ACCOUNT")),
                         "maintenance_id": str(component.get("X-MAINTNOTE-MAINTENANCE-ID")),
                         "status": Status(component.get("X-MAINTNOTE-STATUS")),
@@ -88,10 +84,13 @@ class ICal(Parser):
                         "end": round(component.get("DTEND").dt.timestamp()),
                         "stamp": round(component.get("DTSTAMP").dt.timestamp()),
                         "summary": str(component.get("SUMMARY")),
-                        "organizer": organizer,
+                        "organizer": str(component.get("ORGANIZER")),
                         "uid": str(component.get("UID")),
                         "sequence": int(component.get("SEQUENCE")),
                     }
+
+                    data = {key: value for key, value in data.items() if value != "None"}
+
                     # In a VEVENT sometimes there are mutliple object ID with custom impacts
                     circuits = component.get("X-MAINTNOTE-OBJECT-ID")
                     if isinstance(circuits, list):
@@ -149,7 +148,7 @@ class Html(Parser):
         except Exception as exc:
             raise ParsingError from exc
 
-    def parse_html(self, soup: ResultSet, data_base: Dict) -> Iterable[Union[Mapping[str, Union[str, int, Dict]]]]:
+    def parse_html(self, soup: ResultSet, data_base: Dict) -> List[Dict]:
         """Custom HTML parsing."""
         raise NotImplementedError
 
