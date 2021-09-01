@@ -1,9 +1,5 @@
 """Tests for Processor."""
-
-
 import copy
-import os
-from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -16,14 +12,6 @@ from circuit_maintenance_parser.errors import ProcessorError
 
 
 from circuit_maintenance_parser.parser import Parser
-
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-GENERIC_ICAL_DATA_PATH = Path(dir_path, "data", "ical", "ical1")
-GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
-with open(GENERIC_ICAL_DATA_PATH, "rb") as file_obj:
-    ical_data = NotificationData.init("ical", file_obj.read())
 
 
 PARSED_DATA = [{"a": "b"}, {"c": "d"}]
