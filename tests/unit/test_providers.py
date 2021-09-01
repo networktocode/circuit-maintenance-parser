@@ -1,4 +1,4 @@
-"""Tests for Provider."""
+"""Tests for Providers."""
 from unittest.mock import patch
 
 import pytest

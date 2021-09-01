@@ -32,9 +32,28 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
     extended_data: Dict = {}
 
     def process(self, data: NotificationData, extended_data: Dict) -> Iterable[Maintenance]:
-        """Using the data_parsers, with a custom logic, will try to generate one or more Maintenances."""
+        """Method that uses the `data_parsers` to parse each `DataPart` from data.
+
+        It also enriches the parsed data with `extended_data` in order to fulfill potential gaps that the
+        notification data may have in order to create the `Maintenance` object.
+
+        There are 2 hooks available, to be implemented by custom `Processors`:
+            process_hook: Method that recieves the parsed output and manipulates the extracted data. It could create
+                the final `Maintenances` or just accumulate them.
+            post_process_hook (optional): Used to be able to do a final action on the extracted data before returing
+                the final `Maintenances`.
+
+        Attributes:
+            data: A `NotificationData` object that contains multiple `DataPart` each one with a `type` and a `content`.
+                This `type` is used to identify the candidate parsers, and then the `content` is parsed. This `data`
+                can be initialized via multiple methods, such as simple object or from an email.
+            extended_data (optional): It is a simple `dict` that the client can provide in order to extend some
+                expected missing data from the notification in order to complete all the necessary `Maintenance`
+                attributes.
+        """
         self.extended_data = extended_data
         maintenances_data: List = []
+
         # First, we generate a list of tuples with a `DataPart` and `Parser` if the data type from the first is
         # supported by the second.
         data_part_and_parser_combinations = [
