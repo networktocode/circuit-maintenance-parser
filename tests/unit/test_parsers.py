@@ -11,6 +11,7 @@ from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 
@@ -93,6 +94,17 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserTelstra1,
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
+        ),
+        # Turkcell
+        (
+            HtmlParserTurkcell1,
+            Path(dir_path, "data", "turkcell", "turkcell1.html"),
+            Path(dir_path, "data", "turkcell", "turkcell1_result.json"),
+        ),
+        (
+            HtmlParserTurkcell1,
+            Path(dir_path, "data", "turkcell", "turkcell2.html"),
+            Path(dir_path, "data", "turkcell", "turkcell2_result.json"),
         ),
         # Verizon
         (

@@ -19,6 +19,7 @@ from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 
@@ -163,6 +164,15 @@ class Telstra(GenericProvider):
         SimpleProcessor(data_parsers=[HtmlParserTelstra1]),
     ]
     _default_organizer = "gpen@team.telstra.com"
+
+
+class Turkcell(GenericProvider):
+    """Turkcell provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        SimpleProcessor(data_parsers=[HtmlParserTurkcell1]),
+    ]
+    _default_organizer = "inoc@superonline.net"
 
 
 class Verizon(GenericProvider):

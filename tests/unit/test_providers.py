@@ -17,6 +17,7 @@ from circuit_maintenance_parser.provider import (
     PacketFabric,
     Telia,
     Telstra,
+    Turkcell,
     Verizon,
     Zayo,
 )
@@ -26,7 +27,7 @@ fake_data = NotificationData.init("fake_type", b"fake data")
 
 @pytest.mark.parametrize(
     "provider_class",
-    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Verizon, Zayo,],
+    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Turkcell, Verizon, Zayo,],
 )
 def test_provide_get_maintenances(provider_class):
     """Tests GenericProvider."""
@@ -39,7 +40,7 @@ def test_provide_get_maintenances(provider_class):
 
 @pytest.mark.parametrize(
     "provider_class",
-    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Verizon, Zayo,],
+    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Turkcell, Verizon, Zayo,],
 )
 def test_provide_get_maintenances_one_exception(provider_class):
     """Tests GenericProvider."""
