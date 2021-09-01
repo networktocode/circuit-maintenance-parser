@@ -61,7 +61,7 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
             except (ParsingError, ValidationError) as exc:
                 error_message = "Parser class %s from %s was not successful.\n%s"
                 logger.debug(error_message, data_parser.__name__, self.__class__.__name__, traceback.format_exc())
-                raise ProcessorError(error_message % data_parser.__name__, self.__class__.__name__, "") from exc
+                raise ProcessorError from exc
 
         self.post_process_hook(maintenances_data)
 

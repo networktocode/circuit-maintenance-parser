@@ -30,27 +30,27 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
     This is the entry object to the library and it offers the `get_maintenances` method to process notifications.
 
     Attributes:
-        processors (optional): Defines a list of `Processors` that will be evaluated in order to get `Maintenances`.
+        _processors (optional): Defines a list of `_processors` that will be evaluated in order to get `Maintenances`.
             Each `Processor` implementation has a custom logic to combine the parsed data and a list of the `Parsers`
             that will be used. Default: `[SimpleProcessor(data_parsers=[ICal])]`.
-        default_organizer (optional): Defines a default `organizer`, an email address, to be used to create a
+        _default_organizer (optional): Defines a default `organizer`, an email address, to be used to create a
             `Maintenance` in absence of the information in the original notification.
 
     Examples:
         >>> GenericProvider()
-        GenericProvider(processors=[SimpleProcessor(data_parsers=[<class 'circuit_maintenance_parser.parser.ICal'>], extended_data={})])
+        GenericProvider(_processors=[SimpleProcessor(data_parsers=[<class 'circuit_maintenance_parser.parser.ICal'>], extended_data={})])
     """
 
-    processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
+    _processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
     _default_organizer: str = "unknown"
 
     def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
-        """Main entry method that will use the defined `Processors` in order to extract the `Maintenances` from data."""
+        """Main entry method that will use the defined `_processors` in order to extract the `Maintenances` from data."""
         provider_name = self.__class__.__name__
         error_message = ""
         related_exceptions = []
 
-        for processor in self.processors:
+        for processor in self._processors:
             try:
                 return processor.process(data, self.get_extended_data())
             except ProcessorError as exc:
@@ -58,12 +58,13 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
                     f"- Processor {processor.__class__.__name__} from {provider_name} failed due to: %s\n"
                 )
                 logger.debug(process_error_message, traceback.format_exc())
-                error_message += process_error_message % exc.__cause__
+                related_exc = exc.__cause__ if exc.__cause__ else exc
+                error_message += process_error_message % related_exc
                 related_exceptions.append(exc)
                 continue
 
         raise ProviderError(
-            (f"Failed creating Maintenance notification for {provider_name} .\nDetails:\n{error_message}"),
+            (f"Failed creating Maintenance notification for {provider_name}.\nDetails:\n{error_message}"),
             related_exceptions=related_exceptions,
         )
 
@@ -94,7 +95,7 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
 class Cogent(GenericProvider):
     """Cogent provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[HtmlParserCogent1]),
     ]
     _default_organizer = "support@cogentco.com"
@@ -109,7 +110,7 @@ class EUNetworks(GenericProvider):
 class GTT(GenericProvider):
     """GTT provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[HtmlParserGTT1]),
     ]
     _default_organizer = "InfraCo.CM@gttcorp.org"
@@ -118,7 +119,7 @@ class GTT(GenericProvider):
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[HtmlParserLumen1]),
     ]
     _default_organizer = "smc@lumen.com"
@@ -127,7 +128,7 @@ class Lumen(GenericProvider):
 class Megaport(GenericProvider):
     """Megaport provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[HtmlParserMegaport1]),
     ]
     _default_organizer = "support@megaport.com"
@@ -154,7 +155,7 @@ class Telia(GenericProvider):
 class Telstra(GenericProvider):
     """Telstra provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[ICal]),
         SimpleProcessor(data_parsers=[HtmlParserTelstra1]),
     ]
@@ -164,7 +165,7 @@ class Telstra(GenericProvider):
 class Verizon(GenericProvider):
     """Verizon provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[HtmlParserVerizon1]),
     ]
     _default_organizer = "NO-REPLY-sched-maint@EMEA.verizonbusiness.com"
@@ -173,7 +174,7 @@ class Verizon(GenericProvider):
 class Zayo(GenericProvider):
     """Zayo provider custom class."""
 
-    processors: List[GenericProcessor] = [
+    _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[HtmlParserZayo1]),
     ]
     _default_organizer = "mr@zayo.com"
