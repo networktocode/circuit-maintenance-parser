@@ -73,47 +73,53 @@ class ICal(Parser):
 
         try:
             gcal = Calendar.from_ical(raw)
-            for component in gcal.walk():
-                if component.name == "VEVENT":
-                    data = {
-                        "provider": str(component.get("X-MAINTNOTE-PROVIDER")),
-                        "account": str(component.get("X-MAINTNOTE-ACCOUNT")),
-                        "maintenance_id": str(component.get("X-MAINTNOTE-MAINTENANCE-ID")),
-                        "status": Status(component.get("X-MAINTNOTE-STATUS")),
-                        "start": round(component.get("DTSTART").dt.timestamp()),
-                        "end": round(component.get("DTEND").dt.timestamp()),
-                        "stamp": round(component.get("DTSTAMP").dt.timestamp()),
-                        "summary": str(component.get("SUMMARY")),
-                        "organizer": str(component.get("ORGANIZER")),
-                        "uid": str(component.get("UID")),
-                        "sequence": int(component.get("SEQUENCE")),
-                    }
-
-                    data = {key: value for key, value in data.items() if value != "None"}
-
-                    # In a VEVENT sometimes there are mutliple object ID with custom impacts
-                    circuits = component.get("X-MAINTNOTE-OBJECT-ID")
-                    if isinstance(circuits, list):
-                        data["circuits"] = [
-                            CircuitImpact(
-                                circuit_id=str(object),
-                                impact=Impact(
-                                    object.params.get("X-MAINTNOTE-OBJECT-IMPACT", component.get("X-MAINTNOTE-IMPACT"))
-                                ),
-                            )
-                            for object in component.get("X-MAINTNOTE-OBJECT-ID")
-                        ]
-                    else:
-                        data["circuits"] = [
-                            CircuitImpact(circuit_id=circuits, impact=Impact(component.get("X-MAINTNOTE-IMPACT")),)
-                        ]
-                    result.append(data)
-
+            result = self.parse_ical(gcal)
         except Exception as exc:
             raise ParserError from exc
 
         logger.debug("Successful parsing for %s", self.__class__.__name__)
 
+        return result
+
+    @staticmethod
+    def parse_ical(gcal: Calendar) -> List[Dict]:
+        """Standard ICalendar parsing."""
+        result = []
+        for component in gcal.walk():
+            if component.name == "VEVENT":
+                data = {
+                    "provider": str(component.get("X-MAINTNOTE-PROVIDER")),
+                    "account": str(component.get("X-MAINTNOTE-ACCOUNT")),
+                    "maintenance_id": str(component.get("X-MAINTNOTE-MAINTENANCE-ID")),
+                    "status": Status(component.get("X-MAINTNOTE-STATUS")),
+                    "start": round(component.get("DTSTART").dt.timestamp()),
+                    "end": round(component.get("DTEND").dt.timestamp()),
+                    "stamp": round(component.get("DTSTAMP").dt.timestamp()),
+                    "summary": str(component.get("SUMMARY")),
+                    "organizer": str(component.get("ORGANIZER")),
+                    "uid": str(component.get("UID")),
+                    "sequence": int(component.get("SEQUENCE")),
+                }
+
+                data = {key: value for key, value in data.items() if value != "None"}
+
+                # In a VEVENT sometimes there are mutliple object ID with custom impacts
+                circuits = component.get("X-MAINTNOTE-OBJECT-ID")
+                if isinstance(circuits, list):
+                    data["circuits"] = [
+                        CircuitImpact(
+                            circuit_id=str(object),
+                            impact=Impact(
+                                object.params.get("X-MAINTNOTE-OBJECT-IMPACT", component.get("X-MAINTNOTE-IMPACT"))
+                            ),
+                        )
+                        for object in component.get("X-MAINTNOTE-OBJECT-ID")
+                    ]
+                else:
+                    data["circuits"] = [
+                        CircuitImpact(circuit_id=circuits, impact=Impact(component.get("X-MAINTNOTE-IMPACT")),)
+                    ]
+                result.append(data)
         return result
 
 
