@@ -95,7 +95,7 @@ ntt_provider = init_provider("ntt")
 
 data_to_process = NotificationData.init("ical", raw_data)
 
-maintenances = ntt_provider.maintenances(data_to_process)
+maintenances = ntt_provider.get_maintenances(data_to_process)
 
 print(maintenances[0].to_json())
 {
@@ -154,6 +154,30 @@ $ circuit-maintenance-parser --data-file tests/unit/data/zayo/zayo1.html --data-
 Circuit Maintenance Notification #0
 {
   "account": "clientX",
+  "circuits": [
+    {
+      "circuit_id": "/OGYX/000000/ /ZYO /",
+      "impact": "OUTAGE"
+    }
+  ],
+  "end": 1601035200,
+  "maintenance_id": "TTN-00000000",
+  "organizer": "mr@zayo.com",
+  "provider": "zayo",
+  "sequence": 1,
+  "stamp": 1599436800,
+  "start": 1601017200,
+  "status": "CONFIRMED",
+  "summary": "Zayo will implement planned maintenance to troubleshoot and restore degraded span",
+  "uid": "0"
+}
+```
+
+```bash
+circuit-maintenance-parser --data-file "/tmp/___ZAYO TTN-00000000 Planned MAINTENANCE NOTIFICATION___.eml" --data-type email --provider-type zayo
+Circuit Maintenance Notification #0
+{
+  "account": "Linode",
   "circuits": [
     {
       "circuit_id": "/OGYX/000000/ /ZYO /",

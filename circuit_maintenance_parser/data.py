@@ -34,11 +34,13 @@ class NotificationData(BaseModel, extra=Extra.forbid):
         """Initialize the data_parts from an email.message.Email object."""
         data_parts = []
         for part in email_message.walk():
-            data_parts.append(DataPart(part.get_content_type(), part.get_payload()))
+            if "multipart" in part.get_content_type():
+                continue
+            data_parts.append(DataPart(part.get_content_type(), part.get_payload().encode()))
 
         # Adding extra headers that are interesting to be parsed
-        data_parts.append(DataPart("email-header-subject", email_message["Subject"]))
+        data_parts.append(DataPart("email-header-subject", email_message["Subject"].encode()))
         # TODO: Date could be used to extend the "Stamp" time of a notification when not available, but we need a parser
-        data_parts.append(DataPart("email-header-date", email_message["Date"]))
+        data_parts.append(DataPart("email-header-date", email_message["Date"].encode()))
 
         return cls(data_parts=data_parts)

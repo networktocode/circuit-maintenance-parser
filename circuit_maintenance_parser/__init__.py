@@ -2,6 +2,7 @@
 
 from typing import Type, Optional
 
+from .data import NotificationData
 from .errors import NonexistentProviderError
 from .provider import (
     GenericProvider,
@@ -81,8 +82,4 @@ def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
     return provider_parser
 
 
-__all__ = [
-    "init_provider",
-    "get_provider_class",
-    "get_provider_class_from_sender",
-]
+__all__ = ["init_provider", "get_provider_class", "get_provider_class_from_sender", "NotificationData"]
