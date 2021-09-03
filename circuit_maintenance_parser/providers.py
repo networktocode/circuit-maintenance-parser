@@ -102,10 +102,16 @@ class GenericProvider(BaseModel, extra=Extra.forbid):
 
 
 class Cogent(GenericProvider):
-    """EUNetworks provider custom class."""
+    """Cogent provider custom class."""
 
     _parser_classes: Iterable[Type[Parser]] = [HtmlParserCogent1]
     _default_organizer = "support@cogentco.com"
+
+
+class Colt(GenericProvider):
+    """Colt provider custom class."""
+
+    _default_organizer = "PlannedWorks@colt.net"
 
 
 class EUNetworks(GenericProvider):

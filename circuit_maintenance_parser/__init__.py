@@ -8,6 +8,7 @@ from .output import Maintenance
 from .providers import (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     GTT,
     Lumen,
@@ -23,6 +24,7 @@ from .providers import (
 SUPPORTED_PROVIDERS = (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     GTT,
     Lumen,
