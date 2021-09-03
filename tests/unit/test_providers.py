@@ -7,6 +7,7 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import SimpleProcessor
 from circuit_maintenance_parser.provider import GenericProvider
+from circuit_maintenance_parser.parser import Parser
 
 
 fake_data = NotificationData.init("fake_type", b"fake data")
@@ -19,15 +20,14 @@ class ProviderWithOneProcessor(GenericProvider):
 class ProviderWithTwoProcessors(GenericProvider):
     """Fake Provider with two Processors."""
 
-    _processors: List[GenericProcessor] = [
-        SimpleProcessor(),
-        SimpleProcessor(),
+    _processors = [
+        SimpleProcessor(data_parsers=[Parser]),
+        SimpleProcessor(data_parsers=[Parser]),
     ]
 
 
 @pytest.mark.parametrize(
-    "provider_class",
-    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
+    "provider_class", [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances(provider_class):
     """Tests GenericProvider."""
@@ -39,8 +39,7 @@ def test_provide_get_maintenances(provider_class):
 
 
 @pytest.mark.parametrize(
-    "provider_class",
-    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
+    "provider_class", [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances_one_exception(provider_class):
     """Tests GenericProvider."""
