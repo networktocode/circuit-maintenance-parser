@@ -6,7 +6,7 @@ from dateutil import parser
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
@@ -27,7 +27,7 @@ class HtmlParserLumen1(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_spans(self, spans: ResultSet, data: Dict):
         """Parse Span tag."""

@@ -9,13 +9,8 @@
         ],
         "end": 1629277200,
         "maintenance_id": "10009081013",
-        "organizer": "inoc@superonline.net",
-        "provider": "turkcell",
-        "sequence": 1,
-        "stamp": null,
         "start": 1629257400,
         "status": "CONFIRMED",
-        "summary": "SW upgrade work will be done on the OLTs mentioned below;",
-        "uid": "0"
+        "summary": "SW upgrade work will be done on the OLTs mentioned below;"
     }
 ]

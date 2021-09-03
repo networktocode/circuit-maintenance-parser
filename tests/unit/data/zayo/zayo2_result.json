@@ -9,13 +9,9 @@
     ],
     "end": 1614423600,
     "maintenance_id": "TTN-0001234567",
-    "organizer": "unknown",
-    "provider": "unknown",
-    "sequence": 1,
     "stamp": 1614297600,
     "start": 1614405600,
     "status": "CONFIRMED",
-    "summary": "Zayo will implement network maintenance to enhance service reliability.",
-    "uid": "0"
+    "summary": "Zayo will implement network maintenance to enhance service reliability."
   }
 ]

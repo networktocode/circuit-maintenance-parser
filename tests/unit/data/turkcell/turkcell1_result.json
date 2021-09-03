@@ -17,13 +17,8 @@
         ],
         "end": 1625738400,
         "maintenance_id": "11111111111111",
-        "organizer": "inoc@superonline.net",
-        "provider": "turkcell",
-        "sequence": 1,
-        "stamp": null,
         "start": 1625713200,
         "status": "CONFIRMED",
-        "summary": "There is a fibercut risk during Sancaktepe routes Circuit transfer work will be carried out at Istanbul Sancaktepe service point. It is foreseen that your services will be interrupted\n during the work.",
-        "uid": "0"
+        "summary": "There is a fibercut risk during Sancaktepe routes Circuit transfer work will be carried out at Istanbul Sancaktepe service point. It is foreseen that your services will be interrupted\n during the work."
     }
 ]

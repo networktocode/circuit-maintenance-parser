@@ -21,11 +21,15 @@ enables supporting other providers that are not using this proposed practice, ge
 
 You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised output to handle your received circuit maintenance notifications in a simple way.
 
-## How does it work?
+## Workflow
 
-Starting from a Provider parsing class, **multiple** parsers can be attached (in a specific order) and specific provider information (such as the default email used from the provider).
+1. We instantiate a `Provider`, directly or via the `init_provider` method, that depending on the selected type will return the corresponding instance.
+2. Each `Provider` have already defined multiple `Processors` that will be used to get the `Maintenances` when the `Provider.get_maintenances(data)` method is called.
+3. Each `Processor` class can have a pre defined logic to combine the data extracted from the notifications and create the final `Maintenance` object, and receives a `List` of multiple `Parsers` that will be to `parse` each type of data.
+4. Each `Parser` class supports one or more data types and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant key/values.
+5. When calling the `Provider.get_maintenances(data)`, the `data` argument is an instance of `NotificationData` (which is just a collection of multiple `DataParts`, each one with a `type` and a `content`) that will be used by the corresponding `Parser` when the `Processor` will try to match them.
 
-Each provider could use the standard ICal format commented above or define its custom HTML parsers, supporting multiple notification types for the same provider that could be transitioning from one type to another.
+By default, there is a `GenericProvider` that support a `SimpleProcessor` using the standard `ICal` `Parser`, being the easiest path to start using the library in case the provider uses the reference iCalendar standard.
 
 ### Supported Providers
 
@@ -63,9 +67,9 @@ The library is available as a Python package in pypi and can be installed with p
 ## Python Library
 
 ```python
-from circuit_maintenance_parser import init_provider
+from circuit_maintenance_parser import init_provider, init_data_raw
 
-raw_text = """BEGIN:VCALENDAR
+raw_data = b"""BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Maint Note//https://github.com/maint-notification//
 BEGIN:VEVENT
@@ -87,16 +91,13 @@ END:VEVENT
 END:VCALENDAR
 """
 
-data = {
-  "raw": raw_text,
-  "provider_type": "NTT"
-}
+ntt_provider = init_provider("ntt")
 
-parser = init_provider(**data)
+data_to_process = init_data_raw("ical", raw_data)
 
-parsed_notifications = parser.process()
+maintenances = ntt_provider.get_maintenances(data_to_process)
 
-print(parsed_notifications[0].to_json())
+print(maintenances[0].to_json())
 {
   "account": "137.035999173",
   "circuits": [
@@ -125,7 +126,7 @@ print(parsed_notifications[0].to_json())
 ## CLI
 
 ```bash
-$ circuit-maintenance-parser --raw-file tests/integration/data/ical/ical1
+$ circuit-maintenance-parser --data-file tests/unit/data/ical/ical1 --data-type ical
 Circuit Maintenance Notification #0
 {
   "account": "137.035999173",
@@ -149,10 +150,34 @@ Circuit Maintenance Notification #0
 ```
 
 ```bash
-$ circuit-maintenance-parser --raw-file tests/integration/data/zayo/zayo1.html --parser zayo
+$ circuit-maintenance-parser --data-file tests/unit/data/zayo/zayo1.html --data-type html --provider-type zayo
 Circuit Maintenance Notification #0
 {
   "account": "clientX",
+  "circuits": [
+    {
+      "circuit_id": "/OGYX/000000/ /ZYO /",
+      "impact": "OUTAGE"
+    }
+  ],
+  "end": 1601035200,
+  "maintenance_id": "TTN-00000000",
+  "organizer": "mr@zayo.com",
+  "provider": "zayo",
+  "sequence": 1,
+  "stamp": 1599436800,
+  "start": 1601017200,
+  "status": "CONFIRMED",
+  "summary": "Zayo will implement planned maintenance to troubleshoot and restore degraded span",
+  "uid": "0"
+}
+```
+
+```bash
+circuit-maintenance-parser --data-file "/tmp/___ZAYO TTN-00000000 Planned MAINTENANCE NOTIFICATION___.eml" --data-type email --provider-type zayo
+Circuit Maintenance Notification #0
+{
+  "account": "Linode",
   "circuits": [
     {
       "circuit_id": "/OGYX/000000/ /ZYO /",
