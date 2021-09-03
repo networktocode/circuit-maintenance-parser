@@ -26,8 +26,8 @@ You can leverage on this library in your automation framework to process circuit
 1. We instantiate a `Provider`, directly or via the `init_provider` method, that depending on the selected type will return the corresponding instance.
 2. Each `Provider` have already defined multiple `Processors` that will be used to get the `Maintenances` when the `Provider.get_maintenances(data)` method is called.
 3. Each `Processor` class can have a pre defined logic to combine the data extracted from the notifications and create the final `Maintenance` object, and receives a `List` of multiple `Parsers` that will be to `parse` each type of data.
-4. Each `Parser` class supports multiple data types and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant key/values.
-5. When calling the `Provider.get_maintenances(data)`, the `data` argument is an instance of `NotificationData` that is just a collection of multiple `DataParts`, each one with a `type` and a `content` that will be used by the corresponding `Parser` when the `Processor` will try to match them.
+4. Each `Parser` class supports one or more data types and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant key/values.
+5. When calling the `Provider.get_maintenances(data)`, the `data` argument is an instance of `NotificationData` (which is just a collection of multiple `DataParts`, each one with a `type` and a `content`) that will be used by the corresponding `Parser` when the `Processor` will try to match them.
 
 By default, there is a `GenericProvider` that support a `SimpleProcessor` using the standard `ICal` `Parser`, being the easiest path to start using the library in case the provider uses the reference iCalendar standard.
 
