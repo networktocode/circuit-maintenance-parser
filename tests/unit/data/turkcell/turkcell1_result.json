@@ -1,0 +1,24 @@
+[
+    {
+        "account": "CUSTOMER",
+        "circuits": [
+            {
+                "circuit_id": "circuit1circuit1",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "circuit2circuit2",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "circuit3-circuit3",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1625738400,
+        "maintenance_id": "11111111111111",
+        "start": 1625713200,
+        "status": "CONFIRMED",
+        "summary": "There is a fibercut risk during Sancaktepe routes Circuit transfer work will be carried out at Istanbul Sancaktepe service point. It is foreseen that your services will be interrupted\n during the work."
+    }
+]

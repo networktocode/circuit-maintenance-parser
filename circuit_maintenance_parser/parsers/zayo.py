@@ -7,7 +7,7 @@ from bs4.element import ResultSet  # type: ignore
 
 from dateutil import parser
 
-from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-nested-blocks,no-member, too-many-branches
@@ -29,7 +29,7 @@ class HtmlParserZayo1(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""

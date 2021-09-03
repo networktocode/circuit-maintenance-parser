@@ -9,13 +9,8 @@
         ],
         "end": 1636192800,
         "maintenance_id": "AB987654321-1",
-        "organizer": "unknown",
-        "provider": "unknown",
-        "sequence": 1,
-        "stamp": null,
         "start": 1636182000,
         "status": "RE-SCHEDULED",
-        "summary": "Router Code Upgrade Planned Network Maintenance",
-        "uid": "0"
+        "summary": "Router Code Upgrade Planned Network Maintenance"
     }
 ]
