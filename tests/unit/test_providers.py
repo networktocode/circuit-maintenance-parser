@@ -5,29 +5,29 @@ import pytest
 
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
+from circuit_maintenance_parser.processor import SimpleProcessor
+from circuit_maintenance_parser.provider import GenericProvider
 
-# pylint: disable=duplicate-code
-from circuit_maintenance_parser.provider import (
-    GenericProvider,
-    Cogent,
-    EUNetworks,
-    Lumen,
-    Megaport,
-    NTT,
-    PacketFabric,
-    Telia,
-    Telstra,
-    Turkcell,
-    Verizon,
-    Zayo,
-)
 
 fake_data = NotificationData.init("fake_type", b"fake data")
 
 
+class ProviderWithOneProcessor(GenericProvider):
+    """Fake Provider with only one Processor."""
+
+
+class ProviderWithTwoProcessors(GenericProvider):
+    """Fake Provider with two Processors."""
+
+    _processors: List[GenericProcessor] = [
+        SimpleProcessor(),
+        SimpleProcessor(),
+    ]
+
+
 @pytest.mark.parametrize(
     "provider_class",
-    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Turkcell, Verizon, Zayo,],
+    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances(provider_class):
     """Tests GenericProvider."""
@@ -40,7 +40,7 @@ def test_provide_get_maintenances(provider_class):
 
 @pytest.mark.parametrize(
     "provider_class",
-    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Turkcell, Verizon, Zayo,],
+    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances_one_exception(provider_class):
     """Tests GenericProvider."""
