@@ -3,9 +3,8 @@ import logging
 import sys
 import email
 import click
-from circuit_maintenance_parser.data import NotificationData
 
-from . import SUPPORTED_PROVIDERS, init_provider
+from . import SUPPORTED_PROVIDERS, init_provider, init_data_raw, init_data_emailmessage
 from .provider import ProviderError
 
 
@@ -33,7 +32,7 @@ def main(provider_type, data_file, data_type, verbose):
         if str.lower(data_file[-3:]) == "eml":
             with open(data_file) as email_file:
                 msg = email.message_from_file(email_file)
-            data = NotificationData.init_from_emailmessage(msg)
+            data = init_data_emailmessage(msg)
         else:
             click.echo("File format not supported, only *.eml", err=True)
             sys.exit(1)
@@ -41,7 +40,7 @@ def main(provider_type, data_file, data_type, verbose):
     else:
         with open(data_file, "rb") as raw_filename:
             raw_bytes = raw_filename.read()
-        data = NotificationData.init(data_type, raw_bytes)
+        data = init_data_raw(data_type, raw_bytes)
 
     try:
         parsed_notifications = provider.get_maintenances(data)

@@ -28,7 +28,7 @@ class Parser(BaseModel, extra=Extra.forbid):
     (possibly partial/incomplete) data that will eventually be used to create a Maintenance object.
     """
 
-    # Data Type are used to match the type of parser to be used for each type of data
+    # _data_types are used to match the Parser to to each type of DataPart
     _data_types = ["text/plain", "plain"]
 
     @classmethod

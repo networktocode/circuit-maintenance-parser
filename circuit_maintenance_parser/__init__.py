@@ -52,6 +52,21 @@ def init_provider(provider_type=None) -> Optional[GenericProvider]:
         return None
 
 
+def init_data_raw(data_type: str, data_content: bytes) -> NotificationData:
+    """Returns an instance of NotificationData from one combination of data type and content."""
+    return NotificationData.init(data_type, data_content)
+
+
+def init_data_email(raw_email_bytes: bytes) -> NotificationData:
+    """Returns an instance of NotificationData from a raw email content."""
+    return NotificationData.init_from_email_bytes(raw_email_bytes)
+
+
+def init_data_emailmessage(email_message) -> NotificationData:
+    """Returns an instance of NotificationData from an email message."""
+    return NotificationData.init_from_emailmessage(email_message)
+
+
 def get_provider_class(provider_name: str) -> Type[GenericProvider]:
     """Returns the Provider parser class for a specific provider_type."""
     provider_name = provider_name.lower()
@@ -82,4 +97,11 @@ def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
     return provider_parser
 
 
-__all__ = ["init_provider", "get_provider_class", "get_provider_class_from_sender", "NotificationData"]
+__all__ = [
+    "init_provider",
+    "init_data_raw",
+    "init_data_email",
+    "init_data_emailmessage",
+    "get_provider_class",
+    "get_provider_class_from_sender",
+]

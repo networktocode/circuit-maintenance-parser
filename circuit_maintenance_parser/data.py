@@ -8,6 +8,7 @@ from pydantic import BaseModel, Extra
 class DataPart(NamedTuple):
     """Simplest data unit to be parsed."""
 
+    # type is an arbitrary string that is used to match the DataPart to the Parser class, that contains _data_types
     type: str
     content: bytes
 
@@ -16,6 +17,10 @@ class NotificationData(BaseModel, extra=Extra.forbid):
     """Base class for Notification Data types."""
 
     data_parts: List[DataPart] = []
+
+    def add_data_part(self, data_type: str, data_content: bytes):
+        """Add a DataPart element into the instance data_parts."""
+        self.data_parts.append(DataPart(data_type, data_content))
 
     @classmethod
     def init(cls, data_type: str, data_content: bytes):
