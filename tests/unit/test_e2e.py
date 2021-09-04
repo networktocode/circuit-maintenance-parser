@@ -32,149 +32,224 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
 
 
 @pytest.mark.parametrize(
-    "provider_class, data_type, data_file, result_parse_file",
+    "provider_class, test_data_files, result_parse_files",
     [
         # GenericProvider
-        (GenericProvider, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        (GenericProvider, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # Cogent
         (
             Cogent,
-            "html",
-            Path(dir_path, "data", "cogent", "cogent1.html"),
-            Path(dir_path, "data", "cogent", "cogent1_result.json"),
+            [
+                ("html", Path(dir_path, "data", "cogent", "cogent1.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "cogent", "cogent1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Cogent,
-            "html",
-            Path(dir_path, "data", "cogent", "cogent2.html"),
-            Path(dir_path, "data", "cogent", "cogent2_result.json"),
+            [
+                ("html", Path(dir_path, "data", "cogent", "cogent2.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "cogent", "cogent2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         # EUNetworks
-        (EUNetworks, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # Lumen
         (
             Lumen,
-            "html",
-            Path(dir_path, "data", "lumen", "lumen1.html"),
-            Path(dir_path, "data", "lumen", "lumen1_result.json"),
+            [
+                ("html", Path(dir_path, "data", "lumen", "lumen1.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "lumen", "lumen1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Lumen,
-            "html",
-            Path(dir_path, "data", "lumen", "lumen2.html"),
-            Path(dir_path, "data", "lumen", "lumen2_result.json"),
+            [
+                ("html", Path(dir_path, "data", "lumen", "lumen2.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "lumen", "lumen2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         # Megaport
         (
             Megaport,
-            "html",
-            Path(dir_path, "data", "megaport", "megaport1.html"),
-            Path(dir_path, "data", "megaport", "megaport1_result.json"),
+            [
+                ("html", Path(dir_path, "data", "megaport", "megaport1.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "megaport", "megaport1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Megaport,
-            "html",
-            Path(dir_path, "data", "megaport", "megaport2.html"),
-            Path(dir_path, "data", "megaport", "megaport2_result.json"),
+            [
+                ("html", Path(dir_path, "data", "megaport", "megaport2.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "megaport", "megaport2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         # NTT
-        (NTT, "ical", Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
-        (NTT, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        (
+            NTT,
+            [("ical", Path(dir_path, "data", "ntt", "ntt1")),],
+            [Path(dir_path, "data", "ntt", "ntt1_result.json"),],
+        ),
+        (NTT, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # PacketFabric
-        (PacketFabric, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        (PacketFabric, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # Telia
         (
             Telia,
-            "ical",
-            Path(dir_path, "data", "telia", "telia1"),
-            Path(dir_path, "data", "telia", "telia1_result.json"),
+            [("ical", Path(dir_path, "data", "telia", "telia1")),],
+            [Path(dir_path, "data", "telia", "telia1_result.json"),],
         ),
         (
             Telia,
-            "ical",
-            Path(dir_path, "data", "telia", "telia2"),
-            Path(dir_path, "data", "telia", "telia2_result.json"),
+            [("ical", Path(dir_path, "data", "telia", "telia2")),],
+            [Path(dir_path, "data", "telia", "telia2_result.json"),],
         ),
         # Telstra
         (
             Telstra,
-            "html",
-            Path(dir_path, "data", "telstra", "telstra1.html"),
-            Path(dir_path, "data", "telstra", "telstra1_result.json"),
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra1.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Telstra,
-            "html",
-            Path(dir_path, "data", "telstra", "telstra2.html"),
-            Path(dir_path, "data", "telstra", "telstra2_result.json"),
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra2.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
-        (Telstra, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        (Telstra, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # Turkcell
         (
             Turkcell,
-            "html",
-            Path(dir_path, "data", "turkcell", "turkcell1.html"),
-            Path(dir_path, "data", "turkcell", "turkcell1_result.json"),
+            [
+                ("html", Path(dir_path, "data", "turkcell", "turkcell1.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "turkcell", "turkcell1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Turkcell,
-            "html",
-            Path(dir_path, "data", "turkcell", "turkcell2.html"),
-            Path(dir_path, "data", "turkcell", "turkcell2_result.json"),
+            [
+                ("html", Path(dir_path, "data", "turkcell", "turkcell2.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "turkcell", "turkcell2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         # Verizon
         (
             Verizon,
-            "html",
-            Path(dir_path, "data", "verizon", "verizon1.html"),
-            Path(dir_path, "data", "verizon", "verizon1_result.json"),
+            [
+                ("html", Path(dir_path, "data", "verizon", "verizon1.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "verizon", "verizon1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Verizon,
-            "html",
-            Path(dir_path, "data", "verizon", "verizon2.html"),
-            Path(dir_path, "data", "verizon", "verizon2_result.json"),
+            [
+                ("html", Path(dir_path, "data", "verizon", "verizon2.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "verizon", "verizon2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             Verizon,
-            "html",
-            Path(dir_path, "data", "verizon", "verizon3.html"),
-            Path(dir_path, "data", "verizon", "verizon3_result.json"),
+            [
+                ("html", Path(dir_path, "data", "verizon", "verizon3.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "verizon", "verizon3_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         # Zayo
         (
             Zayo,
-            "html",
-            Path(dir_path, "data", "zayo", "zayo1.html"),
-            Path(dir_path, "data", "zayo", "zayo1_result.json"),
+            [("html", Path(dir_path, "data", "zayo", "zayo1.html")),],
+            [Path(dir_path, "data", "zayo", "zayo1_result.json"),],
         ),
         (
             Zayo,
-            "html",
-            Path(dir_path, "data", "zayo", "zayo2.html"),
-            Path(dir_path, "data", "zayo", "zayo2_result.json"),
-        ),
+            [("html", Path(dir_path, "data", "zayo", "zayo2.html")),],
+            [Path(dir_path, "data", "zayo", "zayo2_result.json"),],
+        ),  # pylint: disable=too-many-locals
     ],
 )
-def test_provider_get_maintenances(provider_class, data_type, data_file, result_parse_file):
+def test_provider_get_maintenances(provider_class, test_data_files, result_parse_files):
     """End to End tests for various Providers."""
     extended_data = provider_class.get_extended_data()
-    # TODO: check how to make data optional from Pydantic do not initialized?
-    default_maintenance_data = {"stamp": None, "uid": "0", "sequence": 1, "summary": ""}
+    default_maintenance_data = {"uid": "0", "sequence": 1, "summary": ""}
     extended_data.update(default_maintenance_data)
 
-    with open(data_file, "rb") as file_obj:
-        if data_type in ["ical", "html"]:
-            data = NotificationData.init(data_type, file_obj.read())
-        # TODO: Add EML testing
+    data = None
+    for data_type, data_file in test_data_files:
+        with open(data_file, "rb") as file_obj:
+            if not data:
+                if data_type in ["ical", "html"]:
+                    data = NotificationData.init(data_type, file_obj.read())
+                # TODO: Add EML testing
+            else:
+                data.add_data_part(data_type, file_obj.read())
 
     parsed_notifications = provider_class().get_maintenances(data)
     notifications_json = []
     for parsed_notification in parsed_notifications:
         notifications_json.append(json.loads(parsed_notification.to_json()))
 
-    with open(result_parse_file) as res_file:
-        expected_result = json.load(res_file)
+    expected_result = []
+    for result_parse_file in result_parse_files:
+        with open(result_parse_file) as res_file:
+            partial_result_data = json.load(res_file)
+            if not expected_result:
+                expected_result = partial_result_data
+            else:
+                expected_result[0].update(partial_result_data[0])
 
     for result in expected_result:
         temp_res = result.copy()
@@ -253,7 +328,7 @@ Details:
 Failed creating Maintenance notification for Telstra.
 Details:
 - Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
-- Processor SimpleProcessor from Telstra failed due to: None of the supported parsers for processor SimpleProcessor (HtmlParserTelstra1) was matching any of the provided data types (ical).
+- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra1) was matching any of the provided data types (ical).
 """,
         ),
         # Zayo

@@ -5,6 +5,7 @@ import calendar
 import datetime
 import quopri
 from typing import Iterable, Union, Dict, List
+from email.utils import parsedate_tz, mktime_tz
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -163,15 +164,13 @@ class Html(Parser):
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
 
 
-class EmailDate(Parser):
+class EmailDateParser(Parser):
     """Parser for Email Date."""
 
     _data_types = ["email-header-date"]
 
     def parse(self, raw: bytes) -> List[Dict]:
         """Method that returns a list of Maintenance objects."""
-        from email.utils import parsedate_tz, mktime_tz
-
         try:
             result = [{"stamp": mktime_tz(parsedate_tz(raw.decode()))}]
             logger.debug("Successful parsing for %s", self.__class__.__name__)

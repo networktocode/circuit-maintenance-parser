@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from circuit_maintenance_parser.parser import ICal, EmailDate
+from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -135,7 +135,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ),
         # Email Date
         (
-            EmailDate,
+            EmailDateParser,
             Path(dir_path, "data", "date", "email_date_1"),
             Path(dir_path, "data", "date", "email_date_1_result.json"),
         ),
