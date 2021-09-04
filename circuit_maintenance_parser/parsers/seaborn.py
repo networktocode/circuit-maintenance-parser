@@ -1,17 +1,33 @@
 """Telstra parser."""
 import logging
+import re
 from typing import Dict, List
 
 from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParsingError
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
+from circuit_maintenance_parser.errors import ParserError
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, Subject
 
 # pylint: disable=too-many-branches
 
 
 logger = logging.getLogger(__name__)
+
+
+class SubjectParserSeaborn1(Subject):
+    """PArser for Seaborn subject string."""
+
+    def parse_subject(self, subject, data_base):
+        data = data_base.copy()
+        try:
+            search = re.search(r".+\[## ([0-9]+) ##\].+", subject)
+            if search:
+                data["account"] = search.group(1)
+            return [data]
+
+        except Exception as exc:
+            raise ParserError from exc
 
 
 class HtmlParserSeaborn1(Html):
@@ -25,7 +41,7 @@ class HtmlParserSeaborn1(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_body(self, body, data):
         p_elements = body.find_all("p")
@@ -61,7 +77,7 @@ class HtmlParserSeaborn2(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_body(self, body, data):
         div_elements = body.find_all("div")

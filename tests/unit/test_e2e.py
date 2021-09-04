@@ -1,4 +1,5 @@
 """Tests for End to End library usage."""
+import email
 import json
 import os
 from pathlib import Path
@@ -18,6 +19,7 @@ from circuit_maintenance_parser.provider import (
     Megaport,
     NTT,
     PacketFabric,
+    Seaborn,
     Telia,
     Telstra,
     Turkcell,
@@ -82,6 +84,13 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (NTT, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
         # PacketFabric
         (PacketFabric, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
+        # Seaborn
+        (
+            Seaborn,
+            "email",
+            Path(dir_path, "data", "seaborn", "seaborn1.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn1_result.json"),
+        ),
         # Telia
         (
             Telia,
@@ -166,7 +175,10 @@ def test_provider_get_maintenances(provider_class, data_type, data_file, result_
     with open(data_file, "rb") as file_obj:
         if data_type in ["ical", "html"]:
             data = NotificationData.init(data_type, file_obj.read())
-        # TODO: Add EML testing
+        elif data_type == "email":
+            with open(data_file) as email_file:
+                msg = email.message_from_file(email_file)
+            data = NotificationData.init_from_emailmessage(msg)
 
     parsed_notifications = provider_class().get_maintenances(data)
     notifications_json = []
