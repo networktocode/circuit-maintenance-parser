@@ -353,7 +353,7 @@ maintenance_id
             """\
 Failed creating Maintenance notification for Zayo.
 Details:
-- Processor SimpleProcessor from Zayo failed due to: 6 validation errors for Maintenance
+- Processor SimpleProcessor from Zayo failed due to: 7 validation errors for Maintenance
 account
   field required (type=value_error.missing)
 maintenance_id
@@ -365,6 +365,8 @@ status
 start
   field required (type=value_error.missing)
 end
+  field required (type=value_error.missing)
+stamp
   field required (type=value_error.missing)
 """,
         ),
