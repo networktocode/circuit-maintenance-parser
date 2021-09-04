@@ -13,6 +13,7 @@ from circuit_maintenance_parser.errors import ProviderError
 from circuit_maintenance_parser.provider import (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     Lumen,
     Megaport,
@@ -48,6 +49,13 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             "html",
             Path(dir_path, "data", "cogent", "cogent2.html"),
             Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        ),
+        # Colt
+        (
+            Colt,
+            "email",
+            Path(dir_path, "data", "colt", "colt3.eml"),
+            Path(dir_path, "data", "colt", "colt3_result.json"),
         ),
         # EUNetworks
         (EUNetworks, "ical", GENERIC_ICAL_DATA_PATH, GENERIC_ICAL_RESULT_PATH,),
@@ -166,7 +174,8 @@ def test_provider_get_maintenances(provider_class, data_type, data_file, result_
     with open(data_file, "rb") as file_obj:
         if data_type in ["ical", "html"]:
             data = NotificationData.init(data_type, file_obj.read())
-        # TODO: Add EML testing
+        elif data_type in ["email"]:
+            data = NotificationData.init_from_email_bytes(file_obj.read())
 
     parsed_notifications = provider_class().get_maintenances(data)
     notifications_json = []

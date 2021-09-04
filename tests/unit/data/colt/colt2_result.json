@@ -1,0 +1,10 @@
+[
+  {
+    "circuits": [
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "C-1234567"
+      }
+    ]
+  }
+]

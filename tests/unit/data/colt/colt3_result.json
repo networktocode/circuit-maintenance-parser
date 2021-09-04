@@ -1,12 +1,17 @@
 [
   {
     "account": "12345000",
-    "circuits": [],    
-    "end": 1628312400,
+    "end": 1533712380,
     "maintenance_id": "CRQ1-12345678",
-    "sequence": 0,
-    "stamp": 1627653788,
-    "start": 1628283600,
+    "circuits": [
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "C-1234567"
+      }
+    ],
+    "sequence": 1,
+    "stamp": 1533595768,
+    "start": 1533704400,
     "status": "CONFIRMED",
     "summary": "Update: Colt Service Affecting Maintenance Notification - CRQ1-12345678 [06/8/2021 21:00:00 GMT - 07/8/2021 05:00:00 GMT] for ACME, 12345000"
   }

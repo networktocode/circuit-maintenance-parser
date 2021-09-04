@@ -161,3 +161,30 @@ class Html(Parser):
             line = line.strip()
         # TODO: below may not be needed if we use `quopri.decodestring()` on the initial email file?
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
+
+
+class Csv(Parser):
+    """Csv parser."""
+
+    _data_types = ["application/csv", "text/csv", "application/octet-stream"]
+
+    def parse(self, raw: bytes) -> List[Dict]:
+        """Execute parsing."""
+        result = []
+
+        data_base: Dict[str, Union[int, str, Iterable]] = {}
+        try:
+            for data in self.parse_csv(raw, data_base):
+                result.append(data)
+
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
+
+            return result
+
+        except Exception as exc:
+            raise ParserError from exc
+
+    @staticmethod
+    def parse_csv(raw: bytes, data_base: Dict) -> List[Dict]:
+        """Custom CSV parsing."""
+        raise NotImplementedError
