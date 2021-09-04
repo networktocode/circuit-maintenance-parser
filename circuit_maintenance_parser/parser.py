@@ -161,3 +161,20 @@ class Html(Parser):
             line = line.strip()
         # TODO: below may not be needed if we use `quopri.decodestring()` on the initial email file?
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
+
+
+class EmailDate(Parser):
+    """Parser for Email Date."""
+
+    _data_types = ["email-header-date"]
+
+    def parse(self, raw: bytes) -> List[Dict]:
+        """Method that returns a list of Maintenance objects."""
+        from email.utils import parsedate_tz, mktime_tz
+
+        try:
+            result = [{"stamp": mktime_tz(parsedate_tz(raw.decode()))}]
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
+            return result
+        except Exception as exc:
+            raise ParserError from exc
