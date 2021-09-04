@@ -172,8 +172,11 @@ class EmailDateParser(Parser):
     def parse(self, raw: bytes) -> List[Dict]:
         """Method that returns a list of Maintenance objects."""
         try:
-            result = [{"stamp": mktime_tz(parsedate_tz(raw.decode()))}]
-            logger.debug("Successful parsing for %s", self.__class__.__name__)
-            return result
+            parsed_date = parsedate_tz(raw.decode())
+            if parsed_date:
+                result = [{"stamp": mktime_tz(parsed_date)}]
+                logger.debug("Successful parsing for %s", self.__class__.__name__)
+                return result
+            raise ParserError("Not parsed_date available.")
         except Exception as exc:
             raise ParserError from exc
