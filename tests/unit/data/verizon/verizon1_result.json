@@ -1,0 +1,16 @@
+[
+    {
+        "account": "Verizon Customer",
+        "circuits": [
+            {
+                "circuit_id": "C12345678",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1629176460,
+        "maintenance_id": "987654321-1",
+        "start": 1629154860,
+        "status": "CONFIRMED",
+        "summary": "A Third Party vendor will be performing scheduled network maintenance."
+    }
+]

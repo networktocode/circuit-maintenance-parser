@@ -1,5 +1,23 @@
 # Changelog
 
+## v2.0.0 -
+
+### Added
+
+- #50 - Added new provider `Verizon` using `Html`
+- #52 - Added new provider `GTT` using `Html`
+- #54 - Added new provider `Turkcell` using `Html`
+- #53 - `circuit-maintenace-parser` refactor, including:
+  - New `Processor` class that allows the `Provider` to define more custom logics to combine parsed data to create
+    `Maintenances`
+  - New `NotificationData` class that enables easier data injection for simple and complex data objects, such as
+    emails.
+  - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
+
+### Fixed
+
+- #49 - Improved `Lumen` `Html` parsing.
+
 ## v1.2.3 - 2021-08-12
 
 ### Fixed

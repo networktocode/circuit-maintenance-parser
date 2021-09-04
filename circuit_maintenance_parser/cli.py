@@ -1,44 +1,51 @@
 """CLI for circuit-maintenance-parser."""
 import logging
 import sys
-
+import email
 import click
 
-from . import SUPPORTED_PROVIDERS, init_provider, ParsingError
+from . import SUPPORTED_PROVIDERS, init_provider, init_data_raw, init_data_emailmessage
+from .provider import ProviderError
 
 
 @click.command()
-@click.option("--raw-file", required=True, help="File containing raw data to parse.")
+@click.option("--data-file", required=True, help="File containing raw data to parse.")
+@click.option("--data-type", required=False, help="Type of notification data. Default: Icalendar", default="ical")
 @click.option(
-    "--parser",
-    type=click.Choice([parser.get_provider_type() for parser in SUPPORTED_PROVIDERS]),
-    default="ical",
-    help="Parser type.",
+    "--provider-type",
+    type=click.Choice([provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]),
+    default="genericprovider",
+    help="Provider type.",
 )
 @click.option("-v", "--verbose", count=True, help="Increase logging verbosity (repeatable)")
-def main(raw_file, parser, verbose):
+def main(provider_type, data_file, data_type, verbose):
     """Entrypoint into CLI app."""
     # Default logging level is WARNING; specifying -v/--verbose repeatedly can lower the threshold.
     verbosity = logging.WARNING - (10 * verbose)
     logging.basicConfig(level=verbosity)
-
-    with open(raw_file, "rb") as raw_filename:
-        raw_bytes = raw_filename.read()
-
-    data = {
-        "raw": raw_bytes,
-        "provider_type": parser,
-    }
-
-    parser = init_provider(**data)
-    if not parser:
-        click.echo(f"Parser type {parser} is not supported.", err=True)
+    provider = init_provider(provider_type)
+    if not provider:
+        click.echo(f"Provider type {provider} is not supported.", err=True)
         sys.exit(1)
 
+    if data_type == "email":
+        if str.lower(data_file[-3:]) == "eml":
+            with open(data_file) as email_file:
+                msg = email.message_from_file(email_file)
+            data = init_data_emailmessage(msg)
+        else:
+            click.echo("File format not supported, only *.eml", err=True)
+            sys.exit(1)
+
+    else:
+        with open(data_file, "rb") as raw_filename:
+            raw_bytes = raw_filename.read()
+        data = init_data_raw(data_type, raw_bytes)
+
     try:
-        parsed_notifications = parser.process()
-    except ParsingError as parsing_error:
-        click.echo(f"Parsing failed: {parsing_error}", err=True)
+        parsed_notifications = provider.get_maintenances(data)
+    except ProviderError as exc:
+        click.echo(f"Provider processing failed: {exc}", err=True)
         sys.exit(1)
 
     for idx, parsed_notification in enumerate(parsed_notifications):
