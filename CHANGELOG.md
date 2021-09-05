@@ -13,6 +13,7 @@
   - New `NotificationData` class that enables easier data injection for simple and complex data objects, such as
     emails.
   - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
+- #59 - Added a new parser `EmailDateParser` that uses the temail `Date` to get the `Stamp` and use in most of the `Providers` via the `CombinedProcessor`. Also, `Maintenance.stamp` attribute is mandatory.
 
 ### Fixed
 
