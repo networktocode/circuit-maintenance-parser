@@ -13,7 +13,7 @@ from .provider import ProviderError
 @click.option("--data-type", required=False, help="Type of notification data. Default: Icalendar", default="ical")
 @click.option(
     "--provider-type",
-    type=click.Choice([provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]),
+    type=click.Choice([provider().get_provider_type() for provider in SUPPORTED_PROVIDERS]),
     default="genericprovider",
     help="Provider type.",
 )

@@ -57,7 +57,7 @@ def test_init_data_emailmessage():
 
 
 @pytest.mark.parametrize(
-    "provider_type, result_type",
+    "provider_type, result_type, extended_data",
     [
         ("wrong", None),
         ("", GenericProvider),
@@ -102,10 +102,10 @@ def test_get_provider_class(provider_name, result, error):
 @pytest.mark.parametrize(
     "email_sender, result, error",
     [
-        (PacketFabric.get_default_organizer(), PacketFabric, None),
-        (NTT.get_default_organizer(), NTT, None),
-        (Zayo.get_default_organizer(), Zayo, None),
-        (EUNetworks.get_default_organizer(), EUNetworks, None),
+        (PacketFabric().get_default_organizer(), PacketFabric, None),
+        (NTT().get_default_organizer(), NTT, None),
+        (Zayo().get_default_organizer(), Zayo, None),
+        (EUNetworks().get_default_organizer(), EUNetworks, None),
         ("wrong", None, NonexistentProviderError),
     ],
 )

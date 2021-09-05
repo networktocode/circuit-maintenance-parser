@@ -33,6 +33,8 @@ class GenericProvider(BaseModel):
     This is the entry object to the library and it offers the `get_maintenances` method to process notifications.
 
     Attributes:
+        provider_type (optional): string to define the provider type.
+        organizer (optional): email address of the provider.
         _processors (optional): Defines a list of `_processors` that will be evaluated in order to get `Maintenances`.
             Each `Processor` implementation has a custom logic to combine the parsed data and a list of the `Parsers`
             that will be used. Default: `[SimpleProcessor(data_parsers=[ICal])]`.
@@ -41,11 +43,21 @@ class GenericProvider(BaseModel):
 
     Examples:
         >>> GenericProvider()
-        GenericProvider()
+        GenericProvider(provider_type='', organizer='')
     """
 
+    provider_type: str = ""
+    organizer: str = ""
+
     _processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
-    _default_organizer: str = "unknown"
+    _default_organizer: str = ""
+
+    def __init__(self, **data):
+        """Init default internal attributes."""
+        super().__init__(**data)
+
+        self.organizer = data.get("organizer", "")
+        self.provider_type = data.get("provider_type", "")
 
     def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
         """Main entry method that will use the defined `_processors` in order to extract the `Maintenances` from data."""
@@ -72,23 +84,20 @@ class GenericProvider(BaseModel):
             related_exceptions=related_exceptions,
         )
 
-    @classmethod
-    def get_default_organizer(cls):
-        """Expose default_organizer as class attribute."""
-        return cls._default_organizer
-
-    @classmethod
-    def get_extended_data(cls):
+    def get_extended_data(self):
         """Return the default data used to extend processed notification data.
 
         It's used when the data is not available in the notification itself
         """
-        return {"organizer": cls._default_organizer, "provider": cls.get_provider_type()}
+        return {"organizer": self.get_default_organizer(), "provider": self.get_provider_type()}
 
-    @classmethod
-    def get_provider_type(cls) -> str:
+    def get_default_organizer(self) -> str:
+        """Expose default_organizer."""
+        return self.organizer if self.organizer else self._default_organizer
+
+    def get_provider_type(self) -> str:
         """Return the Provider Type."""
-        return cls.__name__.lower()
+        return self.provider_type if self.provider_type else self.__class__.__name__.lower()
 
 
 ####################

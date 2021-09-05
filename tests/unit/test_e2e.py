@@ -158,7 +158,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
 )
 def test_provider_get_maintenances(provider_class, data_type, data_file, result_parse_file):
     """End to End tests for various Providers."""
-    extended_data = provider_class.get_extended_data()
+    extended_data = provider_class().get_extended_data()
     # TODO: check how to make data optional from Pydantic do not initialized?
     default_maintenance_data = {"stamp": None, "uid": "0", "sequence": 1, "summary": ""}
     extended_data.update(default_maintenance_data)
@@ -297,7 +297,7 @@ end
 )
 def test_errored_provider_process(provider_class, data_type, data_file, exception, error_message):
     """End to End negative tests."""
-    extended_data = provider_class.get_extended_data()
+    extended_data = provider_class().get_extended_data()
     # TODO: check how to make data optional from Pydantic do not initialized?
     default_maintenance_data = {"stamp": None, "uid": "0", "sequence": 1, "summary": ""}
     extended_data.update(default_maintenance_data)
