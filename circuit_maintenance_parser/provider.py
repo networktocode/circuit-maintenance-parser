@@ -19,6 +19,7 @@ from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserCo
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -152,6 +153,15 @@ class Megaport(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserMegaport1]),
     ]
     _default_organizer = "support@megaport.com"
+
+
+class Momentum(GenericProvider):
+    """Momentum provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserMomentum1, SubjectParserMomentum1]),
+    ]
+    _default_organizer = "maintenance@momentumtelecom.com"
 
 
 class NTT(GenericProvider):

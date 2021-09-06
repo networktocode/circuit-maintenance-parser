@@ -47,6 +47,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - GTT
 - Lumen
 - Megaport
+- Momentum
 - Seaborn
 - Telstra
 - Turkcell
