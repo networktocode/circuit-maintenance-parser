@@ -1,4 +1,4 @@
-"""Telstra parser."""
+"""Seaborn parser."""
 import logging
 import re
 
@@ -55,7 +55,7 @@ class SubjectParserSeaborn2(EmailSubjectParser):
 
 
 class HtmlParserSeaborn1(Html):
-    """Notifications Parser for Seaborn notifications.
+    """Notifications HTML Parser 1 for Seaborn notifications.
 
     <div>
         <p>DESCRIPTION: This is a maintenance notification.</p>
@@ -95,7 +95,7 @@ class HtmlParserSeaborn1(Html):
 
 
 class HtmlParserSeaborn2(Html):
-    """Notifications Parser for Seaborn notifications.
+    """Notifications  HTML Parser 2 for Seaborn notifications.
 
     <div>
         <div>DESCRIPTION: This is a maintenance notification.</div>

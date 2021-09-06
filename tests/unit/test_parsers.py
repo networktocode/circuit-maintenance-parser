@@ -172,6 +172,4 @@ def test_parsers(parser_class, raw_file, results_file):
     with open(results_file) as res_file:
         expected_result = json.load(res_file)
 
-    if parsed_notifications != expected_result:
-        breakpoint()
     assert parsed_notifications == expected_result
