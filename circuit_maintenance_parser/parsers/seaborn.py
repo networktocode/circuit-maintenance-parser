@@ -1,10 +1,8 @@
 """Telstra parser."""
 import logging
 import re
-from typing import Dict, List
 
 from dateutil import parser
-from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, EmailSubjectParser
@@ -19,6 +17,7 @@ class SubjectParserSeaborn1(EmailSubjectParser):
     """Parser for Seaborn subject string, email type 1."""
 
     def parse_subject(self, subject):
+        """Parse subject of email file."""
         data = {}
         try:
             search = re.search(r".+\[(.+)\].([0-9]+).+", subject)
@@ -35,6 +34,7 @@ class SubjectParserSeaborn2(EmailSubjectParser):
     """Parser for Seaborn subject string, email type 2."""
 
     def parse_subject(self, subject):
+        """Parse subject of email file."""
         data = {}
         try:
             search = re.search(r".+\[## ([0-9]+) ##\].+", subject)
@@ -60,6 +60,7 @@ class HtmlParserSeaborn1(Html):
             raise ParserError from exc
 
     def parse_body(self, body, data):
+        """Parse HTML body."""
         data["circuits"] = []
         p_elements = body.find_all("p")
 
@@ -91,6 +92,7 @@ class HtmlParserSeaborn2(Html):
             raise ParserError from exc
 
     def parse_body(self, body, data):
+        """Parse HTML body."""
         data["circuits"] = []
         div_elements = body.find_all("div")
         for element in div_elements:

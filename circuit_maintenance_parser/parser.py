@@ -128,7 +128,8 @@ class Html(Parser):
 
     _data_types = ["text/html", "html"]
 
-    def remove_hex_characters(self, string):
+    @staticmethod
+    def remove_hex_characters(string):
         """Convert any hex characters to standard ascii."""
         return string.encode("ascii", errors="ignore").decode("utf-8")
 
@@ -172,12 +173,12 @@ class EmailSubjectParser(Parser):
 
     _data_types = ["email-header-subject"]
 
-    def parse(self, subject: bytes) -> List[Dict]:
+    def parse(self, raw: bytes) -> List[Dict]:
         """Execute parsing."""
         result = []
 
         try:
-            for data in self.parse_subject(self.bytes_to_string(subject)):
+            for data in self.parse_subject(self.bytes_to_string(raw)):
                 result.append(data)
             logger.debug("Successful parsing for %s", self.__class__.__name__)
 
@@ -186,7 +187,7 @@ class EmailSubjectParser(Parser):
         except Exception as exc:
             raise ParserError from exc
 
-    def parse_subject(self, subject: ResultSet, data_base: Dict) -> List[Dict]:
+    def parse_subject(self, subject: ResultSet) -> List[Dict]:
         """Custom subject parsing."""
         raise NotImplementedError
 
