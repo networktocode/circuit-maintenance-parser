@@ -10,6 +10,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -87,6 +88,12 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserMegaport1,
             Path(dir_path, "data", "megaport", "megaport2.html"),
             Path(dir_path, "data", "megaport", "megaport2_result.json"),
+        ),
+        # Momentum
+        (
+            HtmlParserMomentum1,
+            Path(dir_path, "data", "momentum", "momentum1.eml"),
+            Path(dir_path, "data", "momentum", "momentum1_html_parser_result.json"),
         ),
         # NTT
         (ICal, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
