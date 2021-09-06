@@ -240,4 +240,3 @@ class Csv(Parser):
     def parse_csv(raw: bytes, data_base: Dict) -> List[Dict]:
         """Custom CSV parsing."""
         raise NotImplementedError
-

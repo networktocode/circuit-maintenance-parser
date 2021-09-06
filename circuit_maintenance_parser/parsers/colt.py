@@ -45,14 +45,6 @@ class ICalParserColt1(ICal):
                     maintenance_id = ""
                     account = ""
 
-                    # organizer = (
-                    #     str(component.get("ORGANIZER")) if component.get("ORGANIZER") else self.default_organizer
-                    # )
-                    # provider = (
-                    #     str(component.get("X-MAINTNOTE-PROVIDER"))
-                    #     if component.get("X-MAINTNOTE-PROVIDER")
-                    #     else self.default_provider
-                    # )
                     summary_match = re.search(
                         r"^.*?[-]\s(?P<maintenance_id>CRQ[\S]+).*?,\s*(?P<account>\d+)$", str(component.get("SUMMARY"))
                     )
@@ -62,7 +54,6 @@ class ICalParserColt1(ICal):
 
                     data = {
                         "circuits": [],
-                        # "provider": provider,
                         "account": account,
                         "maintenance_id": maintenance_id,
                         "status": Status("CONFIRMED"),
@@ -70,8 +61,6 @@ class ICalParserColt1(ICal):
                         "end": round(component.get("DTEND").dt.timestamp()),
                         "stamp": round(component.get("DTSTAMP").dt.timestamp()),
                         "summary": str(component.get("SUMMARY")),
-                        # "organizer": organizer,
-                        # "uid": str(component.get("UID")),
                         "sequence": int(component.get("SEQUENCE")),
                     }
                     result.append(data)
