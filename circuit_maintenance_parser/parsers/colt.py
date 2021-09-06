@@ -9,7 +9,7 @@ import base64
 from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.parser import Csv
-from circuit_maintenance_parser.errors import ParserError, MissingMandatoryFields
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
 from circuit_maintenance_parser.parser import ICal
 
