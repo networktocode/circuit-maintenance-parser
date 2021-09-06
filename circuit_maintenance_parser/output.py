@@ -6,7 +6,7 @@ See: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-0
 import json
 from enum import Enum
 
-from typing import List, Optional
+from typing import List
 
 from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra
 
@@ -99,10 +99,10 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         status: defines the overall status or confirmation for the maintenance
         start: timestamp that defines the start date of the maintenance in GMT
         end: timestamp that defines the end date of the maintenance in GMT
+        stamp: timestamp that defines the update date of the maintenance in GMT
         organizer: defines the contact information included in the original notification
 
     Optional attributes:
-        stamp: timestamp that defines the update date of the maintenance in GMT
         summary: description of the maintenace notification
         uid: specific unique identifier for each notification
         sequence: sequence number - initially zero - to serialize updates in case they are received or processed out of
@@ -123,7 +123,7 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         ...     summary="This is a maintenance notification",
         ...     uid="1111",
         ... )
-        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], status=<Status.COMPLETED: 'COMPLETED'>, start=1533704400, end=1533712380, organizer='myemail@example.com', stamp=1533595768, uid='1111', sequence=1, summary='This is a maintenance notification')
+        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], status=<Status.COMPLETED: 'COMPLETED'>, start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='1111', sequence=1, summary='This is a maintenance notification')
     """
 
     provider: StrictStr
@@ -133,11 +133,10 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     status: Status
     start: StrictInt
     end: StrictInt
+    stamp: StrictInt
     organizer: StrictStr
 
     # Non mandatory attributes
-
-    stamp: Optional[StrictInt] = None
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
