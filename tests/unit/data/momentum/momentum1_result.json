@@ -12,7 +12,7 @@
         "organizer": "maintenance@momentumtelecom.com",
         "provider": "momentum",
         "sequence": 1,
-        "stamp": null,
+        "stamp": 1629131454,
         "start": 1628933400,
         "status": "CONFIRMED",
         "summary": "Remove the attenuations identified in this circuit.",

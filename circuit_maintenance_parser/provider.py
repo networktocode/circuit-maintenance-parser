@@ -149,7 +149,7 @@ class Momentum(GenericProvider):
     """Momentum provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        CombinedProcessor(data_parsers=[HtmlParserMomentum1, SubjectParserMomentum1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserMomentum1, SubjectParserMomentum1]),
     ]
     _default_organizer = "maintenance@momentumtelecom.com"
 

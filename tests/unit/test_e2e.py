@@ -112,9 +112,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         # Momentum
         (
             Momentum,
-            "email",
-            Path(dir_path, "data", "momentum", "momentum1.eml"),
-            Path(dir_path, "data", "momentum", "momentum1_result.json"),
+            [("email", Path(dir_path, "data", "momentum", "momentum1.eml")),],
+            [Path(dir_path, "data", "momentum", "momentum1_result.json"),],
         ),
         # NTT
         (
