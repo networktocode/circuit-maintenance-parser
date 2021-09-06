@@ -128,6 +128,11 @@ class Html(Parser):
 
     _data_types = ["text/html", "html"]
 
+    @staticmethod
+    def remove_hex_characters(string):
+        """Convert any hex characters to standard ascii."""
+        return string.encode("ascii", errors="ignore").decode("utf-8")
+
     def parse(self, raw: bytes) -> List[Dict]:
         """Execute parsing."""
         result = []
@@ -161,3 +166,32 @@ class Html(Parser):
             line = line.strip()
         # TODO: below may not be needed if we use `quopri.decodestring()` on the initial email file?
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
+
+
+class EmailSubjectParser(Parser):
+    """Parse data from subject or email."""
+
+    _data_types = ["email-header-subject"]
+
+    def parse(self, raw: bytes) -> List[Dict]:
+        """Execute parsing."""
+        result = []
+
+        try:
+            for data in self.parse_subject(self.bytes_to_string(raw)):
+                result.append(data)
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
+
+            return result
+
+        except Exception as exc:
+            raise ParserError from exc
+
+    def parse_subject(self, subject: ResultSet) -> List[Dict]:
+        """Custom subject parsing."""
+        raise NotImplementedError
+
+    @staticmethod
+    def bytes_to_string(string):
+        """Convert bytes variable to a string."""
+        return string.decode("utf-8")
