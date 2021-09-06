@@ -13,7 +13,7 @@
   - New `NotificationData` class that enables easier data injection for simple and complex data objects, such as
     emails.
   - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
-- #60 - Added new provider `Seaborn` using `Html` and `EmailSubjectParser`
+- #60 - Added new provider `Seaborn` using `Html` and a new parser for Email Subject: `EmailSubjectParser`
 
 ### Fixed
 
