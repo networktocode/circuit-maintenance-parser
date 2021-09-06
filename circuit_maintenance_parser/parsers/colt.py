@@ -6,7 +6,6 @@ import csv
 import io
 import base64
 
-from pydantic import ValidationError
 from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.parser import Csv
@@ -64,7 +63,6 @@ class ICalParserColt1(ICal):
                         "sequence": int(component.get("SEQUENCE")),
                     }
                     result.append(data)
-
 
         except Exception as exc:
             raise ParserError from exc
