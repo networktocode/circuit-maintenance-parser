@@ -5,6 +5,7 @@ import calendar
 import datetime
 import quopri
 from typing import Iterable, Union, Dict, List
+from email.utils import parsedate_tz, mktime_tz
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -168,6 +169,24 @@ class Html(Parser):
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
 
 
+class EmailDateParser(Parser):
+    """Parser for Email Date."""
+
+    _data_types = ["email-header-date"]
+
+    def parse(self, raw: bytes) -> List[Dict]:
+        """Method that returns a list of Maintenance objects."""
+        try:
+            parsed_date = parsedate_tz(raw.decode())
+            if parsed_date:
+                result = [{"stamp": mktime_tz(parsed_date)}]
+                logger.debug("Successful parsing for %s", self.__class__.__name__)
+                return result
+            raise ParserError("Not parsed_date available.")
+        except Exception as exc:
+            raise ParserError from exc
+
+
 class EmailSubjectParser(Parser):
     """Parse data from subject or email."""
 
@@ -187,7 +206,7 @@ class EmailSubjectParser(Parser):
         except Exception as exc:
             raise ParserError from exc
 
-    def parse_subject(self, subject: ResultSet) -> List[Dict]:
+    def parse_subject(self, subject: str) -> List[Dict]:
         """Custom subject parsing."""
         raise NotImplementedError
 
