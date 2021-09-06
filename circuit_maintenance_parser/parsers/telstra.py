@@ -5,7 +5,7 @@ from typing import Dict, List
 from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-branches
@@ -26,7 +26,7 @@ class HtmlParserTelstra1(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse Table tag."""

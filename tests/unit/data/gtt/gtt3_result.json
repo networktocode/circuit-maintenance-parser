@@ -1,0 +1,15 @@
+[
+    {
+        "account": "SOF-IST 10G Long Rt",
+        "circuits": [
+            {
+                "circuit_id": "1111111-5555555",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1,
+        "maintenance_id": "6048019",
+        "start": 0,
+        "status": "CANCELLED"
+    }
+]

@@ -6,7 +6,7 @@ from datetime import datetime
 from pytz import timezone, UTC
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParsingError
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 from circuit_maintenance_parser.utils import city_timezone
 
@@ -27,7 +27,7 @@ class HtmlParserCogent1(Html):
             return [data]
 
         except Exception as exc:
-            raise ParsingError from exc
+            raise ParserError from exc
 
     def parse_div(self, divs: ResultSet, data: Dict):  # pylint: disable=too-many-locals
         """Parse <div> tag."""
