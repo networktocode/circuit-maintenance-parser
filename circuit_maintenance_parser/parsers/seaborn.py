@@ -7,7 +7,7 @@ from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, Subject
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, EmailSubjectParser
 
 # pylint: disable=too-many-branches
 
@@ -15,11 +15,27 @@ from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Statu
 logger = logging.getLogger(__name__)
 
 
-class SubjectParserSeaborn1(Subject):
-    """PArser for Seaborn subject string."""
+class SubjectParserSeaborn1(EmailSubjectParser):
+    """Parser for Seaborn subject string, email type 1."""
 
-    def parse_subject(self, subject, data_base):
-        data = data_base.copy()
+    def parse_subject(self, subject):
+        data = {}
+        try:
+            search = re.search(r".+\[(.+)\].([0-9]+).+", subject)
+            if search:
+                data["account"] = search.group(1)
+                data["maintenance_id"] = search.group(2)
+            return [data]
+
+        except Exception as exc:
+            raise ParserError from exc
+
+
+class SubjectParserSeaborn2(EmailSubjectParser):
+    """Parser for Seaborn subject string, email type 2."""
+
+    def parse_subject(self, subject):
+        data = {}
         try:
             search = re.search(r".+\[## ([0-9]+) ##\].+", subject)
             if search:
@@ -44,17 +60,12 @@ class HtmlParserSeaborn1(Html):
             raise ParserError from exc
 
     def parse_body(self, body, data):
+        data["circuits"] = []
         p_elements = body.find_all("p")
 
         for index, element in enumerate(p_elements):
-            if "NOTIFICATION TYPE" in element.text:
-                pass
-            elif "DESCRIPTION" in element.text:
-                pass
-            elif "SERVICE IMPACT" in element.text:
-                pass
-            elif "LOCATION" in element.text:
-                pass
+            if "DESCRIPTION" in element.text:
+                data["summary"] = element.text.split(":")[1].strip()
             elif "SCHEDULE" in element.text:
                 schedule = p_elements[index + 1].text
                 start, end = schedule.split(" - ")
@@ -63,7 +74,7 @@ class HtmlParserSeaborn1(Html):
                 data["status"] = Status("CONFIRMED")
             elif "AFFECTED CIRCUIT" in element.text:
                 circuit_id = element.text.split(": ")[1]
-                data["circuits"] = [(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))]
+                data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))
 
 
 class HtmlParserSeaborn2(Html):
@@ -80,6 +91,7 @@ class HtmlParserSeaborn2(Html):
             raise ParserError from exc
 
     def parse_body(self, body, data):
+        data["circuits"] = []
         div_elements = body.find_all("div")
         for element in div_elements:
             if "Be advised" in element.text:
@@ -88,7 +100,7 @@ class HtmlParserSeaborn2(Html):
                 elif "been scheduled" in element.text:
                     data["status"] = Status["CONFIRMED"]
             elif "Description" in element.text:
-                pass
+                data["summary"] = element.text.split(":")[1].strip()
             elif "Seaborn Ticket" in element.text:
                 data["maintenance_id"] = element.text.split(":")[1]
             elif "Start date" in element.text:
@@ -99,4 +111,4 @@ class HtmlParserSeaborn2(Html):
                 data["end"] = self.dt2ts(parser.parse(end))
             elif "Circuit impacted" in element.text:
                 circuit_id = self.remove_hex_characters(element.text).split(":")[1]
-                data["circuits"] = [(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))]
+                data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id))

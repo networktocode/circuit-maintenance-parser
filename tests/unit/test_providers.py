@@ -15,6 +15,7 @@ from circuit_maintenance_parser.provider import (
     Megaport,
     NTT,
     PacketFabric,
+    Seaborn,
     Telia,
     Telstra,
     Turkcell,
@@ -40,7 +41,21 @@ def test_provide_get_maintenances(provider_class):
 
 @pytest.mark.parametrize(
     "provider_class",
-    [GenericProvider, Cogent, EUNetworks, Lumen, Megaport, NTT, PacketFabric, Telia, Telstra, Turkcell, Verizon, Zayo,],
+    [
+        GenericProvider,
+        Cogent,
+        EUNetworks,
+        Lumen,
+        Megaport,
+        NTT,
+        PacketFabric,
+        Seaborn,
+        Telia,
+        Telstra,
+        Turkcell,
+        Verizon,
+        Zayo,
+    ],
 )
 def test_provide_get_maintenances_one_exception(provider_class):
     """Tests GenericProvider."""

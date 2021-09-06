@@ -3,7 +3,7 @@
         "account": "99999",
         "circuits": [
             {
-                "circuit_id": "A-AAAAA-AAAAA-AAA1-00000-00",
+                "circuit_id": "AAA-AAAAA-AAAAA-AAAA-0000-00",
                 "impact": "OUTAGE"
             }
         ],

@@ -129,6 +129,7 @@ class Html(Parser):
     _data_types = ["text/html", "html"]
 
     def remove_hex_characters(self, string):
+        """Convert any hex characters to standard ascii."""
         return string.encode("ascii", errors="ignore").decode("utf-8")
 
     def parse(self, raw: bytes) -> List[Dict]:
@@ -166,7 +167,7 @@ class Html(Parser):
         return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
 
 
-class Subject(Parser):
+class EmailSubjectParser(Parser):
     """Parse data from subject or email."""
 
     _data_types = ["email-header-subject"]
@@ -175,9 +176,8 @@ class Subject(Parser):
         """Execute parsing."""
         result = []
 
-        data_base: Dict[str, Union[int, str, Iterable]] = {}
         try:
-            for data in self.parse_subject(self.bytes_to_string(subject), data_base):
+            for data in self.parse_subject(self.bytes_to_string(subject)):
                 result.append(data)
             logger.debug("Successful parsing for %s", self.__class__.__name__)
 
@@ -192,4 +192,5 @@ class Subject(Parser):
 
     @staticmethod
     def bytes_to_string(string):
+        """Convert bytes variable to a string."""
         return string.decode("utf-8")

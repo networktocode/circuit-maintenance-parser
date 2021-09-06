@@ -91,6 +91,18 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Path(dir_path, "data", "seaborn", "seaborn1.eml"),
             Path(dir_path, "data", "seaborn", "seaborn1_result.json"),
         ),
+        (
+            Seaborn,
+            "email",
+            Path(dir_path, "data", "seaborn", "seaborn2.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn2_result.json"),
+        ),
+        (
+            Seaborn,
+            "email",
+            Path(dir_path, "data", "seaborn", "seaborn3.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn3_result.json"),
+        ),
         # Telia
         (
             Telia,
@@ -175,10 +187,8 @@ def test_provider_get_maintenances(provider_class, data_type, data_file, result_
     with open(data_file, "rb") as file_obj:
         if data_type in ["ical", "html"]:
             data = NotificationData.init(data_type, file_obj.read())
-        elif data_type == "email":
-            with open(data_file) as email_file:
-                msg = email.message_from_file(email_file)
-            data = NotificationData.init_from_emailmessage(msg)
+        elif data_type in ["email"]:
+            data = NotificationData.init_from_email_bytes(file_obj.read())
 
     parsed_notifications = provider_class().get_maintenances(data)
     notifications_json = []
@@ -317,7 +327,8 @@ def test_errored_provider_process(provider_class, data_type, data_file, exceptio
     with open(data_file, "rb") as file_obj:
         if data_type in ["ical", "html"]:
             data = NotificationData.init(data_type, file_obj.read())
-        # TODO: Add EML testing
+        elif data_type in ["email"]:
+            data = NotificationData.init_from_email_bytes(file_obj.read())
 
     with pytest.raises(exception) as exc:
         provider_class().get_maintenances(data)

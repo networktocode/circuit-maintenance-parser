@@ -18,7 +18,12 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
-from circuit_maintenance_parser.parsers.seaborn import HtmlParserSeaborn1, HtmlParserSeaborn2, SubjectParserSeaborn1
+from circuit_maintenance_parser.parsers.seaborn import (
+    HtmlParserSeaborn1,
+    HtmlParserSeaborn2,
+    SubjectParserSeaborn1,
+    SubjectParserSeaborn2,
+)
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -152,11 +157,11 @@ class PacketFabric(GenericProvider):
 
 
 class Seaborn(GenericProvider):
-    """Turkcell provider custom class."""
+    """Seaborn provider custom class."""
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[HtmlParserSeaborn1, SubjectParserSeaborn1]),
-        CombinedProcessor(data_parsers=[HtmlParserSeaborn2, SubjectParserSeaborn1]),
+        CombinedProcessor(data_parsers=[HtmlParserSeaborn2, SubjectParserSeaborn2]),
     ]
     _default_organizer = "inoc@superonline.net"
 
