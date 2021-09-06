@@ -14,6 +14,7 @@
     emails.
   - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
 - #60 - Added new provider `Seaborn` using `Html` and a new parser for Email Subject: `EmailSubjectParser`
+- #66 - Added new provider `Momentum` using `Html` and `EmailSubjectParser`
 
 ### Fixed
 
