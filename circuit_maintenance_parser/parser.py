@@ -129,6 +129,11 @@ class Html(Parser):
 
     _data_types = ["text/html", "html"]
 
+    @staticmethod
+    def remove_hex_characters(string):
+        """Convert any hex characters to standard ascii."""
+        return string.encode("ascii", errors="ignore").decode("utf-8")
+
     def parse(self, raw: bytes) -> List[Dict]:
         """Execute parsing."""
         result = []
@@ -180,3 +185,32 @@ class EmailDateParser(Parser):
             raise ParserError("Not parsed_date available.")
         except Exception as exc:
             raise ParserError from exc
+
+
+class EmailSubjectParser(Parser):
+    """Parse data from subject or email."""
+
+    _data_types = ["email-header-subject"]
+
+    def parse(self, raw: bytes) -> List[Dict]:
+        """Execute parsing."""
+        result = []
+
+        try:
+            for data in self.parse_subject(self.bytes_to_string(raw)):
+                result.append(data)
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
+
+            return result
+
+        except Exception as exc:
+            raise ParserError from exc
+
+    def parse_subject(self, subject: str) -> List[Dict]:
+        """Custom subject parsing."""
+        raise NotImplementedError
+
+    @staticmethod
+    def bytes_to_string(string):
+        """Convert bytes variable to a string."""
+        return string.decode("utf-8")

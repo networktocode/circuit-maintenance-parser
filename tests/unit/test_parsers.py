@@ -10,6 +10,12 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.seaborn import (
+    HtmlParserSeaborn1,
+    HtmlParserSeaborn2,
+    SubjectParserSeaborn1,
+    SubjectParserSeaborn2,
+)
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -84,6 +90,27 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ),
         # NTT
         (ICal, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        # Seaborn
+        (
+            HtmlParserSeaborn1,
+            Path(dir_path, "data", "seaborn", "seaborn3.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn3_html_parser_result.json"),
+        ),
+        (
+            HtmlParserSeaborn2,
+            Path(dir_path, "data", "seaborn", "seaborn2.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn2_html_parser_result.json"),
+        ),
+        (
+            SubjectParserSeaborn1,
+            Path(dir_path, "data", "seaborn", "seaborn3.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn3_subject_parser_result.json"),
+        ),
+        (
+            SubjectParserSeaborn2,
+            Path(dir_path, "data", "seaborn", "seaborn2.eml"),
+            Path(dir_path, "data", "seaborn", "seaborn2_subject_parser_result.json"),
+        ),
         # Telstra
         (
             HtmlParserTelstra1,

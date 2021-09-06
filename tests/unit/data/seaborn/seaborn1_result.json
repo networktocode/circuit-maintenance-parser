@@ -1,0 +1,21 @@
+[
+    {
+        "account": "99999",
+        "circuits": [
+            {
+                "circuit_id": "A-AAAAA-AAAAA-AAA1-00000-00",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628766000,
+        "maintenance_id": "7777",
+        "organizer": "inoc@superonline.net",
+        "provider": "seaborn",
+        "sequence": 1,
+        "stamp": 1629131396,
+        "start": 1628733600,
+        "status": "RE-SCHEDULED",
+        "summary": "An emergency work will be carried out to relocate fiber cable due to civil works in the zone.",
+        "uid": "0"
+    }
+]
