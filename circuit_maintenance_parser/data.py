@@ -35,17 +35,31 @@ class NotificationData(BaseModel, extra=Extra.forbid):
         return cls.init_from_emailmessage(email_message)
 
     @classmethod
+    def walk_email(cls, email_message, data_parts):
+        """Recursive walk_email using Set to not duplicate data entries."""
+        for part in email_message.walk():
+            if "image" in part.get_content_type():
+                # Not interested in parsing images/QRs yet
+                continue
+
+            if "multipart" in part.get_content_type():
+                for inner_part in part.get_payload():
+                    if isinstance(inner_part, email.message.Message):
+                        cls.walk_email(inner_part, data_parts)
+            elif "message/rfc822" in part.get_content_type():
+                if isinstance(part.get_payload(), email.message.Message):
+                    cls.walk_email(part.get_payload(), data_parts)
+            else:
+                data_parts.add(DataPart(part.get_content_type(), part.get_payload(decode=True)))
+
+    @classmethod
     def init_from_emailmessage(cls, email_message):
         """Initialize the data_parts from an email.message.Email object."""
-        data_parts = []
-        for part in email_message.walk():
-            if "multipart" in part.get_content_type():
-                continue
-            data_parts.append(DataPart(part.get_content_type(), part.get_payload().encode()))
+        data_parts = set()
+        cls.walk_email(email_message, data_parts)
 
         # Adding extra headers that are interesting to be parsed
-        data_parts.append(DataPart("email-header-subject", email_message["Subject"].encode()))
+        data_parts.add(DataPart("email-header-subject", email_message["Subject"].encode()))
         # TODO: Date could be used to extend the "Stamp" time of a notification when not available, but we need a parser
-        data_parts.append(DataPart("email-header-date", email_message["Date"].encode()))
-
-        return cls(data_parts=data_parts)
+        data_parts.add(DataPart("email-header-date", email_message["Date"].encode()))
+        return cls(data_parts=list(data_parts))

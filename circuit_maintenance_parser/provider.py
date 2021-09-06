@@ -10,15 +10,21 @@ from circuit_maintenance_parser.utils import rgetattr
 
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import ICal
+from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
-from circuit_maintenance_parser.processor import SimpleProcessor, GenericProcessor, CombinedProcessor
+from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
+from circuit_maintenance_parser.parsers.seaborn import (
+    HtmlParserSeaborn1,
+    HtmlParserSeaborn2,
+    SubjectParserSeaborn1,
+    SubjectParserSeaborn2,
+)
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -101,7 +107,7 @@ class Cogent(GenericProvider):
     """Cogent provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserCogent1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserCogent1]),
     ]
     _default_organizer = "support@cogentco.com"
 
@@ -125,7 +131,7 @@ class GTT(GenericProvider):
     """GTT provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserGTT1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
     ]
     _default_organizer = "InfraCo.CM@gttcorp.org"
 
@@ -134,7 +140,7 @@ class Lumen(GenericProvider):
     """Lumen provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserLumen1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserLumen1]),
     ]
     _default_organizer = "smc@lumen.com"
 
@@ -143,7 +149,7 @@ class Megaport(GenericProvider):
     """Megaport provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserMegaport1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserMegaport1]),
     ]
     _default_organizer = "support@megaport.com"
 
@@ -160,6 +166,16 @@ class PacketFabric(GenericProvider):
     _default_organizer = "support@packetfabric.com"
 
 
+class Seaborn(GenericProvider):
+    """Seaborn provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserSeaborn1, SubjectParserSeaborn1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserSeaborn2, SubjectParserSeaborn2]),
+    ]
+    _default_organizer = "inoc@superonline.net"
+
+
 class Telia(GenericProvider):
     """Telia provider custom class."""
 
@@ -171,7 +187,7 @@ class Telstra(GenericProvider):
 
     _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[ICal]),
-        SimpleProcessor(data_parsers=[HtmlParserTelstra1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTelstra1]),
     ]
     _default_organizer = "gpen@team.telstra.com"
 
@@ -180,7 +196,7 @@ class Turkcell(GenericProvider):
     """Turkcell provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserTurkcell1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTurkcell1]),
     ]
     _default_organizer = "inoc@superonline.net"
 
@@ -189,7 +205,7 @@ class Verizon(GenericProvider):
     """Verizon provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserVerizon1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserVerizon1]),
     ]
     _default_organizer = "NO-REPLY-sched-maint@EMEA.verizonbusiness.com"
 
