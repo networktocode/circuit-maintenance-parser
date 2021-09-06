@@ -14,7 +14,11 @@ logger = logging.getLogger(__name__)
 
 
 class SubjectParserSeaborn1(EmailSubjectParser):
-    """Parser for Seaborn subject string, email type 1."""
+    """Parser for Seaborn subject string, email type 1.
+
+    Subject: [{ACOUNT NAME}] {MAINTENACE ID} {DATE}
+             [Customer Direct] 1111 08/14
+    """
 
     def parse_subject(self, subject):
         """Parse subject of email file."""
@@ -31,7 +35,11 @@ class SubjectParserSeaborn1(EmailSubjectParser):
 
 
 class SubjectParserSeaborn2(EmailSubjectParser):
-    """Parser for Seaborn subject string, email type 2."""
+    """Parser for Seaborn subject string, email type 2.
+
+    Subject: [## {ACCOUNT NUMBER} ##] Emergency Maintenance Notification CID: {CIRCUIT} TT#{MAINTENACE ID}
+             [## 11111 ##] Emergency Maintenance Notification CID: AAA-AAAAA-AAAAA-AAA1-1111-11 TT#1111
+    """
 
     def parse_subject(self, subject):
         """Parse subject of email file."""
@@ -47,7 +55,15 @@ class SubjectParserSeaborn2(EmailSubjectParser):
 
 
 class HtmlParserSeaborn1(Html):
-    """Notifications Parser for Seaborn notifications."""
+    """Notifications Parser for Seaborn notifications.
+
+    <div>
+        <p>DESCRIPTION: This is a maintenance notification.</p>
+        <p>SERVICE IMPACT: 05 MINUTE OUTAGE</p>
+        <p>LOCATION: London</p>
+        ...
+    </div>
+    """
 
     def parse_html(self, soup, data_base):
         """Execute parsing."""
@@ -79,7 +95,15 @@ class HtmlParserSeaborn1(Html):
 
 
 class HtmlParserSeaborn2(Html):
-    """Notifications Parser for Seaborn notifications."""
+    """Notifications Parser for Seaborn notifications.
+
+    <div>
+        <div>DESCRIPTION: This is a maintenance notification.</div>
+        <div>SERVICE IMPACT: 05 MINUTE OUTAGE</div>
+        <div>LOCATION: London</div>
+        ...
+    </div>
+    """
 
     def parse_html(self, soup, data_base):
         """Execute parsing."""
