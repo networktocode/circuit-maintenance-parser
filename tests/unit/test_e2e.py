@@ -1,5 +1,4 @@
 """Tests for End to End library usage."""
-import email
 import json
 import os
 from pathlib import Path
