@@ -1,0 +1,14 @@
+[
+    {
+        "account": "Customer Inc",
+        "circuits": [
+            {
+                "circuit_id": "C00001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628938800,
+        "start": 1628933400,
+        "summary": "Remove the attenuations identified in this circuit."
+    }
+]

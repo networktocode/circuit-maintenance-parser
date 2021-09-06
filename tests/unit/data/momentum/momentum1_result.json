@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Customer Inc",
+        "circuits": [
+            {
+                "circuit_id": "C00001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628938800,
+        "maintenance_id": "11111111",
+        "organizer": "maintenance@momentumtelecom.com",
+        "provider": "momentum",
+        "sequence": 1,
+        "stamp": null,
+        "start": 1628933400,
+        "status": "CONFIRMED",
+        "summary": "Remove the attenuations identified in this circuit.",
+        "uid": "0"
+    }
+]

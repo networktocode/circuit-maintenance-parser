@@ -17,6 +17,7 @@ from circuit_maintenance_parser.provider import (
     Lumen,
     Megaport,
     NTT,
+    Momentum,
     PacketFabric,
     Seaborn,
     Telia,
@@ -77,6 +78,13 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             "html",
             Path(dir_path, "data", "megaport", "megaport2.html"),
             Path(dir_path, "data", "megaport", "megaport2_result.json"),
+        ),
+        # Momentum
+        (
+            Momentum,
+            "email",
+            Path(dir_path, "data", "momentum", "momentum1.eml"),
+            Path(dir_path, "data", "momentum", "momentum1_result.json"),
         ),
         # NTT
         (NTT, "ical", Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
