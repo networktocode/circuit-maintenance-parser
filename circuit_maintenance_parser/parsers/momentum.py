@@ -1,6 +1,5 @@
 """Momentum parser."""
 import logging
-import re
 
 from dateutil import parser
 
@@ -17,7 +16,11 @@ class SubjectParserMomentum1(EmailSubjectParser):
     """Parser for Momentum subject string."""
 
     def parse_subject(self, subject):
-        """Parse subject of email file."""
+        """Parse subject of email file.
+
+        Example subject:
+            [notices] Momentum Data Services | Planned Network Maintenance , | Customer Inc | | 11111111 | [ ref:11111.11111:ref ]
+        """
         data = {}
         try:
             split = subject.split("|")
@@ -36,7 +39,20 @@ class SubjectParserMomentum1(EmailSubjectParser):
 
 
 class HtmlParserMomentum1(Html):
-    """Notifications Parser for Momentum notifications."""
+    """Notifications Parser for Momentum notifications.
+
+    <div>
+        <p>
+            <span><span><font>Account: Account Name</font></span></span>
+        </p>
+        <p>
+            <span><span><font>Maintenance start date/time: 2021-08-14 09:30 AM UTC</font></span></span>
+        </p>
+        <p>
+            <span><span><font>Maintenance finish date/time: 2021-08-14 11:30 AM UTC</font></span></span>
+        </p>
+    </div>
+    """
 
     def parse_html(self, soup, data_base):
         """Execute parsing."""
@@ -49,8 +65,9 @@ class HtmlParserMomentum1(Html):
             raise ParserError from exc
 
     def parse_body(self, p_elements, data):
+        """Parse HTML body."""
         for element in p_elements:
-            text = element.text.encode('ascii', errors='ignore').decode("utf-8")
+            text = element.text.encode("ascii", errors="ignore").decode("utf-8")
             for line in text.splitlines():
                 if "Account" in line:
                     data["account"] = line.split(": ")[1].strip()
