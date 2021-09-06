@@ -12,7 +12,7 @@
         "organizer": "inoc@superonline.net",
         "provider": "seaborn",
         "sequence": 1,
-        "stamp": null,
+        "stamp": 1629131347,
         "start": 1628827200,
         "status": "CONFIRMED",
         "summary": "A scheduled work will be carried out in order to perform OTDR measures.",
