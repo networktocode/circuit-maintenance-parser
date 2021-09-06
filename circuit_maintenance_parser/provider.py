@@ -4,7 +4,7 @@ import traceback
 
 from typing import Iterable, List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 from circuit_maintenance_parser.utils import rgetattr
 
@@ -27,7 +27,7 @@ from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
 logger = logging.getLogger(__name__)
 
 
-class GenericProvider(BaseModel):
+class GenericProvider(BaseModel, extra=Extra.forbid):
     """Base class for the Providers.
 
     This is the entry object to the library and it offers the `get_maintenances` method to process notifications.

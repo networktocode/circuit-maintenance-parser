@@ -1,5 +1,6 @@
 """Notifications parser init."""
 from typing import Type, Optional, Dict
+from pydantic.error_wrappers import ValidationError
 
 from .data import NotificationData
 from .errors import NonexistentProviderError
@@ -49,7 +50,7 @@ def init_provider(  # pylint: disable=dangerous-default-value
         provider_parser_class = get_provider_class(provider_type)
         return provider_parser_class(**default_data)
 
-    except NonexistentProviderError:
+    except (NonexistentProviderError, ValidationError):
         return None
 
 

@@ -13,6 +13,7 @@
   - New `NotificationData` class that enables easier data injection for simple and complex data objects, such as
     emails.
   - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
+- #63 - Enable library client to define default `provider_type` and `organizer` to be used to create `Maintenances`.
 
 ### Fixed
 

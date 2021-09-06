@@ -59,19 +59,23 @@ def test_init_data_emailmessage():
 @pytest.mark.parametrize(
     "provider_type, result_type, extended_data",
     [
-        ("wrong", None),
-        ("", GenericProvider),
-        ("ntt", NTT),
-        ("packetfabric", PacketFabric),
-        ("eunetworks", EUNetworks),
-        ("zayo", Zayo),
+        ("wrong", None, {}),
+        ("", GenericProvider, {"provider_type": "a"}),
+        ("ntt", NTT, {"organizer": "a"}),
+        ("packetfabric", PacketFabric, {"provider_type": "a", "organizer": "a"}),
+        ("eunetworks", EUNetworks, {}),
+        ("zayo", None, {"non supported attribute": 1}),
     ],
 )
-def test_init_provider(provider_type, result_type):
+def test_init_provider(provider_type, result_type, extended_data):
     """Tests for init_provider."""
-    provider = init_provider(provider_type=provider_type)
+    provider = init_provider(provider_type=provider_type, default_data=extended_data)
     if result_type:
         assert isinstance(provider, result_type)
+        if "provider_type" in extended_data:
+            assert provider.provider_type == extended_data["provider_type"]
+        if "organizer" in extended_data:
+            assert provider.organizer == extended_data["organizer"]
     else:
         assert provider is None
 
