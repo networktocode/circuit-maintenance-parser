@@ -65,8 +65,6 @@ class ICalParserColt1(ICal):
                     }
                     result.append(data)
 
-        except ValidationError as exc:
-            raise MissingMandatoryFields from exc
 
         except Exception as exc:
             raise ParserError from exc
