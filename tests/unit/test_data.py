@@ -24,7 +24,7 @@ def test_init_from_email_bytes():
         email_raw_data = email_file.read()
     data = NotificationData.init_from_email_bytes(email_raw_data)
     assert isinstance(data, NotificationData)
-    assert len(data.data_parts) == 7
+    assert len(data.data_parts) == 5
 
 
 def test_init_from_emailmessage():
@@ -35,4 +35,4 @@ def test_init_from_emailmessage():
     email_message = email.message_from_string(raw_email_string)
     data = NotificationData.init_from_emailmessage(email_message)
     assert isinstance(data, NotificationData)
-    assert len(data.data_parts) == 7
+    assert len(data.data_parts) == 5
