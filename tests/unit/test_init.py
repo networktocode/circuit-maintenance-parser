@@ -42,7 +42,7 @@ def test_init_data_email():
         email_raw_data = email_file.read()
     data = init_data_email(email_raw_data)
     assert isinstance(data, NotificationData)
-    assert len(data.data_parts) == 7
+    assert len(data.data_parts) == 5
 
 
 def test_init_data_emailmessage():
@@ -53,7 +53,7 @@ def test_init_data_emailmessage():
     email_message = email.message_from_string(raw_email_string)
     data = init_data_emailmessage(email_message)
     assert isinstance(data, NotificationData)
-    assert len(data.data_parts) == 7
+    assert len(data.data_parts) == 5
 
 
 @pytest.mark.parametrize(
