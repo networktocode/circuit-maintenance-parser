@@ -23,7 +23,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ("start", None, ValidationError),
         ("start", "1533704400", ValidationError),
         ("start", 1533704400, None),
-        ("stamp", None, None),
+        ("stamp", None, ValidationError),
         ("stamp", "1533712380", ValidationError),
         ("stamp", 1533712380, None),
         ("maintenance_id", None, ValidationError),
