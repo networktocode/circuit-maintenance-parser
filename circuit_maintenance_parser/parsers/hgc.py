@@ -4,7 +4,6 @@ import re
 
 from dateutil import parser
 
-from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import EmailSubjectParser, Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-branches
@@ -34,15 +33,14 @@ class SubjectParserHGC1(EmailSubjectParser):
 
 
 class HtmlParserHGC1(Html):
-    """HGC HTML parser."""
+    """HGC HTML 1 parser."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
+        data = {}
         self.parse_table(soup.find_all("table"), data)
         data["status"] = Status.CONFIRMED
         return [data]
-
 
     def parse_table(self, tables, data):
         """Parse HTML tables.
@@ -84,11 +82,11 @@ class HtmlParserHGC1(Html):
 
 
 class HtmlParserHGC2(Html):
-    """HGC HTML parser."""
+    """HGC HTML 2 parser."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
+        data = {}
         self.parse_body(soup.find_all("span"), data)
         data["status"] = Status.CONFIRMED
         return [data]
