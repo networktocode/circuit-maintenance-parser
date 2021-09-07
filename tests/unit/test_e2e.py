@@ -13,6 +13,7 @@ from circuit_maintenance_parser.errors import ProviderError
 from circuit_maintenance_parser.provider import (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     Lumen,
     Megaport,
@@ -60,6 +61,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "cogent", "cogent2_result.json"),
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
+        ),
+        # Colt
+        (
+            Colt,
+            [("email", Path(dir_path, "data", "colt", "colt3.eml")),],
+            [Path(dir_path, "data", "colt", "colt3_result.json"),],
         ),
         # EUNetworks
         (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),

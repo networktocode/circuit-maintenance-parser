@@ -7,6 +7,7 @@ from .errors import NonexistentProviderError
 from .provider import (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     GTT,
     Lumen,
@@ -25,6 +26,7 @@ from .provider import (
 SUPPORTED_PROVIDERS = (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     GTT,
     Lumen,

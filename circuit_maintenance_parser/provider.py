@@ -15,6 +15,7 @@ from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
+from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
@@ -110,6 +111,15 @@ class Cogent(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserCogent1]),
     ]
     _default_organizer = "support@cogentco.com"
+
+
+class Colt(GenericProvider):
+    """Cogent provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[ICalParserColt1, CsvParserColt1]),
+    ]
+    _default_organizer = "PlannedWorks@colt.net"
 
 
 class EUNetworks(GenericProvider):

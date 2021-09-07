@@ -44,6 +44,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 #### Supported providers based on other parsers
 
 - Cogent
+- Colt
 - GTT
 - Lumen
 - Megaport
