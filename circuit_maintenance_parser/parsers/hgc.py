@@ -17,7 +17,12 @@ class SubjectParserHGC1(EmailSubjectParser):
     """HGC subject parser."""
 
     def parse_subject(self, subject):
-        """Parse HGC subject string."""
+        """Parse HGC subject string.
+
+        Examples:
+            HGC Maintenance Work Notification - Network to Code _ CIR0000001 (TIC00000000000001)
+            HGC Maintenance Work Notification - Network to Code | CIR0000001 | TIC00000000000001
+        """
         data = {}
         try:
             search = re.search(r"^.+\((.+)\)", subject.replace("\n", ""))
