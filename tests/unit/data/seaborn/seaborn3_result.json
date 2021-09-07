@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Customer Direct",
+        "circuits": [
+            {
+                "circuit_id": "AAA-AAAAA-AAAAA-AAA0-0000-00",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628852400,
+        "maintenance_id": "7777",
+        "organizer": "inoc@superonline.net",
+        "provider": "seaborn",
+        "sequence": 1,
+        "stamp": 1629131347,
+        "start": 1628827200,
+        "status": "CONFIRMED",
+        "summary": "A scheduled work will be carried out in order to perform OTDR measures.",
+        "uid": "0"
+    }
+]

@@ -44,9 +44,12 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 #### Supported providers based on other parsers
 
 - Cogent
+- Colt
 - GTT
 - Lumen
 - Megaport
+- Momentum
+- Seaborn
 - Telstra
 - Turkcell
 - Verizon
@@ -216,12 +219,11 @@ The project is following Network to Code software development guidelines and is 
 
 ### How to add a new Circuit Maintenance provider?
 
-1. If your Provider requires a custom parser, within `circuit_maintenance_parser/parsers`, **add your new parser**, inheriting from generic
-   `Parser` class or custom ones such as `ICal` or `Html` and add a **unit test for the new provider parser**, with at least one test case under
-   `tests/unit/data`.
-2. Add new class in `providers.py` with the custom info, defining in `_parser_classes` the list of parsers that you will use, using the generic `ICal` and/or your custom parsers.
-3. **Expose the new parser class** updating the map `SUPPORTED_PROVIDERS` in
-   `circuit_maintenance_parser/__init__.py` to officially expose the parser.
+1. Define the `Parsers`(inheriting from some of the generic `Parsers` or a new one) that will extract the data from the notification, that could contain itself multiple `DataParts`. The `data_type` of the `Parser` and the `DataPart` have to match. The custom `Parsers` will be placed in the `parsers` folder.
+2. Update the `unit/test_parsers.py` with the new parsers, providing some data to test and validate the extracted data.
+3. Define a new `Provider` inheriting from the `GenericProvider`, defining the `Processors` and the respective `Parsers` to be used. Maybe you can reuse some of the generic `Processors` or maybe you will need to create a custom one. If this is the case, place it in the `processors` folder.
+4. Update the `unit/test_e2e.py` with the new provider, providing some data to test and validate the final `Maintenances` created.
+5. **Expose the new `Provider` class** updating the map `SUPPORTED_PROVIDERS` in `circuit_maintenance_parser/__init__.py` to officially expose the `Provider`.
 
 ## Questions
 
