@@ -4,7 +4,6 @@ import re
 
 from dateutil import parser
 
-from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, EmailSubjectParser
 
 # pylint: disable=too-many-branches
@@ -23,15 +22,11 @@ class SubjectParserSeaborn1(EmailSubjectParser):
     def parse_subject(self, subject):
         """Parse subject of email file."""
         data = {}
-        try:
-            search = re.search(r".+\[(.+)\].([0-9]+).+", subject)
-            if search:
-                data["account"] = search.group(1)
-                data["maintenance_id"] = search.group(2)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        search = re.search(r".+\[(.+)\].([0-9]+).+", subject)
+        if search:
+            data["account"] = search.group(1)
+            data["maintenance_id"] = search.group(2)
+        return [data]
 
 
 class SubjectParserSeaborn2(EmailSubjectParser):
@@ -44,14 +39,10 @@ class SubjectParserSeaborn2(EmailSubjectParser):
     def parse_subject(self, subject):
         """Parse subject of email file."""
         data = {}
-        try:
-            search = re.search(r".+\[## ([0-9]+) ##\].+", subject)
-            if search:
-                data["account"] = search.group(1)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        search = re.search(r".+\[## ([0-9]+) ##\].+", subject)
+        if search:
+            data["account"] = search.group(1)
+        return [data]
 
 
 class HtmlParserSeaborn1(Html):
@@ -65,15 +56,11 @@ class HtmlParserSeaborn1(Html):
     </div>
     """
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_body(soup, data)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {}
+        self.parse_body(soup, data)
+        return [data]
 
     def parse_body(self, body, data):
         """Parse HTML body."""
@@ -105,15 +92,11 @@ class HtmlParserSeaborn2(Html):
     </div>
     """
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_body(soup, data)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {}
+        self.parse_body(soup, data)
+        return [data]
 
     def parse_body(self, body, data):
         """Parse HTML body."""

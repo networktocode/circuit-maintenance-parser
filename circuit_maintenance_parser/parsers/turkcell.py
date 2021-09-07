@@ -6,7 +6,6 @@ from typing import Dict
 from bs4.element import ResultSet  # type: ignore
 from dateutil import parser
 
-from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
@@ -17,15 +16,11 @@ logger = logging.getLogger(__name__)
 class HtmlParserTurkcell1(Html):
     """Notifications Parser for Turkcell notifications."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_tables(soup.find_all("table"), data)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {}
+        self.parse_tables(soup.find_all("table"), data)
+        return [data]
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse tables.

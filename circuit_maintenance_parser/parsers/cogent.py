@@ -6,7 +6,6 @@ from datetime import datetime
 from pytz import timezone, UTC
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 from circuit_maintenance_parser.utils import city_timezone
 
@@ -18,16 +17,12 @@ logger = logging.getLogger(__name__)
 class HtmlParserCogent1(Html):
     """Notifications Parser for Cogent notifications."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_div(soup.find_all("div", class_="a3s aiL"), data)
-            self.parse_title(soup.find_all("title"), data)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {}
+        self.parse_div(soup.find_all("div", class_="a3s aiL"), data)
+        self.parse_title(soup.find_all("title"), data)
+        return [data]
 
     def parse_div(self, divs: ResultSet, data: Dict):  # pylint: disable=too-many-locals
         """Parse <div> tag."""
