@@ -24,16 +24,13 @@ class SubjectParserHGC1(EmailSubjectParser):
             HGC Maintenance Work Notification - Network to Code | CIR0000001 | TIC00000000000001
         """
         data = {}
-        try:
-            search = re.search(r"^.+\((.+)\)", subject.replace("\n", ""))
-            if search:
-                data["maintenance_id"] = search.group(1)
-            else:
-                split = subject.split(" | ")
-                data["maintenance_id"] = split[2]
-            return [data]
-        except Exception as exc:
-            raise ParserError from exc
+        search = re.search(r"^.+\((.+)\)", subject.replace("\n", ""))
+        if search:
+            data["maintenance_id"] = search.group(1)
+        else:
+            split = subject.split(" | ")
+            data["maintenance_id"] = split[2]
+        return [data]
 
 
 class HtmlParserHGC1(Html):
