@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
@@ -198,3 +199,10 @@ def test_parsers(parser_class, raw_file, results_file):
         expected_result = json.load(res_file)
 
     assert parsed_notifications == expected_result
+
+
+@pytest.mark.parametrize("parser_class", [ICal, EmailDateParser, HtmlParserZayo1, SubjectParserSeaborn1])
+def test_parser_no_data(parser_class):
+    """Test parser with no data."""
+    with pytest.raises(ParserError):
+        parser_class().parse(b"")

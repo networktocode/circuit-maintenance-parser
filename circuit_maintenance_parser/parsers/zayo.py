@@ -82,4 +82,5 @@ class HtmlParserZayo1(Html):
                 if "hard down" in impact.lower():
                     data_circuit["impact"] = Impact("OUTAGE")
                     circuits.append(CircuitImpact(**data_circuit))
-        data["circuits"] = circuits
+        if circuits:
+            data["circuits"] = circuits
