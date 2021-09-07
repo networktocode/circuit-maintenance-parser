@@ -52,7 +52,8 @@ class Parser(BaseModel, extra=Extra.forbid):
     def parse(self, raw: bytes) -> List[Dict]:
         """Execute parsing.
 
-        Each main `Parser` class will implement its own custom logic within the `parser_hook` method.
+        Do not override this method!
+        Instead, each main `Parser` class should implement its own custom logic within the `parser_hook` method.
         """
         try:
             result = self.parser_hook(raw)
