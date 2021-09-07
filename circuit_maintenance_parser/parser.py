@@ -37,17 +37,28 @@ class Parser(BaseModel, extra=Extra.forbid):
         """Return the expected data type."""
         return cls._data_types
 
-    def parser_hook(self, raw: bytes):
-        """Custom parser logic."""
+    def parser_hook(self, raw: bytes) -> List[Dict]:
+        """Custom parser logic.
+
+        This method is used by the main `Parser` classes (such as `ICal` or `Html` parser) to define a shared
+        logic (prepare data to process or just define the logic to extract the data), and it will contain at some point
+        a call to the specific method that will be overwritten for each final customization from a `Provider`.
+        For instance, the `Html.parser_hook` method calls the `parse_html` method after initializing the
+        `bs4.BeautifulSoup` and this is the method that each specific parser will implement to finally extract the
+        desired data from the raw content.
+        """
         raise NotImplementedError
 
     def parse(self, raw: bytes) -> List[Dict]:
-        """Execute parsing."""
+        """Execute parsing.
+
+        Each main `Parser` class will implement its own custom logic within the `parser_hook` method.
+        """
         try:
             result = self.parser_hook(raw)
         except Exception as exc:
             raise ParserError from exc
-        if result == [{}]:
+        if any(not partial_result for partial_result in result):
             raise ParserError(
                 f"{self.__class__.__name__} has not extracted any valid data has been extracted from notification:"  # type: ignore
                 f"\n{raw}"  # type: ignore
