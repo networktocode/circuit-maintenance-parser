@@ -13,11 +13,13 @@ from circuit_maintenance_parser.errors import ProviderError
 from circuit_maintenance_parser.provider import (
     GenericProvider,
     Cogent,
+    Colt,
     EUNetworks,
     HGC,
     Lumen,
     Megaport,
     NTT,
+    Momentum,
     PacketFabric,
     Seaborn,
     Telia,
@@ -61,6 +63,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        # Colt
+        (
+            Colt,
+            [("email", Path(dir_path, "data", "colt", "colt3.eml")),],
+            [Path(dir_path, "data", "colt", "colt3_result.json"),],
+        ),
         # EUNetworks
         (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # HGC
@@ -95,6 +103,28 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        (
+            Lumen,
+            [
+                ("html", Path(dir_path, "data", "lumen", "lumen3.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "lumen", "lumen3_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Lumen,
+            [
+                ("html", Path(dir_path, "data", "lumen", "lumen4.html")),
+                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "lumen", "lumen4_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
         # Megaport
         (
             Megaport,
@@ -117,6 +147,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "megaport", "megaport2_result.json"),
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
+        ),
+        # Momentum
+        (
+            Momentum,
+            [("email", Path(dir_path, "data", "momentum", "momentum1.eml")),],
+            [Path(dir_path, "data", "momentum", "momentum1_result.json"),],
         ),
         # NTT
         (
