@@ -9,13 +9,8 @@
         ],
         "end": 1621980000,
         "maintenance_id": "987654321-1",
-        "organizer": "unknown",
-        "provider": "unknown",
-        "sequence": 1,
-        "stamp": null,
         "start": 1621958400,
         "status": "CONFIRMED",
-        "summary": "Please be advised that AMS-IX will be performing a maintenance activity (1234) that will impact services located at Mega-iAdvantage | Hong Kong Impacted Service(s): Interconnects undergoing maintenance might experience an outage. ",
-        "uid": "0"
+        "summary": "Please be advised that AMS-IX will be performing a maintenance activity (1234) that will impact services located at Mega-iAdvantage | Hong Kong Impacted Service(s): Interconnects undergoing maintenance might experience an outage. "
     }
 ]

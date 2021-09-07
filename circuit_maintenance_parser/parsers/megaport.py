@@ -6,7 +6,6 @@ from typing import Dict
 from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 
@@ -18,16 +17,11 @@ logger = logging.getLogger(__name__)
 class HtmlParserMegaport1(Html):
     """Notifications Parser for Megaport notifications."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_tables(soup.find_all("table", attrs={"class": "TextContentContainer"}), data)
-
-            return [data]
-
-        except Exception as exc:
-            raise ParsingError from exc
+        data = {}
+        self.parse_tables(soup.find_all("table", attrs={"class": "TextContentContainer"}), data)
+        return [data]
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse Table tag."""

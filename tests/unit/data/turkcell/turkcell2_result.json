@@ -1,0 +1,16 @@
+[
+    {
+        "account": "01-CUSTOMER",
+        "circuits": [
+            {
+                "circuit_id": "111111111111111",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1629277200,
+        "maintenance_id": "10009081013",
+        "start": 1629257400,
+        "status": "CONFIRMED",
+        "summary": "SW upgrade work will be done on the OLTs mentioned below;"
+    }
+]

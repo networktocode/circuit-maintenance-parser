@@ -7,7 +7,6 @@ from bs4.element import ResultSet  # type: ignore
 
 from dateutil import parser
 
-from circuit_maintenance_parser.errors import ParsingError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-nested-blocks,no-member, too-many-branches
@@ -19,17 +18,13 @@ logger = logging.getLogger(__name__)
 class HtmlParserZayo1(Html):
     """Notifications Parser for Zayo notifications."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_bs(soup.find_all("b"), data)
-            self.parse_tables(soup.find_all("table"), data)
+        data = {}
+        self.parse_bs(soup.find_all("b"), data)
+        self.parse_tables(soup.find_all("table"), data)
 
-            return [data]
-
-        except Exception as exc:
-            raise ParsingError from exc
+        return [data]
 
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""
@@ -87,4 +82,5 @@ class HtmlParserZayo1(Html):
                 if "hard down" in impact.lower():
                     data_circuit["impact"] = Impact("OUTAGE")
                     circuits.append(CircuitImpact(**data_circuit))
-        data["circuits"] = circuits
+        if circuits:
+            data["circuits"] = circuits

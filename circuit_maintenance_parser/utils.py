@@ -1,4 +1,4 @@
-"""Utility functions for the Circuit Maintenance parsers."""
+"""Utility functions for the library."""
 
 from geopy.geocoders import Nominatim  # type: ignore
 from tzwhere import tzwhere  # type: ignore
@@ -16,3 +16,11 @@ def city_timezone(city: str) -> str:
         tzwhere.tzwhere()
     )  # TODO: Offline loading of timezone location data is quite slow. Look for better alternative
     return timezone.tzNameAt(location.latitude, location.longitude)
+
+
+def rgetattr(obj, attr):
+    """Recursive GetAttr to look for nested attributes."""
+    nested_value = getattr(obj, attr)
+    if not nested_value:
+        return obj
+    return rgetattr(nested_value, attr)

@@ -1,8 +1,8 @@
 """Notification Parser exceptions."""
 
 
-class ParsingError(Exception):
-    """Unable to successfully parse the notification."""
+class ProviderError(Exception):
+    """Error in the Provider."""
 
     def __init__(
         self, *args, related_exceptions=None, **kwargs,
@@ -12,9 +12,21 @@ class ParsingError(Exception):
         self.related_exceptions = related_exceptions or []
 
 
+class ProcessorError(Exception):
+    """Error in the Processor."""
+
+
+class ParserError(Exception):
+    """Error in the Parser."""
+
+
 class MissingMandatoryFields(Exception):
     """Missing one or more mandatory fields."""
 
 
 class NonexistentParserError(Exception):
     """Nonexistent Notification Parser."""
+
+
+class NonexistentProviderError(Exception):
+    """Nonexistent Notification Provider."""
