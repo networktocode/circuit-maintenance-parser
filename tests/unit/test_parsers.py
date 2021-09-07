@@ -8,6 +8,7 @@ import pytest
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
+from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.seaborn import (
@@ -60,6 +61,17 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserGTT1,
             Path(dir_path, "data", "gtt", "gtt3.html"),
             Path(dir_path, "data", "gtt", "gtt3_result.json"),
+        ),
+        # HGC
+        (
+            HtmlParserHGC1,
+            Path(dir_path, "data", "hgc", "hgc1.eml"),
+            Path(dir_path, "data", "hgc", "hgc1_html_result.json"),
+        ),
+        (
+            HtmlParserHGC2,
+            Path(dir_path, "data", "hgc", "hgc2.eml"),
+            Path(dir_path, "data", "hgc", "hgc2_html_result.json"),
         ),
         # Lumen
         (
