@@ -61,8 +61,9 @@ class Parser(BaseModel, extra=Extra.forbid):
             raise ParserError from exc
         if any(not partial_result for partial_result in result):
             raise ParserError(
-                f"{self.__class__.__name__} has not extracted any valid data has been extracted from notification:"  # type: ignore
-                f"\n{raw}"  # type: ignore
+                f"{self.__class__.__name__} parser was not able to extract the expected data for each maintenance.\n"  # type: ignore
+                f"  - Raw content: {raw}\n"  # type: ignore
+                f"  - Result: {result}"
             )
         logger.debug("Successful parsing for %s", self.__class__.__name__)
         return result

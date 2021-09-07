@@ -407,8 +407,9 @@ maintenance_id
             """\
 Failed creating Maintenance notification for Zayo.
 Details:
-- Processor SimpleProcessor from Zayo failed due to: HtmlParserZayo1 has not extracted any valid data has been extracted from notification:
-b'aaa'
+- Processor SimpleProcessor from Zayo failed due to: HtmlParserZayo1 parser was not able to extract the expected data for each maintenance.
+  - Raw content: b'aaa'
+  - Result: [{}]
 """,
         ),
     ],
