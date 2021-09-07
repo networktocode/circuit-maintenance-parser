@@ -30,43 +30,34 @@ class ICalParserColt1(ICal):
         try:
             gcal = Calendar.from_ical(base64.b64decode(raw))
         except ValueError:
-            try:
-                gcal = Calendar.from_ical(raw)
-            except ValueError as exc:
-                raise ParserError from exc
+            gcal = Calendar.from_ical(raw)
 
         if not gcal:
             raise ParserError("Not a valid iCalendar data received")
 
-        try:
-            for component in gcal.walk():
-                if component.name == "VEVENT":
-                    maintenance_id = ""
-                    account = ""
+        for component in gcal.walk():
+            if component.name == "VEVENT":
+                maintenance_id = ""
+                account = ""
 
-                    summary_match = re.search(
-                        r"^.*?[-]\s(?P<maintenance_id>CRQ[\S]+).*?,\s*(?P<account>\d+)$", str(component.get("SUMMARY"))
-                    )
-                    if summary_match:
-                        maintenance_id = summary_match.group("maintenance_id")
-                        account = summary_match.group("account")
+                summary_match = re.search(
+                    r"^.*?[-]\s(?P<maintenance_id>CRQ[\S]+).*?,\s*(?P<account>\d+)$", str(component.get("SUMMARY"))
+                )
+                if summary_match:
+                    maintenance_id = summary_match.group("maintenance_id")
+                    account = summary_match.group("account")
 
-                    data = {
-                        "account": account,
-                        "maintenance_id": maintenance_id,
-                        "status": Status("CONFIRMED"),
-                        "start": round(component.get("DTSTART").dt.timestamp()),
-                        "end": round(component.get("DTEND").dt.timestamp()),
-                        "stamp": round(component.get("DTSTAMP").dt.timestamp()),
-                        "summary": str(component.get("SUMMARY")),
-                        "sequence": int(component.get("SEQUENCE")),
-                    }
-                    result.append(data)
-
-        except Exception as exc:
-            raise ParserError from exc
-
-        logger.debug("Successful parsing for %s", self.__class__.__name__)
+                data = {
+                    "account": account,
+                    "maintenance_id": maintenance_id,
+                    "status": Status("CONFIRMED"),
+                    "start": round(component.get("DTSTART").dt.timestamp()),
+                    "end": round(component.get("DTEND").dt.timestamp()),
+                    "stamp": round(component.get("DTSTAMP").dt.timestamp()),
+                    "summary": str(component.get("SUMMARY")),
+                    "sequence": int(component.get("SEQUENCE")),
+                }
+                result.append(data)
 
         return result
 
@@ -75,18 +66,11 @@ class CsvParserColt1(Csv):
     """Colt Notifications partial parser for circuit-ID's in CSV notifications."""
 
     @staticmethod
-    def parse_csv(raw, data_base):
+    def parse_csv(raw):
         """Execute parsing."""
-        data = data_base.copy()
-        data["circuits"] = []
-        try:
-            with io.StringIO(raw.decode("utf-16")) as csv_data:
-                parsed_csv = csv.DictReader(csv_data, dialect=csv.excel_tab)
-                for row in parsed_csv:
-                    data["circuits"].append(
-                        CircuitImpact(impact=Impact("OUTAGE"), circuit_id=row["Circuit ID"].strip())
-                    )
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {"circuits": []}
+        with io.StringIO(raw.decode("utf-16")) as csv_data:
+            parsed_csv = csv.DictReader(csv_data, dialect=csv.excel_tab)
+            for row in parsed_csv:
+                data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=row["Circuit ID"].strip()))
+        return [data]
