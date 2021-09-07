@@ -15,6 +15,7 @@ from circuit_maintenance_parser.provider import (
     Cogent,
     Colt,
     EUNetworks,
+    HGC,
     Lumen,
     Megaport,
     NTT,
@@ -70,6 +71,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         ),
         # EUNetworks
         (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        # HGC
+        (
+            HGC,
+            [
+                ("email", Path(dir_path, "data", "hgc", "hgc1.eml")),
+                ("email", Path(dir_path, "data", "hgc", "hgc2.eml")),
+            ],
+            [Path(dir_path, "data", "hgc", "hgc1_result.json"), Path(dir_path, "data", "hgc", "hgc2_result.json"),],
+        ),
         # Lumen
         (
             Lumen,

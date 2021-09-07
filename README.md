@@ -46,6 +46,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - Cogent
 - Colt
 - GTT
+- HGC
 - Lumen
 - Megaport
 - Momentum

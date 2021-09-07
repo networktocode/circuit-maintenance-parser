@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Account Name",
+        "circuits": [
+            {
+                "circuit_id": "CIR000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1629028800,
+        "maintenance_id": "TIC000000000000001",
+        "organizer": "HGCINOCPW@hgc.com.hk",
+        "provider": "hgc",
+        "sequence": 1,
+        "stamp": 1629131483,
+        "start": 1629010860,
+        "status": "CONFIRMED",
+        "summary": "Service provider performing fault isolation and hardware replacement in London.",
+        "uid": "0"
+    }
+]

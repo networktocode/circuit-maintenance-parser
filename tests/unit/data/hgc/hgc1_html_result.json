@@ -1,0 +1,15 @@
+[
+    {
+        "account": "Account Name",
+        "circuits": [
+            {
+                "circuit_id": "CIR000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1629028800,
+        "start": 1629010860,
+        "status": "CONFIRMED",
+        "summary": "Service provider performing fault isolation and hardware replacement in London."
+    }
+]
