@@ -34,7 +34,10 @@ class HtmlParserLumen1(Html):
                 ):
                     data["maintenance_id"] = line_text.split("#: ")[-1]
                 elif line_text.startswith("summary:"):
-                    for sibling in line.next_siblings:
+                    siblings = line.next_siblings
+                    if not line.next_sibling:
+                        siblings = line.parent.next_sibling
+                    for sibling in siblings:
                         text_sibling = sibling.text.strip() if isinstance(sibling, bs4.element.Tag) else sibling.strip()
                         if text_sibling != "":
                             data["summary"] = text_sibling
