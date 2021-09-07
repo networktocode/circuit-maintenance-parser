@@ -39,16 +39,13 @@ class SubjectParserHGC1(EmailSubjectParser):
 class HtmlParserHGC1(Html):
     """HGC HTML parser."""
 
-    def parse_html(self, soup):
+    def parse_html(self, soup, data_base):
         """Execute parsing."""
-        data = {}
-        try:
-            self.parse_table(soup.find_all("table"), data)
-            data["status"] = Status.CONFIRMED
-            return [data]
+        data = data_base.copy()
+        self.parse_table(soup.find_all("table"), data)
+        data["status"] = Status.CONFIRMED
+        return [data]
 
-        except Exception as exc:
-            raise ParserError from exc
 
     def parse_table(self, tables, data):
         """Parse HTML tables.
@@ -92,16 +89,12 @@ class HtmlParserHGC1(Html):
 class HtmlParserHGC2(Html):
     """HGC HTML parser."""
 
-    def parse_html(self, soup):
+    def parse_html(self, soup, data_base):
         """Execute parsing."""
-        data = {}
-        try:
-            self.parse_body(soup.find_all("span"), data)
-            data["status"] = Status.CONFIRMED
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = data_base.copy()
+        self.parse_body(soup.find_all("span"), data)
+        data["status"] = Status.CONFIRMED
+        return [data]
 
     def parse_body(self, span_elements, data):
         """Parse HTML body.
