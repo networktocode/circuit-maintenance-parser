@@ -48,7 +48,7 @@ class Parser(BaseModel, extra=Extra.forbid):
             if result == [{}]:
                 raise ParserError(
                     f"{self.__class__.__name__} has not extracted any valid data has been extracted from notification:"
-                    f"\n{raw}"
+                    f"\n{raw}"  # type: ignore
                 )
             logger.debug("Successful parsing for %s", self.__class__.__name__)
             return result
