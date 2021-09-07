@@ -4,7 +4,7 @@ import base64
 import calendar
 import datetime
 import quopri
-from typing import Iterable, Union, Dict, List
+from typing import Dict, List
 from email.utils import parsedate_tz, mktime_tz
 
 import bs4  # type: ignore
@@ -37,9 +37,19 @@ class Parser(BaseModel, extra=Extra.forbid):
         """Return the expected data type."""
         return cls._data_types
 
-    def parse(self, raw: bytes) -> List[Dict]:
-        """Extract a list of data that partially or completely describes a series of Maintenance objects."""
+    def parser_hook(self, raw: bytes):
+        """Custom parser logic."""
         raise NotImplementedError
+
+    def parse(self, raw: bytes) -> List[Dict]:
+        """Execute parsing."""
+        try:
+            result = self.parser_hook(raw)
+            logger.debug("Successful parsing for %s", self.__class__.__name__)
+            return result
+
+        except Exception as exc:
+            raise ParserError from exc
 
     @staticmethod
     def dt2ts(date_time: datetime.datetime) -> int:
@@ -55,32 +65,19 @@ class ICal(Parser):
 
     _data_types = ["text/calendar", "ical", "icalendar"]
 
-    def parse(self, raw: bytes) -> List[Dict]:
-        """Method that returns a list of Maintenance objects."""
-        result = []
-
+    def parser_hook(self, raw: bytes):
+        """Execute parsing."""
         # iCalendar data sometimes comes encoded with base64
         # TODO: add a test case
         try:
             gcal = Calendar.from_ical(base64.b64decode(raw))
         except ValueError:
-            try:
-                gcal = Calendar.from_ical(raw)
-            except ValueError as exc:
-                raise ParserError from exc
+            gcal = Calendar.from_ical(raw)
 
         if not gcal:
             raise ParserError("Not a valid iCalendar data received")
 
-        try:
-            gcal = Calendar.from_ical(raw)
-            result = self.parse_ical(gcal)
-        except Exception as exc:
-            raise ParserError from exc
-
-        logger.debug("Successful parsing for %s", self.__class__.__name__)
-
-        return result
+        return self.parse_ical(gcal)
 
     @staticmethod
     def parse_ical(gcal: Calendar) -> List[Dict]:
@@ -134,27 +131,18 @@ class Html(Parser):
         """Convert any hex characters to standard ascii."""
         return string.encode("ascii", errors="ignore").decode("utf-8")
 
-    def parse(self, raw: bytes) -> List[Dict]:
+    def parser_hook(self, raw: bytes):
         """Execute parsing."""
         result = []
+        soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
+        # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
+        # return of `parse_html` as an Iterable object to accommodate this potential case.
+        for data in self.parse_html(soup):
+            result.append(data)
 
-        data_base: Dict[str, Union[int, str, Iterable]] = {}
-        try:
-            soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
+        return result
 
-            # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
-            # return of `parse_html` as an Iterable object to accommodate this potential case.
-            for data in self.parse_html(soup, data_base):
-                result.append(data)
-
-            logger.debug("Successful parsing for %s", self.__class__.__name__)
-
-            return result
-
-        except Exception as exc:
-            raise ParserError from exc
-
-    def parse_html(self, soup: ResultSet, data_base: Dict) -> List[Dict]:
+    def parse_html(self, soup: ResultSet,) -> List[Dict]:
         """Custom HTML parsing."""
         raise NotImplementedError
 
@@ -174,17 +162,12 @@ class EmailDateParser(Parser):
 
     _data_types = ["email-header-date"]
 
-    def parse(self, raw: bytes) -> List[Dict]:
-        """Method that returns a list of Maintenance objects."""
-        try:
-            parsed_date = parsedate_tz(raw.decode())
-            if parsed_date:
-                result = [{"stamp": mktime_tz(parsed_date)}]
-                logger.debug("Successful parsing for %s", self.__class__.__name__)
-                return result
-            raise ParserError("Not parsed_date available.")
-        except Exception as exc:
-            raise ParserError from exc
+    def parser_hook(self, raw: bytes):
+        """Execute parsing."""
+        parsed_date = parsedate_tz(raw.decode())
+        if parsed_date:
+            return [{"stamp": mktime_tz(parsed_date)}]
+        raise ParserError("Not parsed_date available.")
 
 
 class EmailSubjectParser(Parser):
@@ -192,19 +175,12 @@ class EmailSubjectParser(Parser):
 
     _data_types = ["email-header-subject"]
 
-    def parse(self, raw: bytes) -> List[Dict]:
+    def parser_hook(self, raw: bytes):
         """Execute parsing."""
         result = []
-
-        try:
-            for data in self.parse_subject(self.bytes_to_string(raw)):
-                result.append(data)
-            logger.debug("Successful parsing for %s", self.__class__.__name__)
-
-            return result
-
-        except Exception as exc:
-            raise ParserError from exc
+        for data in self.parse_subject(self.bytes_to_string(raw)):
+            result.append(data)
+        return result
 
     def parse_subject(self, subject: str) -> List[Dict]:
         """Custom subject parsing."""
@@ -221,22 +197,15 @@ class Csv(Parser):
 
     _data_types = ["application/csv", "text/csv", "application/octet-stream"]
 
-    def parse(self, raw: bytes) -> List[Dict]:
+    def parser_hook(self, raw: bytes):
         """Execute parsing."""
         result = []
+        for data in self.parse_csv(raw):
+            result.append(data)
 
-        data_base: Dict[str, Union[int, str, Iterable]] = {}
-        try:
-            for data in self.parse_csv(raw, data_base):
-                result.append(data)
-            logger.debug("Successful parsing for %s", self.__class__.__name__)
-
-            return result
-
-        except Exception as exc:
-            raise ParserError from exc
+        return result
 
     @staticmethod
-    def parse_csv(raw: bytes, data_base: Dict) -> List[Dict]:
+    def parse_csv(raw: bytes) -> List[Dict]:
         """Custom CSV parsing."""
         raise NotImplementedError

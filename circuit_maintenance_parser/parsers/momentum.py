@@ -54,15 +54,11 @@ class HtmlParserMomentum1(Html):
     </div>
     """
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_body(soup.find_all("p"), data)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {}
+        self.parse_body(soup.find_all("p"), data)
+        return [data]
 
     def parse_body(self, p_elements, data):
         """Parse HTML body."""

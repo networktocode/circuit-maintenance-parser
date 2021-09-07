@@ -30,10 +30,7 @@ class ICalParserColt1(ICal):
         try:
             gcal = Calendar.from_ical(base64.b64decode(raw))
         except ValueError:
-            try:
-                gcal = Calendar.from_ical(raw)
-            except ValueError as exc:
-                raise ParserError from exc
+            gcal = Calendar.from_ical(raw)
 
         if not gcal:
             raise ParserError("Not a valid iCalendar data received")
@@ -75,18 +72,11 @@ class CsvParserColt1(Csv):
     """Colt Notifications partial parser for circuit-ID's in CSV notifications."""
 
     @staticmethod
-    def parse_csv(raw, data_base):
+    def parse_csv(raw):
         """Execute parsing."""
-        data = data_base.copy()
-        data["circuits"] = []
-        try:
-            with io.StringIO(raw.decode("utf-16")) as csv_data:
-                parsed_csv = csv.DictReader(csv_data, dialect=csv.excel_tab)
-                for row in parsed_csv:
-                    data["circuits"].append(
-                        CircuitImpact(impact=Impact("OUTAGE"), circuit_id=row["Circuit ID"].strip())
-                    )
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {"circuits": []}
+        with io.StringIO(raw.decode("utf-16")) as csv_data:
+            parsed_csv = csv.DictReader(csv_data, dialect=csv.excel_tab)
+            for row in parsed_csv:
+                data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=row["Circuit ID"].strip()))
+        return [data]

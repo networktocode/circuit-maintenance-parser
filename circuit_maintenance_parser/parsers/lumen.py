@@ -6,7 +6,6 @@ from dateutil import parser
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
@@ -18,16 +17,12 @@ logger = logging.getLogger(__name__)
 class HtmlParserLumen1(Html):
     """Notifications Parser for Lumen notifications."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
-        try:
-            self.parse_spans(soup.find_all("span"), data)
-            self.parse_tables(soup.find_all("table"), data)
-            return [data]
-
-        except Exception as exc:
-            raise ParserError from exc
+        data = {}
+        self.parse_spans(soup.find_all("span"), data)
+        self.parse_tables(soup.find_all("table"), data)
+        return [data]
 
     def parse_spans(self, spans: ResultSet, data: Dict):
         """Parse Span tag."""
