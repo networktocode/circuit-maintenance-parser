@@ -15,6 +15,8 @@
   - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
 - #59 - Added a new parser `EmailDateParser` that uses the temail `Date` to get the `Stamp` and use in most of the `Providers` via the `CombinedProcessor`. Also, `Maintenance.stamp` attribute is mandatory.
 - #60 - Added new provider `Seaborn` using `Html` and a new parser for Email Subject: `EmailSubjectParser`
+- #66 - Added new provider `Momentum` using `Html` and `EmailSubjectParser`
+- #61 - Added new provider `Colt` using `ICal` and `Csv`
 
 ### Fixed
 
