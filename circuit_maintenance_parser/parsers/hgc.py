@@ -39,9 +39,9 @@ class SubjectParserHGC1(EmailSubjectParser):
 class HtmlParserHGC1(Html):
     """HGC HTML parser."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
+        data = {}
         try:
             self.parse_table(soup.find_all("table"), data)
             data["status"] = Status.CONFIRMED
@@ -92,9 +92,9 @@ class HtmlParserHGC1(Html):
 class HtmlParserHGC2(Html):
     """HGC HTML parser."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
-        data = data_base.copy()
+        data = {}
         try:
             self.parse_body(soup.find_all("span"), data)
             data["status"] = Status.CONFIRMED
