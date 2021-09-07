@@ -64,6 +64,18 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Path(dir_path, "data", "lumen", "lumen2.html"),
             Path(dir_path, "data", "lumen", "lumen2_result.json"),
         ),
+        (
+            Lumen,
+            "html",
+            Path(dir_path, "data", "lumen", "lumen3.html"),
+            Path(dir_path, "data", "lumen", "lumen3_result.json"),
+        ),
+        (
+            Lumen,
+            "html",
+            Path(dir_path, "data", "lumen", "lumen4.html"),
+            Path(dir_path, "data", "lumen", "lumen4_result.json"),
+        ),
         # Megaport
         (
             Megaport,
