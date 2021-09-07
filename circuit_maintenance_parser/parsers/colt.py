@@ -52,7 +52,6 @@ class ICalParserColt1(ICal):
                         account = summary_match.group("account")
 
                     data = {
-                        "circuits": [],
                         "account": account,
                         "maintenance_id": maintenance_id,
                         "status": Status("CONFIRMED"),
