@@ -1,0 +1,725 @@
+Delivered-To: ext.kcarbonaro@riotgames.com
+Received: by 2002:a4a:251a:0:0:0:0:0 with SMTP id g26csp1413590ooa;
+        Fri, 27 Aug 2021 08:24:53 -0700 (PDT)
+X-Received: by 2002:a2e:918e:: with SMTP id f14mr8077654ljg.357.1630077893226;
+        Fri, 27 Aug 2021 08:24:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1630077893; cv=none;
+        d=google.com; s=arc-20160816;
+        b=cnxtOHJbh5eg9xg/FRhZwSYkS3uUQNwhbmgZX2h+s2fEia+sNd9H8QCst4KjBFpT7I
+         wBlNUoaB9oWQWxFQySyaprSej7fz+DOvFRarAaLmdc72994uMuA3ikU6Ub0Bfq/2TTIH
+         rXztc0EhNn1Lie2aDNan7y5R0tzjuN0dlAbgnKI523SyE35wC44tOVv0100kA7WKLw1n
+         zUhqWln+8iF/EbSvOk5VZxbpF3P26mm74Sy219I+SrRYAS4q1oTnae5DwtEjkYSDIMJa
+         Fr0WEti2/WWYiPW6YfBMlilz65JfOcr+6z4ERMec0EhL8wXlPC/4DjyuBW2XIVGhahJp
+         GkTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=GRS8KTY2+fzMZWn42Gnn3MLVE/VhKl0DWGNEn2EufA4=;
+        b=it1OVuli4IC4Lvpv9/OHMv1ORQhnkM2096P+E4we20WzAPsIs58/JfJixpzDdDKbY9
+         iFgNhhUsPPsA/Ypg8g7U0HKbGAX9E9WjfZXkDsF03PHOb4PZze6LBwnktOLNMya6NtLz
+         PcZ4Q3HUPC66caAU6nU7cTeIbBnTo+Z/LKTi95UZkKfGq2qD+jupQggz65duZkjXUsff
+         1aV1aXT3PVkCRpr18HU434qEPdU6Yp4iNK1RdDqvDULAE5DAtkEMlc8VEnmd+IdkW+YA
+         9aTH7U4RT3YbrgQigiJhJSeBKUSIpBER+IiyNMaR0oYj4zgsdHLt+4mP61yyNIPy+1Xe
+         Osmg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@riotgames.com header.s=riotgames header.b=qIk+98nj;
+       spf=pass (google.com: domain of rmagno@riotgames.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=rmagno@riotgames.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=riotgames.com
+Return-Path: <rmagno@riotgames.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id i18sor1818370lfc.124.2021.08.27.08.24.52
+        for <ext.kcarbonaro@riotgames.com>
+        (Google Transport Security);
+        Fri, 27 Aug 2021 08:24:53 -0700 (PDT)
+Received-SPF: pass (google.com: domain of rmagno@riotgames.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@riotgames.com header.s=riotgames header.b=qIk+98nj;
+       spf=pass (google.com: domain of rmagno@riotgames.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=rmagno@riotgames.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=riotgames.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riotgames.com; s=riotgames;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=GRS8KTY2+fzMZWn42Gnn3MLVE/VhKl0DWGNEn2EufA4=;
+        b=qIk+98njZSBI3icuc8zlZmRizVp2McMB7ldbTFKIEJNvSwmZrEzVoeWnO/BN7rOrH+
+         eejeP4Z/j3QJ1OhW6Hh5L1VIhvn5Eyzg+PayBTMSxHhT5HDJeVypZP04m/v7NZx+nZHd
+         Do2XAGpTf5AjC91xj3B1TAO1FYGlK6/+uOkx8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=GRS8KTY2+fzMZWn42Gnn3MLVE/VhKl0DWGNEn2EufA4=;
+        b=cRYGV6xZ01gMVoO8psDJlQam6eo83g5uwBbZkE7tMUxyBeCMcXIrzNQiDenrQatvfH
+         o8LAexQ54Y+PtlNGO/FtGuTMtz6QdSZQfDVTxI9RrRJgNfsBscoN18lqJhReZhXOjxp+
+         rUDXD6Tx5oK+fZkw2M1u21NUaYu1uTzjnEAHv690Szg0yRntS/09nrNtkWOJrY9YZ2a0
+         s5XeW+p4d4Wg4ZmYHxR8lXcjgJWU9Pg/LnXB1tV0j82FeVdv6skk5RxsCsWP6H5DFI1a
+         fKrWGgOCCQUEVIkfhZKog8CkKf9PklRTMNSyjMt0aJDtVTTeT/HQLqRghcqAM/x127pe
+         nj3A==
+X-Gm-Message-State: AOAM530gdI6IIcHZ6gL3fd1UG6RYcWOb5osQ5o0a+p+/DWzdCmxGBSW5
+	z4QAqtM/W58yLLR++oLcZjSutf8/sif1mkFYNwcBLi+l/FTvifDT
+X-Google-Smtp-Source: ABdhPJze7/DkGQ75D1Zn5b3cLvdpOOqkKcQdSw2voUiqDsC14EtvWobYBY+E6l5w4So4KTpfE0zYwDg3cAVoifQtdi4=
+X-Received: by 2002:a19:4f1a:: with SMTP id d26mr6899966lfb.377.1630077892058;
+ Fri, 27 Aug 2021 08:24:52 -0700 (PDT)
+MIME-Version: 1.0
+References: <1628430219289.94063@tisparkle.com> <CAGPAzqBPmnHza5qjExdNyUDTSxTAYghBLoitGna6k44GtkY0=Q@mail.gmail.com>
+In-Reply-To: <CAGPAzqBPmnHza5qjExdNyUDTSxTAYghBLoitGna6k44GtkY0=Q@mail.gmail.com>
+From: Rodrigo Magno <rmagno@riotgames.com>
+Date: Fri, 27 Aug 2021 16:24:42 +0100
+Message-ID: <CACtiu=qj6veLPikHSee3S7U=J8_QVfsiSPkVkUKRcvspnM+mwQ@mail.gmail.com>
+Subject: Fwd: [Riot Direct] Re: Maintenance Notification for 08/10/2021 -
+ 08/11/2021 - 08/12/2021 | Sparkle TT# 54896 / 54915 / 54931
+To: Kristian Carbonaro <ext.kcarbonaro@riotgames.com>
+Content-Type: multipart/alternative; boundary="000000000000b6e60505ca8c15a1"
+
+--000000000000b6e60505ca8c15a1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Be bright
+
+Rodrigo Magno
+
+Network Engineer III  |  Riot Games
+
+Summoner: Riot Rmagnum
+
+
+---------- Forwarded message ---------
+From: DJ Alexander <dalexander@riotgames.com>
+Date: Sun, 8 Aug 2021 at 15:10
+Subject: [Riot Direct] Re: Maintenance Notification for 08/10/2021 -
+08/11/2021 - 08/12/2021 | Sparkle TT# 54896 / 54915 / 54931
+To: NOC <noc@riotgames.com>
+Cc: Riot Direct Team <rdeng-rg@riotgames.com>
+
+
+Created https://jira.riotgames.com/browse/CHANGE-45596 and added to RD
+calendar.
+
+Cheers,
+
+DJ Alexander
+
+Service Reliability Senior Administrator Riot Games
+
+Summoner: MightyCraic
+
+11 Sir John Rogerson's Quay Dublin 2 | Ireland
+
+
+On Sun, Aug 8, 2021 at 6:43 AM TISAmericaNOC <TISAmericaNOC@tisparkle.com>
+wrote:
+
+>
+> Dear Customer:
+>
+>
+>
+> Please be informed of an activity to be performed:
+>
+>
+>
+> Type of Maintenance
+>
+> Emergency
+>
+> Sparkle Ticket Number
+>
+> 54896 / 54915 / 54931
+>
+> Start Date/Time (UTC) Day 1
+>
+> 08/10/2021 03:00 UTC
+>
+> End Date/Time (UTC) Day 1
+>
+> 08/10/2021 11:00 UTC
+>
+> Start Date/Time (UTC) Day 2
+>
+> 08/11/2021 03:00 UTC
+>
+> End Date/Time (UTC) Day 2
+>
+> 08/11/2021 11:00 UTC
+>
+> Start Date/Time (UTC) BACKUP
+>
+> 08/12/2021 03:00 UTC
+>
+> End Date/Time (UTC) BACKUP
+>
+> 08/12/2021 11:00 UTC
+>
+> Duration of Maintenance (minutes)
+>
+> 480 minutes
+>
+> Expected Impact Time (minutes)
+>
+> 480 minutes
+>
+> Location
+>
+> Segment San Juan, Puerto Rico - Barranquilla, Colombia
+>
+> Circuits Involved in the Activity
+>
+> RTG001UMI2SP5NN
+>
+> Description of Work
+>
+> A scheduled work will be carried out to perform hardware upgrade in order
+> in order to ensure the continued integrity of the network.
+>
+>
+>
+> In case your service is linear the impact will be the described on the
+> maintenance.
+> If your service is protected you will observe protection switch hits.
+>
+>
+>
+> Please be aware that if we do not receive any response from you in the
+> next 24 hour, we will proceed with this activity as scheduled.
+>
+>
+>
+> If you have any additional questions or concerns feel free to contact us.
+>
+>
+>
+>
+> *Dear customer, please be informed about our new e-mail address: *
+> TISAmericaNOC@tisparkle.com
+>
+> *___________________________**__*
+>
+> *TI Sparkle Americas NOC*
+>
+> USA  +1 866 936-5668
+>
+> ARG +54 11 3753-2079
+>
+> BRA +55 21 2429-2520
+> www.tisparkle.com
+>
+> http://americas.tisparkle.com
+>
+> This message may contain confidential information and is intended only fo=
+r
+> the individual(s) named. If you are not the named addressee you should no=
+t
+> disseminate, distribute or copy this e-mail. Please, notify the sender
+> immediately by e-mail reply if you have received this e-mail by mistake a=
+nd
+> immediately delete this e-mail and any attachments from your system.
+>
+> ------------------------------
+> Questo messaggio e i suoi allegati sono indirizzati esclusivamente alle
+> persone indicate. La diffusione, copia o qualsiasi altra azione derivante
+> dalla conoscenza di queste informazioni sono rigorosamente vietate. Qualo=
+ra
+> abbiate ricevuto questo documento per errore siete cortesemente pregati d=
+i
+> darne immediata comunicazione al mittente e di provvedere alla sua
+> distruzione, Grazie.
+>
+> * This e-mail and any attachments is confidential and may contain
+> privileged information intended for the addressee(s) only. Dissemination,
+> copying, printing or use by anybody else is unauthorised. If you are not
+> the intended recipient, please delete this message and any attachments an=
+d
+> advise the sender by return e-mail, Thanks. *
+>
+> *Rispetta l'ambiente. Non stampare questa mail se non =C3=A8 necessario.*
+>
+--=20
+You received this message because you are subscribed to the Google Groups
+"Riot Direct Network (Old)" group.
+To unsubscribe from this group and stop receiving emails from it, send an
+email to rdeng-rg+unsubscribe@riotgames.com.
+To view this discussion on the web visit
+https://groups.google.com/a/riotgames.com/d/msgid/rdeng-rg/CAGPAzqBPmnHza5q=
+jExdNyUDTSxTAYghBLoitGna6k44GtkY0%3DQ%40mail.gmail.com
+<https://groups.google.com/a/riotgames.com/d/msgid/rdeng-rg/CAGPAzqBPmnHza5=
+qjExdNyUDTSxTAYghBLoitGna6k44GtkY0%3DQ%40mail.gmail.com?utm_medium=3Demail&=
+utm_source=3Dfooter>
+.
+
+--000000000000b6e60505ca8c15a1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_sig=
+nature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr=
+"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div =
+dir=3D"ltr"><p><span style=3D"background-color:rgb(255,255,255)" lang=3D"EN=
+-US"><font size=3D"2" face=3D"tahoma, sans-serif" color=3D"#000000">Be brig=
+ht</font></span></p>
+
+<table style=3D"border:none;border-collapse:collapse"><colgroup><col width=
+=3D"65"><col width=3D"241"></colgroup><tbody><tr style=3D"height:46pt"><td =
+style=3D"vertical-align:top;padding:5pt 5pt 5pt 5pt;overflow:hidden"><p dir=
+=3D"ltr" style=3D"line-height:1.2;margin-top:0pt;margin-bottom:0pt"><span s=
+tyle=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-color:=
+transparent;vertical-align:baseline;white-space:pre-wrap"><span style=3D"bo=
+rder:none;display:inline-block;overflow:hidden;width:47px;height:48px"><img=
+ src=3D"https://lh5.googleusercontent.com/U9uUZC2e3L55zxG_yWsPLz4ffrHQwFRbD=
+LJynW4VqWiW8f4SMROxnkrO0KZBZoV8Y3MZPEqbBHwShT5SyQ0VnQ7FuAEZfYvWTM6Ha5WVmXSq=
+qN8WOUFW1J726dGUynkZm7f4LsfH" width=3D"47" height=3D"48.01172447484123" sty=
+le=3D"margin-left:0px"></span></span></p></td><td style=3D"vertical-align:t=
+op;padding:5pt 5pt 5pt 5pt;overflow:hidden"><p dir=3D"ltr" style=3D"line-he=
+ight:1.2;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:9pt;fon=
+t-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weight:70=
+0;vertical-align:baseline;white-space:pre-wrap">Rodrigo Magno</span></p><p =
+dir=3D"ltr" style=3D"line-height:1.2;margin-top:0pt;margin-bottom:0pt"><spa=
+n style=3D"font-size:9pt;font-family:Arial;color:rgb(0,0,0);background-colo=
+r:transparent;vertical-align:baseline;white-space:pre-wrap">Network Enginee=
+r III=C2=A0 |=C2=A0 Riot Games</span></p><p dir=3D"ltr" style=3D"line-heigh=
+t:1.2;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:9pt;font-f=
+amily:Arial;color:rgb(0,0,0);background-color:transparent;vertical-align:ba=
+seline;white-space:pre-wrap">Summoner: Riot Rmagnum</span></p></td></tr></t=
+body></table></div></div></div></div></div></div></div></div></div><br><br>=
+<div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">----------=
+ Forwarded message ---------<br>From: <strong class=3D"gmail_sendername" di=
+r=3D"auto">DJ Alexander</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:d=
+alexander@riotgames.com">dalexander@riotgames.com</a>&gt;</span><br>Date: S=
+un, 8 Aug 2021 at 15:10<br>Subject: [Riot Direct] Re: Maintenance Notificat=
+ion for 08/10/2021 - 08/11/2021 - 08/12/2021 | Sparkle TT# 54896 / 54915 / =
+54931<br>To: NOC &lt;<a href=3D"mailto:noc@riotgames.com">noc@riotgames.com=
+</a>&gt;<br>Cc: Riot Direct Team &lt;<a href=3D"mailto:rdeng-rg@riotgames.c=
+om">rdeng-rg@riotgames.com</a>&gt;<br></div><br><br><div dir=3D"ltr">Create=
+d=C2=A0<a href=3D"https://jira.riotgames.com/browse/CHANGE-45596" target=3D=
+"_blank">https://jira.riotgames.com/browse/CHANGE-45596</a> and added to RD=
+ calendar.=C2=A0<div><br clear=3D"all"><div><div dir=3D"ltr" data-smartmail=
+=3D"gmail_signature"><div dir=3D"ltr">Cheers,<br><div><table style=3D"color=
+:rgb(34,34,34);border:none;border-collapse:collapse"><colgroup><col width=
+=3D"65"><col width=3D"241"></colgroup><tbody><tr style=3D"height:46pt"><td =
+style=3D"vertical-align:top;padding:5pt;overflow:hidden"><p dir=3D"ltr" sty=
+le=3D"line-height:1.2;margin-top:0pt;margin-bottom:0pt"><span style=3D"font=
+-family:Arial;color:rgb(0,0,0);background-color:transparent;vertical-align:=
+baseline;white-space:pre-wrap"><span style=3D"border:none;display:inline-bl=
+ock;overflow:hidden;width:47px;height:48px"><img src=3D"https://lh6.googleu=
+sercontent.com/Oy8BZ1PQR-q-WLcaPK3gmHgYfTJkfxqy_lct8w0JOo3ZLOY3dp3imgpEK1O2=
+wlZ1MPp1yIeUCznHqh8ydoNVkYWDg3GZPcZ_sKb_iBEF0MKAkK_Cwy-z5RElHQqO_dzkZHQru8Y=
+k" width=3D"47" height=3D"48.01172447484123" style=3D"margin-left:0px"></sp=
+an></span></p></td><td style=3D"vertical-align:top;padding:5pt;overflow:hid=
+den"><p dir=3D"ltr" style=3D"text-align:left;line-height:1.2;margin-top:0pt=
+;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);background-color:transp=
+arent;font-weight:700;vertical-align:baseline;white-space:pre-wrap"><font f=
+ace=3D"arial, sans-serif" size=3D"4">DJ Alexander</font></span></p><p dir=
+=3D"ltr" style=3D"text-align:left;line-height:1.2;margin-top:0pt;margin-bot=
+tom:0pt"><font face=3D"arial, sans-serif"><span style=3D"color:rgb(0,0,0);w=
+hite-space:pre-wrap">Service Reliability Senior Administrator Riot Games</s=
+pan><br></font></p><p dir=3D"ltr" style=3D"text-align:left;line-height:1.2;=
+margin-top:0pt;margin-bottom:0pt"><span style=3D"color:rgb(0,0,0);backgroun=
+d-color:transparent;vertical-align:baseline;white-space:pre-wrap"><font fac=
+e=3D"arial, sans-serif">Summoner: MightyCraic</font></span></p><p dir=3D"lt=
+r" style=3D"text-align:left;line-height:1.2;margin-top:0pt;margin-bottom:0p=
+t"><span style=3D"color:rgb(0,0,0);background-color:transparent;vertical-al=
+ign:baseline;white-space:pre-wrap"><font face=3D"arial, sans-serif">11 Sir =
+John Rogerson&#39;s Quay=20
+Dublin 2 | Ireland</font><font face=3D"Arial" style=3D"font-size:9pt"><br><=
+/font></span></p></td></tr></tbody></table></div></div></div></div><br></di=
+v></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Sun, Aug 8, 2021 at 6:43 AM TISAmericaNOC &lt;<a href=3D"mailto:TISAme=
+ricaNOC@tisparkle.com" target=3D"_blank">TISAmericaNOC@tisparkle.com</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+
+
+
+
+<div dir=3D"ltr" style=3D"font-size:10pt;color:rgb(0,0,0);background-color:=
+rgb(255,255,255);font-family:Verdana,Geneva,sans-serif">
+<p><br>
+</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+Dear Customer:</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+=C2=A0</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+Please be informed of an activity to be performed:</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+=C2=A0</p>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"background=
+-color:rgb(255,255,255);color:rgb(33,33,33);font-family:&quot;Segoe UI&quot=
+;,&quot;Segoe WP&quot;,&quot;Segoe UI WPC&quot;,Tahoma,Arial,sans-serif;fon=
+t-size:15px;border-collapse:collapse">
+<tbody>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border:1pt solid wi=
+ndowtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Type of Maintenance</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:1pt solid =
+windowtext;border-right:1pt solid windowtext;border-bottom:1pt solid window=
+text;border-left:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Emergency</p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Sparkle Ticket Number</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+54896=C2=A0/ 54915=C2=A0/ 54931<br>
+</p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Start Date/Time (UTC) Day 1</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+08/10/2021 03:00 UTC</p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+End Date/Time (UTC) Day 1</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+<span lang=3D"ES-AR">08/10/2021 11:00 UTC</span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Start Date/Time (UTC) Day 2</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+08/11/2021 03:00 UTC<span lang=3D"ES-AR"></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+End Date/Time (UTC) Day 2</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+<span lang=3D"ES-AR">08/11/2021 11:00 UTC</span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Start Date/Time (UTC) BACKUP</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+08/12/2021 03:00 UTC<span lang=3D"ES-AR"></span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+End Date/Time (UTC) BACKUP</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+<span lang=3D"ES-AR">08/12/2021 11:00 UTC</span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Duration of Maintenance (minutes)</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+480 minutes<br>
+</p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Expected Impact Time (minutes)</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+480 minutes</p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Location</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+<span lang=3D"ES-AR">Segment San Juan, Puerto Rico - Barranquilla, Colombia=
+</span></p>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Circuits Involved in the Activity</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+</p>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"243" style=
+=3D"border-collapse:collapse;width:182pt">
+<colgroup><col width=3D"243" style=3D"width:182pt"></colgroup>
+<tbody>
+<tr height=3D"20" style=3D"height:15pt">
+<td height=3D"20" style=3D"height:15pt;width:243px">RTG001UMI2SP5NN<br>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td width=3D"227" valign=3D"top" style=3D"width:170.6pt;border-right:1pt so=
+lid windowtext;border-bottom:1pt solid windowtext;border-left:1pt solid win=
+dowtext;border-top:none;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+Description of Work</p>
+</td>
+<td width=3D"300" valign=3D"top" style=3D"width:225pt;border-top:none;borde=
+r-left:none;border-bottom:1pt solid windowtext;border-right:1pt solid windo=
+wtext;padding:0in 5.4pt">
+<p class=3D"MsoNormal" style=3D"margin:0in;font-size:11pt;font-family:Calib=
+ri,sans-serif">
+A scheduled work will be carried out to perform hardware upgrade in order i=
+n order to ensure the continued integrity of the network.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+=C2=A0</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+In case your service is linear the impact will be the described on the main=
+tenance.<br>
+If your service is protected you will observe protection switch hits.</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+=C2=A0</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+Please be aware that if we do not receive any response from you in the next=
+ 24 hour, we will proceed with this activity as scheduled.</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+=C2=A0</p>
+<p class=3D"MsoNormal" style=3D"margin:0in;background-color:rgb(255,255,255=
+);font-size:11pt;font-family:Calibri,sans-serif;color:rgb(33,33,33)">
+If you have any additional questions or concerns feel free to contact us.<b=
+r>
+</p>
+<p><br>
+</p>
+<div id=3D"m_8670394047043287759gmail-m_-902406687038497985Signature">
+<div name=3D"divtagdefaultwrapper">
+<div name=3D"divtagdefaultwrapper" style=3D"margin:0px"><font size=3D"1"><f=
+ont color=3D"#eb0028" face=3D"Verdana, Geneva, sans-serif"><b><br>
+</b></font></font></div>
+<div name=3D"divtagdefaultwrapper" style=3D"margin:0px"><font size=3D"1"><f=
+ont color=3D"#eb0028" face=3D"Verdana, Geneva, sans-serif"><b><br>
+</b></font></font></div>
+<div name=3D"divtagdefaultwrapper" style=3D"margin:0px"><font size=3D"1"><f=
+ont color=3D"#eb0028" face=3D"Verdana, Geneva, sans-serif"><b>Dear customer=
+, please be informed about our new e-mail address:=C2=A0</b></font><span st=
+yle=3D"font-family:Verdana,sans-serif"><span style=3D"background:white"><a =
+href=3D"mailto:TISAmericaNOC@tisparkle.com" id=3D"m_8670394047043287759gmai=
+l-m_-902406687038497985NoLP" style=3D"outline:none" target=3D"_blank">TISAm=
+ericaNOC@tisparkle.com</a></span></span></font><span style=3D"font-size:10p=
+t;background:white;font-family:Arial,sans-serif"></span></div>
+<div name=3D"divtagdefaultwrapper" style=3D"font-family:Calibri,Arial,Helve=
+tica,sans-serif;margin:0px">
+<font size=3D"1" face=3D"Verdana, Geneva, sans-serif"><strong><span style=
+=3D"font-size:9pt;color:rgb(235,0,40)"><br>
+</span></strong></font></div>
+<div name=3D"divtagdefaultwrapper" style=3D"font-family:Calibri,Arial,Helve=
+tica,sans-serif;margin:0px">
+<font size=3D"1" face=3D"Verdana, Geneva, sans-serif"><strong><span style=
+=3D"font-size:9pt;color:rgb(235,0,40)">___________________________</span></=
+strong></font><font size=3D"1" face=3D"Verdana, Geneva, sans-serif"><strong=
+><span style=3D"font-size:9pt;color:rgb(235,0,40)">__</span></strong></font=
+></div>
+<font size=3D"1" face=3D"Verdana, Geneva, sans-serif" style=3D"font-family:=
+Calibri,Arial,Helvetica,sans-serif"><strong><span style=3D"font-size:9pt;co=
+lor:rgb(235,0,40)"></span></strong></font><br>
+<font size=3D"1" face=3D"Verdana, Geneva, sans-serif" style=3D"font-family:=
+Calibri,Arial,Helvetica,sans-serif"><strong><span style=3D"font-size:9pt;co=
+lor:rgb(235,0,40)"></span></strong></font>
+<div name=3D"divtagdefaultwrapper" style=3D"font-family:Calibri,Arial,Helve=
+tica,sans-serif;margin:0px">
+<font size=3D"1" face=3D"Verdana, Geneva, sans-serif"><strong><span style=
+=3D"font-size:9pt;color:rgb(235,0,40)"></span></strong></font>
+<p><strong style=3D"font-family:Verdana,Geneva,sans-serif"><span style=3D"f=
+ont-family:Verdana,Geneva,sans-serif">TI Sparkle Americas NOC</span></stron=
+g><br>
+<strong></strong><br>
+<span style=3D"font-family:Verdana,Geneva,sans-serif;font-size:8pt">USA=C2=
+=A0 +1 866 936-5668</span></p>
+<p><span style=3D"font-family:Verdana,Geneva,sans-serif;font-size:8pt">ARG =
++54 11 3753-2079</span></p>
+<p><span style=3D"font-family:Verdana,Geneva,sans-serif;font-size:8pt">BRA =
++55 21 2429-2520</span><br>
+<strong></strong><a href=3D"http://www.tisparkle.com/" id=3D"m_867039404704=
+3287759gmail-m_-902406687038497985NoLP" target=3D"_blank"><span style=3D"fo=
+nt-family:Verdana,Geneva,sans-serif;font-size:8pt">www.tisparkle.com</span>=
+</a></p>
+<p><a href=3D"http://americas.tisparkle.com/" id=3D"m_8670394047043287759gm=
+ail-m_-902406687038497985NoLP" target=3D"_blank"><span style=3D"font-family=
+:Verdana,Geneva,sans-serif;font-size:8pt">http://americas.tisparkle.com</sp=
+an></a></p>
+<br>
+<span style=3D"font-size:8pt">This message may contain confidential informa=
+tion and is intended only for the individual(s) named. If you are not the n=
+amed addressee you should not disseminate, distribute or copy this e-mail. =
+Please, notify the sender immediately
+ by e-mail reply if you have received this e-mail by mistake and immediatel=
+y delete this e-mail and any attachments from your system.</span><br>
+</div>
+</div>
+</div>
+
+<div>
+<br>
+<hr>
+<table style=3D"width:680px">
+<tbody><tr>
+<td style=3D"width:680px">
+<img src=3D"https://cdn.tim.ticdn.it/content/dam/flytoco-areapubblica-aemfe=
+/tim_it/dem-assets/email_footer/sparkle/680x190_BANNER_MAIL_BIANCO-ORO.jpg"=
+ style=3D"width:100%;height:auto;margin-top:20px;margin-bottom:20px">
+</td>
+</tr>
+<tr>
+<td style=3D"width:680px;font-family:Verdana;font-size:7.5pt;color:rgb(0,0,=
+0);text-align:justify" width=3D"680">
+Questo messaggio e i suoi allegati sono indirizzati esclusivamente alle per=
+sone indicate. La diffusione, copia o qualsiasi altra azione derivante dall=
+a conoscenza di queste informazioni sono rigorosamente vietate. Qualora abb=
+iate ricevuto questo documento per errore siete cortesemente pregati di dar=
+ne immediata comunicazione al mittente e di provvedere alla sua distruzione=
+, Grazie.
+<br><br>
+<i>
+This e-mail and any attachments is confidential and may  contain privileged=
+ information intended for the addressee(s) only. Dissemination, copying, pr=
+inting or use by anybody else is unauthorised. If you are not the intended =
+recipient, please delete this message and any attachments and advise the se=
+nder by return  e-mail, Thanks.
+</i>
+<br><br>
+<b>Rispetta l&#39;ambiente. Non stampare questa mail se non =C3=A8 necessar=
+io.</b>
+</td>
+</tr>
+</tbody></table>=09
+</div>
+
+</div>
+
+</blockquote></div>
+
+<p></p>
+
+-- <br>
+You received this message because you are subscribed to the Google Groups &=
+quot;Riot Direct Network (Old)&quot; group.<br>
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:rdeng-rg+unsubscribe@riotgames.com" target=3D"_bl=
+ank">rdeng-rg+unsubscribe@riotgames.com</a>.<br>
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/riotgames.com/d/msgid/rdeng-rg/CAGPAzqBPmnHza5qjExdNyUDTSxTAYghBLoitGn=
+a6k44GtkY0%3DQ%40mail.gmail.com?utm_medium=3Demail&amp;utm_source=3Dfooter"=
+ target=3D"_blank">https://groups.google.com/a/riotgames.com/d/msgid/rdeng-=
+rg/CAGPAzqBPmnHza5qjExdNyUDTSxTAYghBLoitGna6k44GtkY0%3DQ%40mail.gmail.com</=
+a>.<br>
+</div></div>
+
+--000000000000b6e60505ca8c15a1--

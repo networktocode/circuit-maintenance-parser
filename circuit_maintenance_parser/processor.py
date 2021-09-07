@@ -1,4 +1,5 @@
 """Definition of Processor class."""
+import copy
 import logging
 import traceback
 import itertools
@@ -117,16 +118,24 @@ class CombinedProcessor(GenericProcessor):
 
     def process_hook(self, maintenances_extracted_data, maintenances_data):
         """All the parsers contribute with a subset of data that is extended."""
-        # We only expect one data object from these parsers
         if len(maintenances_extracted_data) == 1:
             self.combined_maintenance_data.update(maintenances_extracted_data[0])
         else:
-            raise ProcessorError(f"Unexpected data retrieved from parser: {maintenances_extracted_data}")
+            maintenances_data.extend(maintenances_extracted_data)
 
     def post_process_hook(self, maintenances_data):
         """After processing all the parsers, we try to combine all the data together."""
         self.extend_processor_data(self.combined_maintenance_data)
-        try:
-            maintenances_data.append(Maintenance(**self.combined_maintenance_data))
-        except ValidationError as exc:
-            raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
+        if maintenances_data:
+            maintenances = maintenances_data.copy()
+            maintenances_data.clear()
+            for maintenance in maintenances:
+                try:
+                    maintenances_data.append(Maintenance(**self.combined_maintenance_data, **maintenance))
+                except ValidationError as exc:
+                    raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
+        else:
+            try:
+                maintenances_data.append(Maintenance(**self.combined_maintenance_data))
+            except ValidationError as exc:
+                raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
