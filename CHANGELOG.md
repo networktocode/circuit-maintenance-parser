@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0 - 
+
+### Added
+
+- #68 - Added new provider `HGC` using `Html` and `EmailSubjectParser`
+
 ## v2.0.0-beta - 2021-09-07
 
 ### Added
