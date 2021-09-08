@@ -1,23 +1,28 @@
 # Changelog
 
-## v2.0.0 -
+## v2.0.0 - 
+
+### Added
+
+- #68 - Added new provider `HGC` using `Html` and `EmailSubjectParser`
+
+## v2.0.0-beta - 2021-09-07
 
 ### Added
 
 - #50 - Added new provider `Verizon` using `Html`
 - #52 - Added new provider `GTT` using `Html`
-- #54 - Added new provider `Turkcell` using `Html`
 - #53 - `circuit-maintenace-parser` refactor, including:
   - New `Processor` class that allows the `Provider` to define more custom logics to combine parsed data to create
     `Maintenances`
   - New `NotificationData` class that enables easier data injection for simple and complex data objects, such as
     emails.
   - Tests refactor to make them more specific to each type of data, mocking interfaces between different classes.
+- #54 - Added new provider `Turkcell` using `Html`
 - #59 - Added a new parser `EmailDateParser` that uses the temail `Date` to get the `Stamp` and use in most of the `Providers` via the `CombinedProcessor`. Also, `Maintenance.stamp` attribute is mandatory.
 - #60 - Added new provider `Seaborn` using `Html` and a new parser for Email Subject: `EmailSubjectParser`
-- #66 - Added new provider `Momentum` using `Html` and `EmailSubjectParser`
 - #61 - Added new provider `Colt` using `ICal` and `Csv`
-- #68 - Added new provider `HGC` using `Html` and `EmailSubjectParser`
+- #66 - Added new provider `Momentum` using `Html` and `EmailSubjectParser`
 
 ### Fixed
 
