@@ -1,10 +1,14 @@
 # Changelog
 
-## v2.0.0 - 
+## v2.0.0 -
 
 ### Added
 
 - #68 - Added new provider `HGC` using `Html` and `EmailSubjectParser`
+
+### Fixed
+
+- #72 - Ensure `NotificationData` init methods for library client do not raise exceptions and just return `None`.
 
 ## v2.0.0-beta - 2021-09-07
 
