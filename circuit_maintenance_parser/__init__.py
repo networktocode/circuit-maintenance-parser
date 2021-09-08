@@ -1,5 +1,5 @@
-"""Notifications parser init."""
-
+"""Circuit-maintenance-parser init."""
+import logging
 from typing import Type, Optional
 
 from .data import NotificationData
@@ -47,6 +47,8 @@ SUPPORTED_PROVIDERS = (
 SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
 SUPPORTED_ORGANIZER_EMAILS = [provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS]
 
+logger = logging.getLogger(__name__)
+
 
 def init_provider(provider_type=None) -> Optional[GenericProvider]:
     """Returns an instance of the corresponding Notification Provider."""
@@ -60,19 +62,31 @@ def init_provider(provider_type=None) -> Optional[GenericProvider]:
         return None
 
 
-def init_data_raw(data_type: str, data_content: bytes) -> NotificationData:
+def init_data_raw(data_type: str, data_content: bytes) -> Optional[NotificationData]:
     """Returns an instance of NotificationData from one combination of data type and content."""
-    return NotificationData.init(data_type, data_content)
+    try:
+        return NotificationData.init(data_type, data_content)
+    except Exception:  # pylint: disable=broad-except
+        logger.exception("Error found initializing data raw: %s, %s", data_type, data_content)
+    return None
 
 
-def init_data_email(raw_email_bytes: bytes) -> NotificationData:
+def init_data_email(raw_email_bytes: bytes) -> Optional[NotificationData]:
     """Returns an instance of NotificationData from a raw email content."""
-    return NotificationData.init_from_email_bytes(raw_email_bytes)
+    try:
+        return NotificationData.init_from_email_bytes(raw_email_bytes)
+    except Exception:  # pylint: disable=broad-except
+        logger.exception("Error found initializing data from email raw bytes: %s", raw_email_bytes)
+    return None
 
 
-def init_data_emailmessage(email_message) -> NotificationData:
+def init_data_emailmessage(email_message) -> Optional[NotificationData]:
     """Returns an instance of NotificationData from an email message."""
-    return NotificationData.init_from_emailmessage(email_message)
+    try:
+        return NotificationData.init_from_emailmessage(email_message)
+    except Exception:  # pylint: disable=broad-except
+        logger.exception("Error found initializing data from email message: %s", email_message)
+    return None
 
 
 def get_provider_class(provider_name: str) -> Type[GenericProvider]:

@@ -36,6 +36,12 @@ def test_init_data_raw():
     assert data.data_parts[0].content == b"my_content"
 
 
+def test_init_data_raw_with_issue():
+    """Test the init_data_raw function with issue."""
+    data = init_data_raw({}, {})
+    assert data is None
+
+
 def test_init_data_email():
     """Test the email data load."""
     with open(Path(dir_path, "data", "email", "test_sample_message.eml"), "rb") as email_file:
@@ -43,6 +49,12 @@ def test_init_data_email():
     data = init_data_email(email_raw_data)
     assert isinstance(data, NotificationData)
     assert len(data.data_parts) == 5
+
+
+def test_init_data_email_with_issue():
+    """Test the init_data_email function with issue."""
+    data = init_data_email("")
+    assert data is None
 
 
 def test_init_data_emailmessage():
@@ -54,6 +66,12 @@ def test_init_data_emailmessage():
     data = init_data_emailmessage(email_message)
     assert isinstance(data, NotificationData)
     assert len(data.data_parts) == 5
+
+
+def test_init_data_emailmessage_with_issue():
+    """Test the init_data_emailmessage function with issue."""
+    data = init_data_emailmessage("")
+    assert data is None
 
 
 @pytest.mark.parametrize(
