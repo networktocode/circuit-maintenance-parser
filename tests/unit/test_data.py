@@ -18,7 +18,7 @@ def test_init_from_raw():
     assert data.data_parts[0].content == b"my_content"
 
 
-def test_init_data_raw_with_issue():
+def test_init_from_raw_with_issue():
     """Test the init_data_raw function with issue."""
     data = NotificationData.init_from_raw({}, {})
     assert data is None
