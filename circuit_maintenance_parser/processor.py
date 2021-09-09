@@ -131,7 +131,8 @@ class CombinedProcessor(GenericProcessor):
             maintenances_data.clear()
             for maintenance in maintenances:
                 try:
-                    maintenances_data.append(Maintenance(**self.combined_maintenance_data, **maintenance))
+                    combind_data = {**self.combined_maintenance_data, **maintenance}
+                    maintenances_data.append(Maintenance(**combind_data))
                 except ValidationError as exc:
                     raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
         else:

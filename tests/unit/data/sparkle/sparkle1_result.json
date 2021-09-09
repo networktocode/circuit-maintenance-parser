@@ -1,0 +1,59 @@
+[
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628593200,
+        "maintenance_id": "1111111",
+        "organizer": "TISAmericaNOC@tisparkle.com",
+        "provider": "sparkle",
+        "sequence": 1,
+        "stamp": 1630077882,
+        "start": 1628564400,
+        "status": "COMPLETED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
+        "uid": "0"
+    },
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628679600,
+        "maintenance_id": "22222",
+        "organizer": "TISAmericaNOC@tisparkle.com",
+        "provider": "sparkle",
+        "sequence": 1,
+        "stamp": 1630077882,
+        "start": 1628650800,
+        "status": "COMPLETED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
+        "uid": "0"
+    },
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628766000,
+        "maintenance_id": "33333",
+        "organizer": "TISAmericaNOC@tisparkle.com",
+        "provider": "sparkle",
+        "sequence": 1,
+        "stamp": 1630077882,
+        "start": 1628737200,
+        "status": "COMPLETED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
+        "uid": "0"
+    }
+]

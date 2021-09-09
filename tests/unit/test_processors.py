@@ -14,8 +14,45 @@ from circuit_maintenance_parser.errors import ProcessorError
 from circuit_maintenance_parser.parser import Parser
 
 
-PARSED_DATA = [{"a": "b"}, {"c": "d"}]
-EXTENDED_DATA = {"z": "x"}
+PARSED_DATA = [
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628679600,
+        "organizer": "TISAmericaNOC@tisparkle.com",
+        "provider": "sparkle",
+        "sequence": 1,
+        "stamp": 1630077882,
+        "start": 1628650800,
+        "status": "COMPLETED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
+        "uid": "0"
+    },
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628679600,
+        "organizer": "TISAmericaNOC@tisparkle.com",
+        "provider": "sparkle",
+        "sequence": 1,
+        "stamp": 1630077882,
+        "start": 1628650800,
+        "status": "COMPLETED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
+        "uid": "0"
+    }
+]
+EXTENDED_DATA = {"maintenance_id": "11111"}
 
 
 class FakeParser(Parser):
@@ -73,10 +110,13 @@ def test_simpleprocessor_without_matching_type():
 def test_combinedprocessor_multiple_data():
     """Tests CombinedProcessor wrong parsed data, with multiple entities."""
     processor = CombinedProcessor(data_parsers=[FakeParser])
-    with pytest.raises(ProcessorError) as e_info:
-        # Using the fake_data that returns mutliple maintenances that are not expected in this processor type
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
         processor.process(fake_data, EXTENDED_DATA)
-    assert "Unexpected data retrieved from parser" in str(e_info)
+        assert mock_maintenance.call_count == len(PARSED_DATA)
+        for parsed_data_element in PARSED_DATA:
+            parsed_data_element.update(EXTENDED_DATA)
+            mock_maintenance.assert_any_call(**parsed_data_element)
 
 
 def test_combinedprocessor():
