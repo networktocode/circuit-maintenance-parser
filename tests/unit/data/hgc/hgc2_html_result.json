@@ -1,0 +1,15 @@
+[
+    {
+        "account": "Customer Inc",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1625767200,
+        "start": 1625763600,
+        "status": "CONFIRMED",
+        "summary": "Cable fiber relocation"
+    }
+]

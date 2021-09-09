@@ -3,13 +3,14 @@
 from typing import Type, Optional
 
 from .data import NotificationData
-from .errors import NonexistentProviderError
+from .errors import NonexistentProviderError, ProviderError
 from .provider import (
     GenericProvider,
     Cogent,
     Colt,
     EUNetworks,
     GTT,
+    HGC,
     Lumen,
     Megaport,
     Momentum,
@@ -30,6 +31,7 @@ SUPPORTED_PROVIDERS = (
     Colt,
     EUNetworks,
     GTT,
+    HGC,
     Lumen,
     Megaport,
     Momentum,
@@ -112,4 +114,6 @@ __all__ = [
     "init_data_emailmessage",
     "get_provider_class",
     "get_provider_class_from_sender",
+    "ProviderError",
+    "NonexistentProviderError",
 ]

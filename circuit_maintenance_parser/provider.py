@@ -17,6 +17,7 @@ from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProces
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
+from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
@@ -136,6 +137,16 @@ class GTT(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
     ]
     _default_organizer = "InfraCo.CM@gttcorp.org"
+
+
+class HGC(GenericProvider):
+    """HGC provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserHGC1, SubjectParserHGC1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserHGC2, SubjectParserHGC1]),
+    ]
+    _default_organizer = "HGCINOCPW@hgc.com.hk"
 
 
 class Lumen(GenericProvider):

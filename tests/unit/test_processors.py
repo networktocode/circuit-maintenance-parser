@@ -57,6 +57,9 @@ class FakeParser(Parser):
     def parse(self, *args, **kwargs):  # pylint: disable=unused-argument
         return copy.deepcopy(self._parsed_data)
 
+    def parser_hook(self, raw: bytes):
+        pass
+
 
 class FakeParser0(FakeParser):
     "Fake class to simulate another Parser."
