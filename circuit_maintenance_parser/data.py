@@ -1,6 +1,6 @@
 """Definition of Data classes."""
 import logging
-from typing import List, NamedTuple, Optional, TypeVar, Type, Set
+from typing import List, NamedTuple, Optional, Type, Set
 
 import email
 from pydantic import BaseModel, Extra
@@ -16,9 +16,6 @@ class DataPart(NamedTuple):
     content: bytes
 
 
-T = TypeVar("T", bound="NotificationData")  # pylint: disable=invalid-name
-
-
 class NotificationData(BaseModel, extra=Extra.forbid):
     """Base class for Notification Data types."""
 
@@ -29,7 +26,9 @@ class NotificationData(BaseModel, extra=Extra.forbid):
         self.data_parts.append(DataPart(data_type, data_content))
 
     @classmethod
-    def init_from_raw(cls: Type[T], data_type: str, data_content: bytes) -> Optional[T]:
+    def init_from_raw(
+        cls: Type["NotificationData"], data_type: str, data_content: bytes
+    ) -> Optional["NotificationData"]:
         """Initialize the data_parts with only one DataPart object."""
         try:
             return cls(data_parts=[DataPart(data_type, data_content)])
@@ -38,7 +37,7 @@ class NotificationData(BaseModel, extra=Extra.forbid):
         return None
 
     @classmethod
-    def init_from_email_bytes(cls: Type[T], raw_email_bytes: bytes) -> Optional[T]:
+    def init_from_email_bytes(cls: Type["NotificationData"], raw_email_bytes: bytes) -> Optional["NotificationData"]:
         """Initialize the data_parts from an email defined as raw bytes.."""
         try:
             raw_email_string = raw_email_bytes.decode("utf-8")
@@ -67,7 +66,7 @@ class NotificationData(BaseModel, extra=Extra.forbid):
                 data_parts.add(DataPart(part.get_content_type(), part.get_payload(decode=True)))
 
     @classmethod
-    def init_from_emailmessage(cls: Type[T], email_message) -> Optional[T]:
+    def init_from_emailmessage(cls: Type["NotificationData"], email_message) -> Optional["NotificationData"]:
         """Initialize the data_parts from an email.message.Email object."""
         try:
             data_parts: Set[DataPart] = set()
