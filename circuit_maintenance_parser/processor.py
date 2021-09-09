@@ -1,5 +1,4 @@
 """Definition of Processor class."""
-import copy
 import logging
 import traceback
 import itertools
@@ -134,7 +133,9 @@ class CombinedProcessor(GenericProcessor):
                     combind_data = {**self.combined_maintenance_data, **maintenance}
                     maintenances_data.append(Maintenance(**combind_data))
                 except ValidationError as exc:
-                    raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
+                    raise ProcessorError(
+                        "Not enough information available to create a Maintenance notification."
+                    ) from exc
         else:
             try:
                 maintenances_data.append(Maintenance(**self.combined_maintenance_data))

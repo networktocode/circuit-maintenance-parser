@@ -1,11 +1,11 @@
 """Sparkle parser."""
 import logging
-import re
-
 from dateutil import parser
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status
+
+logger = logging.getLogger(__name__)
 
 
 class HtmlParserSparkle1(Html):
@@ -19,14 +19,17 @@ class HtmlParserSparkle1(Html):
             raise ParserError from exc
 
     def clean_string(self, string):
+        """Remove hex characters and new lines."""
         return self.remove_hex_characters(string.replace("\n", "")).strip()
 
     @staticmethod
     def set_all_tickets(tickets, attribute, value):
+        """Set the same value for all notifications."""
         for ticket in tickets:
             ticket[attribute] = value
 
     def parse_tables(self, tables, data_base):
+        """Parse HTML tables."""
         data = []
         for table in tables:
             tr_elements = table.find_all("tr")
@@ -50,7 +53,11 @@ class HtmlParserSparkle1(Html):
                         idx += 2
                         data.append(ticket)
                 elif "circuits involved" in td_elements[0].text.lower():
-                    self.set_all_tickets(data, "circuits", [CircuitImpact(impact=Impact.OUTAGE, circuit_id=self.clean_line(td_elements[1].text))])
+                    self.set_all_tickets(
+                        data,
+                        "circuits",
+                        [CircuitImpact(impact=Impact.OUTAGE, circuit_id=self.clean_line(td_elements[1].text))],
+                    )
                 elif "description of work" in td_elements[0].text.lower():
                     self.set_all_tickets(data, "summary", self.clean_string(td_elements[1].text))
         self.set_all_tickets(data, "status", Status.COMPLETED)

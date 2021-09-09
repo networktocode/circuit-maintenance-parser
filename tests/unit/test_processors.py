@@ -17,12 +17,7 @@ from circuit_maintenance_parser.parser import Parser
 PARSED_DATA = [
     {
         "account": "Not Available",
-        "circuits": [
-            {
-                "circuit_id": "CIR0000000000001",
-                "impact": "OUTAGE"
-            }
-        ],
+        "circuits": [{"circuit_id": "CIR0000000000001", "impact": "OUTAGE"}],
         "end": 1628679600,
         "organizer": "TISAmericaNOC@tisparkle.com",
         "provider": "sparkle",
@@ -31,16 +26,11 @@ PARSED_DATA = [
         "start": 1628650800,
         "status": "COMPLETED",
         "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
-        "uid": "0"
+        "uid": "0",
     },
     {
         "account": "Not Available",
-        "circuits": [
-            {
-                "circuit_id": "CIR0000000000001",
-                "impact": "OUTAGE"
-            }
-        ],
+        "circuits": [{"circuit_id": "CIR0000000000001", "impact": "OUTAGE"}],
         "end": 1628679600,
         "organizer": "TISAmericaNOC@tisparkle.com",
         "provider": "sparkle",
@@ -49,8 +39,8 @@ PARSED_DATA = [
         "start": 1628650800,
         "status": "COMPLETED",
         "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
-        "uid": "0"
-    }
+        "uid": "0",
+    },
 ]
 EXTENDED_DATA = {"maintenance_id": "11111"}
 
