@@ -2,6 +2,7 @@
 from typing import Type, Optional
 
 from .data import NotificationData
+from .output import Maintenance
 from .errors import NonexistentProviderError, ProviderError
 from .provider import (
     GenericProvider,
@@ -96,4 +97,5 @@ __all__ = [
     "get_provider_class_from_sender",
     "ProviderError",
     "NonexistentProviderError",
+    "Maintenance",
 ]
