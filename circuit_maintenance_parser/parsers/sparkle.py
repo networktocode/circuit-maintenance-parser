@@ -11,10 +11,11 @@ logger = logging.getLogger(__name__)
 class HtmlParserSparkle1(Html):
     """Notifications HTML Parser 1 for Sparkle notifications."""
 
-    def parse_html(self, soup, data_base):
+    def parse_html(self, soup):
         """Execute parsing."""
+        data = {}
         try:
-            return self.parse_tables(soup.find_all("table"), data_base)
+            return self.parse_tables(soup.find_all("table"), data)
         except Exception as exc:
             raise ParserError from exc
 
