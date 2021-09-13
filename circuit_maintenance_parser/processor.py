@@ -123,21 +123,23 @@ class CombinedProcessor(GenericProcessor):
             maintenances_data.extend(maintenances_extracted_data)
 
     def post_process_hook(self, maintenances_data):
-        """After processing all the parsers, we try to combine all the data together."""
+        """After processing all the parsers, we try to combine all the data together.
+
+        For some notifications there can be multiple maintenances in a single file. To handle this, maintenances are store in a
+        list where each of them can be extended with the extra processors.
+        """
         self.extend_processor_data(self.combined_maintenance_data)
-        if maintenances_data:
+        if not maintenances_data:
+            maintenances = [{}]
+        else:
             maintenances = maintenances_data.copy()
             maintenances_data.clear()
-            for maintenance in maintenances:
-                try:
-                    combined_data = {**self.combined_maintenance_data, **maintenance}
-                    maintenances_data.append(Maintenance(**combined_data))
-                except ValidationError as exc:
-                    raise ProcessorError(
-                        "Not enough information available to create a Maintenance notification."
-                    ) from exc
-        else:
+
+        for maintenance in maintenances:
             try:
-                maintenances_data.append(Maintenance(**self.combined_maintenance_data))
+                combined_data = {**self.combined_maintenance_data, **maintenance}
+                maintenances_data.append(Maintenance(**combined_data))
             except ValidationError as exc:
-                raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
+                raise ProcessorError(
+                    "Not enough information available to create a Maintenance notification."
+                ) from exc
