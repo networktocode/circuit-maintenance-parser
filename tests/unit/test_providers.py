@@ -10,7 +10,7 @@ from circuit_maintenance_parser.provider import GenericProvider
 from circuit_maintenance_parser.parser import Parser
 
 
-fake_data = NotificationData.init("fake_type", b"fake data")
+fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
 
 
 class ProviderWithOneProcessor(GenericProvider):

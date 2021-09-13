@@ -302,7 +302,7 @@ def test_provider_get_maintenances(provider_class, test_data_files, result_parse
         with open(data_file, "rb") as file_obj:
             if not data:
                 if data_type in ["ical", "html"]:
-                    data = NotificationData.init(data_type, file_obj.read())
+                    data = NotificationData.init_from_raw(data_type, file_obj.read())
                 elif data_type in ["email"]:
                     data = NotificationData.init_from_email_bytes(file_obj.read())
             else:
@@ -440,7 +440,7 @@ def test_errored_provider_process(provider_class, data_type, data_file, exceptio
 
     with open(data_file, "rb") as file_obj:
         if data_type in ["ical", "html"]:
-            data = NotificationData.init(data_type, file_obj.read())
+            data = NotificationData.init_from_raw(data_type, file_obj.read())
         elif data_type in ["email"]:
             data = NotificationData.init_from_email_bytes(file_obj.read())
 

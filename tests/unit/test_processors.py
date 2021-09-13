@@ -74,10 +74,11 @@ class FakeParser1(FakeParser):
 
 
 # Fake data used for SimpleProcessor
-fake_data = NotificationData.init("fake_type", b"fake data")
+fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
 # Fake data used for CombinedProcessor
-fake_data_for_combined = NotificationData.init("fake_type_0", b"fake data")
-fake_data_for_combined.data_parts.append(DataPart("fake_type_1", b"fake data"))
+fake_data_for_combined = NotificationData.init_from_raw("fake_type_0", b"fake data")
+if fake_data_for_combined:
+    fake_data_for_combined.data_parts.append(DataPart("fake_type_1", b"fake data"))
 
 
 def test_simpleprocessor():
