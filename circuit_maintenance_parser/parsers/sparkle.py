@@ -9,7 +9,35 @@ logger = logging.getLogger(__name__)
 
 
 class HtmlParserSparkle1(Html):
-    """Notifications HTML Parser 1 for Sparkle notifications."""
+    """Notifications HTML Parser 1 for Sparkle notifications.
+
+    Example:
+        <table>
+            <tbody>
+                <tr>
+                    <td><p></p>Maintenance ID</td>
+                    <td><p></p>1111 / 2222</td>
+                </tr>
+                <tr>
+                    <td><p></p>Start Date/Time (UTC) Day 1</td>
+                    <td><p></p>08/10/2021 03:00 UTC</td>
+                </tr>
+                <tr>
+                    <td><p></p>End Date/Time (UTC) Day 1</td>
+                    <td><p></p>08/10/2021 11:00 UTC</td>
+                </tr>
+                <tr>
+                    <td><p></p>Start Date/Time (UTC) Day 2</td>
+                    <td><p></p>08/11/2021 03:00 UTC</td>
+                </tr>
+                <tr>
+                    <td><p></p>End Date/Time (UTC) Day 2</td>
+                    <td><p></p>08/11/2021 11:00 UTC</td>
+                </tr>
+                ...
+            </tbody>
+        </table>
+    """
 
     def parse_html(self, soup):
         """Execute parsing."""
