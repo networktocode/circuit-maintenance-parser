@@ -52,6 +52,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - Megaport
 - Momentum
 - Seaborn
+- Sparkle
 - Telstra
 - Turkcell
 - Verizon

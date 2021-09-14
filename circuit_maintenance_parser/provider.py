@@ -28,6 +28,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn1,
     SubjectParserSeaborn2,
 )
+from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -205,6 +206,15 @@ class Seaborn(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserSeaborn2, SubjectParserSeaborn2]),
     ]
     _default_organizer = "inoc@superonline.net"
+
+
+class Sparkle(GenericProvider):
+    """Sparkle provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[HtmlParserSparkle1, EmailDateParser]),
+    ]
+    _default_organizer = "TISAmericaNOC@tisparkle.com"
 
 
 class Telia(GenericProvider):
