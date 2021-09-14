@@ -89,6 +89,6 @@ class HtmlParserSparkle1(Html):
                     )
                 elif "description of work" in td_elements[0].text.lower():
                     self.set_all_tickets(data, "summary", self.clean_string(td_elements[1].text))
-        self.set_all_tickets(data, "status", Status.COMPLETED)
+        self.set_all_tickets(data, "status", Status.CONFIRMED)
         self.set_all_tickets(data, "account", "Not Available")
         return data

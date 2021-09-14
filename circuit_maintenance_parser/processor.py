@@ -116,18 +116,18 @@ class CombinedProcessor(GenericProcessor):
     combined_maintenance_data: Dict = {}
 
     def process_hook(self, maintenances_extracted_data, maintenances_data):
-        """All the parsers contribute with a subset of data that is extended."""
+        """All the parsers contribute with a subset of data that is extended.
+
+        For some notifications there can be multiple maintenances in a single file. To handle this, maintenances are store in a
+        list where each of them can be extended with the extra processors.
+        """
         if len(maintenances_extracted_data) == 1:
             self.combined_maintenance_data.update(maintenances_extracted_data[0])
         else:
             maintenances_data.extend(maintenances_extracted_data)
 
     def post_process_hook(self, maintenances_data):
-        """After processing all the parsers, we try to combine all the data together.
-
-        For some notifications there can be multiple maintenances in a single file. To handle this, maintenances are store in a
-        list where each of them can be extended with the extra processors.
-        """
+        """After processing all the parsers, we try to combine all the data together."""
         self.extend_processor_data(self.combined_maintenance_data)
         if not maintenances_data:
             maintenances = [{}]
