@@ -14,7 +14,7 @@
         "sequence": 1,
         "stamp": 1630077882,
         "start": 1628564400,
-        "status": "COMPLETED",
+        "status": "CONFIRMED",
         "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
         "uid": "0"
     },
@@ -33,7 +33,7 @@
         "sequence": 1,
         "stamp": 1630077882,
         "start": 1628650800,
-        "status": "COMPLETED",
+        "status": "CONFIRMED",
         "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
         "uid": "0"
     },
@@ -52,7 +52,7 @@
         "sequence": 1,
         "stamp": 1630077882,
         "start": 1628737200,
-        "status": "COMPLETED",
+        "status": "CONFIRMED",
         "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network.",
         "uid": "0"
     }
