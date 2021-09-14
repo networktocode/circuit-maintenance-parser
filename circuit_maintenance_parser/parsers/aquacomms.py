@@ -1,4 +1,4 @@
-"""Turkcell parser."""
+"""AquaComms parser."""
 import logging
 import re
 from datetime import datetime
