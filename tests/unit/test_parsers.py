@@ -20,6 +20,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn1,
     SubjectParserSeaborn2,
 )
+from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -147,6 +148,12 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             SubjectParserSeaborn2,
             Path(dir_path, "data", "seaborn", "seaborn2.eml"),
             Path(dir_path, "data", "seaborn", "seaborn2_subject_parser_result.json"),
+        ),
+        # Sparkle
+        (
+            HtmlParserSparkle1,
+            Path(dir_path, "data", "sparkle", "sparkle1.eml"),
+            Path(dir_path, "data", "sparkle", "sparkle1_html_parser_result.json"),
         ),
         # Telstra
         (

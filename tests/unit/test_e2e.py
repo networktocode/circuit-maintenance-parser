@@ -22,6 +22,7 @@ from circuit_maintenance_parser.provider import (
     Momentum,
     PacketFabric,
     Seaborn,
+    Sparkle,
     Telia,
     Telstra,
     Turkcell,
@@ -178,6 +179,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Seaborn,
             [("email", Path(dir_path, "data", "seaborn", "seaborn3.eml")),],
             [Path(dir_path, "data", "seaborn", "seaborn3_result.json"),],
+        ),
+        # Sparkle
+        (
+            Sparkle,
+            [("email", Path(dir_path, "data", "sparkle", "sparkle1.eml")),],
+            [Path(dir_path, "data", "sparkle", "sparkle1_result.json"),],
         ),
         # Telia
         (
