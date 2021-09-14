@@ -112,7 +112,7 @@ class AquaComms(GenericProvider):
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserAquaComms1, SubjectParserAquaComms1]),
     ]
-    _default_organizer = "support@cogentco.com"
+    _default_organizer = "tickets@aquacomms.com"
 
 
 class Cogent(GenericProvider):
