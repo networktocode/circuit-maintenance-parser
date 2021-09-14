@@ -70,9 +70,7 @@ class HtmlParserAquaComms1(Html):
                         datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").timestamp()
                     )
                 elif "scheduled end date" in tr_element.text.lower():
-                    data["end"] = int(
-                        datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").timestamp()
-                    )
+                    data["end"] = int(datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").timestamp())
                 elif "service id" in tr_element.text.lower():
                     data["circuits"] = [
                         CircuitImpact(circuit_id=self.get_tr_value(tr_element), impact=Impact("OUTAGE"))
