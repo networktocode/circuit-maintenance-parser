@@ -14,7 +14,7 @@ from circuit_maintenance_parser.errors import ProcessorError
 from circuit_maintenance_parser.parser import Parser
 
 
-PARSED_DATA = [{"a": "b"},{"c": "d"}]
+PARSED_DATA = [{"a": "b"}, {"c": "d"}]
 EXTENDED_DATA = {"y": "z"}
 
 
