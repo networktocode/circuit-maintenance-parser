@@ -12,6 +12,7 @@ from circuit_maintenance_parser.errors import ProviderError
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.provider import (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -41,6 +42,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
     [
         # GenericProvider
         (GenericProvider, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        # AquaComms
+        (
+            AquaComms,
+            [("email", Path(dir_path, "data", "aquacomms", "aquacomms1.eml")),],
+            [Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),],
+        ),
         # Cogent
         (
             Cogent,

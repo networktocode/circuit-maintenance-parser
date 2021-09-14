@@ -6,6 +6,7 @@ from .output import Maintenance
 from .errors import NonexistentProviderError, ProviderError
 from .provider import (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -27,6 +28,7 @@ from .provider import (
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
