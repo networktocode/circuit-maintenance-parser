@@ -6,9 +6,9 @@
                 "impact": "OUTAGE"
             }
         ],
-        "end": 1602572400,
+        "end": 1602576000,
         "maintenance_id": "11111",
-        "start": 1602536400,
+        "start": 1602540000,
         "status": "CONFIRMED"
     }
 ]
