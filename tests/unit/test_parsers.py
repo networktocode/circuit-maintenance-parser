@@ -7,6 +7,7 @@ import pytest
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
+from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -38,6 +39,17 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (ICal, Path(dir_path, "data", "ical", "ical3"), Path(dir_path, "data", "ical", "ical3_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical4"), Path(dir_path, "data", "ical", "ical4_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
+        # AquaComms
+        (
+            HtmlParserAquaComms1,
+            Path(dir_path, "data", "aquacomms", "aquacomms1.eml"),
+            Path(dir_path, "data", "aquacomms", "aquacomms1_html_parser_result.json"),
+        ),
+        (
+            SubjectParserAquaComms1,
+            Path(dir_path, "data", "aquacomms", "aquacomms1.eml"),
+            Path(dir_path, "data", "aquacomms", "aquacomms1_subject_parser_result.json"),
+        ),
         # Cogent
         (
             HtmlParserCogent1,

@@ -1,0 +1,14 @@
+[
+    {
+        "circuits": [
+            {
+                "circuit_id": "111-AAA-11-11BB-33333",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1602572400,
+        "maintenance_id": "11111",
+        "start": 1602536400,
+        "status": "CONFIRMED"
+    }
+]

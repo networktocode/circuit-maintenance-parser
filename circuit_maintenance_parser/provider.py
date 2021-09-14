@@ -14,6 +14,7 @@ from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 
+from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -103,6 +104,15 @@ class GenericProvider(BaseModel):
 ####################
 # PROVIDERS        #
 ####################
+
+
+class AquaComms(GenericProvider):
+    """AquaComms provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserAquaComms1, SubjectParserAquaComms1]),
+    ]
+    _default_organizer = "support@cogentco.com"
 
 
 class Cogent(GenericProvider):
