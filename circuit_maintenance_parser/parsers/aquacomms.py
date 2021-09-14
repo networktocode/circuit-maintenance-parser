@@ -67,11 +67,11 @@ class HtmlParserAquaComms1(Html):
                     data["maintenance_id"] = self.get_tr_value(tr_element)
                 elif "scheduled start date" in tr_element.text.lower():
                     data["start"] = int(
-                        datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").strftime("%s")
+                        datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").timestamp()
                     )
                 elif "scheduled end date" in tr_element.text.lower():
                     data["end"] = int(
-                        datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").strftime("%s")
+                        datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").timestamp()
                     )
                 elif "service id" in tr_element.text.lower():
                     data["circuits"] = [
