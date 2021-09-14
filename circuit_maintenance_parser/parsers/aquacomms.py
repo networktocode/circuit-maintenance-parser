@@ -19,7 +19,7 @@ class SubjectParserAquaComms1(EmailSubjectParser):
         Subject: Aqua Comms Planned Outage Work ISSUE=111111 PROJ=999
         """
         data = {}
-        search = re.search(r".+ISSUE=([0-9]+).PROJ=([0-9]+)", subject)
+        search = re.search(r"ISSUE=([0-9]+).PROJ=([0-9]+)", subject)
         if search:
             data["maintenance_id"] = search.group(1)
             data["account"] = search.group(2)
@@ -65,6 +65,8 @@ class HtmlParserAquaComms1(Html):
             for tr_element in table.find_all("tr"):
                 if "ticket number" in tr_element.text.lower():
                     data["maintenance_id"] = self.get_tr_value(tr_element)
+                elif "update" in tr_element.text.lower():
+                    data["summary"] = tr_element.text.replace("\n", "").split(" - ")[1]
                 elif "scheduled start date" in tr_element.text.lower():
                     data["start"] = self.dt2ts(datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z"))
                 elif "scheduled end date" in tr_element.text.lower():

@@ -9,6 +9,7 @@
         "end": 1602576000,
         "maintenance_id": "11111",
         "start": 1602540000,
-        "status": "CONFIRMED"
+        "status": "CONFIRMED",
+        "summary": "There are no new updates."
     }
 ]
