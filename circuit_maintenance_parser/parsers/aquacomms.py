@@ -2,10 +2,6 @@
 import logging
 import re
 from datetime import datetime
-from typing import Dict
-
-from bs4.element import ResultSet  # type: ignore
-from dateutil import parser
 
 from circuit_maintenance_parser.parser import EmailSubjectParser, Html, Impact, CircuitImpact, Status
 
@@ -78,5 +74,7 @@ class HtmlParserAquaComms1(Html):
                         datetime.strptime(self.get_tr_value(tr_element), "%H:%M %d/%m/%Y %Z").strftime("%s")
                     )
                 elif "service id" in tr_element.text.lower():
-                    data["circuits"] = [CircuitImpact(circuit_id=self.get_tr_value(tr_element), impact=Impact("OUTAGE"))]
+                    data["circuits"] = [
+                        CircuitImpact(circuit_id=self.get_tr_value(tr_element), impact=Impact("OUTAGE"))
+                    ]
         data["status"] = Status.CONFIRMED
