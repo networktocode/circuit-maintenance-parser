@@ -12,6 +12,7 @@ from circuit_maintenance_parser.errors import ProviderError
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.provider import (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -22,6 +23,7 @@ from circuit_maintenance_parser.provider import (
     Momentum,
     PacketFabric,
     Seaborn,
+    Sparkle,
     Telia,
     Telstra,
     Turkcell,
@@ -40,6 +42,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
     [
         # GenericProvider
         (GenericProvider, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        # AquaComms
+        (
+            AquaComms,
+            [("email", Path(dir_path, "data", "aquacomms", "aquacomms1.eml")),],
+            [Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),],
+        ),
         # Cogent
         (
             Cogent,
@@ -179,6 +187,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [("email", Path(dir_path, "data", "seaborn", "seaborn3.eml")),],
             [Path(dir_path, "data", "seaborn", "seaborn3_result.json"),],
         ),
+        # Sparkle
+        (
+            Sparkle,
+            [("email", Path(dir_path, "data", "sparkle", "sparkle1.eml")),],
+            [Path(dir_path, "data", "sparkle", "sparkle1_result.json"),],
+        ),
         # Telia
         (
             Telia,
@@ -295,7 +309,7 @@ def test_provider_get_maintenances(provider_class, test_data_files, result_parse
         with open(data_file, "rb") as file_obj:
             if not data:
                 if data_type in ["ical", "html"]:
-                    data = NotificationData.init(data_type, file_obj.read())
+                    data = NotificationData.init_from_raw(data_type, file_obj.read())
                 elif data_type in ["email"]:
                     data = NotificationData.init_from_email_bytes(file_obj.read())
             else:
@@ -433,7 +447,7 @@ def test_errored_provider_process(provider_class, data_type, data_file, exceptio
 
     with open(data_file, "rb") as file_obj:
         if data_type in ["ical", "html"]:
-            data = NotificationData.init(data_type, file_obj.read())
+            data = NotificationData.init_from_raw(data_type, file_obj.read())
         elif data_type in ["email"]:
             data = NotificationData.init_from_email_bytes(file_obj.read())
 

@@ -15,7 +15,7 @@ from circuit_maintenance_parser.parser import Parser
 
 
 PARSED_DATA = [{"a": "b"}, {"c": "d"}]
-EXTENDED_DATA = {"z": "x"}
+EXTENDED_DATA = {"y": "z"}
 
 
 class FakeParser(Parser):
@@ -47,10 +47,11 @@ class FakeParser1(FakeParser):
 
 
 # Fake data used for SimpleProcessor
-fake_data = NotificationData.init("fake_type", b"fake data")
+fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
 # Fake data used for CombinedProcessor
-fake_data_for_combined = NotificationData.init("fake_type_0", b"fake data")
-fake_data_for_combined.data_parts.append(DataPart("fake_type_1", b"fake data"))
+fake_data_for_combined = NotificationData.init_from_raw("fake_type_0", b"fake data")
+if fake_data_for_combined:
+    fake_data_for_combined.data_parts.append(DataPart("fake_type_1", b"fake data"))
 
 
 def test_simpleprocessor():
@@ -76,10 +77,13 @@ def test_simpleprocessor_without_matching_type():
 def test_combinedprocessor_multiple_data():
     """Tests CombinedProcessor wrong parsed data, with multiple entities."""
     processor = CombinedProcessor(data_parsers=[FakeParser])
-    with pytest.raises(ProcessorError) as e_info:
-        # Using the fake_data that returns mutliple maintenances that are not expected in this processor type
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
         processor.process(fake_data, EXTENDED_DATA)
-    assert "Unexpected data retrieved from parser" in str(e_info)
+        assert mock_maintenance.call_count == len(PARSED_DATA)
+        for parsed_data_element in PARSED_DATA:
+            parsed_data_element.update(EXTENDED_DATA)
+            mock_maintenance.assert_any_call(**parsed_data_element)
 
 
 def test_combinedprocessor():

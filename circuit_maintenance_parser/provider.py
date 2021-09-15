@@ -14,6 +14,7 @@ from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 
+from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -27,6 +28,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn1,
     SubjectParserSeaborn2,
 )
+from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -103,6 +105,15 @@ class GenericProvider(BaseModel):
 ####################
 # PROVIDERS        #
 ####################
+
+
+class AquaComms(GenericProvider):
+    """AquaComms provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserAquaComms1, SubjectParserAquaComms1]),
+    ]
+    _default_organizer = "tickets@aquacomms.com"
 
 
 class Cogent(GenericProvider):
@@ -195,6 +206,15 @@ class Seaborn(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserSeaborn2, SubjectParserSeaborn2]),
     ]
     _default_organizer = "inoc@superonline.net"
+
+
+class Sparkle(GenericProvider):
+    """Sparkle provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[HtmlParserSparkle1, EmailDateParser]),
+    ]
+    _default_organizer = "TISAmericaNOC@tisparkle.com"
 
 
 class Telia(GenericProvider):

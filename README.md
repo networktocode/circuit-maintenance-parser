@@ -43,6 +43,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### Supported providers based on other parsers
 
+- AquaComms
 - Cogent
 - Colt
 - GTT
@@ -51,6 +52,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - Megaport
 - Momentum
 - Seaborn
+- Sparkle
 - Telstra
 - Turkcell
 - Verizon

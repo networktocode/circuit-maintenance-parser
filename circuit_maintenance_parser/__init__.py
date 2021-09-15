@@ -1,11 +1,12 @@
-"""Notifications parser init."""
-
+"""Circuit-maintenance-parser init."""
 from typing import Type, Optional
 
 from .data import NotificationData
+from .output import Maintenance
 from .errors import NonexistentProviderError, ProviderError
 from .provider import (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -17,6 +18,7 @@ from .provider import (
     NTT,
     PacketFabric,
     Seaborn,
+    Sparkle,
     Telia,
     Telstra,
     Turkcell,
@@ -26,6 +28,7 @@ from .provider import (
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -37,6 +40,7 @@ SUPPORTED_PROVIDERS = (
     NTT,
     PacketFabric,
     Seaborn,
+    Sparkle,
     Telia,
     Telstra,
     Turkcell,
@@ -58,21 +62,6 @@ def init_provider(provider_type=None) -> Optional[GenericProvider]:
 
     except NonexistentProviderError:
         return None
-
-
-def init_data_raw(data_type: str, data_content: bytes) -> NotificationData:
-    """Returns an instance of NotificationData from one combination of data type and content."""
-    return NotificationData.init(data_type, data_content)
-
-
-def init_data_email(raw_email_bytes: bytes) -> NotificationData:
-    """Returns an instance of NotificationData from a raw email content."""
-    return NotificationData.init_from_email_bytes(raw_email_bytes)
-
-
-def init_data_emailmessage(email_message) -> NotificationData:
-    """Returns an instance of NotificationData from an email message."""
-    return NotificationData.init_from_emailmessage(email_message)
 
 
 def get_provider_class(provider_name: str) -> Type[GenericProvider]:
@@ -107,11 +96,10 @@ def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
 
 __all__ = [
     "init_provider",
-    "init_data_raw",
-    "init_data_email",
-    "init_data_emailmessage",
+    "NotificationData",
     "get_provider_class",
     "get_provider_class_from_sender",
     "ProviderError",
     "NonexistentProviderError",
+    "Maintenance",
 ]

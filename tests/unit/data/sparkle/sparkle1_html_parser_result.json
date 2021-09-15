@@ -1,0 +1,44 @@
+[
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628593200,
+        "maintenance_id": "1111111",
+        "start": 1628564400,
+        "status": "CONFIRMED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network."
+    },
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628679600,
+        "maintenance_id": "22222",
+        "start": 1628650800,
+        "status": "CONFIRMED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network."
+    },
+    {
+        "account": "Not Available",
+        "circuits": [
+            {
+                "circuit_id": "CIR0000000000001",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1628766000,
+        "maintenance_id": "33333",
+        "start": 1628737200,
+        "status": "CONFIRMED",
+        "summary": "A scheduled work will be carried out to perform hardware upgrade in order in order to ensure the continued integrity of the network."
+    }
+]
