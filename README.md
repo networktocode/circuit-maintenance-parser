@@ -43,6 +43,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### Supported providers based on other parsers
 
+- AquaComms
 - Cogent
 - Colt
 - GTT
@@ -51,6 +52,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - Megaport
 - Momentum
 - Seaborn
+- Sparkle
 - Telstra
 - Turkcell
 - Verizon
@@ -71,7 +73,7 @@ The library is available as a Python package in pypi and can be installed with p
 ## Python Library
 
 ```python
-from circuit_maintenance_parser import init_provider, init_data_raw
+from circuit_maintenance_parser import init_provider, NotificationData
 
 raw_data = b"""BEGIN:VCALENDAR
 VERSION:2.0
@@ -97,7 +99,7 @@ END:VCALENDAR
 
 ntt_provider = init_provider("ntt")
 
-data_to_process = init_data_raw("ical", raw_data)
+data_to_process = NotificationData.init_from_raw("ical", raw_data)
 
 maintenances = ntt_provider.get_maintenances(data_to_process)
 

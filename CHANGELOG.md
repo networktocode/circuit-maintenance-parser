@@ -1,10 +1,11 @@
 # Changelog
 
-## v2.0.0 -
+## v2.0.0 - 2021-09-15
 
 ### Added
 
-- #68 - Added new provider `HGC` using `Html` and `EmailSubjectParser`
+- #73 - Added new provider `Sparkle` using `Html` and `EmailSubjectParser`. Added support for multiple maintenances with `CombinedProcessor`.
+- #75 - Added new provider `AquaComms` using `Html` and `EmailSubjectParser`
 
 ### Fixed
 
@@ -27,6 +28,7 @@
 - #60 - Added new provider `Seaborn` using `Html` and a new parser for Email Subject: `EmailSubjectParser`
 - #61 - Added new provider `Colt` using `ICal` and `Csv`
 - #66 - Added new provider `Momentum` using `Html` and `EmailSubjectParser`
+- #68 - Added new provider `HGC` using `Html` and `EmailSubjectParser`
 
 ### Fixed
 

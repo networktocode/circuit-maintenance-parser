@@ -1,0 +1,21 @@
+[
+    {
+        "account": "999",
+        "circuits": [
+            {
+                "circuit_id": "111-AAA-11-11BB-33333",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1602576000,
+        "maintenance_id": "11111",
+        "organizer": "tickets@aquacomms.com",
+        "provider": "aquacomms",
+        "sequence": 1,
+        "stamp": 1629998529,
+        "start": 1602540000,
+        "status": "CONFIRMED",
+        "summary": "There are no new updates.",
+        "uid": "0"
+    }
+]

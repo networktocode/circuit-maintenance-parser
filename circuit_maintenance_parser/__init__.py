@@ -6,6 +6,7 @@ from .output import Maintenance
 from .errors import NonexistentProviderError, ProviderError
 from .provider import (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -17,6 +18,7 @@ from .provider import (
     NTT,
     PacketFabric,
     Seaborn,
+    Sparkle,
     Telia,
     Telstra,
     Turkcell,
@@ -26,6 +28,7 @@ from .provider import (
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    AquaComms,
     Cogent,
     Colt,
     EUNetworks,
@@ -37,6 +40,7 @@ SUPPORTED_PROVIDERS = (
     NTT,
     PacketFabric,
     Seaborn,
+    Sparkle,
     Telia,
     Telstra,
     Turkcell,
