@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.1 - 2021-09-16
+
+### Fixed
+
+- #79 - Fix `HtmlParserGTT1` regex parsing.
+
 ## v2.0.0 - 2021-09-15
 
 ### Added
