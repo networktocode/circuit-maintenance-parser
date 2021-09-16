@@ -30,18 +30,19 @@ class HtmlParserGTT1(Html):
                     # Group 1 matches the maintenance ID
                     # Group 2 matches the status of the notification
                     groups = re.search(r".+: ([0-9]+) - ([A-Z][a-z]+)", td_element.text.strip())
-                    data["maintenance_id"] = groups.groups()[0]
-                    status = groups.groups()[1]
-                    if status == "Reminder":
-                        data["status"] = Status["CONFIRMED"]
-                    elif status == "Update":
-                        data["status"] = Status["RE_SCHEDULED"]
-                    elif status == "Cancelled":
-                        data["status"] = Status["CANCELLED"]
-                        # When a email is cancelled there is no start or end time specificed
-                        # Setting this to 0 and 1 stops any errors from pydantic
-                        data["start"] = 0
-                        data["end"] = 1
+                    if groups:
+                        data["maintenance_id"] = groups.groups()[0]
+                        status = groups.groups()[1]
+                        if status == "Reminder":
+                            data["status"] = Status["CONFIRMED"]
+                        elif status == "Update":
+                            data["status"] = Status["RE_SCHEDULED"]
+                        elif status == "Cancelled":
+                            data["status"] = Status["CANCELLED"]
+                            # When a email is cancelled there is no start or end time specificed
+                            # Setting this to 0 and 1 stops any errors from pydantic
+                            data["start"] = 0
+                            data["end"] = 1
                 elif "Start" in td_element.text:
                     start = parser.parse(td_element.next_sibling.next_sibling.text)
                     data["start"] = self.dt2ts(start)
