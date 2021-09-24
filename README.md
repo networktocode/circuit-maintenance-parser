@@ -214,6 +214,68 @@ Circuit Maintenance Notification #0
 }
 ```
 
+## How to Extend the Library?
+
+Even the library aims to include support for as many providers as possible, it's likely that not all the thousands of NSP are supported and you may need to add support for some new one. Adding a new `Provider` is quite straight forward, and in the following example we are adding support for an imaginary ABCDE provider, that uses HTML notifications.
+
+First step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
+
+```python
+from typing import Dict
+import bs4  # type: ignore
+from bs4.element import ResultSet  # type: ignore
+from circuit_maintenance_parser.parser import Html
+
+class HtmlParserABCDE1(Html):
+    def parse_html(self, soup) -> Dict:
+        data = {}
+        self._parse_bs(soup.find_all("b"), data)
+        self._parse_tables(soup.find_all("table"), data)
+        return [data]
+
+    def _parse_bs(self, btags: ResultSet, data: Dict):
+      ...
+
+    def _parse_tables(self, tables: ResultSet, data: Dict):
+      ...
+```
+
+Next step is to create the new `Provider` by defining a new class in `circuit_maintenance_parser/provider.py`. This class that inherits from `GenericProvider` only needs to define to attributes:
+
+- `_processors`: is a `list` of `Processor` instances that uses several data `Parsers`. In this example, we don't need to create a new custom `Processor` because the combined logic serves well (the most likely case), and we only need to use the new defined `HtmlParserABCDE1` and also the generic `EmailDateParser` that extract the email date. Also notice that you could have multiple `Processors` with different `Parsers` in this list, supporting several formats.
+- `_default_organizer`: this is a default helper to fill the `organizer` attribute in the `Maintenance` if the information is not part of the original notification.
+
+```python
+class ABCDE(GenericProvider):
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserABCDE1]),
+    ]
+    _default_organizer = "noc@abcde.com"
+```
+
+And expose the new `Provider` in `circuit_maintenance_parser/__init__.py`:
+
+```python
+from .provider import (
+    GenericProvider,
+    ABCDE,
+    ...
+)
+
+SUPPORTED_PROVIDERS = (
+    GenericProvider,
+    ABCDE,
+    ...
+)
+```
+
+Last, but not least, you should update the tests!
+
+- Test the new `Parser` in `tests/unit/test_parsers.py`
+- Test the new `Provider` logic in `tests/unit/test_e2e.py`
+
+... adding the necessary data samples in `tests/unit/data/abcde/`.
+
 # Contributing
 
 Pull requests are welcomed and automatically built and tested against multiple versions of Python through Travis CI.
