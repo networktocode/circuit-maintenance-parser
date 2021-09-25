@@ -19,7 +19,7 @@ during a NANOG meeting that aimed to promote the usage of the iCalendar format. 
 proposed iCalendar format, the parser is straight-forward and there is no need to define custom logic, but this library
 enables supporting other providers that are not using this proposed practice, getting the same outcome.
 
-You can leverage on this library in your automation framework to process circuit maintenance notifications, and use the standarised [`Maintenace`](https://github.com/networktocode/circuit-maintenance-parser/blob/develop/circuit_maintenance_parser/output.py) to handle your received circuit maintenance notifications in a simple way. Every `maintenace` object contains, at least, the following attributes:
+You can leverage this library in your automation framework to process circuit maintenance notifications, and use the standardized [`Maintenance`](https://github.com/networktocode/circuit-maintenance-parser/blob/develop/circuit_maintenance_parser/output.py) to handle your received circuit maintenance notifications in a simple way. Every `maintenance` object contains, at least, the following attributes:
 
 - **provider**: identifies the provider of the service that is the subject of the maintenance notification.
 - **account**: identifies an account associated with the service that is the subject of the maintenance notification.
@@ -36,10 +36,10 @@ You can leverage on this library in your automation framework to process circuit
 ## Workflow
 
 1. We instantiate a `Provider`, directly or via the `init_provider` method, that depending on the selected type will return the corresponding instance.
-2. Get an instance of the `NotificationData` class that groups together `DataParts` which contain some content and a specific type (that will match a specific `Parser`), and adding some factory methods to initialize it from a single content (as before) or directly from a raw email content or `email.message.EmailMessage` instance.
-3. Each `Provider` have already defined multiple `Processors` that will be used to get the `Maintenances` when the `Provider.get_maintenances(data)` method is called.
-4. Each `Processor` class can have a custom logic to combine the data extracted from the notifications and create the final `Maintenance` object, and receives a `List` of multiple `Parsers` that will be to `parse` each type of data.
-5. Each `Parser` class supports one or more data types and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant key/values.
+2. Get an instance of the `NotificationData` class. This instance groups together `DataParts` which each contain some content and a specific type (that will match a specific `Parser`). For example, a `NotificationData` might describe a received email message, with `DataParts` corresponding to the subject line and body of the email. There are factory methods to initialize a `NotificationData` describing a single chunk of binary data, as well as others to initialize one directly from a raw email message or `email.message.EmailMessage` instance.
+3. Each `Provider` uses one or more `Processors` that will be used to build `Maintenances` when the `Provider.get_maintenances(data)` method is called.
+4. Each `Processor` class uses one or more `Parsers` to process each type of data that it handles. It can have custom logic to combine the parsed data from multiple `Parsers` to create the final `Maintenance` object.
+5. Each `Parser` class supports one or a set of related data types, and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant keys/values.
 6. When calling the `Provider.get_maintenances(data)`, the `data` argument is an instance of `NotificationData` that will be used by the corresponding `Parser` when the `Processor` will try to match them.
 
 <p align="center">
@@ -86,8 +86,8 @@ The library is available as a Python package in pypi and can be installed with p
 
 The library requires two things:
 
-- The `notificationdata`: this is the data that the library will check to extract the maintenance notifications. It can be simple (only one data type and content) or from an email, with multiple data parts.
-- The `provider` type: used to select the proper `Provider` which contains the `processor` logic to take the proper `Parsers` and use the data that they extract. By default, the `GenericProvider`(used when no other provider type is defined) will support parsing of `iCalendar` notifications using the recommended format.
+- The `notificationdata`: this is the data that the library will check to extract the maintenance notifications. It can be simple (only one data type and content, such as an iCalendar notification) or more complex (with multiple data parts of different types, such as from an email).
+- The `provider` identifier: used to select the proper `Provider` which contains the `processor` logic to take the proper `Parsers` and use the data that they extract. By default, the `GenericProvider` (used when no other provider type is defined) will support parsing of `iCalendar` notifications using the recommended format.
 
 ### Python Library
 
@@ -216,7 +216,7 @@ Circuit Maintenance Notification #0
 
 ## How to Extend the Library?
 
-Even the library aims to include support for as many providers as possible, it's likely that not all the thousands of NSP are supported and you may need to add support for some new one. Adding a new `Provider` is quite straight forward, and in the following example we are adding support for an imaginary ABCDE provider, that uses HTML notifications.
+Even though the library aims to include support for as many providers as possible, it's likely that not all the thousands of NSP are supported and you may need to add support for some new one. Adding a new `Provider` is quite straightforward, and in the following example we are adding support for an imaginary provider, ABCDE, that uses HTML notifications.
 
 First step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
 
@@ -240,7 +240,7 @@ class HtmlParserABCDE1(Html):
       ...
 ```
 
-Next step is to create the new `Provider` by defining a new class in `circuit_maintenance_parser/provider.py`. This class that inherits from `GenericProvider` only needs to define to attributes:
+Next step is to create the new `Provider` by defining a new class in `circuit_maintenance_parser/provider.py`. This class that inherits from `GenericProvider` only needs to define two attributes:
 
 - `_processors`: is a `list` of `Processor` instances that uses several data `Parsers`. In this example, we don't need to create a new custom `Processor` because the combined logic serves well (the most likely case), and we only need to use the new defined `HtmlParserABCDE1` and also the generic `EmailDateParser` that extract the email date. Also notice that you could have multiple `Processors` with different `Parsers` in this list, supporting several formats.
 - `_default_organizer`: this is a default helper to fill the `organizer` attribute in the `Maintenance` if the information is not part of the original notification.
