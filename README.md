@@ -40,7 +40,6 @@ You can leverage this library in your automation framework to process circuit ma
 3. Each `Provider` uses one or more `Processors` that will be used to build `Maintenances` when the `Provider.get_maintenances(data)` method is called.
 4. Each `Processor` class uses one or more `Parsers` to process each type of data that it handles. It can have custom logic to combine the parsed data from multiple `Parsers` to create the final `Maintenance` object.
 5. Each `Parser` class supports one or a set of related data types, and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant keys/values.
-6. When calling the `Provider.get_maintenances(data)`, the `data` argument is an instance of `NotificationData` that will be used by the corresponding `Parser` when the `Processor` will try to match them.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/nautobot/nautobot-plugin-circuit-maintenance/develop/docs/images/new_workflow.png" width="800" class="center">
@@ -227,7 +226,7 @@ from bs4.element import ResultSet  # type: ignore
 from circuit_maintenance_parser.parser import Html
 
 class HtmlParserABCDE1(Html):
-    def parse_html(self, soup) -> Dict:
+    def parse_html(self, soup: ResultSet) -> Dict:
         data = {}
         self._parse_bs(soup.find_all("b"), data)
         self._parse_tables(soup.find_all("table"), data)
