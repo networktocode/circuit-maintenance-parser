@@ -116,6 +116,7 @@ class CombinedProcessor(GenericProcessor):
     combined_maintenance_data: Dict = {}
 
     def process(self, data: NotificationData, extended_data: Dict) -> Iterable[Maintenance]:
+        """Extend base class process method to ensure that self.combined_maintenance_data is initialized correctly."""
         self.combined_maintenance_data = {}
         return super().process(data, extended_data)
 
