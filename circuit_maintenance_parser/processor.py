@@ -115,6 +115,10 @@ class CombinedProcessor(GenericProcessor):
     # The CombinedProcessor will consolidate all the parsed data into this variable
     combined_maintenance_data: Dict = {}
 
+    def process(self, data: NotificationData, extended_data: Dict) -> Iterable[Maintenance]:
+        self.combined_maintenance_data = {}
+        return super().process(data, extended_data)
+
     def process_hook(self, maintenances_extracted_data, maintenances_data):
         """All the parsers contribute with a subset of data that is extended.
 
