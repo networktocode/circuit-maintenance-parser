@@ -13,6 +13,7 @@ from circuit_maintenance_parser.errors import ProviderError
 from circuit_maintenance_parser.provider import (
     GenericProvider,
     AquaComms,
+    AWS,
     Cogent,
     Colt,
     EUNetworks,
@@ -47,6 +48,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             AquaComms,
             [("email", Path(dir_path, "data", "aquacomms", "aquacomms1.eml")),],
             [Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),],
+        ),
+        # AWS
+        (
+            AWS,
+            [("email", Path(dir_path, "data", "aws", "aws1.eml")),],
+            [Path(dir_path, "data", "aws", "aws1_result.json"),],
         ),
         # Cogent
         (

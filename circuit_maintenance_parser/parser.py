@@ -226,3 +226,24 @@ class Csv(Parser):
     def parse_csv(raw: bytes) -> List[Dict]:
         """Custom CSV parsing."""
         raise NotImplementedError
+
+
+class Text(Parser):
+    """Html parser."""
+
+    _data_types = ["text/plain"]
+
+    def parser_hook(self, raw: bytes):
+        """Execute parsing."""
+        result = []
+        soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
+        # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
+        # return of `parse_html` as an Iterable object to accommodate this potential case.
+        for data in self.parse_text(soup.text):
+            result.append(data)
+
+        return result
+
+    def parse_text(self, text) -> List[Dict]:
+        """Custom text parsing."""
+        raise NotImplementedError
