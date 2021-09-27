@@ -70,6 +70,6 @@ class TextParserAWS1(Text):
             elif re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
                 maintenace_id += line
                 data["circuits"].append(CircuitImpact(circuit_id=line, impact=Impact(impact)))
-        data["maintenance_id"] = hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()
+        data["maintenance_id"] = hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()  # nosec
         data["status"] = Status.CONFIRMED
         return [data]
