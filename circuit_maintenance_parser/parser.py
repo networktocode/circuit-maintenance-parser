@@ -241,7 +241,6 @@ class Text(Parser):
         # return of `parse_html` as an Iterable object to accommodate this potential case.
         for data in self.parse_text(soup.text):
             result.append(data)
-
         return result
 
     def parse_text(self, text) -> List[Dict]:

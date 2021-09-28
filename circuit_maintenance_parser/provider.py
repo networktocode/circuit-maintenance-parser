@@ -123,7 +123,7 @@ class AWS(GenericProvider):
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, TextParserAWS1, SubjectParserAWS1]),
     ]
-    _default_organizer = "aaaaaaaaaaaaaaa"
+    _default_organizer = "aws-account-notifications@amazon.com"
 
 
 class Cogent(GenericProvider):

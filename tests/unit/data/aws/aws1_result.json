@@ -4,32 +4,32 @@
         "circuits": [
             {
                 "circuit_id": "aaaaa-00000001",
-                "impact": "DEGRADED"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000002",
-                "impact": "DEGRADED"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000003",
-                "impact": "DEGRADED"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000004",
-                "impact": "DEGRADED"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000005",
-                "impact": "DEGRADED"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000006",
-                "impact": "DEGRADED"
+                "impact": "OUTAGE"
             }
         ],
         "end": 1621519200,
-        "maintenance_id": "21264c558a1b6a2bedaae0878d6318b0",
-        "organizer": "aaaaaaaaaaaaaaa",
+        "maintenance_id": "15faf02fcf2e999792668df97828bc76",
+        "organizer": "aws-account-notifications@amazon.com",
         "provider": "aws",
         "sequence": 1,
         "stamp": 1620337976,

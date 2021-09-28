@@ -52,8 +52,9 @@ class TextParserAWS1(Text):
             the same time.
         """
         data = {"circuits": []}
-        impact = "OUTAGE"
+        impact = Impact.OUTAGE
         maintenace_id = ""
+        status = Status.CONFIRMED
         for line in text.splitlines():
             if "planned maintenance" in line.lower():
                 data["summary"] = line
@@ -63,13 +64,17 @@ class TextParserAWS1(Text):
                 )
                 if search:
                     data["start"] = self.dt2ts(parser.parse(search.group(1)))
-                    maintenace_id += str(data["start"])
                     data["end"] = self.dt2ts(parser.parse(search.group(2)))
+                    maintenace_id += str(data["start"])
+                    maintenace_id += str(data["end"])
                 if "may become unavailable" in line.lower():
-                    impact = "DEGRADED"
+                    impact = Impact.OUTAGE
+                elif "has been cancelled" in line.lower():
+                    impact = Impact.NO_IMPACT
+                    status = Status.CANCELLED
             elif re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
                 maintenace_id += line
-                data["circuits"].append(CircuitImpact(circuit_id=line, impact=Impact(impact)))
+                data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
         data["maintenance_id"] = hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()  # nosec
-        data["status"] = Status.CONFIRMED
+        data["status"] = status
         return [data]

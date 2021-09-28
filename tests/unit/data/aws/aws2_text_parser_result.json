@@ -1,0 +1,35 @@
+[
+    {
+        "circuits": [
+            {
+                "circuit_id": "aaaaa-00000001",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "aaaaa-00000002",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "aaaaa-00000003",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "aaaaa-00000004",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "aaaaa-00000005",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "aaaaa-00000006",
+                "impact": "NO-IMPACT"
+            }
+        ],
+        "end": 1631584920,
+        "maintenance_id": "47876b7d5a5198643a1a9cb7f954487a",
+        "start": 1631559720,
+        "status": "CANCELLED",
+        "summary": "We would like to inform you that the planned maintenance that was scheduled for AWS Direct Connect endpoint in Equinix SG2, Singapore, SGP from Mon, 13 Sep 2021 19:02:00 GMT to Tue, 14 Sep 2021 02:02:00 GMT has been cancelled. Please find below your AWS Direct Connect services that would have been affected by this planned maintenance."
+    }
+]

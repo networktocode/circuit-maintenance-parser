@@ -55,6 +55,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [("email", Path(dir_path, "data", "aws", "aws1.eml")),],
             [Path(dir_path, "data", "aws", "aws1_result.json"),],
         ),
+        (
+            AWS,
+            [("email", Path(dir_path, "data", "aws", "aws2.eml")),],
+            [Path(dir_path, "data", "aws", "aws2_result.json"),],
+        ),
         # Cogent
         (
             Cogent,
