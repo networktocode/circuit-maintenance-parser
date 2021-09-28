@@ -79,7 +79,6 @@ class TextParserAWS1(Text):
                 if "may become unavailable" in line.lower():
                     impact = Impact.OUTAGE
                 elif "has been cancelled" in line.lower():
-                    impact = Impact.NO_IMPACT
                     status = Status.CANCELLED
             elif re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
                 maintenace_id += line
