@@ -6,6 +6,10 @@
 
 - #86 - Fix `CombinedProcessor` carries over data from previous parsing
 
+### Added
+
+- #84 - New parser added for text. Added new provider `AquaComms` using `Text` and `EmailSubjectParser`
+
 ## v2.0.1 - 2021-09-16
 
 ### Fixed
