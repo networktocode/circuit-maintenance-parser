@@ -4,7 +4,7 @@ import logging
 import quopri
 import re
 
-import bs4
+import bs4  # type: ignore
 
 from dateutil import parser
 
