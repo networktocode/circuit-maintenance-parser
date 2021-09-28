@@ -1,7 +1,10 @@
 """AquaComms parser."""
 import hashlib
 import logging
+import quopri
 import re
+
+import bs4
 
 from dateutil import parser
 
@@ -29,6 +32,12 @@ class SubjectParserAWS1(EmailSubjectParser):
 
 class TextParserAWS1(Text):
     """Parse text body of email."""
+
+    @staticmethod
+    def get_text_hook(raw):
+        """Modify soup before entering `parse_text`."""
+        soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
+        return soup.text
 
     def parse_text(self, text):
         """Parse text.

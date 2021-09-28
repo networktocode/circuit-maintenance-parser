@@ -229,19 +229,22 @@ class Csv(Parser):
 
 
 class Text(Parser):
-    """Html parser."""
+    """Text parser."""
 
     _data_types = ["text/plain"]
 
     def parser_hook(self, raw: bytes):
         """Execute parsing."""
         result = []
-        soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
-        # Even we have not noticed any HTML notification with more than one maintenance yet, we define the
-        # return of `parse_html` as an Iterable object to accommodate this potential case.
-        for data in self.parse_text(soup.text):
+        text = self.get_text_hook(raw)
+        for data in self.parse_text(text):
             result.append(data)
         return result
+
+    @staticmethod
+    def get_text_hook(raw):
+        """Can be overwritten by subclasses."""
+        return raw.decode()
 
     def parse_text(self, text) -> List[Dict]:
         """Custom text parsing."""
