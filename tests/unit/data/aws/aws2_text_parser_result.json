@@ -3,27 +3,27 @@
         "circuits": [
             {
                 "circuit_id": "aaaaa-00000001",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000002",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000003",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000004",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000005",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             },
             {
                 "circuit_id": "aaaaa-00000006",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             }
         ],
         "end": 1631584920,
