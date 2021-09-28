@@ -242,7 +242,7 @@ class Text(Parser):
         return result
 
     @staticmethod
-    def get_text_hook(raw):
+    def get_text_hook(raw: bytes) -> str:
         """Can be overwritten by subclasses."""
         return raw.decode()
 
