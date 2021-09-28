@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.2 - 2021-09-28
+
+### Fixed
+
+- #86 - Fix `CombinedProcessor` carries over data from previous parsing
+
 ## v2.0.1 - 2021-09-16
 
 ### Fixed
