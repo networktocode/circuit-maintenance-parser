@@ -1,0 +1,41 @@
+[
+    {
+        "account": "0000000000001",
+        "circuits": [
+            {
+                "circuit_id": "aaaaa-00000001",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "aaaaa-00000002",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "aaaaa-00000003",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "aaaaa-00000004",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "aaaaa-00000005",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "aaaaa-00000006",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1621519200,
+        "maintenance_id": "15faf02fcf2e999792668df97828bc76",
+        "organizer": "aws-account-notifications@amazon.com",
+        "provider": "aws",
+        "sequence": 1,
+        "stamp": 1620337976,
+        "start": 1621497600,
+        "status": "CONFIRMED",
+        "summary": "Planned maintenance has been scheduled on an AWS Direct Connect router in A Block, New York, NY from Thu, 20 May 2021 08:00:00 GMT to Thu, 20 May 2021 14:00:00 GMT for 6 hours. During this maintenance window, your AWS Direct Connect services listed below may become unavailable.",
+        "uid": "0"
+    }
+]

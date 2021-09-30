@@ -1,0 +1,45 @@
+Subject: [rCluster Request] [rCloud AWS Notification] AWS Direct Connect
+ Planned Maintenance Notification [AWS Account: 0000000000001]
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-SM-COMMUNICATION: true
+X-SM-COMMUNICATION-TYPE: AWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED
+X-SM-DEDUPING-ID: 7cc8bab7-00bb-44e0-a3ec-bdd1a5560b80-EMAIL--1012261942-036424c1a19ca69ca7ea459ebd6823e1
+Date: Thu, 6 May 2021 21:52:56 +0000
+Feedback-ID: 1.us-east-1.xvKJ2gIiw98/SnInpbS9SQT1XBoAzwrySbDsqgMkBQI=:AmazonSES
+X-SES-Outgoing: 2021.05.06-54.240.48.83
+X-Original-Sender: no-reply-aws@amazon.com
+X-Original-Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@amazon.com header.s=szqgv33erturdv5cvz4vtb5qcy53gdkn
+ header.b=IQc0x0aC;       dkim=pass header.i=@amazonses.com
+ header.s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug header.b=X4gZtDlT;       spf=pass
+ (google.com: domain of 0100017943ab6519-f09ba161-049c-45e4-8ff3-698af4d94f86-000000@amazonses.com
+ designates 54.240.48.83 as permitted sender) smtp.mailfrom=0100017943ab6519-f09ba161-049c-45e4-8ff3-698af4d94f86-000000@amazonses.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=amazon.com
+X-Original-From: "Amazon Web Services, Inc." <no-reply-aws@amazon.com>
+Reply-To: "Amazon Web Services, Inc." <no-reply-aws@amazon.com>
+Precedence: list
+
+Hello,
+
+We would like to inform you that the planned maintenance that was scheduled for AWS Direct Connect endpoint in Equinix SG2, Singapore, SGP from Mon, 13 Sep 2021 19:02:00 GMT to Tue, 14 Sep 2021 02:02:00 GMT has been cancelled. Please find below your AWS Direct Connect services that would have been affected by this planned maintenance.
+
+aaaaa-00000001
+aaaaa-00000002
+aaaaa-00000003
+aaaaa-00000004
+aaaaa-00000005
+aaaaa-00000006
+
+We sincerely regret any inconvenience our planning process may have caused you. If you have any questions regarding the planned work, or if you would like to report a fault or adjust your contact information, please contact AWS Support[1].
+
+[1] https://aws.amazon.com/support
+
+Sincerely,
+Amazon Web Services
+
+Amazon Web Services, Inc. is a subsidiary of Amazon.com, Inc. Amazon.com is=
+ a registered trademark of Amazon.com, Inc. This message was produced and d=
+istributed by Amazon Web Services Inc., 410 Terry Ave. North, Seattle, WA 9=
+8109-5210.

@@ -17,6 +17,7 @@ from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProces
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
 
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
+from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -156,6 +157,15 @@ class AquaComms(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserAquaComms1, SubjectParserAquaComms1]),
     ]
     _default_organizer = "tickets@aquacomms.com"
+
+
+class AWS(GenericProvider):
+    """AWS provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, TextParserAWS1, SubjectParserAWS1]),
+    ]
+    _default_organizer = "aws-account-notifications@amazon.com"
 
 
 class Cogent(GenericProvider):
