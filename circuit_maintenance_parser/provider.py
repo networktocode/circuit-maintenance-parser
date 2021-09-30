@@ -74,17 +74,17 @@ class GenericProvider(BaseModel):
     def include_filter_check(self, data: NotificationData) -> bool:
         """If `_include_filter` is defined, it verifies that the matching criteria is met."""
         if self._include_filter:
-            return self.filter_check(True, self._include_filter, data)
+            return self.filter_check(self._include_filter, data)
         return True
 
     def exclude_filter_check(self, data: NotificationData) -> bool:
         """If `_exclude_filter` is defined, it verifies that the matching criteria is met."""
         if self._exclude_filter:
-            return self.filter_check(False, self._exclude_filter, data)
+            return self.filter_check(self._exclude_filter, data)
         return False
 
     @staticmethod
-    def filter_check(match_result: bool, filter_dict: Dict, data: NotificationData) -> bool:
+    def filter_check(filter_dict: Dict, data: NotificationData) -> bool:
         """Generic filter check."""
         for data_part in data.data_parts:
             filter_data_type = data_part.type
@@ -93,9 +93,9 @@ class GenericProvider(BaseModel):
 
             data_part_content = data_part.content.decode()
             if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
-                return match_result
+                return True
 
-        return not match_result
+        return False
 
     def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
         """Main entry method that will use the defined `_processors` in order to extract the `Maintenances` from data."""
