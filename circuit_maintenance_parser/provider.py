@@ -50,15 +50,43 @@ class GenericProvider(BaseModel):
             that will be used. Default: `[SimpleProcessor(data_parsers=[ICal])]`.
         _default_organizer (optional): Defines a default `organizer`, an email address, to be used to create a
             `Maintenance` in absence of the information in the original notification.
+        _include_filter (optional): Dictionary that defines matching string per data type to take a notification into
+            account.
+        _exclude_filter (optional): Dictionary that defines matching string per data type to NOT take a notification
+            into account.
 
     Examples:
         >>> GenericProvider()
         GenericProvider()
     """
 
-    _include_filter: Dict[str, List[str]] = {}
     _processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
     _default_organizer: str = "unknown"
+
+    _include_filter: Dict[str, List[str]] = {}
+    _exclude_filter: Dict[str, List[str]] = {}
+
+    def include_filter_check(self, data: NotificationData) -> bool:
+        """If `_include_filter` is defined, it verifies that the matching criteria is met."""
+        if self._include_filter:
+            return self.filter_check(True, self._include_filter, data)
+        return True
+
+    def exclude_filter_check(self, data: NotificationData) -> bool:
+        """If `_exclude_filter` is defined, it verifies that the matching criteria is met."""
+        if self._exclude_filter:
+            return self.filter_check(False, self._exclude_filter, data)
+        return False
+
+    @staticmethod
+    def filter_check(match_result: bool, filter_dict: Dict, data: NotificationData) -> bool:
+        """Generic filter check."""
+        for filter_data_type, data_part in itertools.product(filter_dict, data.data_parts):
+            if data_part.type == filter_data_type:
+                if any(filter_data in data_part.content.decode() for filter_data in filter_dict[filter_data_type]):
+                    return match_result
+
+        return not match_result
 
     def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
         """Main entry method that will use the defined `_processors` in order to extract the `Maintenances` from data."""
@@ -66,14 +94,7 @@ class GenericProvider(BaseModel):
         error_message = ""
         related_exceptions = []
 
-        for include_filter_data_type, data_part in itertools.product(self._include_filter, data.data_parts):
-            if data_part.type == include_filter_data_type:
-                if any(
-                    include_filter_data in data_part.content.decode()
-                    for include_filter_data in self._include_filter[include_filter_data_type]
-                ):
-                    break
-        else:
+        if self.exclude_filter_check(data) or not self.include_filter_check(data):
             return []
 
         for processor in self._processors:
