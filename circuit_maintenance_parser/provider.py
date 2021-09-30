@@ -1,8 +1,9 @@
 """Definition of Provider class as the entry point to the library."""
 import logging
 import traceback
+import itertools
 
-from typing import Iterable, List
+from typing import Iterable, List, Dict
 
 from pydantic import BaseModel
 
@@ -55,6 +56,7 @@ class GenericProvider(BaseModel):
         GenericProvider()
     """
 
+    _include_filter: Dict[str, List[str]] = {}
     _processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
     _default_organizer: str = "unknown"
 
@@ -63,6 +65,16 @@ class GenericProvider(BaseModel):
         provider_name = self.__class__.__name__
         error_message = ""
         related_exceptions = []
+
+        for include_filter_data_type, data_part in itertools.product(self._include_filter, data.data_parts):
+            if data_part.type == include_filter_data_type:
+                if any(
+                    include_filter_data in data_part.content.decode()
+                    for include_filter_data in self._include_filter[include_filter_data_type]
+                ):
+                    break
+        else:
+            return []
 
         for processor in self._processors:
             try:
@@ -161,6 +173,8 @@ class HGC(GenericProvider):
 
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
+
+    _include_filter = {"email-header-subject": ["Scheduled Maintenance Window"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserLumen1]),
