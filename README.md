@@ -183,7 +183,7 @@ Circuit Maintenance Notification #0
 circuit-maintenance-parser --data-file "/tmp/___ZAYO TTN-00000000 Planned MAINTENANCE NOTIFICATION___.eml" --data-type email --provider-type zayo
 Circuit Maintenance Notification #0
 {
-  "account": "Linode",
+  "account": "some account",
   "circuits": [
     {
       "circuit_id": "/OGYX/000000/ /ZYO /",

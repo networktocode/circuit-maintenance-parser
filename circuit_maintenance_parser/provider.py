@@ -1,7 +1,7 @@
 """Definition of Provider class as the entry point to the library."""
 import logging
+import re
 import traceback
-import itertools
 
 from typing import Iterable, List, Dict
 
@@ -14,6 +14,7 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
+from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
 
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
@@ -55,6 +56,10 @@ class GenericProvider(BaseModel):
         _exclude_filter (optional): Dictionary that defines matching string per data type to NOT take a notification
             into account.
 
+    Notes:
+        - If a notification matches both, the `_include_filter` and `_exclude_filter`, the second takes precedence and
+          the notification will be filtered out.
+
     Examples:
         >>> GenericProvider()
         GenericProvider()
@@ -81,11 +86,14 @@ class GenericProvider(BaseModel):
     @staticmethod
     def filter_check(match_result: bool, filter_dict: Dict, data: NotificationData) -> bool:
         """Generic filter check."""
-        for filter_data_type, data_part in itertools.product(filter_dict, data.data_parts):
-            if data_part.type == filter_data_type:
-                data_part_content = data_part.content.decode()
-                if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
-                    return match_result
+        for data_part in data.data_parts:
+            filter_data_type = data_part.type
+            if filter_data_type not in filter_dict:
+                continue
+
+            data_part_content = data_part.content.decode()
+            if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
+                return match_result
 
         return not match_result
 
@@ -196,7 +204,7 @@ class HGC(GenericProvider):
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
 
-    _include_filter = {"email-header-subject": ["Scheduled Maintenance Window"]}
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Scheduled Maintenance Window"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserLumen1]),
