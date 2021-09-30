@@ -7,7 +7,7 @@ import pytest
 
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProviderError
-from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.provider import (
@@ -94,6 +94,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen1.html")),
                 (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen1_result.json"),
@@ -105,6 +106,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen2.html")),
                 (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen2_result.json"),
@@ -116,6 +118,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen3.html")),
                 (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen3_result.json"),
@@ -127,6 +130,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen4.html")),
                 (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen4_result.json"),
