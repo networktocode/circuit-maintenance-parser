@@ -83,7 +83,8 @@ class GenericProvider(BaseModel):
         """Generic filter check."""
         for filter_data_type, data_part in itertools.product(filter_dict, data.data_parts):
             if data_part.type == filter_data_type:
-                if any(filter_data in data_part.content.decode() for filter_data in filter_dict[filter_data_type]):
+                data_part_content = data_part.content.decode()
+                if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
                     return match_result
 
         return not match_result
