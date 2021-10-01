@@ -1,8 +1,9 @@
 """Definition of Provider class as the entry point to the library."""
 import logging
+import re
 import traceback
 
-from typing import Iterable, List
+from typing import Iterable, List, Dict
 
 from pydantic import BaseModel
 
@@ -13,6 +14,7 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
+from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
 
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
@@ -50,6 +52,14 @@ class GenericProvider(BaseModel):
             that will be used. Default: `[SimpleProcessor(data_parsers=[ICal])]`.
         _default_organizer (optional): Defines a default `organizer`, an email address, to be used to create a
             `Maintenance` in absence of the information in the original notification.
+        _include_filter (optional): Dictionary that defines matching regex per data type to take a notification into
+            account.
+        _exclude_filter (optional): Dictionary that defines matching regex per data type to NOT take a notification
+            into account.
+
+    Notes:
+        - If a notification matches both the `_include_filter` and `_exclude_filter`, the exclusion takes precedence and
+          the notification will be filtered out.
 
     Examples:
         >>> GenericProvider()
@@ -59,11 +69,54 @@ class GenericProvider(BaseModel):
     _processors: List[GenericProcessor] = [SimpleProcessor(data_parsers=[ICal])]
     _default_organizer: str = "unknown"
 
+    _include_filter: Dict[str, List[str]] = {}
+    _exclude_filter: Dict[str, List[str]] = {}
+
+    def include_filter_check(self, data: NotificationData) -> bool:
+        """If `_include_filter` is defined, it verifies that the matching criteria is met."""
+        if self._include_filter:
+            return self.filter_check(self._include_filter, data, "include")
+        return True
+
+    def exclude_filter_check(self, data: NotificationData) -> bool:
+        """If `_exclude_filter` is defined, it verifies that the matching criteria is met."""
+        if self._exclude_filter:
+            return self.filter_check(self._exclude_filter, data, "exclude")
+        return False
+
+    @staticmethod
+    def filter_check(filter_dict: Dict, data: NotificationData, filter_type: str) -> bool:
+        """Generic filter check."""
+        data_part_content = None
+        for data_part in data.data_parts:
+            filter_data_type = data_part.type
+            if filter_data_type not in filter_dict:
+                continue
+
+            data_part_content = data_part.content.decode()
+            if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
+                logger.debug("Matching %s filter expression for %s.", filter_type, data_part_content)
+                return True
+
+        if data_part_content:
+            logger.warning("Not matching any %s filter expression for %s.", filter_type, data_part_content)
+        else:
+            logger.warning(
+                "Not matching any %s filter expression because the notification doesn't contain the expected data_types: %s",
+                filter_type,
+                ", ".join(filter_dict.keys()),
+            )
+        return False
+
     def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
         """Main entry method that will use the defined `_processors` in order to extract the `Maintenances` from data."""
         provider_name = self.__class__.__name__
         error_message = ""
         related_exceptions = []
+
+        if self.exclude_filter_check(data) or not self.include_filter_check(data):
+            logger.debug("Skipping notification %s due filtering policy for %s.", data, self.__class__.__name__)
+            return []
 
         for processor in self._processors:
             try:
@@ -171,6 +224,8 @@ class HGC(GenericProvider):
 
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
+
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Scheduled Maintenance"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserLumen1]),

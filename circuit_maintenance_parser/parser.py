@@ -15,6 +15,7 @@ from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
+from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
 
 # pylint: disable=no-member
 
@@ -177,7 +178,7 @@ class Html(Parser):
 class EmailDateParser(Parser):
     """Parser for Email Date."""
 
-    _data_types = ["email-header-date"]
+    _data_types = [EMAIL_HEADER_DATE]
 
     def parser_hook(self, raw: bytes):
         """Execute parsing."""
@@ -190,7 +191,7 @@ class EmailDateParser(Parser):
 class EmailSubjectParser(Parser):
     """Parse data from subject or email."""
 
-    _data_types = ["email-header-subject"]
+    _data_types = [EMAIL_HEADER_SUBJECT]
 
     def parser_hook(self, raw: bytes):
         """Execute parsing."""
