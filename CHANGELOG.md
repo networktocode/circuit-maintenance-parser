@@ -4,7 +4,7 @@
 
 ### Added
 
-- #91 - `Provider` now adds `_include_filter` and `_exclude_filter` attributes to filter in and out notifications that are relevant to be parsed vs other that are not, avoiding false positives.
+- #91 - `Provider` now adds `_include_filter` and `_exclude_filter` attributes (using regex) to filter in and out notifications that are relevant to be parsed vs other that are not, avoiding false positives.
 
 ## v2.0.1 - 2021-09-16
 
