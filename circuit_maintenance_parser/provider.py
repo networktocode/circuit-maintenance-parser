@@ -87,6 +87,7 @@ class GenericProvider(BaseModel):
     @staticmethod
     def filter_check(filter_dict: Dict, data: NotificationData, filter_type: str) -> bool:
         """Generic filter check."""
+        data_part_content = None
         for data_part in data.data_parts:
             filter_data_type = data_part.type
             if filter_data_type not in filter_dict:
@@ -97,7 +98,14 @@ class GenericProvider(BaseModel):
                 logger.debug("Matching %s filter expression for %s.", filter_type, data_part_content)
                 return True
 
-        logger.warning("Not matching any %s filter expression for %s.", filter_type, data_part_content)
+        if data_part_content:
+            logger.warning("Not matching any %s filter expression for %s.", filter_type, data_part_content)
+        else:
+            logger.warning(
+                "Not matching any %s filter expression because the notification doesn't contain the expected data_types: %s",
+                filter_type,
+                ", ".join(filter_dict.keys()),
+            )
         return False
 
     def get_maintenances(self, data: NotificationData) -> Iterable[Maintenance]:
