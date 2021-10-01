@@ -7,6 +7,7 @@ from .errors import NonexistentProviderError, ProviderError
 from .provider import (
     GenericProvider,
     AquaComms,
+    AWS,
     Cogent,
     Colt,
     EUNetworks,
@@ -29,6 +30,7 @@ from .provider import (
 SUPPORTED_PROVIDERS = (
     GenericProvider,
     AquaComms,
+    AWS,
     Cogent,
     Colt,
     EUNetworks,

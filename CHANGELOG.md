@@ -6,6 +6,16 @@
 
 - #91 - `Provider` now adds `_include_filter` and `_exclude_filter` attributes (using regex) to filter in and out notifications that are relevant to be parsed vs other that are not, avoiding false positives.
 
+## v2.0.2 - 2021-09-28
+
+### Fixed
+
+- #86 - Fix `CombinedProcessor` carries over data from previous parsing
+
+### Added
+
+- #84 - New parser added for text. Added new provider `AquaComms` using `Text` and `EmailSubjectParser`
+
 ## v2.0.1 - 2021-09-16
 
 ### Fixed

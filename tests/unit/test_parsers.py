@@ -8,6 +8,7 @@ import pytest
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
+from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -50,6 +51,27 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             SubjectParserAquaComms1,
             Path(dir_path, "data", "aquacomms", "aquacomms1.eml"),
             Path(dir_path, "data", "aquacomms", "aquacomms1_subject_parser_result.json"),
+        ),
+        # AWS
+        (
+            TextParserAWS1,
+            Path(dir_path, "data", "aws", "aws1.eml"),
+            Path(dir_path, "data", "aws", "aws1_text_parser_result.json"),
+        ),
+        (
+            SubjectParserAWS1,
+            Path(dir_path, "data", "aws", "aws1.eml"),
+            Path(dir_path, "data", "aws", "aws1_subject_parser_result.json"),
+        ),
+        (
+            TextParserAWS1,
+            Path(dir_path, "data", "aws", "aws2.eml"),
+            Path(dir_path, "data", "aws", "aws2_text_parser_result.json"),
+        ),
+        (
+            SubjectParserAWS1,
+            Path(dir_path, "data", "aws", "aws2.eml"),
+            Path(dir_path, "data", "aws", "aws2_subject_parser_result.json"),
         ),
         # Cogent
         (

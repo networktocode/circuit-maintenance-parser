@@ -227,3 +227,26 @@ class Csv(Parser):
     def parse_csv(raw: bytes) -> List[Dict]:
         """Custom CSV parsing."""
         raise NotImplementedError
+
+
+class Text(Parser):
+    """Text parser."""
+
+    _data_types = ["text/plain"]
+
+    def parser_hook(self, raw: bytes):
+        """Execute parsing."""
+        result = []
+        text = self.get_text_hook(raw)
+        for data in self.parse_text(text):
+            result.append(data)
+        return result
+
+    @staticmethod
+    def get_text_hook(raw: bytes) -> str:
+        """Can be overwritten by subclasses."""
+        return raw.decode()
+
+    def parse_text(self, text) -> List[Dict]:
+        """Custom text parsing."""
+        raise NotImplementedError
