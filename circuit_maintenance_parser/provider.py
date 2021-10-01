@@ -204,7 +204,7 @@ class HGC(GenericProvider):
 class Lumen(GenericProvider):
     """Lumen provider custom class."""
 
-    _include_filter = {EMAIL_HEADER_SUBJECT: ["Scheduled Maintenance Window"]}
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Scheduled Maintenance"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserLumen1]),
