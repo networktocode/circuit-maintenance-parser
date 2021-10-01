@@ -15,6 +15,7 @@ from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
+from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
 
 # pylint: disable=no-member
 
@@ -177,7 +178,7 @@ class Html(Parser):
 class EmailDateParser(Parser):
     """Parser for Email Date."""
 
-    _data_types = ["email-header-date"]
+    _data_types = [EMAIL_HEADER_DATE]
 
     def parser_hook(self, raw: bytes):
         """Execute parsing."""
@@ -190,7 +191,7 @@ class EmailDateParser(Parser):
 class EmailSubjectParser(Parser):
     """Parse data from subject or email."""
 
-    _data_types = ["email-header-subject"]
+    _data_types = [EMAIL_HEADER_SUBJECT]
 
     def parser_hook(self, raw: bytes):
         """Execute parsing."""
@@ -225,4 +226,27 @@ class Csv(Parser):
     @staticmethod
     def parse_csv(raw: bytes) -> List[Dict]:
         """Custom CSV parsing."""
+        raise NotImplementedError
+
+
+class Text(Parser):
+    """Text parser."""
+
+    _data_types = ["text/plain"]
+
+    def parser_hook(self, raw: bytes):
+        """Execute parsing."""
+        result = []
+        text = self.get_text_hook(raw)
+        for data in self.parse_text(text):
+            result.append(data)
+        return result
+
+    @staticmethod
+    def get_text_hook(raw: bytes) -> str:
+        """Can be overwritten by subclasses."""
+        return raw.decode()
+
+    def parse_text(self, text) -> List[Dict]:
+        """Custom text parsing."""
         raise NotImplementedError

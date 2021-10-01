@@ -7,12 +7,13 @@ import pytest
 
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProviderError
-
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.provider import (
     GenericProvider,
     AquaComms,
+    AWS,
     Cogent,
     Colt,
     EUNetworks,
@@ -48,12 +49,23 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [("email", Path(dir_path, "data", "aquacomms", "aquacomms1.eml")),],
             [Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),],
         ),
+        # AWS
+        (
+            AWS,
+            [("email", Path(dir_path, "data", "aws", "aws1.eml")),],
+            [Path(dir_path, "data", "aws", "aws1_result.json"),],
+        ),
+        (
+            AWS,
+            [("email", Path(dir_path, "data", "aws", "aws2.eml")),],
+            [Path(dir_path, "data", "aws", "aws2_result.json"),],
+        ),
         # Cogent
         (
             Cogent,
             [
                 ("html", Path(dir_path, "data", "cogent", "cogent1.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "cogent", "cogent1_result.json"),
@@ -64,7 +76,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Cogent,
             [
                 ("html", Path(dir_path, "data", "cogent", "cogent2.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "cogent", "cogent2_result.json"),
@@ -93,7 +105,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Lumen,
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen1.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen1_result.json"),
@@ -104,7 +117,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Lumen,
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen2.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen2_result.json"),
@@ -115,7 +129,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Lumen,
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen3.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen3_result.json"),
@@ -126,7 +141,8 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Lumen,
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen4.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen4_result.json"),
@@ -138,7 +154,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Megaport,
             [
                 ("html", Path(dir_path, "data", "megaport", "megaport1.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "megaport", "megaport1_result.json"),
@@ -149,7 +165,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Megaport,
             [
                 ("html", Path(dir_path, "data", "megaport", "megaport2.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "megaport", "megaport2_result.json"),
@@ -209,7 +225,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Telstra,
             [
                 ("html", Path(dir_path, "data", "telstra", "telstra1.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "telstra", "telstra1_result.json"),
@@ -220,7 +236,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Telstra,
             [
                 ("html", Path(dir_path, "data", "telstra", "telstra2.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "telstra", "telstra2_result.json"),
@@ -233,7 +249,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Turkcell,
             [
                 ("html", Path(dir_path, "data", "turkcell", "turkcell1.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "turkcell", "turkcell1_result.json"),
@@ -244,7 +260,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Turkcell,
             [
                 ("html", Path(dir_path, "data", "turkcell", "turkcell2.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "turkcell", "turkcell2_result.json"),
@@ -256,7 +272,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Verizon,
             [
                 ("html", Path(dir_path, "data", "verizon", "verizon1.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "verizon", "verizon1_result.json"),
@@ -267,7 +283,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Verizon,
             [
                 ("html", Path(dir_path, "data", "verizon", "verizon2.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "verizon", "verizon2_result.json"),
@@ -278,7 +294,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Verizon,
             [
                 ("html", Path(dir_path, "data", "verizon", "verizon3.html")),
-                ("email-header-date", Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
             [
                 Path(dir_path, "data", "verizon", "verizon3_result.json"),

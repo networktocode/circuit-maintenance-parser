@@ -59,6 +59,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### Supported providers based on other parsers
 
+- AWS
 - AquaComms
 - Cogent
 - Colt
@@ -193,7 +194,7 @@ There is also a `cli` entrypoint `circuit-maintenance-parser` which offers easy 
 circuit-maintenance-parser --data-file "/tmp/___ZAYO TTN-00000000 Planned MAINTENANCE NOTIFICATION___.eml" --data-type email --provider-type zayo
 Circuit Maintenance Notification #0
 {
-  "account": "my_account",
+  "account": "some account",
   "circuits": [
     {
       "circuit_id": "/OGYX/000000/ /ZYO /",
@@ -297,6 +298,7 @@ The project is following Network to Code software development guidelines and is 
 1. Define the `Parsers`(inheriting from some of the generic `Parsers` or a new one) that will extract the data from the notification, that could contain itself multiple `DataParts`. The `data_type` of the `Parser` and the `DataPart` have to match. The custom `Parsers` will be placed in the `parsers` folder.
 2. Update the `unit/test_parsers.py` with the new parsers, providing some data to test and validate the extracted data.
 3. Define a new `Provider` inheriting from the `GenericProvider`, defining the `Processors` and the respective `Parsers` to be used. Maybe you can reuse some of the generic `Processors` or maybe you will need to create a custom one. If this is the case, place it in the `processors` folder.
+   - The `Provider` also supports the definition of a `_include_filter` and a `_exclude_filter` to limit the notifications that are actually processed, avoiding false positive errors for notification that are not relevant.
 4. Update the `unit/test_e2e.py` with the new provider, providing some data to test and validate the final `Maintenances` created.
 5. **Expose the new `Provider` class** updating the map `SUPPORTED_PROVIDERS` in `circuit_maintenance_parser/__init__.py` to officially expose the `Provider`.
 

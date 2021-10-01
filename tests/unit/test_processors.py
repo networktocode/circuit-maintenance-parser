@@ -49,6 +49,7 @@ class FakeParser1(FakeParser):
 # Fake data used for SimpleProcessor
 fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
 # Fake data used for CombinedProcessor
+fake_data_type_0 = NotificationData.init_from_raw("fake_type_0", b"fake data")
 fake_data_for_combined = NotificationData.init_from_raw("fake_type_0", b"fake data")
 if fake_data_for_combined:
     fake_data_for_combined.data_parts.append(DataPart("fake_type_1", b"fake data"))
@@ -107,3 +108,18 @@ def test_combinedprocessor_missing_data():
             processor.process(fake_data_for_combined, EXTENDED_DATA)
 
         assert "Not enough information available to create a Maintenance notification" in str(e_info)
+
+
+def test_combinedprocessor_bleed():
+    """Test CombinedProcessor to make sure that information from one processing doesn't bleed over to another."""
+    processor = CombinedProcessor(data_parsers=[FakeParser0, FakeParser1])
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
+        processor.process(fake_data_for_combined, EXTENDED_DATA)
+        assert mock_maintenance.call_count == 1
+        mock_maintenance.assert_called_with(**{**PARSED_DATA[0], **PARSED_DATA[1], **EXTENDED_DATA})
+
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
+        processor.process(fake_data_type_0, EXTENDED_DATA)
+        assert mock_maintenance.call_count == 1
+        mock_maintenance.assert_called_with(**{**PARSED_DATA[0], **EXTENDED_DATA})

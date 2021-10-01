@@ -4,6 +4,8 @@ from typing import List, NamedTuple, Optional, Type, Set
 
 import email
 from pydantic import BaseModel, Extra
+from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
+
 
 logger = logging.getLogger(__name__)
 
@@ -73,9 +75,8 @@ class NotificationData(BaseModel, extra=Extra.forbid):
             cls.walk_email(email_message, data_parts)
 
             # Adding extra headers that are interesting to be parsed
-            data_parts.add(DataPart("email-header-subject", email_message["Subject"].encode()))
-            # TODO: Date could be used to extend the "Stamp" time of a notification when not available, but we need a parser
-            data_parts.add(DataPart("email-header-date", email_message["Date"].encode()))
+            data_parts.add(DataPart(EMAIL_HEADER_SUBJECT, email_message["Subject"].encode()))
+            data_parts.add(DataPart(EMAIL_HEADER_DATE, email_message["Date"].encode()))
             return cls(data_parts=list(data_parts))
         except Exception:  # pylint: disable=broad-except
             logger.exception("Error found initializing data from email message: %s", email_message)

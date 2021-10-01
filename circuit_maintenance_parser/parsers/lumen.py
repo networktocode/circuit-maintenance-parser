@@ -6,7 +6,7 @@ from dateutil import parser
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
@@ -88,8 +88,16 @@ class HtmlParserLumen1(Html):
                     if "account" not in data:
                         data["account"] = cells[idx].string
                     if num_columns == 10:
-                        if cells[idx + 9].string == "Completed":
+                        status_string = cells[idx + 9].string
+                        if status_string == "Completed":
                             data["status"] = Status("COMPLETED")
+                        elif status_string == "Postponed":
+                            data["status"] = Status("RE-SCHEDULED")
+                        elif status_string == "Not Completed":
+                            data["status"] = Status("CANCELLED")
+                    elif "status" not in data:
+                        # Update to an existing ticket may not include an update to the status - make a guess
+                        data["status"] = "CONFIRMED"
 
                     data_circuit = {}
                     data_circuit["circuit_id"] = cells[idx + 1].string
