@@ -1,9 +1,10 @@
 # Changelog
 
-## v2.0.3
+## v2.0.3 - 2021-10-01
 
 ### Added
 
+- #84 - New parser added for text. Added new provider `AWS` using `Text` and `EmailSubjectParser`
 - #91 - `Provider` now adds `_include_filter` and `_exclude_filter` attributes (using regex) to filter in and out notifications that are relevant to be parsed vs other that are not, avoiding false positives.
 
 ### Fixed
@@ -15,10 +16,6 @@
 ### Fixed
 
 - #86 - Fix `CombinedProcessor` carries over data from previous parsing
-
-### Added
-
-- #84 - New parser added for text. Added new provider `AWS` using `Text` and `EmailSubjectParser`
 
 ## v2.0.1 - 2021-09-16
 
