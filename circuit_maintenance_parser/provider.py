@@ -58,7 +58,7 @@ class GenericProvider(BaseModel):
             into account.
 
     Notes:
-        - If a notification matches both, the `_include_filter` and `_exclude_filter`, the second takes precedence and
+        - If a notification matches both the `_include_filter` and `_exclude_filter`, the exclusion takes precedence and
           the notification will be filtered out.
 
     Examples:
