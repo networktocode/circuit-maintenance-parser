@@ -30,3 +30,7 @@ class NonexistentParserError(Exception):
 
 class NonexistentProviderError(Exception):
     """Nonexistent Notification Provider."""
+
+
+class RemoteGeoAPIError(Exception):
+    """Cannot connect to the remote Geolocator service."""
