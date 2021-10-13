@@ -2,7 +2,7 @@
 from geopy.exc import GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError  # type: ignore
 from geopy.geocoders import Nominatim  # type: ignore
 from tzwhere import tzwhere  # type: ignore
-from .errors import RemoteGeoAPIError
+from .errors import ParserError
 
 
 def city_timezone(city: str) -> str:
@@ -19,7 +19,7 @@ def city_timezone(city: str) -> str:
         )  # TODO: Offline loading of timezone location data is quite slow. Look for better alternative
         return timezone.tzNameAt(location.latitude, location.longitude)
     except (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError):
-        raise RemoteGeoAPIError(  # pylint: disable=raise-missing-from
+        raise ParserError(  # pylint: disable=raise-missing-from
             "Cannot connect to the remote Geolocator API to determine timezone"
         )
 
