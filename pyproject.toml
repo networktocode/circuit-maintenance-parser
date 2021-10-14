@@ -42,7 +42,7 @@ yamllint = "^1.20.0"
 bandit = "^1.6.2"
 invoke = "^1.4.1"
 toml = "0.10.2"
-flake8 = "^3.8.3"
+flake8 = "^4.0.0"
 mypy = "^0.812"
 
 [tool.poetry.scripts]
