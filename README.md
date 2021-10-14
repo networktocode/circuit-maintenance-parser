@@ -42,7 +42,7 @@ You can leverage this library in your automation framework to process circuit ma
 5. Each `Parser` class supports one or a set of related data types, and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant keys/values.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/nautobot/nautobot-plugin-circuit-maintenance/develop/docs/images/new_workflow.png" width="800" class="center">
+<img src="https://raw.githubusercontent.com/networktocode/circuit-maintenance-parser/develop/docs/images/new_workflow.png" width="800" class="center">
 </p>
 
 By default, there is a `GenericProvider` that support a `SimpleProcessor` using the standard `ICal` `Parser`, being the easiest path to start using the library in case the provider uses the reference iCalendar standard.
