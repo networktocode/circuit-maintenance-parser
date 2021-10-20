@@ -11,7 +11,7 @@ from circuit_maintenance_parser.utils import rgetattr
 
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import ICal, EmailDateParser
+from circuit_maintenance_parser.parser import EmailSubjectParser, ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
@@ -20,6 +20,7 @@ from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, S
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
+from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -196,6 +197,13 @@ class Colt(GenericProvider):
     ]
     _default_organizer = "PlannedWorks@colt.net"
 
+
+class Equinix(GenericProvider):
+    """Equinix provider custom class."""
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[HtmlParserEquinix, SubjectParserEquinix, EmailDateParser]),
+    ]
+    _default_organizer = "no_reply@equinix.com"
 
 class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
