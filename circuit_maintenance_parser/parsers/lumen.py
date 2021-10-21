@@ -100,7 +100,15 @@ class HtmlParserLumen1(Html):
                         data["status"] = "CONFIRMED"
 
                     data_circuit = {}
-                    data_circuit["circuit_id"] = cells[idx + 1].string
+
+                    # The table can include "Circuit ID" or "Alt Circuit ID" as columns +1 and +2.
+                    # Use the Circuit ID if available, else the Alt Circuit ID if available
+                    circuit_id = cells[idx + 1].string
+                    if circuit_id in ("_", "N/A"):
+                        circuit_id = cells[idx + 2].string
+                    if circuit_id not in ("_", "N/A"):
+                        data_circuit["circuit_id"] = circuit_id
+
                     impact = cells[idx + 6].string
                     if "outage" in impact.lower():
                         data_circuit["impact"] = Impact("OUTAGE")
