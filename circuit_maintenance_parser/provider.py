@@ -200,10 +200,12 @@ class Colt(GenericProvider):
 
 class Equinix(GenericProvider):
     """Equinix provider custom class."""
+
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[HtmlParserEquinix, SubjectParserEquinix, EmailDateParser]),
     ]
     _default_organizer = "servicedesk@equinix.com"
+
 
 class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""

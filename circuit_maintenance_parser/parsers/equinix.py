@@ -1,5 +1,4 @@
 """Circuit Maintenance Parser for Equinix Email Notifications."""
-import bs4
 from typing import List, Dict
 from bs4.element import ResultSet
 from dateutil import parser
@@ -9,14 +8,14 @@ from circuit_maintenance_parser.parser import Html, EmailSubjectParser, Status
 
 
 class HtmlParserEquinix(Html):
-    def parse_html(self, soup:ResultSet) -> Dict:
+    def parse_html(self, soup: ResultSet) -> Dict:
         # Parse the Body of the Email that is HTML
         data = {
             "circuits": [],
             "status": Status.CONFIRMED,
             # "impact": Impact.OUTAGE,
         }
-        impact = self._parse_b(soup.find_all("b"),data)
+        impact = self._parse_b(soup.find_all("b"), data)
         self._parse_table(soup.find_all("th"), data, impact)
 
         # data.pop("impact")
@@ -24,33 +23,36 @@ class HtmlParserEquinix(Html):
 
     def _parse_b(self, b_elements, data):
         """Parse the <b> elements from the notification to capture
-        start and end times, description, and impact. 
+        start and end times, description, and impact.
 
         Args:
             b_elements (): resulting soup object with all <b> elements
             data (Dict): data from the circuit maintenance
+
+        Returns:
+            impact (Status object): impact of the maintenance notification (used in the parse table function to assign an impact for each circuit).
         """
         for b in b_elements:
             if "UTC:" in b:
                 raw_time = b.next_sibling
+                # for non english equinix notifications
+                # english section is usually at the bottom
+                # this skips the non english line at the top
                 if not raw_time.isascii():
                     continue
-                start_end_time = raw_time.split('-')
+                start_end_time = raw_time.split("-")
                 if len(start_end_time) == 2:
-                    data['start'] = self.dt2ts(parser.parse(raw_time.split('-')[0].strip()))
-                    data['end'] = self.dt2ts(parser.parse(raw_time.split('-')[1].strip()))
-            # if "DESCRIPTION:" in b:
-            #     print(b.next_sibling)
-            #     data['summary'] = b.next_sibling
+                    data["start"] = self.dt2ts(parser.parse(raw_time.split("-")[0].strip()))
+                    data["end"] = self.dt2ts(parser.parse(raw_time.split("-")[1].strip()))
             if "IMPACT:" in b:
                 impact_line = b.next_sibling
                 if "No impact to your service" in impact_line:
                     impact = Impact.NO_IMPACT
                 elif "There will be service interruptions" in impact_line.next_sibling.text:
                     impact = Impact.OUTAGE
-                    
+
         print(data)
-        return(impact)
+        return impact
 
     def _parse_table(self, theader_elements, data, impact):
         for th in theader_elements:
@@ -62,25 +64,31 @@ class HtmlParserEquinix(Html):
                     circuit_info = list(tr.find_all("td"))
                     if circuit_info:
                         account, product, circuit = circuit_info
-                        data['circuits'].append({
-                            'circuit_id': circuit.text,
-                            'impact': impact,
-                        })
-                        data['account'] = account.text
+                        data["circuits"].append(
+                            {"circuit_id": circuit.text, "impact": impact,}
+                        )
+                        data["account"] = account.text
 
-                    
-  
+
 class SubjectParserEquinix(EmailSubjectParser):
     def parse_subject(self, subject: str) -> List[Dict]:
-        # parse the subject
-        # Subject: Scheduled software upgrade in metro connect platform-SG Metro Area
-        # Network Maintenance -19-OCT-2021 [5-212760022356]
+        """Parse the Equinix Email subject for summary and status
+
+        Args:
+            subject (str): subject of email
+            e.g. 'Scheduled software upgrade in metro connect platform-SG Metro Area Network Maintenance -19-OCT-2021 [5-212760022356]'
+
+
+        Returns:
+            List[Dict]: Returns the data object with summary and status fields
+        """
         data = {}
-        maintenance_id = re.search(r'\[(.*)\]$', subject)
+        maintenance_id = re.search(r"\[(.*)\]$", subject)
         if maintenance_id:
-            data['maintenance_id'] = maintenance_id[1]
-        data['summary'] = subject
+            data["maintenance_id"] = maintenance_id[1]
+        data["summary"] = subject
         if "COMPLETED" in subject:
-            data['status'] = Status.COMPLETED
+            data["status"] = Status.COMPLETED
+        if "SCHEDULED" or "REMINDER" in subject:
+            data["status"] = Status.CONFIRMED
         return [data]
-    
