@@ -203,7 +203,7 @@ class Equinix(GenericProvider):
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[HtmlParserEquinix, SubjectParserEquinix, EmailDateParser]),
     ]
-    _default_organizer = "no_reply@equinix.com"
+    _default_organizer = "servicedesk@equinix.com"
 
 class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
