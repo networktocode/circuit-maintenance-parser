@@ -11,7 +11,7 @@ from circuit_maintenance_parser.utils import rgetattr
 
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import EmailSubjectParser, ICal, EmailDateParser
+from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT

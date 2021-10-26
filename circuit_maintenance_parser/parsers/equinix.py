@@ -1,29 +1,35 @@
 """Circuit Maintenance Parser for Equinix Email Notifications."""
 from typing import List, Dict
+import re
+
 from bs4.element import ResultSet
 from dateutil import parser
-import re
+
 from circuit_maintenance_parser.output import Impact
 from circuit_maintenance_parser.parser import Html, EmailSubjectParser, Status
 
 
 class HtmlParserEquinix(Html):
+    """Custom Parser for HTML portion of Equinix circuit maintenance notifications."""
+
     def parse_html(self, soup: ResultSet) -> Dict:
-        # Parse the Body of the Email that is HTML
+        """Parse an equinix circuit maintenance email.
+
+        Args:
+            soup (ResultSet): beautiful soup object containing the html portion of an email.
+
+        Returns:
+            Dict: The data dict containing circuit maintenance data.
+        """
         data = {
             "circuits": [],
-            "status": Status.CONFIRMED,
-            # "impact": Impact.OUTAGE,
         }
         impact = self._parse_b(soup.find_all("b"), data)
         self._parse_table(soup.find_all("th"), data, impact)
-
-        # data.pop("impact")
         return [data]
 
     def _parse_b(self, b_elements, data):
-        """Parse the <b> elements from the notification to capture
-        start and end times, description, and impact.
+        """Parse the <b> elements from the notification to capture start and end times, description, and impact.
 
         Args:
             b_elements (): resulting soup object with all <b> elements
@@ -32,9 +38,9 @@ class HtmlParserEquinix(Html):
         Returns:
             impact (Status object): impact of the maintenance notification (used in the parse table function to assign an impact for each circuit).
         """
-        for b in b_elements:
-            if "UTC:" in b:
-                raw_time = b.next_sibling
+        for b_elem in b_elements:
+            if "UTC:" in b_elem:
+                raw_time = b_elem.next_sibling
                 # for non english equinix notifications
                 # english section is usually at the bottom
                 # this skips the non english line at the top
@@ -44,26 +50,24 @@ class HtmlParserEquinix(Html):
                 if len(start_end_time) == 2:
                     data["start"] = self.dt2ts(parser.parse(raw_time.split("-")[0].strip()))
                     data["end"] = self.dt2ts(parser.parse(raw_time.split("-")[1].strip()))
-            if "IMPACT:" in b:
-                impact_line = b.next_sibling
+            if "IMPACT:" in b_elem:
+                impact_line = b_elem.next_sibling
                 if "No impact to your service" in impact_line:
                     impact = Impact.NO_IMPACT
                 elif "There will be service interruptions" in impact_line.next_sibling.text:
                     impact = Impact.OUTAGE
-
-        print(data)
         return impact
 
-    def _parse_table(self, theader_elements, data, impact):
-        for th in theader_elements:
-            if "Account #" in th:
-                circuit_table = th.find_parent("table")
-                for tr in circuit_table.find_all("tr"):
-                    if tr.find(th):
+    def _parse_table(self, theader_elements, data, impact):  # pylint: disable=no-self-use
+        for th_elem in theader_elements:
+            if "Account #" in th_elem:
+                circuit_table = th_elem.find_parent("table")
+                for tr_elem in circuit_table.find_all("tr"):
+                    if tr_elem.find(th_elem):
                         continue
-                    circuit_info = list(tr.find_all("td"))
+                    circuit_info = list(tr_elem.find_all("td"))
                     if circuit_info:
-                        account, product, circuit = circuit_info
+                        account, product, circuit = circuit_info  # pylint: disable=unused-variable
                         data["circuits"].append(
                             {"circuit_id": circuit.text, "impact": impact,}
                         )
@@ -71,16 +75,18 @@ class HtmlParserEquinix(Html):
 
 
 class SubjectParserEquinix(EmailSubjectParser):
+    """Parse the subject of an equinix circuit maintenance email. The subject contains the maintenance ID and status."""
+
     def parse_subject(self, subject: str) -> List[Dict]:
-        """Parse the Equinix Email subject for summary and status
+        """Parse the Equinix Email subject for summary and status.
 
         Args:
             subject (str): subject of email
-            e.g. 'Scheduled software upgrade in metro connect platform-SG Metro Area Network Maintenance -19-OCT-2021 [5-212760022356]'
+            e.g. 'Scheduled software upgrade in metro connect platform-SG Metro Area Network Maintenance -19-OCT-2021 [5-212760022356]'.
 
 
         Returns:
-            List[Dict]: Returns the data object with summary and status fields
+            List[Dict]: Returns the data object with summary and status fields.
         """
         data = {}
         maintenance_id = re.search(r"\[(.*)\]$", subject)
@@ -89,6 +95,6 @@ class SubjectParserEquinix(EmailSubjectParser):
         data["summary"] = subject
         if "COMPLETED" in subject:
             data["status"] = Status.COMPLETED
-        if "SCHEDULED" or "REMINDER" in subject:
+        if "SCHEDULED" in subject or "REMINDER" in subject:
             data["status"] = Status.CONFIRMED
         return [data]
