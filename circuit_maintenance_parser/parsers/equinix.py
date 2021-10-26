@@ -92,7 +92,7 @@ class SubjectParserEquinix(EmailSubjectParser):
         maintenance_id = re.search(r"\[(.*)\]$", subject)
         if maintenance_id:
             data["maintenance_id"] = maintenance_id[1]
-        data["summary"] = subject
+        data["summary"] = subject.strip().replace("\n", "")
         if "COMPLETED" in subject:
             data["status"] = Status.COMPLETED
         if "SCHEDULED" in subject or "REMINDER" in subject:
