@@ -14,7 +14,7 @@ from circuit_maintenance_parser.provider import (
     GenericProvider,
     AquaComms,
     AWS,
-    Cogent,
+    # Cogent,
     Colt,
     EUNetworks,
     HGC,
@@ -61,28 +61,29 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [Path(dir_path, "data", "aws", "aws2_result.json"),],
         ),
         # Cogent
-        (
-            Cogent,
-            [
-                ("html", Path(dir_path, "data", "cogent", "cogent1.html")),
-                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
-            ],
-            [
-                Path(dir_path, "data", "cogent", "cogent1_result.json"),
-                Path(dir_path, "data", "date", "email_date_1_result.json"),
-            ],
-        ),
-        (
-            Cogent,
-            [
-                ("html", Path(dir_path, "data", "cogent", "cogent2.html")),
-                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
-            ],
-            [
-                Path(dir_path, "data", "cogent", "cogent2_result.json"),
-                Path(dir_path, "data", "date", "email_date_1_result.json"),
-            ],
-        ),
+        # TODO: Recover tests back when issue #101 is fixed
+        # (
+        #     Cogent,
+        #     [
+        #         ("html", Path(dir_path, "data", "cogent", "cogent1.html")),
+        #         (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+        #     ],
+        #     [
+        #         Path(dir_path, "data", "cogent", "cogent1_result.json"),
+        #         Path(dir_path, "data", "date", "email_date_1_result.json"),
+        #     ],
+        # ),
+        # (
+        #     Cogent,
+        #     [
+        #         ("html", Path(dir_path, "data", "cogent", "cogent2.html")),
+        #         (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+        #     ],
+        #     [
+        #         Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        #         Path(dir_path, "data", "date", "email_date_1_result.json"),
+        #     ],
+        # ),
         # Colt
         (
             Colt,
