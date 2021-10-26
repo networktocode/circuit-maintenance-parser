@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.4
+
+### Fixed
+
+- #99 - Extend `Zayo` Html parser to handle different table headers.
+
 ## v2.0.3 - 2021-10-01
 
 ### Added
