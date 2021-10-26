@@ -311,7 +311,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("html", Path(dir_path, "data", "zayo", "zayo2.html")),],
             [Path(dir_path, "data", "zayo", "zayo2_result.json"),],
-        ),  # pylint: disable=too-many-locals
+        ),
+        (
+            Zayo,
+            [("html", Path(dir_path, "data", "zayo", "zayo3.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo3_result.json"),],
+        ),
     ],
 )
 def test_provider_get_maintenances(provider_class, test_data_files, result_parse_files):

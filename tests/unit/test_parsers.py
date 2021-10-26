@@ -243,6 +243,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "zayo", "zayo2.html"),
             Path(dir_path, "data", "zayo", "zayo2_result.json"),
         ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo3.eml"),
+            Path(dir_path, "data", "zayo", "zayo3_result.json"),
+        ),
         # Email Date
         (
             EmailDateParser,
