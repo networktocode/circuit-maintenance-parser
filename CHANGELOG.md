@@ -12,6 +12,7 @@
 
 - #84 - New parser added for text. Added new provider `AWS` using `Text` and `EmailSubjectParser`
 - #91 - `Provider` now adds `_include_filter` and `_exclude_filter` attributes (using regex) to filter in and out notifications that are relevant to be parsed vs other that are not, avoiding false positives.
+- #98 - Add handling for Lumen notification with Alt Circuit ID
 
 ### Fixed
 
