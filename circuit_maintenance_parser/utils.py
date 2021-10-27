@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 @backoff.on_exception(
     backoff.constant,
     (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError),
-    interval=1,
+    interval=2,
     max_tries=3,
     logger=logger,
 )
