@@ -1,0 +1,17 @@
+[
+  {
+    "account": "Test Customer",
+    "circuits": [
+      {
+        "circuit_id": "/OQYX/999999/ /ZYO /",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1635066000,
+    "maintenance_id": "TTN-000000001",
+    "stamp": 1633910400,
+    "start": 1635048060,
+    "status": "CONFIRMED",
+    "summary": "Zayo is performing a card replacement to clear a trouble on network equipment."
+  }
+]

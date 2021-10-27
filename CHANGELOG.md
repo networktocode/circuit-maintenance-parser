@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.4
+
+### Fixed
+
+- #98 - Add handling for `Lumen` notification with Alt Circuit ID
+- #99 - Extend `Zayo` Html parser to handle different table headers.
+
 ## v2.0.3 - 2021-10-01
 
 ### Added
