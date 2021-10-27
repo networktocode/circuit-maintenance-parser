@@ -11,11 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 @backoff.on_exception(
-    backoff.constant,
-    (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError),
-    interval=2,
-    max_tries=3,
-    logger=logger,
+    backoff.expo, (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError), max_time=30, logger=logger,
 )
 def city_timezone(city: str) -> str:
     """Get the timezone for a given city.
