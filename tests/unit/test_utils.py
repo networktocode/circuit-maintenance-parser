@@ -5,11 +5,10 @@ import pytest
 from circuit_maintenance_parser.utils import city_timezone
 
 
-# TODO: Recover testing when issue #101 is fixed
 @pytest.mark.parametrize(
     "city, timezone",
     [
-        # ("North Bergen, NJ", "America/New_York"),
+        ("North Bergen, NJ", "America/New_York"),
         # Removing some tests to speed up testing
         # ("Carlstadt, NJ", "America/New_York"),
         # ("Atlanta, GA", "America/New_York"),
