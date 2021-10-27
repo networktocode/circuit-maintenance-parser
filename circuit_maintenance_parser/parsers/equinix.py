@@ -50,6 +50,7 @@ class HtmlParserEquinix(Html):
                 if len(start_end_time) == 2:
                     data["start"] = self.dt2ts(parser.parse(raw_time.split("-")[0].strip()))
                     data["end"] = self.dt2ts(parser.parse(raw_time.split("-")[1].strip()))
+            # all circuits in the notification share the same impact
             if "IMPACT:" in b_elem:
                 impact_line = b_elem.next_sibling
                 if "No impact to your service" in impact_line:
@@ -67,7 +68,7 @@ class HtmlParserEquinix(Html):
                         continue
                     circuit_info = list(tr_elem.find_all("td"))
                     if circuit_info:
-                        account, product, circuit = circuit_info  # pylint: disable=unused-variable
+                        account, _, circuit = circuit_info  # pylint: disable=unused-variable
                         data["circuits"].append(
                             {"circuit_id": circuit.text, "impact": impact,}
                         )
