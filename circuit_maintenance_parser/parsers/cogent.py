@@ -7,7 +7,7 @@ from pytz import timezone, UTC
 from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
-from circuit_maintenance_parser.utils import city_timezone
+from circuit_maintenance_parser.utils import Geolocator
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 
 class HtmlParserCogent1(Html):
     """Notifications Parser for Cogent notifications."""
+
+    _geolocator = Geolocator()
 
     def parse_html(self, soup):
         """Execute parsing."""
@@ -48,7 +50,7 @@ class HtmlParserCogent1(Html):
                 elif line.startswith("Cogent customers receiving service"):
                     match = re.search(r"[^Cogent].*?((\b[A-Z][a-z\s-]+)+, ([A-Za-z-]+[\s-]))", line)
                     if match:
-                        parsed_timezone = city_timezone(match.group(1).strip())
+                        parsed_timezone = self._geolocator.city_timezone(match.group(1).strip())
                         local_timezone = timezone(parsed_timezone)
                         # set start time using the local city timezone
                         start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
