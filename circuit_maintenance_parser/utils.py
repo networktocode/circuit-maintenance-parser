@@ -30,23 +30,29 @@ class Geolocator:
 
     @classmethod
     def load_timezone(cls):
-        """Load the localtions DB."""
+        """Load the timezone resolver."""
         if cls.timezone is None:
             cls.timezone = tzwhere.tzwhere()
+            logger.info("Loaded local timezone resolver.")
 
     @classmethod
     def load_db_location(cls):
         """Load the localtions DB."""
         if cls.db_location is None:
-            logger.info("Loading local locations DB.")
             cls.db_location = pd.read_csv(os.path.join(dirname, "data", "worldcities.csv"))
+            logger.info("Loaded local locations DB.")
 
     def get_location(self, city: str) -> Tuple[float, float]:
         """Get location."""
         try:
-            return self.get_location_from_local_file(city)
+            location_coordinates = self.get_location_from_local_file(city)
         except ValueError:
-            return self.get_location_from_api(city)
+            location_coordinates = self.get_location_from_api(city)
+
+        logger.debug(
+            "Resolved city %s to coordinates: lat %s - lon %s", city, location_coordinates[0], location_coordinates[1],
+        )
+        return location_coordinates
 
     def get_location_from_local_file(self, city: str) -> Tuple[float, float]:
         """Get location from Local DB."""
@@ -57,13 +63,16 @@ class Geolocator:
             # 1. We try to match city name and country
             location = self.db_location.query(f"city_ascii == '{city_name}' & country == '{country}'")
             if not location.empty:
+                logger.debug("Used city name and country to resolve %s to %s from local locations DB.", city, location)
                 return (location.lat.values[0], location.lng.values[0])
 
             # 2. We try to match only city name
             location = self.db_location.query(f"city_ascii == '{city_name}'")
             if not location.empty:
+                logger.debug("Used only city name to resolve %s to %s from local locations DB.", city, location)
                 return (location.lat.values[0], location.lng.values[0])
 
+        logger.debug("City %s was not resolvable in the local locations DB.", city)
         raise ValueError
 
     @staticmethod
@@ -74,6 +83,7 @@ class Geolocator:
         """Get location from API."""
         geolocator = Nominatim(user_agent="circuit_maintenance")
         location = geolocator.geocode(city)  # API call to OpenStreetMap web service
+        logger.debug("Resolved %s to %s from OpenStreetMap webservice.", city, location)
         return (location.latitude, location.longitude)
 
     def city_timezone(self, city: str) -> str:
@@ -93,9 +103,13 @@ class Geolocator:
                     timezone = self.timezone.tzNameAt(latitude, longitude)
 
                 if timezone:
+                    logger.debug("Matched city %s to timezone %s", city, timezone)
                     return timezone
-            except Exception:
-                raise ParserError(f"Cannot obtain the timezone for city {city}")  # pylint: disable=raise-missing-from
+            except Exception as exc:
+                logger.error("Cannot obtain the timezone for city %s: %s", city, exc)
+                raise ParserError(  # pylint: disable=raise-missing-from
+                    f"Cannot obtain the timezone for city {city}: {exc}"
+                )
         raise ParserError("Timezone resolution not properly initalized.")
 
 
