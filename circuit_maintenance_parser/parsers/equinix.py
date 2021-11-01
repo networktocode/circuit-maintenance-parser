@@ -1,8 +1,8 @@
 """Circuit Maintenance Parser for Equinix Email Notifications."""
-from typing import List, Dict
+from typing import Any, Dict, List
 import re
 
-from bs4.element import ResultSet
+from bs4.element import ResultSet  # type: ignore
 from dateutil import parser
 
 from circuit_maintenance_parser.output import Impact
@@ -12,7 +12,7 @@ from circuit_maintenance_parser.parser import Html, EmailSubjectParser, Status
 class HtmlParserEquinix(Html):
     """Custom Parser for HTML portion of Equinix circuit maintenance notifications."""
 
-    def parse_html(self, soup: ResultSet) -> Dict:
+    def parse_html(self, soup: ResultSet) -> List[Dict]:
         """Parse an equinix circuit maintenance email.
 
         Args:
@@ -21,9 +21,8 @@ class HtmlParserEquinix(Html):
         Returns:
             Dict: The data dict containing circuit maintenance data.
         """
-        data = {
-            "circuits": [],
-        }
+        data: Dict[str, Any] = {"circuits": list()}
+
         impact = self._parse_b(soup.find_all("b"), data)
         self._parse_table(soup.find_all("th"), data, impact)
         return [data]
