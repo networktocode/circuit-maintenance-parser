@@ -27,6 +27,22 @@ class HtmlParserEquinix(Html):
         self._parse_table(soup.find_all("th"), data, impact)
         return [data]
 
+    @staticmethod
+    def _isascii(string):
+        """Python 3.6 compatible way to determine if string is only english characters.
+
+        Args:
+            string (str): string to test if only ascii chars.
+
+        Returns:
+            bool: Returns True if string is ascii only, returns false if the string contains extended unicode characters.
+        """
+        try:
+            string.encode("ascii")
+            return True
+        except UnicodeEncodeError:
+            return False
+
     def _parse_b(self, b_elements, data):
         """Parse the <b> elements from the notification to capture start and end times, description, and impact.
 
@@ -43,7 +59,7 @@ class HtmlParserEquinix(Html):
                 # for non english equinix notifications
                 # english section is usually at the bottom
                 # this skips the non english line at the top
-                if not raw_time.isascii():
+                if not self._isascii(raw_time):
                     continue
                 start_end_time = raw_time.split("-")
                 if len(start_end_time) == 2:
