@@ -20,6 +20,7 @@ from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, S
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
+from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -195,6 +196,15 @@ class Colt(GenericProvider):
         CombinedProcessor(data_parsers=[ICalParserColt1, CsvParserColt1]),
     ]
     _default_organizer = "PlannedWorks@colt.net"
+
+
+class Equinix(GenericProvider):
+    """Equinix provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[HtmlParserEquinix, SubjectParserEquinix, EmailDateParser]),
+    ]
+    _default_organizer = "servicedesk@equinix.com"
 
 
 class EUNetworks(GenericProvider):
