@@ -12,6 +12,7 @@ from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParser
 
 # from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1
+from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -90,6 +91,17 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             CsvParserColt1,
             Path(dir_path, "data", "colt", "colt2.csv"),
             Path(dir_path, "data", "colt", "colt2_result.json"),
+        ),
+        # Equinix
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix1.eml"),
+            Path(dir_path, "data", "equinix", "equinix1_result1.json"),
+        ),
+        (
+            SubjectParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix2.eml"),
+            Path(dir_path, "data", "equinix", "equinix2_result.json"),
         ),
         # GTT
         (
