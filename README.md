@@ -63,6 +63,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - AquaComms
 - Cogent
 - Colt
+- Equinix
 - GTT
 - HGC
 - Lumen
