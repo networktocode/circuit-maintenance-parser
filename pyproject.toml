@@ -31,8 +31,6 @@ lxml = "^4.6.2"
 geopy = "^2.1.0"
 tzwhere = "^3.0.3"
 backoff = "^1.11.1"
-# pandas 1.1.5 is the latest one with Python3.6 support
-pandas = "1.1.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
