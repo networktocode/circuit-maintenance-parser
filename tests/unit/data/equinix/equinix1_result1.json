@@ -1,0 +1,69 @@
+[
+  {
+    "account": "009999",
+    "circuits": [
+      {
+        "circuit_id": "10101",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "10108",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "10001",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999000-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999020-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999045-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999063-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999022-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999022-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999064-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999063-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999069-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999057-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999058-B",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "09999052-B",
+        "impact": "NO-IMPACT"
+      }
+    ],
+    "end": 1625238000,
+    "start": 1625220000
+  }
+]
