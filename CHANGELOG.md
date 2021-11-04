@@ -4,9 +4,11 @@
 
 ### Fixed
 
+- #94 - Improve Geo service error handling.
+- #97 - Fix Readme image URLs.
 - #98 - Add handling for `Lumen` notification with Alt Circuit ID.
 - #99 - Extend `Zayo` Html parser to handle different table headers.
-- #103 - Add `Equinix` provider.
+- #102 - Add `Equinix` provider.
 - #104 - Use a local locations DB to map city to timezone as first option, keeping API as fallback option.
 - #105 - Extend `Colt` parser to support multiple `Maintenance` statuses.
 
