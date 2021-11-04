@@ -16,6 +16,7 @@ from icalendar import Calendar  # type: ignore
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
+from circuit_maintenance_parser.utils import Geolocator
 
 # pylint: disable=no-member
 
@@ -32,6 +33,8 @@ class Parser(BaseModel, extra=Extra.forbid):
 
     # _data_types are used to match the Parser to to each type of DataPart
     _data_types = ["text/plain", "plain"]
+
+    _geolocator = Geolocator()
 
     @classmethod
     def get_data_types(cls) -> List[str]:

@@ -42,7 +42,7 @@ You can leverage this library in your automation framework to process circuit ma
 5. Each `Parser` class supports one or a set of related data types, and implements the `Parser.parse()` method used to retrieve a `Dict` with the relevant keys/values.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/nautobot/nautobot-plugin-circuit-maintenance/develop/docs/images/new_workflow.png" width="800" class="center">
+<img src="https://raw.githubusercontent.com/networktocode/circuit-maintenance-parser/develop/docs/images/new_workflow.png" width="800" class="center">
 </p>
 
 By default, there is a `GenericProvider` that support a `SimpleProcessor` using the standard `ICal` `Parser`, being the easiest path to start using the library in case the provider uses the reference iCalendar standard.
@@ -63,6 +63,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - AquaComms
 - Cogent
 - Colt
+- Equinix
 - GTT
 - HGC
 - Lumen
@@ -306,3 +307,7 @@ The project is following Network to Code software development guidelines and is 
 
 For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
 Sign up [here](http://slack.networktocode.com/)
+
+## License notes
+
+This library uses a Basic World Cities Database by Pareto Software, LLC, the owner of Simplemaps.com: The Provider offers a Basic World Cities Database free of charge. This database is licensed under the Creative Commons Attribution 4.0 license as described at: https://creativecommons.org/licenses/by/4.0/.

@@ -61,13 +61,16 @@ class HtmlParserZayo1(Html):
         circuits = []
         for table in tables:
             head_row = table.find_all("th")
-            if len(head_row) < 5 or [self.clean_line(line) for line in head_row[:5]] != [
-                "Circuit Id",
-                "Expected Impact",
-                "A Location CLLI",
-                "Z Location CLLI",
-                "Legacy Circuit Id",
-            ]:
+            if len(head_row) < 5:
+                logger.warning("Less table headers than expected: %s", head_row)
+                continue
+
+            table_headers = [self.clean_line(line) for line in head_row[:5]]
+            expected_headers_ref = (
+                ["Circuit Id", "Expected Impact", "A Location CLLI", "Z Location CLLI", "Legacy Circuit Id",],
+                ["Circuit Id", "Expected Impact", "A Location Address", "Z Location Address", "Legacy Circuit Id",],
+            )
+            if all(table_headers != expected_headers for expected_headers in expected_headers_ref):
                 logger.warning("Table headers are not as expected: %s", head_row)
                 continue
 

@@ -9,8 +9,10 @@ from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
+
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
-from circuit_maintenance_parser.parsers.colt import ICalParserColt1, CsvParserColt1
+from circuit_maintenance_parser.parsers.colt import CsvParserColt1
+from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -86,14 +88,20 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ),
         # Colt
         (
-            ICalParserColt1,
-            Path(dir_path, "data", "colt", "colt1"),
-            Path(dir_path, "data", "colt", "colt1_result.json"),
-        ),
-        (
             CsvParserColt1,
             Path(dir_path, "data", "colt", "colt2.csv"),
             Path(dir_path, "data", "colt", "colt2_result.json"),
+        ),
+        # Equinix
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix1.eml"),
+            Path(dir_path, "data", "equinix", "equinix1_result1.json"),
+        ),
+        (
+            SubjectParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix2.eml"),
+            Path(dir_path, "data", "equinix", "equinix2_result.json"),
         ),
         # GTT
         (
@@ -142,6 +150,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserLumen1,
             Path(dir_path, "data", "lumen", "lumen4.html"),
             Path(dir_path, "data", "lumen", "lumen4_result.json"),
+        ),
+        (
+            HtmlParserLumen1,
+            Path(dir_path, "data", "lumen", "lumen5.html"),
+            Path(dir_path, "data", "lumen", "lumen5_result.json"),
         ),
         # Megaport
         (
@@ -237,6 +250,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserZayo1,
             Path(dir_path, "data", "zayo", "zayo2.html"),
             Path(dir_path, "data", "zayo", "zayo2_result.json"),
+        ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo3.eml"),
+            Path(dir_path, "data", "zayo", "zayo3_result.json"),
         ),
         # Email Date
         (

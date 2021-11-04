@@ -11,6 +11,7 @@ from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER
 
 # pylint: disable=duplicate-code
 from circuit_maintenance_parser.provider import (
+    Equinix,
     GenericProvider,
     AquaComms,
     AWS,
@@ -88,6 +89,17 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Colt,
             [("email", Path(dir_path, "data", "colt", "colt3.eml")),],
             [Path(dir_path, "data", "colt", "colt3_result.json"),],
+        ),
+        (
+            Colt,
+            [("email", Path(dir_path, "data", "colt", "colt4.eml")),],
+            [Path(dir_path, "data", "colt", "colt4_result.json"),],
+        ),
+        # Equinix
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix1.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix3_result.json")],
         ),
         # EUNetworks
         (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
@@ -311,6 +323,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("html", Path(dir_path, "data", "zayo", "zayo2.html")),],
             [Path(dir_path, "data", "zayo", "zayo2_result.json"),],
+        ),
+        (
+            Zayo,
+            [("html", Path(dir_path, "data", "zayo", "zayo3.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo3_result.json"),],
         ),  # pylint: disable=too-many-locals
     ],
 )
