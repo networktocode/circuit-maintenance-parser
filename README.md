@@ -307,3 +307,7 @@ The project is following Network to Code software development guidelines and is 
 
 For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
 Sign up [here](http://slack.networktocode.com/)
+
+## License notes
+
+This library uses a Basic World Cities Database by Pareto Software, LLC, the owner of Simplemaps.com: The Provider offers a Basic World Cities Database free of charge. This database is licensed under the Creative Commons Attribution 4.0 license as described at: https://creativecommons.org/licenses/by/4.0/.
