@@ -24,6 +24,16 @@ class HtmlParserZayo1(Html):
         self.parse_bs(soup.find_all("b"), data)
         self.parse_tables(soup.find_all("table"), data)
 
+        if data:
+            if "account" not in data:
+                data["account"] = "unknown"
+            if "status" not in data:
+                text = soup.get_text()
+                if "will be commencing momentarily" in text:
+                    data["status"] = Status("IN-PROCESS")
+                elif "has been completed" in text:
+                    data["status"] = Status("COMPLETED")
+
         return [data]
 
     def parse_bs(self, btags: ResultSet, data: dict):
@@ -32,10 +42,23 @@ class HtmlParserZayo1(Html):
             if isinstance(line, bs4.element.Tag):
                 if line.text.lower().strip().startswith("maintenance ticket #:"):
                     data["maintenance_id"] = self.clean_line(line.next_sibling)
-                elif line.text.lower().strip().startswith("urgency:"):
-                    urgency = self.clean_line(line.next_sibling)
-                    if urgency == "Planned":
+                elif "serves as official notification" in line.text.lower():
+                    if "will be performing maintenance" in line.text.lower():
                         data["status"] = Status("CONFIRMED")
+                    elif "has cancelled" in line.text.lower():
+                        data["status"] = Status("CANCELLED")
+                # TODO: some Zayo notifications may include multiple activity dates. How best to handle this?
+                # 1st Activity Date
+                # 01-Nov-2021 00:01 to 01-Nov-2021 05:00 ( Mountain )
+                # 01-Nov-2021 06:01 to 01-Nov-2021 11:00 ( GMT )
+                #
+                # 2nd Activity Date
+                # 02-Nov-2021 00:01 to 02-Nov-2021 05:00 ( Mountain )
+                # 02-Nov-2021 06:01 to 02-Nov-2021 11:00 ( GMT )
+                #
+                # 3rd Activity Date
+                # 03-Nov-2021 00:01 to 03-Nov-2021 05:00 ( Mountain )
+                # 03-Nov-2021 06:01 to 03-Nov-2021 11:00 ( GMT )
                 elif "activity date" in line.text.lower():
                     logger.info("Found 'activity date': %s", line.text)
                     for sibling in line.next_siblings:
@@ -50,9 +73,13 @@ class HtmlParserZayo1(Html):
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
+                # TODO: not all Zayo notifications include "date notice sent".
+                # Do we need to pull the date from the email headers, or what should we do here?
                 elif line.text.lower().strip().startswith("date notice sent:"):
                     stamp = parser.parse(self.clean_line(line.next_sibling))
                     data["stamp"] = self.dt2ts(stamp)
+                # TODO: not all Zayo notifications include "customer".
+                # Do we need to pull the customer name from the email subject line, or what should we do here?
                 elif line.text.lower().strip().startswith("customer:"):
                     data["account"] = self.clean_line(line.next_sibling)
 
@@ -80,10 +107,12 @@ class HtmlParserZayo1(Html):
             number_of_circuits = int(len(data_rows) / 5)
             for idx in range(number_of_circuits):
                 data_circuit = {}
-                data_circuit["circuit_id"] = self.clean_line(data_rows[0 + idx])
-                impact = self.clean_line(data_rows[1 + idx])
+                data_circuit["circuit_id"] = self.clean_line(data_rows[0 + 5 * idx])
+                impact = self.clean_line(data_rows[1 + 5 * idx])
                 if "hard down" in impact.lower():
                     data_circuit["impact"] = Impact("OUTAGE")
-                    circuits.append(CircuitImpact(**data_circuit))
+                elif "no expected impact" in impact.lower():
+                    data_circuit["impact"] = Impact("NO-IMPACT")
+                circuits.append(CircuitImpact(**data_circuit))
         if circuits:
             data["circuits"] = circuits

@@ -171,11 +171,9 @@ class Html(Parser):
     def clean_line(line):
         """Clean up of undesired characters from Html."""
         try:
-            line = line.text.strip()
+            return line.text.strip()
         except AttributeError:
-            line = line.strip()
-        # TODO: below may not be needed if we use `quopri.decodestring()` on the initial email file?
-        return line.replace("=C2", "").replace("=A0", "").replace("\r", "").replace("=", "").replace("\n", "")
+            return line.strip()
 
 
 class EmailDateParser(Parser):
