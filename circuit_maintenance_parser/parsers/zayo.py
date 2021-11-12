@@ -90,15 +90,15 @@ class HtmlParserZayo1(Html):
                         if "( GMT )" in text:
                             window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                             start = parser.parse(window.pop(0))
-                            start = self.dt2ts(start)
+                            start_ts = self.dt2ts(start)
                             # Keep the earliest of any listed start times
-                            if "start" not in data or data["start"] > start:
-                                data["start"] = start
+                            if "start" not in data or data["start"] > start_ts:
+                                data["start"] = start_ts
                             end = parser.parse(window.pop(0))
-                            end = self.dt2ts(end)
+                            end_ts = self.dt2ts(end)
                             # Keep the latest of any listed end times
-                            if "end" not in data or data["end"] < end:
-                                data["end"] = end
+                            if "end" not in data or data["end"] < end_ts:
+                                data["end"] = end_ts
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
