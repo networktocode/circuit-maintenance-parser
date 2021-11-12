@@ -64,7 +64,11 @@ class HtmlParserZayo1(Html):
                         data["status"] = Status("CONFIRMED")
                     elif "has cancelled" in line.text.lower():
                         data["status"] = Status("CANCELLED")
-                # TODO: some Zayo notifications may include multiple activity dates. How best to handle this?
+                # Some Zayo notifications may include multiple activity dates.
+                # For lack of a better way to handle this, we consolidate these into a single extended activity range.
+                #
+                # For example, given:
+                #
                 # 1st Activity Date
                 # 01-Nov-2021 00:01 to 01-Nov-2021 05:00 ( Mountain )
                 # 01-Nov-2021 06:01 to 01-Nov-2021 11:00 ( GMT )
@@ -76,6 +80,8 @@ class HtmlParserZayo1(Html):
                 # 3rd Activity Date
                 # 03-Nov-2021 00:01 to 03-Nov-2021 05:00 ( Mountain )
                 # 03-Nov-2021 06:01 to 03-Nov-2021 11:00 ( GMT )
+                #
+                # our end result would be (start: "01-Nov-2021 06:01", end: "03-Nov-2021 11:00")
                 elif "activity date" in line.text.lower():
                     logger.info("Found 'activity date': %s", line.text)
                     for sibling in line.next_siblings:
@@ -84,9 +90,15 @@ class HtmlParserZayo1(Html):
                         if "( GMT )" in text:
                             window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                             start = parser.parse(window.pop(0))
-                            data["start"] = self.dt2ts(start)
+                            start = self.dt2ts(start)
+                            # Keep the earliest of any listed start times
+                            if "start" not in data or data["start"] > start:
+                                data["start"] = start
                             end = parser.parse(window.pop(0))
-                            data["end"] = self.dt2ts(end)
+                            end = self.dt2ts(end)
+                            # Keep the latest of any listed end times
+                            if "end" not in data or data["end"] < end:
+                                data["end"] = end
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
