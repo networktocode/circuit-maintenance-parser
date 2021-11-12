@@ -36,7 +36,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
+from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
 
 logger = logging.getLogger(__name__)
@@ -330,6 +330,6 @@ class Zayo(GenericProvider):
     """Zayo provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserZayo1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserZayo1, HtmlParserZayo1]),
     ]
     _default_organizer = "mr@zayo.com"

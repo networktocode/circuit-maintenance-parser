@@ -28,7 +28,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
+from circuit_maintenance_parser.parsers.zayo import SubjectParserZayo1, HtmlParserZayo1
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -258,18 +258,33 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ),
         (
             HtmlParserZayo1,
-            Path(dir_path, "data", "zayo", "zayo4.html"),
-            Path(dir_path, "data", "zayo", "zayo4_result.json"),
+            Path(dir_path, "data", "zayo", "zayo4.eml"),
+            Path(dir_path, "data", "zayo", "zayo4_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo4.eml"),
+            Path(dir_path, "data", "zayo", "zayo4_subject_parser_result.json"),
         ),
         (
             HtmlParserZayo1,
-            Path(dir_path, "data", "zayo", "zayo5.html"),
-            Path(dir_path, "data", "zayo", "zayo5_result.json"),
+            Path(dir_path, "data", "zayo", "zayo5.eml"),
+            Path(dir_path, "data", "zayo", "zayo5_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo5.eml"),
+            Path(dir_path, "data", "zayo", "zayo5_subject_parser_result.json"),
         ),
         (
             HtmlParserZayo1,
-            Path(dir_path, "data", "zayo", "zayo6.html"),
-            Path(dir_path, "data", "zayo", "zayo6_result.json"),
+            Path(dir_path, "data", "zayo", "zayo6.eml"),
+            Path(dir_path, "data", "zayo", "zayo6_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo6.eml"),
+            Path(dir_path, "data", "zayo", "zayo6_subject_parser_result.json"),
         ),
         # Email Date
         (

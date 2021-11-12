@@ -197,7 +197,7 @@ class EmailSubjectParser(Parser):
     def parser_hook(self, raw: bytes):
         """Execute parsing."""
         result = []
-        for data in self.parse_subject(self.bytes_to_string(raw)):
+        for data in self.parse_subject(self.bytes_to_string(raw).replace("\r\n", "")):
             result.append(data)
         return result
 

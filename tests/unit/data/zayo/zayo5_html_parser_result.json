@@ -1,6 +1,5 @@
 [
     {
-        "account": "Some Customer Inc",
         "circuits": [
             {
                 "circuit_id": "/OGYX/123456/   /ZYO /",
@@ -13,7 +12,6 @@
         ],
         "end": 1635937200,
         "maintenance_id": "TTN-0003456789",
-        "stamp": 1635918838,
         "start": 1635919260,
         "status": "IN-PROCESS",
         "summary": "Routine Fiber splice - NO Impact is Expected to your services. This notification is to advise you that we will be entering a splice case that houses live traffic."

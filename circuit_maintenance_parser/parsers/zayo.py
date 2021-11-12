@@ -7,12 +7,31 @@ from bs4.element import ResultSet  # type: ignore
 
 from dateutil import parser
 
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
+from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status
 
 # pylint: disable=too-many-nested-blocks,no-member, too-many-branches
 
 
 logger = logging.getLogger(__name__)
+
+
+class SubjectParserZayo1(EmailSubjectParser):
+    """Parser for Zayo subject string, email type 1.
+
+    Subject: {MESSAGE TYPE}?***{ACCOUNT NAME}***ZAYO {MAINTENANCE_ID} {URGENCY}...***
+             END OF WINDOW NOTIFICATION***Customer Inc.***ZAYO TTN-0000123456 Planned***
+             ***Customer Inc***ZAYO TTN-0001234567 Emergency MAINTENANCE NOTIFICATION***
+             RESCHEDULE NOTIFICATION***Customer Inc***ZAYO TTN-0005423873 Planned***
+    """
+
+    def parse_subject(self, subject):
+        """Parse subject of email message."""
+        data = {}
+        tokens = subject.split("***")
+        if len(tokens) == 4:
+            data["account"] = tokens[1]
+            data["maintenance_id"] = tokens[2].split(" ")[1]
+        return [data]
 
 
 class HtmlParserZayo1(Html):
@@ -25,8 +44,6 @@ class HtmlParserZayo1(Html):
         self.parse_tables(soup.find_all("table"), data)
 
         if data:
-            if "account" not in data:
-                data["account"] = "unknown"
             if "status" not in data:
                 text = soup.get_text()
                 if "will be commencing momentarily" in text:
@@ -73,13 +90,9 @@ class HtmlParserZayo1(Html):
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
-                # TODO: not all Zayo notifications include "date notice sent".
-                # Do we need to pull the date from the email headers, or what should we do here?
                 elif line.text.lower().strip().startswith("date notice sent:"):
                     stamp = parser.parse(self.clean_line(line.next_sibling))
                     data["stamp"] = self.dt2ts(stamp)
-                # TODO: not all Zayo notifications include "customer".
-                # Do we need to pull the customer name from the email subject line, or what should we do here?
                 elif line.text.lower().strip().startswith("customer:"):
                     data["account"] = self.clean_line(line.next_sibling)
 
