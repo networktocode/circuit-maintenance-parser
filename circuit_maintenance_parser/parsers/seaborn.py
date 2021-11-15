@@ -15,14 +15,14 @@ logger = logging.getLogger(__name__)
 class SubjectParserSeaborn1(EmailSubjectParser):
     """Parser for Seaborn subject string, email type 1.
 
-    Subject: [{ACOUNT NAME}] {MAINTENACE ID} {DATE}
+    Subject: [{ACCOUNT NAME}] {MAINTENANCE ID} {DATE}
              [Customer Direct] 1111 08/14
     """
 
     def parse_subject(self, subject):
         """Parse subject of email file."""
         data = {}
-        search = re.search(r".+\[(.+)\].([0-9]+).+", subject)
+        search = re.search(r".+\[([^#]+)\].([0-9]+).+", subject)
         if search:
             data["account"] = search.group(1)
             data["maintenance_id"] = search.group(2)

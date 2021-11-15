@@ -77,7 +77,8 @@ class NotificationData(BaseModel, extra=Extra.forbid):
             # Adding extra headers that are interesting to be parsed
             data_parts.add(DataPart(EMAIL_HEADER_SUBJECT, email_message["Subject"].encode()))
             data_parts.add(DataPart(EMAIL_HEADER_DATE, email_message["Date"].encode()))
-            return cls(data_parts=list(data_parts))
+            # Ensure the data parts are processed in a consistent order
+            return cls(data_parts=sorted(data_parts, key=lambda part: part.type))
         except Exception:  # pylint: disable=broad-except
             logger.exception("Error found initializing data from email message: %s", email_message)
         return None

@@ -328,6 +328,21 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("html", Path(dir_path, "data", "zayo", "zayo3.eml")),],
             [Path(dir_path, "data", "zayo", "zayo3_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo4.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo4_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo5.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo5_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo6.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo6_result.json"),],
         ),  # pylint: disable=too-many-locals
     ],
 )
@@ -451,7 +466,7 @@ Details:
             """\
 Failed creating Maintenance notification for Zayo.
 Details:
-- Processor SimpleProcessor from Zayo failed due to: 1 validation error for Maintenance
+- Processor CombinedProcessor from Zayo failed due to: 1 validation error for Maintenance
 maintenance_id
   field required (type=value_error.missing)
 """,
@@ -464,7 +479,7 @@ maintenance_id
             """\
 Failed creating Maintenance notification for Zayo.
 Details:
-- Processor SimpleProcessor from Zayo failed due to: HtmlParserZayo1 parser was not able to extract the expected data for each maintenance.
+- Processor CombinedProcessor from Zayo failed due to: HtmlParserZayo1 parser was not able to extract the expected data for each maintenance.
   - Raw content: b'aaa'
   - Result: [{}]
 """,

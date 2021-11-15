@@ -1,0 +1,17 @@
+[
+    {
+        "account": "Some Customer Inc",
+        "circuits": [
+            {
+                "circuit_id": "/OGYX/123456/   /ZYO /",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1636628400,
+        "maintenance_id": "TTN-0002345678",
+        "stamp": 1636329600,
+        "start": 1636606860,
+        "status": "CONFIRMED",
+        "summary": "Service provider will perform demand maintenance to relocate a fiber cable in Vero Beach, FL in order to proactively avoid unplanned outages due to railroad mandated track expansion construction.\r\nGPS:\r\nLocation 1: 27.835306, -80.492250\r\nLocation 2: 27.564528, -80.370944\r\nLocation 3: 27.438167, -80.321833"
+    }
+]
