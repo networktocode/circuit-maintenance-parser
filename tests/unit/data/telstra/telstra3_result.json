@@ -1,0 +1,16 @@
+[
+    {
+        "account": "Some Customer",
+        "circuits": [
+            {
+                "circuit_id": "SNG SYD EPL 9876543",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1637177400,
+        "maintenance_id": "PN123456",
+        "start": 1637155740,
+        "status": "CONFIRMED",
+        "summary": "Telstra Emergency Maintenance Activity - 2345678. Telstra will perform an emergency maintenance activity for Optic Fibre relocation/repair work - Australia"
+    }
+]

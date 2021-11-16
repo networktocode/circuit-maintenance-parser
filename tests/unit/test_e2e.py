@@ -255,6 +255,50 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra3.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra3_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra4.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra4_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra5.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra5_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra6.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra6_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
         (Telstra, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # Turkcell
         (
