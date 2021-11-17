@@ -214,12 +214,15 @@ class EUNetworks(GenericProvider):
 
 
 class GTT(GenericProvider):
-    """GTT provider custom class."""
+    """EXA (formerly GTT) provider custom class."""
+
+    # "Planned Work Notification", "Emergency Work Notification"
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Work Notification"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
     ]
-    _default_organizer = "InfraCo.CM@gttcorp.org"
+    _default_organizer = "InfraCo.CM@exainfra.net"
 
 
 class HGC(GenericProvider):
