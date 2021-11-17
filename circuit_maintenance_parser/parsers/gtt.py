@@ -35,7 +35,7 @@ class HtmlParserGTT1(Html):
                         status = groups.groups()[1]
                         if status == "Reminder":
                             data["status"] = Status["CONFIRMED"]
-                        elif status == "Update":
+                        elif status == "Update" or status == "Rescheduled":
                             data["status"] = Status["RE_SCHEDULED"]
                         elif status == "Cancelled":
                             data["status"] = Status["CANCELLED"]
@@ -44,10 +44,24 @@ class HtmlParserGTT1(Html):
                             data["start"] = 0
                             data["end"] = 1
                 elif "Start" in td_element.text:
-                    start = parser.parse(td_element.next_sibling.next_sibling.text)
+                    # In the case of a normal notification, we have:
+                    # <td>  <strong>TIME</strong></td>
+                    # But in the case of a reschedule, we have:
+                    # <td>  <strong><strike>OLD TIME</strike><font>NEW TIME</font></strong></td>
+                    next_td = td_element.next_sibling.next_sibling
+                    strong = next_td.contents[1]
+                    if strong.string:
+                        start = parser.parse(strong.string)
+                    else:
+                        start = parser.parse(strong.contents[1].string)
                     data["start"] = self.dt2ts(start)
                 elif "End" in td_element.text:
-                    end = parser.parse(td_element.next_sibling.next_sibling.text)
+                    next_td = td_element.next_sibling.next_sibling
+                    strong = next_td.contents[1]
+                    if strong.string:
+                        end = parser.parse(strong.string)
+                    else:
+                        end = parser.parse(strong.contents[1].string)
                     data["end"] = self.dt2ts(end)
             num_columns = len(table.find_all("th"))
             if num_columns:
