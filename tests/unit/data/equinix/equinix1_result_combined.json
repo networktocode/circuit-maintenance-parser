@@ -1,0 +1,77 @@
+[
+    {
+        "account": "009999",
+        "circuits": [
+        {
+            "circuit_id": "10101",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "10108",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "10001",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999000-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999020-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999045-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999063-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999022-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999022-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999064-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999063-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999069-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999057-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999058-B",
+            "impact": "NO-IMPACT"
+        },
+        {
+            "circuit_id": "09999052-B",
+            "impact": "NO-IMPACT"
+        }
+        ],
+        "end": 1625238000,
+        "maintenance_id": "K-293030438574",
+        "organizer": "servicedesk@equinix.com",
+        "provider": "equinix",
+        "sequence": 1,
+        "stamp": 1634658948,
+        "start": 1625220000,
+        "status": "CONFIRMED",
+        "summary": "Fwd: REMINDER - 3rd Party Equinix Network Device Maintenance-TY Metro Area Network Maintenance -02-JUL-2021 [K-293030438574]",
+        "uid": "0"
+    }
+]

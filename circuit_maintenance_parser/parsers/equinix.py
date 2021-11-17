@@ -53,6 +53,7 @@ class HtmlParserEquinix(Html):
         Returns:
             impact (Status object): impact of the maintenance notification (used in the parse table function to assign an impact for each circuit).
         """
+        impact = None
         for b_elem in b_elements:
             if "UTC:" in b_elem:
                 raw_time = b_elem.next_sibling
@@ -72,6 +73,8 @@ class HtmlParserEquinix(Html):
                     impact = Impact.NO_IMPACT
                 elif "There will be service interruptions" in impact_line.next_sibling.text:
                     impact = Impact.OUTAGE
+                elif "Loss of redundancy" in impact_line:
+                    impact = Impact.REDUCED_REDUNDANCY
         return impact
 
     def _parse_table(self, theader_elements, data, impact):  # pylint: disable=no-self-use
@@ -105,7 +108,7 @@ class SubjectParserEquinix(EmailSubjectParser):
             List[Dict]: Returns the data object with summary and status fields.
         """
         data = {}
-        maintenance_id = re.search(r"\[(.*)\]$", subject)
+        maintenance_id = re.search(r"\[([^[]*)\]$", subject)
         if maintenance_id:
             data["maintenance_id"] = maintenance_id[1]
         data["summary"] = subject.strip().replace("\n", "")
