@@ -213,6 +213,26 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
         ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra3.html"),
+            Path(dir_path, "data", "telstra", "telstra3_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra4.html"),
+            Path(dir_path, "data", "telstra", "telstra4_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra5.html"),
+            Path(dir_path, "data", "telstra", "telstra5_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra6.html"),
+            Path(dir_path, "data", "telstra", "telstra6_result.json"),
+        ),
         # Turkcell
         (
             HtmlParserTurkcell1,
