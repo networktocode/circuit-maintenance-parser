@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class HtmlParserGTT1(Html):
-    """Notifications Parser for GTT notifications."""
+    """Notifications Parser for EXA (formerly GTT) notifications."""
 
     def parse_html(self, soup):
         """Execute parsing."""
@@ -37,7 +37,7 @@ class HtmlParserGTT1(Html):
                             data["status"] = Status["TENTATIVE"]
                         elif status == "Reminder":
                             data["status"] = Status["CONFIRMED"]
-                        elif status == "Update" or status == "Rescheduled":
+                        elif status in ("Update", "Rescheduled"):
                             data["status"] = Status["RE_SCHEDULED"]
                         elif status == "Cancelled":
                             data["status"] = Status["CANCELLED"]
