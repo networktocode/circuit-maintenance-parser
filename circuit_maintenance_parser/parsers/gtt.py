@@ -33,7 +33,9 @@ class HtmlParserGTT1(Html):
                     if groups:
                         data["maintenance_id"] = groups.groups()[0]
                         status = groups.groups()[1]
-                        if status == "Reminder":
+                        if status == "New":
+                            data["status"] = Status["TENTATIVE"]
+                        elif status == "Reminder":
                             data["status"] = Status["CONFIRMED"]
                         elif status == "Update" or status == "Rescheduled":
                             data["status"] = Status["RE_SCHEDULED"]
@@ -43,6 +45,8 @@ class HtmlParserGTT1(Html):
                             # Setting this to 0 and 1 stops any errors from pydantic
                             data["start"] = 0
                             data["end"] = 1
+                        elif status == "Completed":
+                            data["status"] = Status["COMPLETED"]
                 elif "Start" in td_element.text:
                     # In the case of a normal notification, we have:
                     # <td>  <strong>TIME</strong></td>
