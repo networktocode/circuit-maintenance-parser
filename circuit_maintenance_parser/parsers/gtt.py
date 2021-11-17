@@ -33,9 +33,7 @@ class HtmlParserGTT1(Html):
                     if groups:
                         data["maintenance_id"] = groups.groups()[0]
                         status = groups.groups()[1]
-                        if status == "New":
-                            data["status"] = Status["TENTATIVE"]
-                        elif status == "Reminder":
+                        if status in ("New", "Reminder"):
                             data["status"] = Status["CONFIRMED"]
                         elif status in ("Update", "Rescheduled"):
                             data["status"] = Status["RE_SCHEDULED"]
