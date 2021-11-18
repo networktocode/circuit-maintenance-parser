@@ -94,7 +94,7 @@ class GenericProvider(BaseModel):
             if filter_data_type not in filter_dict:
                 continue
 
-            data_part_content = data_part.content.decode()
+            data_part_content = data_part.content.decode().replace("\r", "").replace("\n", "")
             if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
                 logger.debug("Matching %s filter expression for %s.", filter_type, data_part_content)
                 return True
@@ -200,6 +200,8 @@ class Colt(GenericProvider):
 
 class Equinix(GenericProvider):
     """Equinix provider custom class."""
+
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Network Maintenance"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[HtmlParserEquinix, SubjectParserEquinix, EmailDateParser]),

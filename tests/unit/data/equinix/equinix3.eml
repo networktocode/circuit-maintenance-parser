@@ -1,0 +1,518 @@
+Delivered-To: nautobot.email@example.com
+Received: by 2002:a05:7000:1f21:0:0:0:0 with SMTP id hs33csp396879mab;
+        Wed, 17 Nov 2021 05:10:26 -0800 (PST)
+X-Received: by 2002:a05:6808:2014:: with SMTP id q20mr44138276oiw.9.1637154626741;
+        Wed, 17 Nov 2021 05:10:26 -0800 (PST)
+ARC-Seal: i=3; a=rsa-sha256; t=1637154626; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=KJC5VM31/eiQyaGHA116PBrOB44xsYVxFNMrA7K0oGLeU87DvQNORtTctHg06xOmSY
+         NO6N/16MXFhz1CnMXgMnyd4mIU225pmNcnDIzY7rLJJmIaATCHvkxS+XpdTV/XxRSS4A
+         4M2zDrgLkm5zADdk//ef1d23MbNINylpZp2pKUSDWs/wK+FdWmQ9msMH0fOGD/yorxQa
+         /EVwa8tf1hD0UfyrWfjej1wo86gE9Kqz9uExhtMFZfJgcH5bojYwBdhdJAak5wi4uyJD
+         aE6399vkp+i/KovwT7AwrdvEGT9iL0wprrXhqKoa1DXF+dRUNkWuUZ9VKUzzV9DGyke2
+         njvQ==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:organization:mime-version:subject
+         :message-id:to:reply-to:from:date:sender:dkim-signature;
+        bh=dLvVdVH96vN2c5dDukZsjAaCmYzGMxWOQg1N4W4aeU8=;
+        b=F//IHBKr6yLZVnO66r3NArxPOOhrSlEobnA60lValuj9/GPuVzJPTh4yx1+5+N4oDu
+         Mj2Qsm/nqsQam3cTvl/Sa4C0bBGXJTfBaHkvJuesQ97ILj8T4HYO6oO2NCn+5YQniBlo
+         Mp8sjoEifqzVqCCrpylHTI6puSIK3p5SiPyP5B81c5eWqtrwtKN3CelaRicgbaRwgd0b
+         lY/n+T8mYuNfZSx0jo9GEK/0ZEEA/zi7lOV5vRdO953eCUpbKsPgqqrXK/WvpFRoQNQ9
+         n5n9TWfDX3AEJYP51x+7HkJIbz6cSvijZJHWuu0TSVtz/n79UKz8T9jHd8ieeUSTYPcQ
+         DjBQ==
+ARC-Authentication-Results: i=3; mx.google.com;
+       dkim=pass header.i=@example.com header.s=example header.b=MQ8puX7v;
+       arc=pass (i=2 spf=pass spfdomain=equinix.com dmarc=pass fromdomain=equinix.com);
+       spf=pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 209.85.220.97 as permitted sender) smtp.mailfrom=maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com;
+       dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
+Return-Path: <maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com>
+Received: from mail-sor-f97.google.com (mail-sor-f97.google.com. [209.85.220.97])
+        by mx.google.com with SMTPS id t10sor4802790otm.65.2021.11.17.05.10.26
+        for <nautobot.email@example.com>
+        (Google Transport Security);
+        Wed, 17 Nov 2021 05:10:26 -0800 (PST)
+Received-SPF: pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 209.85.220.97 as permitted sender) client-ip=209.85.220.97;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@example.com header.s=example header.b=MQ8puX7v;
+       arc=pass (i=2 spf=pass spfdomain=equinix.com dmarc=pass fromdomain=equinix.com);
+       spf=pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 209.85.220.97 as permitted sender) smtp.mailfrom=maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com;
+       dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:dkim-signature:sender:date:from:reply-to:to
+         :message-id:subject:mime-version:organization:x-original-sender
+         :x-original-authentication-results:precedence:mailing-list:list-id
+         :list-post:list-help:list-archive:list-unsubscribe;
+        bh=dLvVdVH96vN2c5dDukZsjAaCmYzGMxWOQg1N4W4aeU8=;
+        b=XZb3UBhZjqkCvgakucchPEwcHhuJBqi9pfaC2m4nSJpl5rDD9dMTRC5QhLtK7u4xBE
+         l+9h32a0isipPZ25R5h3TeUXojQc3uDaoFogp6M/EhfDPZ3vuV1PAXE3Tja+q4iilzKL
+         QWGeRLJvQxFArKkBWP58ZnEEASkFMO2yytYjJQ+S0czuePxNKCfHa3o6nT1wxP8WQ0cA
+         yfJputt2nd13rMeR8B3r8J8V127NiJu6Nel8zAH5nXF3me+tAPUrpFAjdJYOrdbWdFoW
+         J/fZWQVSqialKTf3BgZFOYvmmJaXqw/QxZdFBWYX0Sptf0sEDfWvtNdt7AZwDf3B7Bay
+         xohw==
+X-Gm-Message-State: AOAM530GPrLKTIWZmnUg9m0QElsEI0wXj7rqdiEOuB3pMEiC6N03QDqZ
+	FUPimxHJOXdXBD0desppOZzHs1qsQgMF5YSpqFOuQtSNMd0yOFUh
+X-Google-Smtp-Source: ABdhPJxzOd6h+5kUj1qt+jyBy5FhPqLetjpEgHdUdummq2iZUjleM1Esho2bcmmeOlbxGatiNIkVEIla0xKG
+X-Received: by 2002:a05:6830:1445:: with SMTP id w5mr13499681otp.112.1637154626351;
+        Wed, 17 Nov 2021 05:10:26 -0800 (PST)
+Return-Path: <maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com>
+Received: from netskope.com ([163.116.131.173])
+        by smtp-relay.gmail.com with ESMTPS id f20sm6179603otu.10.2021.11.17.05.10.26
+        for <nautobot.email@example.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Nov 2021 05:10:26 -0800 (PST)
+X-Relaying-Domain: example.com
+Received: by mail-pg1-f198.google.com with SMTP id e4-20020a630f04000000b002cc40fe16afsf1059275pgl.23
+        for <nautobot.email@example.com>; Wed, 17 Nov 2021 05:10:25 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1637154625; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=dPvjD4uYIz+OeAQgv993c2Xdp1+6l8gSnKJfQNVxrrrrFU8HTepvonuZkT8BXYEeoV
+         bsGyUbJySveL72oDTGVjq3GEM0nqHcGg2QNbyTKXStkFVHCrw2cKJyQDNcjQ/BrvVhk9
+         X4TzX25Y2+AAeqVDibvolRqt1xjKJEgnCxa/KqilBs9Utzw+uUfqBnmbp14TpYKgzSo2
+         /GBedd6/54g6E6s74EzeN2BRfec5uPV1lEioINVacw0iJ/lLRa90uD3LFbTqWjNt3H7G
+         vCLA0I82G9DyJfPb3CU0PgP6CR6U9dnElQ7rfYCZoSWkfea0pU6GOVu8FnVIfqToedtB
+         ZBoA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:organization:mime-version:subject
+         :message-id:to:reply-to:from:date:sender:dkim-signature;
+        bh=dLvVdVH96vN2c5dDukZsjAaCmYzGMxWOQg1N4W4aeU8=;
+        b=oQGaNNnL8SgXtbpK28cJrupmFf5fFhARwP1OmDxR/xHOH1JtpJVr0btiNNAQzXfNIl
+         d9S+j1PDOFqi9a1C2px67/0376OttY9TI560EftTV/EpSTSYlO7RqsIoZ+qByMWz9VtJ
+         4B+eQCX1LK0hlnZnGbka1e91zgKlLgq/W1N8sh72bvVFPucRLGeegTuIXkr0wGdTzAzk
+         5qS4SRJXiw+F8sjucyeKbzOgHRlZaIdhMBvA7l2YUsQlx16Qt2UZIkox67MYTUgWIG91
+         pkTgnI8sGFec9CqCecBoGq0iAyLYxlw2FuKBzPdHve/1CvkCkgAA8z1D10ECWddz/fzv
+         l3EQ==
+ARC-Authentication-Results: i=2; mx.google.com;
+       spf=pass (google.com: domain of no-reply@equinix.com designates 216.221.232.129 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=example.com; s=example;
+        h=sender:date:from:reply-to:to:message-id:subject:mime-version
+         :organization:x-original-sender:x-original-authentication-results
+         :precedence:mailing-list:list-id:list-post:list-help:list-archive
+         :list-unsubscribe;
+        bh=dLvVdVH96vN2c5dDukZsjAaCmYzGMxWOQg1N4W4aeU8=;
+        b=MQ8puX7v63oJz7it1DNPYJeeVdKryEsmretgHPpcn1/rirvX9le3Edru8ai3U3XiIQ
+         PJvqv1k7uwSg/k3/ojvMzAegc9LbYWxLjUFS+JxggHsonTqt384GOpYwtgLmCXx0sMts
+         Mdzsp+vb/kImnuV1jW8a4QfDMw/nP+fG3+Ims=
+Sender: maintenance-notices@example.com
+X-Received: by 2002:a17:90b:2309:: with SMTP id mt9mr9548698pjb.213.1637154623296;
+        Wed, 17 Nov 2021 05:10:23 -0800 (PST)
+X-Received: by 2002:a17:90b:2309:: with SMTP id mt9mr9548355pjb.213.1637154620880;
+        Wed, 17 Nov 2021 05:10:20 -0800 (PST)
+X-BeenThere: maintenance-notices@example.com
+Received: by 2002:a17:90b:1bcf:: with SMTP id oa15ls2981174pjb.0.canary-gmail;
+ Wed, 17 Nov 2021 05:10:20 -0800 (PST)
+X-Received: by 2002:a17:902:a605:b0:143:d289:f3fb with SMTP id u5-20020a170902a60500b00143d289f3fbmr12862050plq.41.1637154619788;
+        Wed, 17 Nov 2021 05:10:19 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1637154619; cv=none;
+        d=google.com; s=arc-20160816;
+        b=k9nXrDbnNsbkLsnQt8lvLp0rP8j2dlvW/nsTs1rQk2qrpOjKO7k2k2EVOG6FyHirRL
+         Ed0t0lKXF+nDtjU8nrjcH0FDH0t+7kQ5XpMz2S745c+cyddwXQOBu1zegAg0AS3NU4o9
+         enegjQOr9GkKNDCAXpqIYRIG7r/IUHt+e8i/3DZZf/q76hrR/BCakLwsETfgTGjt+hz8
+         QqEG+D5+ZdfzR8JzRp6D8HY3pdQkTNSK5q5YD49iCXvZOm1dAXPhi0KkPwV7TnsZ5suR
+         OJTlGiieXaPpRcA/BZeMCxz0NSeywfj8MFaBQIRB6p/XYQtnhhhqYOoo06ukaMTzoNul
+         eC1g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=organization:mime-version:subject:message-id:to:reply-to:from:date;
+        bh=6E9iV3kwO52DRLfdVAG0hTkrh4VKiPxUu9e13GDquT8=;
+        b=J3hFFeGTu9htcR6eN0psfcphbInLVMfMmFU7eIm8Gb1Pz6RjuHSAioHPpICxTOk+Dd
+         YKrP/k5SDGcC2joGziljXTqTik8bqSWLNh5L+yC8hNnrBclnZjBV0S4B8vnv20J9X+nV
+         +wRR7aEATC9DmF6dh7sQlCOLUTFgVkVls2gRrFZJMI3D3u/ompCQzv7KQf2z6UIP1MUm
+         5cZibAka6SniBs0hU8z3Cai/DoB/83fMDNOg9mWuXI/boHpygrbG1//5Kc8z+HKcN1Oa
+         PnhbaF2l1fkYr9AvqO5QsC+ZBDDOxbA59iwnon8r5wK2HtJZiTByi1w7dCilQflYvLXJ
+         GKiQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of no-reply@equinix.com designates 216.221.232.129 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
+Received: from sv2esa01.corp.equinix.com (nat1-mis.equinix.com. [216.221.232.129])
+        by mx.google.com with ESMTPS id r2si9088157pjr.143.2021.11.17.05.10.16
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 17 Nov 2021 05:10:19 -0800 (PST)
+Received-SPF: pass (google.com: domain of no-reply@equinix.com designates 216.221.232.129 as permitted sender) client-ip=216.221.232.129;
+Received: from unknown (HELO vmclxremas08.corp.equinix.com) ([10.192.140.2])
+  by sv2esa01.corp.equinix.com with ESMTP; 17 Nov 2021 05:10:16 -0800
+Date: Wed, 17 Nov 2021 13:10:16 +0000 (UTC)
+From: Equinix Network Maintenance NO-REPLY <no-reply@equinix.com>
+Reply-To: Equinix Network Maintenance NO-REPLY <no-reply@equinix.com>
+To: EquinixNetworkMaintenance <EquinixNetworkMaintenance@equinix.com>
+Message-ID: <1814407781.76370.1637154616133@vmclxremas08.corp.equinix.com>
+Subject: [maintenance-notices] COMPLETED - Scheduled MLPE Upgrade-SV Metro Area Network
+ Maintenance -16-NOV-2021 [EQ-GL-20211027-00621]
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="----=_Part_76369_234541402.1637154616132"
+X-Priority: 1
+Organization: Equinix, Inc
+X-Original-Sender: no-reply@equinix.com
+X-Original-Authentication-Results: mx.google.com;       spf=pass (google.com:
+ domain of no-reply@equinix.com designates 216.221.232.129 as permitted
+ sender) smtp.mailfrom=no-reply@equinix.com;       dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=equinix.com
+Precedence: list
+Mailing-list: list maintenance-notices@example.com; contact maintenance-notices+owners@example.com
+List-ID: <maintenance-notices.example.com>
+X-Google-Group-Id: 536184160288
+List-Post: <https://groups.google.com/a/example.com/group/maintenance-notices/post>, <mailto:maintenance-notices@example.com>
+List-Help: <https://support.google.com/a/example.com/bin/topic.py?topic=25838>,
+ <mailto:maintenance-notices+help@example.com>
+List-Archive: <https://groups.google.com/a/example.com/group/maintenance-notices/>
+List-Unsubscribe: <mailto:googlegroups-manage+536184160288+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/example.com/group/maintenance-notices/subscribe>
+x-netskope-inspected: true
+
+------=_Part_76369_234541402.1637154616132
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+ Dear Equinix Customer,
+
+The maintenance listed below has now been completed.
+
+ =20
+
+Dear Equinix Customer,
+
+DATE:		16-NOV-2021 - 17-NOV-2021
+
+SPAN:		16-NOV-2021 - 17-NOV-2021
+
+LOCAL:		TUESDAY, 16 NOV 23:00 - WEDNESDAY, 17 NOV 05:00
+UTC:		WEDNESDAY, 17 NOV 07:00 - WEDNESDAY, 17 NOV 13:00
+
+IBX(s): HQ,SUN,SV1,SV10,SV11,SV13,SV14,SV15,SV16,SV17,SV2,SV3,SV4,SV5,SV6,S=
+V8,SV9
+
+
+DESCRIPTION:Please be advised as part of an ongoing effort to improve relia=
+bility and security, Equinix will be performing software patching on Intern=
+et Exchange (IX) route servers.
+Please ensure your BGP sessions to both route servers are operational befor=
+e the start of the maintenance to avoid service interruption. The activity =
+will be carried out one at a time on each route servers and BGP sessions to=
+ each route server will be down for approximately 60 minutes.
+This work will not cause a physical downtime to the peering port.
+
+Equinix will be performing essential maintenance on the Primary Route Serve=
+r in the SV metro.
+
+BGP sessions to RS1 (AS64511) 192.168.117.251, 2001:db8:0:1:ffff:ffff:ffff:=
+1 will be impacted.
+
+BGP sessions to RS2 (AS64511) 192.168.117.252, 2001:db8:0:1:ffff:ffff:ffff:=
+2 will not be impacted.
+
+BGP sessions to RC1 (AS64510) 192.168.117.250, 2001:db8:0:1:0:6:5517:1 will=
+ not be impacted.
+
+
+PRODUCTS:	INTERNET EXCHANGE
+
+IMPACT:	Loss of redundancy to your service
+
+Internet Exchange 	 			 			 				    Account # 				    Product 				    Servi=
+ce Serial # 			 				 						 123456 						 Internet Exchange 						 12345678=
+-A 				 			 =09
+
+We apologize for any inconvenience you may experience during this activity.=
+  Your cooperation and understanding are greatly appreciated.
+
+The Equinix SMC is available to provide up-to-date status information or ad=
+ditional details, should you have any questions regarding the maintenance. =
+ Please reference EQ-GL-20211027-00621.=20
+
+
+Sincerely, =20
+Equinix SMC     Contacts:  =20
+To place orders, schedule site access, report trouble or manage your user l=
+ist online, please visit: http://www.equinix.com/contact-us/customer-suppor=
+t/=20
+Please do not reply to this email address. If you have any questions or con=
+cerns regarding this notification, please email  Service Desk  and include =
+the ticket [EQ-GL-20211027-00621] in the subject line. If the matter is urg=
+ent, you may contact the Service Desk North America  by phone at +1.866.EQU=
+INIX (378.4649) (USA or Canada) or +1.408.451.5200 (outside USA or Canada) =
+ for an up-to-date status.
+
+To unsubscribe from notifications, please log in to the Equinix Customer Po=
+rtal  and change your preferences.
+
+How are we doing? Tell Equinix - We're Listening.                     E Q U=
+ I N I X   |    One Lagoon Drive, 4th Floor, Redwood City, CA 94065     |  =
+ www.equinix.com        =C2=A9 2021 Equinix, Inc. All rights reserved.| Leg=
+al | Privacy
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+Maintenance Notices" group.
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to maintenance-notices+unsubscribe@example.com.
+To view this discussion on the web visit https://groups.google.com/a/riotga=
+mes.com/d/msgid/maintenance-notices/1814407781.76370.1637154616133%40vmclxremas08.co=
+rp.equinix.com.
+
+------=_Part_76369_234541402.1637154616132
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8" />
+
+<style type=3D"text/css">
+<!--
+
+a:link {
+        color: #215CA1;
+}
+a:visited {
+        color: #215CA1;
+}
+a:hover {
+        color: #215CA1;
+}
+a:active {
+        color: #215CA1;
+}
+ul
+{
+padding: 0px;
+margin: 20px;
+}
+body {
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+}
+-->
+</style>
+<title></title>
+</head>
+<body ><table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" ><tr ><td =
+><table width=3D"700" align=3D"center" cellpadding=3D"0" cellspacing=3D"0" =
+bgcolor=3D"#FFFFFF" ><tr ><td ><table width=3D"100%" cellspacing=3D"0" cell=
+padding=3D"0" ><tr ><td height=3D"111" ><img src=3D"http://info.equinix.com=
+/rs/equinixinc/images/banner-network-maintenance.gif" alt=3D"Meet Equinix" =
+width=3D"702" height=3D"115" border=3D"0" />
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr ><td style=3D"border-left:1px solid #cccccc; border-right:1px solid #cc=
+cccc; " ><table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" ><tr>
+
+<td align=3D"center" height=3D"20" colspan=3D"3"></td>
+</tr>
+<tr ><td width=3D"30">&nbsp;</td>
+<td width=3D"642" valign=3D"top" style=3D"border-bottom:1px solid #cccccc; =
+" ><table width=3D"642" cellspacing=3D"0" cellpadding=3D"0" ><tr ><td valig=
+n=3D"top" style=3D"padding-bottom:20px; " ><table width=3D"640" cellspacing=
+=3D"0" cellpadding=3D"0" >
+<p><span style=3D"font-family:Arial, Helvetica, sans-serif; font-size:12px;=
+ color:#555555; " >
+Dear Equinix Customer,<br />
+<br />
+The maintenance listed below has now been completed.<br />
+<br />
+</p></span>
+<hr>
+<p><span style=3D"font-family:Arial, Helvetica, sans-serif; font-size:12px;=
+ color:#555555; " ><br />
+Dear Equinix Customer,<br />
+<br />
+<b>DATE:</b>		16-NOV-2021 - 17-NOV-2021<br />
+<br />
+<b>SPAN:		16-NOV-2021 - 17-NOV-2021</b><br />
+<br />
+<b>LOCAL:</b>		TUESDAY, 16 NOV 23:00 - WEDNESDAY, 17 NOV 05:00<br />
+<b>UTC:</b>		WEDNESDAY, 17 NOV 07:00 - WEDNESDAY, 17 NOV 13:00<br />
+<br />
+<b>IBX(s): </b>HQ,SUN,SV1,SV10,SV11,SV13,SV14,SV15,SV16,SV17,SV2,SV3,SV4,SV=
+5,SV6,SV8,SV9<br />
+<br />
+<Int Desc><br />
+<b>DESCRIPTION:</b>Please be advised as part of an ongoing effort to improv=
+e reliability and security, Equinix will be performing software patching on=
+ Internet Exchange (IX) route servers.<br />
+Please ensure your BGP sessions to both route servers are operational befor=
+e the start of the maintenance to avoid service interruption. The activity =
+will be carried out one at a time on each route servers and BGP sessions to=
+ each route server will be down for approximately 60 minutes.<br />
+This work will not cause a physical downtime to the peering port.<br />
+<br />
+Equinix will be performing essential maintenance on the Primary Route Serve=
+r in the SV metro.<br />
+<br />
+BGP sessions to RS1 (AS24115) 192.168.117.251, 2001:db8:0:1:ffff:ffff:ffff:=
+1 will be impacted.<br />
+<br />
+BGP sessions to RS2 (AS24115) 192.168.117.252, 2001:db8:0:1:ffff:ffff:ffff:=
+2 will not be impacted.<br />
+<br />
+BGP sessions to RC1 (AS65517) 192.168.117.250, 2001:db8:0:1:0:6:5517:1 will=
+ not be impacted.<br />
+<br/><br />
+<b>PRODUCTS:</b>	INTERNET EXCHANGE<br />
+<br />
+<b>IMPACT:</b>	Loss of redundancy to your service<br />
+<br/>
+    <b><u>Internet Exchange</u></b>
+=09
+
+			<table style=3D"font-family:Arial, Helvetica, sans-serif; font-size:12px=
+; color:#555555; width:100%;border:1px solid black;border-collapse:collapse=
+;table-layout:fixed">
+			<tr>
+				    <th style=3D"border:1px solid; width:33.333%">Account #</th>
+				    <th style=3D"border:1px solid; width:33.333%">Product</th>
+				    <th style=3D"border:1px solid; width:33.333%">Service Serial #</th>
+			</tr>
+				<tr>
+						 <td align=3D"center" style=3D"border:1px solid;word-wrap: break-word=
+;  width:33.333%">123456</td>
+						 <td align=3D"center" style=3D"border:1px solid;word-wrap: break-word=
+;  width:33.333%">Internet Exchange</td>
+						 <td align=3D"center" style=3D"border:1px solid;word-wrap: break-word=
+;  width:33.333%">12345678-A</td>
+				</tr>
+			</table>
+	<br/>
+<span style=3D"font-family:Arial, Helvetica, sans-serif; font-size:12px; co=
+lor:#555555; " ><br /> We apologize for any inconvenience you may experienc=
+e during this activity.  Your cooperation and understanding are greatly app=
+reciated.<br /> <br /> The Equinix SMC is available to provide up-to-date s=
+tatus information or additional details, should you have any questions rega=
+rding the maintenance.  Please reference EQ-GL-20211027-00621. <br />
+<br />
+<p>Sincerely,  <br>  Equinix SMC </p>  </span></p><tr ><td height=3D"20"></=
+td>  </tr>  <tr ><td height=3D"35" valign=3D"top" ><div style=3D"font-famil=
+y:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; " ><span sty=
+le=3D"font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#0000=
+00; font-weight:bold; ">Contacts:</span>   <p>  To place orders, schedule s=
+ite access, report trouble or manage your user list online, please visit: <=
+a href=3D"http://www.equinix.com/contact-us/customer-support/ ">http://www.=
+equinix.com/contact-us/customer-support/ </a></p><p>Please do not reply to =
+this email address. If you have any questions or concerns regarding this no=
+tification, please email  <a href=3D"mailto:servicedesk@equinix.com">Servic=
+e Desk</a>  and include the ticket [EQ-GL-20211027-00621] in the subject li=
+ne. If the matter is urgent, you may contact the Service Desk North America=
+  by phone at +1.866.EQUINIX (378.4649) (USA or Canada) or +1.408.451.5200 =
+(outside USA or Canada)  for an up-to-date status.</p></div><tr ><td height=
+=3D"35" valign=3D"top" ><div style=3D"font-family:Arial, Helvetica, sans-se=
+rif; font-size:12px; color:#555555; " ><br />
+<center>To unsubscribe from notifications, please log in to the <a href =3D=
+"https://customerportal.equinix.com/user/notifications" target=3D"_blank">E=
+quinix Customer Portal </a> and change your preferences.</center><br />
+<pre><font face=3D"arial"></font></pre></div>
+  </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td width=3D"30">
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr ><td style=3D"border-left:1px solid #cccccc; border-right:1px solid #cc=
+cccc; border-bottom:1px solid #cccccc; " ><table width=3D"700" cellpadding=
+=3D"0" cellspacing=3D"0" ><tr ><td width=3D"95" align=3D"center"><a href=3D=
+"http://www.equinix.com"><img src=3D"http://na-g.marketo.com/rs/equinixinc/=
+images/Equinix-Logo_icon-white.gif" alt=3D"Equinix" width=3D"35" height=3D"=
+23" border=3D"0" /></a></td>
+<td width=3D"597" align=3D"right" ><table border=3D"0" align=3D"right" cell=
+padding=3D"0" cellspacing=3D"0" ><tr ><td align=3D"right" valign=3D"middle"=
+ style=3D"font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#=
+aaaaaa; " ><span style=3D"font-family:Arial, Helvetica, sans-serif; font-si=
+ze:14px; font-weight:bold; color:#555555; font-weight:bold;">How are we doi=
+ng? Tell Equinix - We're Listening.</span>
+
+</td>
+<td width=3D"10" height=3D"64" align=3D"center">&nbsp;</td>
+<td align=3D"left" valign=3D"middle" style=3D"font-family:Arial, Helvetica,=
+ sans-serif; font-size:11px; color:#aaaaaa; " ><a href=3D"#" target=3D"_bla=
+nk" style=3D"border:0;"></a><a href=3D"#" target=3D"_blank"></a><a href=3D"=
+https://equinix.qualtrics.com/jfe/form/SV_5tZRNCGwOKna7A1"><img src=3D"http=
+://info.equinix.com/rs/equinixinc/images/FOOTERBUTTON-feedback-en.gif" widt=
+h=3D"132" height=3D"34" border=3D"0" /></a>
+</td>
+</tr>
+</table>
+</td>
+<td width=3D"30" align=3D"right">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width=3D"704" align=3D"center" cellpadding=3D"0" cellspacing=3D"0">
+<tr>
+<td><img src=3D"http://na-g.marketo.com/rs/equinixinc/images/Event_Offering=
+-seperator.jpg" width=3D"704" height=3D"20" /></td>
+</tr>
+
+</table>
+<table width=3D"600" border=3D"0" align=3D"center" cellpadding=3D"0" cellsp=
+acing=3D"0" ><tr ><td align=3D"right" style=3D"font-family:Arial, Helvetica=
+, sans-serif; font-size:11px; color:#777; " ><table border=3D"0" align=3D"c=
+enter" cellpadding=3D"0" cellspacing=3D"0" ><tr ><td align=3D"right" style=
+=3D"font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#777;">=
+<span style=3D"font-weight:bold; color:#000;">E Q U I N I X</span>&nbsp;&nb=
+sp;&nbsp;|&nbsp;&nbsp;&nbsp;</td>
+<td ><span style=3D"font-family:Arial, Helvetica, sans-serif; font-size:12p=
+x; color:#777; " >One Lagoon Drive, 4th Floor, Redwood City, CA 94065</span=
+>
+</td>
+<td align=3D"left" style=3D"font-family:Arial, Helvetica, sans-serif; font-=
+size:12px; color:#777;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href=3D"htt=
+p://www.equinix.com" style=3D" color:#777;">www.equinix.com</a></td>
+</tr>
+<tr>
+<td align=3D"center" height=3D"30"></td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr ><td height=3D"22" align=3D"center" style=3D"font-family:Arial, Helveti=
+ca, sans-serif; font-size:11px; color:#777; " ><span style=3D"font-family:A=
+rial, Helvetica, sans-serif; font-size:11px; color:#777777;">&copy; 2021 Eq=
+uinix, Inc. All rights reserved.| <a style=3D" color:#777777;" href=3D"http=
+://www.equinix.com/legal/" target=3D"_blank">Legal</a> | <a style=3D" color=
+:#777777;" href=3D"http://www.equinix.com/privacy/" target=3D"_blank">Priva=
+cy</a></span>
+  </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;Maintenance Notices&quot; group.<br />
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:maintenance-notices+unsubscribe@example.com">maintenance-notices+=
+unsubscribe@example.com</a>.<br />
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/example.com/d/msgid/maintenance-notices/1814407781.76370.1637154616133%40vmcl=
+xremas08.corp.equinix.com?utm_medium=3Demail&utm_source=3Dfooter">https://g=
+roups.google.com/a/example.com/d/msgid/maintenance-notices/1814407781.76370.163715=
+4616133%40vmclxremas08.corp.equinix.com</a>.<br />
+
+------=_Part_76369_234541402.1637154616132--
