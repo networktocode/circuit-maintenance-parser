@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.5 - 2021-11-18
+
+### Fixed
+
+- #109 - Improve handling of Zayo notifications.
+- #110 - Improve handling of Telstra notifications.
+- #111 - Improve handling of EXA (GTT) notifications.
+- #112 - Improve handling of Equinix notifications.
+
 ## v2.0.4 - 2021-11-04
 
 ### Fixed

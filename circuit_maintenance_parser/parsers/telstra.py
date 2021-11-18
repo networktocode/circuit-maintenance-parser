@@ -27,10 +27,16 @@ class HtmlParserTelstra1(Html):
         for table in tables:
             for td_element in table.find_all("td"):
                 # TODO: We should find a more consistent way to parse the status of a maintenance note
-                if "Planned Maintenance has been scheduled" in td_element.text:
+                if "maintenance has been scheduled" in td_element.text.lower():
                     data["status"] = Status("CONFIRMED")
-                elif "This is a reminder notification to notify that a planned maintenance" in td_element.text:
+                elif "this is a reminder notification to notify that a planned maintenance" in td_element.text.lower():
                     data["status"] = Status("CONFIRMED")
+                elif "has been completed" in td_element.text.lower():
+                    data["status"] = Status("COMPLETED")
+                elif "has been amended" in td_element.text.lower():
+                    data["status"] = Status("RE-SCHEDULED")
+                elif "has been withdrawn" in td_element.text.lower():
+                    data["status"] = Status("CANCELLED")
                 else:
                     continue
                 break

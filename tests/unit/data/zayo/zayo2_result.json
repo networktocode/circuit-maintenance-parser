@@ -11,7 +11,7 @@
     "maintenance_id": "TTN-0001234567",
     "stamp": 1614297600,
     "start": 1614405600,
-    "status": "CONFIRMED",
+    "status": "CANCELLED",
     "summary": "Zayo will implement network maintenance to enhance service reliability."
   }
 ]

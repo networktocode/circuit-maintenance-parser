@@ -1,0 +1,20 @@
+[
+    {
+        "account": "123456",
+        "circuits": [
+            {
+                "circuit_id": "12345678-A",
+                "impact": "REDUCED-REDUNDANCY"
+            }
+        ],
+        "end": 1637154000,
+        "maintenance_id": "EQ-GL-20211027-00621",
+        "organizer": "servicedesk@equinix.com",
+        "provider": "equinix",
+        "sequence": 1,
+        "stamp": 1637154616,
+        "start": 1637132400,
+        "status": "COMPLETED",
+        "summary": "[maintenance-notices] COMPLETED - Scheduled MLPE Upgrade-SV Metro Area Network Maintenance -16-NOV-2021 [EQ-GL-20211027-00621]"
+    }
+]

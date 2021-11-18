@@ -18,6 +18,7 @@ from circuit_maintenance_parser.provider import (
     Cogent,
     Colt,
     EUNetworks,
+    GTT,
     HGC,
     Lumen,
     Megaport,
@@ -99,10 +100,88 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (
             Equinix,
             [("email", Path(dir_path, "data", "equinix", "equinix1.eml"))],
-            [Path(dir_path, "data", "equinix", "equinix3_result.json")],
+            [Path(dir_path, "data", "equinix", "equinix1_result_combined.json")],
+        ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix3.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix3_result_combined.json")],
         ),
         # EUNetworks
         (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        # EXA / GTT
+        (
+            GTT,
+            [
+                ("html", Path(dir_path, "data", "gtt", "gtt1.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "gtt", "gtt1_email_subject")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("html", Path(dir_path, "data", "gtt", "gtt2.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "gtt", "gtt2_email_subject")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("html", Path(dir_path, "data", "gtt", "gtt3.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "gtt", "gtt3_email_subject")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt3_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("html", Path(dir_path, "data", "gtt", "gtt4.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "gtt", "gtt4_email_subject")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt4_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("html", Path(dir_path, "data", "gtt", "gtt5.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "gtt", "gtt5_email_subject")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt5_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("html", Path(dir_path, "data", "gtt", "gtt6.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "gtt", "gtt6_email_subject")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt6_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
         # HGC
         (
             HGC,
@@ -255,6 +334,50 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra3.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra3_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra4.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra4_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra5.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra5_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra6.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra6_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
         (Telstra, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
         # Turkcell
         (
@@ -328,6 +451,21 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("html", Path(dir_path, "data", "zayo", "zayo3.eml")),],
             [Path(dir_path, "data", "zayo", "zayo3_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo4.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo4_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo5.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo5_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo6.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo6_result.json"),],
         ),  # pylint: disable=too-many-locals
     ],
 )
@@ -451,7 +589,7 @@ Details:
             """\
 Failed creating Maintenance notification for Zayo.
 Details:
-- Processor SimpleProcessor from Zayo failed due to: 1 validation error for Maintenance
+- Processor CombinedProcessor from Zayo failed due to: 1 validation error for Maintenance
 maintenance_id
   field required (type=value_error.missing)
 """,
@@ -464,7 +602,7 @@ maintenance_id
             """\
 Failed creating Maintenance notification for Zayo.
 Details:
-- Processor SimpleProcessor from Zayo failed due to: HtmlParserZayo1 parser was not able to extract the expected data for each maintenance.
+- Processor CombinedProcessor from Zayo failed due to: HtmlParserZayo1 parser was not able to extract the expected data for each maintenance.
   - Raw content: b'aaa'
   - Result: [{}]
 """,

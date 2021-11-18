@@ -36,7 +36,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
+from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
 
 logger = logging.getLogger(__name__)
@@ -94,7 +94,7 @@ class GenericProvider(BaseModel):
             if filter_data_type not in filter_dict:
                 continue
 
-            data_part_content = data_part.content.decode()
+            data_part_content = data_part.content.decode().replace("\r", "").replace("\n", "")
             if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
                 logger.debug("Matching %s filter expression for %s.", filter_type, data_part_content)
                 return True
@@ -201,6 +201,8 @@ class Colt(GenericProvider):
 class Equinix(GenericProvider):
     """Equinix provider custom class."""
 
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Network Maintenance"]}
+
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[HtmlParserEquinix, SubjectParserEquinix, EmailDateParser]),
     ]
@@ -214,12 +216,15 @@ class EUNetworks(GenericProvider):
 
 
 class GTT(GenericProvider):
-    """GTT provider custom class."""
+    """EXA (formerly GTT) provider custom class."""
+
+    # "Planned Work Notification", "Emergency Work Notification"
+    _include_filter = {EMAIL_HEADER_SUBJECT: ["Work Notification"]}
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
     ]
-    _default_organizer = "InfraCo.CM@gttcorp.org"
+    _default_organizer = "InfraCo.CM@exainfra.net"
 
 
 class HGC(GenericProvider):
@@ -330,6 +335,6 @@ class Zayo(GenericProvider):
     """Zayo provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        SimpleProcessor(data_parsers=[HtmlParserZayo1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserZayo1, HtmlParserZayo1]),
     ]
     _default_organizer = "mr@zayo.com"

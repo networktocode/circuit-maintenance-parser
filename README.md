@@ -64,7 +64,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 - Cogent
 - Colt
 - Equinix
-- GTT
+- EXA (formerly GTT)
 - HGC
 - Lumen
 - Megaport

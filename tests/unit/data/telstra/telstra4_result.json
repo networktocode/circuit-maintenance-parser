@@ -1,0 +1,16 @@
+[
+    {
+        "account": "Some Customer",
+        "circuits": [
+            {
+                "circuit_id": "SNG TPE EPL 9999999",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1636844400,
+        "maintenance_id": "PN234567",
+        "start": 1636817400,
+        "status": "COMPLETED",
+        "summary": "Taiwan Mobile Essential Maintenance Notification 9876543. Taiwan Mobile to carry out network maintenance operations ro improve network performance and stability. Impact Time: 2021/11/14 02:00 ~ 2021/11/14 02:30 Local"
+    }
+]

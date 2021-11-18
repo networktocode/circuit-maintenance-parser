@@ -28,7 +28,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1
+from circuit_maintenance_parser.parsers.zayo import SubjectParserZayo1, HtmlParserZayo1
 
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -103,6 +103,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "equinix", "equinix2.eml"),
             Path(dir_path, "data", "equinix", "equinix2_result.json"),
         ),
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix3.eml"),
+            Path(dir_path, "data", "equinix", "equinix3_result.json"),
+        ),
         # GTT
         (
             HtmlParserGTT1,
@@ -118,6 +123,21 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserGTT1,
             Path(dir_path, "data", "gtt", "gtt3.html"),
             Path(dir_path, "data", "gtt", "gtt3_result.json"),
+        ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt4.html"),
+            Path(dir_path, "data", "gtt", "gtt4_result.json"),
+        ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt5.html"),
+            Path(dir_path, "data", "gtt", "gtt5_result.json"),
+        ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt6.html"),
+            Path(dir_path, "data", "gtt", "gtt6_result.json"),
         ),
         # HGC
         (
@@ -213,6 +233,26 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "telstra", "telstra2.html"),
             Path(dir_path, "data", "telstra", "telstra2_result.json"),
         ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra3.html"),
+            Path(dir_path, "data", "telstra", "telstra3_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra4.html"),
+            Path(dir_path, "data", "telstra", "telstra4_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra5.html"),
+            Path(dir_path, "data", "telstra", "telstra5_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra6.html"),
+            Path(dir_path, "data", "telstra", "telstra6_result.json"),
+        ),
         # Turkcell
         (
             HtmlParserTurkcell1,
@@ -255,6 +295,36 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserZayo1,
             Path(dir_path, "data", "zayo", "zayo3.eml"),
             Path(dir_path, "data", "zayo", "zayo3_result.json"),
+        ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo4.eml"),
+            Path(dir_path, "data", "zayo", "zayo4_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo4.eml"),
+            Path(dir_path, "data", "zayo", "zayo4_subject_parser_result.json"),
+        ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo5.eml"),
+            Path(dir_path, "data", "zayo", "zayo5_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo5.eml"),
+            Path(dir_path, "data", "zayo", "zayo5_subject_parser_result.json"),
+        ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo6.eml"),
+            Path(dir_path, "data", "zayo", "zayo6_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo6.eml"),
+            Path(dir_path, "data", "zayo", "zayo6_subject_parser_result.json"),
         ),
         # Email Date
         (
