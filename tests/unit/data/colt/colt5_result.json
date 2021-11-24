@@ -1,0 +1,18 @@
+[
+  {
+    "account": "123456",
+    "end": 1628744400,
+    "maintenance_id": "CRQ1-12345678",
+    "circuits": [
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "C-1234567"
+      }
+    ],
+    "sequence": 1,
+    "stamp": 1637790229,
+    "start": 1626130800,
+    "status": "CANCELLED",
+    "summary": "[ EXTERNAL ] Cancellation Colt Third Party Maintenance Notification - CRQ1-12345678 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for ACME, 123456"
+  }
+]

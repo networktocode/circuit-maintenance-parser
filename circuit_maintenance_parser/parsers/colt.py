@@ -33,7 +33,7 @@ class CsvParserColt1(Csv):
 
 
 class SubjectParserColt1(EmailSubjectParser):
-    """Subject parser for Colt notifications."""
+    """Subject parser for Colt notifications - type 1."""
 
     def parse_subject(self, subject):
         """Parse subject.
@@ -44,7 +44,7 @@ class SubjectParserColt1(EmailSubjectParser):
         """
         data = {}
         search = re.search(
-            r"\[.+\](.+).+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+?([A-Z]+)",
+            r"\[.+\](.+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
             subject,
         )
         if search:
@@ -57,5 +57,32 @@ class SubjectParserColt1(EmailSubjectParser):
                 data["status"] = Status("COMPLETED")
             else:
                 data["status"] = Status("CONFIRMED")
+            data["summary"] = subject
+        return [data]
+
+
+class SubjectParserColt2(EmailSubjectParser):
+    """Subject parser for Colt notifications - type 2."""
+
+    def parse_subject(self, subject):
+        r"""Parse subject.
+
+        Example:
+        - [ EXTERNAL ] Cancellation Colt Third Party Maintenance Notification -\n CRQ1-12345678 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for\n ACME, 123456
+        - [ EXTERNAL ] Colt Third Party Maintenance Notification -\n CRQ1-48926339503 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for\n ACME, 123456
+        """
+        data = {}
+        search = re.search(
+            r"\[.+\]\s+([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
+            subject,
+        )
+        if search:
+            if search.group(1).upper() == "CANCELLATION":
+                data["status"] = Status("CANCELLED")
+            else:
+                data["status"] = Status("CONFIRMED")
+            data["maintenance_id"] = search.group(3)
+            data["start"] = self.dt2ts(parser.parse(search.group(4)))
+            data["end"] = self.dt2ts(parser.parse(search.group(5)))
             data["summary"] = subject
         return [data]
