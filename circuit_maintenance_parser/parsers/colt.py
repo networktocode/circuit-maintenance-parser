@@ -44,20 +44,21 @@ class SubjectParserColt1(EmailSubjectParser):
         """
         data = {}
         search = re.search(
-            r"\[.+\](.+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
+            r"\[.+\]\s([A-Za-z\s]+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
             subject,
         )
         if search:
             data["maintenance_id"] = search.group(2)
             data["start"] = self.dt2ts(parser.parse(search.group(3)))
             data["end"] = self.dt2ts(parser.parse(search.group(4)))
-            if search.group(5) == "START":
+            status = search.group(5).strip()
+            if status == "START":
                 data["status"] = Status("IN-PROCESS")
-            elif search.group(5) == "COMPLETED":
+            elif status == "COMPLETED":
                 data["status"] = Status("COMPLETED")
             else:
                 data["status"] = Status("CONFIRMED")
-            data["summary"] = subject
+            data["summary"] = search.group(1).strip()
         return [data]
 
 
@@ -84,5 +85,5 @@ class SubjectParserColt2(EmailSubjectParser):
             data["maintenance_id"] = search.group(3)
             data["start"] = self.dt2ts(parser.parse(search.group(4)))
             data["end"] = self.dt2ts(parser.parse(search.group(5)))
-            data["summary"] = subject
+            data["summary"] = search.group(2).strip()
         return [data]

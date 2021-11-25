@@ -1,16 +1,7 @@
 [
   {
-    "account": "123456",
     "end": 1628744400,
     "maintenance_id": "CRQ1-12345678",
-    "circuits": [
-      {
-        "impact": "OUTAGE",
-        "circuit_id": "C-1234567"
-      }
-    ],
-    "sequence": 1,
-    "stamp": 1637790229,
     "start": 1626130800,
     "status": "CANCELLED",
     "summary": "Colt Third Party Maintenance Notification"
