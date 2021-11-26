@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.6 
+
+### Added
+
+- #116 - New `EmailSubjectParser` for Colt notifications and tests.
+- #117 - Add new notification status of `Alternate Night` for Lumen.
+
 ## v2.0.5 - 2021-11-18
 
 ### Fixed
