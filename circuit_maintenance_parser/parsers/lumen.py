@@ -95,6 +95,8 @@ class HtmlParserLumen1(Html):
                             data["status"] = Status("RE-SCHEDULED")
                         elif status_string == "Not Completed":
                             data["status"] = Status("CANCELLED")
+                        elif status_string == "Alternate Night":
+                            data["status"] = Status("RE-SCHEDULED")
                     elif "status" not in data:
                         # Update to an existing ticket may not include an update to the status - make a guess
                         data["status"] = "CONFIRMED"
