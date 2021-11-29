@@ -1,9 +1,9 @@
 MIME-Version: 1.0
 Date: Mon, 1 Nov 2021 11:51:41 +0000
-Subject: [ EXTERNAL ] MAINTENANCE ALERT: CRQ1-12345678 31/10/2021 00:00:00 GMT - 31/10/2021 07:30:00 GMT - COMPLETED
 From: Maintenance Request <change@example.com>
 To: Maintenance Request <change@example.com>
 Content-Type: multipart/mixed; boundary="000000000000e8c2b105cfb8cc38"
+Subject: [ EXTERNAL ] MAINTENANCE ALERT: CRQ1-12345678 31/10/2021 00:00:00 GMT - 31/10/2021 07:30:00 GMT - COMPLETED
 
 --000000000000e8c2b105cfb8cc38
 Content-Type: multipart/alternative; boundary="000000000000e8c2ae05cfb8cc36"

@@ -1,0 +1,17 @@
+[
+    {
+        "account": "ACME INC",
+        "circuits": [
+            {
+                "circuit_id": "ETH1000-111111",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1637323200,
+        "maintenance_id": "123456789-1",
+        "stamp": 1637207867,
+        "start": 1637301600,
+        "status": "RE-SCHEDULED",
+        "summary": "Lumen intends to carry out internal maintenance within its network. This has been designated as ESSENTIAL. The nature of this work is to repair/replace fiber and is required in order to avoid unplanned outages from damages related to natural causes."
+    }
+]

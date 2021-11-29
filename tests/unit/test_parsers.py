@@ -11,7 +11,7 @@ from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, S
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
-from circuit_maintenance_parser.parsers.colt import CsvParserColt1
+from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
@@ -91,6 +91,16 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             CsvParserColt1,
             Path(dir_path, "data", "colt", "colt2.csv"),
             Path(dir_path, "data", "colt", "colt2_result.json"),
+        ),
+        (
+            SubjectParserColt1,
+            Path(dir_path, "data", "colt", "colt4.eml"),
+            Path(dir_path, "data", "colt", "colt4_subject_parser_1_result.json"),
+        ),
+        (
+            SubjectParserColt2,
+            Path(dir_path, "data", "colt", "colt5.eml"),
+            Path(dir_path, "data", "colt", "colt5_subject_parser_2_result.json"),
         ),
         # Equinix
         (
@@ -175,6 +185,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserLumen1,
             Path(dir_path, "data", "lumen", "lumen5.html"),
             Path(dir_path, "data", "lumen", "lumen5_result.json"),
+        ),
+        (
+            HtmlParserLumen1,
+            Path(dir_path, "data", "lumen", "lumen6.html"),
+            Path(dir_path, "data", "lumen", "lumen6_result.json"),
         ),
         # Megaport
         (
