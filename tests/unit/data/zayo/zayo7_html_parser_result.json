@@ -1,0 +1,15 @@
+[
+    {
+        "circuits": [
+            {
+                "circuit_id": "/IPYX/100722/   /ZYO /",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1637067600,
+        "maintenance_id": "TTN-0005432100",
+        "start": 1636876860,
+        "status": "COMPLETED",
+        "summary": "Zayo will implement maintenance to repair damaged fiber splice case, to prevent unplanned outages"
+    }
+]

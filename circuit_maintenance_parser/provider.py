@@ -335,6 +335,11 @@ class Verizon(GenericProvider):
 class Zayo(GenericProvider):
     """Zayo provider custom class."""
 
+    _include_filter = {
+        "text/html": ["Maintenance Ticket #"],
+        "html": ["Maintenance Ticket #"],
+    }
+
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserZayo1, HtmlParserZayo1]),
     ]
