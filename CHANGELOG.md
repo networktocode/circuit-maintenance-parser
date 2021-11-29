@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.7 - 2021-MM-DD
+
+### Fixed
+
+- #120 - Improve handling of Zayo notifications.
+
 ## v2.0.6 - 2021-11-30
 
 ### Added
