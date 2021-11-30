@@ -1,0 +1,567 @@
+Delivered-To: nautobot.email@example.com
+Received: by 2002:a05:7000:1f21:0:0:0:0 with SMTP id hs33csp7496624mab;
+        Tue, 16 Nov 2021 05:07:16 -0800 (PST)
+X-Received: by 2002:a9d:343:: with SMTP id 61mr5945318otv.382.1637068035715;
+        Tue, 16 Nov 2021 05:07:15 -0800 (PST)
+ARC-Seal: i=3; a=rsa-sha256; t=1637068035; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=IB/8zXU0mGvMEPiGevys762Th4QW/WWOSMFGa/uZu3Mz9ZQaOH+b98tv7CNF4NHZtF
+         ufTzSRlbnjLJ7lr1gfImSCPvndVNPxqL7TjJSNxxoWoEbKoTClThBwEoaBs4sVzhJS4P
+         UKKcta4U7KnRtVKN2ykjEULsovnFXIy3Q1aWcUhwoGC3omJZd6R5r6Y3xu/44IRpN3K/
+         dkmA5NJhgXB0rZIMfGpEWxDQS6ziWgbmT6lv/nUwMXjTaYxOQ78jx1tAp5P/AyhwoC/5
+         tSKR2v5sL1QdR4TiwrspSuYARpyZ+tbI87xaNHcSdIVn5P/x8GCzoIGUnejQoYOWHnUF
+         cFYw==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:mime-version:subject:message-id:to:from
+         :date:sender:dkim-signature;
+        bh=WI7hatx2cY/zCiwLLfmT9tsATL4tdmlbsXu2SR2IL8s=;
+        b=C8RA6H3tFL1i61hRjo6HgYMp57PRDYnQTndRYrTMWGFUweDT41qj2sqGclu0fJCsGV
+         fi4bCjy7GeV3wN6/wVCfgPNvupiZBV0y9hAe60Wa6eMTeNm9Bqrb2dbTWU5HFIP7H60x
+         Ou1okXBKnCqwHEOlwlebZEyDflePbZhJ3jjvw866jRrh4bX1e9z2ER3AI8j7wb22hcQS
+         /x1zrHXddk6AEaWAR1o3jiCvRG55GqpyfHLeszQEaGPxoELC5ryQ2djKGR1sOZSiKjlY
+         AZ+QrxnHfZj8KeOBrc0pt86aFhZLJZ0q8yc6G2m+vK3dIrPz4iBKPenXj6TIdsxsba9U
+         J1aQ==
+ARC-Authentication-Results: i=3; mx.google.com;
+       dkim=pass header.i=@example.com header.s=example header.b=oZnliWXn;
+       arc=pass (i=2 spf=pass spfdomain=a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com dkim=pass dkdomain=zayo.com dmarc=pass fromdomain=zayo.com);
+       spf=pass (google.com: domain of maint-notices+bncbcyp3io6yejbbag2z2gamgqenrxxxiq@example.com designates 209.85.220.97 as permitted sender) smtp.mailfrom=maint-notices+bncBCYP3IO6YEJBBAG2Z2GAMGQENRXXXIQ@example.com;
+       dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=zayo.com
+Return-Path: <maint-notices+bncBCYP3IO6YEJBBAG2Z2GAMGQENRXXXIQ@example.com>
+Received: from mail-sor-f97.google.com (mail-sor-f97.google.com. [209.85.220.97])
+        by mx.google.com with SMTPS id h8sor6057870vsf.11.2021.11.16.05.07.15
+        for <nautobot.email@example.com>
+        (Google Transport Security);
+        Tue, 16 Nov 2021 05:07:15 -0800 (PST)
+Received-SPF: pass (google.com: domain of maint-notices+bncbcyp3io6yejbbag2z2gamgqenrxxxiq@example.com designates 209.85.220.97 as permitted sender) client-ip=209.85.220.97;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@example.com header.s=example header.b=oZnliWXn;
+       arc=pass (i=2 spf=pass spfdomain=a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com dkim=pass dkdomain=zayo.com dmarc=pass fromdomain=zayo.com);
+       spf=pass (google.com: domain of maint-notices+bncbcyp3io6yejbbag2z2gamgqenrxxxiq@example.com designates 209.85.220.97 as permitted sender) smtp.mailfrom=maint-notices+bncBCYP3IO6YEJBBAG2Z2GAMGQENRXXXIQ@example.com;
+       dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=zayo.com
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:dkim-signature:sender:date:from:to:message-id
+         :subject:mime-version:x-original-sender
+         :x-original-authentication-results:precedence:mailing-list:list-id
+         :list-post:list-help:list-archive:list-unsubscribe;
+        bh=WI7hatx2cY/zCiwLLfmT9tsATL4tdmlbsXu2SR2IL8s=;
+        b=GozK90s56Y3hVOd9yPN8oFZa1jSz4rOFLhWgqLoiSo0cI6lCXkp72r/uXZjlfdYX7/
+         Dj5HlhIS7DAI4lVQnJnPoljayzge8TYHnBjzw9ofMbkcjY7c8QrOpAGTC/UrNe9ooBbU
+         H/QLHlzRTDwWvGHNMDb3TCM5aP0xGwAi96/YEYryWDiYYLgrSc084NbYqx2tezdrAd8W
+         zcH9o5qZUnzFl+i1KC3lbilzhaxmMD6i6cjOKDoGO8JVkNanD++YWafcRL9YtLp9YN1s
+         D3FpFn2aNiFxXKxxkiIuatPmI1HLBKMf12RIACs5rCByLc6hkMxB/kL0II4a2DYXwF6b
+         7dfw==
+X-Gm-Message-State: AOAM533fV8DxbMi88GwyXb8A6DqzYlFzXeyw9gzJ73BccuSjvakJAOkc
+	6qR6AkOt0z33Ea1QWjvVIsxrnbneKvLMRUqhPpREB9GKfAsDlc6V
+X-Google-Smtp-Source: ABdhPJxZLh2l9VwninnUEB05SPvOl0XpI3tntFkJRhFvneu65zx1x+a6dplC5URzMushL9aOgjEYQb9Nvf7+
+X-Received: by 2002:a05:6102:3ed4:: with SMTP id n20mr55971226vsv.57.1637068035229;
+        Tue, 16 Nov 2021 05:07:15 -0800 (PST)
+Return-Path: <maint-notices+bncBCYP3IO6YEJBBAG2Z2GAMGQENRXXXIQ@example.com>
+Received: from netskope.com ([8.36.116.139])
+        by smtp-relay.gmail.com with ESMTPS id x123sm4927428vka.12.2021.11.16.05.07.14
+        for <nautobot.email@example.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 Nov 2021 05:07:15 -0800 (PST)
+X-Relaying-Domain: example.com
+Received: by mail-qk1-f199.google.com with SMTP id o19-20020a05620a22d300b0046754380e8asf13531940qki.13
+        for <nautobot.email@example.com>; Tue, 16 Nov 2021 05:07:14 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1637068033; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=VwANNKk53QJSEQJyVTUFdSemKLAYMDumadGoj/JwiJgQJMgvvwmAvLO5t2vyPCRSzg
+         +M++oHhLRWsQ0Ofo180KPtTqcxPolo5WtmZb5WIXdWStiYRHYME5+eQqjJVVtyLhwquB
+         RiwzXReIp7J4ExHsjGuhfq2Sbs0tFRweX0S2hf5eHQu14AQXrss4NjaFenQ9JYJOwEwN
+         fhRezDm7U1n/VV6qh4C5fziDmd5zNKwCF0fJJNr9Dgo0m7QJrjXeE6LA1A/Y87DQ0aE3
+         KH6o/tillafLZPPXp3T0TuOkdb2tYPgfpjl2wZDn0iy5VH6OMXVmfuPm/XtfovnEY5VD
+         +CiQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:mime-version:subject:message-id:to:from
+         :date:sender:dkim-signature;
+        bh=WI7hatx2cY/zCiwLLfmT9tsATL4tdmlbsXu2SR2IL8s=;
+        b=fJIz47nRfg/wLMPBPqbNTcctBCrmmqjczYQs7ID409Hag7o6io+T5S7bKGC4cgmJeU
+         4g+PEVovOikB00gxUYOX9akyeNp5uOVCLO4vR1qU2aIGx4Be3aSBQ8HRaKO4LCxA7kGO
+         D8eHPcnY9OB31cvfMOkdWBuCk0+rJtu4A9ET5zbdnRFDEzSH0rUwQT0fZkNbcTIoxSsk
+         Kkhpui3eTpL5q9N8tUPb0GSOtsRW51V3yWdmw48qTA+IB6I6CWMcsK03OXYoU4Peo2t0
+         7zOFvNTkaNJIPVDDVah1MFSYyZ9VwlppCDhTq4WSEKbzh/vTH7LWNahnzTxpFX56HAtO
+         rsFw==
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@zayo.com header.s=sf112018 header.b=cJQYD4No;
+       spf=pass (google.com: domain of mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com designates 13.110.74.206 as permitted sender) smtp.mailfrom="mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com";
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=zayo.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=example.com; s=example;
+        h=sender:date:from:to:message-id:subject:mime-version
+         :x-original-sender:x-original-authentication-results:precedence
+         :mailing-list:list-id:list-post:list-help:list-archive
+         :list-unsubscribe;
+        bh=WI7hatx2cY/zCiwLLfmT9tsATL4tdmlbsXu2SR2IL8s=;
+        b=oZnliWXnf3DrGuLqxUBXb2UKHVF3N2Q0jIpgIP5p8svgURWuwVaSACYTaRFo0zCmwG
+         Qh6I0MjDEY2YRD1FluWHqx8YYK5dsGXyCbUIyp2C4ZUScov9lAnJ+feje4yQ0cn7BJSG
+         Vbrkk/7e55yAp0YtDzKvJ0iOadVrzq4OuA9/w=
+Sender: maint-notices@example.com
+X-Received: by 2002:a05:622a:28b:: with SMTP id z11mr7382381qtw.242.1637068033308;
+        Tue, 16 Nov 2021 05:07:13 -0800 (PST)
+X-Received: by 2002:a05:622a:28b:: with SMTP id z11mr7382332qtw.242.1637068032974;
+        Tue, 16 Nov 2021 05:07:12 -0800 (PST)
+X-BeenThere: maint-notices@example.com
+Received: by 2002:a05:620a:294b:: with SMTP id n11ls9420290qkp.3.gmail; Tue,
+ 16 Nov 2021 05:07:12 -0800 (PST)
+X-Received: by 2002:a37:98d:: with SMTP id 135mr6125755qkj.166.1637068032336;
+        Tue, 16 Nov 2021 05:07:12 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1637068032; cv=none;
+        d=google.com; s=arc-20160816;
+        b=N6/9T3XZJXe8H0bOqPrlPxEVduOshcVhO30pZ6D7R054LZMMd3eRtjQY2dfTVSmF17
+         G0KMx5b9/vcmWrdfZmxWDN7yrHUfkHJvA9IBNf3UQhULgwwcFRrO3gnX/THHYY5HPC0N
+         xvC7yA0BaEs90UQTHUXIvfm0CRxVB0x2bCwcIe2okhwM/AXLthLWu1FQ9ZXBlzjHyT/r
+         Gq6R+2VwcTuDhIhYbpAP7DshVJbw/mgiRozxcq06pB2H0z/V/PwZMFndXk3YjVyYUhxx
+         N81T/m+GzJW4kn5iiEzUd33Y0I6I+ZM6lhfQdBm25H/DeVsF9C/lrZEY/kYz13i7Q77b
+         fVKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:subject:message-id:to:from:date:dkim-signature;
+        bh=mG0dcEC2Pb90PeX1dDqfwdOjCjYOnK0F6TdfBb6kd7k=;
+        b=OFwQMT1ox8ED3fIeAVUVSfTzJoIRlzvSk1Vpfqw/U26D3UhNi/ogoSnXirDuOLeXzC
+         ULZrYlSvZt/leMC1T72XFStsT2t8YzL0UZZ4q6eAODBDU+m9J3t9B3EGJxnfWmJtZLed
+         QmKElNS8+gZmGl4hENaRkXLilFU77hTg8vVxil97aXlvJP5CzdPwSITvhriThOWWy+eV
+         YAIBpdjGpG4U/E5QW/KEzvAF0M2R9tlK1XajVhn0qIePIvtmjdfdmTdWHvudx7Mvgh0/
+         lk9jkwb8cIuwaAuXRiIiJNcuKLL98j6YavpsEV1nUkog2UpD7vaIPS+CfOGeWEEhJcAt
+         vE3g==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@zayo.com header.s=sf112018 header.b=cJQYD4No;
+       spf=pass (google.com: domain of mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com designates 13.110.74.206 as permitted sender) smtp.mailfrom="mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com";
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=zayo.com
+Received: from smtp15-ia4-sp3.mta.salesforce.com (smtp15-ia4-sp3.mta.salesforce.com. [13.110.74.206])
+        by mx.google.com with ESMTPS id x7si27045370qko.306.2021.11.16.05.07.12
+        for <maint-notices@example.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 16 Nov 2021 05:07:12 -0800 (PST)
+Received-SPF: pass (google.com: domain of mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com designates 13.110.74.206 as permitted sender) client-ip=13.110.74.206;
+Received: from [10.180.203.172] ([10.180.203.172:45648] helo=na152-app1-45-ia4.ops.sfdc.net)
+	by mx2-ia4-sp3.mta.salesforce.com (envelope-from <mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com>)
+	(ecelerity 4.2.38.62368 r(Core:release/4.2.38.0)) with ESMTPS (cipher=ECDHE-RSA-AES256-GCM-SHA384
+	subject="/C=US/ST=California/L=San Francisco/O=salesforce.com, inc./OU=0:app;1:ia4;2:ia4-sp3;3:na152;4:prod/CN=na152-app1-45-ia4.ops.sfdc.net")
+	id CD/F9-06366-00DA3916; Tue, 16 Nov 2021 13:07:12 +0000
+Date: Tue, 16 Nov 2021 13:07:12 +0000 (GMT)
+From: MR Zayo <mr@zayo.com>
+To: "maint-notices@example.com" <maint-notices@example.com>
+Message-ID: <tXhiD000000000000000000000000000000000000000000000R2O1RM00YzkHXEK_RoinH1-Hiehd3w@sfdc.net>
+Subject: [maint-notices] END OF WINDOW NOTIFICATION***Example Inc.***ZAYO
+ TTN-0005432100 Planned***
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="----=_Part_1041_614738999.1637068032082"
+X-Priority: 3
+X-SFDC-LK: 00D6000000079Qk
+X-SFDC-User: 00560000001fmpl
+X-Sender: postmaster@salesforce.com
+X-mail_abuse_inquiries: http://www.salesforce.com/company/abuse.jsp
+X-SFDC-TLS-NoRelay: 1
+X-SFDC-Binding: 1WrIRBV94myi25uB
+X-SFDC-EmailCategory: apiSingleMail
+X-SFDC-Interface: internal
+X-Original-Sender: mr@zayo.com
+X-Original-Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@zayo.com header.s=sf112018 header.b=cJQYD4No;       spf=pass
+ (google.com: domain of mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com
+ designates 13.110.74.206 as permitted sender) smtp.mailfrom="mr=zayo.com__2tt0k2qfvnpvywkz@a9wj63terdu8.6-79qkeai.na152.bnc.salesforce.com";
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=zayo.com
+Precedence: list
+Mailing-list: list maint-notices@example.com; contact maint-notices+owners@example.com
+List-ID: <maint-notices.example.com>
+X-Google-Group-Id: 536184160288
+List-Post: <https://groups.google.com/a/example.com/group/maint-notices/post>, <mailto:maint-notices@example.com>
+List-Help: <https://support.google.com/a/example.com/bin/topic.py?topic=25838>,
+ <mailto:maint-notices+help@example.com>
+List-Archive: <https://groups.google.com/a/example.com/group/maint-notices/>
+List-Unsubscribe: <mailto:googlegroups-manage+536184160288+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/example.com/group/maint-notices/subscribe>
+x-netskope-inspected: true
+
+------=_Part_1041_614738999.1637068032082
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_1040_551133997.1637068032082"
+
+------=_Part_1040_551133997.1637068032082
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Zayo Customer,=20
+
+
+Please be advised that the scheduled maintenance window has closed for this=
+ event.=20
+
+If your services are still being impacted please take a moment to review th=
+e service and bounce any interfaces that may have been impacted. In the eve=
+nt that this does not fully restore your service please contact the Zayo NC=
+C at 1-866-236-2824 or at zayoncc@zayo.com.
+
+
+Maintenance Ticket #: TTN-0005432100
+
+<!--=20
+
+ Maintenance Window: 00:01 - 05:00 Pacific -->
+
+
+Maintenance Window=20
+
+1st Activity Date=20
+14-Nov-2021 00:01 to 14-Nov-2021 05:00 ( Pacific )=20
+
+ 14-Nov-2021 08:01 to 14-Nov-2021 13:00 ( GMT )=20
+
+2nd Activity Date=20
+15-Nov-2021 00:01 to 15-Nov-2021 05:00 ( Pacific )=20
+
+ 15-Nov-2021 08:01 to 15-Nov-2021 13:00 ( GMT )=20
+
+3rd Activity Date=20
+16-Nov-2021 00:01 to 16-Nov-2021 05:00 ( Pacific )=20
+
+ 16-Nov-2021 08:01 to 16-Nov-2021 13:00 ( GMT )=20
+
+
+
+Location of Maintenance: Intersection of Imperial Hwy & Nash St in El Segun=
+do, CA
+
+
+Reason for Maintenance: Zayo will implement maintenance to repair damaged f=
+iber splice case, to prevent unplanned outages
+
+
+Circuit(s) Affected:=20
+
+
+Circuit Id
+Expected Impact
+A Location Address
+
+Z Location Address
+Legacy Circuit Id
+
+/IPYX/100722/ /ZYO /
+Hard Down - up to 5 hours
+1933 S Bundy Dr Los Angeles, CA. USA
+600 W 7th St Los Angeles, CA. USA
+
+
+
+
+If you have any questions or need any additional information, please contac=
+t the MR group at mr@zayo.com or call 1-866-236-2824.
+
+
+Regards,
+
+
+
+
+Zayo=C2=A0Global Change Management Team/=C3=89quipe de Gestion du Changemen=
+t Global=C2=A0Zayo
+
+Zayo | Our Fiber Fuels Global Innovation
+
+Toll free/No=C2=A0sans=C2=A0frais:=C2=A01.866.236.2824
+
+United Kingdom Toll Free/No=C2=A0sans
+frais Royaume-Uni:=C2=A00800.169.1646
+
+Email/Courriel:=C2=A0mr@zayo.com=C2=A0
+
+Website/Site Web:=C2=A0https://www.zayo.com
+
+Purpose=C2=A0|=C2=A0Network Map=C2=A0|=C2=A0Escalation List=C2=A0|=C2=A0Lin=
+kedIn=C2=A0|=C2=A0Twitter=C2=A0|=C2=A0Tranzact=C2=A0
+
+=C2=A0
+
+This communication is the property of Zayo and may contain confidential or =
+privileged information. If you have received this communication in error, p=
+lease promptly notify the sender by reply e-mail and destroy all copies of =
+the communication and any attachments.
+
+=C2=A0
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+Maintenance Notices" group.
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to maint-notices+unsubscribe@example.com.
+To view this discussion on the web visit https://groups.google.com/a/exampl=
+e.com/d/msgid/maint-notices/tXhiD0000000000000000000000000000000000000000000=
+00R2O1RM00YzkHXEK_RoinH1-Hiehd3w%40sfdc.net.
+
+------=_Part_1040_551133997.1637068032082
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html>Dear Zayo Customer,=20
+
+<br><br>Please be advised that the scheduled maintenance window has closed =
+for this event.=20
+<br><br><font color=3D"FF0000">If your services are still being impacted pl=
+ease take a moment to review the service and bounce any interfaces that may=
+ have been impacted.  In the event that this does not fully restore your se=
+rvice please contact the Zayo NCC at 1-866-236-2824 or at <u>zayoncc@zayo.c=
+om</u>.</font>
+
+<br><br><b>Maintenance Ticket #: </b> TTN-0005432100
+
+<!-- <br><br> <b>Maintenance Window: </b> 00:01 - 05:00 Pacific -->
+
+<br><br><b>Maintenance Window </b><br><br><b>1<sup>st</sup> Activity Date <=
+/b><br>14-Nov-2021 00:01 to 14-Nov-2021 05:00 ( Pacific )=20
+<br> 14-Nov-2021 08:01 to 14-Nov-2021 13:00 ( GMT ) <br><br><b>2<sup>nd</su=
+p> Activity Date </b><br>15-Nov-2021 00:01 to 15-Nov-2021 05:00 ( Pacific )=
+=20
+<br> 15-Nov-2021 08:01 to 15-Nov-2021 13:00 ( GMT ) <br><br><b>3<sup>rd</su=
+p> Activity Date </b><br>16-Nov-2021 00:01 to 16-Nov-2021 05:00 ( Pacific )=
+=20
+<br> 16-Nov-2021 08:01 to 16-Nov-2021 13:00 ( GMT )=20
+
+
+<br><br><b>Location of Maintenance: </b> Intersection of Imperial Hwy & Nas=
+h St in El Segundo, CA
+
+<br><br><b>Reason for Maintenance: </b> Zayo will implement maintenance to =
+repair damaged fiber splice case, to prevent unplanned outages
+
+<br><br><b>Circuit(s) Affected: </b><br>
+<table border=3D3D"1"><tr>
+<tr>
+<th>Circuit Id</th>
+<th>Expected Impact</th>
+<th>A Location Address</th>
+
+<th>Z Location Address</th>
+<th>Legacy Circuit Id</th>
+</tr>
+<tr>
+<td>/IPYX/100722/   /ZYO /</td>
+<td>Hard Down - up to 5 hours</td>
+<td>1933 S Bundy Dr Los Angeles, CA. USA</td>
+<td>600 W 7th St Los Angeles, CA. USA</td>
+<td></td>
+</tr>
+</table>
+
+
+<br><br>If you have any questions or need any additional information, pleas=
+e contact the MR group at mr@zayo.com or call 1-866-236-2824.
+
+<br><br>Regards,<br><br>
+<div class=3DWordSection1>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white'><b><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#595959'>Zay</span></b><b><span style=3D'font-family:"Trebuchet MS",s=
+ans-serif;
+mso-bidi-font-family:Arial;color:#FF8000'>o</span></b><b><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#595959'>&nbsp;Global Change Management Team/<span class=3DSpellE><i>=
+<span
+style=3D'background-image:initial;background-position:initial;background-re=
+peat:
+initial'>=C3=89quipe</i></span><i> de <span class=3DSpellE>Gestion</span> d=
+u <span
+class=3DSpellE>Changement</span> Global&nbsp;Zay</span></span></b><b><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#FF8000'>o</span></b></i><span style=3D'font-family:"Arial",sans-seri=
+f;
+color:#222222'><o:p></o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span style=3D'white-space:pre-wrap'><b><span style=3D'font-family:"Tr=
+ebuchet MS",sans-serif;
+mso-bidi-font-family:Arial;color:#F79646'>Zayo | Our Fiber Fuels Global Inn=
+ovation</span></span></b><span style=3D'font-family:"Arial",sans-serif;
+color:#222222'><o:p></o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span style=3D'font-size:11.0pt;font-family:"Trebuchet MS",sans-serif;
+mso-bidi-font-family:Arial;color:#222222'>Toll free/<i>N<sup>o</sup>&nbsp;s=
+ans&nbsp;<span
+class=3DSpellE>frais</span>:</i>&nbsp;</span><span style=3D'font-size:11.0p=
+t;
+font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;color:blue=
+'>1.866.236.2824</span><span
+style=3D'font-size:11.0pt;font-family:"Arial",sans-serif;color:#222222'><o:=
+p></o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span style=3D'font-size:11.0pt;font-family:"Trebuchet MS",sans-serif;
+mso-bidi-font-family:Arial;color:#222222'>United Kingdom Toll Free/<i>N<sup=
+>o</sup>&nbsp;sans
+<span class=3DSpellE>frais</span> <span class=3DSpellE>Royaume-Uni</span>:<=
+/i>&nbsp;</span><span
+style=3D'font-size:11.0pt;font-family:"Trebuchet MS",sans-serif;mso-bidi-fo=
+nt-family:
+Arial;color:blue'>0800.169.1646</span><span style=3D'font-size:11.0pt;font-=
+family:
+"Arial",sans-serif;color:#222222'><o:p></o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span lang=3DFR style=3D'font-size:11.0pt;font-family:"Trebuchet MS",s=
+ans-serif;
+mso-bidi-font-family:Arial;color:#222222;mso-ansi-language:FR'>Email/<i>Cou=
+rriel:</i>&nbsp;</span><u><span
+lang=3DFR style=3D'font-size:11.0pt;font-family:"Trebuchet MS",sans-serif;
+mso-bidi-font-family:Arial;color:blue;mso-ansi-language:FR'><a
+href=3D"mailto:releases@zayo.com" target=3D"_blank">mr@zayo.com</a></span><=
+/u><span
+lang=3DFR style=3D'font-size:11.0pt;font-family:"Trebuchet MS",sans-serif;
+mso-bidi-font-family:Arial;color:#222222;mso-ansi-language:FR'>&nbsp;</span=
+><span
+style=3D'font-size:11.0pt;font-family:"Arial",sans-serif;color:#222222'><o:=
+p></o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span class=3DSpellE><span lang=3DFR-CA style=3D'font-size:11.0pt;font=
+-family:
+"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;color:#222222;mso-ansi=
+-language:
+FR-CA'>Website</span></span><span lang=3DFR style=3D'font-size:11.0pt;font-=
+family:
+"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;color:#222222;mso-ansi=
+-language:
+FR'>/<i>Site Web:</i>&nbsp;<a href=3D"http://www.zayo.com/" target=3D"_blan=
+k">https://www.zayo.com</a></span><span
+style=3D'font-size:11.0pt;font-family:"Arial",sans-serif;color:#222222'><o:=
+p></o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-fam=
+ily:
+Arial;color:#222222'><a href=3D"http://www.zayo.com/company/about-zayo/"
+target=3D"_blank"><b><span style=3D'color:#ED7D31'>Purpose</span></b></a></=
+span><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#ED7D31'>&nbsp;|&nbsp;</span><span style=3D'font-family:"Trebuchet MS=
+",sans-serif;
+mso-bidi-font-family:Arial;color:#222222'><a
+href=3D"http://www.zayo.com/solutions/global-network/" target=3D"_blank"><b=
+><span
+style=3D'color:#ED7D31'>Network Map</span></b></a></span><strong><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#ED7D31'>&nbsp;</span></strong><span style=3D'font-family:"Trebuchet =
+MS",sans-serif;
+mso-bidi-font-family:Arial;color:#ED7D31'>|&nbsp;</span><span style=3D'font=
+-family:
+"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;color:#222222'><a
+href=3D"https://tranzact.zayo.com/#!/escalation-lists" target=3D"_blank"><b=
+><span
+style=3D'color:#ED7D31'>Escalation List</span></b></a></span><b><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#ED7D31'>&nbsp;</span></b><span style=3D'font-family:"Trebuchet MS",s=
+ans-serif;
+mso-bidi-font-family:Arial;color:#ED7D31'>|&nbsp;</span><span style=3D'font=
+-family:
+"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;color:#222222'><a
+href=3D"https://www.linkedin.com/company/530962/" target=3D"_blank"><b><spa=
+n
+style=3D'color:#ED7D31'>LinkedIn</span></b></a></span><b><span style=3D'fon=
+t-family:
+"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;color:#ED7D31'>&nbsp;<=
+/span></b><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#ED7D31'>|&nbsp;</span><span style=3D'font-family:"Trebuchet MS",sans=
+-serif;
+mso-bidi-font-family:Arial;color:#222222'><a
+href=3D"https://twitter.com/zayogroup" target=3D"_blank"><b><span style=3D'=
+color:
+#ED7D31'>Twitter</span></b></a></span><b><span style=3D'font-family:"Trebuc=
+het MS",sans-serif;
+mso-bidi-font-family:Arial;color:#ED7D31'>&nbsp;</span></b><span
+style=3D'font-family:"Trebuchet MS",sans-serif;mso-bidi-font-family:Arial;
+color:#ED7D31'>|&nbsp;<span class=3DSpellE><a
+href=3D"https://tranzact.zayo.com/#!/login" target=3D"_blank"><b><span
+style=3D'color:#ED7D31'>Tranzact</span></b><span style=3D'color:#ED7D31'>&n=
+bsp;</span></a></span></span><span
+style=3D'font-family:"Arial",sans-serif;color:#222222'><o:p></o:p></span></=
+p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;background-im=
+age:
+initial;background-position:initial;background-repeat:initial;word-spacing:
+0px'><span style=3D'font-family:"Arial",sans-serif;color:#222222'><o:p>&nbs=
+p;</o:p></span></p>
+
+<p style=3D'margin:0in;margin-bottom:.0001pt;background:white;font-variant-=
+ligatures: normal;
+font-variant-caps: normal;orphans: 2;text-align:start;widows: 2;-webkit-tex=
+t-stroke-width: 0px;
+text-decoration-style: initial;text-decoration-color: initial;word-spacing:
+0px'><b><i><span style=3D'font-size:9.0pt;font-family:"Trebuchet MS",sans-s=
+erif;
+mso-bidi-font-family:Arial;color:#7F7F7F'><span style=3D'white-space:pre-wr=
+ap'>This communication is the property of Zayo and may contain confidential=
+ or privileged information. If you have received this communication in erro=
+r, please promptly notify the sender by reply e-mail and destroy all copies=
+ of the communication and any attachments.</span></span></i></b><span style=
+=3D'font-size:
+10.0pt;font-family:"Arial",sans-serif;color:#222222'><o:p></o:p></span></p>
+
+<p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
+
+</div></html>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;Maintenance Notices&quot; group.<br />
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:maint-notices+unsubscribe@example.com">maint-notices+=
+unsubscribe@example.com</a>.<br />
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/example.com/d/msgid/maint-notices/tXhiD00000000000000000000000000000000=
+0000000000000R2O1RM00YzkHXEK_RoinH1-Hiehd3w%40sfdc.net?utm_medium=3Demail&u=
+tm_source=3Dfooter">https://groups.google.com/a/example.com/d/msgid/maint-no=
+tices/tXhiD000000000000000000000000000000000000000000000R2O1RM00YzkHXEK_Roi=
+nH1-Hiehd3w%40sfdc.net</a>.<br />
+
+------=_Part_1040_551133997.1637068032082--
+
+------=_Part_1041_614738999.1637068032082--
