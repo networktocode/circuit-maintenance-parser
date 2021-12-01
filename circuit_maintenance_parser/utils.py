@@ -16,36 +16,46 @@ logger = logging.getLogger(__name__)
 dirname = os.path.dirname(__file__)
 
 
+class classproperty:  # pylint: disable=invalid-name,too-few-public-methods
+    """Simple class-level equivalent of an @property."""
+
+    def __init__(self, method):
+        """Wrap a method."""
+        self.getter = method
+
+    def __get__(self, _, cls):
+        """Call the wrapped method."""
+        return self.getter(cls)
+
+
 class Geolocator:
     """Class to obtain Geo Location coordinates."""
 
     # Keeping caching of local DB and timezone in the class
-    db_location: Dict[Union[Tuple[str, str], str], Tuple[float, float]] = {}
-    timezone = None
+    _db_location: Dict[Union[Tuple[str, str], str], Tuple[float, float]] = {}
+    _timezone = None
 
-    def __init__(self):
-        """Initialize instance."""
-        self.load_db_location()
-        self.load_timezone()
-
-    @classmethod
-    def load_timezone(cls):
+    @classproperty
+    def timezone(cls):  # pylint: disable=no-self-argument
         """Load the timezone resolver."""
-        if cls.timezone is None:
-            cls.timezone = tzwhere.tzwhere()
+        if cls._timezone is None:
+            cls._timezone = tzwhere.tzwhere()
             logger.info("Loaded local timezone resolver.")
+        return cls._timezone
 
-    @classmethod
-    def load_db_location(cls):
-        """Load the localtions DB from CSV into a Dict."""
-        with open(os.path.join(dirname, "data", "worldcities.csv")) as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                # Index by city and country
-                cls.db_location[(row["city_ascii"], row["country"])] = (float(row["lat"]), float(row["lng"]))
-                # Index by city (first entry wins if duplicated names)
-                if row["city_ascii"] not in cls.db_location:
-                    cls.db_location[row["city_ascii"]] = (float(row["lat"]), float(row["lng"]))
+    @classproperty
+    def db_location(cls):  # pylint: disable=no-self-argument
+        """Load the locations DB from CSV into a Dict."""
+        if not cls._db_location:
+            with open(os.path.join(dirname, "data", "worldcities.csv")) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    # Index by city and country
+                    cls._db_location[(row["city_ascii"], row["country"])] = (float(row["lat"]), float(row["lng"]))
+                    # Index by city (first entry wins if duplicated names)
+                    if row["city_ascii"] not in cls._db_location:
+                        cls._db_location[row["city_ascii"]] = (float(row["lat"]), float(row["lng"]))
+        return cls._db_location
 
     def get_location(self, city: str) -> Tuple[float, float]:
         """Get location."""
@@ -64,7 +74,9 @@ class Geolocator:
         city_name = city.split(", ")[0]
         country = city.split(", ")[-1]
 
-        lat, lng = self.db_location.get((city_name, country), self.db_location.get(city_name, (None, None)))
+        lat, lng = self.db_location.get(  # pylint: disable=no-member
+            (city_name, country), self.db_location.get(city_name, (None, None))  # pylint: disable=no-member
+        )
         if lat and lng:
             logger.debug("Resolved %s to lat %s, lon %sfrom local locations DB.", city, lat, lng)
             return (lat, lng)
@@ -92,12 +104,12 @@ class Geolocator:
         if self.timezone is not None:
             try:
                 latitude, longitude = self.get_location(city)
-                timezone = self.timezone.tzNameAt(latitude, longitude)
+                timezone = self.timezone.tzNameAt(latitude, longitude)  # pylint: disable=no-member
                 if not timezone:
                     # In some cases, given a latitued and longitued, the tzwhere library returns
                     # an empty timezone, so we try with the coordinates from the API as an alternative
                     latitude, longitude = self.get_location_from_api(city)
-                    timezone = self.timezone.tzNameAt(latitude, longitude)
+                    timezone = self.timezone.tzNameAt(latitude, longitude)  # pylint: disable=no-member
 
                 if timezone:
                     logger.debug("Matched city %s to timezone %s", city, timezone)
