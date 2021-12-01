@@ -1,5 +1,6 @@
 """Zayo parser."""
 import logging
+import re
 from typing import Dict
 
 import bs4  # type: ignore
@@ -22,15 +23,19 @@ class SubjectParserZayo1(EmailSubjectParser):
              END OF WINDOW NOTIFICATION***Customer Inc.***ZAYO TTN-0000123456 Planned***
              ***Customer Inc***ZAYO TTN-0001234567 Emergency MAINTENANCE NOTIFICATION***
              RESCHEDULE NOTIFICATION***Customer Inc***ZAYO TTN-0005423873 Planned***
+
+    Some degenerate examples have been seen as well:
+            [notices] CANCELLED NOTIFICATION***Customer,inc***ZAYO TTN-0005432100 Planned**
+            [notices] Rescheduled  Maintenance***ZAYO TTN-0005471719 MAINTENANCE NOTIFICATION***
     """
 
     def parse_subject(self, subject):
         """Parse subject of email message."""
         data = {}
-        tokens = subject.split("***")
+        tokens = re.split(r"\*+", subject)
         if len(tokens) == 4:
             data["account"] = tokens[1]
-            data["maintenance_id"] = tokens[2].split(" ")[1]
+        data["maintenance_id"] = tokens[-2].split(" ")[1]
         return [data]
 
 
@@ -48,7 +53,7 @@ class HtmlParserZayo1(Html):
                 text = soup.get_text()
                 if "will be commencing momentarily" in text:
                     data["status"] = Status("IN-PROCESS")
-                elif "has been completed" in text:
+                elif "has been completed" in text or "has closed" in text:
                     data["status"] = Status("COMPLETED")
 
         return [data]

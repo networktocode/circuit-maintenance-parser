@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.7 - 2021-12-01
+
+### Fixed
+
+- #120 - Improve handling of Zayo notifications.
+- #121 - Defer loading of `tzwhere` data until it's needed, to reduce memory overhead.
+
 ## v2.0.6 - 2021-11-30
 
 ### Added

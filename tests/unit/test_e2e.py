@@ -471,6 +471,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("email", Path(dir_path, "data", "zayo", "zayo6.eml")),],
             [Path(dir_path, "data", "zayo", "zayo6_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo7.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo7_result.json"),],
         ),  # pylint: disable=too-many-locals
     ],
 )
@@ -596,7 +601,7 @@ Failed creating Maintenance notification for Zayo.
 Details:
 - Processor CombinedProcessor from Zayo failed due to: 1 validation error for Maintenance
 maintenance_id
-  field required (type=value_error.missing)
+  String is empty or 'None' (type=value_error)
 """,
         ),
         (
@@ -608,7 +613,7 @@ maintenance_id
 Failed creating Maintenance notification for Zayo.
 Details:
 - Processor CombinedProcessor from Zayo failed due to: HtmlParserZayo1 parser was not able to extract the expected data for each maintenance.
-  - Raw content: b'aaa'
+  - Raw content: b'Maintenance Ticket #: aaa\\n'
   - Result: [{}]
 """,
         ),
