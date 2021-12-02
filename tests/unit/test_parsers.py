@@ -149,6 +149,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "gtt", "gtt6.html"),
             Path(dir_path, "data", "gtt", "gtt6_result.json"),
         ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt7.eml"),
+            Path(dir_path, "data", "gtt", "gtt7_html_parser_result.json"),
+        ),
         # HGC
         (
             HtmlParserHGC1,

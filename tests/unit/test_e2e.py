@@ -187,6 +187,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        (
+            GTT,
+            [("email", Path(dir_path, "data", "gtt", "gtt7.eml")),],
+            [Path(dir_path, "data", "gtt", "gtt7_result.json"),],
+        ),
         # HGC
         (
             HGC,
