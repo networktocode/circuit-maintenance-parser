@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.8 - 2021-MM-DD
+
+### Fixed
+
+- #124 - Handle encoded non-ASCII characters in email subjects.
+
 ## v2.0.7 - 2021-12-01
 
 ### Fixed
