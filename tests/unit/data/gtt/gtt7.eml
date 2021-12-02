@@ -1,0 +1,430 @@
+Delivered-To: nautobot.email@example.com
+Received: by 2002:a05:7000:1f21:0:0:0:0 with SMTP id hs33csp8787082mab;
+        Tue, 23 Nov 2021 06:50:05 -0800 (PST)
+X-Received: by 2002:a05:620a:1a10:: with SMTP id bk16mr5510732qkb.258.1637679004754;
+        Tue, 23 Nov 2021 06:50:04 -0800 (PST)
+ARC-Seal: i=3; a=rsa-sha256; t=1637679004; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=vUe79MzQJmlVkvvGnvcgbAgme/2Jwt1B2Zo3js/kAu7QCToy4cjQqUHyT7J2srn5dO
+         /kyktHkm4zI6WH5rSd7rWgSkabkVJs0Uwb0BewZ6pTCqITcz7spPhRyQ/mWR7kaALAXy
+         MKJSvJ+486N/6N/Wos867jffOxERI5C7fLxtGdJSaXDwYvA2ecJ3SUaRheuF7i1GzrgL
+         CO9EvbCOaSftPlkUolS98E7wWoIxkNJYZRs7FoMUZNeJJ9LxUQJwOvoBV8LnTB0Obklm
+         YfuSQ5BteOgMj7JSqJJSb23uPRgc3G/RQ0Pp5+vSHjCkaBGNOEMuFK6c6xvyxKkZfmB4
+         7tuQ==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:content-transfer-encoding:mime-version
+         :message-id:reply-to:from:date:subject:to:sender:dkim-signature;
+        bh=C0Jesyuuv4BU+nssMchN2LsveiLMpbfsTndp3ny2HT4=;
+        b=jh+TxTU+BvFo6G0sAv03NdxeaMNwVBUGuIX/ZMudpc1hie8NpY225QcazVPg3CMfno
+         GXTF8srtUvofKWf1VHkAii0AvqIpJUDIY62zr/raOX2r2vMzAGDP270PREpazPgscNZj
+         iBLuebnSvy3NoyxS+X+plJ70vrDY0lKzeDkrb6DeEC/LiRXJXSZksazG8q+xngW+FCQK
+         YpJenJlRIGgBfNaH4JNe0L4uRFWpfJZhtKI2cIXSilGla3T8WfcK3k3UaaIUovGK9ZAZ
+         Jjg/6ko3Cd02WLd0wnQdE/j1M6Ecy3o75hEvHhiKr7Lnc0NjEGDzPkEtN9PtpQgyHg59
+         vXSQ==
+ARC-Authentication-Results: i=3; mx.google.com;
+       dkim=pass header.i=@example.com header.s=example header.b=Va3JHXMB;
+       arc=pass (i=2 spf=pass spfdomain=exainfra.net);
+       spf=pass (google.com: domain of maint-notices+bncbaabbgp76ogamgqetzq64dq@example.com designates 209.85.220.101 as permitted sender) smtp.mailfrom=maint-notices+bncBAABBGP76OGAMGQETZQ64DQ@example.com
+Return-Path: <maint-notices+bncBAABBGP76OGAMGQETZQ64DQ@example.com>
+Received: from mail-sor-f101.google.com (mail-sor-f101.google.com. [209.85.220.101])
+        by mx.google.com with SMTPS id t65sor2273382qkh.48.2021.11.23.06.50.04
+        for <nautobot.email@example.com>
+        (Google Transport Security);
+        Tue, 23 Nov 2021 06:50:04 -0800 (PST)
+Received-SPF: pass (google.com: domain of maint-notices+bncbaabbgp76ogamgqetzq64dq@example.com designates 209.85.220.101 as permitted sender) client-ip=209.85.220.101;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@example.com header.s=example header.b=Va3JHXMB;
+       arc=pass (i=2 spf=pass spfdomain=exainfra.net);
+       spf=pass (google.com: domain of maint-notices+bncbaabbgp76ogamgqetzq64dq@example.com designates 209.85.220.101 as permitted sender) smtp.mailfrom=maint-notices+bncBAABBGP76OGAMGQETZQ64DQ@example.com
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:dkim-signature:sender:to:subject:date:from
+         :reply-to:message-id:mime-version:content-transfer-encoding
+         :x-original-sender:x-original-authentication-results:precedence
+         :mailing-list:list-id:list-post:list-help:list-archive
+         :list-unsubscribe;
+        bh=C0Jesyuuv4BU+nssMchN2LsveiLMpbfsTndp3ny2HT4=;
+        b=jllEAnf+YmTc4vg0ITD6WzAynLyTDtcn1n4IXcLucVwBzG9O2JNmgdZ5r7qH14dyZY
+         ox2cYTbG8vmTvG5EMOLDZpwItR45dCnr4fGY6Q3E5t3+UNGMzgxhlXgYz6weQejPeL3Z
+         O3vtKJL7VZaVz0lAIj6XWLH9NjI/1UjHheZLFp4jjkPArhYvtGAMadvaLj6OvMID2U/s
+         RqPsYv0Jp9o9wCUeV0TGadOTHj1OKtj8idxwFNZ/Qp1qeDbQsCGFhmN2V2Vvvr0s5KCA
+         +MRCT5YhSgzLj83QDbccmHuot6WCzN9bVqGp0qnPKDyRsmGGTRW3JtsNSD5wM2IMbqfJ
+         5X2g==
+X-Gm-Message-State: AOAM531KBPx07Y6btFUQSetapqmUGATdLolWR5FI5p5SzB17j7XNBOD2
+	mpcrzHfz28uZn3CaYk6COBL83Kn5GHMv73Aq3ZzZtOHTDtCPkF/k
+X-Google-Smtp-Source: ABdhPJyKtSr2+JBNZ/K7AU0fv8rsre882Kbrvmgui9UZnUisErOQMUCLsJEigXZHEY+lBCF40OczIu95mTF2
+X-Received: by 2002:ab0:3349:: with SMTP id h9mr9749289uap.111.1637679004217;
+        Tue, 23 Nov 2021 06:50:04 -0800 (PST)
+Return-Path: <maint-notices+bncBAABBGP76OGAMGQETZQ64DQ@example.com>
+Received: from netskope.com ([8.36.116.139])
+        by smtp-relay.gmail.com with ESMTPS id y6sm3667722vkc.4.2021.11.23.06.50.03
+        for <nautobot.email@example.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Nov 2021 06:50:04 -0800 (PST)
+X-Relaying-Domain: example.com
+Received: by mail-wm1-f72.google.com with SMTP id 187-20020a1c02c4000000b003335872db8dsf8071724wmc.2
+        for <nautobot.email@example.com>; Tue, 23 Nov 2021 06:50:02 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1637679001; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=FAEyypmFn1ucJuPYezfoObVktEmUzIWF9RbdsLFVWT+koSL/cW7fjahj1f71Gh2HFm
+         9MnPddkynP8m4fY6p9J096ZmLk7UcYNngvzHgJcJxSfuAN0daPplTdKnTL+Xlh7CPkF+
+         gzq+VFmcRO2ZMc664SCt1DJASI5D1tb+gbXj/O+AFU1KpKKNRI/H1G5H35BU32LO6ewZ
+         +FJdjTmL5SpAN47Yhl/Cxe1AbVcrCj2kEj8zbcrcICWNiTxH3sC7Xaz9As/NYR5B7ggD
+         PFVMIqPoKkDtOwvZFZXQXuhNlcs9p9k5e9MLRX/dwsJBOgsE7oP2ypDxRtAd/MGtmwSW
+         Vj9w==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:content-transfer-encoding:mime-version
+         :message-id:reply-to:from:date:subject:to:sender:dkim-signature;
+        bh=C0Jesyuuv4BU+nssMchN2LsveiLMpbfsTndp3ny2HT4=;
+        b=Y4qeLp1Ne97E8V8qD2lystu+9ocF4zJd8WU4yOsCGqH520Ut1Vq8F6gcq5q+Bhciuz
+         tQ2ms2rspHLKTYKzMjcm3OcAWzIdo2R/0c5WMD0r3K2ws3S+UVY4EAnetonWZownRMFs
+         zmHDRJNn6/uOmiEgOq7rCyiUFfoBMovEcJqcNuan8rKOV91KpnEN6gcYTYvhr2X0edH2
+         AlpnJbwHgu3fha1q8t5RGwuFE/AGlRgX0/n6BXpyg2k2ijXc8W0MqWrSf+4YBUreesFm
+         gxnydAhzUE+oRhPyWme+YsgnUv6zpFz1/1QSrZ1REwD7tHLe3SwwY2BvOh5y6PIhJb/V
+         eUjg==
+ARC-Authentication-Results: i=2; mx.google.com;
+       spf=pass (google.com: domain of cmd.bounceback@exainfra.net designates 154.14.213.215 as permitted sender) smtp.mailfrom=cmd.bounceback@exainfra.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=example.com; s=example;
+        h=sender:to:subject:date:from:reply-to:message-id:mime-version
+         :content-transfer-encoding:x-original-sender
+         :x-original-authentication-results:precedence:mailing-list:list-id
+         :list-post:list-help:list-archive:list-unsubscribe;
+        bh=C0Jesyuuv4BU+nssMchN2LsveiLMpbfsTndp3ny2HT4=;
+        b=Va3JHXMBfNDPJisXXDXiEuiwMYHEa4Efrlc5pXIdolSBuNQUiq6/7ClhYCc2Mr88Yx
+         V0cqHX+MK/IeATDfPoWii7irgv7RCGW5iq7l/vZ+nJSlmhk8aGz3pvDEoSFShFndo60h
+         bzR2sOV2vUHahllv4m7Tgwir2Mzv+c+MmiNa4=
+Sender: maint-notices@example.com
+X-Received: by 2002:a5d:68d2:: with SMTP id p18mr8189115wrw.21.1637679001692;
+        Tue, 23 Nov 2021 06:50:01 -0800 (PST)
+X-Received: by 2002:a5d:68d2:: with SMTP id p18mr8189096wrw.21.1637679001549;
+        Tue, 23 Nov 2021 06:50:01 -0800 (PST)
+X-BeenThere: maint-notices@example.com
+Received: by 2002:a05:600c:ad6:: with SMTP id c22ls889756wmr.1.canary-gmail;
+ Tue, 23 Nov 2021 06:50:00 -0800 (PST)
+X-Received: by 2002:a05:600c:a08:: with SMTP id z8mr3945922wmp.52.1637679000526;
+        Tue, 23 Nov 2021 06:50:00 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1637679000; cv=none;
+        d=google.com; s=arc-20160816;
+        b=iZPVXO7zKyxAnRrjL+FBY7L1RayjqS1Qx4su4wA/yKZmODuu+GvUHbckcEoHYeX46z
+         WYXYG7web/1sbxK/G3MKDxt7lfLg4tBdXX5dtCHFwq6nPDbPrZ9b71AZJPSjNJVSAinz
+         BkV9FJYdPESBBG6scAVBJ2MD7Rn850q7XAmdXdkLUyvvWSiimqVaNDOLOPRMPOm5OYDL
+         4RJ1JArnMR0uFR1zkO6Uk293RJZ6SKZTQCub7LVJCmHD7m/57M83IeJMIHgdCevt4qD9
+         PO6V2rybxuYj/HrMtkc+CHgtVU12s2h5YhuuD5A23RrsZJRzoMHcwZq/UwI1cU6cgY50
+         GvYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:mime-version:message-id:reply-to:from
+         :date:subject:to;
+        bh=q4mPDFTARsCcneEpOnF/XKc0L6eRffzoP2m6dEvPRaE=;
+        b=WmP2TfL5/HMjeAlnWxy5uCaEhIVlI9Lsp10OkUZ5M9EfBUkjbBY0yBYwlbDmRUMpAs
+         VYyOkjovQg1E1DuOI3LO6x0O60NdP/myf7Uo3z42gwnikh7xRUjxpqWtTjcxkPlGEUuE
+         HbikknX8P2JY0fOWAkjSsDF4UiyTQLii8gvH+4YcnkGIHMZYNxntnxSKh7XP8RaoVd5T
+         66noi25/QZnorAIpYffCNgT7zOOyFtboxBU1wwe3eXvpO/VAGtjUZRQbRX1abU+4iRAZ
+         FfPiwr8Bkqt1F74QJAVRcx8EGsH6laarVEr3hhpu+vv8xwSqdiXfCugFmwganrkpvMjL
+         4lUg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of cmd.bounceback@exainfra.net designates 154.14.213.215 as permitted sender) smtp.mailfrom=cmd.bounceback@exainfra.net
+Received: from mexch01.crosstera.com (mexch01.crosstera.com. [154.14.213.215])
+        by mx.google.com with ESMTPS id v129si1976559wme.213.2021.11.23.06.49.59
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 23 Nov 2021 06:50:00 -0800 (PST)
+Received-SPF: pass (google.com: domain of cmd.bounceback@exainfra.net designates 154.14.213.215 as permitted sender) client-ip=154.14.213.215;
+Received: from uklon1-cmd2.gt-t.net (89.149.165.100) by
+ IEDUB-EXCEDGE01.crosstera.com (10.151.34.215) with Microsoft SMTP Server id
+ 15.2.659.4; Tue, 23 Nov 2021 14:49:59 +0000
+Received: by uklon1-cmd2.gt-t.net (Postfix, from userid 1001)
+	id D931C2800122A; Tue, 23 Nov 2021 14:49:58 +0000 (UTC)
+To: <NOC@example.com>, <accountspayable@example.com>,
+	<maint-notices@example.com>,
+	<tfarrell@example.com>
+Subject: =?UTF-8?Q?=5Bmaint=2Dnotices=5D_EXA_Emergency_Work_Notification_TT_6543?=
+	=?UTF-8?Q?0619_=E2=80=93_New?=
+Date: Tue, 23 Nov 2021 14:49:58 +0000
+From: <InfraCo.CM@exainfra.net>
+Reply-To: <InfraCo.CM@exainfra.net>
+Message-ID: <EXA_MSG_ID-62c2d771-800d-4be1-b458-f2b3f9de31ea-EXA_MSG_ID@exainfra.net>
+X-Mailer: PHPMailer 6.1.7 (https://github.com/PHPMailer/PHPMailer)
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="b1_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E"
+Content-Transfer-Encoding: 8bit
+X-Original-Sender: infraco.cm@exainfra.net
+X-Original-Authentication-Results: mx.google.com;       spf=pass (google.com:
+ domain of cmd.bounceback@exainfra.net designates 154.14.213.215 as permitted
+ sender) smtp.mailfrom=cmd.bounceback@exainfra.net
+Precedence: list
+Mailing-list: list maint-notices@example.com; contact maint-notices+owners@example.com
+List-ID: <maint-notices.example.com>
+X-Google-Group-Id: 536184160288
+List-Post: <https://groups.google.com/a/example.com/group/maint-notices/post>, <mailto:maint-notices@example.com>
+List-Help: <https://support.google.com/a/example.com/bin/topic.py?topic=25838>,
+ <mailto:maint-notices+help@example.com>
+List-Archive: <https://groups.google.com/a/example.com/group/maint-notices/>
+List-Unsubscribe: <mailto:googlegroups-manage+536184160288+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/example.com/group/maint-notices/subscribe>
+x-netskope-inspected: true
+
+--b1_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E
+Content-Type: multipart/alternative;
+	boundary="b2_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E"
+
+--b2_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Planned Work Notification: 65430585 - New
+
+As part of our commitment to continually improve the quality of service we =
+provide to our clients, we will be performing a planned work in Washington,=
+ DC between 2021-12-02 05:00:00 - 2021-12-02 10:00:00 GMT.=E2=80=AFPlease s=
+ee details of the work and impact on your service below.
+
+Detail:
+
+Start	2021-12-02 05:00:00 GMT
+End	2021-12-02 10:00:00 GMT
+Location	Washington, DC
+
+Planned work Reason:
+Network optimization on our partner network.
+
+Services Affected	SLID/CCSD	Customer PON	Service Type	Expected Impact to yo=
+ur Service	Site Address
+HI/Wavelength/00696448	1098765-12345678	PO # EXA00012345	Wavelength	300 min=
+	23456 Example Ct,1st Floor Equinix DC2,Ashburn, VA 20147, USA
+Comments (Color explanation) :
+
+Service interruption	Service will experience interruption lasting maximum t=
+he duration value in the service row
+Resiliency Loss	Primary or backup circuit will be impacted only. Service wi=
+ll remain operational throughout the maintenance
+
+If you have any questions regarding the planned work, please login to MyPor=
+tal or contact our Change Management Team using the email below.
+
+Kind Regards,
+EXA Network Operations
+InfraCo.CM@exainfra.net
+
+Did you know that it is now easier than ever to log your tickets=E2=80=AFon=
+ our=E2=80=AFMyPortal=E2=80=AF? You will be able to answer a few troublesho=
+oting questions and receive a ticket ID immediately.=E2=80=AFMyPortal=E2=80=
+=AFalso helps you check on status of existing tickets and access your escal=
+ation list. If you do not have an=E2=80=AFMyPortal=E2=80=AFlogin, you can c=
+ontact your company=E2=80=99s account administrator or submit a request on=
+=E2=80=AFour=E2=80=AFwebsite.
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+Riot Direct Notices" group.
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to maint-notices+unsubscribe@example.com.
+To view this discussion on the web visit https://groups.google.com/a/exampl=
+e.com/d/msgid/maint-notices/EXA_MSG_ID-62c2d771-800d-4be1-b458-f2b3f9de31ea-=
+EXA_MSG_ID%40exainfra.net.
+
+--b2_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang=3D"en">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+    <meta charset=3D"utf-8">
+   =20
+</head>
+<body>
+<div style=3D"width: 740px; font-family: Verdana, Arial, Helvetica, sans-se=
+rif; font-size: 10pt; margin: 0 auto;">
+    <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"740" s=
+tyle=3D"border-collapse: collapse; padding-left: 5px; border: 1px none blac=
+k;">
+        <tr>
+            <td width=3D"30%" style=3D"border-collapse: collapse; padding-l=
+eft: 5px; border: 1px none black;"><img src=3D"https://myportal.exainfra.ne=
+t/assets/img/logos/exa-logo-small.png" border=3D"0"></td>
+            <td width=3D"70%" align=3D"center" style=3D"border-collapse: co=
+llapse; padding-left: 5px; border: 1px none black;"><strong><i>Planned Work=
+ Notification: 65430585 - New</i></strong></td>
+        </tr>
+    </table>
+    <p>As part of our commitment to continually improve the quality of serv=
+ice we provide to our clients, we will be performing a planned work in Wash=
+ington, DC between 2021-12-02 05:00:00 - 2021-12-02 10:00:00 GMT.=E2=80=AFP=
+lease see details of the work and impact on your service below. </p>
+
+    <strong>Detail:</strong><br>
+    <table border=3D"1" cellpadding=3D"4" cellspacing=3D"0" style=3D"width:=
+ 100%; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 8pt; bor=
+der-collapse: collapse; padding-left: 5px; border: 1px solid black;">
+      <tr>
+        <td width=3D"15%" style=3D"border-collapse: collapse; padding-left:=
+ 5px; color: white; font-weight: bold; border: 1px solid black;" bgcolor=3D=
+"#2B3C8A">
+<strong>Start</strong>
+        </td>
+<td width=3D"85%" style=3D"border-collapse: collapse; padding-left: 5px; bo=
+rder: 1px solid black;">
+<strong>2021-12-02 05:00:00 GMT</strong>
+      </td>
+</tr>
+      <tr>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" bgcolor=3D"#2B3C8A">
+<strong>End</strong>
+        </td>
+<td style=3D"border-collapse: collapse; padding-left: 5px; border: 1px soli=
+d black;">
+<strong>2021-12-02 10:00:00 GMT</strong>
+      </td>
+</tr>
+     =20
+      <tr>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" bgcolor=3D"#2B3C8A">
+<strong>Location</strong>
+        </td>
+<td style=3D"border-collapse: collapse; padding-left: 5px; border: 1px soli=
+d black;">
+<strong>Washington, DC</strong>
+      </td>
+</tr>
+    </table>
+
+    <p>
+      <strong>Planned work Reason:</strong><br>
+      Network optimization on our partner network.
+    </p>
+    <table border=3D"1" cellpadding=3D"4" cellspacing=3D"0" style=3D"width:=
+ 100%; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 8pt; bor=
+der-collapse: collapse; padding-left: 5px; border: 1px solid black;">
+      <thead>
+      <tr>
+        <th style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" width=3D"15%" align=3D"c=
+enter" bgcolor=3D"#2B3C8A"><strong>Services Affected</strong></th>
+        <th style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" width=3D"15%" align=3D"c=
+enter" bgcolor=3D"#2B3C8A"><strong>SLID/CCSD</strong></th>
+        <th style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" width=3D"10%" align=3D"c=
+enter" bgcolor=3D"#2B3C8A"><strong>Customer PON</strong></th>
+        <th style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" width=3D"10%" align=3D"c=
+enter" bgcolor=3D"#2B3C8A"><strong>Service Type</strong></th>
+        <th style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" width=3D"15%" align=3D"c=
+enter" bgcolor=3D"#2B3C8A"><strong>Expected Impact to your Service</strong>=
+</th>
+        <th style=3D"border-collapse: collapse; padding-left: 5px; color: w=
+hite; font-weight: bold; border: 1px solid black;" width=3D"35%" align=3D"c=
+enter" bgcolor=3D"#2B3C8A"><strong>Site Address</strong></th>
+      </tr>
+    </thead>
+     =20
+      <tr>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; border: =
+1px solid black;" align=3D"center">HI/Wavelength/00696448</td>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; border: =
+1px solid black;" align=3D"center">1098765-12345678</td>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; border: =
+1px solid black;" align=3D"center">PO # EXA00012345</td>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; border: =
+1px solid black;" align=3D"center">Wavelength</td>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; color: #=
+C00000; border: 1px solid black;" align=3D"center" bgcolor=3D"#FFCCCC">300 =
+min</td>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; border: =
+1px solid black;" align=3D"center">23456 Example Ct,1st Floor Equinix DC2,=
+Ashburn, VA 20147, USA</td>
+      </tr>
+     =20
+    </table>
+  =20
+    <br>
+    Comments (Color explanation) :<br>
+    <table border=3D"1" cellpadding=3D"4" cellspacing=3D"0" style=3D"width:=
+ 100%; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 8pt; bor=
+der-collapse: collapse; padding-left: 5px; border: 1px solid black;">
+      <tr>
+        <td width=3D"15%" style=3D"border-collapse: collapse; padding-left:=
+ 5px; color: #C00000; border: 1px solid black;" bgcolor=3D"#FFCCCC">
+<strong>Service interruption</strong>
+        </td>
+<td width=3D"85%" style=3D"border-collapse: collapse; padding-left: 5px; bo=
+rder: 1px solid black;">Service will experience interruption lasting maximu=
+m the duration value in the service row
+      </td>
+</tr>
+      <tr>
+        <td style=3D"border-collapse: collapse; padding-left: 5px; color: #=
+806000; border: 1px solid black;" bgcolor=3D"#FFE599">
+<strong>Resiliency Loss</strong>
+        </td>
+<td style=3D"border-collapse: collapse; padding-left: 5px; border: 1px soli=
+d black;">Primary or backup circuit will be impacted only. Service will rem=
+ain operational throughout the maintenance
+      </td>
+</tr>
+    </table>
+
+    <p>If you have any questions regarding the planned work, please login t=
+o <a target=3D"_blank" href=3D"https://myportal.exainfra.net/sign-in">MyPor=
+tal</a> or contact our Change Management Team using the email below.</p>
+
+    <br>Kind Regards,
+    <br>EXA Network Operations
+        <br>InfraCo.CM@exainfra.net
+    <br><br>
+  <div style=3D"font-size: 8pt;">
+  <i>
+  Did you know that it is now easier than ever to log your tickets=E2=80=AF=
+on our=E2=80=AF<a target=3D"_blank" href=3D"https://myportal.exainfra.net/s=
+ign-in">MyPortal</a>=E2=80=AF? You will be able to answer a few troubleshoo=
+ting questions and receive a ticket ID immediately.=E2=80=AFMyPortal=E2=80=
+=AFalso helps you check on status of existing tickets and access your escal=
+ation list.
+
+  If you do not have an=E2=80=AFMyPortal=E2=80=AFlogin, you can contact you=
+r company=E2=80=99s account administrator or submit a request on=E2=80=AFou=
+r=E2=80=AF<a target=3D"_blank" href=3D"https://www.exainfra.net/us-en/suppo=
+rt/">website</a>.
+  </i>
+  </div>
+</div>
+</body>
+</html>
+
+<p></p>
+
+-- <br />
+You received this message because you are subscribed to the Google Groups &=
+quot;Riot Direct Notices&quot; group.<br />
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:maint-notices+unsubscribe@example.com">maint-notices+=
+unsubscribe@example.com</a>.<br />
+To view this discussion on the web visit <a href=3D"https://groups.google.c=
+om/a/example.com/d/msgid/maint-notices/EXA_MSG_ID-62c2d771-800d-4be1-b458-f2=
+b3f9de31ea-EXA_MSG_ID%40exainfra.net?utm_medium=3Demail&utm_source=3Dfooter=
+">https://groups.google.com/a/example.com/d/msgid/maint-notices/EXA_MSG_ID-6=
+2c2d771-800d-4be1-b458-f2b3f9de31ea-EXA_MSG_ID%40exainfra.net</a>.<br />
+
+--b2_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E--
+
+--b1_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E
+Content-Type: text/calendar; name="planned_work_primary_window.ics"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="planned_work_primary_window.ics"
+Content-Description: planned_work_primary_window.ics
+
+QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOkVYQQ0KTUVUSE9EOlJFUVVFU1QN
+CkJFR0lOOlZFVkVOVA0KVUlEOjYwNTQwNjE5LTIwMjExMjAyVDA1MDAwMFotMjAyMTEyMDJUMTAw
+MDAwWi0wDQpEVFNUQVJUOjIwMjExMjAyVDA1MDAwMFoNClNFUVVFTkNFOjANClRSQU5TUDpPUEFR
+VUUNCkRURU5EOjIwMjExMjAyVDEwMDAwMFoNClNVTU1BUlk6RVhBIFRUIyg2MDU0MDYxOSlcLCBQ
+bGFubmVkIFdvcmsNCkNMQVNTOlBVQkxJQw0KT1JHQU5JWkVSOkluZnJhQ28uQ01AZXhhaW5mcmEu
+bmV0DQpEVFNUQU1QOjIwMjExMTIzVDE0NDk1OFoNCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVI=
+
+--b1_NhhArHvVcTgy70DuEH3RYcn0mg5DORMTnhJfuXf2E--

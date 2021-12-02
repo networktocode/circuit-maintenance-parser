@@ -75,7 +75,16 @@ class NotificationData(BaseModel, extra=Extra.forbid):
             cls.walk_email(email_message, data_parts)
 
             # Adding extra headers that are interesting to be parsed
-            data_parts.add(DataPart(EMAIL_HEADER_SUBJECT, email_message["Subject"].encode()))
+            data_parts.add(
+                DataPart(
+                    EMAIL_HEADER_SUBJECT,
+                    # decode_header() handles conversion from RFC2047 ASCII representation of non-ASCII content to
+                    #   a list of (string, charset) tuples.
+                    # make_header() merges these back into a single Header object containing this text
+                    # str() gets the simple Unicode representation of the Header.
+                    str(email.header.make_header(email.header.decode_header(email_message["Subject"]))).encode(),
+                )
+            )
             data_parts.add(DataPart(EMAIL_HEADER_DATE, email_message["Date"].encode()))
             # Ensure the data parts are processed in a consistent order
             return cls(data_parts=sorted(data_parts, key=lambda part: part.type))
