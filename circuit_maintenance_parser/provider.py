@@ -301,6 +301,8 @@ class Sparkle(GenericProvider):
 class Telia(GenericProvider):
     """Telia provider custom class."""
 
+    _exclude_filter = {EMAIL_HEADER_SUBJECT: ["Disturbance Information"]}
+
     _default_organizer = "carrier-csc@teliacompany.com"
 
 
