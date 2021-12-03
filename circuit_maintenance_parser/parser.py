@@ -110,14 +110,18 @@ class ICal(Parser):
                     "provider": str(component.get("X-MAINTNOTE-PROVIDER")),
                     "account": str(component.get("X-MAINTNOTE-ACCOUNT")),
                     "maintenance_id": str(component.get("X-MAINTNOTE-MAINTENANCE-ID")),
-                    "status": Status(component.get("X-MAINTNOTE-STATUS")),
+                    # status may be omitted, per the BCOP
+                    "status": Status(component.get("X-MAINTNOTE-STATUS", "NO-CHANGE")),
                     "start": round(component.get("DTSTART").dt.timestamp()),
                     "end": round(component.get("DTEND").dt.timestamp()),
                     "stamp": round(component.get("DTSTAMP").dt.timestamp()),
                     "summary": str(component.get("SUMMARY")),
                     "organizer": str(component.get("ORGANIZER")),
                     "uid": str(component.get("UID")),
-                    "sequence": int(component.get("SEQUENCE")),
+                    # per the BCOP sequence is mandatory, but we have real examples where it's omitted,
+                    # usually in combination with an omitted status. In that case let's treat the sequence as -1,
+                    # i.e. older than all known updates.
+                    "sequence": int(component.get("SEQUENCE", -1)),
                 }
 
                 data = {key: value for key, value in data.items() if value != "None"}
