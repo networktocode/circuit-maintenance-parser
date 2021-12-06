@@ -5,6 +5,7 @@
 ### Fixed
 
 - #124 - Handle encoded non-ASCII characters in email subjects.
+- #126 - Ignore a class of non-maintenance-notification emails from Telia.
 
 ## v2.0.7 - 2021-12-01
 
