@@ -25,13 +25,23 @@ You can leverage this library in your automation framework to process circuit ma
 - **account**: identifies an account associated with the service that is the subject of the maintenance notification.
 - **maintenance_id**: contains text that uniquely identifies the maintenance that is the subject of the notification.
 - **circuits**: list of circuits affected by the maintenance notification and their specific impact.
-- **status**: defines the overall status or confirmation for the maintenance.
 - **start**: timestamp that defines the start date of the maintenance in GMT.
 - **end**: timestamp that defines the end date of the maintenance in GMT.
 - **stamp**: timestamp that defines the update date of the maintenance in GMT.
 - **organizer**: defines the contact information included in the original notification.
 
+and may additionally contain the following attributes:
+
+- **status**: defines the overall status or confirmation for the maintenance.¹
+- **sequence**: a sequence number for notifications involving this maintenance window. In practice this is generally redundant with the **stamp** field, and will be defaulted to `1` for most non-iCal parsed notifications.²
+- **summary**: human-readable details about this maintenance notification.
+- **uid**: a unique (?) identifer for a thread of related notifications. In practice this is generally redundant with the **maintenance_id** field, and will be defaulted to `0` for most non-iCal parsed notifications.
+
 > Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to more details about these attributes.
+
+¹ Per the BCOP, **status** (`X-MAINTNOTE_STATUS`) is an optional field in notifications. However, a `Maintenance` object will always contain a `status` value; in the case where the source notification omits this field, the `status` will be set to `"NO-CHANGE"`, and it's up to the consumer of this library to determine how to appropriately handle this case.
+
+² Per the BCOP, **sequence** is a mandatory field in notifications. However, some NSPs have been seen to send notifications which, while otherwise consistent with the BCOP, omit the `SEQUENCE` field; in such cases, this library will report a sequence number of `-1`.
 
 ## Workflow
 
