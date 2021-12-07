@@ -1,0 +1,17 @@
+[
+    {
+        "account": "SOME CUSTOMER INC, INC.",
+        "circuits": [
+            {
+                "circuit_id": "2006789012",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1636113600,
+        "maintenance_id": "23456789",
+        "stamp": 1638373845,
+        "start": 1636092000,
+        "status": "CANCELLED",
+        "summary": "Dear customer, we hereby inform you about this corrective activity performed by our Third Party. We apologize for the inconvenience that this may cause."
+    }
+]

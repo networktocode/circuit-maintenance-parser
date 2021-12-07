@@ -93,7 +93,7 @@ class HtmlParserLumen1(Html):
                             data["status"] = Status("COMPLETED")
                         elif status_string == "Postponed":
                             data["status"] = Status("RE-SCHEDULED")
-                        elif status_string == "Not Completed":
+                        elif status_string in ["Not Completed", "Cancelled"]:
                             data["status"] = Status("CANCELLED")
                         elif status_string == "Alternate Night":
                             data["status"] = Status("RE-SCHEDULED")
