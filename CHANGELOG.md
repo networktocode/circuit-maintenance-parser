@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- #115 - Add default `status` and `sequence` values for iCal notifications missing these fields
 - #124 - Handle encoded non-ASCII characters in email subjects.
 - #126 - Ignore a class of non-maintenance-notification emails from Telia.
 
