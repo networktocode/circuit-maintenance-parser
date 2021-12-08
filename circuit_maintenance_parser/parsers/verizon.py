@@ -42,7 +42,7 @@ class HtmlParserVerizon1(Html):
             if not cells_text:
                 continue
             if cells_text[0].startswith("Description of Maintenance"):
-                data["summary"] = cells_text[1].replace("&nbsp;", " ")
+                data["summary"] = cells_text[1].replace("&nbsp;", "")
             elif cells_text[0].startswith("Verizon MASTARS Request number:"):
                 data["maintenance_id"] = cells_text[1]
             elif cells_text[0].startswith("Attention:"):
