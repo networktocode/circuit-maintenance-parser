@@ -42,12 +42,14 @@ class HtmlParserVerizon1(Html):
             if not cells_text:
                 continue
             if cells_text[0].startswith("Description of Maintenance"):
-                data["summary"] = cells_text[1]
+                data["summary"] = cells_text[1].replace("&nbsp;", "")
             elif cells_text[0].startswith("Verizon MASTARS Request number:"):
                 data["maintenance_id"] = cells_text[1]
             elif cells_text[0].startswith("Attention:"):
                 if "maintenance was not completed" in cells_text[0]:
                     data["status"] = Status("CANCELLED")
+                elif "request has been rescheduled" in cells_text[0]:
+                    data["status"] = Status("RE-SCHEDULED")
             elif cells_text[0].startswith("Maintenance Date/Time (GMT):"):
                 maintenance_time = cells_text[1].split("-")
                 start = parser.parse(maintenance_time[0].strip())

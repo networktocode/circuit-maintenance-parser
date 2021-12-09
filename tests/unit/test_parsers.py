@@ -311,6 +311,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "verizon", "verizon3.html"),
             Path(dir_path, "data", "verizon", "verizon3_result.json"),
         ),
+        (
+            HtmlParserVerizon1,
+            Path(dir_path, "data", "verizon", "verizon4.html"),
+            Path(dir_path, "data", "verizon", "verizon4_result.json"),
+        ),
         # Zayo
         (
             SubjectParserZayo1,

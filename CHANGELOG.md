@@ -8,6 +8,7 @@
 - #124 - Handle encoded non-ASCII characters in email subjects.
 - #126 - Ignore a class of non-maintenance-notification emails from Telia.
 - #127 - Improve handling of Equinix and Lumen notifications.
+- #128 - Add capability to set `RE-SCHEDULED` status for Verizon rescheduled notifications.
 
 ## v2.0.7 - 2021-12-01
 
