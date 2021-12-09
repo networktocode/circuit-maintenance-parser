@@ -45,6 +45,10 @@ invoke = "^1.4.1"
 toml = "0.10.2"
 flake8 = "^4.0.0"
 mypy = "^0.910"
+# Dependencies for mypy to correctly analyze code using these libraries
+types-python-dateutil = "^2.8.3"
+types-pytz = "^2021.3.2"
+types-toml = "^0.10.1"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
