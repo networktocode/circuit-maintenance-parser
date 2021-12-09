@@ -37,8 +37,9 @@ class Status(str, Enum):
     - "CONFIRMED": Indicates maintenance event is definite.
     - "CANCELLED": Indicates maintenance event was cancelled.
     - "IN-PROCESS": Indicates maintenance event is in process (e.g. open).
-    - "COMPLETED":Indicates maintenance event completed (e.g. closed).
+    - "COMPLETED": Indicates maintenance event completed (e.g. closed).
     - "RE-SCHEDULED": Indicates maintenance event was re-scheduled.
+    - "NO-CHANGE": Indicates status is unchanged from a previous notification (dummy value)
     """
 
     TENTATIVE = "TENTATIVE"
@@ -47,6 +48,8 @@ class Status(str, Enum):
     IN_PROCESS = "IN-PROCESS"
     COMPLETED = "COMPLETED"
     RE_SCHEDULED = "RE-SCHEDULED"
+
+    NO_CHANGE = "NO-CHANGE"
 
 
 class CircuitImpact(BaseModel, extra=Extra.forbid):
@@ -96,13 +99,13 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         account:  identifies an account associated with the service that is the subject of the maintenance notification
         maintenance_id:  contains text that uniquely identifies the maintenance that is the subject of the notification
         circuits: list of circuits affected by the maintenance notification and their specific impact
-        status: defines the overall status or confirmation for the maintenance
         start: timestamp that defines the start date of the maintenance in GMT
         end: timestamp that defines the end date of the maintenance in GMT
         stamp: timestamp that defines the update date of the maintenance in GMT
         organizer: defines the contact information included in the original notification
 
     Optional attributes:
+        status: defines the overall status or confirmation for the maintenance
         summary: description of the maintenace notification
         uid: specific unique identifier for each notification
         sequence: sequence number - initially zero - to serialize updates in case they are received or processed out of
@@ -123,18 +126,18 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         ...     summary="This is a maintenance notification",
         ...     uid="1111",
         ... )
-        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], status=<Status.COMPLETED: 'COMPLETED'>, start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='1111', sequence=1, summary='This is a maintenance notification')
+        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', status=<Status.COMPLETED: 'COMPLETED'>, uid='1111', sequence=1, summary='This is a maintenance notification')
     """
 
     provider: StrictStr
     account: StrictStr
     maintenance_id: StrictStr
     circuits: List[CircuitImpact]
-    status: Status
     start: StrictInt
     end: StrictInt
     stamp: StrictInt
     organizer: StrictStr
+    status: Status
 
     # Non mandatory attributes
     uid: StrictStr = "0"

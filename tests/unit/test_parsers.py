@@ -43,6 +43,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         (ICal, Path(dir_path, "data", "ical", "ical3"), Path(dir_path, "data", "ical", "ical3_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical4"), Path(dir_path, "data", "ical", "ical4_result.json"),),
         (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
+        (ICal, Path(dir_path, "data", "ical", "ical6"), Path(dir_path, "data", "ical", "ical6_result.json"),),
         # AquaComms
         (
             HtmlParserAquaComms1,
@@ -118,6 +119,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "equinix", "equinix3.eml"),
             Path(dir_path, "data", "equinix", "equinix3_result.json"),
         ),
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix4.eml"),
+            Path(dir_path, "data", "equinix", "equinix4_result.json"),
+        ),
         # GTT
         (
             HtmlParserGTT1,
@@ -148,6 +154,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserGTT1,
             Path(dir_path, "data", "gtt", "gtt6.html"),
             Path(dir_path, "data", "gtt", "gtt6_result.json"),
+        ),
+        (
+            HtmlParserGTT1,
+            Path(dir_path, "data", "gtt", "gtt7.eml"),
+            Path(dir_path, "data", "gtt", "gtt7_html_parser_result.json"),
         ),
         # HGC
         (
@@ -190,6 +201,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserLumen1,
             Path(dir_path, "data", "lumen", "lumen6.html"),
             Path(dir_path, "data", "lumen", "lumen6_result.json"),
+        ),
+        (
+            HtmlParserLumen1,
+            Path(dir_path, "data", "lumen", "lumen7.html"),
+            Path(dir_path, "data", "lumen", "lumen7_result.json"),
         ),
         # Megaport
         (
@@ -294,6 +310,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserVerizon1,
             Path(dir_path, "data", "verizon", "verizon3.html"),
             Path(dir_path, "data", "verizon", "verizon3_result.json"),
+        ),
+        (
+            HtmlParserVerizon1,
+            Path(dir_path, "data", "verizon", "verizon4.html"),
+            Path(dir_path, "data", "verizon", "verizon4_result.json"),
         ),
         # Zayo
         (

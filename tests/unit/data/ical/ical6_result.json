@@ -1,0 +1,20 @@
+[
+    {
+        "account": "47004321",
+        "circuits": [
+            {
+                "circuit_id": "246810",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1637009820,
+        "maintenance_id": "GIN-CHG0123456",
+        "provider": "NTT (AS2914)",
+        "sequence": -1,
+        "stamp": 1637009944,
+        "start": 1636999200,
+        "status": "NO-CHANGE",
+        "summary": "NTT (AS2914) Regular Maintenance Notification: completed [GIN-CHG0123456]",
+        "uid": "GIN-CHG0040894"
+    }
+]

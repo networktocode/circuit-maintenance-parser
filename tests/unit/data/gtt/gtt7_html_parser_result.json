@@ -1,0 +1,15 @@
+[
+    {
+        "account": "PO # EXA00012345",
+        "circuits": [
+            {
+                "circuit_id": "1098765-12345678",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1638439200,
+        "maintenance_id": "65430585",
+        "start": 1638421200,
+        "status": "CONFIRMED"
+    }
+]

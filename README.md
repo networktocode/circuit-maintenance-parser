@@ -19,19 +19,26 @@ during a NANOG meeting that aimed to promote the usage of the iCalendar format. 
 proposed iCalendar format, the parser is straight-forward and there is no need to define custom logic, but this library
 enables supporting other providers that are not using this proposed practice, getting the same outcome.
 
-You can leverage this library in your automation framework to process circuit maintenance notifications, and use the standardized [`Maintenance`](https://github.com/networktocode/circuit-maintenance-parser/blob/develop/circuit_maintenance_parser/output.py) to handle your received circuit maintenance notifications in a simple way. Every `maintenance` object contains, at least, the following attributes:
+You can leverage this library in your automation framework to process circuit maintenance notifications, and use the standardized [`Maintenance`](https://github.com/networktocode/circuit-maintenance-parser/blob/develop/circuit_maintenance_parser/output.py) model to handle your received circuit maintenance notifications in a simple way. Every `Maintenance` object contains the following attributes:
 
 - **provider**: identifies the provider of the service that is the subject of the maintenance notification.
 - **account**: identifies an account associated with the service that is the subject of the maintenance notification.
-- **maintenance_id**: contains text that uniquely identifies the maintenance that is the subject of the notification.
+- **maintenance_id**: contains text that uniquely identifies (at least within the context of a specific provider) the maintenance that is the subject of the notification.
 - **circuits**: list of circuits affected by the maintenance notification and their specific impact.
-- **status**: defines the overall status or confirmation for the maintenance.
-- **start**: timestamp that defines the start date of the maintenance in GMT.
-- **end**: timestamp that defines the end date of the maintenance in GMT.
-- **stamp**: timestamp that defines the update date of the maintenance in GMT.
+- **start**: timestamp that defines the starting date/time of the maintenance in GMT.
+- **end**: timestamp that defines the ending date/time of the maintenance in GMT.
+- **stamp**: timestamp that defines the update date/time of the maintenance in GMT.
 - **organizer**: defines the contact information included in the original notification.
+- **status**: defines the overall status or confirmation for the maintenance.¹
+- **summary**: human-readable details about this maintenance notification. May be an empty string.
+- **sequence**: a sequence number for notifications involving this maintenance window. In practice this is generally redundant with the **stamp** field, and will be defaulted to `1` for most non-iCalendar parsed notifications.²
+- **uid**: a unique (?) identifer for a thread of related notifications. In practice this is generally redundant with the **maintenance_id** field, and will be defaulted to `0` for most non-iCalendar parsed notifications.
 
-> Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to more details about these attributes.
+> Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to more details about the standardized meaning of these attributes.
+
+¹ Per the BCOP, **status** (`X-MAINTNOTE_STATUS`) is an optional field in iCalendar notifications. However, a `Maintenance` object will always contain a `status` value; in the case where an iCalendar notification omits this field, the `status` will be set to `"NO-CHANGE"`, and it's up to the consumer of this library to determine how to appropriately handle this case. Parsers of other notification formats are responsible for setting an appropriate value for this field based on the notification contents, and may or may not include `"NO-CHANGE"` as one of the possible reported values.
+
+² Per the BCOP, **sequence** is a mandatory field in iCalendar notifications. However, some NSPs have been seen to send notifications which, while otherwise consistent with the BCOP, omit the `SEQUENCE` field; in such cases, this library will report a sequence number of `-1`.
 
 ## Workflow
 
