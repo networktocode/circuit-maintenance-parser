@@ -1,0 +1,21 @@
+[
+    {
+        "account": "309876",
+        "circuits": [
+            {
+                "circuit_id": "20987564",
+                "impact": "REDUCED-REDUNDANCY"
+            }
+        ],
+        "end": 1639717200,
+        "maintenance_id": "5-210987654321",
+        "organizer": "servicedesk@equinix.com",
+        "provider": "equinix",
+        "sequence": 1,
+        "stamp": 1638803002,
+        "start": 1639695660,
+        "status": "CONFIRMED",
+        "summary": "[maint-notices] 3rd Party SK Maintenance-SK Metro Area Network Maintenance -17-DEC-2021 [5-210987654321]",
+        "uid": "0"
+    }
+]

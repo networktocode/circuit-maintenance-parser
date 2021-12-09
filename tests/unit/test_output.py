@@ -35,11 +35,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         ("provider", None, ValidationError),
         ("provider", 1, ValidationError),
         ("provider", "good", None),
-        # Non mandatory attributes
-        ("status", None, None),
+        ("status", None, ValidationError),
         ("status", 1, ValidationError),
         ("status", "good", ValidationError),
         ("status", "IN-PROCESS", None),
+        # Non mandatory attributes
         ("sequence", None, None),
         ("sequence", "1", ValidationError),
         ("sequence", 1, None),

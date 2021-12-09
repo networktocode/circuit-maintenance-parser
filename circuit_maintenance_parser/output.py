@@ -137,9 +137,9 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     end: StrictInt
     stamp: StrictInt
     organizer: StrictStr
+    status: Status
 
     # Non mandatory attributes
-    status: Status = Status.NO_CHANGE
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
