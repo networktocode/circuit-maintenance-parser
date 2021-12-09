@@ -112,8 +112,15 @@ class SubjectParserEquinix(EmailSubjectParser):
         if maintenance_id:
             data["maintenance_id"] = maintenance_id[1]
         data["summary"] = subject.strip().replace("\n", "")
-        if "COMPLETED" in subject:
+        if "completed" in subject.lower():
             data["status"] = Status.COMPLETED
-        if "SCHEDULED" in subject or "REMINDER" in subject:
+        elif "rescheduled" in subject.lower():
+            data["status"] = Status.RE_SCHEDULED
+        elif "scheduled" in subject.lower() or "reminder" in subject.lower():
             data["status"] = Status.CONFIRMED
+        else:
+            # Some Equinix notifications don't clearly state a status in their subject.
+            # From inspection of examples, it looks like "Confirmed" would be the most appropriate in this case.
+            data["status"] = Status.CONFIRMED
+
         return [data]
