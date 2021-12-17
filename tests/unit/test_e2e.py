@@ -486,6 +486,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("email", Path(dir_path, "data", "zayo", "zayo7.eml")),],
             [Path(dir_path, "data", "zayo", "zayo7_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo8.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo8_result.json"),],
         ),  # pylint: disable=too-many-locals
     ],
 )
