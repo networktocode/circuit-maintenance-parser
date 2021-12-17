@@ -22,20 +22,21 @@ class HtmlParserTelstra1(Html):
         self.parse_tables(soup.find_all("table"), data)
         return [data]
 
-    def parse_tables(self, tables: ResultSet, data: Dict):
+    def parse_tables(self, tables: ResultSet, data: Dict):  # pylint: disable=too-many-locals
         """Parse Table tag."""
         for table in tables:
             for td_element in table.find_all("td"):
                 # TODO: We should find a more consistent way to parse the status of a maintenance note
-                if "maintenance has been scheduled" in td_element.text.lower():
+                td_text = td_element.text.lower()
+                if "maintenance has been scheduled" in td_text:
                     data["status"] = Status("CONFIRMED")
-                elif "this is a reminder notification to notify that a planned maintenance" in td_element.text.lower():
+                elif "this is a reminder notification to notify that a planned maintenance" in td_text:
                     data["status"] = Status("CONFIRMED")
-                elif "has been completed" in td_element.text.lower():
+                elif "has been completed" in td_text:
                     data["status"] = Status("COMPLETED")
-                elif "has been amended" in td_element.text.lower():
+                elif "has been amended" in td_text:
                     data["status"] = Status("RE-SCHEDULED")
-                elif "has been withdrawn" in td_element.text.lower():
+                elif "has been withdrawn" in td_text or "has been cancelled" in td_text:
                     data["status"] = Status("CANCELLED")
                 else:
                     continue

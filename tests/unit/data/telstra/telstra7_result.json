@@ -1,0 +1,16 @@
+[
+    {
+        "account": "Customer Name",
+        "circuits": [
+            {
+                "circuit_id": "SNG SYD EPL 9875643",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1639402140,
+        "maintenance_id": "PN123456",
+        "start": 1639396800,
+        "status": "CANCELLED",
+        "summary": "Telstra Corporation Essential Change Notification - CMART 3513026. Telstra Corporation will implement maintenance work in Australia due to planned hardware replacement work.\r\nYour service(s) may experience a break to service during the change window.\r\n***At this current time, your link will be down during this maintenance and current cable fault AAG Segment 1i (Hongkong -BU4). Please contact our service desk [gsd@team.telstra.com] if necessary***"
+    }
+]
