@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.9
+
+### Fixed
+
+- #132 - Handle alternate "has been cancelled" text in Telstra notifications.
+- #134 - Handle Zayo "RESCHEDULE" notifications.
+
 ## v2.0.8 - 2021-12-09
 
 ### Fixed
