@@ -228,11 +228,11 @@ def tests(context, local=INVOKE_LOCAL):
     """
     black(context, local)
     flake8(context, local)
-    pylint(context, local)
     yamllint(context, local)
     pydocstyle(context, local)
     bandit(context, local)
-    pytest(context, local)
     mypy(context, local)
+    pylint(context, local)
+    pytest(context, local)
 
     print("All tests have passed!")

@@ -44,7 +44,10 @@ bandit = "*"
 invoke = "*"
 flake8 = "*"
 mypy = "*"
-
+# Dependencies for mypy to correctly analyze code using these libraries
+types-python-dateutil = "*"
+types-pytz = "*"
+types-toml = "*"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
