@@ -21,7 +21,7 @@ class HtmlParserEquinix(Html):
         Returns:
             Dict: The data dict containing circuit maintenance data.
         """
-        data: Dict[str, Any] = {"circuits": list()}
+        data: Dict[str, Any] = {"circuits": []}
 
         impact = self._parse_b(soup.find_all("b"), data)
         self._parse_table(soup.find_all("th"), data, impact)
@@ -88,7 +88,10 @@ class HtmlParserEquinix(Html):
                     if circuit_info:
                         account, _, circuit = circuit_info  # pylint: disable=unused-variable
                         data["circuits"].append(
-                            {"circuit_id": circuit.text, "impact": impact,}
+                            {
+                                "circuit_id": circuit.text,
+                                "impact": impact,
+                            }
                         )
                         data["account"] = account.text
 

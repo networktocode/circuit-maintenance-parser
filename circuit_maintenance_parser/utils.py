@@ -47,7 +47,7 @@ class Geolocator:
     def db_location(cls):  # pylint: disable=no-self-argument
         """Load the locations DB from CSV into a Dict."""
         if not cls._db_location:
-            with open(os.path.join(dirname, "data", "worldcities.csv")) as csvfile:
+            with open(os.path.join(dirname, "data", "worldcities.csv"), encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
                     # Index by city and country
@@ -65,7 +65,10 @@ class Geolocator:
             location_coordinates = self.get_location_from_api(city)
 
         logger.debug(
-            "Resolved city %s to coordinates: lat %s - lon %s", city, location_coordinates[0], location_coordinates[1],
+            "Resolved city %s to coordinates: lat %s - lon %s",
+            city,
+            location_coordinates[0],
+            location_coordinates[1],
         )
         return location_coordinates
 
@@ -86,7 +89,10 @@ class Geolocator:
 
     @staticmethod
     @backoff.on_exception(
-        backoff.expo, (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError), max_time=10, logger=logger,
+        backoff.expo,
+        (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError),
+        max_time=10,
+        logger=logger,
     )
     def get_location_from_api(city: str) -> Tuple[float, float]:
         """Get location from API."""

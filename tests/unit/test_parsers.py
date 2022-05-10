@@ -38,12 +38,36 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
     "parser_class, raw_file, results_file",
     [
         # iCal
-        (ICal, Path(dir_path, "data", "ical", "ical1"), Path(dir_path, "data", "ical", "ical1_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical2"), Path(dir_path, "data", "ical", "ical2_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical3"), Path(dir_path, "data", "ical", "ical3_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical4"), Path(dir_path, "data", "ical", "ical4_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical6"), Path(dir_path, "data", "ical", "ical6_result.json"),),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical1"),
+            Path(dir_path, "data", "ical", "ical1_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical2"),
+            Path(dir_path, "data", "ical", "ical2_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical3"),
+            Path(dir_path, "data", "ical", "ical3_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical4"),
+            Path(dir_path, "data", "ical", "ical4_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical5"),
+            Path(dir_path, "data", "ical", "ical5_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical6"),
+            Path(dir_path, "data", "ical", "ical6_result.json"),
+        ),
         # AquaComms
         (
             HtmlParserAquaComms1,
@@ -225,7 +249,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "momentum", "momentum1_html_parser_result.json"),
         ),
         # NTT
-        (ICal, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        (
+            ICal,
+            Path(dir_path, "data", "ntt", "ntt1"),
+            Path(dir_path, "data", "ntt", "ntt1_result.json"),
+        ),
         # Seaborn
         (
             HtmlParserSeaborn1,
@@ -412,7 +440,7 @@ def test_parsers(parser_class, raw_file, results_file):
 
     parsed_notifications = parser_class().parse(raw_data)
 
-    with open(results_file) as res_file:
+    with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
 
     assert parsed_notifications == expected_result

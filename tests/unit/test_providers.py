@@ -27,7 +27,8 @@ class ProviderWithTwoProcessors(GenericProvider):
 
 
 @pytest.mark.parametrize(
-    "provider_class", [ProviderWithOneProcessor, ProviderWithTwoProcessors],
+    "provider_class",
+    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances(provider_class):
     """Tests GenericProvider."""
@@ -39,7 +40,8 @@ def test_provide_get_maintenances(provider_class):
 
 
 @pytest.mark.parametrize(
-    "provider_class", [ProviderWithOneProcessor, ProviderWithTwoProcessors],
+    "provider_class",
+    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances_one_exception(provider_class):
     """Tests GenericProvider."""
@@ -71,7 +73,7 @@ def test_provider_with_include_filter():
 
     # With a non matching data to include, the notification will be skipped and just return empty
     other_fake_data = NotificationData.init_from_raw("other type", b"other data")
-    assert ProviderWithIncludeFilter().get_maintenances(other_fake_data) == []
+    assert not ProviderWithIncludeFilter().get_maintenances(other_fake_data)
 
 
 def test_provider_with_exclude_filter():
@@ -83,7 +85,7 @@ def test_provider_with_exclude_filter():
         _exclude_filter = {fake_data.data_parts[0].type: [fake_data.data_parts[0].content.decode()]}
 
     # Because the exclude filter is matching with the data, we expect that we skip the processing
-    assert ProviderWithIncludeFilter().get_maintenances(fake_data) == []
+    assert not ProviderWithIncludeFilter().get_maintenances(fake_data)
 
     # With a non matching data to exclude, the notification will be not skipped and processed
     other_fake_data = NotificationData.init_from_raw("other type", b"other data")
@@ -104,4 +106,4 @@ def test_provider_with_include_and_exclude_filters():
 
     # Because the exclude filter and the include filter are matching, we expect the exclude to take
     # precedence
-    assert ProviderWithIncludeFilter().get_maintenances(data) == []
+    assert not ProviderWithIncludeFilter().get_maintenances(data)

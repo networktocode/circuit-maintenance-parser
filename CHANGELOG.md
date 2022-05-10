@@ -2,6 +2,10 @@
 
 ## v2.0.9 - 2022-05-10
 
+### Changed
+
+- #141 - Minimum Python version changed from 3.6.1 to 3.6.2
+
 ### Fixed
 
 - #132 - Handle alternate "has been cancelled" text in Telstra notifications.
