@@ -4,7 +4,7 @@
 
 ### Changed
 
-- #141 - Minimum Python version changed from 3.6.1 to 3.6.2
+- #141 - Minimum Python version changed from `3.6.1` to `3.6.2`
 
 ### Fixed
 

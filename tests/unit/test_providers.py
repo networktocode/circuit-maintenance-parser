@@ -9,7 +9,7 @@ from circuit_maintenance_parser.processor import SimpleProcessor
 from circuit_maintenance_parser.provider import GenericProvider
 from circuit_maintenance_parser.parser import Parser
 
-
+# pylint: disable=use-implicit-booleaness-not-comparison
 fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
 
 
@@ -73,7 +73,7 @@ def test_provider_with_include_filter():
 
     # With a non matching data to include, the notification will be skipped and just return empty
     other_fake_data = NotificationData.init_from_raw("other type", b"other data")
-    assert not ProviderWithIncludeFilter().get_maintenances(other_fake_data)
+    assert ProviderWithIncludeFilter().get_maintenances(other_fake_data) == []
 
 
 def test_provider_with_exclude_filter():
@@ -85,7 +85,7 @@ def test_provider_with_exclude_filter():
         _exclude_filter = {fake_data.data_parts[0].type: [fake_data.data_parts[0].content.decode()]}
 
     # Because the exclude filter is matching with the data, we expect that we skip the processing
-    assert not ProviderWithIncludeFilter().get_maintenances(fake_data)
+    assert ProviderWithIncludeFilter().get_maintenances(fake_data) == []
 
     # With a non matching data to exclude, the notification will be not skipped and processed
     other_fake_data = NotificationData.init_from_raw("other type", b"other data")
@@ -106,4 +106,4 @@ def test_provider_with_include_and_exclude_filters():
 
     # Because the exclude filter and the include filter are matching, we expect the exclude to take
     # precedence
-    assert not ProviderWithIncludeFilter().get_maintenances(data)
+    assert ProviderWithIncludeFilter().get_maintenances(data) == []
