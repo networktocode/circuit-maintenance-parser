@@ -61,8 +61,8 @@ class HtmlParserEquinix(Html):
                 # Formated in DAY MONTH YEAR
                 # *SPAN: 02-JUL-2021 - 03-JUL-2021*
                 raw_year_span = b_elem.text.strip().split()
-                start_year = raw_year_span[1].split('-')[-1]
-                end_year = raw_year_span[-1].split('-')[-1]
+                start_year = raw_year_span[1].split("-")[-1]
+                end_year = raw_year_span[-1].split("-")[-1]
             if "UTC:" in b_elem:
                 raw_time = b_elem.next_sibling
                 # for non english equinix notifications

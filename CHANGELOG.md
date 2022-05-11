@@ -10,6 +10,7 @@
 
 - #132 - Handle alternate "has been cancelled" text in Telstra notifications.
 - #134 - Handle Zayo "RESCHEDULE" notifications.
+- #141 - Fix Equinix parser not taking year into account
 
 ## v2.0.8 - 2021-12-09
 
