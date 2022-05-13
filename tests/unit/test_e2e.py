@@ -518,7 +518,7 @@ def test_provider_get_maintenances(provider_class, test_data_files, result_parse
 
     expected_result = []
     for result_parse_file in result_parse_files:
-        with open(result_parse_file) as res_file:
+        with open(result_parse_file, encoding="utf-8") as res_file:
             partial_result_data = json.load(res_file)
             if not expected_result:
                 expected_result = partial_result_data
