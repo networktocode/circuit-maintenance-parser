@@ -55,6 +55,8 @@ class HtmlParserZayo1(Html):
                     data["status"] = Status("IN-PROCESS")
                 elif "has been completed" in text or "has closed" in text:
                     data["status"] = Status("COMPLETED")
+                elif "has rescheduled" in text:
+                    data["status"] = Status("RE-SCHEDULED")
 
         return [data]
 

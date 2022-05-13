@@ -284,6 +284,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "telstra", "telstra6.html"),
             Path(dir_path, "data", "telstra", "telstra6_result.json"),
         ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra7.html"),
+            Path(dir_path, "data", "telstra", "telstra7_result.json"),
+        ),
         # Turkcell
         (
             HtmlParserTurkcell1,
@@ -382,6 +387,16 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "zayo", "zayo7.eml"),
             Path(dir_path, "data", "zayo", "zayo7_subject_parser_result.json"),
         ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo8.eml"),
+            Path(dir_path, "data", "zayo", "zayo8_html_parser_result.json"),
+        ),
+        (
+            SubjectParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo8_subject.txt"),
+            Path(dir_path, "data", "zayo", "zayo8_subject_parser_result.json"),
+        ),
         # Email Date
         (
             EmailDateParser,
@@ -397,7 +412,7 @@ def test_parsers(parser_class, raw_file, results_file):
 
     parsed_notifications = parser_class().parse(raw_data)
 
-    with open(results_file) as res_file:
+    with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
 
     assert parsed_notifications == expected_result

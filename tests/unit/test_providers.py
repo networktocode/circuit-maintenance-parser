@@ -9,7 +9,7 @@ from circuit_maintenance_parser.processor import SimpleProcessor
 from circuit_maintenance_parser.provider import GenericProvider
 from circuit_maintenance_parser.parser import Parser
 
-
+# pylint: disable=use-implicit-booleaness-not-comparison
 fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
 
 

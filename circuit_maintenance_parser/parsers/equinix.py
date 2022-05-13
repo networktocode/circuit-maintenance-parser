@@ -21,7 +21,7 @@ class HtmlParserEquinix(Html):
         Returns:
             Dict: The data dict containing circuit maintenance data.
         """
-        data: Dict[str, Any] = {"circuits": list()}
+        data: Dict[str, Any] = {"circuits": []}
 
         impact = self._parse_b(soup.find_all("b"), data)
         self._parse_table(soup.find_all("th"), data, impact)
@@ -54,7 +54,15 @@ class HtmlParserEquinix(Html):
             impact (Status object): impact of the maintenance notification (used in the parse table function to assign an impact for each circuit).
         """
         impact = None
+        start_year = 0
+        end_year = 0
         for b_elem in b_elements:
+            if "SPAN:" in b_elem.text:
+                # Formated in DAY MONTH YEAR
+                # *SPAN: 02-JUL-2021 - 03-JUL-2021*
+                raw_year_span = b_elem.text.strip().split()
+                start_year = raw_year_span[1].split("-")[-1]
+                end_year = raw_year_span[-1].split("-")[-1]
             if "UTC:" in b_elem:
                 raw_time = b_elem.next_sibling
                 # for non english equinix notifications
@@ -62,10 +70,13 @@ class HtmlParserEquinix(Html):
                 # this skips the non english line at the top
                 if not self._isascii(raw_time):
                     continue
+
+                # Expected Format *UTC:* FRIDAY, 02 JUL 10:00 - FRIDAY, 02 JUL 15:00
+                # Note this detailed time does not contain the year..
                 start_end_time = raw_time.split("-")
                 if len(start_end_time) == 2:
-                    data["start"] = self.dt2ts(parser.parse(raw_time.split("-")[0].strip()))
-                    data["end"] = self.dt2ts(parser.parse(raw_time.split("-")[1].strip()))
+                    data["start"] = self.dt2ts(parser.parse(start_end_time[0].strip() + f" {start_year}"))
+                    data["end"] = self.dt2ts(parser.parse(start_end_time[1].strip() + f" {end_year}"))
             # all circuits in the notification share the same impact
             if "IMPACT:" in b_elem:
                 impact_line = b_elem.next_sibling

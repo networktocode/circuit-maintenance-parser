@@ -486,6 +486,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("email", Path(dir_path, "data", "zayo", "zayo7.eml")),],
             [Path(dir_path, "data", "zayo", "zayo7_result.json"),],
+        ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo8.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo8_result.json"),],
         ),  # pylint: disable=too-many-locals
     ],
 )
@@ -513,7 +518,7 @@ def test_provider_get_maintenances(provider_class, test_data_files, result_parse
 
     expected_result = []
     for result_parse_file in result_parse_files:
-        with open(result_parse_file) as res_file:
+        with open(result_parse_file, encoding="utf-8") as res_file:
             partial_result_data = json.load(res_file)
             if not expected_result:
                 expected_result = partial_result_data
