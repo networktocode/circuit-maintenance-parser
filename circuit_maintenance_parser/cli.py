@@ -31,7 +31,7 @@ def main(provider_type, data_file, data_type, verbose):
 
     if data_type == "email":
         if str.lower(data_file[-3:]) == "eml":
-            with open(data_file) as email_file:
+            with open(data_file, encoding="utf-8") as email_file:
                 msg = email.message_from_file(email_file)
             data = NotificationData.init_from_emailmessage(msg)
         else:

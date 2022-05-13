@@ -47,7 +47,7 @@ class Geolocator:
     def db_location(cls):  # pylint: disable=no-self-argument
         """Load the locations DB from CSV into a Dict."""
         if not cls._db_location:
-            with open(os.path.join(dirname, "data", "worldcities.csv")) as csvfile:
+            with open(os.path.join(dirname, "data", "worldcities.csv"), encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
                     # Index by city and country

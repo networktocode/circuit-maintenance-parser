@@ -412,7 +412,7 @@ def test_parsers(parser_class, raw_file, results_file):
 
     parsed_notifications = parser_class().parse(raw_data)
 
-    with open(results_file) as res_file:
+    with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
 
     assert parsed_notifications == expected_result
