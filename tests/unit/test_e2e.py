@@ -491,10 +491,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Zayo,
             [("email", Path(dir_path, "data", "zayo", "zayo8.eml")),],
             [Path(dir_path, "data", "zayo", "zayo8_result.json"),],
-        ),  # pylint: disable=too-many-locals
+        ),
     ],
 )
-def test_provider_get_maintenances(provider_class, test_data_files, result_parse_files):
+def test_provider_get_maintenances(
+    provider_class, test_data_files, result_parse_files
+):  # pylint: disable=too-many-locals
     """End to End tests for various Providers."""
     extended_data = provider_class.get_extended_data()
     default_maintenance_data = {"uid": "0", "sequence": 1, "summary": ""}
