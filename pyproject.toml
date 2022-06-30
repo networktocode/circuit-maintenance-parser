@@ -47,7 +47,7 @@ flake8 = "^4.0.0"
 mypy = "^0.930"
 # Dependencies for mypy to correctly analyze code using these libraries
 types-python-dateutil = "^2.8.3"
-types-pytz = "^2021.3.2"
+types-pytz = "^2022.0.0"
 types-toml = "^0.10.1"
 
 [tool.poetry.scripts]
