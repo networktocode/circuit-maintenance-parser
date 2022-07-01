@@ -34,7 +34,7 @@ tzwhere = "^3.0.3"
 backoff = "^1.11.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
+pytest = "^7.0.0"
 requests_mock = "^1.7.0"
 pyyaml = "^6.0"
 black = "^19.10b0"
