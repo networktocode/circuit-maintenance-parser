@@ -1,0 +1,18 @@
+[
+  {
+    "account": "123456",
+    "end": 1661043600,
+    "maintenance_id": "CRQ1-12345678",
+    "circuits": [
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "XXX/YYY/ZZ-123456"
+      }
+    ],
+    "sequence": 1,
+    "stamp": 1660202255,
+    "start": 1661025600,
+    "status": "CONFIRMED",
+    "summary": "Colt Service Affecting Maintenance Notification"
+  }
+]
