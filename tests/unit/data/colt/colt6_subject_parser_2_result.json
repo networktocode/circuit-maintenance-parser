@@ -1,0 +1,9 @@
+[
+  {
+    "end": 1661043600,
+    "maintenance_id": "CRQ1-12345678",
+    "start": 1661025600,
+    "status": "CONFIRMED",
+    "summary": "Colt Service Affecting Maintenance Notification"
+  }
+]
