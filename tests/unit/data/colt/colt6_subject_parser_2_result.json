@@ -1,9 +1,9 @@
 [
   {
-    "end": 1661043600,
+    "end": 1628744400,
     "maintenance_id": "CRQ1-12345678",
-    "start": 1661025600,
-    "status": "CONFIRMED",
-    "summary": "Colt Service Affecting Maintenance Notification"
+    "start": 1626130800,
+    "status": "CANCELLED",
+    "summary": "Colt Third Party Maintenance Notification"
   }
 ]
