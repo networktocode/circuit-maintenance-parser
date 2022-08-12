@@ -103,6 +103,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "colt", "colt5.eml"),
             Path(dir_path, "data", "colt", "colt5_subject_parser_2_result.json"),
         ),
+        (
+            SubjectParserColt2,
+            Path(dir_path, "data", "colt", "colt6.eml"),
+            Path(dir_path, "data", "colt", "colt6_subject_parser_2_result.json"),
+        ),
         # Equinix
         (
             HtmlParserEquinix,
