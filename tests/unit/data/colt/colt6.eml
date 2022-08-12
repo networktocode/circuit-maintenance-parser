@@ -1,0 +1,354 @@
+Return-Path: <svc_backbone@acme.com>
+Received: from smtpclient.apple (86-81-217-25.fixed.kpn.net. [86.81.217.25])
+        by smtp.gmail.com with ESMTPSA id q3-20020a17090676c300b00722e4bab163sm823548ejn.200.2022.08.12.07.13.19
+        for <svc_backbone@acme.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 12 Aug 2022 07:13:19 -0700 (PDT)
+From: svc_backbone svc_backbone <svc_backbone@acme.com>
+Content-Type: multipart/mixed;
+	boundary="Apple-Mail=_389F44A2-E525-4B60-9D78-AE41B8EDDB98"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.100.31\))
+Subject:Cancellation Colt Third Party Maintenance Notification -
+ CRQ1-12345678 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for ACME,
+ 123456
+Message-Id: <056F2950-8852-4690-B100-B38FF3130048@acme.com>
+References: <88226301-ff4c-6811-0ca8-9599d131eca5@networktocode.com>
+To: svc_backbone@acme.com
+Date: Fri, 12 Aug 2022 16:13:19 +0200
+X-Mailer: Apple Mail (2.3696.100.31)
+
+
+--Apple-Mail=_389F44A2-E525-4B60-9D78-AE41B8EDDB98
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+>=20
+>=20
+> Planned Outage Notification
+>=20
+> Dear Sir or Madam,
+>=20
+> In order to maintain the highest levels of availability and service to
+> our customers, it is sometimes necessary for Colt and our partners to
+> perform network maintenance.  We apologize for any resulting
+> inconvenience and assure you of our efforts to minimise any service
+> disruption. To view this, and all other planned maintenance on your
+> services, or if you require any assistance, please contact us via the
+> Colt Online Portal http://online.colt.net. Alternatively, email us to
+> PlannedWorks@colt.net, quoting the following reference number
+> CRQ1-12345678. Please retain this unique reference for the =
+maintenance.
+>=20
+> Planned Works Details:
+>=20
+> Planned Work (PW)Ref.:   CRQ1-12345678
+> Start Date & Time:             07/12/2021 23:00:00(GMT)*
+> End Date & Time:              08/12/2021 05:00:00 (GMT)*
+> Outage Duration:              360 Minutes
+>=20
+> *Time Zone:
+> Central European Time (CET)  =3D GMT + 1 hour
+> Central European Summer Time (CEST) =3D GMT + 2 hours
+>=20
+> Justification of the work: We would like to make you aware of a
+> maintenance our carrier will conduct on their network affecting your
+> service to perform Cable Maintenance Work. As this maintenance is not
+> being conducted by Colt, rescheduling this work may not be possible.
+> Should the date and time for the maintenance have passed, without an
+> updated notification communicated for it, please consider the work as
+> completed.
+>=20
+> Service:  ***Please refer to the attached CSV file for your service(s)
+> affected by this maintenance****
+>=20
+> PLEASE NOTE:  To enable you to plan appropriately the list of impacted
+> services includes those that have been completed, as well as those
+> pending completion.  If the pending installation is completed prior to
+> the scheduled date for the planned maintenance these services will be
+> impacted.
+>=20
+> Please assist Colt by informing us about any changes to your contact
+> details via the Colt Online Portal http://online.colt.net or by =
+replying
+> to PlannedWorks@colt.net so that we can ensure that future =
+notifications
+> reach the correct parties.
+>=20
+> Should you experience any issue with your service post the maintenance
+> end time, please contact Colt Technical support via the Colt Online
+> Portal http://online.colt.net. Alternatively, visit
+> http://www.colt.net/support to contact us by phone, quoting your =
+service ID.
+>=20
+> For more information about a service, please consult the Colt Online
+> Portal http://online.colt.net
+>=20
+>=20
+> Colt Change management
+> Colt Technology Services - Operations
+>=20
+> For support log into Colt Online: https://online.colt.net
+> For other contact options: https://www.colt.net/support
+> [Colt Disclaimer] This email is from an entity of the Colt group of
+> companies. Colt Group Holdings Limited, Colt House, 20 Great Eastern
+> Street, London, EC2A 3EH, United Kingdom, registered in England and
+> Wales, under company number 11530966. Corporate and contact =
+information
+> for our entities can be found at
+> https://www.colt.net/legal/colt-group-of-companies/. Internet
+> communications are not secure and Colt does not accept responsibility
+> for the accurate transmission of this message. Content of this email =
+or
+> its attachments is not legally or contractually binding unless =
+expressly
+> previously agreed in writing by Colt=
+
+--Apple-Mail=_389F44A2-E525-4B60-9D78-AE41B8EDDB98
+Content-Disposition: attachment;
+	filename=colt1.txt
+Content-Type: text/plain;
+	x-mac-hide-extension=yes;
+	x-unix-mode=0666;
+	name="colt1.txt"
+Content-Transfer-Encoding: quoted-printable
+
+BEGIN:VCALENDAR
+PRODID:-//Microsoft Corporation//Outlook 16.0 MIMEDIR//EN
+VERSION:2.0
+METHOD:REQUEST
+BEGIN:VTIMEZONE
+TZID:UTC
+BEGIN:STANDARD
+DTSTART:16011028T020000
+TZOFFSETFROM:-0000
+TZOFFSETTO:-0000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+CLASS:PUBLIC
+CREATED:20210730T140308Z
+DTEND;TZID=3DUTC:20210807T050000
+DTSTAMP:20210730T140308Z
+DTSTART;TZID=3DUTC:20210806T210000
+LAST-MODIFIED:20210730T140308Z
+ORGANIZER:DoNotReply_Change@colt.net
+LOCATION:Colt Internal Maintenance
+PRIORITY:5
+SEQUENCE:0
+SUMMARY;LANGUAGE=3Den-us:Colt Service Affecting Maintenance =
+Notification - CRQ1-12345678 [06/8/2021 22:00:00 GMT - 07/8/2021 =
+06:00:00 GMT] for ACME,  12345000
+TRANSP:OPAQUE
+UID:MS00NDE1Mjc5NDc3NTM4ODE4MTFJbXBhY3RlZA=3D=3D
+X-ALT-DESC;FMTTYPE=3Dtext/html:<html =
+xmlns:v=3D'urn:schemas-microsoft-com:vml'  =
+xmlns:o=3D'urn:schemas-microsoft-com:office:office' =
+xmlns:w=3D'urn:schemas-mic rosoft-com:office:word' =
+xmlns:m=3D'http://schemas.microsoft.com/office/2004/12/omml' =
+xmlns=3D'http://www.w3.org/TR/REC-html40'><head><meta name=3DProgId =
+content=3DWord.Document><meta name=3DGenerator content=3D'Microsoft Word =
+15'><meta name=3DOriginator content=3D'Microsoft Word 15'><link =
+rel=3DFile-List href=3D'cid:filelist.xml@01D640EA.9C282590'> </head> =
+<body lang=3DEN-US link=3D'#0563C1' vlink=3D'#954F72' =
+style=3D'tab-interval:.5in'><table width=3D"100%" border=3D"0" =
+cellspacing=3D"0" cellpadding=3D"0"><tr><td align=3D"center"><span =
+style=3D"font-size:12pt;font-family:'Calibri',sans-serif;color:#C00000;tex=
+t-align:center"><strong>This is a system generated calendar invite. =
+Accepting or Declining is meant only for the purpose of a Calendar =
+display.  The timing of the invite is set to the user=E2=80=99s local =
+system time and should not to be confused with the text displayed withi
+ n the invite, which is in GMT.  Should you require any assistance, =
+please contact us via the Colt Online Portal <span =
+style=3D"color:#C00000"><a href=3D"http://online.colt.net/" =
+style=3D"border-bottom: 1px solid #000;"><span lang=3D"DE" =
+style=3D"color:#C00000;border-bottom: 1px solid =
+#000;">http://online.colt.net</span></a></span> or alternatively mail us =
+by replying to the =
+notification</span></td></tr></table><p></p><p><strong><span =
+style=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;"><img border=3D"0" id=3D"_x0000_i1025" =
+src=3D"https://filestore.xmr3.com/763252/111359790/146229/185004/jobsettin=
+gs/docs/logol_1429145502442.png" =
+/></span></span></strong></p><p></p><p><span style=3D"font-size: =
+10pt;"><span style=3D"font-family: arial, sans-serif;"><span =
+style=3D"font-size: 10pt;"><strong>Planned Outage =
+Notification</strong></span></span></span></p><p></p><p><span =
+style=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;">Dear Sir or Madam,</span></span></p><p></p><p><span styl
+ e=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;">In order&nbsp;to maintain the highest levels of =
+availability and service to our customers, it is sometimes necessary for =
+Colt&nbsp;and our partners to perform network maintenance.&nbsp;&nbsp;We =
+apologize for any resulting inconvenience and assure you of our efforts =
+to minimise any service disruption. To view this, and all other planned =
+maintenance on your services, or if you require any assistance, please =
+contact us via the Colt Online Portal&nbsp;</span></span><span =
+style=3D"font-family: arial, sans-serif;"><span style=3D"font-size: =
+11pt;"><span style=3D"font-size: 10pt;"><a =
+href=3D"http://online.colt.net">http://online.colt.net</a>. =
+Alternatively, email us to&nbsp;</span><span style=3D"font-size: =
+10pt;"><a =
+href=3D"mailto:PlannedWorks@colt.net">PlannedWorks@colt.net</a>,&nbsp;</sp=
+an></span></span><span style=3D"font-size: 10pt;"><span =
+style=3D"font-family: arial, sans-serif;">quoting the following =
+reference number&nbsp;<strong>CRQ1
+ -12345678</strong>. Please retain this unique reference for the =
+maintenance.</span></span></p><p></p><p><span style=3D"font-size: =
+10pt;"><span style=3D"font-family: arial, sans-serif;"><span =
+style=3D"font-size: 10pt;"><strong><u>Planned Works =
+Details:</u></strong></span></span></span></p><p></p><p><span =
+style=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;"><strong>Planned Work (PW)Ref.:</strong>&nbsp;&nbsp; =
+CRQ1-12345678</span></span><br /><span style=3D"font-size: 10pt;"><span =
+style=3D"font-family: arial, sans-serif;"><strong>Start Date &amp; =
+Time:</strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp;</span></span>06/8/2021 21:00:00<span style=3D"font-size: =
+10pt;"><span style=3D"font-family: arial, =
+sans-serif;">(GMT)*</span></span><br /><span style=3D"font-size: =
+10pt;"><span style=3D"font-family: arial, sans-serif;"><strong>End Date =
+&amp; Time:</strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp;&nbsp;</span></span>07/8/2021 05:00:00<span style=3D"font-size: =
+10pt;"><span=20
+ style=3D"font-family: arial, sans-serif;">&nbsp;(GMT)*</span></span><br =
+/><span style=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;"><strong>Outage Duration:</strong>&nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; No =
+Impact</span></span></p><p></p><p><strong><em><span =
+style=3D"background-image: initial; background-position: initial; =
+background-size: initial; background-repeat: initial; =
+background-attachment: initial; background-origin: initial; =
+background-clip: initial;"><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 9pt;">*Time =
+Zone:</span></span></span></em></strong><br /><em><span =
+style=3D"background-image: initial; background-position: initial; =
+background-size: initial; background-repeat: initial; =
+background-attachment: initial; background-origin: initial; =
+background-clip: initial;"><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 9pt;">Central European Time =
+(CET)&nbsp;&nbsp;=3D GMT + 1 hour</span></span></span></em><br /><e
+ m><span style=3D"background-image: initial; background-position: =
+initial; background-size: initial; background-repeat: initial; =
+background-attachment: initial; background-origin: initial; =
+background-clip: initial;"><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 9pt;"><em>Central European Summer =
+Time (CEST) =3D GMT + =
+2&nbsp;hours</em></span></span></span></em></p><p><span =
+style=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;"><strong>Justification of the work:</strong>&nbsp;Kindly =
+note the device on which your service is commissioned, will be upgraded =
+at a later stage. Thus please take note that this maintenance for your =
+service, in the attached CSV file, stands as cancelled. There are =
+currently no new dates available. Once the new timings have been =
+finalised, Colt will raise a new change ticket, and inform you about the =
+work. We would like to apologise for any inconvenience this may have =
+resulted in</span></span></p><p></p><p><span style=3D"font-size
+ : 10pt;"><span style=3D"font-family: arial, sans-serif;"><span =
+style=3D"font-size: 10pt;"><strong>Service:&nbsp;&nbsp;<span =
+style=3D"color: rgb(0, 51, 153);">***Please refer to the attached CSV =
+file for your service(s) affected by this =
+maintenance****</span></strong></span></span></span></p><p></p><p></p><p><=
+/p><p><span style=3D"font-size: 10pt;"><span style=3D"font-family: =
+arial, sans-serif;"><strong>PLEASE NOTE:</strong>&nbsp;&nbsp;To enable =
+you to plan appropriately the list of impacted services includes those =
+that have been completed, as well as those pending =
+completion.&nbsp;&nbsp;If the pending installation is completed prior to =
+the scheduled date for the planned maintenance these services will be =
+impacted.</span></span></p><p></p><p><span style=3D"font-size: =
+10pt;"><span style=3D"font-family: arial, sans-serif;">Please assist =
+Colt by informing us about any changes to your contact =
+details&nbsp;</span></span><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 10pt;">via the
+  Colt Online Portal&nbsp;</span></span><span style=3D"font-family: =
+arial, sans-serif;"><span style=3D"font-size: 11pt;"><a =
+href=3D"http://online.colt.net"><span style=3D"font-size: =
+10pt;">http://online.colt.net</span></a></span></span><span =
+style=3D"font-family: arial, sans-serif;"><span style=3D"font-size: =
+10pt;">&nbsp;or by replying to&nbsp;</span></span><span =
+style=3D"font-family: arial, sans-serif;"><span style=3D"font-size: =
+11pt;"><span style=3D"font-size: 10pt;"><a =
+href=3D"mailto:PlannedWorks@colt.net">PlannedWorks@colt.net</a>&nbsp;</spa=
+n></span></span><span style=3D"font-size: 10pt;"><span =
+style=3D"font-family: arial, sans-serif;">so that we can ensure that =
+future notifications reach the correct parties.</span></span><br /><br =
+/><span style=3D"font-family: arial, sans-serif;"><span =
+style=3D"font-size: 10pt;">Should you experience any issue with your =
+service post the maintenance end time, please contact Colt Technical =
+support via the Colt Online Portal&nbsp;</span></span><span =
+style=3D"font-family: arial,
+  sans-serif;"><span style=3D"font-size: 11pt;"><a =
+href=3D"http://online.colt.net"><span style=3D"font-size: =
+10pt;">http://online.colt.net</span></a></span></span><span =
+style=3D"font-family: arial, sans-serif;"><span style=3D"font-size: =
+10pt;">. Alternatively, visit&nbsp;<a =
+href=3D"http://www.colt.net/support">http://www.colt.net/support</a>&nbsp;=
+to contact us by phone, quoting your service ID</span><span =
+style=3D"font-size: 11pt;">.</span><br /><br /><span style=3D"font-size: =
+10pt;">For more information about a service, please =
+consult&nbsp;</span></span><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 10pt;">the Colt Online =
+Portal&nbsp;</span></span><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 11pt;"><a =
+href=3D"http://online.colt.net"><span style=3D"font-size: =
+10pt;">http://online.colt.net</span></a></span></span></p><p></p><p><br =
+/><strong><span style=3D"color: rgb(106, 106, 106);"><span =
+style=3D"font-family: arial, sans-serif;"><span style=3D"font-size: =
+11pt;">
+ Colt Change management</span></span></span></strong><br /><strong><span =
+style=3D"color: rgb(106, 106, 106);"><span style=3D"font-family: arial, =
+sans-serif;"><span style=3D"font-size: 11pt;"><strong>Colt Technology =
+Services - Operations</strong></span></span></span></strong><br /><span =
+style=3D"font-size: 10pt;"><span style=3D"font-family: arial, =
+sans-serif;"><img border=3D"0" id=3D"_x0000_i1025" =
+src=3D"https://filestore.xmr3.com/763252/111359790/146229/185004/jobsettin=
+gs/docs/logol_1429145502442.png" />&nbsp;</span></span><br /><span =
+style=3D"font-family: arial, sans-serif;"><span style=3D"font-size: =
+9pt;">For support log into Colt Online:&nbsp;<span style=3D"color: =
+rgb(31, 73, 125);"><a =
+href=3D"https://online.colt.net">https://online.colt.net</a></span></span>=
+</span><br /><span style=3D"font-family: arial, sans-serif;"><span =
+style=3D"font-size: 9pt;">For other contact options:&nbsp;<span =
+style=3D"color: rgb(31, 73, 125);"><a =
+href=3D"https://www.colt.net/support">https://www.colt.net/support</a></sp=
+an></span></spa
+ n></p></body></html>
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR=
+
+--Apple-Mail=_389F44A2-E525-4B60-9D78-AE41B8EDDB98
+Content-Disposition: attachment;
+	filename=colt2.csv
+Content-Type: text/csv;
+	x-unix-mode=0666;
+	name="colt2.csv"
+Content-Transfer-Encoding: base64
+
+//5PAEMATgAJAEwAZQBnAGEAbAAgAEMAdQBzAHQAbwBtAGUAcgAJAE8AcgBkAGUAcgAgAE4AdQBt
+AGIAZQByAAkAQwBpAHIAYwB1AGkAdAAgAEkARAAJAEMAdQBzAHQAbwBtAGUAcgAgAFIAZQBmACAA
+MQAJAEMAdQBzAHQAbwBtAGUAcgAgAFIAZQBmACAAMgAJAFMAZQByAHYAaQBjAGUACQBBACAAQwB1
+AHMAdABvAG0AZQByAAkAQQAgAEEAZABkAHIAZQBzAHMACQBBACAAUABvAHMAdABjAG8AZABlAAkA
+QQAgAFQAbwB3AG4AIABDAGkAdAB5AAkAQgAgAEMAdQBzAHQAbwBtAGUAcgAJAEIAIABBAGQAZABy
+AGUAcwBzAAkAQgAgAFAAbwBzAHQAYwBvAGQAZQAJAEIAIABUAG8AdwBuACAAQwBpAHQAeQAJAA0A
+CgBPAEMATgA6ACAAMQAyADMANAA1ADYACQBBAEMATQBFACAARQBVAFIATwBQAEUAIABTAEEACQA5
+ADgANwA2ADUANAAzADIAMQAvADEAMgAzADQANQAtADYANwA4ADkACQBDAC0AMQAyADMANAA1ADYA
+NwAJAAkAQgBlAGwAZwBpAHUAbQAgAC0AIABCAHIAdQBzAHMAZQBsAHMACQBJAFAAIABBAEMAQwBF
+AFMAUwA6ACAAMQAgAEcAQgBQAFMAOwAgAFUATgBQAFIATwBUAEUAQwBUAEUARAA7ACAATgBPACAA
+UgBFAFMASQBMAEkARQBOAEMARQA7ACAATgBPACAAQwBPAEwAVAAgAFIATwBVAFQARQBSADsAIABG
+AEwAQQBUACAAUgBBAFQARQAgAEIASQBMAEwASQBOAEcAOwAgADMAUgBEACAAUABBAFIAVABZACAA
+TABFAEEAUwBFAEQAIABMAEkATgBFADsAIABFAFQASABFAFIATgBFAFQAOwAgADEAMAAwADAAQgBB
+AFMARQAtAFQAOwAgAFIASgA0ADUACQBBAEMATQBFACAARQBVAFIATwBQAEUAIABTAEEACQBNAEEA
+SQBOACAAUwBUAFIARQBFAFQACQAxADIAMwA0AAkAQgBSAFUAUwBTAEUATABTAAkAQwBvAGwAdAAJ
+AAkACQAJAA==
+--Apple-Mail=_389F44A2-E525-4B60-9D78-AE41B8EDDB98
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+--Apple-Mail=_389F44A2-E525-4B60-9D78-AE41B8EDDB98--
