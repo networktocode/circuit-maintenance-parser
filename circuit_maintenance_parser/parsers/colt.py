@@ -44,14 +44,14 @@ class SubjectParserColt1(EmailSubjectParser):
         """
         data = {}
         search = re.search(
-            r"([\[\s]*[A-Za-z\s]*[\]\s])+([A-Za-z\s]+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
+            r"([\[\s]*[\w\s]*[\]\s])+([A-Za-z\s]+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
             subject,
         )
         if search:
-            data["maintenance_id"] = search.group(2)
-            data["start"] = self.dt2ts(parser.parse(search.group(3)))
-            data["end"] = self.dt2ts(parser.parse(search.group(4)))
-            status = search.group(5).strip()
+            data["maintenance_id"] = search.group(3)
+            data["start"] = self.dt2ts(parser.parse(search.group(4)))
+            data["end"] = self.dt2ts(parser.parse(search.group(5)))
+            status = search.group(6).strip()
             if status == "START":
                 data["status"] = Status("IN-PROCESS")
             elif status == "COMPLETED":
@@ -74,16 +74,16 @@ class SubjectParserColt2(EmailSubjectParser):
         """
         data = {}
         search = re.search(
-            r"\[.+\]\s+([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
+            r"([\[\s]*[\w\s]*[\]\s])+([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
             subject,
         )
         if search:
-            if search.group(1).upper() == "CANCELLATION":
+            if search.group(2).upper() == "CANCELLATION":
                 data["status"] = Status("CANCELLED")
             else:
                 data["status"] = Status("CONFIRMED")
-            data["maintenance_id"] = search.group(3)
-            data["start"] = self.dt2ts(parser.parse(search.group(4)))
-            data["end"] = self.dt2ts(parser.parse(search.group(5)))
-            data["summary"] = search.group(2).strip()
+            data["maintenance_id"] = search.group(4)
+            data["start"] = self.dt2ts(parser.parse(search.group(5)))
+            data["end"] = self.dt2ts(parser.parse(search.group(6)))
+            data["summary"] = search.group(3).strip()
         return [data]
