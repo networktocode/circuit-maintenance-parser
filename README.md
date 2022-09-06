@@ -68,6 +68,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 - AWS
 - AquaComms
+- BSO
 - Cogent
 - Colt
 - Equinix
