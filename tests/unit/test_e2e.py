@@ -15,6 +15,7 @@ from circuit_maintenance_parser.provider import (
     GenericProvider,
     AquaComms,
     AWS,
+    BSO,
     Cogent,
     Colt,
     EUNetworks,
@@ -61,6 +62,17 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             AWS,
             [("email", Path(dir_path, "data", "aws", "aws2.eml")),],
             [Path(dir_path, "data", "aws", "aws2_result.json"),],
+        ),
+        # BSO
+        (
+            BSO,
+            [("email", Path(dir_path, "data", "bso", "bso1_first.eml")),],
+            [Path(dir_path, "data", "bso", "bso1_result.json"),],
+        ),
+        (
+            BSO,
+            [("html", Path(dir_path, "data", "bso", "bso1.html")),],
+            [Path(dir_path, "data", "bso", "bso1_result.json"),],
         ),
         # Cogent
         (
