@@ -1,5 +1,6 @@
 [
   {
+    "account": "Customer",
     "status": "CONFIRMED",
     "summary": "intervention on an optical section",
     "maintenance_id": "77777",

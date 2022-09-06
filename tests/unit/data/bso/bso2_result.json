@@ -1,5 +1,6 @@
 [
   {
+    "account": "Customer",
     "status": "CONFIRMED",
     "summary": "Network repair in the segment San Luis Potosi to San Diego de la Union",
     "maintenance_id": "22222",
