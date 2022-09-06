@@ -23,6 +23,7 @@ class HtmlParserBSO1(Html):
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse Table tag."""
+        data["account"] = "Customer"  # No Account Name information in html/email details
         for idx, table in enumerate(tables):
             tbody_elements = table.find_all("tbody")
             if idx == 4:
