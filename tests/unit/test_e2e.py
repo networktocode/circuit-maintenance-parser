@@ -66,13 +66,80 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         # BSO
         (
             BSO,
-            [("email", Path(dir_path, "data", "bso", "bso1_first.eml")),],
-            [Path(dir_path, "data", "bso", "bso1_result.json"),],
+            [
+                ("html", Path(dir_path, "data", "bso", "bso1.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso1_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         (
             BSO,
-            [("html", Path(dir_path, "data", "bso", "bso1.html")),],
-            [Path(dir_path, "data", "bso", "bso1_result.json"),],
+            [
+                ("html", Path(dir_path, "data", "bso", "bso2.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso2_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            BSO,
+            [
+                ("html", Path(dir_path, "data", "bso", "bso3.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso3_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            BSO,
+            [
+                ("html", Path(dir_path, "data", "bso", "bso4.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso4_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            BSO,
+            [
+                ("html", Path(dir_path, "data", "bso", "bso5.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso5_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            BSO,
+            [
+                ("html", Path(dir_path, "data", "bso", "bso6.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso6_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            BSO,
+            [
+                ("html", Path(dir_path, "data", "bso", "bso7.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "bso", "bso7_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
         ),
         # Cogent
         (
