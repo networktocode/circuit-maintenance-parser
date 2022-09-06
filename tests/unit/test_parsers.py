@@ -9,7 +9,7 @@ from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
-
+from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
@@ -75,6 +75,77 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             SubjectParserAWS1,
             Path(dir_path, "data", "aws", "aws2.eml"),
             Path(dir_path, "data", "aws", "aws2_subject_parser_result.json"),
+        ),
+        # BSO
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso1.html"),
+            Path(dir_path, "data", "bso", "bso1_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso2.html"),
+            Path(dir_path, "data", "bso", "bso2_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso3.html"),
+            Path(dir_path, "data", "bso", "bso3_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso4.html"),
+            Path(dir_path, "data", "bso", "bso4_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso5.html"),
+            Path(dir_path, "data", "bso", "bso5_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso6.html"),
+            Path(dir_path, "data", "bso", "bso6_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso7.html"),
+            Path(dir_path, "data", "bso", "bso7_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso1_first.eml"),
+            Path(dir_path, "data", "bso", "bso1_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso2_start.eml"),
+            Path(dir_path, "data", "bso", "bso2_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso3_update.eml"),
+            Path(dir_path, "data", "bso", "bso3_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso4_end.eml"),
+            Path(dir_path, "data", "bso", "bso4_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso5_reminder_multiple_ts.eml"),
+            Path(dir_path, "data", "bso", "bso5_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso6_cancel.eml"),
+            Path(dir_path, "data", "bso", "bso6_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso7_backup_ts.eml"),
+            Path(dir_path, "data", "bso", "bso7_result.json"),
         ),
         # Cogent
         (
