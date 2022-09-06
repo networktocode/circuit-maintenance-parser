@@ -1,0 +1,19 @@
+[
+  {
+    "status": "CONFIRMED",
+    "summary": "Work on fiber optical cable in Russian region",
+    "maintenance_id": "11111",
+    "start": 1661785200,
+    "end": 1661799900,
+    "circuits": [
+      {
+        "circuit_id": "TEST-FOR-F1R5-T53N-001",
+        "impact": "REDUCED-REDUNDANCY"
+      },
+      {
+        "circuit_id": "TEST-FOR-F1R5-T53N-002",
+        "impact": "REDUCED-REDUNDANCY"
+      }
+    ]
+  }
+]

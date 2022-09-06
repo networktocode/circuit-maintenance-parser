@@ -1,0 +1,19 @@
+[
+  {
+    "status": "CANCELLED",
+    "summary": "Routine Fiber Splice",
+    "maintenance_id": "66666",
+    "start": 1660510800,
+    "end": 1660536000,
+    "circuits": [
+      {
+        "circuit_id": "TEST-FOR-CAN1-CEL-001",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "TEST-FOR-CAN1-CEL-002",
+        "impact": "OUTAGE"
+      }
+    ]
+  }
+]

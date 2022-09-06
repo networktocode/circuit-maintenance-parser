@@ -1,0 +1,15 @@
+[
+  {
+    "status": "COMPLETED",
+    "summary": "fiber works in Austria",
+    "maintenance_id": "44444",
+    "start": 1660773600,
+    "end": 1660791600,
+    "circuits": [
+      {
+        "circuit_id": "TEST-FOR-END1-MAI-001",
+        "impact": "REDUCED-REDUNDANCY"
+      }
+    ]
+  }
+]

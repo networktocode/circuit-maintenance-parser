@@ -1,0 +1,15 @@
+[
+  {
+    "status": "CONFIRMED",
+    "summary": "relocate multiple fiber cables",
+    "maintenance_id": "55555",
+    "start": 1660885200,
+    "end": 1660993200,
+    "circuits": [
+      {
+        "circuit_id": "TEST-FOR-REM1-ND3R-001",
+        "impact": "OUTAGE"
+      }
+    ]
+  }
+]
