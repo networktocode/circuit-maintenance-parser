@@ -4,7 +4,7 @@ import logging
 from typing import Dict
 
 from dateutil import parser
-from bs4.element import ResultSet  # type: ignore
+from bs4.element import ResultSet, Tag  # type: ignore
 
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
@@ -43,7 +43,7 @@ class HtmlParserBSO1(Html):
                 for td_element in td_elements:
                     self.parse_elements(idx, tables, td_element, data)
 
-    def parse_elements(self, idx, tables, td_element, data):
+    def parse_elements(self, idx: int, tables: ResultSet, td_element: Tag, data: Dict):
         """Parse td elements."""
         if "Maintenance Reason" in td_element.text.strip():
             data["summary"] = tables[idx + 1].find("span").text.strip()
@@ -68,7 +68,7 @@ class HtmlParserBSO1(Html):
                     self.parse_spans(idz, span_elements, data)
 
     @staticmethod
-    def parse_spans(idz, span_elements, data):
+    def parse_spans(idz: int, span_elements: ResultSet, data: dict):
         """Parse spans."""
         data["circuits"] = []
         index = idz
