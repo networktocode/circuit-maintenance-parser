@@ -1,0 +1,16 @@
+[
+  {
+    "account": "Customer info unavailable",
+    "status": "RE-SCHEDULED",
+    "summary": "network maintenance",
+    "maintenance_id": "33333",
+    "start": 1662847200,
+    "end": 1662872400,
+    "circuits": [
+      {
+        "circuit_id": "TEST-FOR-UPD4-TEM-001",
+        "impact": "NO-IMPACT"
+      }
+    ]
+  }
+]
