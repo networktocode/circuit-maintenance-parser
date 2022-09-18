@@ -1,7 +1,7 @@
 Delivered-To: nautobot.email@example.com
-Received: by 2002:a05:7000:1f21:0:0:0:0 with SMTP id hs33csp396879mab;
+Received: by 2001:DB8::1 with SMTP id hs33csp396879mab;
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
-X-Received: by 2002:a05:6808:2014:: with SMTP id q20mr44138276oiw.9.1637154626741;
+X-Received: by 2001:DB8::1 with SMTP id q20mr44138276oiw.9.1637154626741;
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
 ARC-Seal: i=3; a=rsa-sha256; t=1637154626; cv=pass;
         d=google.com; s=arc-20160816;
@@ -29,7 +29,7 @@ ARC-Authentication-Results: i=3; mx.google.com;
        dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
 Return-Path: <maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com>
 Received: from mail-sor-f97.google.com (mail-sor-f97.google.com. [192.0.2.1])
-        by mx.google.com with SMTPS id t10sor4802790otm.65.2021.192.0.2.1.26
+        by mx.google.com with SMTPS id t10sor4802790otm.65.20192.0.2.1.1.26
         for <nautobot.email@example.com>
         (Google Transport Security);
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
@@ -55,11 +55,11 @@ X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 X-Gm-Message-State: AOAM530GPrLKTIWZmnUg9m0QElsEI0wXj7rqdiEOuB3pMEiC6N03QDqZ
 	FUPimxHJOXdXBD0desppOZzHs1qsQgMF5YSpqFOuQtSNMd0yOFUh
 X-Google-Smtp-Source: ABdhPJxzOd6h+5kUj1qt+jyBy5FhPqLetjpEgHdUdummq2iZUjleM1Esho2bcmmeOlbxGatiNIkVEIla0xKG
-X-Received: by 2002:a05:6830:1445:: with SMTP id w5mr13499681otp.112.1637154626351;
+X-Received: by 2001:DB8::1 with SMTP id w5mr13499681otp.112.1637154626351;
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
 Return-Path: <maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com>
 Received: from netskope.com ([192.0.2.1])
-        by smtp-relay.gmail.com with ESMTPS id f20sm6179603otu.10.2021.192.0.2.1.26
+        by smtp-relay.gmail.com with ESMTPS id f20sm6179603otu.10.20192.0.2.1.1.26
         for <nautobot.email@example.com>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
@@ -99,14 +99,14 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
          PJvqv1k7uwSg/k3/ojvMzAegc9LbYWxLjUFS+JxggHsonTqt384GOpYwtgLmCXx0sMts
          Mdzsp+vb/kImnuV1jW8a4QfDMw/nP+fG3+Ims=
 Sender: maintenance-notices@example.com
-X-Received: by 2002:a17:90b:2309:: with SMTP id mt9mr9548698pjb.213.1637154623296;
+X-Received: by 2001:DB8::1 with SMTP id mt9mr9548698pjb.213.1637154623296;
         Wed, 17 Nov 2021 05:10:23 -0800 (PST)
-X-Received: by 2002:a17:90b:2309:: with SMTP id mt9mr9548355pjb.213.1637154620880;
+X-Received: by 2001:DB8::1 with SMTP id mt9mr9548355pjb.213.1637154620880;
         Wed, 17 Nov 2021 05:10:20 -0800 (PST)
 X-BeenThere: maintenance-notices@example.com
-Received: by 2002:a17:90b:1bcf:: with SMTP id oa15ls2981174pjb.0.canary-gmail;
+Received: by 2001:DB8::1 with SMTP id oa15ls2981174pjb.0.canary-gmail;
  Wed, 17 Nov 2021 05:10:20 -0800 (PST)
-X-Received: by 2002:a17:902:a605:b0:143:d289:f3fb with SMTP id u5-20020a170902a60500b00143d289f3fbmr12862050plq.41.1637154619788;
+X-Received: by 2001:DB8::1 with SMTP id u5-20020a170902a60500b00143d289f3fbmr12862050plq.41.1637154619788;
         Wed, 17 Nov 2021 05:10:19 -0800 (PST)
 ARC-Seal: i=1; a=rsa-sha256; t=1637154619; cv=none;
         d=google.com; s=arc-20160816;
@@ -129,7 +129,7 @@ ARC-Authentication-Results: i=1; mx.google.com;
        spf=pass (google.com: domain of no-reply@equinix.com designates 192.0.2.1 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
 Received: from sv2esa01.corp.equinix.com (nat1-mis.equinix.com. [192.0.2.1])
-        by mx.google.com with ESMTPS id r2si9088157pjr.143.2021.192.0.2.1.16
+        by mx.google.com with ESMTPS id r2si9088157pjr.143.20192.0.2.1.1.16
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
         Wed, 17 Nov 2021 05:10:19 -0800 (PST)
 Received-SPF: pass (google.com: domain of no-reply@equinix.com designates 192.0.2.1 as permitted sender) client-ip=192.0.2.1;
@@ -205,7 +205,7 @@ BGP sessions to RS1 (AS64511) 192.0.2.1, 2001:db8:0:1:ffff:ffff:ffff:=
 BGP sessions to RS2 (AS64511) 192.0.2.1, 2001:db8:0:1:ffff:ffff:ffff:=
 2 will not be impacted.
 
-BGP sessions to RC1 (AS64510) 192.0.2.1, 2001:db8:0:1:0:6:5517:1 will=
+BGP sessions to RC1 (AS64510) 192.0.2.1, 2001:DB8::1 will=
  not be impacted.
 
 
@@ -356,7 +356,7 @@ BGP sessions to RS1 (AS24115) 192.0.2.1, 2001:db8:0:1:ffff:ffff:ffff:=
 BGP sessions to RS2 (AS24115) 192.0.2.1, 2001:db8:0:1:ffff:ffff:ffff:=
 2 will not be impacted.<br />
 <br />
-BGP sessions to RC1 (AS65517) 192.0.2.1, 2001:db8:0:1:0:6:5517:1 will=
+BGP sessions to RC1 (AS65517) 192.0.2.1, 2001:DB8::1 will=
  not be impacted.<br />
 <br/><br />
 <b>PRODUCTS:</b>	INTERNET EXCHANGE<br />
