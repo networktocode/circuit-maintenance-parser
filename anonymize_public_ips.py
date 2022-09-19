@@ -84,7 +84,10 @@ def main():
         print("\nHINT - you can clean up these IPs with 'invoke clean-anonymize-ips'")
         sys.exit(1)
     elif ip_found and clean:
-        print(f"\nIP addresses have been changed to {REPLACE_TEXT_IPV4} and {REPLACE_TEXT_IPV6}")
+        print(
+            f"\nIPv4 and IPv6 addresses have been changed to {REPLACE_TEXT_IPV4} and {REPLACE_TEXT_IPV6} respectively.",
+            " \nPlease, keep in mind that this could uncover some parsing dependencies on white spaces.",
+        )
     else:
         print("Only documentation IPs found.")
 
