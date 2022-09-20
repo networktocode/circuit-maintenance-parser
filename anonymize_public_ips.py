@@ -1,4 +1,5 @@
 """Helper script to check and clean IP Addresses in test data."""
+# pylint: disable=too-many-branches
 import re
 import os
 import sys
@@ -9,6 +10,8 @@ TEST_DATA_PATH = os.path.join("tests", "unit", "data")
 REPLACE_TEXT_IPV4 = "192.0.2.1"
 REPLACE_TEXT_IPV6 = "2001:DB8::1"
 
+# Patterns that could match IP address regex and are false positives
+PATTERNS_TO_SKIP = ("PRODID:Data::ICal",)
 
 # Reference: https://gist.github.com/dfee/6ed3a4b05cfe7a6faf40a2102408d5d8
 IPV4SEG = r"(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])"
@@ -40,13 +43,19 @@ IPV6_ADDR_REGEX = "|".join([f"(?:{g})" for g in IPV6GROUPS[::-1]])  # Reverse ro
 def replace(filename, search_exp, replace_exp):
     """Replace line when a substitution is needed."""
     report = ""
-    for line in fileinput.input(filename, inplace=True):
-        newline = re.sub(search_exp, replace_exp, line)
-        sys.stdout.write(newline)
-        if line != newline:
-            if not report:
-                report = f"IP Address found and replaced in {filename}\n"
-            report += f"  - {line}"
+    try:
+        for line in fileinput.input(filename, inplace=True):
+            if any(pattern_to_skip in line for pattern_to_skip in PATTERNS_TO_SKIP):
+                newline = line
+            else:
+                newline = re.sub(search_exp, replace_exp, line)
+            sys.stdout.write(newline)
+            if line != newline:
+                if not report:
+                    report = f"IP Address found and replaced in {filename}\n"
+                report += f"  - {line}"
+    except UnicodeDecodeError as error:
+        return f"Warning: Not able to process {filename}: {error}"
     return report
 
 
@@ -60,25 +69,31 @@ def main():
     ip_found = False
     for (dirpath, _, files) in os.walk(TEST_DATA_PATH):
         for file in files:
-            report = ""
-            if file.endswith((".eml", ".html", ".json")):
-                filename = os.path.join(dirpath, file)
-                if not clean:
-                    with open(filename, "r", encoding="utf-8") as test_file:
+            filename = os.path.join(dirpath, file)
+            if not clean:
+                report = ""
+                with open(filename, "r", encoding="utf-8") as test_file:
+                    try:
                         content = test_file.readlines()
-                        for content_line in content:
-                            content_new = re.sub(IPV4_ADDR_REGEX, REPLACE_TEXT_IPV4, content_line)
-                            content_new = re.sub(IPV6_ADDR_REGEX, REPLACE_TEXT_IPV6, content_new)
-                            if content_line != content_new:
-                                if not report:
-                                    report = f"IP Address found in {filename}\n"
-                                report += f"  - {content_line}"
-                else:
-                    report = replace(filename, IPV4_ADDR_REGEX, REPLACE_TEXT_IPV4)
-                    report += replace(filename, IPV6_ADDR_REGEX, REPLACE_TEXT_IPV6)
-                if report:
-                    ip_found = True
-                    print(report)
+                    except UnicodeDecodeError as error:
+                        print(f"Warning: Not able to process {filename}: {error}")
+                        continue
+                    for content_line in content:
+                        if any(pattern_to_skip in content_line for pattern_to_skip in PATTERNS_TO_SKIP):
+                            continue
+                        content_new = re.sub(IPV4_ADDR_REGEX, REPLACE_TEXT_IPV4, content_line)
+                        content_new = re.sub(IPV6_ADDR_REGEX, REPLACE_TEXT_IPV6, content_new)
+                        if content_line != content_new:
+                            if not report:
+                                report = f"IP Address found in {filename}\n"
+                            report += f"  - {content_line}"
+            else:
+                report = replace(filename, IPV4_ADDR_REGEX, REPLACE_TEXT_IPV4)
+                report += replace(filename, IPV6_ADDR_REGEX, REPLACE_TEXT_IPV6)
+
+            if report:
+                ip_found = True
+                print(report)
 
     if ip_found and not clean:
         print("\nHINT - you can clean up these IPs with 'invoke clean-anonymize-ips'")

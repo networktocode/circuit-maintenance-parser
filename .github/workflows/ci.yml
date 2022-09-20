@@ -118,6 +118,7 @@ jobs:
       - "flake8"
       - "yamllint"
       - "mypy"
+      - "anonymize_ips"
   unittest:
     strategy:
       fail-fast: true
