@@ -285,6 +285,8 @@ Last, but not least, you should update the tests!
 
 ... adding the necessary data samples in `tests/unit/data/abcde/`.
 
+> You can anonymize your IPv4 and IPv6 addresses using the `invoke anonymize-ips --local`. Keep in mind that only 192.0.2.0/24 addresses are preserved, in case you need to check these IPs in your test output (unlikely)
+
 # Contributing
 
 Pull requests are welcomed and automatically built and tested against multiple versions of Python through Travis CI.

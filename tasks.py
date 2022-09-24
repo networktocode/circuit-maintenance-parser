@@ -219,6 +219,18 @@ def cli(context):
 
 
 @task
+def anonymize_ips(context, local=INVOKE_LOCAL):
+    """Run Anonymize IPs clean up.
+
+    Args:
+        context (obj): Used to run specific commands
+        local (bool): Define as `True` to execute locally
+    """
+    exec_cmd = "python anonymize_ips.py"
+    run_cmd(context, exec_cmd, local)
+
+
+@task
 def tests(context, local=INVOKE_LOCAL):
     """Run all tests for the specified name and Python version.
 
