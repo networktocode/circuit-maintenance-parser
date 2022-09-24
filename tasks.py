@@ -218,15 +218,22 @@ def cli(context):
     context.run(f"{dev}", pty=True)
 
 
-@task
-def anonymize_ips(context, local=INVOKE_LOCAL):
+@task(help={"provider": "Name of the Provider to anonymize.", "file": "Absolute file path to anonymize."},)
+def anonymize_ips(context, local=INVOKE_LOCAL, provider=None, file=None):
     """Run Anonymize IPs clean up.
 
     Args:
         context (obj): Used to run specific commands
         local (bool): Define as `True` to execute locally
+        provider (str): Name of the Provider to anonymize
+        file (str): Absolute file path to anonymize
     """
     exec_cmd = "python anonymize_ips.py"
+    if provider:
+        exec_cmd += f" --provider {provider}"
+    if file:
+        exec_cmd += f" --file {file}"
+
     run_cmd(context, exec_cmd, local)
 
 

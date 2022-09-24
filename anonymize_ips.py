@@ -1,6 +1,7 @@
 """Anonymize IPs."""
 import os
 import sys
+import argparse
 import fileinput
 import random
 import string
@@ -41,8 +42,23 @@ def replace(filename):
 
 def main():
     """Main function."""
+    parser = argparse.ArgumentParser(description="Clean IP Addresses.")
+    parser.add_argument("--provider", help="Provider folder name, under tests/unit/data to anonymize.", required=False)
+    parser.add_argument("--file", help="Absolute filename name to anonymize.", required=False)
+    args = parser.parse_args()
+
+    if args.provider and args.file:
+        print("Provider and File are mutually exclusive, choose one.")
+        sys.exit(0)
+    elif args.provider:
+        path = os.path.join(TEST_DATA_PATH, args.provider)
+    elif args.file:
+        path = args.file
+    else:
+        path = TEST_DATA_PATH
+
     report = ""
-    for (dirpath, _, files) in os.walk(TEST_DATA_PATH):
+    for (dirpath, _, files) in os.walk(path):
         for file in files:
             filename = os.path.join(dirpath, file)
             report += replace(filename)
