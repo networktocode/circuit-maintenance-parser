@@ -285,7 +285,7 @@ Last, but not least, you should update the tests!
 
 ... adding the necessary data samples in `tests/unit/data/abcde/`.
 
-> You can anonymize your IPv4 and IPv6 addresses using the `invoke anonymize-ips --local`. Keep in mind that only 192.0.2.0/24 addresses are preserved, in case you need to check these IPs in your test output (unlikely)
+> You can anonymize your IPv4 and IPv6 addresses using the `invoke anonymize-ips --local`. Keep in mind that only IPv4 addresses for documentation purposes (RFC5737: "192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24") are preserved, in case you need to check these IPs in your test output (unlikely)
 
 # Contributing
 
