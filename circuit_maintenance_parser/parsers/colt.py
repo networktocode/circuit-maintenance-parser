@@ -49,8 +49,8 @@ class SubjectParserColt1(EmailSubjectParser):
         )
         if search:
             data["maintenance_id"] = search.group(2)
-            data["start"] = self.dt2ts(parser.parse(search.group(3)))
-            data["end"] = self.dt2ts(parser.parse(search.group(4)))
+            data["start"] = self.dt2ts(parser.parse(search.group(3), dayfirst=True))
+            data["end"] = self.dt2ts(parser.parse(search.group(4), dayfirst=True))
             status = search.group(5).strip()
             if status == "START":
                 data["status"] = Status("IN-PROCESS")
@@ -83,7 +83,7 @@ class SubjectParserColt2(EmailSubjectParser):
             else:
                 data["status"] = Status("CONFIRMED")
             data["maintenance_id"] = search.group(3)
-            data["start"] = self.dt2ts(parser.parse(search.group(4)))
-            data["end"] = self.dt2ts(parser.parse(search.group(5)))
+            data["start"] = self.dt2ts(parser.parse(search.group(4), dayfirst=True))
+            data["end"] = self.dt2ts(parser.parse(search.group(5), dayfirst=True))
             data["summary"] = search.group(2).strip()
         return [data]
