@@ -571,6 +571,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [("email", Path(dir_path, "data", "zayo", "zayo8.eml")),],
             [Path(dir_path, "data", "zayo", "zayo8_result.json"),],
         ),
+        (
+            Zayo,
+            [("email", Path(dir_path, "data", "zayo", "zayo9.eml")),],
+            [Path(dir_path, "data", "zayo", "zayo9_result.json"),],
+        ),
     ],
 )
 def test_provider_get_maintenances(
