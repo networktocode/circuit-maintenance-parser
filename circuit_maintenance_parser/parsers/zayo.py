@@ -128,6 +128,7 @@ class HtmlParserZayo1(Html):
             expected_headers_ref = (
                 ["Circuit Id", "Expected Impact", "A Location CLLI", "Z Location CLLI", "Legacy Circuit Id",],
                 ["Circuit Id", "Expected Impact", "A Location Address", "Z Location Address", "Legacy Circuit Id",],
+                ["Circuit Id", "Expected Impact", "A Location Address", "Z Location Address", "Customer Circuit ID",],
             )
             if all(table_headers != expected_headers for expected_headers in expected_headers_ref):
                 logger.warning("Table headers are not as expected: %s", head_row)
