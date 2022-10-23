@@ -8,14 +8,14 @@ X-SM-COMMUNICATION-TYPE: AWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED
 X-SM-DEDUPING-ID: 7cc8bab7-00bb-44e0-a3ec-bdd1a5560b80-EMAIL--1012261942-036424c1a19ca69ca7ea459ebd6823e1
 Date: Thu, 6 May 2021 21:52:56 +0000
 Feedback-ID: 1.us-east-1.xvKJ2gIiw98/SnInpbS9SQT1XBoAzwrySbDsqgMkBQI=:AmazonSES
-X-SES-Outgoing: 2021.05.06-54.240.48.83
+X-SES-Outgoing: 2021.05.06-192.0.2.1
 X-Original-Sender: no-reply-aws@amazon.com
 X-Original-Authentication-Results: mx.google.com;       dkim=pass
  header.i=@amazon.com header.s=szqgv33erturdv5cvz4vtb5qcy53gdkn
  header.b=IQc0x0aC;       dkim=pass header.i=@amazonses.com
  header.s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug header.b=X4gZtDlT;       spf=pass
  (google.com: domain of 0100017943ab6519-f09ba161-049c-45e4-8ff3-698af4d94f86-000000@amazonses.com
- designates 54.240.48.83 as permitted sender) smtp.mailfrom=0100017943ab6519-f09ba161-049c-45e4-8ff3-698af4d94f86-000000@amazonses.com;
+ designates 192.0.2.1 as permitted sender) smtp.mailfrom=0100017943ab6519-f09ba161-049c-45e4-8ff3-698af4d94f86-000000@amazonses.com;
        dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=amazon.com
 X-Original-From: "Amazon Web Services, Inc." <no-reply-aws@amazon.com>
 Reply-To: "Amazon Web Services, Inc." <no-reply-aws@amazon.com>
