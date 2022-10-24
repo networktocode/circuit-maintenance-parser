@@ -714,6 +714,22 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "types-pytz"
+version = "2022.5.0.0"
+description = "Typing stubs for pytz"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-toml"
+version = "0.10.8"
+description = "Typing stubs for toml"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.4.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -780,7 +796,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "411b225c7a13aa1b31b626a33c47f8deaa4d3fe605e41c2dee5f2fa5e12fdec7"
+content-hash = "ae8dd2c4dcabdefdbf4bd3d035f41c1a725f51fd8359c3b6051d96d6884948ca"
 
 [metadata.files]
 astroid = []
@@ -1064,6 +1080,8 @@ typed-ast = [
     {file = "typed_ast-1.5.4.tar.gz", hash = "sha256:39e21ceb7388e4bb37f4c679d72707ed46c2fbf2a5609b8b8ebc4b067d977df2"},
 ]
 types-python-dateutil = []
+types-pytz = []
+types-toml = []
 typing-extensions = []
 tzwhere = [
     {file = "tzwhere-3.0.3.tar.gz", hash = "sha256:b9a056e60f6ad5d44e7bc9d397ae683ea4bcd81f812ab6bbdfaad3d9984fcf19"},
