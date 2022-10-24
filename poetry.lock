@@ -334,11 +334,11 @@ python-versions = "*"
 
 [[package]]
 name = "mypy"
-version = "0.961"
+version = "0.982"
 description = "Optional static typing for Python"
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
 mypy-extensions = ">=0.4.3"
@@ -796,7 +796,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "df5c8247560c71f842e85e2fa6d795aea8de8a168751c10ea2bfad712b7727f9"
+content-hash = "ae8dd2c4dcabdefdbf4bd3d035f41c1a725f51fd8359c3b6051d96d6884948ca"
 
 [metadata.files]
 astroid = []
