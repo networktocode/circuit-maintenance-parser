@@ -218,7 +218,9 @@ def cli(context):
     context.run(f"{dev}", pty=True)
 
 
-@task(help={"provider": "Name of the Provider to anonymize.", "file": "Absolute file path to anonymize."},)
+@task(
+    help={"provider": "Name of the Provider to anonymize.", "file": "Absolute file path to anonymize."},
+)
 def anonymize_ips(context, local=INVOKE_LOCAL, provider=None, file=None):
     """Run Anonymize IPs clean up.
 
