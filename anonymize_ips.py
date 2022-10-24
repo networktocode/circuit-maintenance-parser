@@ -17,7 +17,12 @@ SALT = "".join(random.choice(_CHAR_CHOICES) for _ in range(_DEFAULT_SALT_LENGTH)
 # RFC 5737
 IPV4_DOCUMENTATION_ADDRESSES = ["192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24"]
 
-anonymizer4 = IpAnonymizer(SALT, None, preserve_addresses=IPV4_DOCUMENTATION_ADDRESSES, preserve_suffix=None,)
+anonymizer4 = IpAnonymizer(
+    SALT,
+    None,
+    preserve_addresses=IPV4_DOCUMENTATION_ADDRESSES,
+    preserve_suffix=None,
+)
 anonymizer6 = IpV6Anonymizer(SALT, preserve_suffix=None)
 
 

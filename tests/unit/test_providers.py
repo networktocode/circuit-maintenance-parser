@@ -27,7 +27,8 @@ class ProviderWithTwoProcessors(GenericProvider):
 
 
 @pytest.mark.parametrize(
-    "provider_class", [ProviderWithOneProcessor, ProviderWithTwoProcessors],
+    "provider_class",
+    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances(provider_class):
     """Tests GenericProvider."""
@@ -39,7 +40,8 @@ def test_provide_get_maintenances(provider_class):
 
 
 @pytest.mark.parametrize(
-    "provider_class", [ProviderWithOneProcessor, ProviderWithTwoProcessors],
+    "provider_class",
+    [ProviderWithOneProcessor, ProviderWithTwoProcessors],
 )
 def test_provide_get_maintenances_one_exception(provider_class):
     """Tests GenericProvider."""

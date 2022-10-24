@@ -45,23 +45,43 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
     "provider_class, test_data_files, result_parse_files",
     [
         # GenericProvider
-        (GenericProvider, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        (
+            GenericProvider,
+            [
+                ("ical", GENERIC_ICAL_DATA_PATH),
+            ],
+            [
+                GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
         # AquaComms
         (
             AquaComms,
-            [("email", Path(dir_path, "data", "aquacomms", "aquacomms1.eml")),],
-            [Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "aquacomms", "aquacomms1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),
+            ],
         ),
         # AWS
         (
             AWS,
-            [("email", Path(dir_path, "data", "aws", "aws1.eml")),],
-            [Path(dir_path, "data", "aws", "aws1_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "aws", "aws1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "aws", "aws1_result.json"),
+            ],
         ),
         (
             AWS,
-            [("email", Path(dir_path, "data", "aws", "aws2.eml")),],
-            [Path(dir_path, "data", "aws", "aws2_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "aws", "aws2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "aws", "aws2_result.json"),
+            ],
         ),
         # BSO
         (
@@ -167,18 +187,30 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         # Colt
         (
             Colt,
-            [("email", Path(dir_path, "data", "colt", "colt3.eml")),],
-            [Path(dir_path, "data", "colt", "colt3_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "colt", "colt3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "colt", "colt3_result.json"),
+            ],
         ),
         (
             Colt,
-            [("email", Path(dir_path, "data", "colt", "colt4.eml")),],
-            [Path(dir_path, "data", "colt", "colt4_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "colt", "colt4.eml")),
+            ],
+            [
+                Path(dir_path, "data", "colt", "colt4_result.json"),
+            ],
         ),
         (
             Colt,
-            [("email", Path(dir_path, "data", "colt", "colt5.eml")),],
-            [Path(dir_path, "data", "colt", "colt5_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "colt", "colt5.eml")),
+            ],
+            [
+                Path(dir_path, "data", "colt", "colt5_result.json"),
+            ],
         ),
         # Equinix
         (
@@ -197,7 +229,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [Path(dir_path, "data", "equinix", "equinix4_result_combined.json")],
         ),
         # EUNetworks
-        (EUNetworks, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        (
+            EUNetworks,
+            [
+                ("ical", GENERIC_ICAL_DATA_PATH),
+            ],
+            [
+                GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
         # EXA / GTT
         (
             GTT,
@@ -273,8 +313,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         ),
         (
             GTT,
-            [("email", Path(dir_path, "data", "gtt", "gtt7.eml")),],
-            [Path(dir_path, "data", "gtt", "gtt7_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "gtt", "gtt7.eml")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt7_result.json"),
+            ],
         ),
         # HGC
         (
@@ -283,7 +327,10 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 ("email", Path(dir_path, "data", "hgc", "hgc1.eml")),
                 ("email", Path(dir_path, "data", "hgc", "hgc2.eml")),
             ],
-            [Path(dir_path, "data", "hgc", "hgc1_result.json"), Path(dir_path, "data", "hgc", "hgc2_result.json"),],
+            [
+                Path(dir_path, "data", "hgc", "hgc1_result.json"),
+                Path(dir_path, "data", "hgc", "hgc2_result.json"),
+            ],
         ),
         # Lumen
         (
@@ -360,50 +407,98 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         # Momentum
         (
             Momentum,
-            [("email", Path(dir_path, "data", "momentum", "momentum1.eml")),],
-            [Path(dir_path, "data", "momentum", "momentum1_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "momentum", "momentum1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "momentum", "momentum1_result.json"),
+            ],
         ),
         # NTT
         (
             NTT,
-            [("ical", Path(dir_path, "data", "ntt", "ntt1")),],
-            [Path(dir_path, "data", "ntt", "ntt1_result.json"),],
+            [
+                ("ical", Path(dir_path, "data", "ntt", "ntt1")),
+            ],
+            [
+                Path(dir_path, "data", "ntt", "ntt1_result.json"),
+            ],
         ),
-        (NTT, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        (
+            NTT,
+            [
+                ("ical", GENERIC_ICAL_DATA_PATH),
+            ],
+            [
+                GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
         # PacketFabric
-        (PacketFabric, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        (
+            PacketFabric,
+            [
+                ("ical", GENERIC_ICAL_DATA_PATH),
+            ],
+            [
+                GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
         # Seaborn
         (
             Seaborn,
-            [("email", Path(dir_path, "data", "seaborn", "seaborn1.eml")),],
-            [Path(dir_path, "data", "seaborn", "seaborn1_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "seaborn", "seaborn1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "seaborn", "seaborn1_result.json"),
+            ],
         ),
         (
             Seaborn,
-            [("email", Path(dir_path, "data", "seaborn", "seaborn2.eml")),],
-            [Path(dir_path, "data", "seaborn", "seaborn2_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "seaborn", "seaborn2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "seaborn", "seaborn2_result.json"),
+            ],
         ),
         (
             Seaborn,
-            [("email", Path(dir_path, "data", "seaborn", "seaborn3.eml")),],
-            [Path(dir_path, "data", "seaborn", "seaborn3_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "seaborn", "seaborn3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "seaborn", "seaborn3_result.json"),
+            ],
         ),
         # Sparkle
         (
             Sparkle,
-            [("email", Path(dir_path, "data", "sparkle", "sparkle1.eml")),],
-            [Path(dir_path, "data", "sparkle", "sparkle1_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "sparkle", "sparkle1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "sparkle", "sparkle1_result.json"),
+            ],
         ),
         # Telia
         (
             Telia,
-            [("ical", Path(dir_path, "data", "telia", "telia1")),],
-            [Path(dir_path, "data", "telia", "telia1_result.json"),],
+            [
+                ("ical", Path(dir_path, "data", "telia", "telia1")),
+            ],
+            [
+                Path(dir_path, "data", "telia", "telia1_result.json"),
+            ],
         ),
         (
             Telia,
-            [("ical", Path(dir_path, "data", "telia", "telia2")),],
-            [Path(dir_path, "data", "telia", "telia2_result.json"),],
+            [
+                ("ical", Path(dir_path, "data", "telia", "telia2")),
+            ],
+            [
+                Path(dir_path, "data", "telia", "telia2_result.json"),
+            ],
         ),
         # Telstra
         (
@@ -472,7 +567,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
-        (Telstra, [("ical", GENERIC_ICAL_DATA_PATH),], [GENERIC_ICAL_RESULT_PATH,],),
+        (
+            Telstra,
+            [
+                ("ical", GENERIC_ICAL_DATA_PATH),
+            ],
+            [
+                GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
         # Turkcell
         (
             Turkcell,
@@ -533,48 +636,84 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         # Zayo
         (
             Zayo,
-            [("html", Path(dir_path, "data", "zayo", "zayo1.html")),],
-            [Path(dir_path, "data", "zayo", "zayo1_result.json"),],
+            [
+                ("html", Path(dir_path, "data", "zayo", "zayo1.html")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo1_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("html", Path(dir_path, "data", "zayo", "zayo2.html")),],
-            [Path(dir_path, "data", "zayo", "zayo2_result.json"),],
+            [
+                ("html", Path(dir_path, "data", "zayo", "zayo2.html")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo2_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("html", Path(dir_path, "data", "zayo", "zayo3.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo3_result.json"),],
+            [
+                ("html", Path(dir_path, "data", "zayo", "zayo3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo3_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("email", Path(dir_path, "data", "zayo", "zayo4.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo4_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "zayo", "zayo4.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo4_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("email", Path(dir_path, "data", "zayo", "zayo5.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo5_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "zayo", "zayo5.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo5_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("email", Path(dir_path, "data", "zayo", "zayo6.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo6_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "zayo", "zayo6.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo6_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("email", Path(dir_path, "data", "zayo", "zayo7.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo7_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "zayo", "zayo7.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo7_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("email", Path(dir_path, "data", "zayo", "zayo8.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo8_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "zayo", "zayo8.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo8_result.json"),
+            ],
         ),
         (
             Zayo,
-            [("email", Path(dir_path, "data", "zayo", "zayo9.eml")),],
-            [Path(dir_path, "data", "zayo", "zayo9_result.json"),],
+            [
+                ("email", Path(dir_path, "data", "zayo", "zayo9.eml")),
+            ],
+            [
+                Path(dir_path, "data", "zayo", "zayo9_result.json"),
+            ],
         ),
     ],
 )

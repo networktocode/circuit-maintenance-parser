@@ -140,7 +140,10 @@ class ICal(Parser):
                     ]
                 else:
                     data["circuits"] = [
-                        CircuitImpact(circuit_id=circuits, impact=Impact(component.get("X-MAINTNOTE-IMPACT")),)
+                        CircuitImpact(
+                            circuit_id=circuits,
+                            impact=Impact(component.get("X-MAINTNOTE-IMPACT")),
+                        )
                     ]
                 result.append(data)
         return result
@@ -167,7 +170,10 @@ class Html(Parser):
 
         return result
 
-    def parse_html(self, soup: ResultSet,) -> List[Dict]:
+    def parse_html(
+        self,
+        soup: ResultSet,
+    ) -> List[Dict]:
         """Custom HTML parsing."""
         raise NotImplementedError
 

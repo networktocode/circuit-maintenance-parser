@@ -99,7 +99,10 @@ class HtmlParserEquinix(Html):
                     if circuit_info:
                         account, _, circuit = circuit_info  # pylint: disable=unused-variable
                         data["circuits"].append(
-                            {"circuit_id": circuit.text, "impact": impact,}
+                            {
+                                "circuit_id": circuit.text,
+                                "impact": impact,
+                            }
                         )
                         data["account"] = account.text
 
