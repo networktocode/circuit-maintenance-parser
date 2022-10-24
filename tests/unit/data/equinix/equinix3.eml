@@ -1,7 +1,7 @@
 Delivered-To: nautobot.email@example.com
-Received: by 2002:a05:7000:1f21:0:0:0:0 with SMTP id hs33csp396879mab;
+Received: by 26b:c69a:80d0:f85:f301:549e:e7a4:9133 with SMTP id hs33csp396879mab;
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
-X-Received: by 2002:a05:6808:2014:: with SMTP id q20mr44138276oiw.9.1637154626741;
+X-Received: by 26b:c69a:94dc:6108:6b7f:26a0:3dcc:4d with SMTP id q20mr44138276oiw.9.1637154626741;
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
 ARC-Seal: i=3; a=rsa-sha256; t=1637154626; cv=pass;
         d=google.com; s=arc-20160816;
@@ -25,19 +25,19 @@ ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
 ARC-Authentication-Results: i=3; mx.google.com;
        dkim=pass header.i=@example.com header.s=example header.b=MQ8puX7v;
        arc=pass (i=2 spf=pass spfdomain=equinix.com dmarc=pass fromdomain=equinix.com);
-       spf=pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 209.85.220.97 as permitted sender) smtp.mailfrom=maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com;
+       spf=pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 223.132.15.60 as permitted sender) smtp.mailfrom=maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com;
        dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
 Return-Path: <maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com>
-Received: from mail-sor-f97.google.com (mail-sor-f97.google.com. [209.85.220.97])
+Received: from mail-sor-f97.google.com (mail-sor-f97.google.com. [223.132.15.60])
         by mx.google.com with SMTPS id t10sor4802790otm.65.2021.11.17.05.10.26
         for <nautobot.email@example.com>
         (Google Transport Security);
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
-Received-SPF: pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 209.85.220.97 as permitted sender) client-ip=209.85.220.97;
+Received-SPF: pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 223.132.15.60 as permitted sender) client-ip=223.132.15.60;
 Authentication-Results: mx.google.com;
        dkim=pass header.i=@example.com header.s=example header.b=MQ8puX7v;
        arc=pass (i=2 spf=pass spfdomain=equinix.com dmarc=pass fromdomain=equinix.com);
-       spf=pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 209.85.220.97 as permitted sender) smtp.mailfrom=maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com;
+       spf=pass (google.com: domain of maintenance-notices+bncbdbld5ph4eibbph62ogamgqe5vxs7oq@example.com designates 223.132.15.60 as permitted sender) smtp.mailfrom=maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com;
        dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
@@ -55,10 +55,10 @@ X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 X-Gm-Message-State: AOAM530GPrLKTIWZmnUg9m0QElsEI0wXj7rqdiEOuB3pMEiC6N03QDqZ
 	FUPimxHJOXdXBD0desppOZzHs1qsQgMF5YSpqFOuQtSNMd0yOFUh
 X-Google-Smtp-Source: ABdhPJxzOd6h+5kUj1qt+jyBy5FhPqLetjpEgHdUdummq2iZUjleM1Esho2bcmmeOlbxGatiNIkVEIla0xKG
-X-Received: by 2002:a05:6830:1445:: with SMTP id w5mr13499681otp.112.1637154626351;
+X-Received: by 26b:c69a:94ef:40a:aaf6:3a2d:fd80:e045 with SMTP id w5mr13499681otp.112.1637154626351;
         Wed, 17 Nov 2021 05:10:26 -0800 (PST)
 Return-Path: <maintenance-notices+bncBDBLD5PH4EIBBPH62OGAMGQE5VXS7OQ@example.com>
-Received: from netskope.com ([163.116.131.173])
+Received: from netskope.com ([160.167.90.183])
         by smtp-relay.gmail.com with ESMTPS id f20sm6179603otu.10.2021.11.17.05.10.26
         for <nautobot.email@example.com>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
@@ -86,7 +86,7 @@ ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
          pkTgnI8sGFec9CqCecBoGq0iAyLYxlw2FuKBzPdHve/1CvkCkgAA8z1D10ECWddz/fzv
          l3EQ==
 ARC-Authentication-Results: i=2; mx.google.com;
-       spf=pass (google.com: domain of no-reply@equinix.com designates 216.221.232.129 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
+       spf=pass (google.com: domain of no-reply@equinix.com designates 211.17.226.239 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=example.com; s=example;
@@ -99,14 +99,14 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
          PJvqv1k7uwSg/k3/ojvMzAegc9LbYWxLjUFS+JxggHsonTqt384GOpYwtgLmCXx0sMts
          Mdzsp+vb/kImnuV1jW8a4QfDMw/nP+fG3+Ims=
 Sender: maintenance-notices@example.com
-X-Received: by 2002:a17:90b:2309:: with SMTP id mt9mr9548698pjb.213.1637154623296;
+X-Received: by 26b:c687:8b59:d556:8f5:6c8d:3e3f:2487 with SMTP id mt9mr9548698pjb.213.1637154623296;
         Wed, 17 Nov 2021 05:10:23 -0800 (PST)
-X-Received: by 2002:a17:90b:2309:: with SMTP id mt9mr9548355pjb.213.1637154620880;
+X-Received: by 26b:c687:8b59:d556:8f5:6c8d:3e3f:2487 with SMTP id mt9mr9548355pjb.213.1637154620880;
         Wed, 17 Nov 2021 05:10:20 -0800 (PST)
 X-BeenThere: maintenance-notices@example.com
-Received: by 2002:a17:90b:1bcf:: with SMTP id oa15ls2981174pjb.0.canary-gmail;
+Received: by 26b:c687:8b59:fdf1:3ff4:662e:5895:9f92 with SMTP id oa15ls2981174pjb.0.canary-gmail;
  Wed, 17 Nov 2021 05:10:20 -0800 (PST)
-X-Received: by 2002:a17:902:a605:b0:143:d289:f3fb with SMTP id u5-20020a170902a60500b00143d289f3fbmr12862050plq.41.1637154619788;
+X-Received: by 26b:c687:8b57:37a:ca34:54a5:2dc9:6ed1 with SMTP id u5-20020a170902a60500b00143d289f3fbmr12862050plq.41.1637154619788;
         Wed, 17 Nov 2021 05:10:19 -0800 (PST)
 ARC-Seal: i=1; a=rsa-sha256; t=1637154619; cv=none;
         d=google.com; s=arc-20160816;
@@ -126,14 +126,14 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
          PnhbaF2l1fkYr9AvqO5QsC+ZBDDOxbA59iwnon8r5wK2HtJZiTByi1w7dCilQflYvLXJ
          GKiQ==
 ARC-Authentication-Results: i=1; mx.google.com;
-       spf=pass (google.com: domain of no-reply@equinix.com designates 216.221.232.129 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
+       spf=pass (google.com: domain of no-reply@equinix.com designates 211.17.226.239 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
-Received: from sv2esa01.corp.equinix.com (nat1-mis.equinix.com. [216.221.232.129])
+Received: from sv2esa01.corp.equinix.com (nat1-mis.equinix.com. [211.17.226.239])
         by mx.google.com with ESMTPS id r2si9088157pjr.143.2021.11.17.05.10.16
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
         Wed, 17 Nov 2021 05:10:19 -0800 (PST)
-Received-SPF: pass (google.com: domain of no-reply@equinix.com designates 216.221.232.129 as permitted sender) client-ip=216.221.232.129;
-Received: from unknown (HELO vmclxremas08.corp.equinix.com) ([10.192.140.2])
+Received-SPF: pass (google.com: domain of no-reply@equinix.com designates 211.17.226.239 as permitted sender) client-ip=211.17.226.239;
+Received: from unknown (HELO vmclxremas08.corp.equinix.com) ([10.153.56.233])
   by sv2esa01.corp.equinix.com with ESMTP; 17 Nov 2021 05:10:16 -0800
 Date: Wed, 17 Nov 2021 13:10:16 +0000 (UTC)
 From: Equinix Network Maintenance NO-REPLY <no-reply@equinix.com>
@@ -149,7 +149,7 @@ X-Priority: 1
 Organization: Equinix, Inc
 X-Original-Sender: no-reply@equinix.com
 X-Original-Authentication-Results: mx.google.com;       spf=pass (google.com:
- domain of no-reply@equinix.com designates 216.221.232.129 as permitted
+ domain of no-reply@equinix.com designates 211.17.226.239 as permitted
  sender) smtp.mailfrom=no-reply@equinix.com;       dmarc=pass (p=NONE sp=NONE
  dis=NONE) header.from=equinix.com
 Precedence: list
@@ -199,13 +199,13 @@ This work will not cause a physical downtime to the peering port.
 Equinix will be performing essential maintenance on the Primary Route Serve=
 r in the SV metro.
 
-BGP sessions to RS1 (AS64511) 192.168.117.251, 2001:db8:0:1:ffff:ffff:ffff:=
+BGP sessions to RS1 (AS64511) 192.168.156.3, 2001:db8:0:1:ffff:ffff:ffff:=
 1 will be impacted.
 
-BGP sessions to RS2 (AS64511) 192.168.117.252, 2001:db8:0:1:ffff:ffff:ffff:=
+BGP sessions to RS2 (AS64511) 192.168.156.7, 2001:db8:0:1:ffff:ffff:ffff:=
 2 will not be impacted.
 
-BGP sessions to RC1 (AS64510) 192.168.117.250, 2001:db8:0:1:0:6:5517:1 will=
+BGP sessions to RC1 (AS64510) 192.168.156.2, 269:aafb:2cca:6f84:dcee:47f2:e995:d37a will=
  not be impacted.
 
 
@@ -350,13 +350,13 @@ This work will not cause a physical downtime to the peering port.<br />
 Equinix will be performing essential maintenance on the Primary Route Serve=
 r in the SV metro.<br />
 <br />
-BGP sessions to RS1 (AS24115) 192.168.117.251, 2001:db8:0:1:ffff:ffff:ffff:=
+BGP sessions to RS1 (AS24115) 192.168.156.3, 2001:db8:0:1:ffff:ffff:ffff:=
 1 will be impacted.<br />
 <br />
-BGP sessions to RS2 (AS24115) 192.168.117.252, 2001:db8:0:1:ffff:ffff:ffff:=
+BGP sessions to RS2 (AS24115) 192.168.156.7, 2001:db8:0:1:ffff:ffff:ffff:=
 2 will not be impacted.<br />
 <br />
-BGP sessions to RC1 (AS65517) 192.168.117.250, 2001:db8:0:1:0:6:5517:1 will=
+BGP sessions to RC1 (AS65517) 192.168.156.2, 269:aafb:2cca:6f84:dcee:47f2:e995:d37a will=
  not be impacted.<br />
 <br/><br />
 <b>PRODUCTS:</b>	INTERNET EXCHANGE<br />
