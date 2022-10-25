@@ -1,5 +1,35 @@
 # Changelog
 
+## v2.2.0 - 2022-10-25
+
+### Added
+
+- #169 - Add a helper script to anonymize IP addresses using `netconan`
+- #163 - New parser for BSO provider
+
+### Changed
+
+- #182 - Moved `toml` to dev-dependencies
+- #181 - Changed mypy to v0.982
+- #180 - Minimum Python version changed from `3.6.2` to `3.7`
+- #179 - Do not require an "[ EXTERNAL ]" marker for Colt email subjects
+- #176 - Handle Zayo table with "Customer Circuit ID" header
+- #170 - Update networktocode/gh-action-setup-poetry-environment action to v4
+- #164 - Improve CI concurrency
+- #161 - Update dependency flake8 to v5
+- #160 - Update slackapi/slack-github-action action to v1.23.0
+- #154 - Do not accept `pydantic` v1.9.1
+- #151 - Changed version `types-pytz` to v2022
+- #150 - Update actions/setup-python action to v4
+- #148 - Update actions/checkout action to v3
+- #147 - Update slackapi/slack-github-action action to v1.19.0
+- #146 - Migrate CI from Travis to Github Actions
+- #138 - Update dependency pytest to v7
+
+### Fixed
+
+- #177 - Fixed Colt parser: use European-style day-first date parsing
+
 ## v2.1.0 - 2022-05-13
 
 ### Changed
