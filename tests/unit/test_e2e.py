@@ -212,6 +212,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "colt", "colt5_result.json"),
             ],
         ),
+        (
+            Colt,
+            [("email", Path(dir_path, "data", "colt", "colt6.eml")),],
+            [Path(dir_path, "data", "colt", "colt6_result.json"),],
+        ),
+        (
+            Colt,
+            [("email", Path(dir_path, "data", "colt", "colt7.eml")),],
+            [Path(dir_path, "data", "colt", "colt7_result.json"),],
+        ),
         # Equinix
         (
             Equinix,

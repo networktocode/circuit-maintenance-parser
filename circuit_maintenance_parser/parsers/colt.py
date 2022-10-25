@@ -38,13 +38,14 @@ class SubjectParserColt1(EmailSubjectParser):
     def parse_subject(self, subject):
         """Parse subject.
 
-        Example:
+        Examples:
         - [ EXTERNAL ] MAINTENANCE ALERT: CRQ1-12345678 24/10/2021 04:00:00 GMT - 24/10/2021 11:00:00 GMT is about to START
         - [ EXTERNAL ] MAINTENANCE ALERT: CRQ1-12345678 31/10/2021 00:00:00 GMT - 31/10/2021 07:30:00 GMT - COMPLETED
+        - MAINTENANCE ALERT: CRQ1-87654321 18/10/2022 20:00:00 GMT - 19/10/2022 00:00:00 GMT - COMPLETED
         """
         data = {}
         search = re.search(
-            r"\[.+\]\s([A-Za-z\s]+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
+            r"(?:\[.+\]\s)?([A-Za-z\s]+):?\s+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
             subject,
         )
         if search:
@@ -68,13 +69,14 @@ class SubjectParserColt2(EmailSubjectParser):
     def parse_subject(self, subject):
         r"""Parse subject.
 
-        Example:
+        Examples:
         - [ EXTERNAL ] Cancellation Colt Third Party Maintenance Notification -\n CRQ1-12345678 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for\n ACME, 123456
         - [ EXTERNAL ] Colt Third Party Maintenance Notification -\n CRQ1-48926339503 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for\n ACME, 123456
+        - Colt Third Party Maintenance Notification - CRQ1-87654321 [12/11/2022 05:00:00 GMT - 12/11/2022 17:00:00 GMT] for EXAMPLE, 654321
         """
         data = {}
         search = re.search(
-            r"\[.+\]\s+([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
+            r"(?:\[.+\]\s+)?([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
             subject,
         )
         if search:

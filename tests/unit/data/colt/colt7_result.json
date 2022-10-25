@@ -1,0 +1,18 @@
+[
+  {
+    "account": "123456",
+    "end": 1635665400,
+    "maintenance_id": "CRQ1-12345678",
+    "circuits": [
+      {
+        "impact": "OUTAGE",
+        "circuit_id": "C-1234567"
+      }
+    ],
+    "sequence": 1,
+    "stamp": 1635767501,
+    "start": 1635638400,
+    "status": "COMPLETED",
+    "summary": "MAINTENANCE ALERT"
+  }
+]
