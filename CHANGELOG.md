@@ -11,7 +11,7 @@
 
 - #182 - Moved `toml` to dev-dependencies
 - #181 - Changed mypy to v0.982
-- #180 - Minimum Python version changed from `3.6.2` to `3.7`
+- #180 - **Minimum Python version changed** from `3.6.2` to `3.7`
 - #179 - Do not require an "[ EXTERNAL ]" marker for Colt email subjects
 - #176 - Handle Zayo table with "Customer Circuit ID" header
 - #170 - Update networktocode/gh-action-setup-poetry-environment action to v4
