@@ -65,7 +65,10 @@ class Geolocator:
             location_coordinates = self.get_location_from_api(city)
 
         logger.debug(
-            "Resolved city %s to coordinates: lat %s - lon %s", city, location_coordinates[0], location_coordinates[1],
+            "Resolved city %s to coordinates: lat %s - lon %s",
+            city,
+            location_coordinates[0],
+            location_coordinates[1],
         )
         return location_coordinates
 
@@ -86,7 +89,10 @@ class Geolocator:
 
     @staticmethod
     @backoff.on_exception(
-        backoff.expo, (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError), max_time=10, logger=logger,
+        backoff.expo,
+        (GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError),
+        max_time=10,
+        logger=logger,
     )
     def get_location_from_api(city: str) -> Tuple[float, float]:
         """Get location from API."""

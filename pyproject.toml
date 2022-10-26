@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
-version = "2.1.0"
+version = "2.2.0"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code <opensource@networktocode.com>"]
 license = "Apache-2.0"
@@ -10,9 +10,10 @@ readme = "README.md"
 keywords = ["parser", "circuit", "maintenance"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
 ]
 include = [
     "CHANGELOG.md",
@@ -21,10 +22,10 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.7"
 click = ">=7.1, <9.0"
-pydantic = {version = "^1.8.2", extras = ["dotenv"]}
-toml = "0.10.2"
+# Skipping 1.9.x versions due issue https://github.com/samuelcolvin/pydantic/issues/4114
+pydantic = {version = "~1.8.2", extras = ["dotenv"]}
 icalendar = "^4.0.7"
 bs4 = "^0.0.1"
 lxml = "^4.6.2"
@@ -33,21 +34,23 @@ tzwhere = "^3.0.3"
 backoff = "^1.11.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
+pytest = "^7.0.0"
 requests_mock = "^1.7.0"
 pyyaml = "^6.0"
-black = "^19.10b0"
+black = "^22.3.0"
 pylint = "^2.4.4"
 pydocstyle = "^6.0.0"
 yamllint = "^1.20.0"
 bandit = "^1.6.2"
 invoke = "^1.4.1"
-flake8 = "^4.0.0"
-mypy = "^0.930"
+flake8 = "^5.0.0"
+mypy = "^0.982"
 # Dependencies for mypy to correctly analyze code using these libraries
 types-python-dateutil = "^2.8.3"
-types-pytz = "^2021.3.2"
+types-pytz = "^2022.0.0"
 types-toml = "^0.10.1"
+netconan = "^0.12.3"
+toml = "0.10.2"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"

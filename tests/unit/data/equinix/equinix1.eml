@@ -1,12 +1,12 @@
-Received: by 2002:ac9:2e4b:0:0:0:0:0 with SMTP id s11csp522796ocf;
+Received: by 26b:c655:dc35:3da8:ec7f:1d64:b72c:f426 with SMTP id s11csp522796ocf;
         Tue, 19 Oct 2021 08:56:00 -0700 (PDT)
-X-Received: by 2002:ab0:5548:: with SMTP id u8mr857164uaa.0.1634658960078;
+X-Received: by 26b:c60a:dbd3:15f3:1fdd:7a84:b83b:41d with SMTP id u8mr857164uaa.0.1634658960078;
         Tue, 19 Oct 2021 08:56:00 -0700 (PDT)
-Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [223.132.15.71])
         by mx.google.com with SMTPS id g11sor5314027uan.30.2021.10.19.08.56.00
         (Google Transport Security);
         Tue, 19 Oct 2021 08:56:00 -0700 (PDT)
-X-Received: by 2002:ab0:56c1:: with SMTP id c1mr871051uab.6.1634658959279;
+X-Received: by 26b:c60a:d9fd:51a0:d447:dac5:44df:85a8 with SMTP id c1mr871051uab.6.1634658959279;
  Tue, 19 Oct 2021 08:55:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <2079981293.739237.1625133948669@vmclxremas08.corp.equinix.com> <CACtiu=rLxxskfD=jn5obrxUG9ZQ4UGQ3-8Mn+CZG9QGHSW-+OA@mail.gmail.com>

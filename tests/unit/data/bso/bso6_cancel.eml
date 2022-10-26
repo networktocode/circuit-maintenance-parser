@@ -1,0 +1,1051 @@
+Delivered-To:
+Received:
+X-Google-Smtp-Source:
+X-Received:
+ARC-Seal:
+ARC-Message-Signature:
+ARC-Authentication-Results:
+Return-Path: <no-reply@bso.co>
+Received:
+Received-SPF:
+Authentication-Results:
+Received:
+Content-Type: multipart/alternative;
+MIME-Version: 1.0
+Subject:
+From:
+To:
+Date:
+Message-ID:
+
+--===============3734662519850625295==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+
+
+Maintenance Canceled_
+
+Dear Customer,
+
+Please be advised that BSO's upstream provider has <span style='color: #f44336;font-style: bold;'>canceled</span> <strong>a planned</strong> maintenance work.
+
+
+
+Below you will find your service ID and the timeframe for the maintenance work:
+
+Service Details
+Service ID (SID)
+
+
+    TEST-FOR-CAN1-CEL-001
+
+    TEST-FOR-CAN1-CEL-002
+
+
+
+Maintenance Reason
+Routine Fiber Splice
+
+Maintenance Details
+
+Maintenance ID		66666
+
+Timeslot start time		Aug 14, 2022 21:00 UTC
+Timeslot end time		Aug 15, 2022 04:00 UTC
+Expected impact duration 		Up to 07 Hours
+Expected impact level 		At risk only
+
+
+If you have any request or query regarding this maintenance work, feel free to open a ticket following BSO Support process.
+/!\ Please do not respond to this e-mail. This mailbox is not monitored. /!\
+
+We apologise for any inconvenience this may cause to you or your customers.
+Please log in to your service-desk portal account using the link below for more information:
+
+http://servicedesk.bsonetwork.net
+
+Kind regards,
+
+The NOC Team
+BSO - Redefining Connectivity
+
+Contact the BSO NOC for 24/7 support
+FR	|	+33 1 84 88 56 48
+UK	|	+44 203 608 9893
+US	|	+1 347 433 7997
+© 2021 BSO, All rights reserved.
+
+
+--===============3734662519850625295==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <!-- [ if !mso]> <!-->
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <!-- <![endif] -->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>BSO Maintenance Information</title>
+  <style type="text/css" media="screen">
+    @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700);
+  </style>
+
+  <style type="text/css">
+    table {
+      height: 100%;
+    }
+
+    img {
+      color: #ffffff;
+      text-align: center;
+      font-family: 'Titillium Web';
+      display: block;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100% !important;
+      -ms-text-size-adjust: 100% !important;
+      font-family: 'Titillium Web';
+      background: #fffffe;
+    }
+
+    table td {
+      border-collapse: collapse;
+      border-spacing: 0 !important;
+    }
+
+    table tr {
+      border-collapse: collapse;
+      border-spacing: 0 !important;
+    }
+
+    table tbody {
+      border-collapse: collapse;
+      border-spacing: 0 !important;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0 !important;
+    }
+
+    img {
+      -ms-interpolation-mode: bicubic;
+    }
+
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+    }
+
+    /**** My desktop styles ****/
+    @media only screen and (min-width: 640px) {
+      .noDesk {
+        display: none !important;
+      }
+
+      .td-padding {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+
+      .padding-container {
+        padding: 0px 15px 0px 15px !important;
+        mso-padding-alt: 0px 15px 0px 15px !important;
+      }
+
+      .mobile-column-left-padding {
+        padding: 0px 0px 0px 0px !important;
+        mso-alt-padding: 0px 0px 0px 0px !important;
+      }
+
+      .mobile-column-right-padding {
+        padding: 0px 0px 0px 0px !important;
+        mso-alt-padding: 0px 0px 0px 0px !important;
+      }
+
+      .mobile {
+        display: none !important
+      }
+    }
+
+    /**** My mobile styles ****/
+    @media only screen and (max-width: 599px) and (-webkit-min-device-pixel-ratio: 1) {
+      *[class].wrapper {
+        width: 100% !important;
+      }
+
+      *[class].container {
+        width: 100% !important;
+      }
+
+      *[class].mobile {
+        width: 100% !important;
+        display: block !important;
+      }
+
+      *[class].image {
+        width: 100% !important;
+        height: auto;
+      }
+
+      *[class].center {
+        margin: 0 auto !important;
+        text-align: center !important;
+      }
+
+      *[class="mobileOff"] {
+        width: 0px !important;
+        display: none !important;
+      }
+
+      *[class*="mobileOn"] {
+        display: block !important;
+        max-height: none !important;
+      }
+
+      p[class="mobile-padding"] {
+        padding-left: 0px !important;
+        padding-top: 10px;
+      }
+
+      .padding-container {
+        padding: 0px 15px 0px 15px !important;
+        mso-padding-alt: 0px 15px 0px 15px !important;
+      }
+
+      .td-padding {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+
+      .mobile-column-left-padding {
+        padding: 18px 0px 18px 0px !important;
+        mso-alt-padding: 18px 0px 18px 0px !important;
+      }
+
+      .mobile-column-right-padding {
+        padding: 18px 0px 0px 0px !important;
+        mso-alt-padding: 18px 0px 0px 0px !important;
+      }
+
+      .stack {
+        width: 100% !important;
+      }
+
+      img {
+        width: 100% !important;
+        height: auto !important;
+      }
+
+      *[class="hide"] {
+        display: none !important
+      }
+
+      *[class="Gmail"] {
+        display: none !important
+      }
+
+      .Gmail {
+        display: none !important
+      }
+
+      .bottom-padding-fix {
+        padding: 0px 0px 18px 0px !important;
+        mso-alt-padding: 0px 0px 18px 0px;
+      }
+    }
+
+    a {
+      color: #000050;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    @-webkit-keyframes ripple {
+      100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+      }
+    }
+
+    @-moz-keyframes ripple {
+      100% {
+        opacity: 0;
+        -moz-transform: scale(2.5);
+      }
+    }
+
+    @-o-keyframes ripple {
+      100% {
+        opacity: 0;
+        -o-transform: scale(2.5);
+      }
+    }
+
+    @keyframes ripple {
+      100% {
+        opacity: 0;
+        transform: scale(2.5);
+      }
+    }
+
+    .bso-gradient-mint {
+      background-image: linear-gradient(90deg, #00FFFF, #3BF0B6);
+    }
+
+    .bso-bg-navy {
+      background: #000050;
+    }
+
+    .bso-bg-navy-50 {
+      width: 50px;
+      height: 100%;
+      background-image: linear-gradient(0deg, #000050 50%, #fff 50.01%, #fff);
+    }
+
+    .bso-text-white {
+      color: #ffffff;
+      font-family: 'Titillium Web';
+    }
+
+    .bso-text-navy {
+      color: #000050;
+      font-family: 'Titillium Web';
+    }
+
+    .bso-text-black {
+      color: #404040;
+      font-family: 'Titillium Web';
+    }
+
+    .linkButton {
+      color: #FFFFFF;
+      background-color: #000050;
+      border-radius: 1px;
+      padding: 6px 16px;
+      font-size: 14px;
+      min-width: 64px;
+      box-sizing: border-box;
+      transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      font-weight: 400;
+      line-height: 1.75;
+      letter-spacing: 0.02857em;
+      border: 0;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-flex;
+      outline: 0;
+      position: relative;
+      align-items: center;
+      user-select: none;
+      vertical-align: middle;
+      justify-content: center;
+      text-decoration: none;
+      -webkit-appearance: none;
+      -webkit-tap-highlight-color: transparent;
+      writing-mode: horizontal-tb !important;
+      -webkit-writing-mode: horizontal-tb !important;
+      text-rendering: auto;
+      word-spacing: normal;
+      text-indent: 0px;
+      text-shadow: none;
+      text-align: center;
+    }
+
+    .linkButton:hover {
+      background-color: #40407c !important;
+    }
+  </style>
+  <!--[if gte mso 9]>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+</head>
+
+<body style="margin:0; padding:0; background-color: #eeeeee;" bgcolor="#eeeeee">
+  <!--[if mso]>
+    <style type="text/css">
+    body, table, td {font-family: 'Titillium Web';}
+    </style>
+  <![endif]-->
+  <!-- START EMAIL -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eeeeee">
+    <!-- START CARD 1 -->
+    <tr>
+      <td width="100%" valign="top" align="center" class="padding-container"
+        style="padding-top: 10px!important; padding-bottom: 10px!important; mso-padding-alt: 10px 0px 10px 0px;">
+        <table width="640" cellpadding="0" cellspacing="0" border="0" align="center" class="wrapper">
+          <tr>
+            <td>
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="border-radius: 3px; border-bottom: 2px solid #000050;" class="card-1" width="100%"
+                    valign="top" align="center">
+                    <table style="border-radius: 3px;" width="640" cellpadding="0" cellspacing="0" border="0"
+                      align="center" class="wrapper" bgcolor="#ffffff">
+                      <tr>
+                        <td align="center">
+                          <table width="640" cellpadding="0" cellspacing="0" border="0" class="container">
+                            <tbody>
+                              <!-- START HEADER IMAGE -->
+                              <tr>
+                                <td width="100%" align="left">
+                                  <img alt="bso-navy" src="https://noctool.bsonetwork.net/images/logos/bso-navy.svg" width="100"
+                                    style="padding-top: 10px; padding-bottom: 10px; outline-style: none; text-decoration: none; line-height: 60px; vertical-align: middle; margin-left: 20px; margin-right: auto; " />
+                                </td>
+                              </tr>
+                              <!-- END HEADER IMAGE -->
+                              <!-- START BANNER IMAGE -->
+                              <tr>
+                                <td class="bso-bg-navy bso-text-white" align="left" valign="middle" height="60">
+                                  <span
+                                    style="margin-left: 20px!important; margin-right: auto; font-weight: 600; font-size: 22px;">
+                                    Maintenance Canceled_
+                                  </span>
+                                </td>
+                              </tr>
+                              <!-- END BANNER IMAGE -->
+                              <!-- MESSAGE INTRO START -->
+                              <tr>
+                                <td class="td-padding" align="left"
+                                  style="font-family: 'Titillium Web'; color: #000050!important; font-size: 12px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                  Dear Customer,<br /><br />
+                                  Please be advised that BSO's upstream provider has <span style='color: #f44336;font-style: bold;'>canceled</span> <strong>a planned</strong> maintenance work.
+                                  <br /><br />
+
+                                  Below you will find your service ID and the timeframe for the maintenance work:
+                                </td>
+                              </tr>
+                              <!-- MESSAGE INTRO END -->
+                              <!-- TABLE CONTENT START -->
+                              <tr>
+                                <td class="td-padding" align="left"
+                                  style="font-family: 'Titillium Web'; color: #000050!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                  <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border:1px solid #e5e5e5;border-collapse:initial!important">
+                                    <tbody>
+                                      <tr>
+                                        <td width="10"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          bgcolor="#00f2b5"></td>
+                                        <td align="center" bgcolor="#00f2b5"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                          <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td height="8"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td align="left"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                  <b class="bso-text-navy"
+                                                    style="Margin:0;font-size:16px;line-height:1.4;margin:0;font-family: 'Titillium Web';">
+                                                    Service Details
+                                                  </b>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td height="8"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td width="10"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          bgcolor="#00f2b5"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          width="15"></td>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                          <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td height="10"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                  <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="top"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Service ID (SID)
+                                                          </span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="top"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+
+
+                                                          <span
+                                                            style="margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:600; display: inline-block;">
+                                                            TEST-FOR-CAN1-CEL-001
+                                                          </span>
+
+                                                          <span
+                                                            style="margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:600; display: inline-block;">
+                                                            TEST-FOR-CAN1-CEL-002
+                                                          </span>
+
+
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td height="10"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <!-- TABLE CONTENT END -->
+                              <!-- MAINTENANCE REASON -->
+                              <tr style="display: table-row;">
+                                <td class="td-padding" align="left"
+                                  style="font-family: 'Titillium Web'; color: #000050!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                  <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border:1px solid #e5e5e5;border-collapse:initial!important">
+                                    <tbody>
+                                      <tr>
+                                        <td width="10"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          bgcolor="#00f2b5"></td>
+                                        <td align="center" bgcolor="#00f2b5"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                          <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td height="8"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td align="left"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                  <b class="bso-text-navy"
+                                                    style="Margin:0;font-size:16px;line-height:1.4;margin:0;font-family: 'Titillium Web';">
+                                                    Maintenance Reason
+                                                  </b>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td height="8"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td width="10"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          bgcolor="#00f2b5"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          width="15"></td>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                          <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td height="10"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                  <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td width="100%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;">
+                                                          <span
+                                                            style="Margin:0;font-size:14px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web'; display: block; font-size: 12px;">
+                                                            Routine Fiber Splice
+                                                          </span>
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td height="10"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <!-- MAINTENANCE REASON END -->
+                              <!-- MAINTENANCE DETAILS START -->
+                              <tr>
+                                <td class="td-padding" align="left"
+                                  style="font-family: 'Titillium Web'; color: #000050!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                  <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border:1px solid #e5e5e5;border-collapse:initial!important">
+                                    <tbody>
+                                      <tr>
+                                        <td width="10"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          bgcolor="#00f2b5"></td>
+                                        <td align="center" bgcolor="#00f2b5"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                          <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td height="8"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td align="left"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                  <b class="bso-text-navy"
+                                                    style="Margin:0;font-size:16px;line-height:1.4;margin:0;font-family: 'Titillium Web';">
+                                                    Maintenance Details
+                                                  </b>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td height="8"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td width="10"
+                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          bgcolor="#00f2b5"></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0"
+                                          width="15"></td>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                          <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td height="10"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+
+                                              <tr>
+                                                <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                  <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Maintenance
+                                                            ID</span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:14px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:bold">
+                                                            66666</span>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td height="5"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                      </tr>
+
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Timeslot start time</span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Aug 14, 2022 21:00 UTC</span>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Timeslot end time</span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Aug 15, 2022 04:00 UTC</span>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Expected impact duration
+
+                                                          </span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Up to 07 Hours </span>
+                                                        </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Expected impact level
+
+                                                          </span>
+                                                        </td>
+                                                      </tr>
+
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="padding-left:15px;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal; display: inline-block;">
+                                                            TEST-FOR-CAN1-CEL-001
+                                                          </span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            At risk only
+                                                          </span>
+                                                        </td>
+                                                      </tr>
+
+                                                      <tr>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="padding-left:15px;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal; display: inline-block;">
+                                                            TEST-FOR-CAN1-CEL-002
+                                                          </span>
+                                                        </td>
+                                                        <td width="10%"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                        <td width="45%" align="left" valign="middle"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2">
+                                                          <span
+                                                            style="Margin:0;font-size:12px;line-height:1.4;color:#404040;margin:0;font-family: 'Titillium Web';font-weight:normal">
+                                                            Hard Down
+                                                          </span>
+                                                        </td>
+                                                      </tr>
+
+                                                      <tr>
+                                                        <td height="5"
+                                                          style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                        </td>
+                                                      </tr>
+
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td height="5"
+                                                  style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td style="Margin:0;font-family: 'Titillium Web';line-height:1.2;font-size:0">
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <!-- TABLE CONTENT END -->
+                              <tr>
+                                <td class="td-padding" align="left"
+                                  style="font-family: 'Titillium Web'; color: #000050!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                  <br>
+                                  <span style="font-size:12px;">
+                                    If you have any request or query regarding this maintenance work, feel free to open
+                                    a ticket following BSO Support process.
+                                  </span>
+                                  <br><br>
+                                  <span>
+                                    <span style="font-size:12px;"><strong>/!\ Please do not respond to this e-mail. This
+                                        mailbox is not monitored. /!\</strong><br /><br />We apologise for any
+                                      inconvenience this may cause to you or your customers.<br />
+                                      Please log in to your service-desk portal account using the link below for more
+                                      information:<br>
+                                      <br />
+                                      <a href="https://servicedesk.bsonetwork.net"
+                                        style="font-size: 14px; line-height: normal;font-weight: 600;">https://servicedesk.bsonetwork.net</a><br>
+                                      <br />
+                                      Kind regards,
+                                      <br /><br />
+                                      The NOC Team<br />
+                                      BSO - Redefining Connectivity</span>
+                                  </span><br>
+                                  &nbsp;
+                                </td>
+                              </tr>
+                              <!-- FOOTER START -->
+                              <tr>
+                                <td class="td-padding" align="left"
+                                  style="font-family: 'Titillium Web'; color: #ffffff!important; line-height: 24px; padding-top: 10px; padding-left: 0px!important; padding-right: 0px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 10px 0px 0px 0px;">
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                    style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                    <tbody>
+                                      <tr>
+                                        <td class="bso-bg-navy-50">&nbsp;</td>
+                                        <td align="center" class="bso-gradient-mint"
+                                          style="Margin:0;font-family: 'Titillium Web';color:#ffffff;line-height:1.2;text-align:center;">
+                                          <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td class="td-padding" align="left" valign="middle"
+                                                  style="Margin:0;font-family: 'Titillium Web'; font-weight:normal;line-height:1.5;margin:0">
+                                                  <strong class="bso-text-navy" style="font-size: 15px;">
+                                                    Speak with our support team.
+                                                  </strong>
+                                                </td>
+                                                <td class="td-padding" align="left" valign="middle"
+                                                  style="padding-top: 10px; padding-bottom: 10px;">
+                                                  <table class="bso-text-navy" cellpadding="1" cellspacing="0"
+                                                    border="0" style="font-size: 12px; font-weight: 600; ">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td>FR</td>
+                                                        <td>|</td>
+                                                        <td>+33 1 84 88 56 48</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>UK</td>
+                                                        <td>|</td>
+                                                        <td>+44 203 608 9893</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td>US</td>
+                                                        <td>|</td>
+                                                        <td>+1 347 433 7997</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                        <td class="bso-bg-navy-50">&nbsp;</td>
+                                      </tr>
+                                      <tr class="bso-bg-navy">
+                                        <td colspan="3">
+                                          <table border="0" cellspacing="0" cellpadding="0" width="100%"
+                                            style="border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                            <tbody>
+                                              <tr>
+                                                <td align="center">
+                                                  <table border="0" cellspacing="0" cellpadding="15" width="100%"
+                                                    style="margin-left:auto;margin-right:auto;border-spacing:0;clear:both;font-family: 'Titillium Web';border-collapse:collapse!important">
+                                                    <tbody>
+                                                      <tr>
+                                                        <td align="center" valign="middle" align="center" width="100%"
+                                                          style="Margin:0;font-family: 'Titillium Web';color:#ffffff;line-height:1.2;">
+                                                          <a href="https://www.linkedin.com/company/bso-network-solutions"
+                                                            target="_blank">
+                                                            <img alt="bso-linkedin"
+                                                              src="https://noctool.bsonetwork.net/images/logos/social_icons/30x30/bso-icon-linkedin.png"
+                                                              style="display:inline-block;" />
+                                                          </a>
+                                                          <a href="https://twitter.com/BSONetwork" target="_blank">
+                                                            <img alt="bso-twitter"
+                                                              src="https://noctool.bsonetwork.net/images/logos/social_icons/30x30/bso-icon-twitter.png"
+                                                              style="display:inline-block;" />
+                                                          </a>
+                                                          <a href="https://www.facebook.com/BSOGlobal" target="_blank">
+                                                            <img alt="bso-facebook"
+                                                              src="https://noctool.bsonetwork.net/images/logos/social_icons/30x30/bso-icon-facebook.png"
+                                                              style="display:inline-block;" />
+                                                          </a>
+                                                          <a href="https://www.instagram.com/wearebso" target="_blank">
+                                                            <img alt="bso-instagram"
+                                                              src="https://noctool.bsonetwork.net/images/logos/social_icons/30x30/bso-icon-instagram.png"
+                                                              style="display:inline-block;" />
+                                                          </a>
+                                                          <a href="https://www.youtube.com/channel/UCq5iAw0g5q3eFK4rg_L1YuA"
+                                                            target="_blank">
+                                                            <img alt="bso-youtube"
+                                                              src="https://noctool.bsonetwork.net/images/logos/social_icons/30x30/bso-icon-youtube.png"
+                                                              style="display:inline-block;" />
+                                                          </a>
+                                                        </td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td align="center" valign="middle" align="center" width="100%"
+                                                  class="bso-text-white"
+                                                  style="line-height:1.2; padding-top: 2px; padding-bottom: 10px; font-size: 13px">
+                                                  © 2021 BSO, All rights reserved.
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <!-- FOOTER END -->
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  </td>
+  </tr>
+  <!-- END CARD 1 -->
+
+  <!-- SPACER -->
+  <!--[if gte mso 9]>
+      <table align="center" border="0" cellspacing="0" cellpadding="0" width="640">
+        <tr>
+          <td align="center" valign="top" width="640" height="18">
+            <![endif]-->
+  <tr>
+    <td height="18px"></td>
+  </tr>
+  <!--[if gte mso 9]>
+          </td>
+        </tr>
+      </table>
+      <![endif]-->
+  <!-- END SPACER -->
+
+  <!-- FOOTER -->
+  <!-- FOOTER -->
+
+  <!-- SPACER -->
+  <!--[if gte mso 9]>
+      <table align="center" border="0" cellspacing="0" cellpadding="0" width="640">
+        <tr>
+          <td align="center" valign="top" width="640" height="36">
+            <![endif]-->
+  <tr>
+    <td height="36px"></td>
+  </tr>
+  <!--[if gte mso 9]>
+          </td>
+        </tr>
+      </table>
+      <![endif]-->
+  <!-- END SPACER -->
+
+  </table>
+  <!-- END EMAIL -->
+</body>
+
+</html>
+--===============3734662519850625295==--

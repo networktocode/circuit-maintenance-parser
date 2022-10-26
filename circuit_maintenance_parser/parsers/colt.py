@@ -38,19 +38,20 @@ class SubjectParserColt1(EmailSubjectParser):
     def parse_subject(self, subject):
         """Parse subject.
 
-        Example:
+        Examples:
         - [ EXTERNAL ] MAINTENANCE ALERT: CRQ1-12345678 24/10/2021 04:00:00 GMT - 24/10/2021 11:00:00 GMT is about to START
         - [ EXTERNAL ] MAINTENANCE ALERT: CRQ1-12345678 31/10/2021 00:00:00 GMT - 31/10/2021 07:30:00 GMT - COMPLETED
+        - MAINTENANCE ALERT: CRQ1-87654321 18/10/2022 20:00:00 GMT - 19/10/2022 00:00:00 GMT - COMPLETED
         """
         data = {}
         search = re.search(
-            r"\[.+\]\s([A-Za-z\s]+).+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
+            r"(?:\[.+\]\s)?([A-Za-z\s]+):?\s+?(CRQ\w+-\w+)\s(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?([A-Z]+)",
             subject,
         )
         if search:
             data["maintenance_id"] = search.group(2)
-            data["start"] = self.dt2ts(parser.parse(search.group(3)))
-            data["end"] = self.dt2ts(parser.parse(search.group(4)))
+            data["start"] = self.dt2ts(parser.parse(search.group(3), dayfirst=True))
+            data["end"] = self.dt2ts(parser.parse(search.group(4), dayfirst=True))
             status = search.group(5).strip()
             if status == "START":
                 data["status"] = Status("IN-PROCESS")
@@ -68,13 +69,14 @@ class SubjectParserColt2(EmailSubjectParser):
     def parse_subject(self, subject):
         r"""Parse subject.
 
-        Example:
+        Examples:
         - [ EXTERNAL ] Cancellation Colt Third Party Maintenance Notification -\n CRQ1-12345678 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for\n ACME, 123456
         - [ EXTERNAL ] Colt Third Party Maintenance Notification -\n CRQ1-48926339503 [07/12/2021 23:00:00 GMT - 08/12/2021 05:00:00 GMT] for\n ACME, 123456
+        - Colt Third Party Maintenance Notification - CRQ1-87654321 [12/11/2022 05:00:00 GMT - 12/11/2022 17:00:00 GMT] for EXAMPLE, 654321
         """
         data = {}
         search = re.search(
-            r"\[.+\]\s+([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
+            r"(?:\[.+\]\s+)?([A-Za-z]+)\s+([\w\s]+)[\s-]+?(CRQ\w+-\w+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s+[A-Z]+).+?(\d+/\d+/\d+\s\d+:\d+:\d+\s[A-Z]+).+",
             subject,
         )
         if search:
@@ -83,7 +85,7 @@ class SubjectParserColt2(EmailSubjectParser):
             else:
                 data["status"] = Status("CONFIRMED")
             data["maintenance_id"] = search.group(3)
-            data["start"] = self.dt2ts(parser.parse(search.group(4)))
-            data["end"] = self.dt2ts(parser.parse(search.group(5)))
+            data["start"] = self.dt2ts(parser.parse(search.group(4), dayfirst=True))
+            data["end"] = self.dt2ts(parser.parse(search.group(5), dayfirst=True))
             data["summary"] = search.group(2).strip()
         return [data]

@@ -1,7 +1,7 @@
 Delivered-To: nautobot.email@example.com
-Received: by 2002:a05:7000:1f21:0:0:0:0 with SMTP id hs33csp4865244mab;
+Received: by 26b:c69a:80d0:f85:f301:549e:e7a4:9133 with SMTP id hs33csp4865244mab;
         Mon, 6 Dec 2021 07:03:42 -0800 (PST)
-X-Received: by 2002:a05:6512:1093:: with SMTP id j19mr36120315lfg.340.1638803022202;
+X-Received: by 26b:c69a:9c77:260f:a4fa:46cf:bf19:8a68 with SMTP id j19mr36120315lfg.340.1638803022202;
         Mon, 06 Dec 2021 07:03:42 -0800 (PST)
 ARC-Seal: i=3; a=rsa-sha256; t=1638803022; cv=pass;
         d=google.com; s=arc-20160816;
@@ -25,19 +25,19 @@ ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
 ARC-Authentication-Results: i=3; mx.google.com;
        dkim=pass header.i=@example.com header.s=example header.b=jlMpGX2M;
        arc=pass (i=2 spf=pass spfdomain=equinix.com dmarc=pass fromdomain=equinix.com);
-       spf=pass (google.com: domain of maint-notices+bncbdbld5ph4eibbtomxcgqmgqeyrh3nsy@example.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=maint-notices+bncBDBLD5PH4EIBBTOMXCGQMGQEYRH3NSY@example.com;
+       spf=pass (google.com: domain of maint-notices+bncbdbld5ph4eibbtomxcgqmgqeyrh3nsy@example.com designates 223.132.15.9 as permitted sender) smtp.mailfrom=maint-notices+bncBDBLD5PH4EIBBTOMXCGQMGQEYRH3NSY@example.com;
        dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
 Return-Path: <maint-notices+bncBDBLD5PH4EIBBTOMXCGQMGQEYRH3NSY@example.com>
-Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [223.132.15.9])
         by mx.google.com with SMTPS id 124sor4230631vkb.28.2021.12.06.07.03.41
         for <nautobot.email@example.com>
         (Google Transport Security);
         Mon, 06 Dec 2021 07:03:42 -0800 (PST)
-Received-SPF: pass (google.com: domain of maint-notices+bncbdbld5ph4eibbtomxcgqmgqeyrh3nsy@example.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Received-SPF: pass (google.com: domain of maint-notices+bncbdbld5ph4eibbtomxcgqmgqeyrh3nsy@example.com designates 223.132.15.9 as permitted sender) client-ip=223.132.15.9;
 Authentication-Results: mx.google.com;
        dkim=pass header.i=@example.com header.s=example header.b=jlMpGX2M;
        arc=pass (i=2 spf=pass spfdomain=equinix.com dmarc=pass fromdomain=equinix.com);
-       spf=pass (google.com: domain of maint-notices+bncbdbld5ph4eibbtomxcgqmgqeyrh3nsy@example.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=maint-notices+bncBDBLD5PH4EIBBTOMXCGQMGQEYRH3NSY@example.com;
+       spf=pass (google.com: domain of maint-notices+bncbdbld5ph4eibbtomxcgqmgqeyrh3nsy@example.com designates 223.132.15.9 as permitted sender) smtp.mailfrom=maint-notices+bncBDBLD5PH4EIBBTOMXCGQMGQEYRH3NSY@example.com;
        dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=equinix.com
 ARC-Seal: i=2; a=rsa-sha256; t=1638803021; cv=pass;
         d=google.com; s=arc-20160816;
@@ -59,7 +59,7 @@ ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
          2/7voD6JAa4IJSk3dNaX87Pdhs1WcxlOKAalgsCNVuSeN96kc5FdN0PGV+kFxfl42uy4
          BUow==
 ARC-Authentication-Results: i=2; mx.google.com;
-       spf=pass (google.com: domain of no-reply@equinix.com designates 64.191.227.129 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
+       spf=pass (google.com: domain of no-reply@equinix.com designates 82.248.245.45 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=example.com; s=example;
@@ -89,12 +89,12 @@ Sender: maint-notices@example.com
 X-Gm-Message-State: AOAM533VjlUj/LnFyQw6o0/xeOuSqlLm74Eu6fwRVVfPgXTuX5AJXBcT
 	cAvJNZpcyEL49FDqjsEE1/LPLlro
 X-Google-Smtp-Source: ABdhPJy6PqBs7zFjsCpnVPD/K3IQt2HloRSlQiCjXVwxBKRb7W8g+KhWJ4iR4IeVft1P+Iihq/Xk8Q==
-X-Received: by 2002:ac5:cfca:: with SMTP id m10mr41966216vkf.29.1638803021272;
+X-Received: by 26b:c65b:3ad2:32b5:a246:1e35:126:a90b with SMTP id m10mr41966216vkf.29.1638803021272;
         Mon, 06 Dec 2021 07:03:41 -0800 (PST)
 X-BeenThere: maint-notices@example.com
-Received: by 2002:a05:6102:41a6:: with SMTP id cd38ls5065354vsb.5.gmail; Mon,
+Received: by 26b:c69a:9846:8a28:5c9d:d7b2:25b7:f565 with SMTP id cd38ls5065354vsb.5.gmail; Mon,
  06 Dec 2021 07:03:40 -0800 (PST)
-X-Received: by 2002:a05:6102:38ce:: with SMTP id k14mr35991447vst.70.1638803019627;
+X-Received: by 26b:c69a:9846:c584:83ff:9eb:e3dd:79cd with SMTP id k14mr35991447vst.70.1638803019627;
         Mon, 06 Dec 2021 07:03:39 -0800 (PST)
 ARC-Seal: i=1; a=rsa-sha256; t=1638803019; cv=none;
         d=google.com; s=arc-20160816;
@@ -114,14 +114,14 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
          PKoIN+w96weW4/fLbXnQmFDFpuLYIDlPicnd+kvrdXhMoLv/SBtz+h9Qf4zxQ1FqwZHD
          zz0Q==
 ARC-Authentication-Results: i=1; mx.google.com;
-       spf=pass (google.com: domain of no-reply@equinix.com designates 64.191.227.129 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
+       spf=pass (google.com: domain of no-reply@equinix.com designates 82.248.245.45 as permitted sender) smtp.mailfrom=no-reply@equinix.com;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=equinix.com
-Received: from ch3esa01.corp.equinix.com (nat1-ch-mis.equinix.com. [64.191.227.129])
+Received: from ch3esa01.corp.equinix.com (nat1-ch-mis.equinix.com. [82.248.245.45])
         by mx.google.com with ESMTPS id n9si10427993vse.680.2021.12.06.07.03.24
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
         Mon, 06 Dec 2021 07:03:39 -0800 (PST)
-Received-SPF: pass (google.com: domain of no-reply@equinix.com designates 64.191.227.129 as permitted sender) client-ip=64.191.227.129;
-Received: from unknown (HELO vmclxremas08.corp.equinix.com) ([10.192.140.2])
+Received-SPF: pass (google.com: domain of no-reply@equinix.com designates 82.248.245.45 as permitted sender) client-ip=82.248.245.45;
+Received: from unknown (HELO vmclxremas08.corp.equinix.com) ([10.153.56.233])
   by ch3esa01.corp.equinix.com with ESMTP; 06 Dec 2021 07:03:22 -0800
 Date: Mon, 6 Dec 2021 15:03:22 +0000 (UTC)
 From: Equinix Network Maintenance NO-REPLY <no-reply@equinix.com>
@@ -137,7 +137,7 @@ X-Priority: 1
 Organization: Equinix, Inc
 X-Original-Sender: no-reply@equinix.com
 X-Original-Authentication-Results: mx.google.com;       spf=pass (google.com:
- domain of no-reply@equinix.com designates 64.191.227.129 as permitted sender)
+ domain of no-reply@equinix.com designates 82.248.245.45 as permitted sender)
  smtp.mailfrom=no-reply@equinix.com;       dmarc=pass (p=NONE sp=NONE
  dis=NONE) header.from=equinix.com
 Precedence: list

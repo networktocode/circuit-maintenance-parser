@@ -9,7 +9,7 @@ from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import ICal, EmailDateParser
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
-
+from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
@@ -38,12 +38,36 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
     "parser_class, raw_file, results_file",
     [
         # iCal
-        (ICal, Path(dir_path, "data", "ical", "ical1"), Path(dir_path, "data", "ical", "ical1_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical2"), Path(dir_path, "data", "ical", "ical2_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical3"), Path(dir_path, "data", "ical", "ical3_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical4"), Path(dir_path, "data", "ical", "ical4_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical5"), Path(dir_path, "data", "ical", "ical5_result.json"),),
-        (ICal, Path(dir_path, "data", "ical", "ical6"), Path(dir_path, "data", "ical", "ical6_result.json"),),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical1"),
+            Path(dir_path, "data", "ical", "ical1_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical2"),
+            Path(dir_path, "data", "ical", "ical2_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical3"),
+            Path(dir_path, "data", "ical", "ical3_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical4"),
+            Path(dir_path, "data", "ical", "ical4_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical5"),
+            Path(dir_path, "data", "ical", "ical5_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical6"),
+            Path(dir_path, "data", "ical", "ical6_result.json"),
+        ),
         # AquaComms
         (
             HtmlParserAquaComms1,
@@ -76,6 +100,77 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "aws", "aws2.eml"),
             Path(dir_path, "data", "aws", "aws2_subject_parser_result.json"),
         ),
+        # BSO
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso1.html"),
+            Path(dir_path, "data", "bso", "bso1_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso2.html"),
+            Path(dir_path, "data", "bso", "bso2_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso3.html"),
+            Path(dir_path, "data", "bso", "bso3_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso4.html"),
+            Path(dir_path, "data", "bso", "bso4_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso5.html"),
+            Path(dir_path, "data", "bso", "bso5_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso6.html"),
+            Path(dir_path, "data", "bso", "bso6_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso7.html"),
+            Path(dir_path, "data", "bso", "bso7_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso1_first.eml"),
+            Path(dir_path, "data", "bso", "bso1_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso2_start.eml"),
+            Path(dir_path, "data", "bso", "bso2_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso3_update.eml"),
+            Path(dir_path, "data", "bso", "bso3_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso4_end.eml"),
+            Path(dir_path, "data", "bso", "bso4_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso5_reminder_multiple_ts.eml"),
+            Path(dir_path, "data", "bso", "bso5_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso6_cancel.eml"),
+            Path(dir_path, "data", "bso", "bso6_result.json"),
+        ),
+        (
+            HtmlParserBSO1,
+            Path(dir_path, "data", "bso", "bso7_backup_ts.eml"),
+            Path(dir_path, "data", "bso", "bso7_result.json"),
+        ),
         # Cogent
         (
             HtmlParserCogent1,
@@ -102,6 +197,16 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             SubjectParserColt2,
             Path(dir_path, "data", "colt", "colt5.eml"),
             Path(dir_path, "data", "colt", "colt5_subject_parser_2_result.json"),
+        ),
+        (
+            SubjectParserColt2,
+            Path(dir_path, "data", "colt", "colt6.eml"),
+            Path(dir_path, "data", "colt", "colt6_subject_parser_2_result.json"),
+        ),
+        (
+            SubjectParserColt1,
+            Path(dir_path, "data", "colt", "colt7.eml"),
+            Path(dir_path, "data", "colt", "colt7_subject_parser_1_result.json"),
         ),
         # Equinix
         (
@@ -225,7 +330,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "momentum", "momentum1_html_parser_result.json"),
         ),
         # NTT
-        (ICal, Path(dir_path, "data", "ntt", "ntt1"), Path(dir_path, "data", "ntt", "ntt1_result.json"),),
+        (
+            ICal,
+            Path(dir_path, "data", "ntt", "ntt1"),
+            Path(dir_path, "data", "ntt", "ntt1_result.json"),
+        ),
         # Seaborn
         (
             HtmlParserSeaborn1,
@@ -396,6 +505,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             SubjectParserZayo1,
             Path(dir_path, "data", "zayo", "zayo8_subject.txt"),
             Path(dir_path, "data", "zayo", "zayo8_subject_parser_result.json"),
+        ),
+        (
+            HtmlParserZayo1,
+            Path(dir_path, "data", "zayo", "zayo9.eml"),
+            Path(dir_path, "data", "zayo", "zayo9_html_parser_result.json"),
         ),
         # Email Date
         (
