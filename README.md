@@ -58,10 +58,10 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### Supported providers using the BCOP standard
 
+- Arelion
 - EuNetworks
 - NTT
 - PacketFabric
-- Telia
 - Telstra
 
 #### Supported providers based on other parsers
