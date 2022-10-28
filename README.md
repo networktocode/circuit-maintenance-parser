@@ -58,7 +58,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### Supported providers using the BCOP standard
 
-- Arelion
+- Arelion (previously Telia)
 - EuNetworks
 - NTT
 - PacketFabric
