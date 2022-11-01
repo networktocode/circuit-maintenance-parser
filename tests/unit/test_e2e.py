@@ -14,6 +14,7 @@ from circuit_maintenance_parser.provider import (
     Equinix,
     GenericProvider,
     AquaComms,
+    Arelion,
     AWS,
     BSO,
     Cogent,
@@ -28,7 +29,6 @@ from circuit_maintenance_parser.provider import (
     PacketFabric,
     Seaborn,
     Sparkle,
-    Telia,
     Telstra,
     Turkcell,
     Verizon,
@@ -62,6 +62,25 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),
+            ],
+        ),
+        # Arelion
+        (
+            Arelion,
+            [
+                ("ical", Path(dir_path, "data", "arelion", "arelion1")),
+            ],
+            [
+                Path(dir_path, "data", "arelion", "arelion1_result.json"),
+            ],
+        ),
+        (
+            Arelion,
+            [
+                ("ical", Path(dir_path, "data", "arelion", "arelion2")),
+            ],
+            [
+                Path(dir_path, "data", "arelion", "arelion2_result.json"),
             ],
         ),
         # AWS
@@ -497,25 +516,6 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "sparkle", "sparkle1_result.json"),
-            ],
-        ),
-        # Telia
-        (
-            Telia,
-            [
-                ("ical", Path(dir_path, "data", "telia", "telia1")),
-            ],
-            [
-                Path(dir_path, "data", "telia", "telia1_result.json"),
-            ],
-        ),
-        (
-            Telia,
-            [
-                ("ical", Path(dir_path, "data", "telia", "telia2")),
-            ],
-            [
-                Path(dir_path, "data", "telia", "telia2_result.json"),
             ],
         ),
         # Telstra

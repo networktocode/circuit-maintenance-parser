@@ -172,6 +172,14 @@ class AquaComms(GenericProvider):
     _default_organizer = "tickets@aquacomms.com"
 
 
+class Arelion(GenericProvider):
+    """Arelion (formerly Telia Carrier) provider custom class."""
+
+    _exclude_filter = {EMAIL_HEADER_SUBJECT: ["Disturbance Information"]}
+
+    _default_organizer = "support@arelion.com"
+
+
 class AWS(GenericProvider):
     """AWS provider custom class."""
 
@@ -308,12 +316,10 @@ class Sparkle(GenericProvider):
     _default_organizer = "TISAmericaNOC@tisparkle.com"
 
 
-class Telia(GenericProvider):
+class Telia(Arelion):
     """Telia provider custom class."""
 
-    _exclude_filter = {EMAIL_HEADER_SUBJECT: ["Disturbance Information"]}
-
-    _default_organizer = "carrier-csc@teliacompany.com"
+    # Kept for compatibility purposes, but Telia is renamed Arelion
 
 
 class Telstra(GenericProvider):
