@@ -32,6 +32,7 @@ lxml = "^4.6.2"
 geopy = "^2.1.0"
 tzwhere = "^3.0.3"
 backoff = "^1.11.1"
+chardet = "^5.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0.0"

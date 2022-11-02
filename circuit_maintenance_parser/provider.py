@@ -2,6 +2,7 @@
 import logging
 import re
 import traceback
+import chardet
 
 from typing import Iterable, List, Dict
 
@@ -95,7 +96,8 @@ class GenericProvider(BaseModel):
             if filter_data_type not in filter_dict:
                 continue
 
-            data_part_content = data_part.content.decode().replace("\r", "").replace("\n", "")
+            data_part_encoding = chardet.detect(data_part.content).get("encoding", "utf-8")
+            data_part_content = data_part.content.decode(data_part_encoding).replace("\r", "").replace("\n", "")
             if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
                 logger.debug("Matching %s filter expression for %s.", filter_type, data_part_content)
                 return True
