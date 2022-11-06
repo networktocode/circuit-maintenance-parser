@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Customer,inc",
+        "circuits": [
+            {
+                "circuit_id": "ABCD/123456//ZYO",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1666159200,
+        "maintenance_id": "TTN-0001234567",
+        "organizer": "mr@zayo.com",
+        "provider": "zayo",
+        "sequence": 1,
+        "stamp": 1666051200,
+        "start": 1666137600,
+        "status": "CONFIRMED",
+        "summary": "Zayo will implement EÉmergency maintenance to restore network stability and prevent an unplanned outage",
+        "uid": "0"
+    }
+]
