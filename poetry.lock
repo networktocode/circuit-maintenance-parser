@@ -452,15 +452,15 @@ python-versions = ">=2.6"
 
 [[package]]
 name = "platformdirs"
-version = "2.5.2"
-description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+version = "2.5.3"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-docs = ["furo (>=2021.7.5b38)", "proselint (>=0.10.2)", "sphinx (>=4)", "sphinx-autodoc-typehints (>=1.12)"]
-test = ["appdirs (==1.4.4)", "pytest (>=6)", "pytest-cov (>=2.7)", "pytest-mock (>=3.6)"]
+docs = ["furo (>=2022.9.29)", "proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-autodoc-typehints (>=1.19.4)"]
+test = ["appdirs (==1.4.4)", "pytest (>=7.2)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
 
 [[package]]
 name = "pluggy"
@@ -743,6 +743,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "types-chardet"
+version = "5.0.4"
+description = "Typing stubs for chardet"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "types-python-dateutil"
 version = "2.8.19.2"
 description = "Typing stubs for python-dateutil"
@@ -834,7 +842,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "b4043a36927c2d6225e8be401ce9fd95324ff3aa91119c56b74984e0219458ac"
+content-hash = "2ddc7c2009ec0ea1affb5b8a7e83ac678a09f7c19877398aa3d25b77deba6b51"
 
 [metadata.files]
 astroid = [
@@ -1128,8 +1136,8 @@ pbr = [
     {file = "pbr-5.11.0.tar.gz", hash = "sha256:b97bc6695b2aff02144133c2e7399d5885223d42b7912ffaec2ca3898e673bfe"},
 ]
 platformdirs = [
-    {file = "platformdirs-2.5.2-py3-none-any.whl", hash = "sha256:027d8e83a2d7de06bbac4e5ef7e023c02b863d7ea5d079477e722bb41ab25788"},
-    {file = "platformdirs-2.5.2.tar.gz", hash = "sha256:58c8abb07dcb441e6ee4b11d8df0ac856038f944ab98b7be6b27b2a3c7feef19"},
+    {file = "platformdirs-2.5.3-py3-none-any.whl", hash = "sha256:0cb405749187a194f444c25c82ef7225232f11564721eabffc6ec70df83b11cb"},
+    {file = "platformdirs-2.5.3.tar.gz", hash = "sha256:6e52c21afff35cb659c6e52d8b4d61b9bd544557180440538f255d9382c8cbe0"},
 ]
 pluggy = [
     {file = "pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
@@ -1343,6 +1351,10 @@ typed-ast = [
     {file = "typed_ast-1.5.4-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:98f80dee3c03455e92796b58b98ff6ca0b2a6f652120c263efdba4d6c5e58f72"},
     {file = "typed_ast-1.5.4-cp39-cp39-win_amd64.whl", hash = "sha256:0fdbcf2fef0ca421a3f5912555804296f0b0960f0418c440f5d6d3abb549f3e1"},
     {file = "typed_ast-1.5.4.tar.gz", hash = "sha256:39e21ceb7388e4bb37f4c679d72707ed46c2fbf2a5609b8b8ebc4b067d977df2"},
+]
+types-chardet = [
+    {file = "types-chardet-5.0.4.tar.gz", hash = "sha256:449a98338fa264ddee88dd3a8141989f0ae920bcc720460c54b9f4374a6c1bb3"},
+    {file = "types_chardet-5.0.4-py3-none-any.whl", hash = "sha256:6946e22f32789a473852570810b4afe632172fae03c04bdbffe670606cc4ac11"},
 ]
 types-python-dateutil = [
     {file = "types-python-dateutil-2.8.19.2.tar.gz", hash = "sha256:e6e32ce18f37765b08c46622287bc8d8136dc0c562d9ad5b8fd158c59963d7a7"},
