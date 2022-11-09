@@ -1,12 +1,12 @@
 """Telstra parser."""
 import logging
 from typing import Dict, List
-
+import re
 from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
-import re
+
 
 # pylint: disable=too-many-branches
 
@@ -29,14 +29,14 @@ class HtmlParserTelstra1(Html):
             for p_element in table.find_all("p"):
                 # TODO: We should find a more consistent way to parse the status of a maintenance note
                 p_text = p_element.text.lower()
+                if "attention" in p_text:
+                    regex = re.search("[^attention ].*", p_text.strip())
+                    data["account"] = regex.group()
                 if "maintenance has been scheduled" in p_text:
                     data["status"] = Status("CONFIRMED")
                 elif "successful" in p_text:
                     data["status"] = Status("COMPLETED")
-                elif (
-                    "this is a note to let you know that we'll soon be doing some network maintenance"
-                    in p_text
-                ):
+                elif "this is a note to let you know that we'll soon be doing some network maintenance" in p_text:
                     data["status"] = Status("CONFIRMED")
                 elif "has been rescheduled" in p_text:
                     data["status"] = Status("RE-SCHEDULED")
@@ -50,19 +50,16 @@ class HtmlParserTelstra1(Html):
                     continue
                 strong_text = strong_element.string.strip()
                 strong_sibling = strong_element.next_sibling.next_sibling
-                data["account"] = "Criteo SA (EMEA)"
                 if strong_text == "Reference number":
-                    data["maintenance_id"] = strong_sibling.string
+                    data["maintenance_id"] = strong_sibling.string.strip()
                 elif strong_text == "Start time":
                     text_start = strong_sibling.string
-                    regex = re.search(
-                        "\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_start
-                    )
+                    regex = re.search(r"\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_start)
                     start = parser.parse(regex.group())
                     data["start"] = self.dt2ts(start)
                 elif strong_text == "End time":
                     text_end = strong_sibling.string
-                    regex = re.search("\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_end)
+                    regex = re.search(r"\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_end)
                     end = parser.parse(regex.group())
                     data["end"] = self.dt2ts(end)
                 elif strong_text == "Service/s under maintenance":
@@ -70,9 +67,7 @@ class HtmlParserTelstra1(Html):
                     # TODO: This split is just an assumption of the multiple service, to be checked with more samples
                     impacted_circuits = strong_sibling.text.split(", ")
                     for circuit_id in impacted_circuits:
-                        data["circuits"].append(
-                            CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id)
-                        )
+                        data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip()))
                 elif strong_text == "Maintenance Details":
                     sentences: List[str] = []
                     for element in strong_element.next_elements:
