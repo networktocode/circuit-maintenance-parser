@@ -2,7 +2,6 @@
 import logging
 from typing import Dict, List
 import re
-from attr import define
 from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
