@@ -2,6 +2,7 @@
 import logging
 from typing import Dict, List
 import re
+from attr import define
 from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
 
@@ -60,13 +61,17 @@ class HtmlParserTelstra1(Html):
                     regex = re.search(r"\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_start)
                     if regex is not None:
                         start = parser.parse(regex.group())
-                    data["start"] = self.dt2ts(start)
+                        data["start"] = self.dt2ts(start)
+                    else:
+                        data["start"] = "Not defined"
                 elif strong_text == "End time":
                     text_end = strong_sibling.string
                     regex = re.search(r"\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_end)
                     if regex is not None:
                         end = parser.parse(regex.group())
-                    data["end"] = self.dt2ts(end)
+                        data["end"] = self.dt2ts(end)
+                    else:
+                        data["end"] = "is not defined"
                 elif strong_text == "Service/s under maintenance":
                     data["circuits"] = []
                     # TODO: This split is just an assumption of the multiple service, to be checked with more samples
