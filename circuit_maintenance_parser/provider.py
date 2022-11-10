@@ -2,9 +2,9 @@
 import logging
 import re
 import traceback
-import chardet
 
 from typing import Iterable, List, Dict
+import chardet
 
 from pydantic import BaseModel
 
