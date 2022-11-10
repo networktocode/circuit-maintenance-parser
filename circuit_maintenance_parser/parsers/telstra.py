@@ -31,7 +31,10 @@ class HtmlParserTelstra1(Html):
                 p_text = p_element.text.lower()
                 if "attention" in p_text:
                     regex = re.search("[^attention ].*", p_text.strip())
-                    data["account"] = regex.group()
+                    if regex is not None:
+                        data["account"] = regex.group()
+                    else:
+                        data["account"] = "not Found"
                 if "maintenance has been scheduled" in p_text:
                     data["status"] = Status("CONFIRMED")
                 elif "successful" in p_text:
@@ -55,12 +58,14 @@ class HtmlParserTelstra1(Html):
                 elif strong_text == "Start time":
                     text_start = strong_sibling.string
                     regex = re.search(r"\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_start)
-                    start = parser.parse(regex.group())
+                    if regex is not None:
+                        start = parser.parse(regex.group())
                     data["start"] = self.dt2ts(start)
                 elif strong_text == "End time":
                     text_end = strong_sibling.string
                     regex = re.search(r"\d{2}\s[a-zA-Z]{3}\s\d{4}\s\d{2}[:]\d{2}[:]\d{2}", text_end)
-                    end = parser.parse(regex.group())
+                    if regex is not None:
+                        end = parser.parse(regex.group())
                     data["end"] = self.dt2ts(end)
                 elif strong_text == "Service/s under maintenance":
                     data["circuits"] = []
