@@ -746,13 +746,13 @@ python-versions = ">=3.6"
 name = "types-chardet"
 version = "5.0.4"
 description = "Typing stubs for chardet"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
 [[package]]
 name = "types-python-dateutil"
-version = "2.8.19.2"
+version = "2.8.19.3"
 description = "Typing stubs for python-dateutil"
 category = "dev"
 optional = false
@@ -842,7 +842,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "2ddc7c2009ec0ea1affb5b8a7e83ac678a09f7c19877398aa3d25b77deba6b51"
+content-hash = "dfcb07ac46d5d695fe7fdddab30146d42783d5e6df85c90a55fdee3e440b86b2"
 
 [metadata.files]
 astroid = [
@@ -1357,8 +1357,8 @@ types-chardet = [
     {file = "types_chardet-5.0.4-py3-none-any.whl", hash = "sha256:6946e22f32789a473852570810b4afe632172fae03c04bdbffe670606cc4ac11"},
 ]
 types-python-dateutil = [
-    {file = "types-python-dateutil-2.8.19.2.tar.gz", hash = "sha256:e6e32ce18f37765b08c46622287bc8d8136dc0c562d9ad5b8fd158c59963d7a7"},
-    {file = "types_python_dateutil-2.8.19.2-py3-none-any.whl", hash = "sha256:3f4dbe465e7e0c6581db11fd7a4855d1355b78712b3f292bd399cd332247e9c0"},
+    {file = "types-python-dateutil-2.8.19.3.tar.gz", hash = "sha256:a313284df5ed3fd078303262edc0efde28998cd08e5061ef1ccc0bb5fef4d2da"},
+    {file = "types_python_dateutil-2.8.19.3-py3-none-any.whl", hash = "sha256:ce6af1bdf0aca6b7dc8815a664f0e8b55da91ff7851102cf87c87178e7c8e7ec"},
 ]
 types-pytz = [
     {file = "types-pytz-2022.6.0.1.tar.gz", hash = "sha256:d078196374d1277e9f9984d49373ea043cf2c64d5d5c491fbc86c258557bd46f"},

@@ -33,7 +33,6 @@ geopy = "^2.1.0"
 tzwhere = "^3.0.3"
 backoff = "^1.11.1"
 chardet = "^5"
-types-chardet = "^5.0.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0.0"
@@ -53,6 +52,7 @@ types-pytz = "^2022.0.0"
 types-toml = "^0.10.1"
 netconan = "^0.12.3"
 toml = "0.10.2"
+types-chardet = "^5.0.4"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
