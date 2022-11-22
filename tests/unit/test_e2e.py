@@ -74,7 +74,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "aws", "aws1_result.json"),
             ],
         ),
-                # Arelion
+        # Arelion
         (
             Arelion,
             [
