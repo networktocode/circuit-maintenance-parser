@@ -1,0 +1,155 @@
+Received: from PH0PR14MB4247.namprd14.prod.outlook.com (2603:10b6:510:2a::19)
+ by BN6PR1401MB2083.namprd14.prod.outlook.com with HTTPS; Thu, 3 Nov 2022
+ 11:48:38 +0000
+Received: from SN7PR04CA0214.namprd04.prod.outlook.com (2603:10b6:806:127::9)
+ by PH0PR14MB4247.namprd14.prod.outlook.com (2603:10b6:510:2a::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.22; Thu, 3 Nov
+ 2022 11:48:35 +0000
+Received: from SN1NAM02FT0042.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:806:127:cafe::4a) by SN7PR04CA0214.outlook.office365.com
+ (2603:10b6:806:127::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.22 via Frontend
+ Transport; Thu, 3 Nov 2022 11:48:35 +0000
+Authentication-Results: spf=pass (sender IP is 66.28.3.247)
+ smtp.mailfrom=cogentco.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none
+ header.from=cogentco.com;compauth=pass reason=109
+Received-SPF: Pass (protection.outlook.com: domain of cogentco.com designates
+ 66.28.3.247 as permitted sender) receiver=protection.outlook.com;
+ client-ip=66.28.3.247; helo=engtools.sys.cogentco.com; pr=C
+Received: from engtools.sys.cogentco.com (66.28.3.247) by
+ SN1NAM02FT0042.mail.protection.outlook.com (10.97.4.129) with Microsoft SMTP
+ Server id 15.20.5791.20 via Frontend Transport; Thu, 3 Nov 2022 11:48:35
+ +0000
+Message-ID: <MNT04643245@starfish.cogentco.com>
+From: "Cogent-NoReply@cogentco.com" <Cogent-NoReply@cogentco.com>
+To: cyx_maintenancenotification@cyxtera.com
+Date: Thu, 03 Nov 2022 11:44:00 +0000
+Subject: 11/3/2022 Fiber Provider Maintenance - Minneapolis, MN
+ 1-300396173
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Return-Path: Cogent-NoReply@cogentco.com
+X-MS-Exchange-Organization-ExpirationStartTime: 03 Nov 2022 11:48:35.4396
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 9f2777eb-43b0-4840-0155-08dabd915708
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 771b4dde-ee8a-4460-aa48-1118d7040da9:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1NAM02FT0042:EE_|PH0PR14MB4247:EE_
+X-MS-Exchange-Organization-AuthSource:
+ SN1NAM02FT0042.eop-nam02.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 9f2777eb-43b0-4840-0155-08dabd915708
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:1;
+X-Forefront-Antispam-Report:
+ CIP:66.28.3.247;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:engtools.sys.cogentco.com;PTR:engtools.sys.cogentco.com;CAT:NONE;SFS:(13230022)(4636009)(286005)(451199015)(9316004)(33656002)(6512007)(8676002)(26005)(956004)(450100002)(1096003)(6486002)(34206002)(6666004)(7636003)(356005)(7596003)(336012)(83380400001)(86362001)(36736006)(66899015);DIR:INB;
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2022 11:48:35.2834
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9f2777eb-43b0-4840-0155-08dabd915708
+X-MS-Exchange-CrossTenant-Id: 771b4dde-ee8a-4460-aa48-1118d7040da9
+X-MS-Exchange-CrossTenant-AuthSource:
+ SN1NAM02FT0042.eop-nam02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR14MB4247
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.5701824
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.5791.022
+Importance: high
+X-Priority: 1
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);
+X-Microsoft-Antispam-Message-Info:
+	=?iso-8859-1?Q?dIjfjXETRTM1+NDx8b2WaewBhH+TQGOifUeZ8CoED7gEQgmjUDOQzr8pjI?=
+ =?iso-8859-1?Q?IAS/Ye8j1xz7vUxnoU4hOv6b0DmCAm6AOIBfBfrtpAJNk8eo8iFjKYCKbB?=
+ =?iso-8859-1?Q?x3AuDf2RYazR9Wp+eBA5kIizQIRCzJxJXkbJgAkEgWIf7EwmYmmgycNM+f?=
+ =?iso-8859-1?Q?Hv2BbWy1TQt8+EMpklv31uUplXpSgqKEOBbrrXbotqfGqkh53mCuDJHhV8?=
+ =?iso-8859-1?Q?/+ADltyawBewDuI2NvTpt9BLbvdiig1xNlH7mtcs1ANN0cJKtG/rlAE4M2?=
+ =?iso-8859-1?Q?7QDmeCSOsKDi/WmlTJqpid6uW77jNH05N0SaVhx5sChLpkWUCFcBB2OAGn?=
+ =?iso-8859-1?Q?qEmn4YiPF7g3QDChtaRf3i8ywmKxIuUnO4aeCiKjCRKlzXtv+EFkhrrNv9?=
+ =?iso-8859-1?Q?IEheXKyaiA3hvZMZkHqVyWwJdrT4d2pEMB52kmjqVRbbpayGigj1bZSYhW?=
+ =?iso-8859-1?Q?/zyMTLl2O2YxCcZ637r7vgaknanVaF2KGgAd97/D+ld8rgpXnaKejK5eMq?=
+ =?iso-8859-1?Q?R21UicVWNz2GfVZzCR5Elf/Mk45vRCaZ8aWAevyvjhIXOgj9J/p0Osy756?=
+ =?iso-8859-1?Q?3QD7UXP2dNbaKr4Vx1EQFbNlBkPMzjECUPwRlRiK7Dw5hKsQuSjqx+fF7m?=
+ =?iso-8859-1?Q?BujBhC93t7MQhJNTt3ryfutEgu5OYPmEVMxbg1Pjcaq8WR+xY1MbIPPvm+?=
+ =?iso-8859-1?Q?0QqSEf0NX+QQBMTwDCBk3fqL3tYOdXfuwZwnHZF5MU7PL6tmZ4N4hHSP5J?=
+ =?iso-8859-1?Q?wFIib/pYDCRSK07jmF2oUafWh5X0RFtBDy71x07/Rz4QF7TmwBRhPNYiZc?=
+ =?iso-8859-1?Q?36EUu/T8GDDCHSt1GvOkS+vtB9NSIb3gJLMcQI7Bl7qTjHKWtsJ4WYn0yq?=
+ =?iso-8859-1?Q?w0B707Q+yykNhg9+Y7uvCyyzAJVcnHTTVXZc279rknWGZ7FDXgPU2gY81b?=
+ =?iso-8859-1?Q?5V7SlYMuyAI01x0PJc2ftocungd35Ceiauv2g7S09GQUGsIt7g0G7Y65K7?=
+ =?iso-8859-1?Q?TYwcvO+CE9BSn5j21hTuMU3yBCDqjArxcH2/HrmUO+32mprMJcnFdFI+tm?=
+ =?iso-8859-1?Q?QRmqXOeKXSCfSaLgj3pjHrrs3LWJJ6Te2IKMMmnZARIneUPoyIpe6za5J6?=
+ =?iso-8859-1?Q?3eJHbTxGlHErZifqRVEFC1aXo6Q0WGgFVQ/O4c9JGWJo/CP5KXr6An1DWh?=
+ =?iso-8859-1?Q?ov1mkk6jREBaVbZ1a2P0Dvp5dkrwy1v//Zx7kg99E+voKZ13stNlVyKeea?=
+ =?iso-8859-1?Q?/p5juqI96l5sf7R7MRfSJN4qTJUavx6sD4aTunVBaAutpwnI42O+8KVgmB?=
+ =?iso-8859-1?Q?evSOiqyeo5qzOkhfnMxobughL2Gr3ytF4X/+OM9rO9topLjwquCRvmgyzW?=
+ =?iso-8859-1?Q?S/jEm9QnEtFpaLQJHoS1/cf9KYed584TqDBaXBOpMGCjj39tu8PlTMy7Z0?=
+ =?iso-8859-1?Q?Du3eSXzDcyl7PutdYZrDGt8gT/r45KMm7W16t1n88R6zyW7qS3d2axEtrM?=
+ =?iso-8859-1?Q?Suw9xPFF54IJM8eqOOCHWgRda9x/jTnbwKgUYVKztcH4qHL04NS9vuSSZP?=
+ =?iso-8859-1?Q?IPs4w5VNPqS0eFeIp1RQT2rqBGITmlrmddb/em806KHaDFcPDpr9xnPwkT?=
+ =?iso-8859-1?Q?XUw5Nrl3xgder4HO1f9161Q3bojKSWpW+gcOoy6bmyQQ8DCoMAFrQyFfP8?=
+ =?iso-8859-1?Q?O5NSWBWnTlxycZiMAUW08WMp5FE3grBWr8YD9FYJWMgL57w5sjl4wZZ1bX?=
+ =?iso-8859-1?Q?q3kHWeLwB2S+eXCpfqAcfzHq7EOoDDl4kkAc9S720RXgaqlcSh/F4FZorT?=
+ =?iso-8859-1?Q?63vz9hns59gbcr2mz2tRjCD6Lb5jGtVg3fi/QKEK9be20MKArrrL?=
+MIME-Version: 1.0
+
+CAUTION: This email originated outside of Cyxtera. Do not click links or op=
+en attachments unless you recognize the sender and have verified the conten=
+t is safe.
+
+FIBER PROVIDER MAINTENANCE
+
+Dear Cogent Customer,
+
+As a valued customer, Cogent is committed to keeping you informed about any=
+ changes in the status of your service with us. This email is to alert you =
+regarding a fiber provider maintenance which will affect your connection to=
+ Cogent:
+
+Start time: 10:00pm CT 11/3/2022 (Day 3 of 3)
+End time: 5:00am CT 11/4/2022
+Work order number: VN15285
+Order ID(s) impacted: 1-300396173
+Expected Outage/Downtime: 7 hours
+
+Cogent customers receiving service in Minneapolis, MN will be affected by t=
+his outage. This outage has been scheduled by Zayo. The purpose of this mai=
+ntenance is to replace damaged fiber. Only the Cogent Order ID(s) above wil=
+l be impacted.
+
+During this maintenance window, you will experience an interruption in serv=
+ice while Zayo completes the maintenance activities; the interruption is ex=
+pected to be less than 7 hours; however, due to the complexity of the work,=
+ your downtime may be longer.
+
+Our network operations engineers closely monitor the work and will do every=
+thing possible to minimize any inconvenience to you.  If you have any probl=
+ems with your connection after this time, or if you have any questions rega=
+rding the maintenance at any point, please call Customer Support at 1-877-7=
+-COGENT and refer to this Maintenance Ticket: VN15285.
+
+We appreciate your patience during this work and welcome any feedback. Plea=
+se send all questions and concerns to mailto:support@cogentco.com?subject=
+=3DMaintenance%20Event%20For%20Order%20ID:%201-300396173&body=3DRE:VN15285%=
+0A%0AStart%20time:10:00pm CT%2011/3/2022%0AEnd%20time:%205:00am CT%0AWork%2=
+0order%20number:%20VN15285%0AOrder%20ID(s)%20impacted:%201-300396173%0AExpe=
+cted%20Outage/Downtime:%207 hours%0APlease%20type%20any%20questions%20or%20=
+concerns%20with%20this%20event%20below%20this%20line%0A--------------
+
+
+
+Sincerely,
+
+Customer Support
+Cogent Communications
+support@cogentco.com
+877-7COGENT
