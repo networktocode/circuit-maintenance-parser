@@ -34,6 +34,8 @@ class SubjectParserCogent1(EmailSubjectParser):
         else:
             data["status"] = Status("CONFIRMED")
 
+        return [data]
+
         
 
 class TextParserCogent1(Text):
@@ -138,6 +140,7 @@ class TextParserCogent1(Text):
                 summary = data["summary"]
                 data["summary"] = summary + '\n' + line
         pprint(data)
+        return [data]
 
 
 

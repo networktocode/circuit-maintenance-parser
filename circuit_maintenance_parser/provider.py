@@ -204,7 +204,7 @@ class Cogent(GenericProvider):
     """Cogent provider custom class."""
 
     _processors: List[GenericProcessor] = [
-        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserCogent1]),
+        #CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserCogent1]),
         CombinedProcessor(data_parsers=[EmailDateParser, TextParserCogent1, SubjectParserCogent1]),
     ]
     _default_organizer = "support@cogentco.com"
