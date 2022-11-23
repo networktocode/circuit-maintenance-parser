@@ -24,7 +24,7 @@ class HtmlParserTelstra1(Html):
         return [data]
 
     def add_maintenance_data(self, table: ResultSet, data: Dict):
-        """populate data dict"""
+        """Populate data dict."""
         for strong_element in table.find_all("strong"):
             if not strong_element.string:
                 continue
