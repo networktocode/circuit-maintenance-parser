@@ -8,8 +8,6 @@ from bs4.element import ResultSet  # type: ignore
 
 from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status, Text
 
-from pprint import pprint
-
 logger = logging.getLogger(__name__)
 
 # pylint: disable=too-many-branches
@@ -25,14 +23,28 @@ class SubjectParserCogent1(EmailSubjectParser):
         11/19/2022 Circuit Provider Maintenance - Edina, MN 1-300123456
         Correction 06/11/2021 AB987654321-1 Planned Network Maintenance - San Jose, CA 1-123456789
         """
-        print(subject)
-        data = {}
-        if subject.startswith("Correction"):
+
+        data = {"circuits": []}
+        
+        subject = subject.lower()
+
+        if subject.startswith("correction") or "rescheduled" in subject:
             data["status"] = Status("RE-SCHEDULED")
-        elif "Planned" in subject or "Maintenance" in subject:
+        elif subject.startswith("cancellation"):
+            data["status"] = Status("CANCELLED")
+        elif "planned" in subject or "provider" in subject or "emergency" in subject:
             data["status"] = Status("CONFIRMED")
+        elif "completed" in subject:
+            data["status"] = Status("COMPLETED")
         else:
-            data["status"] = Status("CONFIRMED")
+            data["status"] = Status("NO-CHANGE")
+
+        match = re.search(r".* ([\d-]+)", subject)
+        if match:
+            circuit_id = match.group(1)
+            data["circuits"].append(
+                CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip())
+            )
 
         return [data]
 
@@ -65,14 +77,13 @@ class TextParserCogent1(Text):
         
         """
         data = {
-            "circuits": [],
-            "summary": "",
+            #"circuits": [],
+            "summary": "Cogent circuit maintenance",
         }
 
         lines = text.splitlines()
 
         for line in lines:
-            print(f"LINE: {line}")
             if line.startswith("Dear"):
                 match = re.search(r"Dear (.*),", line)
                 if match:
@@ -87,7 +98,6 @@ class TextParserCogent1(Text):
                     end_str = " ".join(match.groups())
             elif line.startswith("Cogent customers receiving service"):
                 data['summary'] = line
-                print(f"LINE: {line}")
                 match = re.search(r"[^Cogent].*?((\b[A-Z][a-z\s-]+)+, ([A-Za-z-]+[\s-]))", line)
                 if match:
                     parsed_timezone = self._geolocator.city_timezone(match.group(1).strip())
@@ -137,9 +147,7 @@ class TextParserCogent1(Text):
                             CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip())
                         )
             elif line.startswith("During this maintenance"):
-                summary = data["summary"]
-                data["summary"] = summary + '\n' + line
-        pprint(data)
+                data["summary"] = line
         return [data]
 
 
@@ -151,7 +159,7 @@ class HtmlParserCogent1(Html):
         """Execute parsing."""
         data = {}
         self.parse_div(soup.find_all("div", class_="a3s aiL"), data)
-        #self.parse_title(soup.find_all("title"), data)
+        self.parse_title(soup.find_all("title"), data)
         return [data]
 
     def parse_div(self, divs: ResultSet, data: Dict):  # pylint: disable=too-many-locals
