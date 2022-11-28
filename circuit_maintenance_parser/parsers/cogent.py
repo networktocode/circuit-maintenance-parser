@@ -20,12 +20,10 @@ class SubjectParserCogent1(EmailSubjectParser):
         """Parse subject.
 
         Example:
-
         11/19/2022 Circuit Provider Maintenance - Edina, MN 1-300123456
         Correction 06/11/2021 AB987654321-1 Planned Network Maintenance - San Jose, CA 1-123456789
         """
-
-        data = {"circuits": []}
+        data: Dict = {"circuits": []}
 
         subject = subject.lower()
 
@@ -49,10 +47,10 @@ class SubjectParserCogent1(EmailSubjectParser):
 
 
 class TextParserCogent1(Text):
-    """Parse text body of Cogent emails"""
+    """Parse text body of Cogent emails."""
 
     def parse_text(self, text):
-        """Execute parsing of text
+        """Execute parsing of text.
 
         Example:
             CIRCUIT PROVIDER MAINTENANCE
@@ -98,12 +96,12 @@ class TextParserCogent1(Text):
                 data["summary"] = line
                 match = re.search(r"[^Cogent].*?((\b[A-Z][a-z\s-]+)+, ([A-Za-z-]+[\s-]))", line)
                 if match:
-                    parsed_timezone = self._geolocator.city_timezone(match.group(1).strip())
-                    local_timezone = timezone(parsed_timezone)
+                    local_timezone = timezone(self._geolocator.city_timezone(match.group(1).strip()))
+
                     # set start time using the local city timezone
                     try:
                         start = datetime.strptime(start_str, "%I:%M %p %d/%m/%Y")
-                    except:
+                    except ValueError:
                         start = datetime.strptime(start_str, "%I:%M%p %d/%m/%Y")
                     local_time = local_timezone.localize(start)
                     # set start time to UTC
@@ -119,7 +117,7 @@ class TextParserCogent1(Text):
                     # set end time using the local city timezone
                     try:
                         end = datetime.strptime(end_str, "%I:%M %p %d/%m/%Y")
-                    except:
+                    except ValueError:
                         end = datetime.strptime(end_str, "%I:%M%p %d/%m/%Y")
                     local_time = local_timezone.localize(end)
                     # set end time to UTC
