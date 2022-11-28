@@ -1,7 +1,7 @@
 """Cogent parser."""
 import logging
 import re
-from typing import Dict, List
+from typing import Dict
 from datetime import datetime
 from pytz import timezone, UTC
 from bs4.element import ResultSet  # type: ignore
@@ -12,25 +12,26 @@ logger = logging.getLogger(__name__)
 
 # pylint: disable=too-many-branches
 
+
 class SubjectParserCogent1(EmailSubjectParser):
     """Subject parser for Cogent nofifications."""
 
     def parse_subject(self, subject: str):
         """Parse subject.
 
-        Example: 
+        Example:
 
         11/19/2022 Circuit Provider Maintenance - Edina, MN 1-300123456
         Correction 06/11/2021 AB987654321-1 Planned Network Maintenance - San Jose, CA 1-123456789
         """
 
         data = {"circuits": []}
-        
+
         subject = subject.lower()
 
         if subject.startswith("correction") or "rescheduled" in subject:
             data["status"] = Status("RE-SCHEDULED")
-        elif subject.startswith("cancellation"):
+        elif "cancellation" in subject:
             data["status"] = Status("CANCELLED")
         elif "planned" in subject or "provider" in subject or "emergency" in subject:
             data["status"] = Status("CONFIRMED")
@@ -42,13 +43,10 @@ class SubjectParserCogent1(EmailSubjectParser):
         match = re.search(r".* ([\d-]+)", subject)
         if match:
             circuit_id = match.group(1)
-            data["circuits"].append(
-                CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip())
-            )
+            data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip()))
 
         return [data]
 
-        
 
 class TextParserCogent1(Text):
     """Parse text body of Cogent emails"""
@@ -74,10 +72,10 @@ class TextParserCogent1(Text):
             During this maintenance window, you will experience an interruption in service while Zayo completes the maintenance activities; the interruption is expected to be less than 7 hours; however, due to the complexity of the work, your downtime may be longer.
 
             Our network operations engineers closely monitor the work and will do everything possible to minimize any inconvenience to you.  If you have any problems with your connection after this time, or if you have any questions regarding the maintenance at any point, please call Customer Support at 1-877-7-COGENT and refer to this Maintenance Ticket: VN16123.
-        
+
         """
         data = {
-            #"circuits": [],
+            # "circuits": [],
             "summary": "Cogent circuit maintenance",
         }
 
@@ -97,7 +95,7 @@ class TextParserCogent1(Text):
                 if match:
                     end_str = " ".join(match.groups())
             elif line.startswith("Cogent customers receiving service"):
-                data['summary'] = line
+                data["summary"] = line
                 match = re.search(r"[^Cogent].*?((\b[A-Z][a-z\s-]+)+, ([A-Za-z-]+[\s-]))", line)
                 if match:
                     parsed_timezone = self._geolocator.city_timezone(match.group(1).strip())
@@ -143,13 +141,10 @@ class TextParserCogent1(Text):
                 match = re.search(r"Order ID\(s\) impacted: (.*)", line)
                 if match:
                     for circuit_id in match.group(1).split(","):
-                        data["circuits"].append(
-                            CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip())
-                        )
+                        data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip()))
             elif line.startswith("During this maintenance"):
                 data["summary"] = line
         return [data]
-
 
 
 class HtmlParserCogent1(Html):
