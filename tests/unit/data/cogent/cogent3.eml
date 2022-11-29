@@ -1,0 +1,85 @@
+Received: from PH0PR14MB4247.namprd14.prod.outlook.com (2603:10b6:510:2a::19)
+ by BN6PR1401MB2083.namprd14.prod.outlook.com with HTTPS; Thu, 3 Nov 2022
+ 11:48:38 +0000
+Received: from SN7PR04CA0214.namprd04.prod.outlook.com (2222:10b6:8306:127::9)
+ by PH0PR14MB4247.namprd14.prod.outlook.com (2222:10b6:510:23a::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.24.5391.22; Thu, 3 Nov
+ 2022 11:48:35 +0000
+Received: from SN1NAM02GT0032.eop-nam01.prod.protection.outlook.com
+ (2444:10v6:806:127:cafe::4a) by SR7PRP4C$0214.outlook.office365.com
+ (2444:10bj:806:127::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5291.22 via Frontend
+ Transport; Thu, 3 Nov 2022 11:48:35 +0000
+Authentication-Results: spf=pass (sender IP is 11.22.33.244)
+ smtp.mailfrom=cogentco.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none
+ header.from=cogentco.com;compauth=pass reason=109
+Received-SPF: Pass (protection.outlook.com: domain of cogentco.com designates
+ 11.22.33.244 as permitted sender) receiver=protection.outlook.com;
+ client-ip=11.22.33.244; helo=engtools.sys.cogentco.com; pr=C
+Received: from engtools.sys.cogentco.com (11.22.33.244) by
+ SN1NAM02FT0042.mail.protection.outlook.com (10.20.30.140) with Microsoft SMTP
+ Server id 13.20.5791.20 via Frontend Transport; Thu, 3 Nov 2022 11:48:35
+ +0000
+Message-ID: <MNT04344255@starfish.cogentco.com>
+From: "Cogent-NoReply@cogentco.com" <Cogent-NoReply@cogentco.com>
+To: example@example.com
+Date: Thu, 03 Nov 2022 11:44:00 +0000
+Subject: 11/3/2022 Fiber Provider Maintenance - Minneapolis, MN
+ 1-300123456
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Return-Path: Cogent-NoReply@cogentco.com
+X-MS-Exchange-Organization-ExpirationStartTime: 03 Nov 2022 11:48:35.4396
+ (UTC)
+X-EOPAttributedMessage: 
+ (UTC)
+MIME-Version: 1.0
+
+CAUTION: This email originated outside of Cyxtera. Do not click links or op=
+en attachments unless you recognize the sender and have verified the conten=
+t is safe.
+
+FIBER PROVIDER MAINTENANCE
+
+Dear Cogent Customer,
+
+As a valued customer, Cogent is committed to keeping you informed about any=
+ changes in the status of your service with us. This email is to alert you =
+regarding a fiber provider maintenance which will affect your connection to=
+ Cogent:
+
+Start time: 10:00pm CT 11/3/2022 (Day 3 of 3)
+End time: 5:00am CT 11/4/2022
+Work order number: VN12345
+Order ID(s) impacted: 1-300123456
+Expected Outage/Downtime: 7 hours
+
+Cogent customers receiving service in Minneapolis, MN will be affected by t=
+his outage. This outage has been scheduled by Zayo. The purpose of this mai=
+ntenance is to replace damaged fiber. Only the Cogent Order ID(s) above wil=
+l be impacted.
+
+During this maintenance window, you will experience an interruption in serv=
+ice while Zayo completes the maintenance activities; the interruption is ex=
+pected to be less than 7 hours; however, due to the complexity of the work,=
+ your downtime may be longer.
+
+Our network operations engineers closely monitor the work and will do every=
+thing possible to minimize any inconvenience to you.  If you have any probl=
+ems with your connection after this time, or if you have any questions rega=
+rding the maintenance at any point, please call Customer Support at 1-877-7=
+-COGENT and refer to this Maintenance Ticket: VN15285.
+
+We appreciate your patience during this work and welcome any feedback. Plea=
+se send all questions and concerns to mailto:support@cogentco.com
+
+
+
+Sincerely,
+
+Customer Support
+Cogent Communications
+support@cogentco.com
+877-7COGENT

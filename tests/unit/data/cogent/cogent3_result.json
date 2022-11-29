@@ -1,0 +1,16 @@
+[
+    {
+        "account": "Cogent Customer",
+        "circuits": [
+            {
+                "circuit_id": "1-300123456",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1649671200,
+        "maintenance_id": "VN12345",
+        "start": 1667475840,
+        "status": "CONFIRMED",
+        "summary": "During this maintenance window, you will experience an interruption in service while Zayo completes the maintenance activities; the interruption is expected to be less than 7 hours; however, due to the complexity of the work, your downtime may be longer."
+    }
+]
