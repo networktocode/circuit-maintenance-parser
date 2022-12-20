@@ -1,8 +1,16 @@
 [
     {
         "account": "customer name",
+        "circuits": [
+            {
+                "circuit_id": "HKG TOK EPL 23569741",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1665525600,
         "maintenance_id": "PN458762",
         "start": 1665500400,
-        "end": 1665525600
+        "status": "CONFIRMED",
+        "summary": ""
     }
 ]

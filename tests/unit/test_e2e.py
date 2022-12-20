@@ -64,16 +64,6 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "aquacomms", "aquacomms1_result.json"),
             ],
         ),
-        # AWS
-        (
-            AWS,
-            [
-                ("email", Path(dir_path, "data", "aws", "aws1.eml")),
-            ],
-            [
-                Path(dir_path, "data", "aws", "aws1_result.json"),
-            ],
-        ),
         # Arelion
         (
             Arelion,
@@ -91,6 +81,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "arelion", "arelion2_result.json"),
+            ],
+        ),
+        # AWS
+        (
+            AWS,
+            [
+                ("email", Path(dir_path, "data", "aws", "aws1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "aws", "aws1_result.json"),
             ],
         ),
         (
