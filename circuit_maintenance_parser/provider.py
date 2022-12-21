@@ -329,7 +329,8 @@ class Telstra(GenericProvider):
 
     _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[ICal]),
-        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTelstra1, HtmlParserTelstra2]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTelstra2]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTelstra1]),
     ]
     _default_organizer = "gpen@team.telstra.com"
 

@@ -73,6 +73,7 @@ class HtmlParserTelstra1(Html):
                         # First sentence containts 'Maintenance Details:' so we skip it
                         data["summary"] = ". ".join(sentences[1:])
             break
+
 class HtmlParserTelstra2(Html):
     """Notifications Parser for Telstra notifications."""
 
