@@ -13,6 +13,7 @@ from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Statu
 
 logger = logging.getLogger(__name__)
 
+
 class HtmlParserTelstra1(Html):
     """Notifications Parser for Telstra notifications."""
 
@@ -73,6 +74,7 @@ class HtmlParserTelstra1(Html):
                         # First sentence containts 'Maintenance Details:' so we skip it
                         data["summary"] = ". ".join(sentences[1:])
             break
+
 
 class HtmlParserTelstra2(Html):
     """Notifications Parser for Telstra notifications."""
