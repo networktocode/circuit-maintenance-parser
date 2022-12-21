@@ -25,7 +25,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
-from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import SubjectParserZayo1, HtmlParserZayo1
@@ -365,6 +365,41 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
         # Telstra
         (
             HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra1.html"),
+            Path(dir_path, "data", "telstra", "telstra1_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra2.html"),
+            Path(dir_path, "data", "telstra", "telstra2_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra3.html"),
+            Path(dir_path, "data", "telstra", "telstra3_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra4.html"),
+            Path(dir_path, "data", "telstra", "telstra4_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra5.html"),
+            Path(dir_path, "data", "telstra", "telstra5_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra6.html"),
+            Path(dir_path, "data", "telstra", "telstra6_result.json"),
+        ),
+        (
+            HtmlParserTelstra1,
+            Path(dir_path, "data", "telstra", "telstra7.html"),
+            Path(dir_path, "data", "telstra", "telstra7_result.json"),
+        ),
+        (
+            HtmlParserTelstra2,
             Path(dir_path, "data", "telstra", "telstra8.html"),
             Path(dir_path, "data", "telstra", "telstra8_result.json"),
         ),

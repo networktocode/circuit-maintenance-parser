@@ -35,7 +35,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
-from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
@@ -329,7 +329,7 @@ class Telstra(GenericProvider):
 
     _processors: List[GenericProcessor] = [
         SimpleProcessor(data_parsers=[ICal]),
-        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTelstra1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserTelstra1, HtmlParserTelstra2]),
     ]
     _default_organizer = "gpen@team.telstra.com"
 
