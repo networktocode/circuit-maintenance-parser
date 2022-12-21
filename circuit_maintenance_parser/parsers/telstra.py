@@ -114,7 +114,7 @@ class HtmlParserTelstra2(Html):
                 impacted_circuits = strong_sibling.text.split(", ")
                 for circuit_id in impacted_circuits:
                     data["circuits"].append(CircuitImpact(impact=Impact("OUTAGE"), circuit_id=circuit_id.strip()))
-            elif strong_text == "Maintenance Details":
+            elif strong_text == "Maintenance details":
                 sentences: List[str] = []
                 for element in strong_element.next_elements:
                     if element.string == "Reference number":
