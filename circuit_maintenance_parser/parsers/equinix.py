@@ -86,6 +86,8 @@ class HtmlParserEquinix(Html):
                     impact = Impact.OUTAGE
                 elif "Loss of redundancy" in impact_line:
                     impact = Impact.REDUCED_REDUNDANCY
+                elif "Traffic will be re-routed" in impact_line:
+                    impact = Impact.REDUCED_REDUNDANCY
         return impact
 
     def _parse_table(self, theader_elements, data, impact):  # pylint: disable=no-self-use
@@ -97,7 +99,14 @@ class HtmlParserEquinix(Html):
                         continue
                     circuit_info = list(tr_elem.find_all("td"))
                     if circuit_info:
-                        account, _, circuit = circuit_info  # pylint: disable=unused-variable
+                        if len(circuit_info) == 4:
+                            # Equinix Connect notifications contain the IBX name
+                            account, _, _, circuit = circuit_info  # pylint: disable=unused-variable
+                        elif len(circuit_info) == 14:
+                            # Equinix Fabric notifications include a lot of additional detail on seller and subscriber ID's
+                            account, _, _, circuit, _, _, _, _, _, _, _, _, _, _ = circuit_info  # pylint: disable=unused-variable
+                        else:
+                            account, _, circuit = circuit_info  # pylint: disable=unused-variable
                         data["circuits"].append(
                             {
                                 "circuit_id": circuit.text,
