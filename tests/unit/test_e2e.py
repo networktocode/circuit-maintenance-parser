@@ -651,6 +651,17 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        (
+            Verizon,
+            [
+                ("html", Path(dir_path, "data", "verizon", "verizon5.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "verizon", "verizon5_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
         # Zayo
         (
             Zayo,
