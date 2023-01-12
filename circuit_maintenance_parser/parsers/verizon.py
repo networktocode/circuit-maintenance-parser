@@ -57,7 +57,7 @@ class HtmlParserVerizon1(Html):
                 data["start"] = self.dt2ts(start)
                 data["end"] = self.dt2ts(end)
 
-        for row in circuit_table.find("tbody").find_all("tr"):
+        for row in circuit_table.find_all("tr"):
             cells = row.find_all("td")
             cells_text = [cell.string.strip() for cell in cells if cell.string]
             if not cells_text or cells_text[0].startswith("Company Name"):
