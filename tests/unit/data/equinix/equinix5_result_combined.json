@@ -1,0 +1,25 @@
+[   
+    {
+        "account": "123456",
+        "circuits": [
+            {
+                "circuit_id": "24682468-A",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "135791357-A",
+                "impact": "NO-IMPACT"
+            }
+        ],
+        "end": 1667426400,
+        "maintenance_id": "5-9876543210",
+        "organizer": "servicedesk@equinix.com",
+        "provider": "equinix",
+        "sequence": 1,
+        "stamp": 1638803002,
+        "start": 1667397600,
+        "status": "CONFIRMED",
+        "summary": "[External] REMINDER - Scheduled Software Upgrade on Infrastructure device-SG Metro Area Network Maintenance -02-NOV-2022 [5-9876543210]",
+        "uid": "0"
+    }
+]
