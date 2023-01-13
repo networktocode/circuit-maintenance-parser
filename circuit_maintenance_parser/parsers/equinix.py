@@ -104,7 +104,22 @@ class HtmlParserEquinix(Html):
                             account, _, _, circuit = circuit_info  # pylint: disable=unused-variable
                         elif len(circuit_info) == 14:
                             # Equinix Fabric notifications include a lot of additional detail on seller and subscriber ID's
-                            account, _, _, circuit, _, _, _, _, _, _, _, _, _, _ = circuit_info  # pylint: disable=unused-variable
+                            (
+                                account,
+                                _,
+                                _,
+                                circuit,
+                                _,
+                                _,
+                                _,
+                                _,
+                                _,
+                                _,
+                                _,
+                                _,
+                                _,
+                                _,
+                            ) = circuit_info  # pylint: disable=unused-variable
                         else:
                             account, _, circuit = circuit_info  # pylint: disable=unused-variable
                         data["circuits"].append(
