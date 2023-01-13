@@ -9,13 +9,8 @@
         ],
         "end": 1679886000,
         "maintenance_id": "987654321-1",
-        "organizer": "NO-REPLY-sched-maint@EMEA.verizonbusiness.com",
-        "provider": "verizon",
-        "sequence": 1,
-        "stamp": 1673372234,
         "start": 1679868000,
         "status": "CONFIRMED",
-        "summary": "A Third Party vendor will be performing scheduled network maintenance.",
-        "uid": "0"
+        "summary": "A Third Party vendor will be performing scheduled network maintenance."
     }
 ]
