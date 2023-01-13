@@ -120,8 +120,10 @@ class HtmlParserEquinix(Html):
                                 _,
                                 _,
                             ) = circuit_info  # pylint: disable=unused-variable
-                        else:
+                        elif len(circuit_info) == 3:
                             account, _, circuit = circuit_info  # pylint: disable=unused-variable
+                        else:
+                            return
                         data["circuits"].append(
                             {
                                 "circuit_id": circuit.text,
