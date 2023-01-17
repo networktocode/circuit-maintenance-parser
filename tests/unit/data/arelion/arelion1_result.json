@@ -13,13 +13,13 @@
         ],
         "end": 1628596800,
         "maintenance_id": "PWIC111111.1",
-        "organizer": "mailto:carrier-csc@teliacompany.com",
-        "provider": "teliacarrier.com",
+        "organizer": "mailto:support@arelion.com",
+        "provider": "arelion.com",
         "sequence": 34,
         "stamp": 1627891506,
         "start": 1628568000,
         "status": "CANCELLED",
-        "summary": "PWIC111111.1: Planned work notification from Telia Carrier",
-        "uid": "PWIC111111.1@teliacarrier.com"
+        "summary": "PWIC111111.1: Planned work notification from Arelion",
+        "uid": "PWIC111111.1@arelion.com"
     }
 ]

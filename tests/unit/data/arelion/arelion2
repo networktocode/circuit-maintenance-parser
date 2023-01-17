@@ -1,24 +1,24 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Telia Carrier//Change Management Tool
+PRODID:-//Arelion//Change Management Tool
 BEGIN:VEVENT
 DTSTART;VALUE=DATE-TIME:20210810T040000Z
 DTEND;VALUE=DATE-TIME:20210810T120000Z
 DTSTAMP;VALUE=DATE-TIME:20210802T080506Z
-UID:PWIC111111.1@teliacarrier.com
-SUMMARY:PWIC111111.1: Planned work notification from Telia Carrier
-ORGANIZER;CN="Telia Carrier CSC":mailto:carrier-csc@teliacompany.com
+UID:PWIC111111.1@arelion.com
+SUMMARY:PWIC111111.1: Planned work notification from Arelion
+ORGANIZER;CN="Arelion CSC":mailto:support@arelion.com
 SEQUENCE:34
-X-MAINTNOTE-PROVIDER:teliacarrier.com
+X-MAINTNOTE-PROVIDER:arelion.com
 X-MAINTNOTE-ACCOUNT:1111
 X-MAINTNOTE-MAINTENANCE-ID:PWIC111111.1
 X-MAINTNOTE-IMPACT:OUTAGE
 X-MAINTNOTE-OBJECT-ID:IC-111111
 X-MAINTNOTE-OBJECT-ID:IC-222222
 X-MAINTNOTE-STATUS:CANCELLED
-DESCRIPTION:Please note that Telia Carrier will perform maintenance work as
+DESCRIPTION:Please note that Arelion will perform maintenance work as
   outlined below.\n\nPlanned work reference: PWIC111111\nAction and Reason:
-  Telia Carrier is upgrading its transmission capacity in order to fulfill 
+  Arelion is upgrading its transmission capacity in order to fulfill 
  customer needs. 
 The work will be done in several service windows (contain
  ing both Primary and Backup). 
@@ -29,24 +29,24 @@ several times.\nLo
 END:VEVENT
 BEGIN:VEVENT
 VERSION:2.0
-PRODID:-//Telia Carrier//Change Management Tool
+PRODID:-//Arelion//Change Management Tool
 DTSTART;VALUE=DATE-TIME:20210810T040000Z
 DTEND;VALUE=DATE-TIME:20210810T120000Z
 DTSTAMP;VALUE=DATE-TIME:20210802T080506Z
-UID:PWIC111111.2@teliacarrier.com
-SUMMARY:PWIC111111.2: Planned work notification from Telia Carrier
-ORGANIZER;CN="Telia Carrier CSC":mailto:carrier-csc@teliacompany.com
+UID:PWIC111111.2@arelion.com
+SUMMARY:PWIC111111.2: Planned work notification from Arelion
+ORGANIZER;CN="Arelion CSC":mailto:support@arelion.com
 SEQUENCE:34
-X-MAINTNOTE-PROVIDER:teliacarrier.com
+X-MAINTNOTE-PROVIDER:arelion.com
 X-MAINTNOTE-ACCOUNT:1111
 X-MAINTNOTE-MAINTENANCE-ID:PWIC111111.2
 X-MAINTNOTE-IMPACT:OUTAGE
 X-MAINTNOTE-OBJECT-ID:IC-111111
 X-MAINTNOTE-OBJECT-ID:IC-222222
 X-MAINTNOTE-STATUS:CANCELLED
-DESCRIPTION:Please note that Telia Carrier will perform maintenance work as
+DESCRIPTION:Please note that Arelion will perform maintenance work as
   outlined below.\n\nPlanned work reference: PWIC111111\nAction and Reason:
-  Telia Carrier is upgrading its transmission capacity in order to fulfill 
+  Arelion is upgrading its transmission capacity in order to fulfill 
  customer needs. 
 The work will be done in several service windows (contain
  ing both Primary and Backup). 

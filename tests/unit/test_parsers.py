@@ -229,6 +229,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "equinix", "equinix4.eml"),
             Path(dir_path, "data", "equinix", "equinix4_result.json"),
         ),
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix5.eml"),
+            Path(dir_path, "data", "equinix", "equinix5_result.json"),
+        ),
         # GTT
         (
             HtmlParserGTT1,
@@ -429,6 +434,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserVerizon1,
             Path(dir_path, "data", "verizon", "verizon4.html"),
             Path(dir_path, "data", "verizon", "verizon4_result.json"),
+        ),
+        (
+            HtmlParserVerizon1,
+            Path(dir_path, "data", "verizon", "verizon5.html"),
+            Path(dir_path, "data", "verizon", "verizon5_result.json"),
         ),
         # Zayo
         (

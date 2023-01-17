@@ -4,6 +4,7 @@ import re
 import traceback
 
 from typing import Iterable, List, Dict
+import chardet
 
 from pydantic import BaseModel
 
@@ -19,7 +20,7 @@ from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
-from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
+from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, TextParserCogent1, SubjectParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -95,7 +96,8 @@ class GenericProvider(BaseModel):
             if filter_data_type not in filter_dict:
                 continue
 
-            data_part_content = data_part.content.decode().replace("\r", "").replace("\n", "")
+            data_part_encoding = chardet.detect(data_part.content).get("encoding", "utf-8")
+            data_part_content = data_part.content.decode(data_part_encoding).replace("\r", "").replace("\n", "")
             if any(re.search(filter_re, data_part_content) for filter_re in filter_dict[filter_data_type]):
                 logger.debug("Matching %s filter expression for %s.", filter_type, data_part_content)
                 return True
@@ -172,6 +174,14 @@ class AquaComms(GenericProvider):
     _default_organizer = "tickets@aquacomms.com"
 
 
+class Arelion(GenericProvider):
+    """Arelion (formerly Telia Carrier) provider custom class."""
+
+    _exclude_filter = {EMAIL_HEADER_SUBJECT: ["Disturbance Information"]}
+
+    _default_organizer = "support@arelion.com"
+
+
 class AWS(GenericProvider):
     """AWS provider custom class."""
 
@@ -195,6 +205,7 @@ class Cogent(GenericProvider):
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserCogent1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, TextParserCogent1, SubjectParserCogent1]),
     ]
     _default_organizer = "support@cogentco.com"
 
@@ -308,12 +319,10 @@ class Sparkle(GenericProvider):
     _default_organizer = "TISAmericaNOC@tisparkle.com"
 
 
-class Telia(GenericProvider):
+class Telia(Arelion):
     """Telia provider custom class."""
 
-    _exclude_filter = {EMAIL_HEADER_SUBJECT: ["Disturbance Information"]}
-
-    _default_organizer = "carrier-csc@teliacompany.com"
+    # Kept for compatibility purposes, but Telia is renamed Arelion
 
 
 class Telstra(GenericProvider):

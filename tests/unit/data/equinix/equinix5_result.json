@@ -1,0 +1,17 @@
+[   
+    {
+        "account": "123456",
+        "circuits": [
+            {
+                "circuit_id": "24682468-A",
+                "impact": "NO-IMPACT"
+            },
+            {
+                "circuit_id": "135791357-A",
+                "impact": "NO-IMPACT"
+            }
+        ],
+        "end": 1667426400,
+        "start": 1667397600
+    }
+]
