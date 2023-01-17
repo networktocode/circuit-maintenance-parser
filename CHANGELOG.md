@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.2.1 - 2023-01-17
+
+### Changed
+
+- #197 - Updated Equinix parser: Adding support for additional impact statement and notification types.
+- #192 - Updated Cogent parser: Adding subject and text parser.
+- #186 - Updated Telia Carrier as Arelion (while keeping Telia for backwards compatibility).
+
+### Fixed
+
+- #198 - Fixed Verizon parser: use European-style day-first date parsing
+- #187 - Fixed Zayo parser: adds chardet.detect method before decoding data_part.content.
+
 ## v2.2.0 - 2022-10-25
 
 ### Added
