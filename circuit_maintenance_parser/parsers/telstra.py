@@ -139,15 +139,19 @@ class HtmlParserTelstra2(Html):
                         data["account"] = regex.group()
                     else:
                         data["account"] = "not Found"
-                if "maintenance has been scheduled" in p_text:
+            for span_element in table.find_all("span"):
+                span_text = span_element.text.lower()
+                if "planned maintenance to our network infrastructure" in span_text:
                     data["status"] = Status("CONFIRMED")
-                elif "successful" in p_text:
-                    data["status"] = Status("COMPLETED")
-                elif "this is a note to let you know that we'll soon be doing some network maintenance" in p_text:
+                elif "emergency maintenance to our network infrastructure" in span_text:
                     data["status"] = Status("CONFIRMED")
-                elif "has been rescheduled" in p_text:
+                elif "has been rescheduled" in span_text:
                     data["status"] = Status("RE-SCHEDULED")
-                elif "has been withdrawn" in p_text or "has been cancelled" in p_text:
+                elif "has been completed successfully" in span_text:
+                    data["status"] = Status("COMPLETED")
+                elif "did not proceed" in span_text or "has been withdrawn" in span_text or "has been cancelled" in span_text:
+                    data["status"] = Status("CANCELLED")
+                elif "was unsuccessful" in span_text:
                     data["status"] = Status("CANCELLED")
                 else:
                     continue

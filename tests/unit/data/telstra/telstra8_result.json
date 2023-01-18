@@ -1,8 +1,15 @@
 [
     {
         "account": "customer name",
-        "summary": "\n                                                                                DCT/APT Emergency Maintenance\n                                                                                Notification\n                                                                            . \n                                                                                Please be informed of emergency\n                                                                                maintenance\n                                                                            ",
-        "maintenance_id": "PN458762",
+        "summary": "\n                        DCT/APT Emergency Maintenance Notification\n                      . \n                        Please be informed of emergency maintenance\n                      ",
+        "circuits": [
+            {
+                "circuit_id": "HKG TOK EPL 9000156416",
+                "impact": "OUTAGE"
+            }
+        ],
+        "maintenance_id": "PN498484",
+        "status": "CONFIRMED",
         "start": 1665500400,
         "end": 1665525600
     }
