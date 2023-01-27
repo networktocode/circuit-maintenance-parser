@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.2.2 - 2023-01-27
+
+### Changed
+
+- #204 - Updated pydantic version support
+
 ## v2.2.1 - 2023-01-17
 
 ### Changed
