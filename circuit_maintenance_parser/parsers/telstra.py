@@ -149,7 +149,11 @@ class HtmlParserTelstra2(Html):
                     data["status"] = Status("RE-SCHEDULED")
                 elif "has been completed successfully" in span_text:
                     data["status"] = Status("COMPLETED")
-                elif "did not proceed" in span_text or "has been withdrawn" in span_text or "has been cancelled" in span_text:
+                elif (
+                    "did not proceed" in span_text
+                    or "has been withdrawn" in span_text
+                    or "has been cancelled" in span_text
+                ):
                     data["status"] = Status("CANCELLED")
                 elif "was unsuccessful" in span_text:
                     data["status"] = Status("CANCELLED")
