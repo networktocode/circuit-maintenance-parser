@@ -593,6 +593,28 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (
             Telstra,
             [
+                ("html", Path(dir_path, "data", "telstra", "telstra7.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra7_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
+                ("html", Path(dir_path, "data", "telstra", "telstra8.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "telstra", "telstra8_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Telstra,
+            [
                 ("ical", GENERIC_ICAL_DATA_PATH),
             ],
             [
@@ -861,6 +883,7 @@ Details:
 Failed creating Maintenance notification for Telstra.
 Details:
 - Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
+- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra2) was matching any of the provided data types (ical).
 - Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra1) was matching any of the provided data types (ical).
 """,
         ),
