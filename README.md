@@ -336,6 +336,18 @@ Details:
 - Processor CombinedProcessor from Zayo failed due to: Debugging exception
 ```
 
+> Note: `invoke build` will result in an error due to no Dockerfile. This is expected as the library runs simple pytest testing without a container.
+
+```
+-> % invoke build
+Building image circuit-maintenance-parser:2.2.2-py3.8
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2B done
+#1 DONE 0.0s
+WARNING: failed to get git remote url: fatal: No remote configured to list refs from.
+ERROR: failed to solve: rpc error: code = Unknown desc = failed to solve with frontend dockerfile.v0: failed to read dockerfile: open /var/lib/docker/tmp/buildkit-mount1243547759/Dockerfile: no such file or directory
+```
+
 ## Questions
 
 For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
