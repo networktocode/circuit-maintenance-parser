@@ -313,6 +313,35 @@ The project is following Network to Code software development guidelines and is 
 4. Update the `unit/test_e2e.py` with the new provider, providing some data to test and validate the final `Maintenances` created.
 5. **Expose the new `Provider` class** updating the map `SUPPORTED_PROVIDERS` in `circuit_maintenance_parser/__init__.py` to officially expose the `Provider`.
 
+### How to debug circuit-maintenance-parser library locally
+
+1. `poetry install` updates the library and its dependencies locally.
+2. `circuit-maintenance-parser` is now built with your recent local changes.
+
+If you were to add loggers or debuggers to one of the classes:
+
+```
+───────────────────────────────────┐
+• 62: class HtmlParserZayo1(Html): │
+───────────────────────────────────┘
+│ 62 │                                                                                                                     │ 62 │
+│ 63 │    def parse_bs(self, btags: ResultSet, data: dict):                                                                │ 63 │    def parse_bs(self, btags: ResultSet, data: dict):
+│ 64 │        """Parse B tag."""                                                                                           │ 64 │        """Parse B tag."""
+│    │                                                                                                                     │ 65 │        raise Exception('Debugging exception')
+│ 65 │        for line in btags:                                                                                           │ 66 │        for line in btags:
+│ 66 │            if isinstance(line, bs4.element.Tag):                                                                    │ 67 │            if isinstance(line, bs4.element.Tag):
+│ 67 │                if line.text.lower().strip().startswith("maintenance ticket #:"):                                    │ 68 │                if line.text.lower().strip().startswith("maintenance ticket #:"):
+```
+
+After running `poetry install`:
+
+```
+-> % circuit-maintenance-parser --data-file ~/Downloads/zayo.eml --data-type email --provider-type zayo
+Provider processing failed: Failed creating Maintenance notification for Zayo.
+Details:
+- Processor CombinedProcessor from Zayo failed due to: Debugging exception
+```
+
 ## Questions
 
 For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
