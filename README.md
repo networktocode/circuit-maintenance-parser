@@ -320,17 +320,11 @@ The project is following Network to Code software development guidelines and is 
 
 If you were to add loggers or debuggers to one of the classes:
 
-```
-───────────────────────────────────┐
-• 62: class HtmlParserZayo1(Html): │
-───────────────────────────────────┘
-│ 62 │                                                                                                                     │ 62 │
-│ 63 │    def parse_bs(self, btags: ResultSet, data: dict):                                                                │ 63 │    def parse_bs(self, btags: ResultSet, data: dict):
-│ 64 │        """Parse B tag."""                                                                                           │ 64 │        """Parse B tag."""
-│    │                                                                                                                     │ 65 │        raise Exception('Debugging exception')
-│ 65 │        for line in btags:                                                                                           │ 66 │        for line in btags:
-│ 66 │            if isinstance(line, bs4.element.Tag):                                                                    │ 67 │            if isinstance(line, bs4.element.Tag):
-│ 67 │                if line.text.lower().strip().startswith("maintenance ticket #:"):                                    │ 68 │                if line.text.lower().strip().startswith("maintenance ticket #:"):
+```python
+class HtmlParserZayo1(Html):
+    def parse_bs(self, btags: ResultSet, data: dict):
+        """Parse B tag."""
+        raise Exception('Debugging exception')
 ```
 
 After running `poetry install`:
