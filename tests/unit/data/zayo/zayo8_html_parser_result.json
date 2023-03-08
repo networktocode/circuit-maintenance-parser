@@ -7,10 +7,40 @@
                 "impact": "OUTAGE"
             }
         ],
-        "end": 1641639600,
+        "end": 1641466800,
         "maintenance_id": "TTN-0001234567",
         "stamp": 1639526400,
         "start": 1641445260,
+        "status": "RE-SCHEDULED",
+        "summary": "Zayo Third-Party Provider will implement maintenance to perform temporary fiber relocation in order to proactively avoid outages.\"Please Note\" This is a reschedule of TTN-0002345678\nAs this maintenance is not under the control of  Zayo it may not be possible to reschedule it, due to resources having been coordinated with the railway system (Lat: 50.12345- Lon: -119.12345)The maintenance consists of 2 nights; however, customers will only receive notification for the night their services will be impacted"
+    },
+    {
+        "account": "Customer,inc",
+        "circuits": [
+            {
+                "circuit_id": "/OQYX/234567/   /ZYO /",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1641553200,
+        "maintenance_id": "TTN-0001234567",
+        "stamp": 1639526400,
+        "start": 1641531660,
+        "status": "RE-SCHEDULED",
+        "summary": "Zayo Third-Party Provider will implement maintenance to perform temporary fiber relocation in order to proactively avoid outages.\"Please Note\" This is a reschedule of TTN-0002345678\nAs this maintenance is not under the control of  Zayo it may not be possible to reschedule it, due to resources having been coordinated with the railway system (Lat: 50.12345- Lon: -119.12345)The maintenance consists of 2 nights; however, customers will only receive notification for the night their services will be impacted"
+    },
+    {
+        "account": "Customer,inc",
+        "circuits": [
+            {
+                "circuit_id": "/OQYX/234567/   /ZYO /",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1641639600,
+        "maintenance_id": "TTN-0001234567",
+        "stamp": 1639526400,
+        "start": 1641618060,
         "status": "RE-SCHEDULED",
         "summary": "Zayo Third-Party Provider will implement maintenance to perform temporary fiber relocation in order to proactively avoid outages.\"Please Note\" This is a reschedule of TTN-0002345678\nAs this maintenance is not under the control of  Zayo it may not be possible to reschedule it, due to resources having been coordinated with the railway system (Lat: 50.12345- Lon: -119.12345)The maintenance consists of 2 nights; however, customers will only receive notification for the night their services will be impacted"
     }

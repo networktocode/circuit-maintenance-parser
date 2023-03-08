@@ -49,33 +49,28 @@ class HtmlParserZayo1(Html):
         self.parse_bs(soup.find_all("b"), data)
         self.parse_tables(soup.find_all("table"), data)
 
-        # Iterates over multiple windows and duplicates other maintenance info to a new dictionary while also updating start and end times for the specific window.
-        for window in data['windows']:
+        if not data:
+            return [{}]
+
+        if "status" not in data:
+            text = soup.get_text()
+            if "will be commencing momentarily" in text:
+                data["status"] = Status("IN-PROCESS")
+            elif "has been completed" in text or "has closed" in text:
+                data["status"] = Status("COMPLETED")
+            elif "has rescheduled" in text:
+                data["status"] = Status("RE-SCHEDULED")
+
+        for maintenance_window in data.get('windows', []):
             maintenance = deepcopy(data)
-            maintenance['start'], maintenance['end'] = window
+            maintenance['start'], maintenance['end'] = maintenance_window
             del maintenance['windows']
             maintenances.append(maintenance)
-
-        # Deleting the key after we are finished checking for multiple windows and duplicating data.
-        del data['windows']
-
-        if data:
-            if "status" not in data:
-                text = soup.get_text()
-                if "will be commencing momentarily" in text:
-                    data["status"] = Status("IN-PROCESS")
-                elif "has been completed" in text or "has closed" in text:
-                    data["status"] = Status("COMPLETED")
-                elif "has rescheduled" in text:
-                    data["status"] = Status("RE-SCHEDULED")
 
         return maintenances
 
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""
-
-        # Initialise multiple windows list that will be used in parse_html
-        data['windows'] = []
 
         for line in btags:
             if isinstance(line, bs4.element.Tag):
@@ -88,6 +83,10 @@ class HtmlParserZayo1(Html):
                         data["status"] = Status("CANCELLED")
                 elif "activity date" in line.text.lower():
                     logger.info("Found 'activity date': %s", line.text)
+
+                    if 'windows' not in data:
+                        data['windows'] = []
+
                     for sibling in line.next_siblings:
                         text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
                         logger.debug("Checking for GMT date/timestamp in sibling: %s", text)
