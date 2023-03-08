@@ -1,6 +1,7 @@
 """Zayo parser."""
 import logging
 import re
+from copy import deepcopy
 from typing import Dict
 
 import bs4  # type: ignore
@@ -38,15 +39,25 @@ class SubjectParserZayo1(EmailSubjectParser):
         data["maintenance_id"] = tokens[-2].split(" ")[1]
         return [data]
 
-
 class HtmlParserZayo1(Html):
     """Notifications Parser for Zayo notifications."""
 
     def parse_html(self, soup):
         """Execute parsing."""
+        maintenances = []
         data = {}
         self.parse_bs(soup.find_all("b"), data)
         self.parse_tables(soup.find_all("table"), data)
+
+        # Iterates over multiple windows and duplicates other maintenance info to a new dictionary while also updating start and end times for the specific window.
+        for window in data['windows']:
+            maintenance = deepcopy(data)
+            maintenance['start'], maintenance['end'] = window
+            del maintenance['windows']
+            maintenances.append(maintenance)
+
+        # Deleting the key after we are finished checking for multiple windows and duplicating data.
+        del data['windows']
 
         if data:
             if "status" not in data:
@@ -58,10 +69,14 @@ class HtmlParserZayo1(Html):
                 elif "has rescheduled" in text:
                     data["status"] = Status("RE-SCHEDULED")
 
-        return [data]
+        return maintenances
 
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""
+
+        # Initialise multiple windows list that will be used in parse_html
+        data['windows'] = []
+
         for line in btags:
             if isinstance(line, bs4.element.Tag):
                 if line.text.lower().strip().startswith("maintenance ticket #:"):
@@ -71,24 +86,6 @@ class HtmlParserZayo1(Html):
                         data["status"] = Status("CONFIRMED")
                     elif "has cancelled" in line.text.lower():
                         data["status"] = Status("CANCELLED")
-                # Some Zayo notifications may include multiple activity dates.
-                # For lack of a better way to handle this, we consolidate these into a single extended activity range.
-                #
-                # For example, given:
-                #
-                # 1st Activity Date
-                # 01-Nov-2021 00:01 to 01-Nov-2021 05:00 ( Mountain )
-                # 01-Nov-2021 06:01 to 01-Nov-2021 11:00 ( GMT )
-                #
-                # 2nd Activity Date
-                # 02-Nov-2021 00:01 to 02-Nov-2021 05:00 ( Mountain )
-                # 02-Nov-2021 06:01 to 02-Nov-2021 11:00 ( GMT )
-                #
-                # 3rd Activity Date
-                # 03-Nov-2021 00:01 to 03-Nov-2021 05:00 ( Mountain )
-                # 03-Nov-2021 06:01 to 03-Nov-2021 11:00 ( GMT )
-                #
-                # our end result would be (start: "01-Nov-2021 06:01", end: "03-Nov-2021 11:00")
                 elif "activity date" in line.text.lower():
                     logger.info("Found 'activity date': %s", line.text)
                     for sibling in line.next_siblings:
@@ -97,15 +94,10 @@ class HtmlParserZayo1(Html):
                         if "( GMT )" in text:
                             window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                             start = parser.parse(window.pop(0))
-                            start_ts = self.dt2ts(start)
-                            # Keep the earliest of any listed start times
-                            if "start" not in data or data["start"] > start_ts:
-                                data["start"] = start_ts
                             end = parser.parse(window.pop(0))
+                            start_ts = self.dt2ts(start)
                             end_ts = self.dt2ts(end)
-                            # Keep the latest of any listed end times
-                            if "end" not in data or data["end"] < end_ts:
-                                data["end"] = end_ts
+                            data['windows'].append((start_ts, end_ts))
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
