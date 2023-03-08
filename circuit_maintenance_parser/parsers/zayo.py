@@ -72,7 +72,6 @@ class HtmlParserZayo1(Html):
 
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""
-
         for line in btags:
             if isinstance(line, bs4.element.Tag):
                 if line.text.lower().strip().startswith("maintenance ticket #:"):
@@ -141,6 +140,7 @@ class HtmlParserZayo1(Html):
                     "Customer Circuit ID",
                 ],
             )
+
             if all(table_headers != expected_headers for expected_headers in expected_headers_ref):
                 logger.warning("Table headers are not as expected: %s", head_row)
                 continue
@@ -148,6 +148,7 @@ class HtmlParserZayo1(Html):
             data_rows = table.find_all("td")
             if len(data_rows) % 5 != 0:
                 raise AssertionError("Table format is not correct")
+
             number_of_circuits = int(len(data_rows) / 5)
             for idx in range(number_of_circuits):
                 data_circuit = {}
@@ -158,5 +159,6 @@ class HtmlParserZayo1(Html):
                 elif "no expected impact" in impact.lower():
                     data_circuit["impact"] = Impact("NO-IMPACT")
                 circuits.append(CircuitImpact(**data_circuit))
+
         if circuits:
             data["circuits"] = circuits
