@@ -61,10 +61,10 @@ class HtmlParserZayo1(Html):
             elif "has rescheduled" in text:
                 data["status"] = Status("RE-SCHEDULED")
 
-        for maintenance_window in data.get('windows', []):
+        for maintenance_window in data.get("windows", []):
             maintenance = deepcopy(data)
-            maintenance['start'], maintenance['end'] = maintenance_window
-            del maintenance['windows']
+            maintenance["start"], maintenance["end"] = maintenance_window
+            del maintenance["windows"]
             maintenances.append(maintenance)
 
         return maintenances
@@ -84,19 +84,20 @@ class HtmlParserZayo1(Html):
                 elif "activity date" in line.text.lower():
                     logger.info("Found 'activity date': %s", line.text)
 
-                    if 'windows' not in data:
-                        data['windows'] = []
+                    if "windows" not in data:
+                        data["windows"] = []
 
                     for sibling in line.next_siblings:
                         text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
                         logger.debug("Checking for GMT date/timestamp in sibling: %s", text)
+
                         if "( GMT )" in text:
                             window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                             start = parser.parse(window.pop(0))
                             end = parser.parse(window.pop(0))
                             start_ts = self.dt2ts(start)
                             end_ts = self.dt2ts(end)
-                            data['windows'].append((start_ts, end_ts))
+                            data["windows"].append((start_ts, end_ts))
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
