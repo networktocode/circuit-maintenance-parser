@@ -313,6 +313,41 @@ The project is following Network to Code software development guidelines and is 
 4. Update the `unit/test_e2e.py` with the new provider, providing some data to test and validate the final `Maintenances` created.
 5. **Expose the new `Provider` class** updating the map `SUPPORTED_PROVIDERS` in `circuit_maintenance_parser/__init__.py` to officially expose the `Provider`.
 
+### How to debug circuit-maintenance-parser library locally
+
+1. `poetry install` updates the library and its dependencies locally.
+2. `circuit-maintenance-parser` is now built with your recent local changes.
+
+If you were to add loggers or debuggers to one of the classes:
+
+```python
+class HtmlParserZayo1(Html):
+    def parse_bs(self, btags: ResultSet, data: dict):
+        """Parse B tag."""
+        raise Exception('Debugging exception')
+```
+
+After running `poetry install`:
+
+```
+-> % circuit-maintenance-parser --data-file ~/Downloads/zayo.eml --data-type email --provider-type zayo
+Provider processing failed: Failed creating Maintenance notification for Zayo.
+Details:
+- Processor CombinedProcessor from Zayo failed due to: Debugging exception
+```
+
+> Note: `invoke build` will result in an error due to no Dockerfile. This is expected as the library runs simple pytest testing without a container.
+
+```
+-> % invoke build
+Building image circuit-maintenance-parser:2.2.2-py3.8
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2B done
+#1 DONE 0.0s
+WARNING: failed to get git remote url: fatal: No remote configured to list refs from.
+ERROR: failed to solve: rpc error: code = Unknown desc = failed to solve with frontend dockerfile.v0: failed to read dockerfile: open /var/lib/docker/tmp/buildkit-mount1243547759/Dockerfile: no such file or directory
+```
+
 ## Questions
 
 For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
