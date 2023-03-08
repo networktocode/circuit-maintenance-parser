@@ -39,6 +39,7 @@ class SubjectParserZayo1(EmailSubjectParser):
         data["maintenance_id"] = tokens[-2].split(" ")[1]
         return [data]
 
+
 class HtmlParserZayo1(Html):
     """Notifications Parser for Zayo notifications."""
 
