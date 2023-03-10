@@ -1,6 +1,7 @@
 """Zayo parser."""
 import logging
 import re
+from copy import deepcopy
 from typing import Dict
 
 import bs4  # type: ignore
@@ -44,21 +45,30 @@ class HtmlParserZayo1(Html):
 
     def parse_html(self, soup):
         """Execute parsing."""
+        maintenances = []
         data = {}
         self.parse_bs(soup.find_all("b"), data)
         self.parse_tables(soup.find_all("table"), data)
 
-        if data:
-            if "status" not in data:
-                text = soup.get_text()
-                if "will be commencing momentarily" in text:
-                    data["status"] = Status("IN-PROCESS")
-                elif "has been completed" in text or "has closed" in text:
-                    data["status"] = Status("COMPLETED")
-                elif "has rescheduled" in text:
-                    data["status"] = Status("RE-SCHEDULED")
+        if not data:
+            return [{}]
 
-        return [data]
+        if "status" not in data:
+            text = soup.get_text()
+            if "will be commencing momentarily" in text:
+                data["status"] = Status("IN-PROCESS")
+            elif "has been completed" in text or "has closed" in text:
+                data["status"] = Status("COMPLETED")
+            elif "has rescheduled" in text:
+                data["status"] = Status("RE-SCHEDULED")
+
+        for maintenance_window in data.get("windows", []):
+            maintenance = deepcopy(data)
+            maintenance["start"], maintenance["end"] = maintenance_window
+            del maintenance["windows"]
+            maintenances.append(maintenance)
+
+        return maintenances
 
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""
@@ -71,41 +81,23 @@ class HtmlParserZayo1(Html):
                         data["status"] = Status("CONFIRMED")
                     elif "has cancelled" in line.text.lower():
                         data["status"] = Status("CANCELLED")
-                # Some Zayo notifications may include multiple activity dates.
-                # For lack of a better way to handle this, we consolidate these into a single extended activity range.
-                #
-                # For example, given:
-                #
-                # 1st Activity Date
-                # 01-Nov-2021 00:01 to 01-Nov-2021 05:00 ( Mountain )
-                # 01-Nov-2021 06:01 to 01-Nov-2021 11:00 ( GMT )
-                #
-                # 2nd Activity Date
-                # 02-Nov-2021 00:01 to 02-Nov-2021 05:00 ( Mountain )
-                # 02-Nov-2021 06:01 to 02-Nov-2021 11:00 ( GMT )
-                #
-                # 3rd Activity Date
-                # 03-Nov-2021 00:01 to 03-Nov-2021 05:00 ( Mountain )
-                # 03-Nov-2021 06:01 to 03-Nov-2021 11:00 ( GMT )
-                #
-                # our end result would be (start: "01-Nov-2021 06:01", end: "03-Nov-2021 11:00")
                 elif "activity date" in line.text.lower():
                     logger.info("Found 'activity date': %s", line.text)
+
+                    if "windows" not in data:
+                        data["windows"] = []
+
                     for sibling in line.next_siblings:
                         text = sibling.text if isinstance(sibling, bs4.element.Tag) else sibling
                         logger.debug("Checking for GMT date/timestamp in sibling: %s", text)
+
                         if "( GMT )" in text:
                             window = self.clean_line(sibling).strip("( GMT )").split(" to ")
                             start = parser.parse(window.pop(0))
-                            start_ts = self.dt2ts(start)
-                            # Keep the earliest of any listed start times
-                            if "start" not in data or data["start"] > start_ts:
-                                data["start"] = start_ts
                             end = parser.parse(window.pop(0))
+                            start_ts = self.dt2ts(start)
                             end_ts = self.dt2ts(end)
-                            # Keep the latest of any listed end times
-                            if "end" not in data or data["end"] < end_ts:
-                                data["end"] = end_ts
+                            data["windows"].append((start_ts, end_ts))
                             break
                 elif line.text.lower().strip().startswith("reason for maintenance:"):
                     data["summary"] = self.clean_line(line.next_sibling)
@@ -148,6 +140,7 @@ class HtmlParserZayo1(Html):
                     "Customer Circuit ID",
                 ],
             )
+
             if all(table_headers != expected_headers for expected_headers in expected_headers_ref):
                 logger.warning("Table headers are not as expected: %s", head_row)
                 continue
@@ -155,6 +148,7 @@ class HtmlParserZayo1(Html):
             data_rows = table.find_all("td")
             if len(data_rows) % 5 != 0:
                 raise AssertionError("Table format is not correct")
+
             number_of_circuits = int(len(data_rows) / 5)
             for idx in range(number_of_circuits):
                 data_circuit = {}
@@ -165,5 +159,6 @@ class HtmlParserZayo1(Html):
                 elif "no expected impact" in impact.lower():
                     data_circuit["impact"] = Impact("NO-IMPACT")
                 circuits.append(CircuitImpact(**data_circuit))
+
         if circuits:
             data["circuits"] = circuits
