@@ -87,10 +87,8 @@ class HtmlParserLumen1(Html):
                     if "GMT" in cells[idx].string and "GMT" in cells[idx + 1].string:
                         start = parser.parse(cells[idx].string.split(" GMT")[0])
                         start_ts = self.dt2ts(start)
-                        #data["start"] = self.dt2ts(start)
                         end = parser.parse(cells[idx + 1].string.split(" GMT")[0])
                         end_ts = self.dt2ts(end)
-                        #data["end"] = self.dt2ts(end)
                         data['windows'].append((start_ts, end_ts))
                         break
 
