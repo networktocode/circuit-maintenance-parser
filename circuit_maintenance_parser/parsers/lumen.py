@@ -26,10 +26,10 @@ class HtmlParserLumen1(Html):
         self.parse_tables(soup.find_all("table"), data)
 
         # Iterates over multiple windows and duplicates other maintenance info to a new dictionary while also updating start and end times for the specific window.
-        for window in data['windows']:
+        for window in data["windows"]:
             maintenance = deepcopy(data)
-            maintenance['start'], maintenance['end'] = window
-            del maintenance['windows']
+            maintenance["start"], maintenance["end"] = window
+            del maintenance["windows"]
             maintenances.append(maintenance)
 
         # Deleting the key after we are finished checking for multiple windows and duplicating data.
@@ -74,7 +74,7 @@ class HtmlParserLumen1(Html):
         """Parse Table tag."""
 
         # Initialise multiple windows list that will be used in parse_html
-        data['windows'] = []
+        data["windows"] = []
 
         circuits = []
         for table in tables:
@@ -89,7 +89,7 @@ class HtmlParserLumen1(Html):
                         start_ts = self.dt2ts(start)
                         end = parser.parse(cells[idx + 1].string.split(" GMT")[0])
                         end_ts = self.dt2ts(end)
-                        data['windows'].append((start_ts, end_ts))
+                        data["windows"].append((start_ts, end_ts))
                         break
 
             elif cells[0].string == "Customer Name":
