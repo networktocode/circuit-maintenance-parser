@@ -33,7 +33,7 @@ class HtmlParserLumen1(Html):
             maintenances.append(maintenance)
 
         # Deleting the key after we are finished checking for multiple windows and duplicating data.
-        del data['windows']
+        del data["windows"]
 
         return maintenances
 
