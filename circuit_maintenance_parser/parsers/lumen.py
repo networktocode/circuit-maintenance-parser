@@ -69,10 +69,8 @@ class HtmlParserLumen1(Html):
                                 data["stamp"] = self.dt2ts(stamp)
                             break
 
-    def parse_tables(self, tables: ResultSet, data: Dict):
-
+    def parse_tables(self, tables: ResultSet, data: Dict):  # pylint: disable=too-many-locals
         """Parse Table tag."""
-
         # Initialise multiple windows list that will be used in parse_html
         data["windows"] = []
 
