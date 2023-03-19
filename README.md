@@ -308,11 +308,32 @@ The project is following Network to Code software development guidelines and is 
 
 1. Define the `Parsers`(inheriting from some of the generic `Parsers` or a new one) that will extract the data from the notification, that could contain itself multiple `DataParts`. The `data_type` of the `Parser` and the `DataPart` have to match. The custom `Parsers` will be placed in the `parsers` folder.
 2. Update the `unit/test_parsers.py` with the new parsers, providing some data to test and validate the extracted data.
-3. Define a new `Provider` inheriting from the `GenericProvider`, defining the `Processors` and the rclassespective `Parsers` to be used. Maybe you can reuse some of the generic `Processors` or maybe you will need to create a custom one. If this is the case, place it in the `processors` folder.
+3. Define a new `Provider` inheriting from the `GenericProvider`, defining the `Processors` and the respective `Parsers` to be used. Maybe you can reuse some of the generic `Processors` or maybe you will need to create a custom one. If this is the case, place it in the `processors` folder.
    - The `Provider` also supports the definition of a `_include_filter` and a `_exclude_filter` to limit the notifications that are actually processed, avoiding false positive errors for notification that are not relevant.
 4. Update the `unit/test_e2e.py` with the new provider, providing some data to test and validate the final `Maintenances` created.
 5. **Expose the new `Provider` class** updating the map `SUPPORTED_PROVIDERS` in `circuit_maintenance_parser/__init__.py` to officially expose the `Provider`.
-6. Run some final CI tests locally to ensure that there is no linting/formatting issues with your changes. You should look to get a code score of 10/10: `invoke tests --local`
+6. You can run some tests here to verify that your new unit tests do not cause issues with existing tests, and in general they work as expected. You can do this by running `pytest --log-cli-level=DEBUG --capture=tee-sys`. You can narrow down the tests that you want to execute with the `-k` flag. If successful, your results should look similar to the following:
+
+```
+-> % pytest --log-cli-level=DEBUG --capture=tee-sys -k test_parsers
+...omitted debug logs...
+====================================================== 99 passed, 174 deselected, 17 warnings in 10.35s ======================================================
+```
+7. Run some final CI tests locally to ensure that there is no linting/formatting issues with your changes. You should look to get a code score of 10/10. See the example below: `invoke tests --local`
+
+```
+-> % invoke tests --local
+LOCAL - Running command black --check --diff .
+All done! ✨ 🍰 ✨
+41 files would be left unchanged.
+LOCAL - Running command flake8 .
+LOCAL - Running command find . -name "*.py" | xargs pylint
+************* Module tasks
+tasks.py:4:0: W0402: Uses of a deprecated module 'distutils.util' (deprecated-module)
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+```
 
 ## Questions
 
