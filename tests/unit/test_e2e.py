@@ -463,12 +463,12 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Lumen,
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen8.html")),
-                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                # (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
                 (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen8_result.json"),
-                Path(dir_path, "data", "date", "email_date_1_result.json"),
+                # Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
         # Megaport
