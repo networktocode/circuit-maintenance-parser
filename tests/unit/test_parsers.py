@@ -549,7 +549,10 @@ def test_parsers(parser_class, raw_file, results_file):
     with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
 
-    assert parsed_notifications == expected_result
+    if parser_class == EmailDateParser:
+        assert parsed_notifications == [expected_result]
+    else:
+        assert parsed_notifications == expected_result
 
 
 @pytest.mark.parametrize("parser_class", [ICal, EmailDateParser, HtmlParserZayo1, SubjectParserZayo1])
