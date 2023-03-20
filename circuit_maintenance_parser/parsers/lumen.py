@@ -2,6 +2,7 @@
 import logging
 from typing import Dict
 
+from copy import deepcopy
 from dateutil import parser
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -19,10 +20,22 @@ class HtmlParserLumen1(Html):
 
     def parse_html(self, soup):
         """Execute parsing."""
+        maintenances = []
         data = {}
         self.parse_spans(soup.find_all("span"), data)
         self.parse_tables(soup.find_all("table"), data)
-        return [data]
+
+        # Iterates over multiple windows and duplicates other maintenance info to a new dictionary while also updating start and end times for the specific window.
+        for window in data["windows"]:
+            maintenance = deepcopy(data)
+            maintenance["start"], maintenance["end"] = window
+            del maintenance["windows"]
+            maintenances.append(maintenance)
+
+        # Deleting the key after we are finished checking for multiple windows and duplicating data.
+        del data["windows"]
+
+        return maintenances
 
     def parse_spans(self, spans: ResultSet, data: Dict):
         """Parse Span tag."""
@@ -56,8 +69,11 @@ class HtmlParserLumen1(Html):
                                 data["stamp"] = self.dt2ts(stamp)
                             break
 
-    def parse_tables(self, tables: ResultSet, data: Dict):
+    def parse_tables(self, tables: ResultSet, data: Dict):  # pylint: disable=too-many-locals
         """Parse Table tag."""
+        # Initialise multiple windows list that will be used in parse_html
+        data["windows"] = []
+
         circuits = []
         for table in tables:
             cells = table.find_all("td")
@@ -68,9 +84,10 @@ class HtmlParserLumen1(Html):
                 for idx in range(num_columns, len(cells), num_columns):
                     if "GMT" in cells[idx].string and "GMT" in cells[idx + 1].string:
                         start = parser.parse(cells[idx].string.split(" GMT")[0])
-                        data["start"] = self.dt2ts(start)
+                        start_ts = self.dt2ts(start)
                         end = parser.parse(cells[idx + 1].string.split(" GMT")[0])
-                        data["end"] = self.dt2ts(end)
+                        end_ts = self.dt2ts(end)
+                        data["windows"].append((start_ts, end_ts))
                         break
 
             elif cells[0].string == "Customer Name":
