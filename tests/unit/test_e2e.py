@@ -868,7 +868,7 @@ def test_provider_get_maintenances(
                 for _ in range(len(expected_result)):
                     expected_result[0].update(partial_result_data)
             else:
-                assert len(expected_result) == len(expected_result)
+                assert len(expected_result) == len(partial_result_data)
                 for i, _ in enumerate(partial_result_data):
                     expected_result[i].update(partial_result_data[i])
 
