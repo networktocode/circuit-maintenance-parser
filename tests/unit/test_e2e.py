@@ -9,7 +9,7 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProviderError
 from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
-# pylint: disable=duplicate-code
+# pylint: disable=duplicate-code,too-many-lines
 from circuit_maintenance_parser.provider import (
     Equinix,
     GenericProvider,
