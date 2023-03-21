@@ -25,7 +25,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
-from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1
+from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import SubjectParserZayo1, HtmlParserZayo1
@@ -317,6 +317,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "lumen", "lumen7.html"),
             Path(dir_path, "data", "lumen", "lumen7_result.json"),
         ),
+        (
+            HtmlParserLumen1,
+            Path(dir_path, "data", "lumen", "lumen8.html"),
+            Path(dir_path, "data", "lumen", "lumen8_result.json"),
+        ),
         # Megaport
         (
             HtmlParserMegaport1,
@@ -402,6 +407,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserTelstra1,
             Path(dir_path, "data", "telstra", "telstra7.html"),
             Path(dir_path, "data", "telstra", "telstra7_result.json"),
+        ),
+        (
+            HtmlParserTelstra2,
+            Path(dir_path, "data", "telstra", "telstra8.html"),
+            Path(dir_path, "data", "telstra", "telstra8_result.json"),
         ),
         # Turkcell
         (
@@ -539,10 +549,13 @@ def test_parsers(parser_class, raw_file, results_file):
     with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
 
-    assert parsed_notifications == expected_result
+    if parser_class == EmailDateParser:
+        assert parsed_notifications == [expected_result]
+    else:
+        assert parsed_notifications == expected_result
 
 
-@pytest.mark.parametrize("parser_class", [ICal, EmailDateParser, HtmlParserZayo1, SubjectParserSeaborn1])
+@pytest.mark.parametrize("parser_class", [ICal, EmailDateParser, HtmlParserZayo1, SubjectParserZayo1])
 def test_parser_no_data(parser_class):
     """Test parser with no data."""
     with pytest.raises(ParserError):

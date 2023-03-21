@@ -1,0 +1,40 @@
+[
+    {
+        "account": "Customer",
+        "circuits": [
+        {
+            "circuit_id": "123456789",
+            "impact": "OUTAGE"
+        },
+        {
+            "circuit_id": "123456789",
+            "impact": "OUTAGE"
+        }
+        ],
+        "end": 1679479200,
+        "maintenance_id": "12345678",
+        "stamp": 1678379003,
+        "start": 1679457600,
+        "status": "IN-PROCESS",
+        "summary": "Lumen intends to carry out internal maintenance within its network.  This has been designated as ESSENTIAL. The nature of this work is to repair fiber and is required in order to avoid unplanned outages from damages related to natural causes."
+    },
+    {
+        "account": "Customer",
+        "circuits": [
+          {
+            "circuit_id": "123456789",
+            "impact": "OUTAGE"
+          },
+          {
+            "circuit_id": "123456789",
+            "impact": "OUTAGE"
+          }
+        ],
+        "end": 1679565600,
+        "maintenance_id": "12345678",
+        "stamp": 1678379003,
+        "start": 1679544000,
+        "status": "IN-PROCESS",
+        "summary": "Lumen intends to carry out internal maintenance within its network.  This has been designated as ESSENTIAL. The nature of this work is to repair fiber and is required in order to avoid unplanned outages from damages related to natural causes."
+      }
+]
