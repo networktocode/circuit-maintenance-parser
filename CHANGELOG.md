@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.2.3 - 2023-03-21
+
+### Changed
+
+- #216 - Allow Lumen maintenance multiple windows to be parsed
+- #212 - Updated documentation: Contribution section
+- #210 - Ability to parse multiple maintenance windows from Zayo
+- #190 - Update Telstra for new notificaiton format
+
+### Fixed
+
+- #222 - Fix e22 tests when combining data from multiple maintenances
+
 ## v2.2.2 - 2023-01-27
 
 ### Changed
