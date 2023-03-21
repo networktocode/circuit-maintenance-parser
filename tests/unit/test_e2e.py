@@ -9,7 +9,7 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProviderError
 from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
-# pylint: disable=duplicate-code
+# pylint: disable=duplicate-code,too-many-lines
 from circuit_maintenance_parser.provider import (
     Equinix,
     GenericProvider,
@@ -463,12 +463,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Lumen,
             [
                 ("html", Path(dir_path, "data", "lumen", "lumen8.html")),
-                # (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
                 (EMAIL_HEADER_SUBJECT, Path(dir_path, "data", "lumen", "subject_work_planned")),
             ],
             [
                 Path(dir_path, "data", "lumen", "lumen8_result.json"),
-                # Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
         # Megaport
@@ -729,6 +728,17 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (
             Verizon,
             [
+                ("html", Path(dir_path, "data", "verizon", "verizon4.html")),
+                (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
+            ],
+            [
+                Path(dir_path, "data", "verizon", "verizon4_result.json"),
+                Path(dir_path, "data", "date", "email_date_1_result.json"),
+            ],
+        ),
+        (
+            Verizon,
+            [
                 ("html", Path(dir_path, "data", "verizon", "verizon5.html")),
                 (EMAIL_HEADER_DATE, Path(dir_path, "data", "date", "email_date_1")),
             ],
@@ -823,7 +833,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
 )
 def test_provider_get_maintenances(
     provider_class, test_data_files, result_parse_files
-):  # pylint: disable=too-many-locals
+):  # pylint: disable=too-many-locals,too-many-branches
     """End to End tests for various Providers."""
     extended_data = provider_class.get_extended_data()
     default_maintenance_data = {"uid": "0", "sequence": 1, "summary": ""}
@@ -849,10 +859,18 @@ def test_provider_get_maintenances(
     for result_parse_file in result_parse_files:
         with open(result_parse_file, encoding="utf-8") as res_file:
             partial_result_data = json.load(res_file)
-            if not expected_result:
+
+            # TODO: Tests assume that maintenances (multiple) will be discovered on the first parser
+            if not expected_result and isinstance(partial_result_data, list):
                 expected_result = partial_result_data
+
+            if expected_result and isinstance(partial_result_data, dict):
+                for _ in range(len(expected_result)):
+                    expected_result[0].update(partial_result_data)
             else:
-                expected_result[0].update(partial_result_data[0])
+                assert len(expected_result) == len(partial_result_data)
+                for i, _ in enumerate(partial_result_data):
+                    expected_result[i].update(partial_result_data[i])
 
     for result in expected_result:
         temp_res = result.copy()
