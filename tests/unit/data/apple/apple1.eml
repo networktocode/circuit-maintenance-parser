@@ -1,15 +1,7 @@
-Date-warning: Date header was inserted by rn-mailsvcp-relay-lapp01.rno.apple.com
-Date: Mon, 01 May 2023 10:38:11 -0700 (PDT)
-Message-id: <0RTZ00SF5QBN8K50@rn-mailsvcp-relay-lapp01.rno.apple.com>
-Received: from prz3-cstools-hyp001.corp.apple.com
- (prz3-cstools-hyp001.corp.apple.com [10.35.7.133])
-	by csmail.corp.apple.com (Postfix) with ESMTP id 1E23115EDE4;	Mon,
- 1 May 2023 17:38:11 +0000 (UTC)
-Content-type: multipart/mixed; boundary="===============1255676001481217459=="
 MIME-version: 1.0
-From: noreply@apple.com
+Date: Thu, 26 Aug 2021 18:22:09 +0100
 Subject: Apple (AS714) Net Maintenance Notice for AS12345 in Chicago
-To: recipients not specified: ;
+Content-type: multipart/mixed; boundary="===============1255676001481217459=="
 
 --===============1255676001481217459==
 Content-Type: text/plain; charset="us-ascii"
@@ -29,7 +21,6 @@ Apple AS: 714
 Peer AS: 12345
 
 
-Apple IP: ['10.0.0.1', '2000:0000:0000:0000:0000:0000:0000:0001']
 Peer IP: ['10.0.0.2', '2000:0000:0000:0000:0000:0000:0000:0002']
 
 There is no change required on your end as we will gracefully drain the traffic prior to maintenance.

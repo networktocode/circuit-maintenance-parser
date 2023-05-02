@@ -7,10 +7,6 @@ from circuit_maintenance_parser.output import Impact, Status
 from circuit_maintenance_parser.parser import EmailSubjectParser, Text, CircuitImpact
 
 class SubjectParserApple(EmailSubjectParser):
-    def parser_hook(self, raw: bytes):
-        message = email.message_from_string(self.bytes_to_string(raw))
-        return self.parse_subject(message['subject'])
-
     def parse_subject(self, subject: str) -> List[Dict]:
         return [{'summary': subject}]
 
@@ -21,10 +17,12 @@ class TextParserApple(Text):
             'circuits': self._circuits(text),
             'maintenance_id': self._maintenance_id(text),
             'start': self._start_time(text),
+            'stamp': self._start_time(text),
             'end': self._end_time(text),
             'status': Status.CONFIRMED, # Have yet to see anything but confirmation.
             'organizer': 'peering-noc@group.apple.com',
             'provider': 'apple',
+            'account': 'Customer info unavailable'
         }
         return [data]
 
@@ -33,7 +31,7 @@ class TextParserApple(Text):
         m = re.search(pattern, text)
         return [CircuitImpact(
             circuit_id=f'AS{m.group(1)}',
-            impact=Impact.NO_IMPACT)]
+            impact=Impact.OUTAGE)]
 
     def _maintenance_id(self, text):
         # Apple ticket numbers always starts with "CHG".

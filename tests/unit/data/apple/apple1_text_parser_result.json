@@ -3,14 +3,16 @@
         "circuits": [
             {
                 "circuit_id": "AS12345",
-                "impact": "NO-IMPACT"
+                "impact": "OUTAGE"
             }
         ],
         "end": 1684281540,
         "maintenance_id": "CHG000123456",
         "start": 1683036000,
+        "stamp": 1683036000,
         "status": "CONFIRMED",
         "organizer": "peering-noc@group.apple.com",
-        "provider": "apple"
+        "provider": "apple",
+        "account": "Customer info unavailable"
     }
 ]
