@@ -1,0 +1,17 @@
+[
+    {
+        "circuits": [
+            {
+                "circuit_id": "AS12345",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1684281540,
+        "maintenance_id": "CHG000123456",
+        "start": 1683036000,
+        "status": "CONFIRMED",
+        "summary": "Apple (AS714) Net Maintenance Notice for AS12345 in Chicago",
+        "organizer": "peering-noc@group.apple.com",
+        "provider": "apple"
+    }
+]

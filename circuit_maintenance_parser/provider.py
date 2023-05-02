@@ -17,6 +17,7 @@ from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
 
+from circuit_maintenance_parser.parsers.apple import SubjectParserApple, TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
@@ -163,6 +164,14 @@ class GenericProvider(BaseModel):
 ####################
 # PROVIDERS        #
 ####################
+
+class Apple(GenericProvider):
+    """Apple provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[TextParserApple, SubjectParserApple]),
+    ]
+    _default_organizer = "peering-noc@group.apple.com"
 
 
 class AquaComms(GenericProvider):
