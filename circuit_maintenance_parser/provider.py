@@ -165,6 +165,7 @@ class GenericProvider(BaseModel):
 # PROVIDERS        #
 ####################
 
+
 class Apple(GenericProvider):
     """Apple provider custom class."""
 

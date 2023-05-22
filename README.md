@@ -66,6 +66,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### Supported providers based on other parsers
 
+- Apple
 - AWS
 - AquaComms
 - BSO
