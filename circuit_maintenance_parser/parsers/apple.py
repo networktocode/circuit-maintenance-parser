@@ -9,12 +9,35 @@ from circuit_maintenance_parser.parser import EmailSubjectParser, Text, CircuitI
 
 
 class SubjectParserApple(EmailSubjectParser):
+    """Subject parser for Apple notification."""
+
     def parse_subject(self, subject: str) -> List[Dict]:
+        """Use the subject of the email as summary
+
+        Args:
+            subject (str): Message subjects
+
+        Returns:
+            List[Dict]: List of attributes for Maintenance object
+        """
         return [{"summary": subject}]
 
 
 class TextParserApple(Text):
+    """Parse the plaintext content of an Apple notification
+
+    Args:
+        Text (str): Plaintext message
+    """
     def parse_text(self, text: str) -> List[Dict]:
+        """Extract attributes from an Apple notification email.
+
+        Args:
+            text (str): plaintext message
+
+        Returns:
+            List[Dict]: List of attributes for Maintenance object
+        """
         data = {
             "circuits": self._circuits(text),
             "maintenance_id": self._maintenance_id(text),
@@ -46,7 +69,7 @@ class TextParserApple(Text):
         try:
             # Try EU timestamp
             return int(datetime.strptime(m.group(1), "%Y-%m-%d(%a) %H:%M %Z").replace(tzinfo=timezone.utc).timestamp())
-        except:
+        except Exception:
             # Try RFC2822 - US timestamp
             rfc2822 = m.group(1)
             time_tuple = email.utils.parsedate_tz(rfc2822)
