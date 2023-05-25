@@ -29,6 +29,7 @@ class TextParserApple(Text):
     Args:
         Text (str): Plaintext message
     """
+
     def parse_text(self, text: str) -> List[Dict]:
         """Extract attributes from an Apple notification email.
 
