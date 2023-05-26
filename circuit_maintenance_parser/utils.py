@@ -6,7 +6,7 @@ import csv
 
 from geopy.exc import GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError  # type: ignore
 from geopy.geocoders import Nominatim  # type: ignore
-from tzwhere import tzwhere  # type: ignore
+from timezonefinder import TimezoneFinder
 import backoff  # type: ignore
 
 from .errors import ParserError
@@ -39,7 +39,7 @@ class Geolocator:
     def timezone(cls):  # pylint: disable=no-self-argument
         """Load the timezone resolver."""
         if cls._timezone is None:
-            cls._timezone = tzwhere.tzwhere()
+            cls._timezone = TimezoneFinder()
             logger.info("Loaded local timezone resolver.")
         return cls._timezone
 
@@ -110,12 +110,12 @@ class Geolocator:
         if self.timezone is not None:
             try:
                 latitude, longitude = self.get_location(city)
-                timezone = self.timezone.tzNameAt(latitude, longitude)  # pylint: disable=no-member
+                timezone = self.timezone.timezone_at(lat=latitude, lng=longitude)  # pylint: disable=no-member
                 if not timezone:
                     # In some cases, given a latitued and longitued, the tzwhere library returns
                     # an empty timezone, so we try with the coordinates from the API as an alternative
                     latitude, longitude = self.get_location_from_api(city)
-                    timezone = self.timezone.tzNameAt(latitude, longitude)  # pylint: disable=no-member
+                    timezone = self.timezone.timezone_at(lat=latitude, lng=longitude)  # pylint: disable=no-member
 
                 if timezone:
                     logger.debug("Matched city %s to timezone %s", city, timezone)
