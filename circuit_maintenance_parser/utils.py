@@ -6,7 +6,7 @@ import csv
 
 from geopy.exc import GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError  # type: ignore
 from geopy.geocoders import Nominatim  # type: ignore
-from timezonefinder import TimezoneFinder
+from timezonefinder import TimezoneFinder  # type: ignore
 import backoff  # type: ignore
 
 from .errors import ParserError
