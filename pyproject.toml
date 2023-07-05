@@ -24,7 +24,7 @@ include = [
 [tool.poetry.dependencies]
 python = "^3.7"
 click = ">=7.1, <9.0"
-pydantic = {version = ">= 1.8.0, != 1.9.*, >= 1.10.4", extras = ["dotenv"]}
+pydantic = {version = ">= 1.8.0, != 1.9.*, >= 1.10.4, ^1", extras = ["dotenv"]}
 icalendar = "^5.0.0"
 bs4 = "^0.0.1"
 lxml = "^4.6.2"
