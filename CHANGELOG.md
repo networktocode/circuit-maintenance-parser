@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.2.4 - 2023-07-12
+
+- #230 - Swap out tzwhere for TimezoneFinder
+- #234 - Added upper bound to pydantic dependency
+
+### Changed
+
 ## v2.2.3 - 2023-03-21
 
 ### Changed
@@ -7,7 +14,7 @@
 - #216 - Allow Lumen maintenance multiple windows to be parsed
 - #212 - Updated documentation: Contribution section
 - #210 - Ability to parse multiple maintenance windows from Zayo
-- #190 - Update Telstra for new notificaiton format
+- #190 - Update Telstra for new notification format
 
 ### Fixed
 
