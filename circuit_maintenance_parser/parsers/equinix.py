@@ -90,7 +90,7 @@ class HtmlParserEquinix(Html):
                     impact = Impact.REDUCED_REDUNDANCY
         return impact
 
-    def _parse_table(self, theader_elements, data, impact):  # pylint: disable=no-self-use
+    def _parse_table(self, theader_elements, data, impact):
         for th_elem in theader_elements:
             if "Account #" in th_elem:
                 circuit_table = th_elem.find_parent("table")
