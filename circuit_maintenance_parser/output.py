@@ -82,7 +82,7 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
     # Optional Attributes
     impact: Impact = Impact.OUTAGE
 
-    # pylint: disable=no-self-argument,no-self-use
+    # pylint: disable=no-self-argument
     @validator("impact")
     def validate_impact_type(cls, value):
         """Validate Impact type."""
@@ -144,7 +144,7 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     sequence: StrictInt = 1
     summary: StrictStr = ""
 
-    # pylint: disable=no-self-argument,no-self-use
+    # pylint: disable=no-self-argument
     @validator("status")
     def validate_status_type(cls, value):
         """Validate Status type."""

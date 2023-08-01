@@ -870,7 +870,7 @@ def test_provider_get_maintenances(
             else:
                 assert len(expected_result) == len(partial_result_data)
                 for i, _ in enumerate(partial_result_data):
-                    expected_result[i].update(partial_result_data[i])
+                    expected_result[i].update(partial_result_data[i])  # pylint: disable=unnecessary-list-index-lookup
 
     for result in expected_result:
         temp_res = result.copy()
