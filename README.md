@@ -86,6 +86,20 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 > Note: Because these providers do not support the BCOP standard natively, maybe there are some gaps on the implemented parser that will be refined with new test cases. We encourage you to report related **issues**!
 
+#### LLM-powered Parsers
+
+The library supports an optional parser option leveraging Large Language Model (LLM) to provide a best-effort parsing when the specific parsers have not been successful.
+
+These LLM parsers are automatically appended as a processor option after the already available for all the Providers when the integration environmental variable is set (check the below integrations).
+
+> These integrations may involve some costs for API usage. Use it carefully! As an order of magnitude, a parsing of an email with OpenAI GPT gpt-3.5-turbo model costs $0.004.
+
+These are the current supported LLM integrations:
+
+- [OpenAI](https://openai.com/product), these are the supported ENVs:
+  - `OPENAI_TOKEN` (Required): OpenAI token.
+  - `OPENAI_MODEL` (Optional): Model to use, it defaults to "gpt-3.5-turbo".
+
 ## Installation
 
 The library is available as a Python package in pypi and can be installed with pip:
@@ -319,6 +333,7 @@ The project is following Network to Code software development guidelines and is 
 ...omitted debug logs...
 ====================================================== 99 passed, 174 deselected, 17 warnings in 10.35s ======================================================
 ```
+
 7. Run some final CI tests locally to ensure that there is no linting/formatting issues with your changes. You should look to get a code score of 10/10. See the example below: `invoke tests --local`
 
 ```

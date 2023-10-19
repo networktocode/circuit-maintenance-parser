@@ -262,13 +262,20 @@ def tests(context, local=INVOKE_LOCAL):
         context (obj): Used to run specific commands
         local (bool): Define as `True` to execute locally
     """
+    token_openai = os.getenv("OPENAI_TOKEN")
+    if token_openai:
+        del os.environ["OPENAI_TOKEN"]
+
     black(context, local)
     flake8(context, local)
     pylint(context, local)
     yamllint(context, local)
     pydocstyle(context, local)
     bandit(context, local)
-    pytest(context, local)
     mypy(context, local)
+    pytest(context, local)
+
+    if token_openai:
+        os.environ["OPENAI_TOKEN"] = token_openai
 
     print("All tests have passed!")

@@ -544,7 +544,9 @@ def test_parsers(parser_class, raw_file, results_file):
     with open(raw_file, "rb") as file_obj:
         raw_data = file_obj.read()
 
-    parsed_notifications = parser_class().parse(raw_data)
+    parsed_notifications = parser_class().parse(
+        raw_data, parser_class._data_types[0]  # pylint: disable=protected-access
+    )
 
     with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
@@ -559,4 +561,4 @@ def test_parsers(parser_class, raw_file, results_file):
 def test_parser_no_data(parser_class):
     """Test parser with no data."""
     with pytest.raises(ParserError):
-        parser_class().parse(b"")
+        parser_class().parse(b"", parser_class._data_types[0])  # pylint: disable=protected-access
