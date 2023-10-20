@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Bogus Corp",
+        "circuits": [
+          {
+            "circuit_id": "None",
+            "impact": "NO-IMPACT"
+          }
+        ],
+        "end": 1696698000,
+        "maintenance_id": "02345678",
+        "organizer": "mailto:noc@eunetworks.com",
+        "provider": "euNetworks.com",
+        "sequence": 2,
+        "stamp": 1696586160,
+        "start": 1696633200,
+        "status": "CANCELLED",
+        "summary": "Maintenance note",
+        "uid": "02345678@euNetworks.com"
+    }
+]

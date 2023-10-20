@@ -274,10 +274,10 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (
             EUNetworks,
             [
-                ("ical", GENERIC_ICAL_DATA_PATH),
+                ("email", Path(dir_path, "data", "eunetworks", "eunetworks_cancel.eml")),
             ],
             [
-                GENERIC_ICAL_RESULT_PATH,
+                Path(dir_path, "data", "eunetworks", "eunetworks_cancel.json"),
             ],
         ),
         # EXA / GTT

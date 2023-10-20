@@ -138,11 +138,23 @@ class ICal(Parser):
                         )
                         for object in component.get("X-MAINTNOTE-OBJECT-ID")
                     ]
-                else:
+                elif circuits is not None:
                     data["circuits"] = [
                         CircuitImpact(
                             circuit_id=circuits,
                             impact=Impact(component.get("X-MAINTNOTE-IMPACT")),
+                        )
+                    ]
+                elif data["status"] == "CANCELLED":
+                    # We shouldn't have to do this, as it does not
+                    # comply with the BCOP spec to have no circuits, but
+                    # if circuits aren't defined, we insert a fake
+                    # circuit ID on cancelled requests.  At least
+                    # EUNetworks has sent some notifications this way.
+                    data["circuits"] = [
+                        CircuitImpact(
+                            circuit_id="None",
+                            impact=Impact("NO-IMPACT")
                         )
                     ]
                 result.append(data)
