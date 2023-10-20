@@ -151,12 +151,7 @@ class ICal(Parser):
                     # if circuits aren't defined, we insert a fake
                     # circuit ID on cancelled requests.  At least
                     # EUNetworks has sent some notifications this way.
-                    data["circuits"] = [
-                        CircuitImpact(
-                            circuit_id="None",
-                            impact=Impact("NO-IMPACT")
-                        )
-                    ]
+                    data["circuits"] = [CircuitImpact(circuit_id="None", impact=Impact("NO-IMPACT"))]
                 result.append(data)
         return result
 
