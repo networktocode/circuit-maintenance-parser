@@ -26,15 +26,15 @@ ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
 ARC-Authentication-Results: i=3; mx.google.com;
        dkim=pass header.i=@testdomain.com header.s=testdomain header.b=GLHcVmBa;
        arc=pass (i=2 spf=pass spfdomain=us-west-2.amazonses.com dkim=pass dkdomain=sns.amazonaws.com dkim=pass dkdomain=amazonses.com dmarc=pass fromdomain=amazonaws.com);
-       spf=pass (google.com: domain of rd-notices+bncbcsjvsho64cbb6ob2suamgqe3dqkcsq@testdomain.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=rd-notices+bncBCSJVSHO64CBB6OB2SUAMGQE3DQKCSQ@testdomain.com;
+       spf=pass (google.com: domain of rd-notices+bncbcsjvsho64cbb6ob2suamgqe3dqkcsq@testdomain.com designates 7.7.7.7 as permitted sender) smtp.mailfrom=rd-notices+bncBCSJVSHO64CBB6OB2SUAMGQE3DQKCSQ@testdomain.com;
        dmarc=fail (p=QUARANTINE sp=NONE dis=NONE arc=pass) header.from=amazonaws.com
 Return-Path: <rd-notices+bncBCSJVSHO64CBB6OB2SUAMGQE3DQKCSQ@testdomain.com>
-Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [7.7.7.7)
         by mx.google.com with SMTPS id z195-20020a4a49cc000000b0057b8079d2f9sor1288663ooa.3.2023.09.27.23.45.13
         for <bill.murray@testdomain.com>
         (Google Transport Security);
         Wed, 27 Sep 2023 23:45:13 -0700 (PDT)
-Received-SPF: pass (google.com: domain of rd-notices+bncbcsjvsho64cbb6ob2suamgqe3dqkcsq@testdomain.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Received-SPF: pass (google.com: domain of rd-notices+bncbcsjvsho64cbb6ob2suamgqe3dqkcsq@testdomain.com designates 7.7.7.7 as permitted sender) client-ip=7.7.7.7;
 Sender: rd-notices@testdomain.com
 X-Gm-Message-State: AOJu0YwA1ncYCL1JhSr58XiTdslkwS2bbAyUG8XhiJs3xZZJ3Ccy9WF5
 	b8y79QbLjF9OquocCHSQC0PxicdI
@@ -46,7 +46,7 @@ Received: by 2002:a4a:554d:0:b0:573:f543:8c29 with SMTP id e74-20020a4a554d00000
  Wed, 27 Sep 2023 23:45:12 -0700 (PDT)
 X-Received: by 2002:a54:4002:0:b0:3a7:8725:f37c with SMTP id x2-20020a544002000000b003a78725f37cmr391884oie.10.1695883512779;
         Wed, 27 Sep 2023 23:45:12 -0700 (PDT)
-Received: from a59-201.smtp-out.us-west-2.amazonses.com (a59-201.smtp-out.us-west-2.amazonses.com. [54.240.59.201])
+Received: from a59-201.smtp-out.us-west-2.amazonses.com (a59-201.smtp-out.us-west-2.amazonses.com. [7.7.7.7])
         by mx.google.com with ESMTPS id f20-20020a637554000000b00578b785d46csi18216323pgn.193.2023.09.27.23.45.12
         for <rd-notices@testdomain.com>
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
