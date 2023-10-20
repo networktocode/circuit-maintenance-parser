@@ -127,7 +127,11 @@ class ICal(Parser):
                 data = {key: value for key, value in data.items() if value != "None"}
 
                 # In a VEVENT sometimes there are mutliple object ID with custom impacts
-                circuits = component.get("X-MAINTNOTE-OBJECT-ID")
+                # In addition, while circuits should always be populated according to the BCOP, sometimes
+                # they are not in the real world, at least in maintenances with a CANCELLED status.  Thus
+                # we allow empty circuit lists, but will validate elsewhere that they are only empty in a
+                # maintenance object with a CANCELLED status.
+                circuits = component.get("X-MAINTNOTE-OBJECT-ID", [])
                 if isinstance(circuits, list):
                     data["circuits"] = [
                         CircuitImpact(
@@ -136,22 +140,15 @@ class ICal(Parser):
                                 object.params.get("X-MAINTNOTE-OBJECT-IMPACT", component.get("X-MAINTNOTE-IMPACT"))
                             ),
                         )
-                        for object in component.get("X-MAINTNOTE-OBJECT-ID")
+                        for object in component.get("X-MAINTNOTE-OBJECT-ID", [])
                     ]
-                elif circuits is not None:
+                else:
                     data["circuits"] = [
                         CircuitImpact(
                             circuit_id=circuits,
                             impact=Impact(component.get("X-MAINTNOTE-IMPACT")),
                         )
                     ]
-                elif data["status"] == "CANCELLED":
-                    # We shouldn't have to do this, as it does not
-                    # comply with the BCOP spec to have no circuits, but
-                    # if circuits aren't defined, we insert a fake
-                    # circuit ID on cancelled requests.  At least
-                    # EUNetworks has sent some notifications this way.
-                    data["circuits"] = [CircuitImpact(circuit_id="None", impact=Impact("NO-IMPACT"))]
                 result.append(data)
         return result
 
