@@ -13,7 +13,7 @@ from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser,
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
 logger = logging.getLogger(__name__)
-#logger.setLevel("DEBUG")
+# logger.setLevel("DEBUG")
 
 
 class SubjectParserAWS1(EmailSubjectParser):
@@ -87,7 +87,7 @@ class TextParserAWS1(Text):
 
         data = {"circuits": [], "start": "", "end": ""}
         impact = Impact.OUTAGE
-        maintenace_id = ""
+        maintenance_id = ""
         status = Status.CONFIRMED
 
         for line in text.splitlines():
@@ -99,13 +99,8 @@ class TextParserAWS1(Text):
             # there may still be some strings with data to capture.
             # otherwise, continue on.
             if not line_matched:
-                if "may become unavailable" in line.lower():
-                    impact = Impact.OUTAGE
-                elif "has been cancelled" in line.lower():
-                    status = Status.CANCELLED
-
                 if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
-                    maintenace_id += line
+                    maintenance_id += line
                     data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
                 continue
 
@@ -126,15 +121,21 @@ class TextParserAWS1(Text):
                             else:
                                 data[v] = group_match
 
+            # Let's determine impact and status
+            if "may become unavailable" in line.lower():
+                impact = Impact.OUTAGE
+            elif "has been cancelled" in line.lower():
+                status = Status.CANCELLED
+
         # Let's get our times in order.
         if data["start"] and data["end"]:
             data["start"] = self.dt2ts(parser.parse(data["start"]))
             data["end"] = self.dt2ts(parser.parse(data["end"]))
-            maintenace_id += str(data["start"])
-            maintenace_id += str(data["end"])
+            maintenance_id += str(data["start"])
+            maintenance_id += str(data["end"])
 
         # No maintenance ID found in emails, so a hash value is being generated using the start,
         #  end and IDs of all circuits in the notification.
-        data["maintenance_id"] = hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.md5(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         data["status"] = status
         return [data]

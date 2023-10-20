@@ -27,7 +27,7 @@
             }
         ],
         "end": 1621519200,
-        "maintenance_id": "15faf02fcf2e999792668df97828bc76",
+        "maintenance_id": "1cae19787c16a01d90fd5937a94c6737",
         "start": 1621497600,
         "status": "CONFIRMED",
         "summary": "Planned maintenance has been scheduled on an AWS Direct Connect router in A Block, New York, NY from Thu, 20 May 2021 08:00:00 GMT to Thu, 20 May 2021 14:00:00 GMT for 6 hours. During this maintenance window, your AWS Direct Connect services listed below may become unavailable."
