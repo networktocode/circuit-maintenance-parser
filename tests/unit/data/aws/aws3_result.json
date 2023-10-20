@@ -1,0 +1,37 @@
+[
+  {
+    "account": "0000000000001",
+    "circuits": [
+      {
+        "circuit_id": "xxxxx-ffffffff",
+        "impact": "OUTAGE"
+      },
+      {
+        "circuit_id": "yyyyy-uuuuuuuu",
+        "impact": "OUTAGE"
+      },
+      {
+        "circuit_id": "mmmmm-iiiiiiii",
+        "impact": "OUTAGE"
+      },
+      {
+        "circuit_id": "rrrrr-pppppppp",
+        "impact": "OUTAGE"
+      },
+      {
+        "circuit_id": "fffff-qqqqqqqq",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1697115600,
+    "maintenance_id": "b15bf3344836f5ad8ab6a6e16cf328f8",
+    "organizer": "aws-account-notifications@amazon.com",
+    "provider": "aws",
+    "sequence": 1,
+    "stamp": 1695883512,
+    "start": 1697094000,
+    "status": "CONFIRMED",
+    "summary": "Planned maintenance has been scheduled on an AWS Direct Connect endpoint in Westin Building Exchange, Seattle, WA. During this maintenance window, your AWS Direct Connect services associated with this event may become unavailable.\\n\\nThis maintenance is scheduled to avoid disrupting redundant connections at the same time.\\n\\nIf you encounter any problems with your connection after the end of this maintenance window, please contact AWS Support(1).\\n\\n(1) https://aws.amazon.com/support. For more details, please see https://phd.aws.amazon.com/phd/home?region=us-west-2#/dashboard/open-issues",
+    "uid": "0"
+  }
+]

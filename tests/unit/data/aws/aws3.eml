@@ -1,0 +1,119 @@
+Delivered-To: bill.murray@testdomain.com
+Received: by 2002:a05:7300:a498:b0:db:5402:54d2 with SMTP id ci24csp3189966dyb;
+        Wed, 27 Sep 2023 23:45:14 -0700 (PDT)
+X-Received: by 2002:a05:6830:1b64:b0:6c4:ded2:44d0 with SMTP id d4-20020a0568301b6400b006c4ded244d0mr393870ote.27.1695883513842;
+        Wed, 27 Sep 2023 23:45:13 -0700 (PDT)
+ARC-Seal: i=3; a=rsa-sha256; t=1695883513; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=J2AUxyAHbkdx5YmP5xAbEeJM3elEoa14Iwv5t4wjz1RTKLla7KfqHxEZMD1LYoenxs
+         ZLpE/YDGT+ZSphagfW1mo+veHY27kppDSD00YOjDWdWqOLNUvH6KDvGlkMIEIKATDfI/
+         5lWcAOTP2h5x7kha2YFpModQRq/fL2727THiXX+BTTWi6r1kF0IAO8lcivXAuM8jaZtM
+         DYgJAzQW/hcpexKfXz5idvB7cM4TA6+EtsbntwuTILFG6QuY6l09nQOLSnaiDC9WpxXk
+         Nnveuzzzkx4XklLFCn6AaangILYMa/Ac9kfcOT6MBwOHngH27Pj06PjxF5x7Otk/VLtD
+         NTqA==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:feedback-id:content-transfer-encoding
+         :mime-version:subject:message-id:to:from:date:sender:dkim-signature;
+        bh=YXHwVUeIH05Eff5uu/QBh14WkQXPczhkl0K2x/xaxHI=;
+        fh=/BZp/CoWS56RYHJk/Nq7+rYFbsXKZMYT25P0V/4q4R8=;
+        b=El2IxnqZD03wQKR3T3OgYD9VZmQlP/4/0F/G9rkTXGnpqdk6LMM7wtFngfyND14s2/
+         j49qP6rvxFdU2YNPbm6K0v6UplLq6sq57eE8kKVJ9qIu4hebNR3r75ohqPRwU7rzvoGB
+         mPjuE2UevG9YfswuQ8/gDeLbBFAP9gyj6BMwYnC9uQRwdy1fYLMizPxPP/WxV+RLbY6C
+         s7UzQudntDwdE+hFpKHx8mUMrx+4AN/PU4eYyuGjXSrT8qb5LWCC6xFmIIN5LluDMGfO
+         VNXZBnDMf6paqOUk6SdRDDGR60D5dTR+KMXvc5ilbgmErZDLGMDqlm93ku65R3nnFot2
+         OmzA==
+ARC-Authentication-Results: i=3; mx.google.com;
+       dkim=pass header.i=@testdomain.com header.s=testdomain header.b=GLHcVmBa;
+       arc=pass (i=2 spf=pass spfdomain=us-west-2.amazonses.com dkim=pass dkdomain=sns.amazonaws.com dkim=pass dkdomain=amazonses.com dmarc=pass fromdomain=amazonaws.com);
+       spf=pass (google.com: domain of rd-notices+bncbcsjvsho64cbb6ob2suamgqe3dqkcsq@testdomain.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=rd-notices+bncBCSJVSHO64CBB6OB2SUAMGQE3DQKCSQ@testdomain.com;
+       dmarc=fail (p=QUARANTINE sp=NONE dis=NONE arc=pass) header.from=amazonaws.com
+Return-Path: <rd-notices+bncBCSJVSHO64CBB6OB2SUAMGQE3DQKCSQ@testdomain.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id z195-20020a4a49cc000000b0057b8079d2f9sor1288663ooa.3.2023.09.27.23.45.13
+        for <bill.murray@testdomain.com>
+        (Google Transport Security);
+        Wed, 27 Sep 2023 23:45:13 -0700 (PDT)
+Received-SPF: pass (google.com: domain of rd-notices+bncbcsjvsho64cbb6ob2suamgqe3dqkcsq@testdomain.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Sender: rd-notices@testdomain.com
+X-Gm-Message-State: AOJu0YwA1ncYCL1JhSr58XiTdslkwS2bbAyUG8XhiJs3xZZJ3Ccy9WF5
+	b8y79QbLjF9OquocCHSQC0PxicdI
+X-Google-Smtp-Source: AGHT+IHRVxhXNJLs7Sr7hKiGQj5axz7trO3ifhk17zVerbtpqBwzCR3N9tJiSMksqUUrB6MOLmrSLg==
+X-Received: by 2002:a4a:d138:0:b0:57e:1618:e700 with SMTP id n24-20020a4ad138000000b0057e1618e700mr147723oor.7.1695883513473;
+        Wed, 27 Sep 2023 23:45:13 -0700 (PDT)
+X-BeenThere: rd-notices@testdomain.com
+Received: by 2002:a4a:554d:0:b0:573:f543:8c29 with SMTP id e74-20020a4a554d000000b00573f5438c29ls1795866oob.1.-pod-prod-01-us;
+ Wed, 27 Sep 2023 23:45:12 -0700 (PDT)
+X-Received: by 2002:a54:4002:0:b0:3a7:8725:f37c with SMTP id x2-20020a544002000000b003a78725f37cmr391884oie.10.1695883512779;
+        Wed, 27 Sep 2023 23:45:12 -0700 (PDT)
+Received: from a59-201.smtp-out.us-west-2.amazonses.com (a59-201.smtp-out.us-west-2.amazonses.com. [54.240.59.201])
+        by mx.google.com with ESMTPS id f20-20020a637554000000b00578b785d46csi18216323pgn.193.2023.09.27.23.45.12
+        for <rd-notices@testdomain.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 27 Sep 2023 23:45:12 -0700 (PDT)
+Date: Thu, 28 Sep 2023 06:45:12 +0000
+From: DXMaintNotify-RealDirect <no-reply@sns.amazonaws.com>
+To: rd-notices@testdomain.com
+Message-ID: <0101018ada88c9ab-7bb959a5-dfa6-4e9b-9fa1-787fe83442c6-000000@us-west-2.amazonses.com>
+Subject: [rd-notices] AWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+x-amz-sns-message-id: c08baa17-4211-5fca-a32c-f79861293c18
+x-amz-sns-subscription-arn: arn:aws:sns:us-west-2:860000000000:DXMaintNotify:9e02f42f-b026-4bd7-bb9b-5d1eb2b2e141
+Feedback-ID: 1.us-west-2.c55J8LO2Yl1R0Ht+ysI6VjzUH6Cvo3dHPF80AUVC/G8=:AmazonSES
+X-SES-Outgoing: 2023.09.28-54.240.59.201
+X-Original-Sender: no-reply@sns.amazonaws.com
+Precedence: list
+Mailing-list: list rd-notices@testdomain.com; contact rd-notices+owners@testdomain.com
+List-ID: <rd-notices.testdomain.com>
+X-Spam-Checked-In-Group: rd-notices@testdomain.com
+X-Google-Group-Id: 536184160288
+List-Post: <https://groups.google.com/a/testdomain.com/group/rd-notices/post>, <mailto:rd-notices@testdomain.com>
+List-Help: <https://support.google.com/a/testdomain.com/bin/topic.py?topic=25838>,
+ <mailto:rd-notices+help@testdomain.com>
+List-Archive: <https://groups.google.com/a/testdomain.com/group/rd-notices/>
+List-Unsubscribe: <mailto:googlegroups-manage+536184160288+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/testdomain.com/group/rd-notices/subscribe>
+
+Planned maintenance has been scheduled on an AWS Direct Connect endpoint in=
+ Westin Building Exchange, Seattle, WA. During this maintenance window, you=
+r AWS Direct Connect services associated with this event may become unavail=
+able.\n\nThis maintenance is scheduled to avoid disrupting redundant connec=
+tions at the same time.\n\nIf you encounter any problems with your connecti=
+on after the end of this maintenance window, please contact AWS Support(1).=
+\n\n(1) https://aws.amazon.com/support. For more details, please see https:=
+//phd.aws.amazon.com/phd/home?region=3Dus-west-2#/dashboard/open-issues
+
+Region: us-west-2
+Account Id: 0000000000001
+
+Affected Resources:
+xxxxx-ffffffff
+yyyyy-uuuuuuuu
+mmmmm-iiiiiiii
+rrrrr-pppppppp
+fffff-qqqqqqqq
+
+Start Time: Thu, 12 Oct 2023 07:00:00 GMT
+End Time: Thu, 12 Oct 2023 13:00:00 GMT
+
+--
+If you wish to stop receiving notifications from this topic, please click o=
+r visit the link below to unsubscribe:
+https://sns.us-west-2.amazonaws.com/unsubscribe.html?SubscriptionArn=3Darn:=
+aws:sns:us-west-2:860000000000:DXMaintNotify:9e02f42f-b026-4bd7-bb9b-5d1eb2=
+b2e141&Endpoint=3Drd-notices@testdomain.com
+
+Please do not reply directly to this email. If you have any questions or co=
+mments regarding this email, please contact us at https://aws.amazon.com/su=
+pport
+
+--=20
+You received this message because you are subscribed to the Google Groups "=
+Real Direct Notices" group.
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to rd-notices+unsubscribe@testdomain.com.
+To view this discussion on the web visit https://groups.google.com/a/Realga=
+mes.com/d/msgid/rd-notices/0101018ada88c9ab-7bb959a5-dfa6-4e9b-9fa1-787fe83=
+442c6-000000%40us-west-2.amazonses.com.

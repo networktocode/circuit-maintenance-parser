@@ -100,6 +100,16 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "aws", "aws2.eml"),
             Path(dir_path, "data", "aws", "aws2_subject_parser_result.json"),
         ),
+        (
+            TextParserAWS1,
+            Path(dir_path, "data", "aws", "aws3.eml"),
+            Path(dir_path, "data", "aws", "aws3_text_parser_result.json"),
+        ),
+        (
+            SubjectParserAWS1,
+            Path(dir_path, "data", "aws", "aws3.eml"),
+            Path(dir_path, "data", "aws", "aws3_subject_parser_result.json"),
+        ),
         # BSO
         (
             HtmlParserBSO1,
