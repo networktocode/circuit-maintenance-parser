@@ -13,7 +13,6 @@ from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser,
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
 logger = logging.getLogger(__name__)
-# logger.setLevel("DEBUG")
 
 
 class SubjectParserAWS1(EmailSubjectParser):
@@ -27,7 +26,7 @@ class SubjectParserAWS1(EmailSubjectParser):
         data = {"account": ""}
         # Common Subject strings for matching:
         subject_map = {
-            "\[AWS Account ?I?D?: ([0-9]+)\]": "account",
+            r"\[AWS Account ?I?D?: ([0-9]+)\]": "account",
         }
 
         regex_keys = re.compile("|".join(subject_map), re.IGNORECASE)
@@ -39,10 +38,11 @@ class SubjectParserAWS1(EmailSubjectParser):
             if not line_matched:
                 continue
             for group_match in line_matched.groups():
-                if group_match is not None:
-                    for k, v in subject_map.items():
-                        if re.search(k, line, re.IGNORECASE):
-                            data[v] = group_match
+                if not group_match:
+                    continue
+                for key, value in subject_map.items():
+                    if re.search(key, line, re.IGNORECASE):
+                        data[value] = group_match
         return [data]
 
 
@@ -107,19 +107,20 @@ class TextParserAWS1(Text):
             # for lines that do match our regex strings.
             # grab the data and map the values to keys.
             for group_match in line_matched.groups():
-                if group_match is not None:
-                    for k, v in text_map.items():
-                        if re.search(k, line_matched.string, re.IGNORECASE):
-                            # Due to having a single line on some emails
-                            # This causes multiple match groups
-                            # However this needs to be split across keys.
-                            # This could probably be cleaned up.
-                            if v == "start_and_end" and data["start"] == "":
-                                data["start"] = group_match
-                            elif v == "start_and_end" and data["end"] == "":
-                                data["end"] = group_match
-                            else:
-                                data[v] = group_match
+                if not group_match:
+                    continue
+                for key, value in text_map.items():
+                    if re.search(key, line_matched.string, re.IGNORECASE):
+                        # Due to having a single line on some emails
+                        # This causes multiple match groups
+                        # However this needs to be split across keys.
+                        # This could probably be cleaned up.
+                        if value == "start_and_end" and data["start"] == "":
+                            data["start"] = group_match
+                        elif value == "start_and_end" and data["end"] == "":
+                            data["end"] = group_match
+                        else:
+                            data[value] = group_match
 
             # Let's determine impact and status
             if "may become unavailable" in line.lower():
