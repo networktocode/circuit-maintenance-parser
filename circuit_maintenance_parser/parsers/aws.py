@@ -85,7 +85,7 @@ class TextParserAWS1(Text):
 
         regex_keys = re.compile("|".join(text_map), re.IGNORECASE)
 
-        data = {"circuits": [], "start": "", "end": ""}
+        data = {"circuits": []}
         impact = Impact.OUTAGE
         maintenance_id = ""
         status = Status.CONFIRMED
@@ -115,9 +115,9 @@ class TextParserAWS1(Text):
                         # This causes multiple match groups
                         # However this needs to be split across keys.
                         # This could probably be cleaned up.
-                        if value == "start_and_end" and data["start"] == "":
+                        if value == "start_and_end" and "start" not in data:
                             data["start"] = group_match
-                        elif value == "start_and_end" and data["end"] == "":
+                        elif value == "start_and_end":
                             data["end"] = group_match
                         else:
                             data[value] = group_match
@@ -129,7 +129,7 @@ class TextParserAWS1(Text):
                 status = Status.CANCELLED
 
         # Let's get our times in order.
-        if data["start"] and data["end"]:
+        if all((key in data for key in ["start", "end"])):
             data["start"] = self.dt2ts(parser.parse(data["start"]))
             data["end"] = self.dt2ts(parser.parse(data["end"]))
             maintenance_id += str(data["start"])
