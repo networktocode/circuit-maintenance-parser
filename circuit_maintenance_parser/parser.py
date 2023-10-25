@@ -272,8 +272,8 @@ class LLM(Parser):
 
     _llm_question = (
         "Can you extract the maintenance_id, the account_id, the impact, the status "
-        "(e.g., confirmed, cancelled), the summary, the circuit ids (also defined as service or order), and the global "
-        "start_time and end_time as EPOCH timestamps in JSON format with keys in "
+        "(e.g., confirmed, cancelled, rescheduled), the summary, the circuit ids (also defined as service or order), "
+        "and the global start_time and end_time as EPOCH timestamps in JSON format with keys in "
         "lowercase underscore format? Reply with only the answer in JSON form and "
         "include no other commentary"
     )
@@ -313,15 +313,22 @@ class LLM(Parser):
         if impact_key:
             if "no impact" in generated_json[impact_key].lower():
                 return Impact.NO_IMPACT
+            if "partial" in generated_json[impact_key].lower():
+                return Impact.DEGRADED
 
         return Impact.OUTAGE
 
     def _get_circuit_ids(self, generated_json: dict, impact: Impact):
         """Method to get the Circuit IDs and use a general Impact."""
         circuits = []
-        circuits_ids = self.get_key_with_string(generated_json, "circuit")
-        for circuit_id in generated_json[circuits_ids]:
-            circuits.append(CircuitImpact(circuit_id=circuit_id, impact=impact))
+        circuits_ids_key = self.get_key_with_string(generated_json, "circuit")
+        for circuit in generated_json[circuits_ids_key]:
+            if isinstance(circuit, str):
+                circuits.append(CircuitImpact(circuit_id=circuit, impact=impact))
+            elif isinstance(circuit, dict):
+                circuit_key = self.get_key_with_string(circuit, "circuit")
+                circuits.append(CircuitImpact(circuit_id=circuit[circuit_key], impact=impact))
+
         return circuits
 
     def _get_start(self, generated_json: dict):
@@ -340,8 +347,16 @@ class LLM(Parser):
         """Method to get the Status."""
         status_key = self.get_key_with_string(generated_json, "status")
 
-        if generated_json[status_key] == "confirmed":
+        if "confirmed" in generated_json[status_key].lower():
             return Status.CONFIRMED
+        if "rescheduled" in generated_json[status_key].lower():
+            return Status.RE_SCHEDULED
+        if "cancelled" in generated_json[status_key].lower():
+            return Status.CANCELLED
+        if "ongoing" in generated_json[status_key].lower():
+            return Status.IN_PROCESS
+        if "completed" in generated_json[status_key].lower():
+            return Status.COMPLETED
 
         return Status.CONFIRMED
 
