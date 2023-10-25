@@ -272,7 +272,7 @@ class LLM(Parser):
 
     _llm_question = (
         "Can you extract the maintenance_id, the account_id, the impact, the status "
-        "(e.g., confirmed, cancelled), the summary, the circuit ids, and the global "
+        "(e.g., confirmed, cancelled), the summary, the circuit ids (also defined as service or order), and the global "
         "start_time and end_time as EPOCH timestamps in JSON format with keys in "
         "lowercase underscore format? Reply with only the answer in JSON form and "
         "include no other commentary"
@@ -347,7 +347,11 @@ class LLM(Parser):
 
     def _get_account(self, generated_json: dict):
         """Method to get the Account."""
-        return generated_json[self.get_key_with_string(generated_json, "account")]
+        account = generated_json[self.get_key_with_string(generated_json, "account")]
+        if not account:
+            return "Not found"
+
+        return account
 
     def _get_maintenance_id(self, generated_json: dict, start, end, circuits):
         """Method to get the Maintenance ID."""
@@ -368,18 +372,20 @@ class LLM(Parser):
 
         data = {
             "circuits": self._get_circuit_ids(generated_json, impact),
-            "start": self._get_start(generated_json),
-            "end": self._get_end(generated_json),
-            "summary": self._get_summary(generated_json),
+            "start": int(self._get_start(generated_json)),
+            "end": int(self._get_end(generated_json)),
+            "summary": str(self._get_summary(generated_json)),
             "status": self._get_status(generated_json),
-            "account": self._get_account(generated_json),
+            "account": str(self._get_account(generated_json)),
         }
 
-        data["maintenance_id"] = self._get_maintenance_id(
-            generated_json,
-            data["start"],
-            data["end"],
-            data["circuits"],
+        data["maintenance_id"] = str(
+            self._get_maintenance_id(
+                generated_json,
+                data["start"],
+                data["end"],
+                data["circuits"],
+            )
         )
 
         return [data]
