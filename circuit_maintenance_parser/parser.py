@@ -127,7 +127,11 @@ class ICal(Parser):
                 data = {key: value for key, value in data.items() if value != "None"}
 
                 # In a VEVENT sometimes there are mutliple object ID with custom impacts
-                circuits = component.get("X-MAINTNOTE-OBJECT-ID")
+                # In addition, while circuits should always be populated according to the BCOP, sometimes
+                # they are not in the real world, at least in maintenances with a CANCELLED status.  Thus
+                # we allow empty circuit lists, but will validate elsewhere that they are only empty in a
+                # maintenance object with a CANCELLED status.
+                circuits = component.get("X-MAINTNOTE-OBJECT-ID", [])
                 if isinstance(circuits, list):
                     data["circuits"] = [
                         CircuitImpact(
@@ -136,7 +140,7 @@ class ICal(Parser):
                                 object.params.get("X-MAINTNOTE-OBJECT-IMPACT", component.get("X-MAINTNOTE-IMPACT"))
                             ),
                         )
-                        for object in component.get("X-MAINTNOTE-OBJECT-ID")
+                        for object in component.get("X-MAINTNOTE-OBJECT-ID", [])
                     ]
                 else:
                     data["circuits"] = [

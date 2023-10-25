@@ -98,14 +98,15 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         provider: identifies the provider of the service that is the subject of the maintenance notification
         account:  identifies an account associated with the service that is the subject of the maintenance notification
         maintenance_id:  contains text that uniquely identifies the maintenance that is the subject of the notification
-        circuits: list of circuits affected by the maintenance notification and their specific impact
+        circuits: list of circuits affected by the maintenance notification and their specific impact. Note this can be
+            an empty list for notifications with a CANCELLED status if the provider does not populate the circuit list.
+        status: defines the overall status or confirmation for the maintenance
         start: timestamp that defines the start date of the maintenance in GMT
         end: timestamp that defines the end date of the maintenance in GMT
         stamp: timestamp that defines the update date of the maintenance in GMT
         organizer: defines the contact information included in the original notification
 
     Optional attributes:
-        status: defines the overall status or confirmation for the maintenance
         summary: description of the maintenace notification
         uid: specific unique identifier for each notification
         sequence: sequence number - initially zero - to serialize updates in case they are received or processed out of
@@ -126,18 +127,18 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         ...     summary="This is a maintenance notification",
         ...     uid="1111",
         ... )
-        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', status=<Status.COMPLETED: 'COMPLETED'>, uid='1111', sequence=1, summary='This is a maintenance notification')
+        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', status=<Status.COMPLETED: 'COMPLETED'>, circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='1111', sequence=1, summary='This is a maintenance notification')
     """
 
     provider: StrictStr
     account: StrictStr
     maintenance_id: StrictStr
+    status: Status
     circuits: List[CircuitImpact]
     start: StrictInt
     end: StrictInt
     stamp: StrictInt
     organizer: StrictStr
-    status: Status
 
     # Non mandatory attributes
     uid: StrictStr = "0"
@@ -160,9 +161,9 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         return value
 
     @validator("circuits")
-    def validate_empty_circuits(cls, value):
-        """Validate emptry strings."""
-        if len(value) < 1:
+    def validate_empty_circuits(cls, value, values):
+        """Validate non-cancel notifications have a populated circuit list."""
+        if len(value) < 1 and values["status"] != "CANCELLED":
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 
