@@ -90,7 +90,7 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 The library supports an optional parser option leveraging Large Language Model (LLM) to provide a best-effort parsing when the specific parsers have not been successful.
 
-These LLM parsers are automatically appended as a processor option after the already available for all the Providers when the integration environmental variable is set (check the below integrations).
+When the appropriate environment variable(s) are set (see below), these LLM parsers are automatically appended after all existing processors for each defined Provider.
 
 > These integrations may involve some costs for API usage. Use it carefully! As an order of magnitude, a parsing of an email with OpenAI GPT gpt-3.5-turbo model costs $0.004.
 
