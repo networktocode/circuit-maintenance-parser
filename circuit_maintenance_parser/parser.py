@@ -374,8 +374,8 @@ class LLM(Parser):
         if maintenance_key and generated_json["maintenance_id"] != "N/A":
             return generated_json["maintenance_id"]
 
-        maintenace_id = str(start) + str(end) + "".join(list(circuits))
-        return hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()  # nosec
+        maintenance_id = str(start) + str(end) + "".join(list(circuits))
+        return hashlib.md5(maintenance_id.encode("utf-8")).hexdigest()  # nosec
 
     def parse_content(self, content):
         """Parse content via LLM."""
