@@ -317,8 +317,9 @@ class LLM(Parser):
         if content_type in ["html", "text/html"]:
             soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
             content = soup.text
-        else:
+        elif content_type in ["text/plain"]:
             content = self.get_text_hook(raw)
+
         for data in self.parse_content(content):
             result.append(data)
         return result
