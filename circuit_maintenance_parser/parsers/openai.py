@@ -24,14 +24,17 @@ class OpenAIParser(LLM):
                 messages=[
                     {
                         "role": "system",
-                        "content": content,
+                        "content": self._llm_question,
                     },
                     {
                         "role": "user",
-                        "content": self._llm_question,
+                        "content": content,
                     },
                 ],
             )
+
+        # TODO: Maybe asking again about the generated response could refine it
+
         except openai.error.InvalidRequestError as err:
             logger.error(err)
             return None

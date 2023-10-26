@@ -544,9 +544,7 @@ def test_parsers(parser_class, raw_file, results_file):
     with open(raw_file, "rb") as file_obj:
         raw_data = file_obj.read()
 
-    parsed_notifications = parser_class().parse(
-        raw_data, parser_class._data_types[0]  # pylint: disable=protected-access
-    )
+    parsed_notifications = parser_class().parse(raw_data, parser_class.get_data_types()[0])
 
     with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)

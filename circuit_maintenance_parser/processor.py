@@ -54,7 +54,7 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         self.extended_data = extended_data
         maintenances_data: List = []
 
-        # First, we generate a set with the key `Parser` and `DataPart` if the data type from the first is
+        # First, we generate a dictionary with the key `Parser` and `DataPart` if the data type from the first is
         # supported by the second. This avoids reusing the same Parser for different data types if supported.
         data_part_and_parser_combinations = {
             data_parser: data_part

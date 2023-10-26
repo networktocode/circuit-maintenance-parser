@@ -270,13 +270,46 @@ class LLM(Parser):
 
     _data_types = ["text/html", "html", "text/plain"]
 
-    _llm_question = (
-        "Can you extract the maintenance_id, the account_id, the impact, the status "
-        "(e.g., confirmed, cancelled, rescheduled), the summary, the circuit ids (also defined as service or order), "
-        "and the global start_time and end_time as EPOCH timestamps in JSON format with keys in "
-        "lowercase underscore format? Reply with only the answer in JSON form and "
-        "include no other commentary"
-    )
+    _llm_question = """Please, could you extract a JSON form without any other comment,
+    with the following JSON schema (timestamps in EPOCH):
+    {
+    "type": "object",
+    "properties": {
+        "start": {
+            "type": "int",
+        },
+        "end": {
+            "type": "int",
+        },
+        "account": {
+            "type": "string",
+        },
+        "summary": {
+            "type": "string",
+        },
+        "maintenance_id": {
+            "type": "string",
+        },
+        "account": {
+            "type": "string",
+        },
+        "status": {
+            "type": "string",
+        },
+        "impact": {
+            "type": "string",
+        },
+        "circuit_ids": {
+            "type": "array",
+            "items": {
+                "type": "string",
+            }
+        }
+    }
+    More context:
+    * Circuit IDs are also known as service or order
+    * Status could be confirmed, ongoing, cancelled, completed or rescheduled
+    """
 
     def parser_hook(self, raw: bytes, content_type: str):
         """Execute parsing."""
@@ -333,11 +366,11 @@ class LLM(Parser):
 
     def _get_start(self, generated_json: dict):
         """Method to get the Start Time."""
-        return generated_json[self.get_key_with_string(generated_json, "start_time")]
+        return generated_json[self.get_key_with_string(generated_json, "start")]
 
     def _get_end(self, generated_json: dict):
         """Method to get the End Time."""
-        return generated_json[self.get_key_with_string(generated_json, "end_time")]
+        return generated_json[self.get_key_with_string(generated_json, "end")]
 
     def _get_summary(self, generated_json: dict):
         """Method to get the Summary."""
