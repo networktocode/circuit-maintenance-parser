@@ -23,13 +23,16 @@ class SubjectParserAWS1(EmailSubjectParser):
 
         Example: AWS Direct Connect Planned Maintenance Notification [AWS Account: 00000001]
         """
-        data = {"account": ""}
+        data = {}
         # Common Subject strings for matching:
-        subject_map = {
-            r"\[AWS Account ?I?D?: ([0-9]+)\]": "account",
-        }
+        subject_map = [{"account": r"\[AWS Account ?I?D?: ([0-9]+)\]"}]
 
-        regex_keys = re.compile("|".join(subject_map), re.IGNORECASE)
+        subject_list = []
+        for each_subject in subject_map:
+            for key, value in each_subject.items():
+                subject_list.append(value)
+
+        regex_keys = re.compile("|".join(subject_list), re.IGNORECASE)
 
         # in case of a multi-line subject
         # match the subject map
@@ -40,9 +43,10 @@ class SubjectParserAWS1(EmailSubjectParser):
             for group_match in line_matched.groups():
                 if not group_match:
                     continue
-                for key, value in subject_map.items():
-                    if re.search(key, line, re.IGNORECASE):
-                        data[value] = group_match
+                for parser_dict in subject_map:
+                    for key, value in parser_dict.items():
+                        if re.search(key, line, re.IGNORECASE):
+                            data[key] = group_match
         return [data]
 
 
@@ -76,14 +80,25 @@ class TextParserAWS1(Text):
             This maintenance is scheduled to avoid disrupting redundant connections at =
             the same time.
         """
-        text_map = {
-            "^Account ?I?D?: ([0-9]+)": "account",
-            "^Start Time: ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})": "start",
-            "^End Time: ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})": "end",
-            "(?<=from )([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})": "start_and_end",
-        }
+        text_map = [
+            {"account": "^Account ?I?D?: ([0-9]+)"},
+            {
+                "start": "^Start Time: ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})"
+            },
+            {
+                "end": "^End Time: ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})"
+            },
+            {
+                "start_and_end": "(?<=from )([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})"
+            },
+        ]
 
-        regex_keys = re.compile("|".join(text_map), re.IGNORECASE)
+        each_textmap = []
+        for search_string in text_map:
+            for key, value in search_string.items():
+                each_textmap.append(value)
+
+        regex_keys = re.compile("|".join(each_textmap), re.IGNORECASE)
 
         data = {"circuits": []}
         impact = Impact.OUTAGE
@@ -109,18 +124,19 @@ class TextParserAWS1(Text):
             for group_match in line_matched.groups():
                 if not group_match:
                     continue
-                for key, value in text_map.items():
-                    if re.search(key, line_matched.string, re.IGNORECASE):
-                        # Due to having a single line on some emails
-                        # This causes multiple match groups
-                        # However this needs to be split across keys.
-                        # This could probably be cleaned up.
-                        if value == "start_and_end" and "start" not in data:
-                            data["start"] = group_match
-                        elif value == "start_and_end":
-                            data["end"] = group_match
-                        else:
-                            data[value] = group_match
+                for parser_dict in text_map:
+                    for key, value in parser_dict.items():
+                        if re.search(value, line_matched.string, re.IGNORECASE):
+                            # Due to having a single line on some emails
+                            # This causes multiple match groups
+                            # However this needs to be split across keys.
+                            # This could probably be cleaned up.
+                            if key == "start_and_end" and "start" not in data:
+                                data["start"] = group_match
+                            elif key == "start_and_end":
+                                data["end"] = group_match
+                            else:
+                                data[key] = group_match
 
             # Let's determine impact and status
             if "may become unavailable" in line.lower():
