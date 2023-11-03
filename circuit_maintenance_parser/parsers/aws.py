@@ -43,8 +43,8 @@ class SubjectParserAWS1(EmailSubjectParser):
             for group_match in line_matched.groups():
                 if not group_match:
                     continue
-                for parser_dict in subject_map:
-                    for key, value in parser_dict.items():
+                for search_string in subject_map:
+                    for key, value in search_string.items():
                         if re.search(key, line, re.IGNORECASE):
                             data[key] = group_match
         return [data]
@@ -124,8 +124,8 @@ class TextParserAWS1(Text):
             for group_match in line_matched.groups():
                 if not group_match:
                     continue
-                for parser_dict in text_map:
-                    for key, value in parser_dict.items():
+                for search_string in text_map:
+                    for key, value in search_string.items():
                         if re.search(value, line_matched.string, re.IGNORECASE):
                             # Due to having a single line on some emails
                             # This causes multiple match groups
