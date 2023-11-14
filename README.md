@@ -88,13 +88,15 @@ By default, there is a `GenericProvider` that support a `SimpleProcessor` using 
 
 #### LLM-powered Parsers
 
-The library supports an optional parser option leveraging Large Language Model (LLM) to provide a best-effort parsing when the specific parsers have not been successful.
+The library supports an optional parser option leveraging Large Language Model (LLM) to provide best-effort parsing when the specific parsers have not been successful.
+
+> Warning: Some of these integrations, such as OpenAI, require of extras installations parameters. Check the [extras section](#extras)
 
 When the appropriate environment variable(s) are set (see below), these LLM parsers are automatically appended after all existing processors for each defined Provider.
 
 > These integrations may involve some costs for API usage. Use it carefully! As an order of magnitude, a parsing of an email with OpenAI GPT gpt-3.5-turbo model costs $0.004.
 
-These are the current supported LLM integrations:
+These are the currently supported LLM integrations:
 
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
   - `OPENAI_TOKEN` (Required): OpenAI token.
@@ -104,6 +106,12 @@ These are the current supported LLM integrations:
 
 The library is available as a Python package in pypi and can be installed with pip:
 `pip install circuit-maintenance-parser`
+
+### Extras
+
+#### OpenAI
+
+`pip install circuit-maintenance-parser[openai]`
 
 ## How to use it?
 
