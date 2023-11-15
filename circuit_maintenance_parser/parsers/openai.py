@@ -5,7 +5,7 @@ import json
 from typing import List, Optional
 
 try:
-    from openai import OpenAI
+    from openai import OpenAI  # type: ignore
 except ImportError:
     _HAS_OPENAI = False
 else:
