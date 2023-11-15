@@ -8,7 +8,7 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra
+from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra, PrivateAttr
 
 
 class Impact(str, Enum):
@@ -91,6 +91,12 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
         return value
 
 
+class Metadata(BaseModel):
+    """Metadata class to provide context about the Maintenance object."""
+    provider: StrictStr
+    processor: StrictStr
+    parsers: StrictStr
+
 class Maintenance(BaseModel, extra=Extra.forbid):
     """Maintenance class.
 
@@ -138,11 +144,17 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     stamp: StrictInt
     organizer: StrictStr
     status: Status
+    _metadata: Metadata = PrivateAttr()
 
     # Non mandatory attributes
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
+
+    def __init__(self, **data):
+        """Initialize the Maintenance object."""
+        self._metadata = data.pop("_metadata")
+        super().__init__(**data)
 
     # pylint: disable=no-self-argument
     @validator("status")
@@ -184,3 +196,8 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     def to_json(self) -> str:
         """Get JSON representation of the class object."""
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=2)
+
+    @property
+    def metadata(self):
+        """Get Maintenance Metadata."""
+        return self._metadata

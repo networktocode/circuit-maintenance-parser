@@ -52,3 +52,5 @@ def main(provider_type, data_file, data_type, verbose):
     for idx, parsed_notification in enumerate(parsed_notifications):
         click.secho(f"Circuit Maintenance Notification #{idx}", fg="green", bold=True)
         click.secho(parsed_notification.to_json(), fg="yellow")
+        click.secho(f"Metadata #{idx}", fg="green", bold=True)
+        click.secho(parsed_notification.metadata, fg="blue")

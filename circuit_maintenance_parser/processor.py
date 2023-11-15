@@ -8,7 +8,7 @@ from typing import Iterable, Type, Dict, List
 from pydantic import BaseModel, Extra
 from pydantic.error_wrappers import ValidationError
 
-from circuit_maintenance_parser.output import Maintenance
+from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.parser import Parser
 from circuit_maintenance_parser.errors import ParserError, ProcessorError
@@ -106,6 +106,11 @@ class SimpleProcessor(GenericProcessor):
         """For each data extracted (that can be multiple), we try to build a complete Maintenance."""
         for extracted_data in maintenances_extracted_data:
             self.extend_processor_data(extracted_data)
+            extracted_data["_metadata"] = Metadata(
+                parsers=str(self.data_parsers),
+                processor=str(self.__class__),
+                provider=self.extended_data["provider"]
+            )
             maintenances_data.append(Maintenance(**extracted_data))
 
 
@@ -143,6 +148,11 @@ class CombinedProcessor(GenericProcessor):
         for maintenance in maintenances:
             try:
                 combined_data = {**self.combined_maintenance_data, **maintenance}
+                combined_data["_metadata"] = Metadata(
+                    parsers=str(self.data_parsers),
+                    processor=str(self.__class__),
+                    provider=self.extended_data["provider"]
+                )
                 maintenances_data.append(Maintenance(**combined_data))
             except ValidationError as exc:
                 raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
