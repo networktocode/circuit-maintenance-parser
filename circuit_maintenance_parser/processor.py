@@ -38,9 +38,9 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         notification data may have in order to create the `Maintenance` object.
 
         There are 2 hooks available, to be implemented by custom `Processors`:
-            process_hook: Method that recieves the parsed output and manipulates the extracted data. It could create
+            process_hook: Method that receives the parsed output and manipulates the extracted data. It could create
                 the final `Maintenances` or just accumulate them.
-            post_process_hook (optional): Used to be able to do a final action on the extracted data before returing
+            post_process_hook (optional): Used to be able to do a final action on the extracted data before returning
                 the final `Maintenances`.
 
         Attributes:
@@ -54,13 +54,13 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         self.extended_data = extended_data
         maintenances_data: List = []
 
-        # First, we generate a list of tuples with a `DataPart` and `Parser` if the data type from the first is
-        # supported by the second.
-        data_part_and_parser_combinations = [
-            (data_part, data_parser)
+        # First, we generate a dictionary with the key `Parser` and `DataPart` if the data type from the first is
+        # supported by the second. This avoids reusing the same Parser for different data types if supported.
+        data_part_and_parser_combinations = {
+            data_parser: data_part
             for (data_part, data_parser) in itertools.product(data.data_parts, self.data_parsers)
             if data_part.type in data_parser.get_data_types()
-        ]
+        }
 
         if not data_part_and_parser_combinations:
             error_message = (
@@ -72,9 +72,9 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
             logger.debug(error_message)
             raise ProcessorError(error_message)
 
-        for data_part, data_parser in data_part_and_parser_combinations:
+        for data_parser, data_part in data_part_and_parser_combinations.items():
             try:
-                self.process_hook(data_parser().parse(data_part.content), maintenances_data)
+                self.process_hook(data_parser().parse(data_part.content, data_part.type), maintenances_data)
 
             except (ParserError, ValidationError) as exc:
                 error_message = "Parser class %s from %s was not successful.\n%s"

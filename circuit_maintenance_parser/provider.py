@@ -1,5 +1,6 @@
 """Definition of Provider class as the entry point to the library."""
 import logging
+import os
 import re
 import traceback
 
@@ -39,7 +40,7 @@ from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlP
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
-
+from circuit_maintenance_parser.parsers.openai import OpenAIParser
 
 logger = logging.getLogger(__name__)
 
@@ -121,6 +122,9 @@ class GenericProvider(BaseModel):
         if self.exclude_filter_check(data) or not self.include_filter_check(data):
             logger.debug("Skipping notification %s due filtering policy for %s.", data, self.__class__.__name__)
             return []
+
+        if os.getenv("OPENAI_API_KEY"):
+            self._processors.append(CombinedProcessor(data_parsers=[EmailDateParser, OpenAIParser]))
 
         for processor in self._processors:
             try:
