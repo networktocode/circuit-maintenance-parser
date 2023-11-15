@@ -99,7 +99,7 @@ When the appropriate environment variable(s) are set (see below), these LLM pars
 These are the currently supported LLM integrations:
 
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
-  - `OPENAI_TOKEN` (Required): OpenAI token.
+  - `OPENAI_API_KEY` (Required): OpenAI API Key.
   - `OPENAI_MODEL` (Optional): Model to use, it defaults to "gpt-3.5-turbo".
 
 ## Installation

@@ -123,7 +123,7 @@ class GenericProvider(BaseModel):
             logger.debug("Skipping notification %s due filtering policy for %s.", data, self.__class__.__name__)
             return []
 
-        if os.getenv("OPENAI_TOKEN"):
+        if os.getenv("OPENAI_API_KEY"):
             self._processors.append(CombinedProcessor(data_parsers=[EmailDateParser, OpenAIParser]))
 
         for processor in self._processors:

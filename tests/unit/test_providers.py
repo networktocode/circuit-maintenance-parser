@@ -117,7 +117,7 @@ def test_provider_with_include_and_exclude_filters():
 )
 def test_provider_gets_mlparser(provider_class):
     """Test to check the any provider gets a default ML parser when ENV is activated."""
-    os.environ["OPENAI_TOKEN"] = "some_token"
+    os.environ["OPENAI_API_KEY"] = "some_api_key"
     data = NotificationData.init_from_raw("text/plain", b"fake data")
     data.add_data_part("text/html", b"other data")
 
