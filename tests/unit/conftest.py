@@ -1,5 +1,6 @@
 """Used to setup fixtures to be used through tests"""
 import pytest
+from circuit_maintenance_parser.output import Metadata
 
 
 @pytest.fixture()
@@ -19,6 +20,7 @@ def maintenance_data():
         "status": "COMPLETED",
         "summary": "This is a maintenance notification",
         "uid": "VNOC-1-99999999999",
+        "_metadata": Metadata(provider="some provider", processor="some processor", parsers="some parsers"),
     }
 
 

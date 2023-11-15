@@ -93,9 +93,11 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
 
 class Metadata(BaseModel):
     """Metadata class to provide context about the Maintenance object."""
+
     provider: StrictStr
     processor: StrictStr
     parsers: StrictStr
+
 
 class Maintenance(BaseModel, extra=Extra.forbid):
     """Maintenance class.
@@ -119,6 +121,11 @@ class Maintenance(BaseModel, extra=Extra.forbid):
             order
 
     Example:
+        >>> metadata = Metadata(
+        ...     processor="<class 'circuit_maintenance_parser.processor.CombinedProcessor'>",
+        ...     provider="genericprovider",
+        ...     parsers="[<class 'circuit_maintenance_parser.parser.EmailDateParser'>,]"
+        ... )
         >>> Maintenance(
         ...     account="12345000",
         ...     end=1533712380,
@@ -132,6 +139,7 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         ...     status="COMPLETED",
         ...     summary="This is a maintenance notification",
         ...     uid="1111",
+        ...     _metadata=metadata,
         ... )
         Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', status=<Status.COMPLETED: 'COMPLETED'>, circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='1111', sequence=1, summary='This is a maintenance notification')
     """
@@ -145,7 +153,6 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     end: StrictInt
     stamp: StrictInt
     organizer: StrictStr
-    status: Status
     _metadata: Metadata = PrivateAttr()
 
     # Non mandatory attributes

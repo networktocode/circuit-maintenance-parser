@@ -98,6 +98,12 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         current_maintenance_data.update(self.extended_data)
         current_maintenance_data.update(temp_res)
 
+    def generate_metadata(self):
+        """Generate the Metadata for the Maintenance."""
+        return Metadata(
+            parsers=str(self.data_parsers), processor=str(self.__class__), provider=self.extended_data["provider"]
+        )
+
 
 class SimpleProcessor(GenericProcessor):
     """Processor to get all the Maintenance Data in each Data Part."""
@@ -106,11 +112,7 @@ class SimpleProcessor(GenericProcessor):
         """For each data extracted (that can be multiple), we try to build a complete Maintenance."""
         for extracted_data in maintenances_extracted_data:
             self.extend_processor_data(extracted_data)
-            extracted_data["_metadata"] = Metadata(
-                parsers=str(self.data_parsers),
-                processor=str(self.__class__),
-                provider=self.extended_data["provider"]
-            )
+            extracted_data["_metadata"] = self.generate_metadata()
             maintenances_data.append(Maintenance(**extracted_data))
 
 
@@ -148,11 +150,7 @@ class CombinedProcessor(GenericProcessor):
         for maintenance in maintenances:
             try:
                 combined_data = {**self.combined_maintenance_data, **maintenance}
-                combined_data["_metadata"] = Metadata(
-                    parsers=str(self.data_parsers),
-                    processor=str(self.__class__),
-                    provider=self.extended_data["provider"]
-                )
+                combined_data["_metadata"] = self.generate_metadata()
                 maintenances_data.append(Maintenance(**combined_data))
             except ValidationError as exc:
                 raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
