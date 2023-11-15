@@ -1,0 +1,63 @@
+Delivered-To: example@example.com
+Return-Path: <random@example.com>
+Date: Fri, 6 Oct 2023 09:57:00 +0000 (GMT)
+From: Maintenance <maintenance@eunetworks.com>
+To: user@example.com"
+Message-ID: <aba@example.net>
+Subject: CANCELLED euNetworks Emergency Work: 02345678
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_9999_1445545000.1696586220000"
+X-Priority: 3
+X-Sender: postmaster@salesforce.com
+X-mail_abuse_inquiries: http://www.salesforce.com/company/abuse.jsp
+Reply-To: Maintenance <maintenance@eunetworks.com>
+
+------=_Part_9999_1445545000.1696586220000
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_9998_1422331000.1696586220000"
+
+------=_Part_9998_1422331000.1696586220000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Maintenance Announcement
+Dear Customer,
+
+Please be advised that the previously announced works have been cancelled. =
+If an alternative date should be required, this will be announced in time.
+
+TRIMMED STUFF HERE.
+
+
+ref:00D200000000A05.500N1000002uvs4:ref
+------=_Part_9998_1422331000.1696586220000
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+TRIMMED STUFF HERE
+------=_Part_9998_1422331000.1696586220000--
+
+------=_Part_9999_1445545000.1696586220000
+Content-Type: text/calendar; name="X-02345678.ics"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="X-02345678.ics"
+
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Microsoft Corporation//Outlook 11.0 MIMEDIR//EN
+BEGIN:VEVENT
+SUMMARY: Maintenance note 
+DTSTART;VALUE=DATE-TIME:20231006T230000Z
+DTEND;VALUE=DATE-TIME:20231007T170000Z
+DTSTAMP;VALUE=DATE-TIME:20231006T095600Z
+UID:02345678@euNetworks.com
+SEQUENCE:2
+X-MAINTNOTE-PROVIDER:euNetworks.com
+X-MAINTNOTE-ACCOUNT:A Company
+X-MAINTNOTE-MAINTENANCE-ID:02345678
+X-MAINTNOTE-STATUS:CANCELLED
+ORGANIZER;CN=noc@eunetworks.com:mailto:noc@eunetworks.com
+END:VEVENT
+END:VCALENDAR
+------=_Part_9999_1445545000.1696586220000--

@@ -68,6 +68,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "ical", "ical6"),
             Path(dir_path, "data", "ical", "ical6_result.json"),
         ),
+        (
+            ICal,
+            Path(dir_path, "data", "ical", "ical7"),
+            Path(dir_path, "data", "ical", "ical7_result.json"),
+        ),
         # AquaComms
         (
             HtmlParserAquaComms1,
