@@ -45,7 +45,7 @@ class Parser(BaseModel):
 
     @classmethod
     def get_name(cls) -> str:
-        """Return the parse name."""
+        """Return the parser name."""
         return cls.__name__
 
     def parser_hook(self, raw: bytes, content_type: str) -> List[Dict]:
