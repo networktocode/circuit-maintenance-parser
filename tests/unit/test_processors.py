@@ -75,7 +75,9 @@ def test_simpleprocessor():
             parsed_data_element.update(
                 {
                     "_metadata": Metadata(
-                        provider=EXTENDED_DATA["provider"], processor=str(SimpleProcessor), parsers=str([FakeParser])
+                        provider=EXTENDED_DATA["provider"],
+                        processor=SimpleProcessor.get_name(),
+                        parsers=[FakeParser.get_name()],
                     )
                 }
             )
@@ -102,7 +104,9 @@ def test_combinedprocessor_multiple_data():
             parsed_data_element.update(
                 {
                     "_metadata": Metadata(
-                        provider=EXTENDED_DATA["provider"], processor=str(CombinedProcessor), parsers=str([FakeParser])
+                        provider=EXTENDED_DATA["provider"],
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser.get_name()],
                     )
                 }
             )
@@ -124,8 +128,8 @@ def test_combinedprocessor():
                 **{
                     "_metadata": Metadata(
                         provider=EXTENDED_DATA["provider"],
-                        processor=str(CombinedProcessor),
-                        parsers=str([FakeParser0, FakeParser1]),
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser0.get_name(), FakeParser1.get_name()],
                     )
                 },
             }
@@ -160,8 +164,8 @@ def test_combinedprocessor_bleed():
                 **{
                     "_metadata": Metadata(
                         provider=EXTENDED_DATA["provider"],
-                        processor=str(CombinedProcessor),
-                        parsers=str([FakeParser0, FakeParser1]),
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser0.get_name(), FakeParser1.get_name()],
                     )
                 },
             }
@@ -177,8 +181,8 @@ def test_combinedprocessor_bleed():
                 **{
                     "_metadata": Metadata(
                         provider=EXTENDED_DATA["provider"],
-                        processor=str(CombinedProcessor),
-                        parsers=str([FakeParser0, FakeParser1]),
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser0.get_name(), FakeParser1.get_name()],
                     )
                 },
             }
@@ -200,8 +204,8 @@ def test_combinedprocessor_multidatatype():
                 **{
                     "_metadata": Metadata(
                         provider=EXTENDED_DATA["provider"],
-                        processor=str(CombinedProcessor),
-                        parsers=str([FakeParserMultiDataType]),
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParserMultiDataType.get_name()],
                     )
                 },
             }

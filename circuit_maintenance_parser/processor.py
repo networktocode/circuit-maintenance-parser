@@ -10,7 +10,7 @@ from pydantic.error_wrappers import ValidationError
 
 from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import Parser
+from circuit_maintenance_parser.parser import Parser, LLM
 from circuit_maintenance_parser.errors import ParserError, ProcessorError
 
 
@@ -98,10 +98,18 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         current_maintenance_data.update(self.extended_data)
         current_maintenance_data.update(temp_res)
 
+    @classmethod
+    def get_name(cls) -> str:
+        """Return the processor name."""
+        return cls.__name__
+
     def generate_metadata(self):
         """Generate the Metadata for the Maintenance."""
         return Metadata(
-            parsers=str(self.data_parsers), processor=str(self.__class__), provider=self.extended_data["provider"]
+            parsers=[parser.get_name() for parser in self.data_parsers],
+            generated_by_llm=any(issubclass(parser, LLM) for parser in self.data_parsers),
+            processor=self.get_name(),
+            provider=self.extended_data["provider"],
         )
 
 

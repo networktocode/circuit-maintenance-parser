@@ -20,7 +20,9 @@ def maintenance_data():
         "status": "COMPLETED",
         "summary": "This is a maintenance notification",
         "uid": "VNOC-1-99999999999",
-        "_metadata": Metadata(provider="some provider", processor="some processor", parsers="some parsers"),
+        "_metadata": Metadata(
+            provider="some provider", processor="some processor", parsers=["some parser 1", "some parser 2"]
+        ),
     }
 
 

@@ -96,7 +96,8 @@ class Metadata(BaseModel):
 
     provider: StrictStr
     processor: StrictStr
-    parsers: StrictStr
+    parsers: List[StrictStr]
+    generated_by_llm: bool = False
 
 
 class Maintenance(BaseModel, extra=Extra.forbid):
@@ -122,9 +123,9 @@ class Maintenance(BaseModel, extra=Extra.forbid):
 
     Example:
         >>> metadata = Metadata(
-        ...     processor="<class 'circuit_maintenance_parser.processor.CombinedProcessor'>",
+        ...     processor="SimpleProcessor",
         ...     provider="genericprovider",
-        ...     parsers="[<class 'circuit_maintenance_parser.parser.EmailDateParser'>,]"
+        ...     parsers=["EmailDateParser"]
         ... )
         >>> Maintenance(
         ...     account="12345000",

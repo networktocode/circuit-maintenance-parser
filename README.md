@@ -106,7 +106,7 @@ These are the currently supported LLM integrations:
 
 Each `Maintenance` comes with a `metadata` attribute to provide information about the provider used and the process and parsers used in the successful parsing of the maintenance.
 
-This information is relevant to validate the actual content of the `Maintenance` because it may be generated using an LLM-powered parser that means that the confidence level is lower than using a pre-defined parser.
+This information is relevant to validate the actual content of the `Maintenance` because it may be generated using an LLM-powered parser which means that the confidence level is lower than using a pre-defined parser. You can check the `Metadata.generate_by_llm` boolean to check it.
 
 ## Installation
 
@@ -128,7 +128,7 @@ The library requires two things:
 
 ### Python Library
 
-First step is to define the `Provider` that we will use to parse the notifications. As commented, there is a `GenericProvider` that implements the gold standard format and can be reused for any notification matching the expectations.
+The first step is to define the `Provider` that we will use to parse the notifications. As commented, there is a `GenericProvider` that implements the gold standard format and can be reused for any notification matching the expectations.
 
 ```python
 from circuit_maintenance_parser import init_provider
@@ -223,7 +223,7 @@ Every maintenance contains the `metadata` attribute to understand how has been p
 
 ```python
 print(maintenances[0].metadata)
-provider='genericprovider' processor="<class 'circuit_maintenance_parser.processor.SimpleProcessor'>" parsers="[<class 'circuit_maintenance_parser.parser.ICal'>]"
+provider='genericprovider' processor="SimpleProcessor" parsers=["ICal"], generated_by_llm=False
 ```
 
 ### CLI
@@ -262,7 +262,7 @@ Circuit Maintenance Notification #0
 
 Even though the library aims to include support for as many providers as possible, it's likely that not all the thousands of NSP are supported and you may need to add support for some new one. Adding a new `Provider` is quite straightforward, and in the following example we are adding support for an imaginary provider, ABCDE, that uses HTML notifications.
 
-First step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
+The first step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case, we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
 
 ```python
 from typing import Dict
