@@ -7,38 +7,38 @@
 Every network depends on external circuits provided by NSPs who interconnect them to the Internet, to office branches or to
 external service providers such as Public Clouds.
 
-Obviously, these services occasionally require operation windows to upgrade or to fix related issues, and usually they happen in the form of **circuit maintenance periods**.
+Obviously, these services occasionally require operation windows to upgrade or to fix related issues, and usually, they happen in the form of **circuit maintenance periods**.
 NSPs generally notify customers of these upcoming events so that customers can take actions to minimize the impact on the regular usage of the related circuits.
 
-The challenge faced by many customers is that mostly every NSP defines its own maintenance notification format, even though in the
+The challenge faced by many customers is that almost every NSP defines its own maintenance notification format, even though in the
 end the relevant information is mostly the same across NSPs. This library is built to parse notification formats from
-several providers and to return always the same object struct that will make it easier to process them afterwards.
+several providers and to return always the same object struct which will make it easier to process them afterwards.
 
-The format of this output is following the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) defined
+The format of this output follows the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) defined
 during a NANOG meeting that aimed to promote the usage of the iCalendar format. Indeed, if the NSP is using the
-proposed iCalendar format, the parser is straight-forward and there is no need to define custom logic, but this library
+proposed iCalendar format, the parser is straightforward and there is no need to define custom logic, but this library
 enables supporting other providers that are not using this proposed practice, getting the same outcome.
 
-You can leverage this library in your automation framework to process circuit maintenance notifications, and use the standardized [`Maintenance`](https://github.com/networktocode/circuit-maintenance-parser/blob/develop/circuit_maintenance_parser/output.py) model to handle your received circuit maintenance notifications in a simple way. Every `Maintenance` object contains the following attributes:
+You can leverage this library in your automation framework to process circuit maintenance notifications and use the standardized [`Maintenance`](https://github.com/networktocode/circuit-maintenance-parser/blob/develop/circuit_maintenance_parser/output.py) model to handle your received circuit maintenance notifications in a simple way. Every `Maintenance` object contains the following attributes:
 
 - **provider**: identifies the provider of the service that is the subject of the maintenance notification.
 - **account**: identifies an account associated with the service that is the subject of the maintenance notification.
 - **maintenance_id**: contains text that uniquely identifies (at least within the context of a specific provider) the maintenance that is the subject of the notification.
-- **circuits**: list of circuits affected by the maintenance notification and their specific impact.  Note that in a maintenance cancelled notification, some providers omit the circuit list, so this may be blank for maintenance notifications with a status of CANCELLED.
+- **circuits**: list of circuits affected by the maintenance notification and their specific impact. Note that in a maintenance canceled notification, some providers omit the circuit list, so this may be blank for maintenance notifications with a status of CANCELLED.
 - **start**: timestamp that defines the starting date/time of the maintenance in GMT.
 - **end**: timestamp that defines the ending date/time of the maintenance in GMT.
 - **stamp**: timestamp that defines the update date/time of the maintenance in GMT.
 - **organizer**: defines the contact information included in the original notification.
 - **status**: defines the overall status or confirmation for the maintenance.¹
 - **summary**: human-readable details about this maintenance notification. May be an empty string.
-- **sequence**: a sequence number for notifications involving this maintenance window. In practice this is generally redundant with the **stamp** field, and will be defaulted to `1` for most non-iCalendar parsed notifications.²
-- **uid**: a unique (?) identifer for a thread of related notifications. In practice this is generally redundant with the **maintenance_id** field, and will be defaulted to `0` for most non-iCalendar parsed notifications.
+- **sequence**: a sequence number for notifications involving this maintenance window. In practice, this is generally redundant with the **stamp** field and will be defaulted to `1` for most non-iCalendar parsed notifications.²
+- **uid**: a unique (?) identifier for a thread of related notifications. In practice, this is generally redundant with the **maintenance_id** field and will be defaulted to `0` for most non-iCalendar parsed notifications.
 
 > Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to more details about the standardized meaning of these attributes.
 
-¹ Per the BCOP, **status** (`X-MAINTNOTE_STATUS`) is an optional field in iCalendar notifications. However, a `Maintenance` object will always contain a `status` value; in the case where an iCalendar notification omits this field, the `status` will be set to `"NO-CHANGE"`, and it's up to the consumer of this library to determine how to appropriately handle this case. Parsers of other notification formats are responsible for setting an appropriate value for this field based on the notification contents, and may or may not include `"NO-CHANGE"` as one of the possible reported values.
+¹ Per the BCOP, the **status** (`X-MAINTNOTE_STATUS`) is an optional field in iCalendar notifications. However, a `Maintenance` object will always contain a `status` value; in the case where an iCalendar notification omits this field, the `status` will be set to `"NO-CHANGE"`, and it's up to the consumer of this library to determine how to appropriately handle this case. Parsers of other notification formats are responsible for setting an appropriate value for this field based on the notification contents, and may or may not include `"NO-CHANGE"` as one of the possible reported values.
 
-² Per the BCOP, **sequence** is a mandatory field in iCalendar notifications. However, some NSPs have been seen to send notifications which, while otherwise consistent with the BCOP, omit the `SEQUENCE` field; in such cases, this library will report a sequence number of `-1`.
+² Per the BCOP, the **sequence** is a mandatory field in iCalendar notifications. However, some NSPs have been seen to send notifications which, while otherwise consistent with the BCOP, omit the `SEQUENCE` field; in such cases, this library will report a sequence number of `-1`.
 
 ## Workflow
 
@@ -52,7 +52,7 @@ You can leverage this library in your automation framework to process circuit ma
 <img src="https://raw.githubusercontent.com/networktocode/circuit-maintenance-parser/develop/docs/images/new_workflow.png" width="800" class="center">
 </p>
 
-By default, there is a `GenericProvider` that support a `SimpleProcessor` using the standard `ICal` `Parser`, being the easiest path to start using the library in case the provider uses the reference iCalendar standard.
+By default, there is a `GenericProvider` that supports a `SimpleProcessor` using the standard `ICal` `Parser`, being the easiest path to start using the library in case the provider uses the reference iCalendar standard.
 
 ### Supported Providers
 
@@ -100,7 +100,13 @@ These are the currently supported LLM integrations:
 
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
   - `OPENAI_API_KEY` (Required): OpenAI API Key.
-  - `OPENAI_MODEL` (Optional): Model to use, it defaults to "gpt-3.5-turbo".
+  - `OPENAI_MODEL` (Optional): The LLM model to use, defaults to "gpt-3.5-turbo".
+
+### Metadata
+
+Each `Maintenance` comes with a `metadata` attribute to provide information about the provider used and the process and parsers used in the successful parsing of the maintenance.
+
+This information is relevant to validate the actual content of the `Maintenance` because it may be generated using an LLM-powered parser which means that the confidence level is lower than using a pre-defined parser. You can check the `Metadata.generate_by_llm` boolean to check it.
 
 ## Installation
 
@@ -122,7 +128,7 @@ The library requires two things:
 
 ### Python Library
 
-First step is to define the `Provider` that we will use to parse the notifications. As commented, there is a `GenericProvider` that implements the gold standard format and can be reused for any notification matching the expectations.
+The first step is to define the `Provider` that we will use to parse the notifications. As commented, there is a `GenericProvider` that implements the gold standard format and can be reused for any notification matching the expectations.
 
 ```python
 from circuit_maintenance_parser import init_provider
@@ -206,16 +212,23 @@ print(maintenances[0].to_json())
 }
 ```
 
-Notice that, either with the `GenericProvider` or `NTT` provider, we get the same result from the same data, because they are using exactly the same `Processor` and `Parser`. The only difference is that `NTT` notifications come without `organizer` and `provider` in the notification, and this info is fulfilled with some default values for the `Provider`, but in this case the original notification contains all the necessary information, so the defaults are not used.
+Notice that, either with the `GenericProvider` or `NTT` provider, we get the same result from the same data, because they are using exactly the same `Processor` and `Parser`. The only difference is that `NTT` notifications come without `organizer` and `provider` in the notification, and this info is fulfilled with some default values for the `Provider`, but in this case, the original notification contains all the necessary information, so the defaults are not used.
 
 ```python
 ntt_maintenances = ntt_provider.get_maintenances(data_to_process)
 assert maintenances_ntt == maintenances
 ```
 
+Every maintenance contains the `metadata` attribute to understand how has been parsed:
+
+```python
+print(maintenances[0].metadata)
+provider='genericprovider' processor="SimpleProcessor" parsers=["ICal"], generated_by_llm=False
+```
+
 ### CLI
 
-There is also a `cli` entrypoint `circuit-maintenance-parser` which offers easy access to the library using few arguments:
+There is also a `cli` entry point `circuit-maintenance-parser` which offers easy access to the library using a few arguments:
 
 - `data-file`: file storing the notification.
 - `data-type`: `ical`, `html` or `email`, depending on the data type.
@@ -249,7 +262,7 @@ Circuit Maintenance Notification #0
 
 Even though the library aims to include support for as many providers as possible, it's likely that not all the thousands of NSP are supported and you may need to add support for some new one. Adding a new `Provider` is quite straightforward, and in the following example we are adding support for an imaginary provider, ABCDE, that uses HTML notifications.
 
-First step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
+The first step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case, we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
 
 ```python
 from typing import Dict
@@ -271,10 +284,10 @@ class HtmlParserABCDE1(Html):
       ...
 ```
 
-Next step is to create the new `Provider` by defining a new class in `circuit_maintenance_parser/provider.py`. This class that inherits from `GenericProvider` only needs to define two attributes:
+The next step is to create the new `Provider` by defining a new class in `circuit_maintenance_parser/provider.py`. This class that inherits from `GenericProvider` only needs to define two attributes:
 
-- `_processors`: is a `list` of `Processor` instances that uses several data `Parsers`. In this example, we don't need to create a new custom `Processor` because the combined logic serves well (the most likely case), and we only need to use the new defined `HtmlParserABCDE1` and also the generic `EmailDateParser` that extract the email date. Also notice that you could have multiple `Processors` with different `Parsers` in this list, supporting several formats.
-- `_default_organizer`: this is a default helper to fill the `organizer` attribute in the `Maintenance` if the information is not part of the original notification.
+- `_processors`: is a `list` of `Processor` instances that uses several data `Parsers`. In this example, we don't need to create a new custom `Processor` because the combined logic serves well (the most likely case), and we only need to use the newly defined `HtmlParserABCDE1` and also the generic `EmailDateParser` that extracts the email date. Also notice that you could have multiple `Processors` with different `Parsers` in this list, supporting several formats.
+- `_default_organizer`: This is a default helper to fill the `organizer` attribute in the `Maintenance` if the information is not part of the original notification.
 
 ```python
 class ABCDE(GenericProvider):
@@ -328,7 +341,7 @@ The project is following Network to Code software development guidelines and is 
 
 ### How to add a new Circuit Maintenance provider?
 
-1. Define the `Parsers`(inheriting from some of the generic `Parsers` or a new one) that will extract the data from the notification, that could contain itself multiple `DataParts`. The `data_type` of the `Parser` and the `DataPart` have to match. The custom `Parsers` will be placed in the `parsers` folder.
+1. Define the `Parsers`(inheriting from some of the generic `Parsers` or a new one) that will extract the data from the notification, which could contain multiple `DataParts`. The `data_type` of the `Parser` and the `DataPart` have to match. The custom `Parsers` will be placed in the `parsers` folder.
 2. Update the `unit/test_parsers.py` with the new parsers, providing some data to test and validate the extracted data.
 3. Define a new `Provider` inheriting from the `GenericProvider`, defining the `Processors` and the respective `Parsers` to be used. Maybe you can reuse some of the generic `Processors` or maybe you will need to create a custom one. If this is the case, place it in the `processors` folder.
    - The `Provider` also supports the definition of a `_include_filter` and a `_exclude_filter` to limit the notifications that are actually processed, avoiding false positive errors for notification that are not relevant.

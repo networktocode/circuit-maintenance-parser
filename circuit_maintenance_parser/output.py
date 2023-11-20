@@ -8,7 +8,7 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra
+from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra, PrivateAttr
 
 
 class Impact(str, Enum):
@@ -91,6 +91,15 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
         return value
 
 
+class Metadata(BaseModel):
+    """Metadata class to provide context about the Maintenance object."""
+
+    provider: StrictStr
+    processor: StrictStr
+    parsers: List[StrictStr]
+    generated_by_llm: bool = False
+
+
 class Maintenance(BaseModel, extra=Extra.forbid):
     """Maintenance class.
 
@@ -113,6 +122,11 @@ class Maintenance(BaseModel, extra=Extra.forbid):
             order
 
     Example:
+        >>> metadata = Metadata(
+        ...     processor="SimpleProcessor",
+        ...     provider="genericprovider",
+        ...     parsers=["EmailDateParser"]
+        ... )
         >>> Maintenance(
         ...     account="12345000",
         ...     end=1533712380,
@@ -126,6 +140,7 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         ...     status="COMPLETED",
         ...     summary="This is a maintenance notification",
         ...     uid="1111",
+        ...     _metadata=metadata,
         ... )
         Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', status=<Status.COMPLETED: 'COMPLETED'>, circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='1111', sequence=1, summary='This is a maintenance notification')
     """
@@ -139,11 +154,17 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     end: StrictInt
     stamp: StrictInt
     organizer: StrictStr
+    _metadata: Metadata = PrivateAttr()
 
     # Non mandatory attributes
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
+
+    def __init__(self, **data):
+        """Initialize the Maintenance object."""
+        self._metadata = data.pop("_metadata")
+        super().__init__(**data)
 
     # pylint: disable=no-self-argument
     @validator("status")
@@ -185,3 +206,8 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     def to_json(self) -> str:
         """Get JSON representation of the class object."""
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=2)
+
+    @property
+    def metadata(self):
+        """Get Maintenance Metadata."""
+        return self._metadata

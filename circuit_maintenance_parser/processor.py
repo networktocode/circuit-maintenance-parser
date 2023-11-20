@@ -8,9 +8,9 @@ from typing import Iterable, Type, Dict, List
 from pydantic import BaseModel, Extra
 from pydantic.error_wrappers import ValidationError
 
-from circuit_maintenance_parser.output import Maintenance
+from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import Parser
+from circuit_maintenance_parser.parser import Parser, LLM
 from circuit_maintenance_parser.errors import ParserError, ProcessorError
 
 
@@ -98,6 +98,20 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         current_maintenance_data.update(self.extended_data)
         current_maintenance_data.update(temp_res)
 
+    @classmethod
+    def get_name(cls) -> str:
+        """Return the processor name."""
+        return cls.__name__
+
+    def generate_metadata(self):
+        """Generate the Metadata for the Maintenance."""
+        return Metadata(
+            parsers=[parser.get_name() for parser in self.data_parsers],
+            generated_by_llm=any(issubclass(parser, LLM) for parser in self.data_parsers),
+            processor=self.get_name(),
+            provider=self.extended_data["provider"],
+        )
+
 
 class SimpleProcessor(GenericProcessor):
     """Processor to get all the Maintenance Data in each Data Part."""
@@ -106,6 +120,7 @@ class SimpleProcessor(GenericProcessor):
         """For each data extracted (that can be multiple), we try to build a complete Maintenance."""
         for extracted_data in maintenances_extracted_data:
             self.extend_processor_data(extracted_data)
+            extracted_data["_metadata"] = self.generate_metadata()
             maintenances_data.append(Maintenance(**extracted_data))
 
 
@@ -143,6 +158,7 @@ class CombinedProcessor(GenericProcessor):
         for maintenance in maintenances:
             try:
                 combined_data = {**self.combined_maintenance_data, **maintenance}
+                combined_data["_metadata"] = self.generate_metadata()
                 maintenances_data.append(Maintenance(**combined_data))
             except ValidationError as exc:
                 raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
