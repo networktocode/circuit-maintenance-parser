@@ -280,7 +280,7 @@ class LLM(Parser):
     _data_types = ["text/html", "html", "text/plain"]
 
     _llm_question = """Please, could you extract a JSON form without any other comment,
-    with the following JSON schema (timestamps in EPOCH):
+    with the following JSON schema (timestamps in EPOCH and taking into account the GMT offset):
     {
     "type": "object",
     "properties": {
