@@ -1,4 +1,4 @@
-"""AquaComms parser."""
+"""AWS parser."""
 import hashlib
 import logging
 import quopri
@@ -24,9 +24,29 @@ class SubjectParserAWS1(EmailSubjectParser):
         Example: AWS Direct Connect Planned Maintenance Notification [AWS Account: 00000001]
         """
         data = {}
-        search = re.search(r"\[AWS Account ?I?D?: ([0-9]+)\]", subject)
-        if search:
-            data["account"] = search.group(1)
+        # Common Subject strings for matching:
+        subject_map = [{"account": r"\[AWS Account ?I?D?: ([0-9]+)\]"}]
+
+        subject_list = []
+        for each_subject in subject_map:
+            for key, value in each_subject.items():
+                subject_list.append(value)
+
+        regex_keys = re.compile("|".join(subject_list), re.IGNORECASE)
+
+        # in case of a multi-line subject
+        # match the subject map
+        for line in subject.splitlines():
+            line_matched = re.search(regex_keys, line)
+            if not line_matched:
+                continue
+            for group_match in line_matched.groups():
+                if not group_match:
+                    continue
+                for search_string in subject_map:
+                    for key, value in search_string.items():
+                        if re.search(key, line, re.IGNORECASE):
+                            data[key] = group_match
         return [data]
 
 
@@ -60,31 +80,79 @@ class TextParserAWS1(Text):
             This maintenance is scheduled to avoid disrupting redundant connections at =
             the same time.
         """
+        text_map = [
+            {"account": "^Account ?I?D?: ([0-9]+)"},
+            {
+                "start": "^Start Time: ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})"
+            },
+            {
+                "end": "^End Time: ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})"
+            },
+            {
+                "start_and_end": "(?<=from )([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})"
+            },
+        ]
+
+        each_textmap = []
+        for search_string in text_map:
+            for key, value in search_string.items():
+                each_textmap.append(value)
+
+        regex_keys = re.compile("|".join(each_textmap), re.IGNORECASE)
+
         data = {"circuits": []}
         impact = Impact.OUTAGE
-        maintenace_id = ""
+        maintenance_id = ""
         status = Status.CONFIRMED
+
         for line in text.splitlines():
             if "planned maintenance" in line.lower():
                 data["summary"] = line
-                search = re.search(
-                    r"([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})",
-                    line,
-                )
-                if search:
-                    data["start"] = self.dt2ts(parser.parse(search.group(1)))
-                    data["end"] = self.dt2ts(parser.parse(search.group(2)))
-                    maintenace_id += str(data["start"])
-                    maintenace_id += str(data["end"])
-                if "may become unavailable" in line.lower():
-                    impact = Impact.OUTAGE
-                elif "has been cancelled" in line.lower():
-                    status = Status.CANCELLED
-            elif re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
-                maintenace_id += line
-                data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
+            # match against the regex strings
+            line_matched = re.search(regex_keys, line)
+            # if we have a string that's not in our text_map
+            # there may still be some strings with data to capture.
+            # otherwise, continue on.
+            if not line_matched:
+                if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
+                    maintenance_id += line
+                    data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
+                continue
+
+            # for lines that do match our regex strings.
+            # grab the data and map the values to keys.
+            for group_match in line_matched.groups():
+                if not group_match:
+                    continue
+                for search_string in text_map:
+                    for key, value in search_string.items():
+                        if re.search(value, line_matched.string, re.IGNORECASE):
+                            # Due to having a single line on some emails
+                            # This causes multiple match groups
+                            # However this needs to be split across keys.
+                            # This could probably be cleaned up.
+                            if key == "start_and_end" and "start" not in data:
+                                data["start"] = group_match
+                            elif key == "start_and_end":
+                                data["end"] = group_match
+                            else:
+                                data[key] = group_match
+
+            # Let's determine impact and status
+            if "may become unavailable" in line.lower():
+                impact = Impact.OUTAGE
+            elif "has been cancelled" in line.lower():
+                status = Status.CANCELLED
+
+        # Let's get our times in order.
+        if all((key in data for key in ["start", "end"])):
+            data["start"] = self.dt2ts(parser.parse(data["start"]))
+            data["end"] = self.dt2ts(parser.parse(data["end"]))
+            maintenance_id += str(data["start"])
+            maintenance_id += str(data["end"])
+
         # No maintenance ID found in emails, so a hash value is being generated using the start,
         #  end and IDs of all circuits in the notification.
-        data["maintenance_id"] = hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.md5(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         data["status"] = status
         return [data]

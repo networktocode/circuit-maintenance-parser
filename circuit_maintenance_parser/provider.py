@@ -191,6 +191,7 @@ class AWS(GenericProvider):
 
     _processors: List[GenericProcessor] = [
         CombinedProcessor(data_parsers=[EmailDateParser, TextParserAWS1, SubjectParserAWS1]),
+        CombinedProcessor(data_parsers=[EmailDateParser, TextParserAWS1]),
     ]
     _default_organizer = "aws-account-notifications@amazon.com"
 
