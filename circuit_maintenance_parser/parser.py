@@ -349,7 +349,7 @@ class LLM(Parser):
 
     def get_llm_question(self):
         """Return the LLM question."""
-        custom_llm_question = os.getenv("OPENAI_API_KEY")
+        custom_llm_question = os.getenv("LLM_QUESTION")
         if custom_llm_question:
             return custom_llm_question
 
