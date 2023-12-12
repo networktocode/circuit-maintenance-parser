@@ -1,5 +1,6 @@
 """Definition of Mainentance Notification base classes."""
 import logging
+import os
 import base64
 import calendar
 import datetime
@@ -345,6 +346,14 @@ class LLM(Parser):
             if string in key:
                 return key
         return None
+
+    def get_llm_question(self):
+        """Return the LLM question."""
+        custom_llm_question = os.getenv("OPENAI_API_KEY")
+        if custom_llm_question:
+            return custom_llm_question
+
+        return self._llm_question
 
     def get_llm_response(self, content):
         """Method to retrieve the response from the LLM for some content."""

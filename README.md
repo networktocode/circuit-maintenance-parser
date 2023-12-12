@@ -88,7 +88,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 
 #### LLM-powered Parsers
 
-The library supports an optional parser option leveraging Large Language Model (LLM) to provide best-effort parsing when the specific parsers have not been successful.
+The library supports an optional parser option leveraging Large Language Models (LLM) to provide best-effort parsing when the specific parsers have not been successful.
 
 > Warning: Some of these integrations, such as OpenAI, require of extras installations parameters. Check the [extras section](#extras)
 
@@ -97,6 +97,8 @@ When the appropriate environment variable(s) are set (see below), these LLM pars
 > These integrations may involve some costs for API usage. Use it carefully! As an order of magnitude, a parsing of an email with OpenAI GPT gpt-3.5-turbo model costs $0.004.
 
 These are the currently supported LLM integrations:
+
+- `LLM_QUESTION` (Optional), question to overwrite the default one. Change it carefully.
 
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
   - `OPENAI_API_KEY` (Required): OpenAI API Key.
