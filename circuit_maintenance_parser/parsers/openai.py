@@ -32,7 +32,7 @@ class OpenAIParser(LLM):
                 messages=[
                     {  # type: ignore
                         "role": "system",
-                        "content": self.get_llm_question,
+                        "content": self.llm_question,
                     },
                     {  # type: ignore
                         "role": "user",

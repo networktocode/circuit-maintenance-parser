@@ -347,7 +347,8 @@ class LLM(Parser):
                 return key
         return None
 
-    def get_llm_question(self):
+    @property
+    def llm_question(self):
         """Return the LLM question."""
         custom_llm_question = os.getenv("PARSER_LLM_QUESTION_STR")
         if custom_llm_question:
