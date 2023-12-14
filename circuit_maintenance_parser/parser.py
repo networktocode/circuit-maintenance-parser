@@ -349,11 +349,11 @@ class LLM(Parser):
 
     def get_llm_question(self):
         """Return the LLM question."""
-        custom_llm_question = os.getenv("LLM_QUESTION_STR")
+        custom_llm_question = os.getenv("PARSER_LLM_QUESTION_STR")
         if custom_llm_question:
             return custom_llm_question
 
-        custom_llm_question_path = os.getenv("LLM_QUESTION_FILEPATH")
+        custom_llm_question_path = os.getenv("PARSER_LLM_QUESTION_FILEPATH")
         if custom_llm_question_path:
             try:
                 with open(custom_llm_question_path, mode="r", encoding="utf-8") as llm_question_file:
