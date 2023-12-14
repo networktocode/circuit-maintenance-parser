@@ -98,7 +98,8 @@ When the appropriate environment variable(s) are set (see below), these LLM pars
 
 These are the currently supported LLM integrations:
 
-- `LLM_QUESTION` (Optional), question to overwrite the default one. Change it carefully.
+- `LLM_QUESTION` (Optional), question to overwrite the default one. Change it carefully. It has precedence over `LLM_QUESTION_FILEPATH`
+- `LLM_QUESTION_FILEPATH` (Optional), a path to a file that contains a question to overwrite the default one.
 
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
   - `OPENAI_API_KEY` (Required): OpenAI API Key.
