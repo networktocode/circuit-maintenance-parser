@@ -1,5 +1,6 @@
 """Definition of Mainentance Notification base classes."""
 import logging
+import os
 import base64
 import calendar
 import datetime
@@ -345,6 +346,23 @@ class LLM(Parser):
             if string in key:
                 return key
         return None
+
+    @property
+    def llm_question(self):
+        """Return the LLM question."""
+        custom_llm_question = os.getenv("PARSER_LLM_QUESTION_STR")
+        if custom_llm_question:
+            return custom_llm_question
+
+        custom_llm_question_path = os.getenv("PARSER_LLM_QUESTION_FILEPATH")
+        if custom_llm_question_path:
+            try:
+                with open(custom_llm_question_path, mode="r", encoding="utf-8") as llm_question_file:
+                    return llm_question_file.read()
+            except OSError as err:
+                logger.warning("The file %s can't be read: %s", custom_llm_question_path, err)
+
+        return self._llm_question
 
     def get_llm_response(self, content):
         """Method to retrieve the response from the LLM for some content."""
