@@ -4,7 +4,7 @@
 
 ### Added
 
-- [#245](https://github.com/networktocode/circuit-maintenance-parser/pull/245) [#250](https://github.com/networktocode/circuit-maintenance-parser/pull/250) [#252](https://github.com/networktocode/circuit-maintenance-parser/pull/252) - feat: :sparkles: OpenAI parser by @chadell
+- [#245](https://github.com/networktocode/circuit-maintenance-parser/pull/245) [#250](https://github.com/networktocode/circuit-maintenance-parser/pull/250) [#252](https://github.com/networktocode/circuit-maintenance-parser/pull/252) - OpenAI parser by @chadell
 
 - [#249](https://github.com/networktocode/circuit-maintenance-parser/pull/249) - Add Metadata to every Maintenance, addresses issue #246 by @chadell
 
