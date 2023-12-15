@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.3.0 - 2023-12-15
+
+### Added
+
+- [#245](https://github.com/networktocode/circuit-maintenance-parser/pull/245) [#250](https://github.com/networktocode/circuit-maintenance-parser/pull/250) [#252](https://github.com/networktocode/circuit-maintenance-parser/pull/252) - OpenAI parser by @chadell
+
+- [#249](https://github.com/networktocode/circuit-maintenance-parser/pull/249) - Add Metadata to every Maintenance, addresses issue #246 by @chadell
+
+### Changed
+
+- [#237](https://github.com/networktocode/circuit-maintenance-parser/pull/237) - Remove Python 3.7 support by @slyngshede
+
+### Fixed
+
+- [#243](https://github.com/networktocode/circuit-maintenance-parser/pull/243) - Handle broken EUNetworks cancellation messages by @jmaslak
+- [#251](https://github.com/networktocode/circuit-maintenance-parser/pull/251) Add missing Arelion entry to SUPPORTED_PROVIDERS by @glennmatthews
+
 ## v2.2.4 - 2023-07-12
 
 - #230 - Swap out tzwhere for TimezoneFinder

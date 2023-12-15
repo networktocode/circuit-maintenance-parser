@@ -1,13 +1,15 @@
 """Tests for Providers."""
+import os
 from unittest.mock import patch
 
 import pytest
 
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
-from circuit_maintenance_parser.processor import SimpleProcessor
-from circuit_maintenance_parser.provider import GenericProvider
-from circuit_maintenance_parser.parser import Parser
+from circuit_maintenance_parser.processor import SimpleProcessor, CombinedProcessor
+from circuit_maintenance_parser.provider import GenericProvider, AquaComms
+from circuit_maintenance_parser.parser import Parser, EmailDateParser
+from circuit_maintenance_parser.parsers.openai import OpenAIParser
 
 # pylint: disable=use-implicit-booleaness-not-comparison
 fake_data = NotificationData.init_from_raw("fake_type", b"fake data")
@@ -107,3 +109,24 @@ def test_provider_with_include_and_exclude_filters():
     # Because the exclude filter and the include filter are matching, we expect the exclude to take
     # precedence
     assert ProviderWithIncludeFilter().get_maintenances(data) == []
+
+
+@pytest.mark.parametrize(
+    "provider_class",
+    [GenericProvider, AquaComms],
+)
+def test_provider_gets_mlparser(provider_class):
+    """Test to check the any provider gets a default ML parser when ENV is activated."""
+    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
+    data = NotificationData.init_from_raw("text/plain", b"fake data")
+    data.add_data_part("text/html", b"other data")
+
+    provider = provider_class()
+
+    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+        mock_processor.return_value = [{"a": "b"}]
+        provider.get_maintenances(data)
+
+    assert provider._processors[-1] == CombinedProcessor(  # pylint: disable=protected-access
+        data_parsers=[EmailDateParser, OpenAIParser]
+    )

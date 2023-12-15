@@ -8,7 +8,7 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra
+from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra, PrivateAttr
 
 
 class Impact(str, Enum):
@@ -82,13 +82,22 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
     # Optional Attributes
     impact: Impact = Impact.OUTAGE
 
-    # pylint: disable=no-self-argument,no-self-use
+    # pylint: disable=no-self-argument
     @validator("impact")
     def validate_impact_type(cls, value):
         """Validate Impact type."""
         if value not in Impact:
             raise ValueError("Not a valid impact type")
         return value
+
+
+class Metadata(BaseModel):
+    """Metadata class to provide context about the Maintenance object."""
+
+    provider: StrictStr
+    processor: StrictStr
+    parsers: List[StrictStr]
+    generated_by_llm: bool = False
 
 
 class Maintenance(BaseModel, extra=Extra.forbid):
@@ -98,20 +107,26 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         provider: identifies the provider of the service that is the subject of the maintenance notification
         account:  identifies an account associated with the service that is the subject of the maintenance notification
         maintenance_id:  contains text that uniquely identifies the maintenance that is the subject of the notification
-        circuits: list of circuits affected by the maintenance notification and their specific impact
+        circuits: list of circuits affected by the maintenance notification and their specific impact. Note this can be
+            an empty list for notifications with a CANCELLED status if the provider does not populate the circuit list.
+        status: defines the overall status or confirmation for the maintenance
         start: timestamp that defines the start date of the maintenance in GMT
         end: timestamp that defines the end date of the maintenance in GMT
         stamp: timestamp that defines the update date of the maintenance in GMT
         organizer: defines the contact information included in the original notification
 
     Optional attributes:
-        status: defines the overall status or confirmation for the maintenance
         summary: description of the maintenace notification
         uid: specific unique identifier for each notification
         sequence: sequence number - initially zero - to serialize updates in case they are received or processed out of
             order
 
     Example:
+        >>> metadata = Metadata(
+        ...     processor="SimpleProcessor",
+        ...     provider="genericprovider",
+        ...     parsers=["EmailDateParser"]
+        ... )
         >>> Maintenance(
         ...     account="12345000",
         ...     end=1533712380,
@@ -125,26 +140,33 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         ...     status="COMPLETED",
         ...     summary="This is a maintenance notification",
         ...     uid="1111",
+        ...     _metadata=metadata,
         ... )
-        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', status=<Status.COMPLETED: 'COMPLETED'>, uid='1111', sequence=1, summary='This is a maintenance notification')
+        Maintenance(provider='A random NSP', account='12345000', maintenance_id='VNOC-1-99999999999', status=<Status.COMPLETED: 'COMPLETED'>, circuits=[CircuitImpact(circuit_id='123', impact=<Impact.NO_IMPACT: 'NO-IMPACT'>), CircuitImpact(circuit_id='456', impact=<Impact.OUTAGE: 'OUTAGE'>)], start=1533704400, end=1533712380, stamp=1533595768, organizer='myemail@example.com', uid='1111', sequence=1, summary='This is a maintenance notification')
     """
 
     provider: StrictStr
     account: StrictStr
     maintenance_id: StrictStr
+    status: Status
     circuits: List[CircuitImpact]
     start: StrictInt
     end: StrictInt
     stamp: StrictInt
     organizer: StrictStr
-    status: Status
+    _metadata: Metadata = PrivateAttr()
 
     # Non mandatory attributes
     uid: StrictStr = "0"
     sequence: StrictInt = 1
     summary: StrictStr = ""
 
-    # pylint: disable=no-self-argument,no-self-use
+    def __init__(self, **data):
+        """Initialize the Maintenance object."""
+        self._metadata = data.pop("_metadata")
+        super().__init__(**data)
+
+    # pylint: disable=no-self-argument
     @validator("status")
     def validate_status_type(cls, value):
         """Validate Status type."""
@@ -160,9 +182,9 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         return value
 
     @validator("circuits")
-    def validate_empty_circuits(cls, value):
-        """Validate emptry strings."""
-        if len(value) < 1:
+    def validate_empty_circuits(cls, value, values):
+        """Validate non-cancel notifications have a populated circuit list."""
+        if len(value) < 1 and values["status"] != "CANCELLED":
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 
@@ -184,3 +206,8 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     def to_json(self) -> str:
         """Get JSON representation of the class object."""
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=2)
+
+    @property
+    def metadata(self):
+        """Get Maintenance Metadata."""
+        return self._metadata

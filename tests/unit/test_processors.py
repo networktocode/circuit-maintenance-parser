@@ -5,7 +5,7 @@ from unittest.mock import patch
 import pytest
 from pydantic.error_wrappers import ValidationError
 
-from circuit_maintenance_parser.output import Maintenance
+from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
 from circuit_maintenance_parser.data import DataPart, NotificationData
 from circuit_maintenance_parser.errors import ProcessorError
@@ -13,37 +13,45 @@ from circuit_maintenance_parser.errors import ProcessorError
 
 from circuit_maintenance_parser.parser import Parser
 
+# pylint: disable=global-variable-undefined
 
 PARSED_DATA = [{"a": "b"}, {"c": "d"}]
-EXTENDED_DATA = {"y": "z"}
+EXTENDED_DATA = {"y": "z", "provider": "required"}
 
 
 class FakeParser(Parser):
     "Fake class to simulate a Parser."
     _parsed_data = PARSED_DATA
-    _data_type = "fake_type"
-
-    @classmethod
-    def get_data_types(cls):
-        return [cls._data_type]
+    _data_types = ["fake_type"]
 
     def parse(self, *args, **kwargs):  # pylint: disable=unused-argument
         return copy.deepcopy(self._parsed_data)
 
-    def parser_hook(self, raw: bytes):
+    def parser_hook(self, raw: bytes, content_type: str):
         pass
 
 
 class FakeParser0(FakeParser):
     "Fake class to simulate another Parser."
-    _data_type = "fake_type_0"
+    _data_types = ["fake_type_0"]
     _parsed_data = copy.deepcopy([PARSED_DATA[0]])
 
 
 class FakeParser1(FakeParser):
     "Fake class to simulate yet another Parser."
-    _data_type = "fake_type_1"
+    _data_types = ["fake_type_1"]
     _parsed_data = copy.deepcopy([PARSED_DATA[1]])
+
+
+class FakeParserMultiDataType(FakeParser):
+    "Fake class to simulate yet another Parser."
+    _data_types = ["fake_type_0", "fake_type_1"]
+    _parsed_data = copy.deepcopy([PARSED_DATA[1]])
+
+    def parse(self, *args, **kwargs):  # pylint: disable=unused-argument
+        global parser_runs
+        parser_runs += 1  # pylint: disable=undefined-variable
+        return copy.deepcopy(self._parsed_data)
 
 
 # Fake data used for SimpleProcessor
@@ -64,6 +72,15 @@ def test_simpleprocessor():
         assert mock_maintenance.call_count == len(PARSED_DATA)
         for parsed_data_element in PARSED_DATA:
             parsed_data_element.update(EXTENDED_DATA)
+            parsed_data_element.update(
+                {
+                    "_metadata": Metadata(
+                        provider=EXTENDED_DATA["provider"],
+                        processor=SimpleProcessor.get_name(),
+                        parsers=[FakeParser.get_name()],
+                    )
+                }
+            )
             mock_maintenance.assert_any_call(**parsed_data_element)
 
 
@@ -84,6 +101,15 @@ def test_combinedprocessor_multiple_data():
         assert mock_maintenance.call_count == len(PARSED_DATA)
         for parsed_data_element in PARSED_DATA:
             parsed_data_element.update(EXTENDED_DATA)
+            parsed_data_element.update(
+                {
+                    "_metadata": Metadata(
+                        provider=EXTENDED_DATA["provider"],
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser.get_name()],
+                    )
+                }
+            )
             mock_maintenance.assert_any_call(**parsed_data_element)
 
 
@@ -94,7 +120,20 @@ def test_combinedprocessor():
     with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
         processor.process(fake_data_for_combined, EXTENDED_DATA)
         assert mock_maintenance.call_count == 1
-        mock_maintenance.assert_any_call(**{**PARSED_DATA[0], **PARSED_DATA[1], **EXTENDED_DATA})
+        mock_maintenance.assert_any_call(
+            **{
+                **PARSED_DATA[0],
+                **PARSED_DATA[1],
+                **EXTENDED_DATA,
+                **{
+                    "_metadata": Metadata(
+                        provider=EXTENDED_DATA["provider"],
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser0.get_name(), FakeParser1.get_name()],
+                    )
+                },
+            }
+        )
 
 
 def test_combinedprocessor_missing_data():
@@ -117,9 +156,58 @@ def test_combinedprocessor_bleed():
     with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
         processor.process(fake_data_for_combined, EXTENDED_DATA)
         assert mock_maintenance.call_count == 1
-        mock_maintenance.assert_called_with(**{**PARSED_DATA[0], **PARSED_DATA[1], **EXTENDED_DATA})
+        mock_maintenance.assert_any_call(
+            **{
+                **PARSED_DATA[0],
+                **PARSED_DATA[1],
+                **EXTENDED_DATA,
+                **{
+                    "_metadata": Metadata(
+                        provider=EXTENDED_DATA["provider"],
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser0.get_name(), FakeParser1.get_name()],
+                    )
+                },
+            }
+        )
 
     with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
         processor.process(fake_data_type_0, EXTENDED_DATA)
         assert mock_maintenance.call_count == 1
-        mock_maintenance.assert_called_with(**{**PARSED_DATA[0], **EXTENDED_DATA})
+        mock_maintenance.assert_called_with(
+            **{
+                **PARSED_DATA[0],
+                **EXTENDED_DATA,
+                **{
+                    "_metadata": Metadata(
+                        provider=EXTENDED_DATA["provider"],
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParser0.get_name(), FakeParser1.get_name()],
+                    )
+                },
+            }
+        )
+
+
+def test_combinedprocessor_multidatatype():
+    """Tests CombinedProcessor."""
+    processor = CombinedProcessor(data_parsers=[FakeParserMultiDataType])
+    global parser_runs
+    parser_runs = 0
+    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
+        processor.process(fake_data_for_combined, EXTENDED_DATA)
+        assert mock_maintenance.call_count == 1
+        mock_maintenance.assert_any_call(
+            **{
+                **PARSED_DATA[1],
+                **EXTENDED_DATA,
+                **{
+                    "_metadata": Metadata(
+                        provider=EXTENDED_DATA["provider"],
+                        processor=CombinedProcessor.get_name(),
+                        parsers=[FakeParserMultiDataType.get_name()],
+                    )
+                },
+            }
+        )
+        assert parser_runs == 1

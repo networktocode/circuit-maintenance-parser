@@ -8,9 +8,9 @@ from typing import Iterable, Type, Dict, List
 from pydantic import BaseModel, Extra
 from pydantic.error_wrappers import ValidationError
 
-from circuit_maintenance_parser.output import Maintenance
+from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import Parser
+from circuit_maintenance_parser.parser import Parser, LLM
 from circuit_maintenance_parser.errors import ParserError, ProcessorError
 
 
@@ -38,9 +38,9 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         notification data may have in order to create the `Maintenance` object.
 
         There are 2 hooks available, to be implemented by custom `Processors`:
-            process_hook: Method that recieves the parsed output and manipulates the extracted data. It could create
+            process_hook: Method that receives the parsed output and manipulates the extracted data. It could create
                 the final `Maintenances` or just accumulate them.
-            post_process_hook (optional): Used to be able to do a final action on the extracted data before returing
+            post_process_hook (optional): Used to be able to do a final action on the extracted data before returning
                 the final `Maintenances`.
 
         Attributes:
@@ -54,13 +54,13 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         self.extended_data = extended_data
         maintenances_data: List = []
 
-        # First, we generate a list of tuples with a `DataPart` and `Parser` if the data type from the first is
-        # supported by the second.
-        data_part_and_parser_combinations = [
-            (data_part, data_parser)
+        # First, we generate a dictionary with the key `Parser` and `DataPart` if the data type from the first is
+        # supported by the second. This avoids reusing the same Parser for different data types if supported.
+        data_part_and_parser_combinations = {
+            data_parser: data_part
             for (data_part, data_parser) in itertools.product(data.data_parts, self.data_parsers)
             if data_part.type in data_parser.get_data_types()
-        ]
+        }
 
         if not data_part_and_parser_combinations:
             error_message = (
@@ -72,9 +72,9 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
             logger.debug(error_message)
             raise ProcessorError(error_message)
 
-        for data_part, data_parser in data_part_and_parser_combinations:
+        for data_parser, data_part in data_part_and_parser_combinations.items():
             try:
-                self.process_hook(data_parser().parse(data_part.content), maintenances_data)
+                self.process_hook(data_parser().parse(data_part.content, data_part.type), maintenances_data)
 
             except (ParserError, ValidationError) as exc:
                 error_message = "Parser class %s from %s was not successful.\n%s"
@@ -98,6 +98,20 @@ class GenericProcessor(BaseModel, extra=Extra.forbid):
         current_maintenance_data.update(self.extended_data)
         current_maintenance_data.update(temp_res)
 
+    @classmethod
+    def get_name(cls) -> str:
+        """Return the processor name."""
+        return cls.__name__
+
+    def generate_metadata(self):
+        """Generate the Metadata for the Maintenance."""
+        return Metadata(
+            parsers=[parser.get_name() for parser in self.data_parsers],
+            generated_by_llm=any(issubclass(parser, LLM) for parser in self.data_parsers),
+            processor=self.get_name(),
+            provider=self.extended_data["provider"],
+        )
+
 
 class SimpleProcessor(GenericProcessor):
     """Processor to get all the Maintenance Data in each Data Part."""
@@ -106,6 +120,7 @@ class SimpleProcessor(GenericProcessor):
         """For each data extracted (that can be multiple), we try to build a complete Maintenance."""
         for extracted_data in maintenances_extracted_data:
             self.extend_processor_data(extracted_data)
+            extracted_data["_metadata"] = self.generate_metadata()
             maintenances_data.append(Maintenance(**extracted_data))
 
 
@@ -143,6 +158,7 @@ class CombinedProcessor(GenericProcessor):
         for maintenance in maintenances:
             try:
                 combined_data = {**self.combined_maintenance_data, **maintenance}
+                combined_data["_metadata"] = self.generate_metadata()
                 maintenances_data.append(Maintenance(**combined_data))
             except ValidationError as exc:
                 raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc
