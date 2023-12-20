@@ -1,0 +1,28 @@
+[
+    {
+        "account": "0000000000001",
+        "circuits": [
+            {
+                "circuit_id": "dxvif-00000001",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "dxcon-00000002",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "dxlag-00000003",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1703055600,
+        "maintenance_id": "677c40657cf43e821df44c75d500785b",
+        "organizer": "aws-account-notifications@amazon.com",
+        "provider": "aws",
+        "sequence": 1,
+        "stamp": 1620337976,
+        "start": 1703041200,
+        "status": "CONFIRMED",
+        "summary": "Emergency maintenance has been scheduled on an AWS Direct Connect endpoint in Datacenter Foo3, Anywhere, USA from Wed, 20 Dec 2023 03:00:00 GMT to Wed, 20 Dec 2023 07:00:00 GMT for 4 hours. This maintenance will cause a disruption to the following Direct Connect connections you own:"
+    }
+]
