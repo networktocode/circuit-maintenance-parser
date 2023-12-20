@@ -65,7 +65,7 @@ class TextParserAWS1(Text):
         maintenace_id = ""
         status = Status.CONFIRMED
         for line in text.splitlines():
-            if "planned maintenance" in line.lower():
+            if "planned maintenance" in line.lower() or "maintenance has been scheduled" in line.lower():
                 data["summary"] = line
                 search = re.search(
                     r"([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})",
