@@ -23,7 +23,8 @@ class HtmlParserEquinix(Html):
         """
         data: Dict[str, Any] = {"circuits": []}
 
-        impact = self._parse_b(soup.find_all("b"), data)
+        bolded_elems = soup.find_all(["b", "strong"])
+        impact = self._parse_bolded(bolded_elems, data)
         self._parse_table(soup.find_all("th"), data, impact)
         return [data]
 
@@ -43,8 +44,8 @@ class HtmlParserEquinix(Html):
         except UnicodeEncodeError:
             return False
 
-    def _parse_b(self, b_elements, data):
-        """Parse the <b> elements from the notification to capture start and end times, description, and impact.
+    def _parse_bolded(self, b_elements, data):
+        """Parse the <b> / <strong> elements from the notification to capture start and end times, description, and impact.
 
         Args:
             b_elements (): resulting soup object with all <b> elements
@@ -63,7 +64,8 @@ class HtmlParserEquinix(Html):
                 raw_year_span = b_elem.text.strip().split()
                 start_year = raw_year_span[1].split("-")[-1]
                 end_year = raw_year_span[-1].split("-")[-1]
-            if "UTC:" in b_elem:
+            if "UTC:" in b_elem.text:
+                print("UTC found")
                 raw_time = b_elem.next_sibling
                 # for non english equinix notifications
                 # english section is usually at the bottom
@@ -80,9 +82,16 @@ class HtmlParserEquinix(Html):
             # all circuits in the notification share the same impact
             if "IMPACT:" in b_elem:
                 impact_line = b_elem.next_sibling
+                if impact_line.next_sibling is None:
+                    impact_sibling_line = ""
+                else:
+                    impact_sibling_line = impact_line.next_sibling
+
                 if "No impact to your service" in impact_line:
                     impact = Impact.NO_IMPACT
-                elif "There will be service interruptions" in impact_line.next_sibling.text:
+                elif "There will be service interruptions" in impact_line:
+                    impact = Impact.OUTAGE
+                elif "There will be service interruptions" in impact_sibling_line:
                     impact = Impact.OUTAGE
                 elif "Loss of redundancy" in impact_line:
                     impact = Impact.REDUCED_REDUNDANCY
@@ -158,6 +167,8 @@ class SubjectParserEquinix(EmailSubjectParser):
             data["status"] = Status.RE_SCHEDULED
         elif "scheduled" in subject.lower() or "reminder" in subject.lower():
             data["status"] = Status.CONFIRMED
+        elif "cancelled" in subject.lower():
+            data["status"] = Status.CANCELLED
         else:
             # Some Equinix notifications don't clearly state a status in their subject.
             # From inspection of examples, it looks like "Confirmed" would be the most appropriate in this case.

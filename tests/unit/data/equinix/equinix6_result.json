@@ -1,0 +1,13 @@
+[   
+    {
+        "account": "555555",
+        "circuits": [
+            {
+                "circuit_id": "2345678",
+                "impact": "REDUCED-REDUNDANCY"
+            }
+        ],
+        "end": 1703037600,
+        "start": 1703023200
+    }
+]
