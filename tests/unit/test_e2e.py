@@ -294,6 +294,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [("email", Path(dir_path, "data", "equinix", "equinix8.eml"))],
             [Path(dir_path, "data", "equinix", "equinix8_result_combined.json")],
         ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix9.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix9_result_combined.json")],
+        ),
         # EUNetworks
         (
             EUNetworks,

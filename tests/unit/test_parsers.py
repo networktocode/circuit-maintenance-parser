@@ -259,6 +259,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "equinix", "equinix8.eml"),
             Path(dir_path, "data", "equinix", "equinix8_result.json"),
         ),
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix9.eml"),
+            Path(dir_path, "data", "equinix", "equinix9_result.json"),
+        ),
         # GTT
         (
             HtmlParserGTT1,

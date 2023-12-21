@@ -64,7 +64,7 @@ class HtmlParserEquinix(Html):
                 raw_year_span = b_elem.text.strip().split()
                 start_year = raw_year_span[1].split("-")[-1]
                 end_year = raw_year_span[-1].split("-")[-1]
-            if "UTC:" in b_elem.text:
+            if start_year != 0 and "UTC:" in b_elem.text:
                 raw_time = b_elem.next_sibling
                 # for non english equinix notifications
                 # english section is usually at the bottom
