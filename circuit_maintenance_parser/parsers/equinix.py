@@ -81,10 +81,7 @@ class HtmlParserEquinix(Html):
             # all circuits in the notification share the same impact
             if "IMPACT:" in b_elem:
                 impact_line = b_elem.next_sibling
-                if impact_line.next_sibling is None:
-                    impact_sibling_line = ""
-                else:
-                    impact_sibling_line = impact_line.next_sibling
+                impact_sibling_line = impact_line.next_sibling or ""
 
                 if "No impact to your service" in impact_line:
                     impact = Impact.NO_IMPACT
