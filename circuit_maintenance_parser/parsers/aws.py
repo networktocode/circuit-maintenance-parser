@@ -1,4 +1,4 @@
-"""AquaComms parser."""
+"""AWS parser."""
 import hashlib
 import logging
 import quopri
