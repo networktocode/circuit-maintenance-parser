@@ -1,0 +1,266 @@
+Date: Thu, 21 Dec 2023 04:16:05 -0800 (PST)
+From: Equinix Network Maintenance <no-reply@equinix.com>
+Reply-To: <no-reply@equinix.com>
+Subject: Scheduled Software Upgrade - AM6, DB2, HE6, ZW1 Network Maintenance - (SERVICE IMPACTING) - 10-JAN-2024 [CHG0031000]
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_111111_2222222.1234567898"
+X-ServiceNow-Generated: true
+
+------=_Part_111111_2222222.1234567898
+Content-Type: multipart/alternative; boundary="----=_Part_111112_17421832.1234567898"
+
+------=_Part_111112_17421832.1234567898
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+
+
+
+
+
+
+
+
+=C2=A0=C2=A0=C2=A0
+=C2=A0Dear Equinix Customers,=C2=A0
+=C2=A0
+DATE: 10-JAN-2024 - 11-JAN-2024
+
+SPAN: 10-JAN-2024 - 11-JAN-2024
+
+UTC: WEDNESDAY, 10 JAN 22:00 - THURSDAY, 11 JAN 06:00
+
+(Time Conversion Guide)
+=C2=A0
+LOCATION: AM6, DB2, HE6, ZW1=C2=A0
+=C2=A0
+DESCRIPTION: Please be advised that Equinix engineers will be performing a =
+planned software upgrade.=20
+
+For customers without redundancy configured ports and services a downtime i=
+s expected.
+Customers with redundant configured services will only experience a loss of=
+ redundancy.
+
+This work will impact network ports and virtual services listed in this not=
+ification.
+
+The expected duration would be:=20
+up to 120 minutes in the maintenance window (between 20 to 120 minutes).=C2=
+=A0
+=C2=A0
+OUTAGE DURATION: 2 Hours
+=C2=A0
+PRODUCTS: Equinix Connect, Equinix Internet Access, Equinix Fabric, Metro C=
+onnect=C2=A0
+=C2=A0
+IMPACT: There will be service interruptions
+=C2=A0
+RECOMMENDED ACTION: The Equinix platform provides redundancy options. To mi=
+tigate the impact of a maintenance event, we recommend customers to setup r=
+edundant connections according to best practices.
+
+No action is required from customers with redundancy.
+=C2=A0
+
+Impacted Assets
+
+Equinix Connect
+
+Account #ProductIBXService Serial #
+555555Equinix ConnectDB2EC1234.1
+
+=C2=A0
+We apologize for any inconvenience you may experience during this activity.=
+ Your cooperation and understanding are=C2=A0greatly appreciated.
+=C2=A0
+Please do not reply to this email address. If you have any questions or con=
+cerns regarding this notification, please log a network ticket via the Equi=
+nix Customer Portal or contact Global Service Desk and quote the ticket ref=
+erence.
+=C2=A0
+Equinix is available to answer questions, provide up-to-date status informa=
+tion or additional details regarding the maintenance. Please reference CHG0=
+031000.=C2=A0
+=C2=A0=C2=A0=C2=A0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Service Insight | Notification Preferences | Equinix Status Page | Support =
+Case=20
+
+ Glossary of terms | Equinix Customer Portal=20
+
+
+
+
+
+
+
+
+
+
+
+
+Equinix | Legal | Privacy  =20
+  =E2=80=AF =E2=80=AF =E2=80=AF  =20
+
+
+
+
+
+
+------=_Part_111112_17421832.1234567898
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<html><head></head><body><table style=3D"border-collapse: collapse; margin:=
+ auto;border:1px solid #CFCFCF" border=3D"1" width=3D"700" cellspacing=3D"0=
+" cellpadding=3D"0" align=3D"center"><tbody><tr><td><table border=3D"0" sty=
+le=3D"width: 100%;">
+<tbody>
+<tr>
+<td height=3D"111" style=3D"text-align: center;"><img src=3D"http://info.eq=
+uinix.com/rs/equinixinc/images/banner-network-maintenance.gif" alt=3D"Meet =
+Equinix" width=3D"700" height=3D"115" border=3D"0"></td>
+</tr>
+</tbody>
+</table><table style=3D"border-collapse: collapse; margin: auto; height: 32=
+7.85px;" border=3D"0" width=3D"700" cellspacing=3D"0" cellpadding=3D"0" ali=
+gn=3D"center"><tbody><tr style=3D"height: 15.4px;"><td style=3D"height: 15.=
+4px; width: 29.6991px;">&nbsp;</td><td style=3D"height: 15.4px; width: 637.=
+581px;">&nbsp;</td><td style=3D"height: 15.4px; width: 29.7454px;">&nbsp;</=
+td></tr><tr style=3D"height: 297.05px;"><td style=3D"height: 297.05px; widt=
+h: 29.6991px;" width=3D"30">&nbsp;</td><td style=3D"height: 297.05px; width=
+: 637.581px;" width=3D"642"><span style=3D"font-family: arial, helvetica, s=
+ans-serif; font-size: 10pt;">Dear Equinix Customers,&nbsp;</span><br><span =
+style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp=
+;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; font-=
+size: 10pt;"><strong>DATE:</strong> 10-JAN-2024 - 11-JAN-2024</span><br><sp=
+an style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;"><b=
+r><b>SPAN: 10-JAN-2024 - 11-JAN-2024</b><br><br><b>UTC: </b>WEDNESDAY, 10 J=
+AN 22:00 - THURSDAY, 11 JAN 06:00<br></span><br><span style=3D"font-family:=
+ arial, helvetica, sans-serif; font-size: 10pt;"><a href=3D"https://www.tim=
+eanddate.com/worldclock/converter-classic.html" rel=3D"nofollow">(Time Conv=
+ersion Guide)</a></span><br><span style=3D"font-family: arial, helvetica, s=
+ans-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"font-family: a=
+rial, helvetica, sans-serif; font-size: 10pt;"><strong>LOCATION:</strong> A=
+M6, DB2, HE6, ZW1&nbsp;</span><br><span style=3D"font-family: arial, helvet=
+ica, sans-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"font-fam=
+ily: arial, helvetica, sans-serif; font-size: 10pt;"><strong>DESCRIPTION:</=
+strong> Please be advised that Equinix engineers will be performing a plann=
+ed software upgrade.=20
+<br>
+<br>For customers without redundancy configured ports and services a downti=
+me is expected.
+<br>Customers with redundant configured services will only experience a los=
+s of redundancy.
+<br>
+<br>This work will impact network ports and virtual services listed in this=
+ notification.
+<br>
+<br>The expected duration would be:=20
+<br>up to 120 minutes in the maintenance window (between 20 to 120 minutes)=
+.&nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif;=
+ font-size: 10pt;">&nbsp;<br><strong>OUTAGE DURATION:</strong> 2 Hours<br>&=
+nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; f=
+ont-size: 10pt;"><strong>PRODUCTS:</strong> Equinix Connect, Equinix Intern=
+et Access, Equinix Fabric, Metro Connect&nbsp;</span><br><span style=3D"fon=
+t-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span><br>=
+<span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;"=
+><strong>IMPACT:</strong> There will be service interruptions</span><br><sp=
+an style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&n=
+bsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; fo=
+nt-size: 10pt;"><strong>RECOMMENDED ACTION:</strong> The Equinix platform p=
+rovides redundancy options. To mitigate the impact of a maintenance event, =
+we recommend customers to setup redundant connections according to best pra=
+ctices.
+<br>
+<br>No action is required from customers with redundancy.</span><br><span s=
+tyle=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;=
+</span><br><span style=3D"font-family: arial, helvetica, sans-serif; font-s=
+ize: 10pt;"><br><table style=3D"border-collapse: collapse;height:40px;" bor=
+der=3D"0" cellspacing=3D"0" cellpadding=3D"0"><tbody><tr><td><span style=3D=
+"text-decoration: underline;"><strong>Impacted Assets</strong></span></td><=
+/tr></tbody></table><br><div style=3D"text-decoration:underline;"><b>Equini=
+x Connect</b></div><br><table style=3D"border-collapse: collapse; width: 99=
+%;" border=3D"1"><tbody><tr><th style=3D"width: 25%;">Account #</th><th sty=
+le=3D"width: 25%;">Product</th><th style=3D"width: 25%;">IBX</th><th style=
+=3D"width: 25%;">Service Serial #</th></tr><tr><td style=3D"text-align: cen=
+ter;">555555</td><td style=3D"text-align: center;">Equinix Connect</td><td =
+style=3D"text-align: center;">DB2</td><td style=3D"text-align: center;">EC1=
+234.1</td></tr></tbody></table></span><br><span style=3D"font-family: arial=
+, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"=
+font-family: arial, helvetica, sans-serif; font-size: 10pt;">We apologize f=
+or any inconvenience you may experience during this activity. Your cooperat=
+ion and understanding are&nbsp;greatly appreciated.</span><br><span style=
+=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</sp=
+an><br><span style=3D"font-family: arial, helvetica, sans-serif; font-size:=
+ 10pt;">Please do not reply to this email address. If you have any question=
+s or concerns regarding this notification, please log a network ticket via =
+the Equinix Customer Portal or contact Global Service Desk and quote the ti=
+cket reference.</span><br><span style=3D"font-family: arial, helvetica, san=
+s-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"font-family: ari=
+al, helvetica, sans-serif; font-size: 10pt;">Equinix is available to answer=
+ questions, provide up-to-date status information or additional details reg=
+arding the maintenance. Please reference CHG0031000.</span></td><td style=
+=3D"height: 297.05px; width: 29.7454px;" width=3D"30">&nbsp;</td></tr><tr s=
+tyle=3D"height: 15.4px;"><td style=3D"height: 15.4px; width: 29.6991px;">&n=
+bsp;</td><td style=3D"height: 15.4px; width: 637.581px;">&nbsp;</td><td sty=
+le=3D"height: 15.4px; width: 29.7454px;">&nbsp;</td></tr></tbody></table><t=
+able width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td height=3D"20"><img src=3D"http://na-g.marketo.com/rs/equinixinc/images/=
+Event_Offering-seperator.jpg" width=3D"700" height=3D"20" style=3D"display:=
+ block; margin-left: auto; margin-right: auto;"></td>
+</tr>
+</tbody>
+</table>
+<table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td>
+<p style=3D"text-align: center;"></p>
+<p style=3D"text-align: center; font-family: Arial, Helvetica, sans-serif; =
+color: #00a3e0;"><span style=3D"font-size: 10pt; color: #707073;"><a href=
+=3D"https://customerportal.equinix.com/cid/" target=3D"_blank" style=3D"col=
+or: #00a3e0;" rel=3D"noopener">Service Insight </a>| <a href=3D"https://cus=
+tomerportal.equinix.com/ecp/user/notifications" target=3D"_blank" rel=3D"no=
+opener" style=3D"color: #00a3e0;">Notification Preferences</a> | <a href=3D=
+"https://status.equinix.com" target=3D"_blank" rel=3D"noopener" style=3D"co=
+lor: #00a3e0;">Equinix Status Page</a> | <a href=3D"https://customerportal.=
+equinix.com/ecp/casemanagement" target=3D"_blank" rel=3D"noopener" style=3D=
+"color: #00a3e0;">Support Case</a>&nbsp;</span></p>
+<p style=3D"text-align: center; font-family: Arial, Helvetica, sans-serif; =
+color: #707073;"><span style=3D"font-size: 10pt;">&nbsp;<a href=3D"https://=
+www.equinix.com/welcome-guide/glossary" target=3D"_blank" rel=3D"noopener" =
+style=3D"color: #00a3e0;">Glossary of terms</a> | <a href=3D"https://custom=
+erportal.equinix.com" target=3D"_blank" rel=3D"noopener" style=3D"color: #0=
+0a3e0;">Equinix Customer Portal</a>&nbsp;</span></p>
+<p style=3D"text-align: center;"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center" s=
+tyle=3D"height: 22.3958px;">
+<tbody>
+<tr style=3D"height: 22.3958px;">
+<td width=3D"10px;" td=3D""></td>
+<td width=3D"10px;"></td>
+</tr>
+</tbody>
+</table></td></tr></tbody></table></body></html>
+------=_Part_111112_17421832.1234567898--
+------=_Part_111111_2222222.1234567898--
