@@ -77,6 +77,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - Lumen
 - Megaport
 - Momentum
+- Netflix (AS2906 only)
 - Seaborn
 - Sparkle
 - Telstra

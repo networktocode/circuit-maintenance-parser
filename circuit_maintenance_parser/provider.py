@@ -29,6 +29,7 @@ from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
+from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -290,6 +291,13 @@ class Momentum(GenericProvider):
         CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserMomentum1, SubjectParserMomentum1]),
     ]
     _default_organizer = "maintenance@momentumtelecom.com"
+
+
+class Netflix(GenericProvider):
+    """Netflix provider custom class."""
+
+    _processors: List[GenericProcessor] = [CombinedProcessor(data_parsers=[EmailDateParser, TextParserNetflix1])]
+    _default_organizer = "cdnetops@netflix.com"
 
 
 class NTT(GenericProvider):

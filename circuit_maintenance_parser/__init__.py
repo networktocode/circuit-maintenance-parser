@@ -19,6 +19,7 @@ from .provider import (
     Lumen,
     Megaport,
     Momentum,
+    Netflix,
     NTT,
     PacketFabric,
     Seaborn,
@@ -45,6 +46,7 @@ SUPPORTED_PROVIDERS = (
     Lumen,
     Megaport,
     Momentum,
+    Netflix,
     NTT,
     PacketFabric,
     Seaborn,
@@ -80,7 +82,6 @@ def get_provider_class(provider_name: str) -> Type[GenericProvider]:
         if provider_parser.get_provider_type() == provider_name:
             break
     else:
-
         raise NonexistentProviderError(
             f"{provider_name} is not a currently supported provider. Only {', '.join(SUPPORTED_PROVIDER_NAMES)}"
         )
