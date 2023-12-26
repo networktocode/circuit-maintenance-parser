@@ -1,10 +1,7 @@
 """Netflix parser."""
-import datetime
 import hashlib
 import logging
 import re
-
-import bs4  # type: ignore
 
 from dateutil import parser
 
