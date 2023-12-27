@@ -1,0 +1,25 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [
+      {
+        "circuit_id": "000000-DF-ABCDFL01-DCBAFL02",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "111111-DFAA-CCF",
+        "impact": "NO-IMPACT"
+      }
+    ],
+    "end": 1704290400,
+    "maintenance_id": "CM20231201000",
+    "organizer": "fiberchangemgmt@crowncastle.com",
+    "provider": "crowncastle",
+    "sequence": 1,
+    "stamp": 1702190640,
+    "start": 1704268800,
+    "status": "CONFIRMED",
+    "summary": "Crown Castle Fiber will be conducting a required maintenance at the above-listed location for routine splicing. Although no impact to your circuit(s) listed below is expected, this maintenance is deemed potentially service affecting. We apologize for any resulting inconvenience and assure you of our efforts to minimize any service disruption.",
+    "uid": "0"
+  }
+]

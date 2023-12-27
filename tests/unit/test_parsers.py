@@ -12,6 +12,7 @@ from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParser
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
+from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
@@ -217,6 +218,27 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             SubjectParserColt1,
             Path(dir_path, "data", "colt", "colt7.eml"),
             Path(dir_path, "data", "colt", "colt7_subject_parser_1_result.json"),
+        ),
+        # Crown Castle Fiber
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle2.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle2_parser_result.json"),
+        ),
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle3.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle3_parser_result.json"),
+        ),
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle4.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle4_parser_result.json"),
+        ),
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle5.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle5_parser_result.json"),
         ),
         # Equinix
         (
