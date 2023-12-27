@@ -356,6 +356,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "netflix", "netflix1.eml"),
             Path(dir_path, "data", "netflix", "netflix1_text_parser_result.json"),
         ),
+        (
+            TextParserNetflix1,
+            Path(dir_path, "data", "netflix", "netflix2.eml"),
+            Path(dir_path, "data", "netflix", "netflix2_text_parser_result.json"),
+        ),
         # NTT
         (
             ICal,

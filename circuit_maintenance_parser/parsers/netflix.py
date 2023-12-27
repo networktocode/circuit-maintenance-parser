@@ -68,7 +68,7 @@ class TextParserNetflix1(Text):
                 data["circuits"].append(CircuitImpact(circuit_id=line.lstrip(), impact=impact))
                 maintenance_id += line + "/"
 
-        data["end"] = data["start"] + hours * 3660 + minutes * 60
+        data["end"] = data["start"] + hours * 3600 + minutes * 60
 
         # Netflix does not send a maintenance ID, so a hash value is being generated using the start,
         #  end and IDs of all circuits in the notification.

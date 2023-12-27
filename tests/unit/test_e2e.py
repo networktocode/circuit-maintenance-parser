@@ -523,6 +523,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "netflix", "netflix1_result.json"),
             ],
         ),
+        (
+            Netflix,
+            [
+                ("email", Path(dir_path, "data", "netflix", "netflix2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "netflix", "netflix2_result.json"),
+            ],
+        ),
         # NTT
         (
             NTT,
