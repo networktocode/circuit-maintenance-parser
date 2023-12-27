@@ -240,6 +240,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             Path(dir_path, "data", "crowncastle", "crowncastle5.html"),
             Path(dir_path, "data", "crowncastle", "crowncastle5_parser_result.json"),
         ),
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle6.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle6_parser_result.json"),
+        ),
         # Equinix
         (
             HtmlParserEquinix,

@@ -108,7 +108,8 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         account:  identifies an account associated with the service that is the subject of the maintenance notification
         maintenance_id:  contains text that uniquely identifies the maintenance that is the subject of the notification
         circuits: list of circuits affected by the maintenance notification and their specific impact. Note this can be
-            an empty list for notifications with a CANCELLED status if the provider does not populate the circuit list.
+            an empty list for notifications with a CANCELLED or COMPLETED status if the provider does not populate the
+            circuit list.
         status: defines the overall status or confirmation for the maintenance
         start: timestamp that defines the start date of the maintenance in GMT
         end: timestamp that defines the end date of the maintenance in GMT
@@ -184,7 +185,7 @@ class Maintenance(BaseModel, extra=Extra.forbid):
     @validator("circuits")
     def validate_empty_circuits(cls, value, values):
         """Validate non-cancel notifications have a populated circuit list."""
-        if len(value) < 1 and values["status"] != "CANCELLED":
+        if len(value) < 1 and str(values["status"]) in ("CANCELLED", "COMPLETED"):
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 

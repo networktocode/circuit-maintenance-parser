@@ -61,13 +61,14 @@ class HtmlParserCrownCastle1(Html):
                     data["end"] = self.dt2ts(datetime.strptime(en_dt, "%m/%d/%Y %I:%M %p %Z"))
 
         table = soup.find("table", id="circuitgrid")
-        for row in table.find_all("tr"):
-            cols = row.find_all("td")
-            if len(cols) == 6:
-                if cols[4].string.strip() == "None":
-                    impact = Impact("NO-IMPACT")
-                else:
-                    impact = Impact("OUTAGE")
-                data["circuits"].append(CircuitImpact(impact=impact, circuit_id=cols[0].string.strip()))
+        if table is not None:
+            for row in table.find_all("tr"):
+                cols = row.find_all("td")
+                if len(cols) == 6:
+                    if cols[4].string.strip() == "None":
+                        impact = Impact("NO-IMPACT")
+                    else:
+                        impact = Impact("OUTAGE")
+                    data["circuits"].append(CircuitImpact(impact=impact, circuit_id=cols[0].string.strip()))
 
         return [data]

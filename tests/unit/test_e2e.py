@@ -267,6 +267,13 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [Path(dir_path, "data", "crowncastle", "crowncastle1_result.json")],
         ),
+        (
+            CrownCastle,
+            [
+                ("email", Path(dir_path, "data", "crowncastle", "crowncastle7.eml")),
+            ],
+            [Path(dir_path, "data", "crowncastle", "crowncastle7_result.json")],
+        ),
         # Equinix
         (
             Equinix,
