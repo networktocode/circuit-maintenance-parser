@@ -1,0 +1,35 @@
+From: cdnetops@saasmail.netflix.com
+Reply-To: cdnetops@netflix.com
+To: noc@example.com
+Subject: Dry Run Notification- Netflix Open Connect - Scheduled Maintenance - Edgeconnex LAS01 - 2024-01-31 18:00:00+00:00 UTC
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Date: Fri, 22 Dec 2023 18:14:04 +0000
+
+Example.com (AS65000),
+
+    Netflix (AS2906) will be performing scheduled maintenance in Edgeconnex LAS01, at 2024-01-31 18:00:00+00:00 UTC.
+
+    Traffic will drain away onto redundant equipment prior to the start of the maintenance.
+
+    After approximately 1 hour of draining, you will see BGP sessions and associated interfaces flap.
+
+    Expected downtime will be approximately 60 minutes.  Traffic will be restored shortly thereafter.
+
+    Please do not shut down any links or BGP sessions during this downtime.
+
+    Your IPs:
+    192.0.2.1
+    2001:db8::1
+
+    Please note, if you do IRR filtering, that we often update our prefixes.
+
+    Our prefix set is RS-NETFLIX and our as-set is AS-NFLX.
+
+    Please be sure to accept advertisements that originate from ASNs: 2906, 40027, and 55095.
+
+    Thank you,
+
+    Netflix Open Connect
+    

@@ -24,6 +24,7 @@ from circuit_maintenance_parser.provider import (
     HGC,
     Lumen,
     Megaport,
+    Netflix,
     NTT,
     Momentum,
     PacketFabric,
@@ -530,6 +531,25 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "momentum", "momentum1_result.json"),
+            ],
+        ),
+        # Netflix
+        (
+            Netflix,
+            [
+                ("email", Path(dir_path, "data", "netflix", "netflix1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "netflix", "netflix1_result.json"),
+            ],
+        ),
+        (
+            Netflix,
+            [
+                ("email", Path(dir_path, "data", "netflix", "netflix2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "netflix", "netflix2_result.json"),
             ],
         ),
         # NTT
