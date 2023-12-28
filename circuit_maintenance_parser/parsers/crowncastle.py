@@ -20,9 +20,9 @@ class HtmlParserCrownCastle1(Html):
 
         data["status"] = self.get_status(soup)
 
-        for p in soup.find_all("p"):
-            for s in p.strings:
-                search = re.match(r"^Dear (.*),", s)
+        for paragraph in soup.find_all("p"):
+            for pstring in paragraph.strings:
+                search = re.match(r"^Dear (.*),", pstring)
                 if search:
                     data["account"] = search.group(1)
 
@@ -70,21 +70,21 @@ class HtmlParserCrownCastle1(Html):
 
     def get_status(self, soup):
         """Get the status of the maintenance."""
-        for p in soup.find_all("p"):
-            for s in p.strings:
-                if "has been completed." in s:
+        for paragraph in soup.find_all("p"):
+            for pstring in paragraph.strings:
+                if "has been completed." in pstring:
                     return Status("COMPLETED")
 
-        for u in soup.find_all("u"):
-            if u.string is None:
+        for underline in soup.find_all("u"):
+            if underline.string is None:
                 continue
-            if u.string.strip() == "Maintenance Notification":
+            if underline.string.strip() == "Maintenance Notification":
                 return Status("CONFIRMED")
-            if u.string.strip() == "Emergency Notification":
+            if underline.string.strip() == "Emergency Notification":
                 return Status("CONFIRMED")
-            if u.string.strip() == "Maintenance Notification - Rescheduled Event":
+            if underline.string.strip() == "Maintenance Notification - Rescheduled Event":
                 return Status("RE-SCHEDULED")
-            if u.string.strip() == "Maintenance Cancellation Notification":
+            if underline.string.strip() == "Maintenance Cancellation Notification":
                 return Status("CANCELLED")
 
             return Status("NO-CHANGE")
