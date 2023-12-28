@@ -1,0 +1,16 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [
+      {
+        "circuit_id": "666666-WAVE-CCF",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1702638000,
+    "maintenance_id": "CM20231201000",
+    "start": 1702609200,
+    "status": "CANCELLED",
+    "summary": "Please note this maintenance has been cancelled. Crown Castle Fiber apologizes for any resulting inconvenience and thank you for your patience."
+  }
+]

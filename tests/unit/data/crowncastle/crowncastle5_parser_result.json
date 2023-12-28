@@ -1,0 +1,20 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [
+      {
+        "circuit_id": "666666-DF-ANYWFL00-ANYWFL01",
+        "impact": "NO-IMPACT"
+      },
+      {
+        "circuit_id": "666666-DBAA-CCF",
+        "impact": "NO-IMPACT"
+      }
+    ],
+    "end": 1701784800,
+    "maintenance_id": "CM20231201000",
+    "start": 1701768600,
+    "status": "COMPLETED",
+    "summary": "Please note this maintenance has been rescheduled to the dates/times listed above. The previous date was 12/1/23 and the new rescheduled date is 12/5/23. Crown Castle Fiber apologizes for any inconvenience this may cause."
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [],
+    "end": 1701601200,
+    "maintenance_id": "CM20231201000",
+    "organizer": "fiberchangemgmt@crowncastle.com",
+    "provider": "crowncastle",
+    "sequence": 1,
+    "stamp": 1702190640,
+    "start": 1701572400,
+    "status": "COMPLETED",
+    "uid": "0"
+  }
+]

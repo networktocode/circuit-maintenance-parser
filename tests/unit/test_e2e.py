@@ -19,6 +19,7 @@ from circuit_maintenance_parser.provider import (
     BSO,
     Cogent,
     Colt,
+    CrownCastle,
     EUNetworks,
     GTT,
     HGC,
@@ -258,6 +259,21 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 Path(dir_path, "data", "colt", "colt7_result.json"),
             ],
+        ),
+        # Crown Castle
+        (
+            CrownCastle,
+            [
+                ("email", Path(dir_path, "data", "crowncastle", "crowncastle1.eml")),
+            ],
+            [Path(dir_path, "data", "crowncastle", "crowncastle1_result.json")],
+        ),
+        (
+            CrownCastle,
+            [
+                ("email", Path(dir_path, "data", "crowncastle", "crowncastle7.eml")),
+            ],
+            [Path(dir_path, "data", "crowncastle", "crowncastle7_result.json")],
         ),
         # Equinix
         (
