@@ -26,6 +26,7 @@ from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParse
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
+from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
@@ -250,6 +251,15 @@ class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
 
     _default_organizer = "noc@eunetworks.com"
+
+
+class Google(GenericProvider):
+    """Google provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGoogle1]),
+    ]
+    _default_organizer = "noc-noreply@google.com"
 
 
 class GTT(GenericProvider):

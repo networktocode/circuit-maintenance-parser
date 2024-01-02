@@ -14,6 +14,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
+from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -296,6 +297,12 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
             HtmlParserEquinix,
             Path(dir_path, "data", "equinix", "equinix9.eml"),
             Path(dir_path, "data", "equinix", "equinix9_result.json"),
+        ),
+        # Google
+        (
+            HtmlParserGoogle1,
+            Path(dir_path, "data", "google", "google1.html"),
+            Path(dir_path, "data", "google", "google1_parser_result.json"),
         ),
         # GTT
         (
