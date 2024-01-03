@@ -21,6 +21,7 @@ from circuit_maintenance_parser.provider import (
     Colt,
     CrownCastle,
     EUNetworks,
+    Google,
     GTT,
     HGC,
     Lumen,
@@ -418,6 +419,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 Path(dir_path, "data", "hgc", "hgc1_result.json"),
                 Path(dir_path, "data", "hgc", "hgc2_result.json"),
+            ],
+        ),
+        # Google
+        (
+            Google,
+            [
+                ("email", Path(dir_path, "data", "google", "google2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "google", "google2_result.json"),
             ],
         ),
         # Lumen

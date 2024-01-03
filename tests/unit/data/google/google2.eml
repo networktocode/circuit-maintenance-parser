@@ -1,0 +1,157 @@
+Date: Wed, 06 Dec 2023 00:40:05 +0000
+Subject: [Scheduled] Google Planned Network Maintenance Notification - Reference PCR/123456
+From: Google NOC <noc-noreply@google.com>
+Content-Type: multipart/alternative; boundary="000000000000a556e4060bffffff"
+
+--000000000000a556e4060bffffff
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+
+Google Network Maintenance Notification - Reference PCR/123456
+
+
+This message was sent to: [sample@example.net]
+This address was selected from the Google ISP Portal. You can update your  
+preferences by navigating to "Configuration > Contacts" and adjusting Email  
+Subscriptions for each user. You can find additional details about Contacts  
+here.
+
+
+Details:
+Start Time: 2023-12-05 20:55:00 +0000 UTC
+End Time: 2023-12-06 05:05:00 +0000 UTC
+Duration: 8h10m0s
+
+
+Google ASN: 15169 Peer ASN: 65001
+
+Google Neighbor Address(es): 192.0.2.1 Peer Neighbor Address(es):  
+192.0.2.0
+
+Google Neighbor Address(es): 2001:db8::1 Peer Neighbor  
+Address(es): 2001:db8::
+
+
+Google systems will automatically re-route the traffic away from the  
+peering link(s) under maintenance.
+
+Depending on the nature of the work, your BGP session with Google may stay  
+up through the maintenance window. Traffic may shift to alternate sessions  
+with Google and/or your upstream provider(s).
+
+Questions about this event can be sent to noc@google.com.
+
+Thank you for peering with Google!
+
+
+
+PRIVILEGE AND CONFIDENTIALITY NOTICE: The information in this e-mail  
+communication and any attached documents may be privileged, confidential or  
+otherwise protected from disclosure and is intended only for the use of the  
+designated recipient(s). If the reader is neither the intended recipient  
+nor an employee or agent thereof who is responsible for delivering it to  
+the intended recipient, you are hereby notified that any review,  
+dissemination, distribution, copying or other use of this communication is  
+strictly prohibited. If you have received this communication in error,  
+please immediately notify us by return e-mail and promptly delete the  
+original electronic e-mail communication and any attached documentation.  
+Receipt by anyone other than the intended recipient is not a waiver of any  
+attorney-client or work-product privilege.
+
+
+--000000000000a556e4060bffffff
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+
+<div style=3D"font-family: 'Open Sans', sans-serif;">
+  <div style=3D"font-weight: bold; font-size: larger;"><span style=3D"color=
+: rgb(51, 105, 232);">G</span><span style=3D"color: rgb(213, 15, 37);">o</s=
+pan><span style=3D"color: rgb(238, 178, 17);">o</span><span style=3D"color:=
+ rgb(51, 105, 232);">g</span><span style=3D"color: rgb(0, 153, 37);">l</spa=
+n><span style=3D"color: rgb(213, 15, 37);">e</span>  Network Maintenance No=
+tification - Reference PCR/123456</div>
+  <hr />
+ =20
+  <div style=3D"font-size: smaller;">
+  This message was sent to: [sample@example.net]<br />
+  This address was selected from the <a href=3D"http://peering.google.com/"=
+>Google ISP Portal</a>. You can update your preferences by navigating to "C=
+onfiguration > Contacts" and adjusting Email Subscriptions for each user. Y=
+ou can find additional details about Contacts <a href=3D"https://support.go=
+ogle.com/interconnect/answer/7658597?hl=3Den&ref_topic=3D7650153">here</a>.
+  </div>
+
+  <br />
+  <br />
+ =20
+  <span style=3D"font-weight: bold;">Details:</span><br />
+  <span style=3D"font-weight: bold;">Start Time:</span> 2023-12-05 20:55:00=
+ &#43;0000 UTC<br />
+  <span style=3D"font-weight: bold;">End Time:</span> 2023-12-06 05:05:00 &=
+#43;0000 UTC<br />
+  <span style=3D"font-weight: bold;">Duration:</span> 8h10m0s<br />
+  <table>
+    <tr>
+      <td><span style=3D"font-weight: bold;">Google ASN:</span></td><td>151=
+69</td>
+      <td><span style=3D"font-weight: bold;">Peer ASN:</span></td><td>65001<=
+/td>
+    </tr>
+   =20
+    <tr style=3D"vertical-align: top;">
+      <td><span style=3D"font-weight: bold;">Google Neighbor Address(es):</=
+span></td><td>192.0.2.1</td>
+      <td><span style=3D"font-weight: bold;">Peer Neighbor Address(es):</sp=
+an></td><td>192.0.2.0</td>
+    </tr>
+   =20
+    <tr style=3D"vertical-align: top;">
+      <td><span style=3D"font-weight: bold;">Google Neighbor Address(es):</=
+span></td><td>2001:db8::1</td>
+      <td><span style=3D"font-weight: bold;">Peer Neighbor Address(es):</sp=
+an></td><td>2001:db8::</td>
+    </tr>
+   =20
+  </table>
+
+  <p>
+  Google systems will automatically re-route the traffic away from the peer=
+ing link(s) under maintenance.
+  </p>
+  <p>
+  Depending on the nature of the work, your BGP session with Google may sta=
+y up through the maintenance window. Traffic may shift to alternate session=
+s with Google and/or your upstream provider(s).
+  </p>
+  <p>
+  Questions about this event can be sent to noc@google.com.
+  </p>
+  <p>
+  Thank you for peering with <span style=3D"color: rgb(51, 105, 232);">G</s=
+pan><span style=3D"color: rgb(213, 15, 37);">o</span><span style=3D"color: =
+rgb(238, 178, 17);">o</span><span style=3D"color: rgb(51, 105, 232);">g</sp=
+an><span style=3D"color: rgb(0, 153, 37);">l</span><span style=3D"color: rg=
+b(213, 15, 37);">e</span>!<br />
+  </p>
+  <hr />
+  <br />
+  <div style=3D"font-size: smaller; color: silver;">
+    PRIVILEGE AND CONFIDENTIALITY NOTICE: The information in this
+    e-mail communication and any attached documents may be privileged,
+    confidential or otherwise protected from disclosure and is intended onl=
+y
+    for the use of the designated recipient(s). If the reader is neither th=
+e
+    intended recipient nor an employee or agent thereof who is responsible
+    for delivering it to the intended recipient, you are hereby notified
+    that any review, dissemination, distribution, copying or other use of
+    this communication is strictly prohibited. If you have received this
+    communication in error, please immediately notify us by return e-mail
+    and promptly delete the original electronic e-mail communication and
+    any attached documentation. Receipt by anyone other than the intended
+    recipient is not a waiver of any attorney-client or work-product
+    privilege.
+  </div>
+</div>
+
+--000000000000a556e4060bffffff--
