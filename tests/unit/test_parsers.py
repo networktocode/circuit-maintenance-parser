@@ -37,6 +37,17 @@ from circuit_maintenance_parser.parsers.zayo import SubjectParserZayo1, HtmlPars
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
+class ComplexEncoder(json.JSONEncoder):
+    """Helper Class to encode to JSON recursively calling custom methods."""
+
+    def default(self, o):
+        """Expected method to serialize to JSON."""
+        if hasattr(o, "to_json"):
+            return o.to_json()
+
+        return json.JSONEncoder.default(self, o)
+
+
 @pytest.mark.parametrize(
     "parser_class, raw_file, results_file",
     [
@@ -627,6 +638,8 @@ def test_parsers(parser_class, raw_file, results_file):
 
     parsed_notifications = parser_class().parse(raw_data, parser_class.get_data_types()[0])
 
+    parsed_notifications = json.loads(json.dumps(parsed_notifications, cls=ComplexEncoder))
+
     with open(results_file, encoding="utf-8") as res_file:
         expected_result = json.load(res_file)
 
@@ -640,4 +653,4 @@ def test_parsers(parser_class, raw_file, results_file):
 def test_parser_no_data(parser_class):
     """Test parser with no data."""
     with pytest.raises(ParserError):
-        parser_class().parse(b"", parser_class._data_types[0])  # pylint: disable=protected-access
+        parser_class().parse(b"", parser_class.get_data_types()[0])  # pylint: disable=protected-access

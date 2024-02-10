@@ -114,3 +114,8 @@ build-backend = "poetry.masonry.api"
 [tool.pytest.ini_options]
 python_paths = "./"
 addopts = "-vv --doctest-modules"
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
