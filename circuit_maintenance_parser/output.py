@@ -192,8 +192,6 @@ class Maintenance(BaseModel, extra="forbid"):
             raise ValueError("String is empty or 'None'")
         return value
 
-    # TODO[pydantic]: We couldn't refactor the `validator`, please replace it by `field_validator` manually.
-    # Check https://docs.pydantic.dev/dev-v2/migration/#changes-to-validators for more information.
     @field_validator("circuits")
     @classmethod
     def validate_empty_circuits(cls, value, values):
@@ -203,8 +201,6 @@ class Maintenance(BaseModel, extra="forbid"):
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 
-    # TODO[pydantic]: We couldn't refactor the `validator`, please replace it by `field_validator` manually.
-    # Check https://docs.pydantic.dev/dev-v2/migration/#changes-to-validators for more information.
     @field_validator("end")
     @classmethod
     def validate_end_time(cls, end, values):
