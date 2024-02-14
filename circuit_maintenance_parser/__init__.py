@@ -95,7 +95,6 @@ def get_provider_class(provider_name: str) -> Type[GenericProvider]:
 
 def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
     """Returns the notification parser class for an email sender address."""
-
     for provider_parser in SUPPORTED_PROVIDERS:
         if provider_parser.get_default_organizer() == email_sender:
             break

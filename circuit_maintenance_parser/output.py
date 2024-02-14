@@ -8,7 +8,7 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import BaseModel, validator, StrictStr, StrictInt, Extra, PrivateAttr
+from pydantic import field_validator, BaseModel, StrictStr, StrictInt, PrivateAttr
 
 
 class Impact(str, Enum):
@@ -52,7 +52,7 @@ class Status(str, Enum):
     NO_CHANGE = "NO-CHANGE"
 
 
-class CircuitImpact(BaseModel, extra=Extra.forbid):
+class CircuitImpact(BaseModel, extra="forbid"):
     """CircuitImpact class.
 
     Each Circuit Maintenance can contain multiple affected circuits, and each one can have a different level of impact.
@@ -73,9 +73,9 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
         ... )
         Traceback (most recent call last):
         ...
-        pydantic.error_wrappers.ValidationError: 1 validation error for CircuitImpact
+        pydantic_core._pydantic_core.ValidationError: 1 validation error for CircuitImpact
         impact
-          value is not a valid enumeration member; permitted: 'NO-IMPACT', 'REDUCED-REDUNDANCY', 'DEGRADED', 'OUTAGE' (type=type_error.enum; enum_values=[<Impact.NO_IMPACT: 'NO-IMPACT'>, <Impact.REDUCED_REDUNDANCY: 'REDUCED-REDUNDANCY'>, <Impact.DEGRADED: 'DEGRADED'>, <Impact.OUTAGE: 'OUTAGE'>])
+          Input should be 'NO-IMPACT', 'REDUCED-REDUNDANCY', 'DEGRADED' or 'OUTAGE' [type=enum, input_value='wrong impact', input_type=str]
     """
 
     circuit_id: StrictStr
@@ -83,12 +83,20 @@ class CircuitImpact(BaseModel, extra=Extra.forbid):
     impact: Impact = Impact.OUTAGE
 
     # pylint: disable=no-self-argument
-    @validator("impact")
+    @field_validator("impact")
+    @classmethod
     def validate_impact_type(cls, value):
         """Validate Impact type."""
         if value not in Impact:
             raise ValueError("Not a valid impact type")
         return value
+
+    def to_json(self):
+        """Return a JSON serializable dict."""
+        return {
+            "circuit_id": self.circuit_id,
+            "impact": self.impact.value,
+        }
 
 
 class Metadata(BaseModel):
@@ -100,7 +108,7 @@ class Metadata(BaseModel):
     generated_by_llm: bool = False
 
 
-class Maintenance(BaseModel, extra=Extra.forbid):
+class Maintenance(BaseModel, extra="forbid"):
     """Maintenance class.
 
     Mandatory attributes:
@@ -164,34 +172,40 @@ class Maintenance(BaseModel, extra=Extra.forbid):
 
     def __init__(self, **data):
         """Initialize the Maintenance object."""
-        self._metadata = data.pop("_metadata")
+        metadata = data.pop("_metadata")
         super().__init__(**data)
+        self._metadata = metadata
 
-    # pylint: disable=no-self-argument
-    @validator("status")
+    @field_validator("status")
+    @classmethod
     def validate_status_type(cls, value):
         """Validate Status type."""
         if value not in Status:
             raise ValueError("Not a valid status type")
         return value
 
-    @validator("provider", "account", "maintenance_id", "organizer")
+    @field_validator("provider", "account", "maintenance_id", "organizer")
+    @classmethod
     def validate_empty_strings(cls, value):
         """Validate emptry strings."""
         if value in ["", "None"]:
             raise ValueError("String is empty or 'None'")
         return value
 
-    @validator("circuits")
+    @field_validator("circuits")
+    @classmethod
     def validate_empty_circuits(cls, value, values):
         """Validate non-cancel notifications have a populated circuit list."""
+        values = values.data
         if len(value) < 1 and str(values["status"]) in ("CANCELLED", "COMPLETED"):
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 
-    @validator("end")
+    @field_validator("end")
+    @classmethod
     def validate_end_time(cls, end, values):
         """Validate that End time happens after Start time."""
+        values = values.data
         if "start" not in values:
             raise ValueError("Start time is a mandatory attribute.")
         start = values["start"]
@@ -209,6 +223,6 @@ class Maintenance(BaseModel, extra=Extra.forbid):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=2)
 
     @property
-    def metadata(self):
+    def metadata(self) -> Metadata:
         """Get Maintenance Metadata."""
         return self._metadata

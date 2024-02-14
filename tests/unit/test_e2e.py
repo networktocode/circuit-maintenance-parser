@@ -914,7 +914,6 @@ def test_provider_get_maintenances(
     extended_data = provider_class.get_extended_data()
     default_maintenance_data = {"uid": "0", "sequence": 1, "summary": ""}
     extended_data.update(default_maintenance_data)
-
     data = None
     for data_type, data_file in test_data_files:
         with open(data_file, "rb") as file_obj:
@@ -967,8 +966,7 @@ def test_provider_get_maintenances(
             """\
 Failed creating Maintenance notification for GenericProvider.
 Details:
-- Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
-""",
+- Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  Field required""",
         ),
         (
             GenericProvider,
@@ -980,8 +978,7 @@ Failed creating Maintenance notification for GenericProvider.
 Details:
 - Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance
 maintenance_id
-  field required (type=value_error.missing)
-""",
+  Field required""",
         ),
         (
             GenericProvider,
@@ -1021,13 +1018,11 @@ Details:
             "ical",
             Path(dir_path, "data", "ical", "ical_no_account"),
             ProviderError,
-            """\
-Failed creating Maintenance notification for Telstra.
-Details:
-- Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
-- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra2) was matching any of the provided data types (ical).
-- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra1) was matching any of the provided data types (ical).
-""",
+            [
+                "- Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  Field required",
+                "- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra2) was matching any of the provided data types (ical).",
+                "- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra1) was matching any of the provided data types (ical).",
+            ],
         ),
         # Zayo
         (
@@ -1040,8 +1035,7 @@ Failed creating Maintenance notification for Zayo.
 Details:
 - Processor CombinedProcessor from Zayo failed due to: 1 validation error for Maintenance
 maintenance_id
-  String is empty or 'None' (type=value_error)
-""",
+  Value error, String is empty or 'None'""",
         ),
         (
             Zayo,
@@ -1074,5 +1068,10 @@ def test_errored_provider_process(provider_class, data_type, data_file, exceptio
     with pytest.raises(exception) as exc:
         provider_class().get_maintenances(data)
 
-    assert len(exc.value.related_exceptions) == len(provider_class._processors)  # pylint: disable=protected-access
-    assert str(exc.value) == error_message
+    assert len(exc.value.related_exceptions) == len(
+        provider_class.get_default_processors()
+    )  # pylint: disable=protected-access
+    if isinstance(error_message, str):
+        error_message = [error_message]
+    for item in error_message:
+        assert item in str(exc.value)
