@@ -12,13 +12,16 @@ from .provider import (
     BSO,
     Cogent,
     Colt,
+    CrownCastle,
     Equinix,
     EUNetworks,
     GTT,
+    Google,
     HGC,
     Lumen,
     Megaport,
     Momentum,
+    Netflix,
     NTT,
     PacketFabric,
     Seaborn,
@@ -38,13 +41,16 @@ SUPPORTED_PROVIDERS = (
     BSO,
     Cogent,
     Colt,
+    CrownCastle,
     Equinix,
     EUNetworks,
+    Google,
     GTT,
     HGC,
     Lumen,
     Megaport,
     Momentum,
+    Netflix,
     NTT,
     PacketFabric,
     Seaborn,
@@ -80,7 +86,6 @@ def get_provider_class(provider_name: str) -> Type[GenericProvider]:
         if provider_parser.get_provider_type() == provider_name:
             break
     else:
-
         raise NonexistentProviderError(
             f"{provider_name} is not a currently supported provider. Only {', '.join(SUPPORTED_PROVIDER_NAMES)}"
         )
@@ -90,7 +95,6 @@ def get_provider_class(provider_name: str) -> Type[GenericProvider]:
 
 def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
     """Returns the notification parser class for an email sender address."""
-
     for provider_parser in SUPPORTED_PROVIDERS:
         if provider_parser.get_default_organizer() == email_sender:
             break

@@ -5,8 +5,7 @@ import itertools
 
 from typing import Iterable, Type, Dict, List
 
-from pydantic import BaseModel, Extra
-from pydantic.error_wrappers import ValidationError
+from pydantic import BaseModel, ValidationError
 
 from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
@@ -17,7 +16,7 @@ from circuit_maintenance_parser.errors import ParserError, ProcessorError
 logger = logging.getLogger(__name__)
 
 
-class GenericProcessor(BaseModel, extra=Extra.forbid):
+class GenericProcessor(BaseModel, extra="forbid"):
     """Base class for the Processors.
 
     Attributes:

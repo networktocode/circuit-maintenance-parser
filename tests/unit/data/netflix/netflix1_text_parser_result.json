@@ -1,0 +1,20 @@
+[
+    {
+        "account": "AS65000",
+        "circuits": [
+            {
+                "circuit_id": "192.0.2.1",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "2001:db8::1",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1706727600,
+        "maintenance_id": "65160ee397421aab53c9b3486fc425ea",
+        "start": 1706724000,
+        "status": "CONFIRMED",
+        "summary": "Netflix (AS2906) will be performing scheduled maintenance in Edgeconnex LAS01, at 2024-01-31 18:00:00+00:00 UTC."
+    }
+]

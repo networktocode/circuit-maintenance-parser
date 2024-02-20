@@ -1,0 +1,10 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [],
+    "end": 1701601200,
+    "maintenance_id": "CM20231201000",
+    "start": 1701572400,
+    "status": "COMPLETED"
+  }
+]

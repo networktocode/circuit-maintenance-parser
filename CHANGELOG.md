@@ -1,5 +1,24 @@
 # Changelog
 
+## v2.4.0 - 2024-02-20
+
+### Added
+
+- [#260](https://github.com/networktocode/circuit-maintenance-parser/pull/260) - Add Google parser
+- [#259](https://github.com/networktocode/circuit-maintenance-parser/pull/259) - Add Crown Castle fiber parser
+- [#258](https://github.com/networktocode/circuit-maintenance-parser/pull/258) - Add Netflix parser
+
+### Changed
+
+- [#264](https://github.com/networktocode/circuit-maintenance-parser/pull/264) - Adopt Pydantic 2.0
+- [#256](https://github.com/networktocode/circuit-maintenance-parser/pull/256) - Improved Equinix parser
+
+### Fixed
+
+- [#257](https://github.com/networktocode/circuit-maintenance-parser/pull/257) - Update incorrect file comment
+- [#255](https://github.com/networktocode/circuit-maintenance-parser/pull/255) -
+  Properly process Amazon emergency maintenance notifications
+
 ## v2.3.0 - 2023-12-15
 
 ### Added

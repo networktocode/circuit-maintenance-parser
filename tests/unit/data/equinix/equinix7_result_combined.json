@@ -1,0 +1,21 @@
+[   
+    {
+        "account": "555555",
+        "circuits": [
+            {
+                "circuit_id": "EC1234.1",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1704952800,
+        "maintenance_id": "CHG0031000",
+        "organizer": "servicedesk@equinix.com",
+        "provider": "equinix",
+        "sequence": 1,
+        "stamp": 1703160965,
+        "start": 1704924000,
+        "status": "CONFIRMED",
+        "summary": "Scheduled Software Upgrade - AM6, DB2, HE6, ZW1 Network Maintenance - (SERVICE IMPACTING) - 10-JAN-2024 [CHG0031000]",
+        "uid": "0"
+    }
+]

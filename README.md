@@ -24,7 +24,7 @@ You can leverage this library in your automation framework to process circuit ma
 - **provider**: identifies the provider of the service that is the subject of the maintenance notification.
 - **account**: identifies an account associated with the service that is the subject of the maintenance notification.
 - **maintenance_id**: contains text that uniquely identifies (at least within the context of a specific provider) the maintenance that is the subject of the notification.
-- **circuits**: list of circuits affected by the maintenance notification and their specific impact. Note that in a maintenance canceled notification, some providers omit the circuit list, so this may be blank for maintenance notifications with a status of CANCELLED.
+- **circuits**: list of circuits affected by the maintenance notification and their specific impact. Note that in a maintenance canceled or completed notification, some providers omit the circuit list, so this may be blank for maintenance notifications with a status of CANCELLED or COMPLETED.
 - **start**: timestamp that defines the starting date/time of the maintenance in GMT.
 - **end**: timestamp that defines the ending date/time of the maintenance in GMT.
 - **stamp**: timestamp that defines the update date/time of the maintenance in GMT.
@@ -71,12 +71,15 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - BSO
 - Cogent
 - Colt
+- Crown Castle Fiber
 - Equinix
 - EXA (formerly GTT)
 - HGC
+- Google
 - Lumen
 - Megaport
 - Momentum
+- Netflix (AS2906 only)
 - Seaborn
 - Sparkle
 - Telstra
