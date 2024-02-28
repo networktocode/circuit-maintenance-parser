@@ -197,7 +197,7 @@ class Maintenance(BaseModel, extra="forbid"):
     def validate_empty_circuits(cls, value, values):
         """Validate non-cancel notifications have a populated circuit list."""
         values = values.data
-        if len(value) < 1 and str(values["status"]) in ("CANCELLED", "COMPLETED"):
+        if len(value) < 1 and str(values["status"]) not in ("Status.CANCELLED", "Status.COMPLETED"):
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 
