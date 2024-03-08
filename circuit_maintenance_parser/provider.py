@@ -282,6 +282,12 @@ class EUNetworks(GenericProvider):
     _default_organizer = "noc@eunetworks.com"
 
 
+class EXA(GenericProvider):
+    """EXA (formerly GTT) provider custom class."""
+
+    _default_organizer = PrivateAttr("InfraCo.CM@exainfra.net")
+
+
 class Google(GenericProvider):
     """Google provider custom class."""
 
@@ -304,7 +310,7 @@ class GTT(GenericProvider):
             CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
         ]
     )
-    _default_organizer = PrivateAttr("InfraCo.CM@exainfra.net")
+    _default_organizer = PrivateAttr("netopsadmin@gtt.net")
 
 
 class HGC(GenericProvider):
