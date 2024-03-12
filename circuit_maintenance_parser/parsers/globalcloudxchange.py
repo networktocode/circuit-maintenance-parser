@@ -68,6 +68,7 @@ class SubjectParserGcx1(EmailSubjectParser):
             data["start"] = self.dt2ts(datetime.strptime(search.group(5), date_format))
             data["end"] = self.dt2ts(datetime.strptime(search.group(6), date_format))
             data["summary"] = search.group(4)
+
         if "completed" in subject.lower():
             data["status"] = Status.COMPLETED
         elif "rescheduled" in subject.lower():
