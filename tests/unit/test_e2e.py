@@ -21,7 +21,6 @@ from circuit_maintenance_parser.provider import (
     Colt,
     CrownCastle,
     EUNetworks,
-    EXA,
     Google,
     GTT,
     HGC,
@@ -328,24 +327,6 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "eunetworks", "eunetworks_cancel.json"),
             ],
         ),
-        (
-            EXA,
-            [
-                ("ical", Path(dir_path, "data", "exa", "exa1")),
-            ],
-            [
-                Path(dir_path, "data", "exa", "exa1_result.json"),
-            ],
-        ),
-        (
-            EXA,
-            [
-                ("ical", Path(dir_path, "data", "exa", "exa2")),
-            ],
-            [
-                Path(dir_path, "data", "exa", "exa2_result.json"),
-            ],
-        ),
         # EXA / GTT
         (
             GTT,
@@ -426,6 +407,24 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "gtt", "gtt7_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("ical", Path(dir_path, "data", "gtt", "gtt8")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt8_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("ical", Path(dir_path, "data", "gtt", "gtt9")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt9_result.json"),
             ],
         ),
         # HGC

@@ -282,12 +282,6 @@ class EUNetworks(GenericProvider):
     _default_organizer = "noc@eunetworks.com"
 
 
-class EXA(GenericProvider):
-    """EXA (formerly GTT) provider custom class."""
-
-    _default_organizer = PrivateAttr("InfraCo.CM@exainfra.net")
-
-
 class Google(GenericProvider):
     """Google provider custom class."""
 
@@ -303,14 +297,15 @@ class GTT(GenericProvider):
     """EXA (formerly GTT) provider custom class."""
 
     # "Planned Work Notification", "Emergency Work Notification"
-    _include_filter = PrivateAttr({EMAIL_HEADER_SUBJECT: ["Work Notification"]})
+    #_include_filter = PrivateAttr({EMAIL_HEADER_SUBJECT: ["Work Notification"]})
 
     _processors: List[GenericProcessor] = PrivateAttr(
         [
+            SimpleProcessor(data_parsers=[ICal]),
             CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
         ]
     )
-    _default_organizer = PrivateAttr("netopsadmin@gtt.net")
+    _default_organizer = PrivateAttr("InfraCo.CM@exainfra.net")
 
 
 class HGC(GenericProvider):
