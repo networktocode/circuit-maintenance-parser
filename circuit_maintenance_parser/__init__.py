@@ -1,28 +1,30 @@
 """Circuit-maintenance-parser init."""
-from typing import Type, Optional
+
+from typing import Optional, Type
 
 from .data import NotificationData
-from .output import Maintenance
 from .errors import NonexistentProviderError, ProviderError
+from .output import Maintenance
 from .provider import (
-    GenericProvider,
-    AquaComms,
-    Arelion,
     AWS,
     BSO,
+    GTT,
+    HGC,
+    NTT,
+    AquaComms,
+    Arelion,
     Cogent,
     Colt,
     CrownCastle,
     Equinix,
     EUNetworks,
-    GTT,
+    GenericProvider,
+    GlobalCloudXchange,
     Google,
-    HGC,
     Lumen,
     Megaport,
     Momentum,
     Netflix,
-    NTT,
     PacketFabric,
     Seaborn,
     Sparkle,
@@ -44,6 +46,7 @@ SUPPORTED_PROVIDERS = (
     CrownCastle,
     Equinix,
     EUNetworks,
+    GlobalCloudXchange,
     Google,
     GTT,
     HGC,
