@@ -6,6 +6,7 @@ from typing import Any, Dict, List
 
 from bs4.element import ResultSet  # type: ignore
 
+from circuit_maintenance_parser.output import Impact
 from circuit_maintenance_parser.parser import EmailSubjectParser, Html, Status
 
 
@@ -34,9 +35,9 @@ class HtmlParserGcx1(Html):
             for row in table.find_all("tr"):
                 cols = row.find_all("td")
                 if len(cols) == 2 and "Service ID" not in cols[0].text:
-                    impact = "NO-IMPACT"
-                    if cols[1].text == "At Risk":
-                        impact = "REDUCED-REDUNDANCY"
+                    impact = Impact.OUTAGE
+                    if "at risk" in cols[1].text.lower():
+                        impact = Impact.REDUCED_REDUNDANCY
 
                     data["circuits"].append({"circuit_id": cols[0].text, "impact": impact})
 
