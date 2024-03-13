@@ -1,5 +1,11 @@
 # Changelog
 
+## v.2.5.0 - 2024-03-13
+
+### Added
+
+- [#274](https://github.com/networktocode/circuit-maintenance-parser/pull/274) - Add Global Cloud XChange Parser
+
 ## v2.4.0 - 2024-02-20
 
 ### Added
