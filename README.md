@@ -75,6 +75,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - Equinix
 - EXA (formerly GTT)
 - HGC
+- Global Cloud Xchange
 - Google
 - Lumen
 - Megaport

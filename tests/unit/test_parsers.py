@@ -1,4 +1,5 @@
 """Tests generic for parser."""
+
 import json
 import os
 from pathlib import Path
@@ -6,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.parser import ICal, EmailDateParser
+from circuit_maintenance_parser.parser import EmailDateParser, ICal
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
@@ -14,6 +15,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
+from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
@@ -31,8 +33,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.zayo import SubjectParserZayo1, HtmlParserZayo1
-
+from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -311,6 +312,17 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserEquinix,
             Path(dir_path, "data", "equinix", "equinix9.eml"),
             Path(dir_path, "data", "equinix", "equinix9_result.json"),
+        ),
+        # Global Cloud Xchange
+        (
+            HtmlParserGcx1,
+            Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1.eml"),
+            Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1_html_parser_result.json"),
+        ),
+        (
+            SubjectParserGcx1,
+            Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1_subject.eml"),
+            Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1_subject_parser_result.json"),
         ),
         # Google
         (

@@ -1,34 +1,36 @@
 """Tests for End to End library usage."""
+
 import json
 import os
 from pathlib import Path
 
 import pytest
 
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProviderError
-from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
 # pylint: disable=duplicate-code,too-many-lines
 from circuit_maintenance_parser.provider import (
-    Equinix,
-    GenericProvider,
-    AquaComms,
-    Arelion,
     AWS,
     BSO,
+    GTT,
+    HGC,
+    NTT,
+    AquaComms,
+    Arelion,
     Cogent,
     Colt,
     CrownCastle,
+    Equinix,
     EUNetworks,
+    GenericProvider,
+    GlobalCloudXchange,
     Google,
-    GTT,
-    HGC,
     Lumen,
     Megaport,
-    Netflix,
-    NTT,
     Momentum,
+    Netflix,
     PacketFabric,
     Seaborn,
     Sparkle,
@@ -419,6 +421,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 Path(dir_path, "data", "hgc", "hgc1_result.json"),
                 Path(dir_path, "data", "hgc", "hgc2_result.json"),
+            ],
+        ),
+        # GlobalCloudXchange
+        (
+            GlobalCloudXchange,
+            [
+                ("email", Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1_result.json"),
             ],
         ),
         # Google

@@ -1,37 +1,35 @@
 """Definition of Provider class as the entry point to the library."""
+
 import logging
 import os
 import re
 import traceback
+from typing import Dict, Iterable, List
 
-from typing import Iterable, List, Dict
 import chardet
-
 from pydantic import BaseModel, PrivateAttr
 
-from circuit_maintenance_parser.utils import rgetattr
-
-from circuit_maintenance_parser.output import Maintenance
-from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import ICal, EmailDateParser
-from circuit_maintenance_parser.errors import ProcessorError, ProviderError
-from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor, GenericProcessor
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT
-
+from circuit_maintenance_parser.data import NotificationData
+from circuit_maintenance_parser.errors import ProcessorError, ProviderError
+from circuit_maintenance_parser.output import Maintenance
+from circuit_maintenance_parser.parser import EmailDateParser, ICal
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
-from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, TextParserCogent1, SubjectParserCogent1
+from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1, TextParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
-from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
+from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1
+from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
+from circuit_maintenance_parser.parsers.openai import OpenAIParser
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -43,7 +41,8 @@ from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlP
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
-from circuit_maintenance_parser.parsers.openai import OpenAIParser
+from circuit_maintenance_parser.processor import CombinedProcessor, GenericProcessor, SimpleProcessor
+from circuit_maintenance_parser.utils import rgetattr
 
 logger = logging.getLogger(__name__)
 
@@ -280,6 +279,17 @@ class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
 
     _default_organizer = "noc@eunetworks.com"
+
+
+class GlobalCloudXchange(GenericProvider):
+    """Global Cloud Xchange provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserGcx1, HtmlParserGcx1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("Gnoc@globalcloudxchange.com")
 
 
 class Google(GenericProvider):
