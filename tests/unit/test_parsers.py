@@ -366,6 +366,16 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "gtt", "gtt7.eml"),
             Path(dir_path, "data", "gtt", "gtt7_html_parser_result.json"),
         ),
+        (
+            ICal,
+            Path(dir_path, "data", "gtt", "gtt8"),
+            Path(dir_path, "data", "gtt", "gtt8_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "gtt", "gtt9"),
+            Path(dir_path, "data", "gtt", "gtt9_result.json"),
+        ),
         # HGC
         (
             HtmlParserHGC1,
