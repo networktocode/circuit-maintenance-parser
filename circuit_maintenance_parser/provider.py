@@ -297,6 +297,7 @@ class GTT(GenericProvider):
     """EXA (formerly GTT) provider custom class."""
 
     # "Planned Work Notification", "Emergency Work Notification"
+    _include_filter = PrivateAttr({"Icalendar": ["BEGIN"], "ical": ["BEGIN"], EMAIL_HEADER_SUBJECT: ["Work Notification"]})
 
     _processors: List[GenericProcessor] = PrivateAttr(
         [
