@@ -1,0 +1,16 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [
+      {
+        "circuit_id": "666666-WAVE-CCF",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1706526000,
+    "maintenance_id": "CM20231201000",
+    "start": 1706158800,
+    "status": "CONFIRMED",
+    "summary": "Crown Castle Fiber partner carrier will be conducting a required maintenance at the above-listed location for a splice case audit. No impact to your circuit(s) listed below is expected. The work will not occur during business hours."
+  }
+]

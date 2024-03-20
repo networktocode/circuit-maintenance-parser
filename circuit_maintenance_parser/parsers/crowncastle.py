@@ -56,11 +56,8 @@ class HtmlParserCrownCastle1(Html):
         for strong in soup.find_all("strong"):
             if strong.string.strip() == "Ticket Number:":
                 data["maintenance_id"] = strong.next_sibling.strip()
-            if strong.string.strip() == "Description:":
-                summary = strong.parent.next_sibling.next_sibling.contents[0].string.strip()
-                summary = re.sub(r"[\n\r]", "", summary)
-                data["summary"] = summary
-            if strong.string.strip().startswith("Work Description:"):
+            val = strong.string.strip()
+            if val == "Description:" or val.startswith("Work Description:"):
                 for sibling in strong.parent.next_siblings:
                     summary = "".join(sibling.strings)
                     summary = re.sub(r"[\n\r]", "", summary)
