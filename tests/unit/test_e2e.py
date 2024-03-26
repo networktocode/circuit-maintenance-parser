@@ -37,6 +37,7 @@ from circuit_maintenance_parser.provider import (
     Telstra,
     Turkcell,
     Verizon,
+    Windstream,
     Zayo,
 )
 
@@ -852,6 +853,14 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "verizon", "verizon5_result.json"),
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
+        ),
+        # Windstream
+        (
+            Windstream,
+            [
+                ("email", Path(dir_path, "data", "windstream", "windstream1.eml")),
+            ],
+            [Path(dir_path, "data", "windstream", "windstream1_result.json")],
         ),
         # Zayo
         (
