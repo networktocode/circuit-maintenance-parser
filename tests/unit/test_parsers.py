@@ -577,7 +577,7 @@ class NestedEncoder(json.JSONEncoder):
         (
             HtmlParserWindstream1,
             Path(dir_path, "data", "windstream", "windstream1.eml"),
-            Path(dir_path, "data", "windstream", "windstream1_result.json"),
+            Path(dir_path, "data", "windstream", "windstream1_parser_result.json"),
         ),
         # Zayo
         (
