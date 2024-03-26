@@ -52,14 +52,14 @@ class HtmlParserWindstream1(Html):
             value_tag = cols[1].string.strip()
             if header_tag == "WMT:":
                 data["maintenance_id"] = value_tag
-            elif header_tag == "Event Start Date & Time:":
+            elif "Date & Time:" in header_tag:
                 value_tag = value_tag.replace(" ET", "")
                 value_tag = datetime.strptime(value_tag, "%m/%d/%y %H:%M")
-                data["start"] = int(value_tag.replace(tzinfo=timezone.utc).timestamp())
-            elif header_tag == "Event End Date & Time:":
-                value_tag = value_tag.replace(" ET", "")
-                value_tag = datetime.strptime(value_tag, "%m/%d/%y %H:%M")
-                data["end"] = int(value_tag.replace(tzinfo=timezone.utc).timestamp())
+                event_time = int(value_tag.replace(tzinfo=timezone.utc).timestamp())
+                if "Event Start" in header_tag:
+                    data["start"] = event_time
+                elif "Event End" in header_tag:
+                    data["end"] = event_time
             elif header_tag == "Outage":
                 impact = Impact("OUTAGE")
             else:
