@@ -1,6 +1,7 @@
 """Windstream Fiber parser."""
 import logging
 from datetime import datetime, timezone
+import pytz
 
 from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
 
@@ -54,12 +55,12 @@ class HtmlParserWindstream1(Html):
                 data["maintenance_id"] = value_tag
             elif "Date & Time:" in header_tag:
                 value_tag = value_tag.replace(" ET", "")
-                value_tag = datetime.strptime(value_tag, "%m/%d/%y %H:%M")
-                event_time = int(value_tag.replace(tzinfo=timezone.utc).timestamp())
+                date_obj_est = datetime.strptime(value_tag, "%m/%d/%y %H:%M")
+                date_obj_est = pytz.timezone("US/Eastern").localize(date_obj_est)
                 if "Event Start" in header_tag:
-                    data["start"] = event_time
+                    data["start"] = int(date_obj_est.astimezone(pytz.utc).replace(tzinfo=timezone.utc).timestamp())
                 elif "Event End" in header_tag:
-                    data["end"] = event_time
+                    data["end"] = int(date_obj_est.astimezone(pytz.utc).replace(tzinfo=timezone.utc).timestamp())
             elif header_tag == "Outage":
                 impact = Impact("OUTAGE")
             else:
