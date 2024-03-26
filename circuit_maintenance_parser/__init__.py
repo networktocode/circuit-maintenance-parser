@@ -32,6 +32,7 @@ from .provider import (
     Telstra,
     Turkcell,
     Verizon,
+    Windstream,
     Zayo,
 )
 
@@ -62,6 +63,7 @@ SUPPORTED_PROVIDERS = (
     Telstra,
     Turkcell,
     Verizon,
+    Windstream,
     Zayo,
 )
 

@@ -1,0 +1,115 @@
+MIME-Version: 1.0
+Date: Wed, 13 Mar 2024 00:05:34 +1030
+From: 
+	"wci.maintenance.notifications@windstream.com"
+	 <wci.maintenance.notifications@windstream.com>
+Subject: Windstream (Demand Notification WMT#: 123456)
+Thread-Topic: Windstream (Demand Notification WMT#: 123456)
+Message-ID: <20240312133524.9B07A18000267@azlapp0432.windstream.com>
+To: receiver <receiver@testing.com>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><s=
+tyle>
+<!--
+body
+	{font-size:13px;
+	font-family:Arial,Helvetica,sans-serif;
+	color:#404040;
+	margin:0px;
+	padding:0;
+	text-align:left;
+	background-color:#fff;
+	margin:10px 5px 10px 5px}
+.headerRow
+	{background:#E1F3C8;
+	font-weight:bold}
+.circuitTable
+	{border:2px solid #D5D5D5;
+	border-right:0px}
+.circuitTable td
+	{padding:5px;
+	border-right:2px solid #D5D5D5}
+.summary
+	{padding:0px 5px}
+.tblPadding
+	{border:2px solid #D5D5D5;
+	border-right:0px;
+	border-bottom:0px}
+.tblPadding td
+	{padding:5px;
+	border:2px solid #D5D5D5;
+	border-top:0px;
+	border-left:0px}
+.bottomBorder td
+	{border-bottom:2px solid #D5D5D5}
+.altColor
+	{background:#F0F0F0}
+h1
+	{font-size:22px;
+	text-align:center}
+h2
+	{font-size:14px;
+	margin-bottom:5px;
+	margin-left:5px}
+.description
+	{padding-left:7px}
+.timeZoneTable
+	{border:1px solid #000000;
+	border-bottom:0px;
+	font-size:12px;
+	font-family:Calibri,Arial,Helvetica,sans-serif}
+.timeZoneTable td
+	{border-bottom:1px solid #000000;
+	padding-left:12px;
+	padding-right:12px;
+	padding-top:5px}
+-->
+</style></head><body><p align=3D"center" style=3D"text-align:center"><img w=
+idth=3D"200" height=3D"67" src=3D"https://we-uata.windstream.com/cdn2/win_m=
+op_logo.png"></p><h1>Planned Maintenance Notification</h1><p></p><div class=
+=3D"summary"><br>Windstream has identified a network fault and must perform=
+ demand maintenance in order to restore our network services to their full =
+capabilities. This maintenance is required to resolve current service impac=
+ts or remove the risk for potential impacts. We understand the challenges t=
+his may present and are working to minimize disruptions. The details of the=
+ planned maintenance are listed below along with descriptions and planned i=
+mpact timeframes.<br><br><h2>DESCRIPTION OF MAINTENANCE</h2><span class=3D"=
+description">Fiber Maintenance - DOT Mandated Project<br><br><b>Related WMT=
+: </b>123456</span><br><br><h2>MAINTENANCE INFORMATION</h2><table border=3D=
+"0" cellspacing=3D"0" cellpadding=3D"0"><tbody><tr><td valign=3D"top"><tabl=
+e border=3D"0" cellspacing=3D"0" cellpadding=3D"0" class=3D"tblPadding"><tb=
+ody><tr><td><b>WMT:</b></td><td>123456</td></tr><tr><td><b>Maintenance Addr=
+ess:</b></td><td><div>Location1</div><div>RANDOM ADDRESS FOR PARSING  =
+</div></td></tr><tr><td><b>Service Affecting:</b></td><=
+td>YES</td></tr><tr><td><b>Event Start Date &amp; Time:</b></td><td>03/20/2=
+4 02:00 ET</td></tr><tr><td><b>Event End Date &amp; Time:</b></td><td>03/20=
+/24 08:00 ET</td></tr></tbody></table></td><td valign=3D"top" style=3D"padd=
+ing-left:15px"><table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" clas=
+s=3D"tblPadding"><tbody><tr><td><b>Impact Type:</b></td><td><b>Duration</b>=
+</td><td><b>Impact Start</b></td><td><b>Impact End</b></td></tr><tr><td>Out=
+age</td><td>360 minute(s)</td><td>03/20/24 02:00 ET</td><td>03/20/24 08:00 =
+ET</td></tr><tr><td colspan=3D"4"><em style=3D"font-size:11pt">Note: Servic=
+e impact may be experienced at varying times throughout the implementation =
+window.</em></td></tr></tbody></table></td></tr></tbody></table><br><br><h2=
+></h2><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"circ=
+uitTable"><tbody><tr class=3D"headerRow bottomBorder"><td>Name</td><td>Acco=
+unt</td><td>Circuit ID</td><td>Rate Code</td><td>Cust Ckt ID</td><td>A-Loc<=
+/td><td>A-Loc Address</td><td>Z-Loc</td><td>Z-Loc Address</td></tr><tr><td>=
+TEST ACCOUNT</td><td>*****1234</td><td>WS/KJUS/1=
+2345/ /WXN /</td><td>100G</td><td>12345678</td><td>ABCDE012</td><td>123 Fa=
+ke ST</td><td>ABCDEF</td><td>456 Fake ST</td></tr><tr><td>=
+TEST ACCOUNT</td><td>*****1234</td><td>WS/KJUS/2=
+2345/ /WXN /</td><td>100G</td><td> 12345678</td><td>ABCDE012</td><td>123 Fa=
+ke ST</td><td> ABCDEF</td><td>456 Fake ST</td></tr></tbody></table><br=
+><br>If you experience any trouble with your service prior to or after this=
+ maintenance window time frame shown in this notification, please contact t=
+he appropriate Service Assurance group.<br><ul><li><b>Enterprise</b>: 800-6=
+00-5050</li><li><b>Wholesale</b>: 844-946-2662</li><li><b>Fiber To The Towe=
+r</b>: 877-473-8042</li></ul><br>If you have questions pertaining to or in =
+reference to this maintenance, please contact the Windstream Change Managem=
+ent Team via email directly at wci.maintenance.notifications@windstream.com=
+ or by calling us at 800-892-6785.<br><br>Thank you for your business!</div=
+></body></html>=

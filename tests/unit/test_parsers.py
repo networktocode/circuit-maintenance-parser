@@ -33,6 +33,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -571,6 +572,12 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserVerizon1,
             Path(dir_path, "data", "verizon", "verizon5.html"),
             Path(dir_path, "data", "verizon", "verizon5_result.json"),
+        ),
+        # Windstream
+        (
+            HtmlParserWindstream1,
+            Path(dir_path, "data", "windstream", "windstream1.eml"),
+            Path(dir_path, "data", "windstream", "windstream1_parser_result.json"),
         ),
         # Zayo
         (

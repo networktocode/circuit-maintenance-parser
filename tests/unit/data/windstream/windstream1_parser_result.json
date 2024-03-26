@@ -1,0 +1,20 @@
+[
+    {
+        "account": "TEST ACCOUNT",
+        "circuits": [
+        {
+            "circuit_id": "WS/KJUS/12345/ /WXN /",
+            "impact": "OUTAGE"
+        },
+        {
+            "circuit_id": "WS/KJUS/22345/ /WXN /",
+            "impact": "OUTAGE"
+        }
+        ],
+        "end": 1710936000,
+        "maintenance_id": "123456",
+        "start": 1710914400,
+        "status": "CONFIRMED",
+        "summary": "Windstream has identified a network fault and must perform demand maintenance in order to restore our network services to their full capabilities. This maintenance is required to resolve current service impacts or remove the risk for potential impacts. We understand the challenges this may present and are working to minimize disruptions. The details of the planned maintenance are listed below along with descriptions and planned impact timeframes."
+    }
+]

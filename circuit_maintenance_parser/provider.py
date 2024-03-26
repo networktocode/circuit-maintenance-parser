@@ -40,6 +40,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 from circuit_maintenance_parser.processor import CombinedProcessor, GenericProcessor, SimpleProcessor
 from circuit_maintenance_parser.utils import rgetattr
@@ -450,6 +451,17 @@ class Verizon(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("NO-REPLY-sched-maint@EMEA.verizonbusiness.com")
+
+
+class Windstream(GenericProvider):
+    """Windstream provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserWindstream1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("wci.maintenance.notifications@windstream.com")
 
 
 class Zayo(GenericProvider):
