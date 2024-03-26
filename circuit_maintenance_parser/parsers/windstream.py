@@ -13,7 +13,6 @@ class HtmlParserWindstream1(Html):
     """Notifications Parser for Windstream notifications."""
 
     def parse_html(self, soup):
-
         """Execute parsing."""
         data = {}
         data["circuits"] = []
