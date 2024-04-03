@@ -3,6 +3,8 @@ import os
 import logging
 from typing import Tuple, Dict, Union
 import csv
+import datetime
+import pytz
 
 from geopy.exc import GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError  # type: ignore
 from geopy.geocoders import Nominatim  # type: ignore
@@ -126,6 +128,52 @@ class Geolocator:
                     f"Cannot obtain the timezone for city {city}: {exc}"
                 )
         raise ParserError("Timezone resolution not properly initalized.")
+
+
+def convert_timezone(time_str):
+    """
+    Converts a string representing a date/time in the format 'MM/DD/YY HH:MM Timezone' to a datetime object in UTC.
+
+    Parameters:
+        time_str (str): A string representing a date/time followed by a timezone abbreviation.
+
+    Returns:
+        datetime: A datetime object representing the converted date/time in UTC.
+
+    Example:
+        convert_timezone("01/20/24 06:00 ET")
+    """
+    # Convert timezone abbreviation to timezone string for pytz.
+    timezone_mapping = {
+        "ET": "US/Eastern",
+        "CT": "US/Central",
+        "MT": "US/Mountain",
+        "PT": "US/Pacific"
+        # Add more mappings as needed
+    }
+
+    datetime_str, tz_abbr = time_str.rsplit(maxsplit=1)
+    # Parse the datetime string
+    dt_time = datetime.datetime.strptime(datetime_str, "%m/%d/%y %H:%M")
+
+    timezone = timezone_mapping.get(tz_abbr)
+    if timezone is None:
+        try:
+            # Get the timezone object
+            tz_zone = pytz.timezone(tz_abbr)
+        except Exception as exc:
+            raise Exception("Timezone not found: " + str(exc))  # pylint: disable=raise-missing-from
+    else:
+        # Get the timezone object
+        tz_zone = pytz.timezone(timezone)
+
+    # Convert to the specified timezone
+    dt_time = tz_zone.localize(dt_time)
+
+    # Convert to UTC
+    dt_utc = dt_time.astimezone(pytz.utc)
+
+    return dt_utc
 
 
 def rgetattr(obj, attr):
