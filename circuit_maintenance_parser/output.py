@@ -8,7 +8,11 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import field_validator, BaseModel, StrictStr, StrictInt, PrivateAttr
+try:
+    from pydantic import field_validator
+except ImportError:
+    from pydantic import validator as field_validator
+from pydantic import BaseModel, StrictStr, StrictInt, PrivateAttr
 
 
 class Impact(str, Enum):

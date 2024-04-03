@@ -182,7 +182,7 @@ def pylint(context, local=INVOKE_LOCAL):
         context (obj): Used to run specific commands
         local (bool): Define as `True` to execute locally
     """
-    exec_cmd = 'find . -name "*.py" | xargs pylint'
+    exec_cmd = 'find . -name "*.py" | grep -vE "(.venv/)" | xargs pylint'
     run_cmd(context, exec_cmd, local)
 
 

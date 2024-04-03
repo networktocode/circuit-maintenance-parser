@@ -114,6 +114,10 @@ jobs:
       fail-fast: true
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
+        pydantic: ["2.x"]
+        include:
+          - python-version: "3.11"
+            pydantic: "1.x"
     runs-on: "ubuntu-20.04"
     env:
       INVOKE_LOCAL: "True"
@@ -128,6 +132,9 @@ jobs:
           poetry-install-options: "--with dev"
       - name: "Run poetry Install"
         run: "poetry install"
+      - name: "Run poetry Install"
+        run: "pip install pydantic==1.10.13"
+        if: matrix.pydantic == '1.x'
       - name: "Run Tests"
         run: "poetry run invoke pytest --local"
     needs:

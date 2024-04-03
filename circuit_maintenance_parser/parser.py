@@ -42,7 +42,10 @@ class Parser(BaseModel):
     @classmethod
     def get_data_types(cls) -> List[str]:
         """Return the expected data type."""
-        return cls._data_types.get_default()
+        try:
+            return cls._data_types.get_default()
+        except AttributeError:
+            return cls._data_types
 
     @classmethod
     def get_name(cls) -> str:
