@@ -161,8 +161,8 @@ def convert_timezone(time_str):
         try:
             # Get the timezone object
             tz_zone = pytz.timezone(tz_abbr)
-        except Exception as exc:
-            raise Exception("Timezone not found: " + str(exc))  # pylint: disable=raise-missing-from
+        except ValueError as exc:
+            raise ValueError("Timezone not found: " + str(exc))  # pylint: disable=raise-missing-from
     else:
         # Get the timezone object
         tz_zone = pytz.timezone(timezone)
