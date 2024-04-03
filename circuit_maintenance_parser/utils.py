@@ -134,7 +134,7 @@ def convert_timezone(time_str):
     """
     Converts a string representing a date/time in the format 'MM/DD/YY HH:MM Timezone' to a datetime object in UTC.
 
-    Parameters:
+    Args:
         time_str (str): A string representing a date/time followed by a timezone abbreviation.
 
     Returns:
