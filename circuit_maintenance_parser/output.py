@@ -8,7 +8,14 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import field_validator, BaseModel, StrictStr, StrictInt, PrivateAttr
+try:
+    from pydantic import field_validator
+except ImportError:
+    # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+    from pydantic import validator as field_validator  # type: ignore
+
+
+from pydantic import BaseModel, StrictStr, StrictInt, PrivateAttr
 
 
 class Impact(str, Enum):
@@ -197,7 +204,7 @@ class Maintenance(BaseModel, extra="forbid"):
     def validate_empty_circuits(cls, value, values):
         """Validate non-cancel notifications have a populated circuit list."""
         values = values.data
-        if len(value) < 1 and str(values["status"]) in ("CANCELLED", "COMPLETED"):
+        if len(value) < 1 and values["status"] not in (Status.CANCELLED, Status.COMPLETED):
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
 

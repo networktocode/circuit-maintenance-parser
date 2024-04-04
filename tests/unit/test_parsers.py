@@ -33,6 +33,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -267,6 +268,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "crowncastle", "crowncastle8.html"),
             Path(dir_path, "data", "crowncastle", "crowncastle8_parser_result.json"),
         ),
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle9.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle9_parser_result.json"),
+        ),
         # Equinix
         (
             HtmlParserEquinix,
@@ -365,6 +371,16 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserGTT1,
             Path(dir_path, "data", "gtt", "gtt7.eml"),
             Path(dir_path, "data", "gtt", "gtt7_html_parser_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "gtt", "gtt8"),
+            Path(dir_path, "data", "gtt", "gtt8_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "gtt", "gtt9"),
+            Path(dir_path, "data", "gtt", "gtt9_result.json"),
         ),
         # HGC
         (
@@ -556,6 +572,12 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserVerizon1,
             Path(dir_path, "data", "verizon", "verizon5.html"),
             Path(dir_path, "data", "verizon", "verizon5_result.json"),
+        ),
+        # Windstream
+        (
+            HtmlParserWindstream1,
+            Path(dir_path, "data", "windstream", "windstream1.eml"),
+            Path(dir_path, "data", "windstream", "windstream1_parser_result.json"),
         ),
         # Zayo
         (

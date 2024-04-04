@@ -40,6 +40,7 @@ from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 from circuit_maintenance_parser.processor import CombinedProcessor, GenericProcessor, SimpleProcessor
 from circuit_maintenance_parser.utils import rgetattr
@@ -150,22 +151,38 @@ class GenericProvider(BaseModel):
     @classmethod
     def get_default_organizer(cls) -> str:
         """Expose default_organizer as class attribute."""
-        return cls._default_organizer.get_default()  # type: ignore
+        try:
+            return cls._default_organizer.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._default_organizer
 
     @classmethod
     def get_default_processors(cls) -> List[GenericProcessor]:
         """Expose default_processors as class attribute."""
-        return cls._processors.get_default()  # type: ignore
+        try:
+            return cls._processors.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._processors
 
     @classmethod
     def get_default_include_filters(cls) -> Dict[str, List[str]]:
         """Expose include_filter as class attribute."""
-        return cls._include_filter.get_default()  # type: ignore
+        try:
+            return cls._include_filter.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._include_filter
 
     @classmethod
     def get_default_exclude_filters(cls) -> Dict[str, List[str]]:
         """Expose exclude_filter as class attribute."""
-        return cls._exclude_filter.get_default()  # type: ignore
+        try:
+            return cls._exclude_filter.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._exclude_filter
 
     @classmethod
     def get_extended_data(cls):
@@ -307,10 +324,13 @@ class GTT(GenericProvider):
     """EXA (formerly GTT) provider custom class."""
 
     # "Planned Work Notification", "Emergency Work Notification"
-    _include_filter = PrivateAttr({EMAIL_HEADER_SUBJECT: ["Work Notification"]})
+    _include_filter = PrivateAttr(
+        {"Icalendar": ["BEGIN"], "ical": ["BEGIN"], EMAIL_HEADER_SUBJECT: ["Work Notification"]}
+    )
 
     _processors: List[GenericProcessor] = PrivateAttr(
         [
+            SimpleProcessor(data_parsers=[ICal]),
             CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGTT1]),
         ]
     )
@@ -447,6 +467,17 @@ class Verizon(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("NO-REPLY-sched-maint@EMEA.verizonbusiness.com")
+
+
+class Windstream(GenericProvider):
+    """Windstream provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserWindstream1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("wci.maintenance.notifications@windstream.com")
 
 
 class Zayo(GenericProvider):

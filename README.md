@@ -60,9 +60,10 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 
 - Arelion (previously Telia)
 - EuNetworks
+- EXA (formerly GTT) (\*)
 - NTT
 - PacketFabric
-- Telstra
+- Telstra (\*)
 
 #### Supported providers based on other parsers
 
@@ -73,7 +74,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - Colt
 - Crown Castle Fiber
 - Equinix
-- EXA (formerly GTT)
+- EXA (formerly GTT) (\*)
 - HGC
 - Global Cloud Xchange
 - Google
@@ -83,10 +84,13 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - Netflix (AS2906 only)
 - Seaborn
 - Sparkle
-- Telstra
+- Telstra (\*)
 - Turkcell
 - Verizon
+- Windstream
 - Zayo
+
+(\*) Providers in both lists, with BCOP standard and nonstandard parsers.
 
 > Note: Because these providers do not support the BCOP standard natively, maybe there are some gaps on the implemented parser that will be refined with new test cases. We encourage you to report related **issues**!
 
