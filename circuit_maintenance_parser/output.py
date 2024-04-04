@@ -13,8 +13,11 @@ try:
 except ImportError:
     # Define a wrapper that acts like field_validator but uses validator for mypy
     from pydantic import validator
+
     def field_validator(*args, **kwargs):
         return validator(*args, **kwargs)
+
+
 from pydantic import BaseModel, StrictStr, StrictInt, PrivateAttr
 
 
