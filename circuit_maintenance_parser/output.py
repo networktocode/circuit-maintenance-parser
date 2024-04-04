@@ -11,6 +11,7 @@ from typing import List
 try:
     from pydantic import field_validator
 except ImportError:
+    # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
     from pydantic import validator as field_validator  # type: ignore
 
 

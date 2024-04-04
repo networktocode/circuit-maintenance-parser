@@ -153,6 +153,7 @@ class GenericProvider(BaseModel):
         try:
             return cls._default_organizer.get_default()  # type: ignore
         except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
             return cls._default_organizer
 
     @classmethod
@@ -161,6 +162,7 @@ class GenericProvider(BaseModel):
         try:
             return cls._processors.get_default()  # type: ignore
         except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
             return cls._processors
 
     @classmethod
@@ -169,6 +171,7 @@ class GenericProvider(BaseModel):
         try:
             return cls._include_filter.get_default()  # type: ignore
         except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
             return cls._include_filter
 
     @classmethod
@@ -177,6 +180,7 @@ class GenericProvider(BaseModel):
         try:
             return cls._exclude_filter.get_default()  # type: ignore
         except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
             return cls._exclude_filter
 
     @classmethod
