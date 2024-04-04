@@ -11,10 +11,10 @@ from typing import List
 try:
     from pydantic import field_validator
 except ImportError:
-    # Define a wrapper that acts like field_validator but uses validator for mypy
     from pydantic import validator
 
     def field_validator(*args, **kwargs):
+        """Define a wrapper that acts like field_validator but uses validator for mypy."""
         return validator(*args, **kwargs)
 
 
