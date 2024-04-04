@@ -11,11 +11,7 @@ from typing import List
 try:
     from pydantic import field_validator
 except ImportError:
-    from pydantic import validator
-
-    def field_validator(*args, **kwargs):
-        """Define a wrapper that acts like field_validator but uses validator for mypy."""
-        return validator(*args, **kwargs)
+    from pydantic import validator as field_validator  # type: ignore
 
 
 from pydantic import BaseModel, StrictStr, StrictInt, PrivateAttr
