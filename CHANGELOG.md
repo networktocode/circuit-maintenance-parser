@@ -1,6 +1,23 @@
 # Changelog
 
-## v.2.5.0 - 2024-03-13
+## v2.6.0 - 2024-04-04
+
+### Added
+
+- [#273](https://github.com/networktocode/circuit-maintenance-parser/pull/273) - Add iCal parsing to GTT/EXA
+- [#280](https://github.com/networktocode/circuit-maintenance-parser/pull/280) - Add new Windstream Parser
+
+### Changed
+
+- [#277](https://github.com/networktocode/circuit-maintenance-parser/pull/277) - Refactor the output validator `validate_empty_circuit`
+- [#281](https://github.com/networktocode/circuit-maintenance-parser/pull/281) Add the ability to support pydantic 1 and 2
+
+### Fixed
+
+- [#272](https://github.com/networktocode/circuit-maintenance-parser/pull/272) - Fix the logic in the output validator `validate_empty_circuit`
+- [#278](https://github.com/networktocode/circuit-maintenance-parser/pull/278) - Increase robustness of Crown Castle parsing
+
+## v2.5.0 - 2024-03-13
 
 ### Added
 
