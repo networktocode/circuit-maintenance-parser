@@ -27,7 +27,7 @@ click = ">=7.1, <9.0"
 pydantic = {version =  ">= 1.8.0, != 1.9.*, >= 1.10.4, < 3", extras = ["dotenv"]}
 icalendar = "^5.0.0"
 bs4 = "^0.0.2"
-lxml = "^4.6.2"
+lxml = "^5.0.0"
 geopy = "^2.1.0"
 timezonefinder = "^6.0.1"
 backoff = "^1.11.1"
