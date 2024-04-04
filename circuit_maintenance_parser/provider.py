@@ -151,22 +151,38 @@ class GenericProvider(BaseModel):
     @classmethod
     def get_default_organizer(cls) -> str:
         """Expose default_organizer as class attribute."""
-        return cls._default_organizer.get_default()  # type: ignore
+        try:
+            return cls._default_organizer.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._default_organizer
 
     @classmethod
     def get_default_processors(cls) -> List[GenericProcessor]:
         """Expose default_processors as class attribute."""
-        return cls._processors.get_default()  # type: ignore
+        try:
+            return cls._processors.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._processors
 
     @classmethod
     def get_default_include_filters(cls) -> Dict[str, List[str]]:
         """Expose include_filter as class attribute."""
-        return cls._include_filter.get_default()  # type: ignore
+        try:
+            return cls._include_filter.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._include_filter
 
     @classmethod
     def get_default_exclude_filters(cls) -> Dict[str, List[str]]:
         """Expose exclude_filter as class attribute."""
-        return cls._exclude_filter.get_default()  # type: ignore
+        try:
+            return cls._exclude_filter.get_default()  # type: ignore
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls._exclude_filter
 
     @classmethod
     def get_extended_data(cls):

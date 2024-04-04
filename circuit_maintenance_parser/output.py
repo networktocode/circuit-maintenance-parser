@@ -8,7 +8,14 @@ from enum import Enum
 
 from typing import List
 
-from pydantic import field_validator, BaseModel, StrictStr, StrictInt, PrivateAttr
+try:
+    from pydantic import field_validator
+except ImportError:
+    # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+    from pydantic import validator as field_validator  # type: ignore
+
+
+from pydantic import BaseModel, StrictStr, StrictInt, PrivateAttr
 
 
 class Impact(str, Enum):
