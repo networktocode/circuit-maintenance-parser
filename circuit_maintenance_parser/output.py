@@ -77,12 +77,13 @@ class CircuitImpact(BaseModel, extra="forbid"):
         >>> CircuitImpact(
         ...     circuit_id="1234",
         ...     impact="wrong impact"
-        ... )
+        ... ) # doctest:+ELLIPSIS
         Traceback (most recent call last):
         ...
         pydantic_core._pydantic_core.ValidationError: 1 validation error for CircuitImpact
         impact
           Input should be 'NO-IMPACT', 'REDUCED-REDUNDANCY', 'DEGRADED' or 'OUTAGE' [type=enum, input_value='wrong impact', input_type=str]
+        ...
     """
 
     circuit_id: StrictStr
