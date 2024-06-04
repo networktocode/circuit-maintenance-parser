@@ -46,7 +46,7 @@ class Parser(BaseModel):
             return cls._data_types.get_default()
         except AttributeError:
             # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
-            return cls._data_types
+            return cls()._data_types
 
     @classmethod
     def get_name(cls) -> str:

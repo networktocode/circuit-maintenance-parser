@@ -77,12 +77,13 @@ class CircuitImpact(BaseModel, extra="forbid"):
         >>> CircuitImpact(
         ...     circuit_id="1234",
         ...     impact="wrong impact"
-        ... )
+        ... ) # doctest:+ELLIPSIS
         Traceback (most recent call last):
         ...
         pydantic_core._pydantic_core.ValidationError: 1 validation error for CircuitImpact
         impact
           Input should be 'NO-IMPACT', 'REDUCED-REDUNDANCY', 'DEGRADED' or 'OUTAGE' [type=enum, input_value='wrong impact', input_type=str]
+        ...
     """
 
     circuit_id: StrictStr
@@ -203,7 +204,10 @@ class Maintenance(BaseModel, extra="forbid"):
     @classmethod
     def validate_empty_circuits(cls, value, values):
         """Validate non-cancel notifications have a populated circuit list."""
-        values = values.data
+        try:
+            values = values.data  # pydantic 2.x
+        except AttributeError:  # pydantic 1.x
+            pass
         if len(value) < 1 and values["status"] not in (Status.CANCELLED, Status.COMPLETED):
             raise ValueError("At least one circuit has to be included in the maintenance")
         return value
@@ -212,7 +216,10 @@ class Maintenance(BaseModel, extra="forbid"):
     @classmethod
     def validate_end_time(cls, end, values):
         """Validate that End time happens after Start time."""
-        values = values.data
+        try:
+            values = values.data  # pydantic 2.x
+        except AttributeError:  # pydantic 1.x
+            pass
         if "start" not in values:
             raise ValueError("Start time is a mandatory attribute.")
         start = values["start"]
