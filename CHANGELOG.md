@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.6.1 - 2024-06-04
+
+### Fixed
+
+- [#288](https://github.com/networktocode/circuit-maintenance-parser/pull/288) - Fixed exceptions under Pydantic 1.x.
+
+### Dependencies
+
+- [#286](https://github.com/networktocode/circuit-maintenance-parser/pull/286) - Added support for `lxml` 5.x.
+
 ## v2.6.0 - 2024-04-04
 
 ### Added
