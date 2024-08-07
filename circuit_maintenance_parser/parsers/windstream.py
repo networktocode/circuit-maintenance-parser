@@ -46,6 +46,7 @@ class HtmlParserWindstream1(Html):
             if len(row) < 2:
                 continue
             cols = row.find_all("td")
+            print(cols)
             header_tag = cols[0].string
             if header_tag is None or header_tag == "Maintenance Address:":
                 continue
@@ -63,6 +64,20 @@ class HtmlParserWindstream1(Html):
                 impact = Impact("OUTAGE")
             else:
                 continue
+
+        maint_id = soup.find("td", text="WMT:").find_next_sibling("td").string
+        if maint_id:
+            data["maintenance_id"] = maint_id
+
+        event_start = soup.find("td", text="Event Start Date & Time:").find_next_sibling("td").string
+        if event_start:
+            dt_time = convert_timezone(event_start)
+            data["start"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
+
+        event_end = soup.find("td", text="Event End Date & Time:").find_next_sibling("td").string
+        if event_end:
+            dt_time = convert_timezone(event_end)
+            data["end"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
 
         table = soup.find("table", "circuitTable")
         for row in table.find_all("tr"):
