@@ -49,15 +49,17 @@ class HtmlParserWindstream1(Html):
         if maint_id:
             data["maintenance_id"] = maint_id
 
-        event_start = soup.find("td", string="Event Start Date & Time:").find_next_sibling("td").string
-        if event_start:
-            dt_time = convert_timezone(event_start)
+        event = soup.find("td", string="Event Start Date & Time:").find_next_sibling("td").string
+        if event:
+            dt_time = convert_timezone(event)
             data["start"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
+            event = ""
 
-        event_end = soup.find("td", string="Event End Date & Time:").find_next_sibling("td").string
-        if event_end:
-            dt_time = convert_timezone(event_end)
+        event = soup.find("td", string="Event End Date & Time:").find_next_sibling("td").string
+        if event:
+            dt_time = convert_timezone(event)
             data["end"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
+            event = ""
 
         table = soup.find("table", "circuitTable")
         for row in table.find_all("tr"):
