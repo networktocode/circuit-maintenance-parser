@@ -41,28 +41,25 @@ class HtmlParserWindstream1(Html):
 
         data["summary"] = summary_text
 
-        table = soup.find("table")
-        for row in table.find_all("tr"):
-            if len(row) < 2:
-                continue
-            cols = row.find_all("td")
-            header_tag = cols[0].string
-            if header_tag is None or header_tag == "Maintenance Address:":
-                continue
-            header_tag = header_tag.string.strip()
-            value_tag = cols[1].string.strip()
-            if header_tag == "WMT:":
-                data["maintenance_id"] = value_tag
-            elif "Date & Time:" in header_tag:
-                dt_time = convert_timezone(value_tag)
-                if "Event Start" in header_tag:
-                    data["start"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
-                elif "Event End" in header_tag:
-                    data["end"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
-            elif header_tag == "Outage":
-                impact = Impact("OUTAGE")
-            else:
-                continue
+        impact = soup.find("td", string="Outage").find_next_sibling("td").string
+        if impact:
+            impact = Impact("OUTAGE")
+
+        maint_id = soup.find("td", string="WMT:").find_next_sibling("td").string
+        if maint_id:
+            data["maintenance_id"] = maint_id
+
+        event = soup.find("td", string="Event Start Date & Time:").find_next_sibling("td").string
+        if event:
+            dt_time = convert_timezone(event)
+            data["start"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
+            event = ""
+
+        event = soup.find("td", string="Event End Date & Time:").find_next_sibling("td").string
+        if event:
+            dt_time = convert_timezone(event)
+            data["end"] = int(dt_time.replace(tzinfo=timezone.utc).timestamp())
+            event = ""
 
         table = soup.find("table", "circuitTable")
         for row in table.find_all("tr"):

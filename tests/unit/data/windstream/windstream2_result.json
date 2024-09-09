@@ -1,0 +1,19 @@
+[
+    {
+        "account": "Account Name",
+        "circuits": [
+          {
+            "circuit_id": "WS/ABCD/123456/   /WXN /",
+            "impact": "OUTAGE"
+          }
+        ],
+        "end": 1723554000,
+        "maintenance_id": "223456",
+        "organizer": "wci.maintenance.notifications@windstream.com",
+        "provider": "windstream",
+        "stamp": 1722976963,
+        "start": 1723525200,
+        "status": "CONFIRMED",
+        "summary": "Windstream has identified a network fault and must perform demand maintenance in order to restore our network services to their full capabilities. This maintenance is required to resolve current service impacts or remove the risk for potential impacts. We understand the challenges this may present and are working to minimize disruptions. The details of the planned maintenance are listed below along with descriptions and planned impact timeframes."
+      }
+]
