@@ -2,7 +2,7 @@
 from typing import List, Dict, Any
 from datetime import datetime
 
-from bs4.element import ResultSet # type: ignore
+from bs4.element import ResultSet  # type: ignore
 from circuit_maintenance_parser.output import Impact, Status
 from circuit_maintenance_parser.parser import Html, EmailSubjectParser
 
