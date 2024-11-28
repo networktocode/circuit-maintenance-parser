@@ -1,0 +1,335 @@
+Received: from SJ0PR01MB6477.prod.exchangelabs.com (2603:10b6:a03:29b::15) by
+ SN7PR01MB7921.prod.exchangelabs.com with HTTPS; Wed, 13 Nov 2024 13:52:32
+ +0000
+Received: from MW4PR04CA0202.namprd04.prod.outlook.com (2603:10b6:303:86::27)
+ by SJ0PR01MB6477.prod.exchangelabs.com (2603:10b6:a03:29b::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8158.17; Wed, 13 Nov 2024 13:52:26 +0000
+Received: from MWH0EPF000971E2.namprd02.prod.outlook.com
+ (2603:10b6:303:86:cafe::b0) by MW4PR04CA0202.outlook.office365.com
+ (2603:10b6:303:86::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.16 via Frontend
+ Transport; Wed, 13 Nov 2024 13:52:25 +0000
+Received: from esa.hc5801-97.iphmx.com (68.232.145.138) by
+ MWH0EPF000971E2.mail.protection.outlook.com (10.167.243.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8158.14 via Frontend Transport; Wed, 13 Nov 2024 13:52:23 +0000
+Received: from mx8.tatacommunications.com ([66.198.167.198])
+  by esa3.hc5801-97.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2024 05:52:18 -0800
+Received: from unknown (HELO app150053.phx201.service-now.com) ([199.91.136.12])
+  by Mx8.tatacommunications.com with ESMTP; 13 Nov 2024 08:50:40 -0500
+From: Do-Not-Reply <Do-Not-Reply@tatacommunications.com>
+Subject: TCL TT: "CHGP0123456" / "Normal" / "Scheduled" / Planned Work
+ Notification
+Thread-Topic: TCL TT: "CHGP0123456" / "Normal" / "Scheduled" / Planned Work
+ Notification
+Thread-Index: AQHbNdNJIbPWneNx/EeY2NpjB+Q21w==
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Wed, 13 Nov 2024 13:50:40 +0000
+Message-ID: <71995954.23300.1731505840801@app150053.phx201.service-now.com>
+List-Unsubscribe:
+        <mailto:service.support@tatacommunications.com?subject=Unsubscribe+from+%22%5BCSNPH2%5D+Planned+Work+Unprotected%22&body=Sending+this+email+with+the+predefined+content+in+the+subject+and+body+will+unsubscribe+you+from+the+notification+%22%5BCSNPH2%5D+Planned+Work+Unprotected%22.+%0D%0A%0D%0AUnsubscribe%3A%7B%22id%22%3A%22f8bf87b8db86030037c23caf9d9619c5%22%2C%22token%22%3A%22c797e62132%22%7D>
+Reply-To: "Do-Not-Reply@tatacommunications.com"
+        <Do-Not-Reply@tatacommunications.com>
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource:
+        MWH0EPF000971E2.namprd02.prod.outlook.com
+X-MS-Has-Attach: yes
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-Network-Message-Id:
+        ed49c87c-53fc-4648-e27b-08dd03ea670c
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+received-spf: None (esa.hc5801-97.iphmx.com: no sender  authenticity
+ information available from domain of  postmaster@Mx8.tatacommunications.com)
+ identity=helo;  client-ip=66.198.167.198; receiver=esa.hc5801-97.iphmx.com;
+  envelope-from="Do-Not-Reply@tatacommunications.com";
+  x-sender="postmaster@Mx8.tatacommunications.com";
+  x-conformance=sidf_compatible
+ironport-sdr: 6734af13_IWoJR2Yv3a7tNd5HK2w4bxEtP8A4oES9mDNC4TO/AVhiNT0
+ e6Zja5I1Cci6Vhd7zv0TtZCqFSrug3idybjtpHg==
+x-ironport-av: E=Sophos;i="6.12,151,1728975600";
+    d="scan'208,217";a="88495262"
+x-amp-result: UNKNOWN
+x-amp-original-verdict: FILE UNKNOWN
+x-amp-file-uploaded: False
+authentication-results: spf=pass (sender IP is 66.198.167.198)
+ smtp.mailfrom=tatacommunications.com; dkim=pass (signature was verified)
+ header.d=tatacommunications.com;dmarc=pass action=none
+ header.from=tatacommunications.com;compauth=pass reason=100
+dkim-signature: v=1; a=rsa-sha256; c=simple/simple;  d=tatacommunications.com;
+ i=@tatacommunications.com;  q=dns/txt; s=selector11; t=1731505939;
+ x=1763041939;  h=date:from:reply-to:to:message-id:subject:mime-version:
+   list-unsubscribe;  bh=Y8l/NtqYKtfWmrd8Vd9luBNgZ/r2S/GmUuhDalYp3TM=;
+  b=T1nY+nwStSiHqVBueKed0WuECs/uLp0XF89wxiX0hrXOaDo4uBaMUg6C
+   97asGGoFSPfXFmvEJSKfEH85dhHpFQ+VJhkscavJwOlHVAM4LahxJU7ux
+   TpwgPecNZrbnK6YHKH3+FptCepvE+W7yHP4i66Z8JArRxAcFPTTCgfU62
+   omBW1IlRLTdc7OuXyYaWmTvQCcFtJ0SIzj5m7fmWirMJT4x9bw5F16wMh
+   u1La48mxINJsI1aJ2tqMqQE4+HGR3+HWJGfu7nt2D09pXlYl/SmDzslxO
+   TaN1Ch+3bAOmhy1YEoBZs1uyLmYbi3bSROVixrjA4xNMYcyqW5bRo7TM1   Q==;
+x-ms-office365-filtering-correlation-id: ed49c87c-53fc-4648-e27b-08dd03ea670c
+x-ms-traffictypediagnostic:
+        MWH0EPF000971E2:EE_|SJ0PR01MB6477:EE_|SN7PR01MB7921:EE_
+x-microsoft-antispam:
+        BCL:3;ARA:13230040|3072899012|2092899012|5062899012|3092899012|12012899012|4022899009|82310400026|4076899003|8096899003;
+x-forefront-antispam-report:
+        CIP:68.232.145.138;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx8.tatacommunications.com;PTR:mx8.tatacommunications.com;CAT:NONE;SFS:(13230040)(3072899012)(2092899012)(5062899012)(3092899012)(12012899012)(4022899009)(82310400026)(4076899003)(8096899003);DIR:INB;
+x-ms-exchange-crosstenant-authas: Anonymous
+x-ms-exchange-crosstenant-authsource:
+        MWH0EPF000971E2.namprd02.prod.outlook.com
+x-ms-exchange-crosstenant-network-message-id:
+        ed49c87c-53fc-4648-e27b-08dd03ea670c
+x-ms-exchange-crosstenant-originalarrivaltime: 13 Nov 2024 13:52:23.8544 (UTC)
+x-ms-exchange-crosstenant-fromentityheader: Internet
+x-ms-exchange-crosstenant-id: dd3dfd2f-6a3b-40d1-9be0-bf8327d81c50
+x-ms-exchange-transport-crosstenantheadersstamped: SJ0PR01MB6477
+x-ms-exchange-transport-endtoendlatency: 00:00:08.8601533
+x-ms-exchange-processed-by-bccfoldering: 15.20.8158.013
+ironport-hdrordr: A9a23:+9oMr6FhK2q+brDApLqEL8eALOsnbusQ8zAXPiFKOGVom6mj/P
+ xG885rsiMc9wxhO03I9ersBED4ewK5yXcX2/h2AV7BZmnbUQKTRekJ0WKF+VPd8kbFmdK1u5
+ 0NT4FOTPC1LUESt7ee3CCIV+8bhPat1cmT9Jzj5kYodxgvT6179Q92BkK6HyRNNXF7LIt8Dp
+ 3Z7sFavTahdB0sD/iTFz0ZRODIpdHR/aiWAyI7Ow==
+authentication-results-original: esa.hc5801-97.iphmx.com; spf=None
+ smtp.pra=Do-Not-Reply@tatacommunications.com; spf=Pass
+ smtp.mailfrom=Do-Not-Reply@tatacommunications.com; spf=None
+ smtp.helo=postmaster@Mx8.tatacommunications.com; dkim=pass (signature
+ verified) header.i=@tatacommunications.com; dmarc=pass (p=reject dis=none)
+ d=tatacommunications.com
+x-eopattributedmessage: 0
+x-eoptenantattributedmessage: dd3dfd2f-6a3b-40d1-9be0-bf8327d81c50:0
+x-tenant: A891CFC00BC182B5C1E6A97
+x-ms-exchange-atpmessageproperties: SA|SL
+x-ironport-anti-spam-filtered: true
+x-ipas-result:
+        A0EJAAAGrjRne8anxkJaGwEBAQEBAQEBBQEBARIBAQEDAwEBAYF/BgEBAQsBgUBbKBkBSAGBJwRThFaIHYcwgiGJAIsHhkhjgRCBVhSBXgwPAQEBAQEBDC4BFQQBBASFAB+KIwEeBwEEMAkOAQIBAgEBAQEBAwIDAQEBAQEBAQEBDQEBAQQBAQECAQECBAMCAQECEAEBQkmFQQgyDYI9HoEsgSYBAQEBAQEBAQEBAQEdAghjAQEhBgwBAhEdAQEECicDBjEBAgwWAgIHHjAEBBEBIoIHgnZHAwWjDwGBLD8CKAFAAQyBCwoBiQkBAQF4gTIaAmWCDAEBBgQDAgOCRNszCYFIAYVPgnYBBQEqgTIChAs7ghmCIyeCKHqBJIEkgTuBBU2CMwQYAQEOASc3gw6CTxqBFIExLYN6diV3hSWCE2iKF4ZPiBEHB2GBVjIBVRMXCwcFQ3c8AyJvaoFWgTmBUUOBFQaBQi8bIQtcgTeBLgYVBIEORj+CSmlLOgINAjaCJCRZgk+DWIFCgUCCB4EmQIQmglEdNwkDC209Fh8GAgwbS0IdEp0jAQqBHEaCN4EiFUoZFBdFGRQUgVwCjhEBhD8kkR4PXJJPjjGEJIoNgj6LMooQl2kDkmABmHcio0MJhTVjAWAjOoFcTSOCHIEbTwMZD1iCaIphgVqCIMYlIjU7AgcBCgEBAwmGSIhCDQGBSwEB
+x-ironport-outbreak-status: No, level 0, Unknown - Unknown
+x-mga-submission:
+        MDFIz377tYGRr3/oKkWUSdWu7KOmXuPNGLo41ZfR+d9H4sEQkgRfLvd4cFIjMttsAAMmWvN/NM+ltZqAm+djH1WSG5IeKpsaqVsEi/wYdmUHyyrgLN8SWNyu6eqLxR1Sckar9ZgI7Qsxc6wQu6/YxRLKAqW7nsl69AlKRsBfQTcFcg==
+auto-submitted: auto-generated
+X-Microsoft-Antispam-Mailbox-Delivery:
+        ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(920097)(930097)(140003)(1420198);
+X-Microsoft-Antispam-Message-Info:
+        =?utf-8?B?WVFiK1BkR1JRU2hIQ0plRndycEZnM1dpRGVSK3lGdkN4emRUTFdqbis0eDlW?=
+ =?utf-8?B?RUZsWHFGcXJUUEpjR2gwOE1Cd0FMaE43cXp6SXQ1MlhoK3NhUTd5b0RDNEdZ?=
+ =?utf-8?B?WlByT2RBMWtlZTNaUG10N2RJMVliK0lXWWU4YzVYT1FRRGtlMTRMNHZDUkNa?=
+ =?utf-8?B?Q1lManpnK0RtZXlrMFpqWmJLTkdEYWlzQWVCUGVrNjFJVzMwMnllT0FnQ3JJ?=
+ =?utf-8?B?cjdtQzR6NDF3byt5d1c1OWt4VUVpSWREM3g2RWp3NW5aT1drdWZ0dmQrR3Q1?=
+ =?utf-8?B?WG1JMjRkVCs1Nzdsby9paG1qUUhhVk56WHEvdVRyMDBkZHdGYWQ0d28zSExV?=
+ =?utf-8?B?QS9NcnhLMEprNTBoTkRldm5kU3c0c1lzZWRQaHZvQzdwUUN3WGc1d25aZ0pL?=
+ =?utf-8?B?REFrOW1ESUN6NVlvYTJUVXIydjZGWVJFYVRhTU81b2xRM1JHV1lKT2VSSWVj?=
+ =?utf-8?B?WFhXRXB2bnB0akRmaXp1QXpDb2lZZVlxeTNQTzZCV0d0RnRUK0hkQmlzc0Ni?=
+ =?utf-8?B?VkVERGl2UDJwUkdsUGxIb0NPWVp5SGZpY21BbHV4SGFDck5kbU9VcnNQS0pi?=
+ =?utf-8?B?bGpuaVNzbDdmcFZPL0VTWnVmMnNZNmlDZ1pRUXYwYVF4TzljaGV3WVJtVjlI?=
+ =?utf-8?B?Q0swNjlvV3NYUGVCaDlkV3BYV2N6dFZBUGk5dDlhZFh4Z1d2QzlGeVE2SmhC?=
+ =?utf-8?B?eHJER0NqZ3JyWFdLdmJDK1pUV3l4Q3gxSG16ZUVpZ2hiOExJTExrdHExYTFL?=
+ =?utf-8?B?cHdBNmxYK0pCY3BjVC9QU3BjakJhVldoVVpvN2Z6dnVnTEF2WEw0Y3QwcnU2?=
+ =?utf-8?B?VUcwUmhmTmszSG4wV2l5bDVLNGp6dHF3cGNNRkJ0WnM1SURtelh2RHJ0b0Fn?=
+ =?utf-8?B?d0dzd2IzYjB3aVlteERQQTFtSHpaRVhRTkJmUVNoMDBUbHdCakphcGdXUW5w?=
+ =?utf-8?B?Z05Ec0gzM3VSSnlsZ2xia1ptZVJ0dHZHRm9vVUlKQmR2Ynd1eVc4bllBZHlw?=
+ =?utf-8?B?ZkhIUkgwYzdoYkNMN0VKTDdIK29VbktrTlpzbEY5c1V4MTArMHRhMVFXNXVH?=
+ =?utf-8?B?Zit1RlNCSjkrZXBmbnVKdnhuclZBN0luWUZnZTNmeUhiZGkyZWZDODZjSHVQ?=
+ =?utf-8?B?WENFY1UvWEFJcU9oM0I2M3BMT0hDVTd0Y3BjYnRMcjFDRTZ1cnRzSzVSR04y?=
+ =?utf-8?B?UkZHK2NQZlJ3TkF3eDMyZlo2MjZVbFpNdHdldjAwY0g1RENEdTRnb1pEK20z?=
+ =?utf-8?B?Mzc4U3VXY2JmeHhXeVVsQmgrWEs1OWVHbVlsNHRoYVViaDc2bFRlOC9nNXFC?=
+ =?utf-8?B?Y0I5eXNuMzVhTmVONFZFSXJiS3JNTWE0UUlGQnF3ckNrczMrQWVKR3pPUWpv?=
+ =?utf-8?B?TlRtbWd3bnJKc0I5Rzk0cmNZdGhMa2ZSTXc4T29UWmJHcGtlbG51RE80aHZM?=
+ =?utf-8?B?aW5yNnZCdXJXbzZkMXBaUHBHNVdoVGhXamhkeTJ4OS85cEIxQyttQlRQb0Ix?=
+ =?utf-8?B?Y3UvbFo4TE9BdFZDNitkUlBFK3JabjFDWUJ2RE9PWGgxWGhzamkrb3haMDN1?=
+ =?utf-8?B?V21qZzJkQVpyYVZ5bmRyeHNhbW92Q2o1aytVYy96d0liNE5uV1EvVWV6ejFG?=
+ =?utf-8?B?eTN3bXlNbjMwSUFaV0tMM1oxdjVmMlpoNzFzbUM2dnFXb3h5K2JRZ0drSkM5?=
+ =?utf-8?B?L2cwbjRQSTh1L2d5OEV2VUtadE1Fc3AyaUVLT05uQ0FEY0hzdldldXdGUUQ3?=
+ =?utf-8?B?dkNRNXNQRXdVaWQwV3FSYUdzYW9KZ3RSdEJ6Yng5eEtLZjBCZlMzdWM0dDI5?=
+ =?utf-8?B?UDFmM1FRWTRzUjVDMGFDQlBYTlZ1TFliNjVOMFJPTkF3czllYnpiY0REbHhH?=
+ =?utf-8?B?UE01SUxNOE0xZk9ydWZNRTdkSkxnMUdJc1R3bXlnZ0hmOTlVSVBXRlJ3NUl0?=
+ =?utf-8?B?Z0ZFUndqUTltVnZXZDVRamppZ1p5WXgxRXNOOFpMcHhnVXM0a3N4dnVVY0dB?=
+ =?utf-8?B?aXptUHRMRDM2aW1uYUpYVVlyeTNIbDlHY2hPck83T3pKZHJEaldIU3UxUDJv?=
+ =?utf-8?B?ZTJ4elFETC9wKzloVWdhdUZiYWdJYVpFak05dklVdHN4T3BycjBkd1JXbVc5?=
+ =?utf-8?B?engyWFF2STJyM0xONVdJUHpLRTR2N0hCbTQrY1d4eWhOQjdya09YcEZrZG1S?=
+ =?utf-8?B?S2xxSGIyM1RlNU0zNThzVVNTZXBDaVhtNm9JSTRIMkgzLzIvS2pRMko4R0dO?=
+ =?utf-8?B?NzdQZUhJS1Iya0ppZGs5b01JRjM1Z3NpVWpnaHZ6eFk1WnZZZXhENW0yQzRn?=
+ =?utf-8?B?T082V29JbFJQbW1DM04vZTVZc0FySFBYRW0vRVZ0UGlqRVBxU0J5OEZDcnIx?=
+ =?utf-8?B?Q2hNanZKemZRR1FMZm5yK0FObkF1Y3RxeVpNcmRSZDM4enYrOE4xTVFNTW9N?=
+ =?utf-8?B?b3Q5aEowQ2RONEVaakxFVmZ0TG52c1pYUmdhT0kvcnhrQndPQ1ltRnB1UTV5?=
+ =?utf-8?B?VmJsQWgvVC9ueTR5V0VUOW53WFZNSGFHMllEaEdtVERpUjdUelNZV05FeUVE?=
+ =?utf-8?B?OHY0ZjZCRy9xSnpoejl5L3lZSkQ1SkI2VGVNRWNNelpEKzRjMStwN2xSd2Fm?=
+ =?utf-8?B?WUVNK1pzQVdnT2ZBaWtibCtTMnZXQ2hyTEtIRHozWkxtVHA1eTcyMkxVazlw?=
+ =?utf-8?B?OUZRTXF0bm5hK0hCN1pEVWxuMG9lRUoyT2lFYVQ4Z0xLNitERm5OVnJjeldY?=
+ =?utf-8?B?NnAxN2tTL3R5RlRUV2pmZkdzMHBuL3FkMmd6NDRESE5xS2N2QUVzWHhKdWw3?=
+ =?utf-8?B?RHNqcE1MOGFQNVBoKzN3c1hGN0Fmejl3NXZkM0xDMWpkdCs1QnhpcmRaeFVG?=
+ =?utf-8?B?bVRrTHJVclhld1V6WjVjQnpiUT09?=
+Content-Type: multipart/related;
+        boundary="_004_71995954233001731505840801app150053phx201servicenowcom_";
+        type="multipart/alternative"
+MIME-Version: 1.0
+
+--_004_71995954233001731505840801app150053phx201servicenowcom_
+Content-Type: multipart/alternative;
+        boundary="_000_71995954233001731505840801app150053phx201servicenowcom_"
+
+--_000_71995954233001731505840801app150053phx201servicenowcom_
+Content-Type: text/plain; charset="utf-8"
+
+CAUTION: This email has been sent from an external source. Do not click links, open attachments, or provide sensitive business information unless you can verify the sender’s legitimacy.
+
+
+Dear Customer,
+
+
+
+Tata Communication is in receipt of maintenance activity. The details of maintenance activity are as below. Your below mentioned service would experience an outage of “8 Days 23 Hours 58 Minutes” during the activity window.
+
+
+
+TATA COMMUNICATIONS      [cid:logo.pngx@SNC.8e754fb1f9f9130c]
+ Planned Work Notification
+Ticket Reference - TCL  CHGP0123456
+Service ID      A012345678901234567, B012345678901234567
+NIMS ID F0123-45678-901, F0123-45678-901
+Maintenance Type        Normal
+Activity Status Scheduled
+Execution Owner International Cables
+Location of activity    Mumbai
+
+Activity Window (IST)   2024-12-22 05:31:00 IST to 2024-12-31 05:29:00 IST
+Activity Window (GMT)   2024-12-22 00:01:00 GMT to 2024-12-30 23:59:00 GMT
+Expected Impact Duration(DD:HH:MM) :    8 Days 23 Hours 58 Minutes
+
+Activity Description    Planned activity for shunt fault repair of Seg 11 near Mumbai in TGNEA network.
+
+We request you to reschedule sensitive operations at your end accordingly.
+We apologize for any inconvenience due to this event and resulting downtime.
+If you have any queries with respect to this activity, feel free to contact us on the coordinates mentioned below:
+Mail ID :planned.activity@tatacommunications.com<mailto:planned.activity@tatacommunications.com>
+Contact Number : + 91 20 6614 4444 & Toll Free no: 1-8002660660
+We look forward to your co-operation and a long term synergic association.
+Best Regards,
+Customer Service
+TATA COMMUNICATIONS
+
+
+
+
+Ref:MSGTCL000142929801
+
+--_000_71995954233001731505840801app150053phx201servicenowcom_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <CCC84E3A32B339489D231D64CA90DE77@prod.exchangelabs.com>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<div style="background-color:#FFEB9C; width:100%; padding:2pt; font-size:10pt; line-height:12pt; font-family:'Calibri'; color:Black; text-align: left;">
+<span style="color:#9C6500; font-weight:bold;">CAUTION:</span> This email has been sent from an external source. Do not click links, open attachments, or provide sensitive business information unless you can verify the sender’s legitimacy.
+</div>
+<br>
+<div>
+<p></p>
+<p></p>
+<p></p>
+<p><span style="color: #000000; font-size: 10pt; font-family: tahoma, arial, helvetica, sans-serif;">Dear&nbsp;Customer,</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000; font-size: 10pt; font-family: tahoma, arial, helvetica, sans-serif;">Tata Communication is in receipt of maintenance activity. The details of maintenance activity are as below. Your below mentioned service would experience an
+ outage of “8 Days 23 Hours 58 Minutes” during the activity window.</span></p>
+<p>&nbsp;</p>
+<table style="height: 42px; border-color: #000000;" border="0" width="623" cellspacing="0">
+<tbody>
+<tr style="background-color: #4b85c5;">
+<td style="border: none; text-align: left; padding-left: 5px;"><span style="font-size: 11pt; color: #ffffff; font-family: helvetica;"><strong>TATA COMMUNICATIONS</strong></span></td>
+<td style="border: 0.5px #bbbbbb;">&nbsp;<img style="align: baseline;" title="" src="cid:logo.pngx@SNC.8e754fb1f9f9130c" alt="" width="44" height="38" align="right" border="" hspace="10" vspace=""></td>
+</tr>
+</tbody>
+</table>
+<table style="height: 38px; border-color: #000000;" border="1" width="620" cellspacing="0">
+<tbody>
+<tr>
+<td style="background-color: #4b85c5;" colspan="2"><span style="color: #ffffff; font-family: arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;Planned Work Notification</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><span style="color: black;">Ticket Reference - TCL</span></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">CHGP0123456</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><span style="color: black;">Service ID</span></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">A012345678901234567, B012345678901234567</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><span style="color: black;">NIMS ID</span></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">F0123-45678-901, F0123-45678-901</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Maintenance Type</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">Normal</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Activity Status</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">Scheduled</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Execution Owner</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">International Cables</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Location of activity</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">Mumbai</span></td>
+</tr>
+<tr>
+<td style="background-color: #4b85c5;" colspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Activity Window (IST)</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">2024-12-22 05:31:00 IST to 2024-12-31 05:29:00 IST</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Activity Window (GMT)</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">2024-12-22 00:01:00 GMT to 2024-12-30 23:59:00 GMT</span></td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><strong><span style="color: black;">Expected Impact Duration(DD:HH:MM) :</span></strong></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">8 Days 23 Hours 58 Minutes</span></td>
+</tr>
+<tr>
+<td style="background-color: #4b85c5;" colspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;"><strong><span style="color: black;">Activity Description</span></strong></span></td>
+<td><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">Planned activity for shunt fault repair of Seg 11 near Mumbai in TGNEA network.</span></td>
+</tr>
+<tr>
+<td colspan="2">
+<p><span style="font-family: arial, helvetica, sans-serif; font-size: 10pt;">We request you to reschedule sensitive operations at your end accordingly.<br>
+We apologize for any inconvenience due to this event and resulting downtime.<br>
+If you have any queries with respect to this activity, feel free to contact us on the coordinates mentioned below:<br>
+Mail ID :<a href="mailto:planned.activity@tatacommunications.com">planned.activity@tatacommunications.com</a><br>
+Contact Number : + 91 20 6614 4444 &amp; Toll Free no: 1-8002660660<br>
+We look forward to your co-operation and a long term synergic association.<br>
+Best Regards,<br>
+Customer Service<br>
+TATA COMMUNICATIONS</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<div>&nbsp;</div>
+<div style="display:inline">Ref:MSGTCL000142929801</div>
+</div>
+</body>
+</html>
+
+--_000_71995954233001731505840801app150053phx201servicenowcom_--
+
+--_004_71995954233001731505840801app150053phx201servicenowcom_
+Content-Type: image/png; name="image"
+Content-Description: image
+Content-Disposition: inline; filename="image"; size=189;
+        creation-date="Wed, 13 Nov 2024 13:52:32 GMT";
+        modification-date="Fri, 15 Nov 2024 09:14:58 GMT"
+Content-ID: <logo.pngx@SNC.8e754fb1f9f9130c>
+Content-Transfer-Encoding: base64
+
+
+--_004_71995954233001731505840801app150053phx201servicenowcom_--
