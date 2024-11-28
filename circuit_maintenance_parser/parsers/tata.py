@@ -2,7 +2,7 @@
 from typing import List, Dict, Any
 from datetime import datetime
 
-from bs4.element import ResultSet
+from bs4.element import ResultSet # type: ignore
 from circuit_maintenance_parser.output import Impact, Status
 from circuit_maintenance_parser.parser import Html, EmailSubjectParser
 
@@ -43,7 +43,7 @@ class HtmlParserTata(Html):
         return [data]
 
     @staticmethod
-    def _parse_time(string: str) -> str:
+    def _parse_time(string: str) -> int:
         """Convert YYYY-MM-DD HH:MM:SS GMT to epoch."""
         return int((datetime.strptime(string.strip(), "%Y-%m-%d %H:%M:%S GMT") - datetime(1970, 1, 1)).total_seconds())
 
