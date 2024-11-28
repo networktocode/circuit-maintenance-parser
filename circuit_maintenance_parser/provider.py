@@ -37,6 +37,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -426,6 +427,19 @@ class Sparkle(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("TISAmericaNOC@tisparkle.com")
+
+
+class Tata(GenericProvider):
+    """Tata provider custom class."""
+
+    _include_filter = PrivateAttr({EMAIL_HEADER_SUBJECT: ["Planned Work Notification"]})
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[HtmlParserTata, SubjectParserTata, EmailDateParser]),
+        ]
+    )
+    _default_organizer = PrivateAttr("planned.activity@tatacommunications.com")
 
 
 class Telia(Arelion):
