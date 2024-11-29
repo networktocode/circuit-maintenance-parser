@@ -1,3 +1,4 @@
+# pylint: disable=disallowed-name
 """Circuit maintenance parser for Tata Email notifications."""
 from typing import List, Dict, Any
 from datetime import datetime
