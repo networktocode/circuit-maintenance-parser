@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.7.0 - 2024-12-02
+
+### Added
+
+- [#297](https://github.com/networktocode/circuit-maintenance-parser/pull/297) - Added new parser for Tata Communications.
+
+### Dependencies
+
+- [#295](https://github.com/networktocode/circuit-maintenance-parser/pull/295) - Remove pydantic dotenv extra
+
+### Changed
+
+- [#291](https://github.com/networktocode/circuit-maintenance-parser/pull/291) - Update Windstream Parser for new emails
+
 ## v2.6.1 - 2024-06-04
 
 ### Fixed
