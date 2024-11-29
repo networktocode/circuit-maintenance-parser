@@ -1,0 +1,25 @@
+[
+    {
+        "account": "N/A",
+        "circuits": [
+            {
+                "circuit_id": "A012345678901234567",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "B012345678901234567",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1735603140,
+        "maintenance_id": "CHGP0123456",
+        "organizer": "planned.activity@tatacommunications.com",
+        "provider": "tata",
+        "sequence": 1,
+        "stamp": 1731505840,
+        "start": 1734825660,
+        "status": "CONFIRMED",
+        "summary": "TCL TT: \"CHGP0123456\" / \"Normal\" / \"Scheduled\" / Planned Work Notification",
+        "uid": "0"
+    }
+]

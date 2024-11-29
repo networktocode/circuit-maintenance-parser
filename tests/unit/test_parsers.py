@@ -30,6 +30,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -494,6 +495,77 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserSparkle1,
             Path(dir_path, "data", "sparkle", "sparkle1.eml"),
             Path(dir_path, "data", "sparkle", "sparkle1_html_parser_result.json"),
+        ),
+        # Tata
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_first_reminder_body.html"),
+            Path(dir_path, "data", "tata", "tata_first_reminder_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_first_reminder_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_first_reminder_subject_result.json"),
+        ),
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_final_reminder_body.html"),
+            Path(dir_path, "data", "tata", "tata_final_reminder_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_final_reminder_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_final_reminder_subject_result.json"),
+        ),
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_body.html"),
+            Path(dir_path, "data", "tata", "tata_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_subject_result.json"),
+        ),
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_cancellation_body.html"),
+            Path(dir_path, "data", "tata", "tata_cancellation_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_cancellation_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_cancellation_subject_result.json"),
+        ),
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_completion_body.html"),
+            Path(dir_path, "data", "tata", "tata_completion_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_completion_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_completion_subject_result.json"),
+        ),
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_extension_body.html"),
+            Path(dir_path, "data", "tata", "tata_extension_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_extension_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_extension_subject_result.json"),
+        ),
+        (
+            HtmlParserTata,
+            Path(dir_path, "data", "tata", "tata_reschedule_body.html"),
+            Path(dir_path, "data", "tata", "tata_reschedule_body_result.json"),
+        ),
+        (
+            SubjectParserTata,
+            Path(dir_path, "data", "tata", "tata_reschedule_subject.txt"),
+            Path(dir_path, "data", "tata", "tata_reschedule_subject_result.json"),
         ),
         # Telstra
         (
