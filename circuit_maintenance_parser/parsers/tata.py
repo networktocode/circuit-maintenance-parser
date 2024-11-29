@@ -22,9 +22,10 @@ class HtmlParserTata(Html):
         for span in soup.find_all("span"):
             curr = span.text.strip()
             if curr != prev:
-                if prev.lower() == "ticket reference - tcl":
+                prev_lower = prev.lower()
+                if prev_lower == "ticket reference - tcl":
                     data["maintenance_id"] = curr
-                elif prev.lower() == "service id":
+                elif prev_lower == "service id":
                     for circuit in curr.split(","):
                         data["circuits"].append(
                             {
@@ -32,11 +33,11 @@ class HtmlParserTata(Html):
                                 "impact": Impact.OUTAGE,
                             }
                         )
-                elif prev.lower() == "activity window (gmt)" or prev.lower() == "revised activity window (gmt)":
+                elif prev_lower in ("activity window (gmt)", "revised activity window (gmt)"):
                     start_end = curr.split("to")
                     data["start"] = self._parse_time(start_end[0])
                     data["end"] = self._parse_time(start_end[1])
-                elif "extended up to time window" in prev.lower():
+                elif "extended up to time window" in prev_lower:
                     if "gmt" in curr.lower():
                         data["end"] = self._parse_time(curr)
             prev = span.text.strip()
@@ -55,13 +56,14 @@ class SubjectParserTata(EmailSubjectParser):
     def parse_subject(self, subject: str) -> List[Dict]:
         """Parse Tata Email subject for summary and status."""
         data: Dict[str, Any] = {"summary": subject.strip().replace("\n", "")}
-        if "completion" in subject.lower():
+        subject_lower = subject.lower()
+        if "completion" in subject_lower:
             data["status"] = Status.COMPLETED
-        elif "reschedule" in subject.lower() or "extension" in subject.lower():
+        elif "reschedule" in subject_lower or "extension" in subject_lower:
             data["status"] = Status.RE_SCHEDULED
-        elif "reminder" in subject.lower():
+        elif "reminder" in subject_lower:
             data["status"] = Status.CONFIRMED
-        elif "cancellation" in subject.lower():
+        elif "cancellation" in subject_lower:
             data["status"] = Status.CANCELLED
         else:
             data["status"] = Status.CONFIRMED
