@@ -35,19 +35,14 @@ class HtmlParserTata(Html):
                         )
                 elif prev_lower in ("activity window (gmt)", "revised activity window (gmt)"):
                     start_end = curr.split("to")
-                    data["start"] = self._parse_time(start_end[0])
-                    data["end"] = self._parse_time(start_end[1])
+                    data["start"] = self.dt2ts(datetime.strptime(start_end[0].strip(), "%Y-%m-%d %H:%M:%S %Z"))
+                    data["end"] = self.dt2ts(datetime.strptime(start_end[1].strip(), "%Y-%m-%d %H:%M:%S %Z"))
                 elif "extended up to time window" in prev_lower:
                     if "gmt" in curr.lower():
-                        data["end"] = self._parse_time(curr)
+                        data["end"] = self.dt2ts(datetime.strptime(curr, "%Y-%m-%d %H:%M:%S %Z"))
             prev = span.text.strip()
 
         return [data]
-
-    @staticmethod
-    def _parse_time(string: str) -> int:
-        """Convert YYYY-MM-DD HH:MM:SS GMT to epoch."""
-        return int((datetime.strptime(string.strip(), "%Y-%m-%d %H:%M:%S GMT") - datetime(1970, 1, 1)).total_seconds())
 
 
 class SubjectParserTata(EmailSubjectParser):
