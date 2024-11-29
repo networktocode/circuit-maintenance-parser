@@ -84,6 +84,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - Netflix (AS2906 only)
 - Seaborn
 - Sparkle
+- Tata
 - Telstra (\*)
 - Turkcell
 - Verizon
