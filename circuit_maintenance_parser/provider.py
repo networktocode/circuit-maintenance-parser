@@ -30,6 +30,7 @@ from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.openai import OpenAIParser
+from circuit_maintenance_parser.parsers.pccw import HtmlParserPccw, SubjectParserPccw
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -404,6 +405,29 @@ class PacketFabric(GenericProvider):
     """PacketFabric provider custom class."""
 
     _default_organizer = PrivateAttr("support@packetfabric.com")
+
+
+class Pccw(GenericProvider):
+    """PCCW provider custom class."""
+
+    _include_filter = PrivateAttr(
+        {
+            "Icalendar": ["BEGIN"],
+            "ical": ["BEGIN"],
+            EMAIL_HEADER_SUBJECT: [
+                "Completion - Planned Outage Notification",
+                "Completion - Urgent Maintenance Notification",
+            ],
+        }
+    )
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            SimpleProcessor(data_parsers=[ICal]),
+            CombinedProcessor(data_parsers=[HtmlParserPccw, SubjectParserPccw, EmailDateParser]),
+        ]
+    )
+    _default_organizer = "mailto:gsoc-planned-event@pccwglobal.com"
 
 
 class Seaborn(GenericProvider):
