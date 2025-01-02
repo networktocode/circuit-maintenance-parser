@@ -1,0 +1,25 @@
+[
+    {
+        "account": "Acme Pte Ltd",
+        "circuits": [
+            {
+                "circuit_id": "ABC(XXX)-DEF(XXX) EP4321:AAAAAA-654321-",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "ABC(XXX)-DEF(XXX) EP1234:AAAAAA-123456-",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1733425200,
+        "maintenance_id": "INC0123456789AB",
+        "organizer": "mailto:gsoc-planned-event@pccwglobal.com",
+        "provider": "PCCW Global",
+        "sequence": 1,
+        "stamp": 1733275888,
+        "start": 1733410800,
+        "status": "CANCELLED",
+        "summary": "Cancellation - Urgent Maintenance Notification of International Service -UMW Reference number U1234\\56E-A1 - INC0123456789AB",
+        "uid": "20241202T075849Z-uidGen@fe80:0:0:0:42:acff:fe15:3%eth0"
+    }
+]
