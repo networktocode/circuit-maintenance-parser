@@ -53,18 +53,18 @@ class TextParserApple(Text):
         }
         return [data]
 
-    def _circuits(self, text):  # pylint: disable=no-self-use
+    def _circuits(self, text):
         pattern = r"Peer AS: (\d*)"
         match = re.search(pattern, text)
         return [CircuitImpact(circuit_id=f"AS{match.group(1)}", impact=Impact.OUTAGE)]
 
-    def _maintenance_id(self, text):  # pylint: disable=no-self-use
+    def _maintenance_id(self, text):
         # Apple ticket numbers always starts with "CHG".
         pattern = r"CHG(\d*)"
         match = re.search(pattern, text)
         return match.group(0)
 
-    def _get_time(self, pattern, text):  # pylint: disable=no-self-use
+    def _get_time(self, pattern, text):
         # Apple sends timestamps as RFC2822 for the US
         # but a custom format for EU datacenters.
         match = re.search(pattern, text)
