@@ -1,6 +1,6 @@
 """Circuit maintenance parser for Pccw Email notifications."""
 import re
-from typing import List, Dict, Any, ClassVar
+from typing import List, Dict, Tuple, Any, ClassVar
 from datetime import datetime
 
 from bs4.element import ResultSet  # type: ignore
@@ -39,7 +39,7 @@ class HtmlParserPccw(Html):
         customer_field = soup.find(string=re.compile("Customer Name :", re.IGNORECASE))
         return customer_field.split(":")[1].strip()
 
-    def _extract_maintenance_window(self, soup: ResultSet) -> tuple[datetime, datetime]:
+    def _extract_maintenance_window(self, soup: ResultSet) -> Tuple[datetime, datetime]:
         """Extract start and end times from maintenance window."""
         datetime_field = soup.find(string=re.compile("Date Time :", re.IGNORECASE))
         time_parts = (
