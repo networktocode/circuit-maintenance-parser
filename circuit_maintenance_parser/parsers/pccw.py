@@ -56,6 +56,8 @@ class SubjectParserPCCW(EmailSubjectParser):
     This parser extracts maintenance ID, status and summary from the email subject line.
     """
 
+    # Only completion notification doesn't come with ICal. Other such as planned outage, urgent maintenance,
+    # amendment and cacellation notifications come with ICal. Hence, maintenance status is set to COMPLETED.
     DEFAULT_STATUS: ClassVar[Status] = Status.COMPLETED
 
     def parse_subject(self, subject: str) -> List[Dict]:
