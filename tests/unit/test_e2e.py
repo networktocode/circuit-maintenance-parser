@@ -651,6 +651,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "pccw", "pccw_email_result.json"),
             ],
         ),
+        (
+            PCCW,
+            [
+                ("ical", Path(dir_path, "data", "pccw", "pccw_ical")),
+            ],
+            [
+                Path(dir_path, "data", "pccw", "pccw_ical_result.json"),
+            ],
+        ),
         # Seaborn
         (
             Seaborn,
