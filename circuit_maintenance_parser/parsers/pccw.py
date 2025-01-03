@@ -1,4 +1,4 @@
-"""Circuit maintenance parser for Pccw Email notifications."""
+"""Circuit maintenance parser for PCCW Email notifications."""
 import re
 from typing import List, Dict, Tuple, Any, ClassVar
 from datetime import datetime
@@ -8,14 +8,14 @@ from circuit_maintenance_parser.output import Status
 from circuit_maintenance_parser.parser import Html, EmailSubjectParser
 
 
-class HtmlParserPccw(Html):
-    """Custom Parser for HTML portion of Pccw circuit maintenance notifications."""
+class HtmlParserPCCW(Html):
+    """Custom Parser for HTML portion of PCCW circuit maintenance notifications."""
 
     DATE_TIME_FORMAT: ClassVar[str] = "%d/%m/%Y %H:%M:%S"
     PROVIDER: ClassVar[str] = "PCCW Global"
 
     def parse_html(self, soup: ResultSet) -> List[Dict]:
-        """Parse Pccw circuit maintenance email.
+        """Parse PCCW circuit maintenance email.
 
         Args:
             soup: BeautifulSoup ResultSet containing the email HTML content
@@ -50,8 +50,8 @@ class HtmlParserPccw(Html):
         return start_time, end_time
 
 
-class SubjectParserPccw(EmailSubjectParser):
-    """Custom Parser for Email subject of Pccw circuit maintenance notifications.
+class SubjectParserPCCW(EmailSubjectParser):
+    """Custom Parser for Email subject of PCCW circuit maintenance notifications.
 
     This parser extracts maintenance ID, status and summary from the email subject line.
     """
@@ -59,7 +59,7 @@ class SubjectParserPccw(EmailSubjectParser):
     DEFAULT_STATUS: ClassVar[Status] = Status.COMPLETED
 
     def parse_subject(self, subject: str) -> List[Dict]:
-        """Parse Pccw circuit maintenance email subject.
+        """Parse PCCW circuit maintenance email subject.
 
         Args:
             subject: Email subject string to parse

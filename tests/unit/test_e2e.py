@@ -32,7 +32,7 @@ from circuit_maintenance_parser.provider import (
     Momentum,
     Netflix,
     PacketFabric,
-    Pccw,
+    PCCW,
     Seaborn,
     Sparkle,
     Tata,
@@ -641,9 +641,9 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 GENERIC_ICAL_RESULT_PATH,
             ],
         ),
-        # Pccw
+        # PCCW
         (
-            Pccw,
+            PCCW,
             [
                 ("email", Path(dir_path, "data", "pccw", "pccw_email.eml")),
             ],

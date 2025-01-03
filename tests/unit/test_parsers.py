@@ -23,7 +23,7 @@ from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
-from circuit_maintenance_parser.parsers.pccw import HtmlParserPccw, SubjectParserPccw
+from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -470,7 +470,7 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "ntt", "ntt1"),
             Path(dir_path, "data", "ntt", "ntt1_result.json"),
         ),
-        # Pccw
+        # PCCW
         (
             ICal,
             Path(dir_path, "data", "pccw", "pccw_planned"),
@@ -492,22 +492,22 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "pccw", "pccw_cancellation_result.json"),
         ),
         (
-            HtmlParserPccw,
+            HtmlParserPCCW,
             Path(dir_path, "data", "pccw", "pccw_completion1_body.html"),
             Path(dir_path, "data", "pccw", "pccw_completion1_body_result.json"),
         ),
         (
-            SubjectParserPccw,
+            SubjectParserPCCW,
             Path(dir_path, "data", "pccw", "pccw_completion1_subject.txt"),
             Path(dir_path, "data", "pccw", "pccw_completion1_subject_result.json"),
         ),
         (
-            HtmlParserPccw,
+            HtmlParserPCCW,
             Path(dir_path, "data", "pccw", "pccw_completion2_body.html"),
             Path(dir_path, "data", "pccw", "pccw_completion2_body_result.json"),
         ),
         (
-            SubjectParserPccw,
+            SubjectParserPCCW,
             Path(dir_path, "data", "pccw", "pccw_completion2_subject.txt"),
             Path(dir_path, "data", "pccw", "pccw_completion2_subject_result.json"),
         ),
