@@ -12,6 +12,7 @@ from .provider import (
     HGC,
     NTT,
     AquaComms,
+    Apple,
     Arelion,
     Cogent,
     Colt,
@@ -39,6 +40,7 @@ from .provider import (
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    Apple,
     AquaComms,
     Arelion,
     AWS,
