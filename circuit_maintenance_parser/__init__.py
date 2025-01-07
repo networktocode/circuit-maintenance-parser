@@ -12,6 +12,7 @@ from .provider import (
     HGC,
     NTT,
     AquaComms,
+    Apple,
     Arelion,
     Cogent,
     Colt,
@@ -26,6 +27,7 @@ from .provider import (
     Momentum,
     Netflix,
     PacketFabric,
+    PCCW,
     Seaborn,
     Sparkle,
     Tata,
@@ -39,6 +41,7 @@ from .provider import (
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    Apple,
     AquaComms,
     Arelion,
     AWS,
@@ -58,6 +61,7 @@ SUPPORTED_PROVIDERS = (
     Netflix,
     NTT,
     PacketFabric,
+    PCCW,
     Seaborn,
     Sparkle,
     Tata,

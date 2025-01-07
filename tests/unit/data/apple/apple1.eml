@@ -1,0 +1,40 @@
+MIME-version: 1.0
+Date: Thu, 26 Aug 2021 18:22:09 +0100
+Subject: Apple (AS714) Net Maintenance Notice for AS12345 in Chicago
+Content-type: multipart/mixed; boundary="===============1255676001481217459=="
+
+--===============1255676001481217459==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Apple (AS714) Network Maintenance Notification
+Reference Internal Ticket: CHG000123456
+Message sent to: noc@example.org
+
+Details:
+Start Time: 2 May 2023 14:00 UTC
+End Time: 16 May 2023 23:59 UTC
+
+Peering Details:
+Apple AS: 714
+Peer AS: 12345
+
+
+Peer IP: ['10.0.0.2', '2000:0000:0000:0000:0000:0000:0000:0002']
+
+There is no change required on your end as we will gracefully drain the traffic prior to maintenance.
+
+When the maintenance is completed, Apple will automatically re-route traffic back.
+For reference, our current max prefix setting recommendation is: IPv4 = 10000 and IPv6 = 1000.
+Questions about this event can be sent to peering-noc@group.apple.com.
+
+Thank you for peering with Apple!
+
+Regards,
+
+Apple Peering NOC (AS714)
+peering-noc@group.apple.com
+as714.peeringdb.com
+
+--===============1255676001481217459==--

@@ -8,6 +8,7 @@ import pytest
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import EmailDateParser, ICal
+from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
@@ -23,6 +24,7 @@ from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
+from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -92,6 +94,12 @@ class NestedEncoder(json.JSONEncoder):
             ICal,
             Path(dir_path, "data", "ical", "ical7"),
             Path(dir_path, "data", "ical", "ical7_result.json"),
+        ),
+        # Apple
+        (
+            TextParserApple,
+            Path(dir_path, "data", "apple", "apple1.eml"),
+            Path(dir_path, "data", "apple", "apple1_text_parser_result.json"),
         ),
         # AquaComms
         (
@@ -468,6 +476,47 @@ class NestedEncoder(json.JSONEncoder):
             ICal,
             Path(dir_path, "data", "ntt", "ntt1"),
             Path(dir_path, "data", "ntt", "ntt1_result.json"),
+        ),
+        # PCCW
+        (
+            ICal,
+            Path(dir_path, "data", "pccw", "pccw_planned"),
+            Path(dir_path, "data", "pccw", "pccw_planned_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "pccw", "pccw_urgent"),
+            Path(dir_path, "data", "pccw", "pccw_urgent_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "pccw", "pccw_amendment"),
+            Path(dir_path, "data", "pccw", "pccw_amendment_result.json"),
+        ),
+        (
+            ICal,
+            Path(dir_path, "data", "pccw", "pccw_cancellation"),
+            Path(dir_path, "data", "pccw", "pccw_cancellation_result.json"),
+        ),
+        (
+            HtmlParserPCCW,
+            Path(dir_path, "data", "pccw", "pccw_completion1_body.html"),
+            Path(dir_path, "data", "pccw", "pccw_completion1_body_result.json"),
+        ),
+        (
+            SubjectParserPCCW,
+            Path(dir_path, "data", "pccw", "pccw_completion1_subject.txt"),
+            Path(dir_path, "data", "pccw", "pccw_completion1_subject_result.json"),
+        ),
+        (
+            HtmlParserPCCW,
+            Path(dir_path, "data", "pccw", "pccw_completion2_body.html"),
+            Path(dir_path, "data", "pccw", "pccw_completion2_body_result.json"),
+        ),
+        (
+            SubjectParserPCCW,
+            Path(dir_path, "data", "pccw", "pccw_completion2_subject.txt"),
+            Path(dir_path, "data", "pccw", "pccw_completion2_subject_result.json"),
         ),
         # Seaborn
         (

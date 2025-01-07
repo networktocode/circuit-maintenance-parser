@@ -18,6 +18,7 @@ from circuit_maintenance_parser.provider import (
     HGC,
     NTT,
     AquaComms,
+    Apple,
     Arelion,
     Cogent,
     Colt,
@@ -32,6 +33,7 @@ from circuit_maintenance_parser.provider import (
     Momentum,
     Netflix,
     PacketFabric,
+    PCCW,
     Seaborn,
     Sparkle,
     Tata,
@@ -59,6 +61,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
+        # Apple
+        (
+            Apple,
+            [
+                ("email", Path(dir_path, "data", "apple", "apple1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "apple", "apple1_result.json"),
             ],
         ),
         # AquaComms
@@ -638,6 +650,25 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
+        # PCCW
+        (
+            PCCW,
+            [
+                ("email", Path(dir_path, "data", "pccw", "pccw_email.eml")),
+            ],
+            [
+                Path(dir_path, "data", "pccw", "pccw_email_result.json"),
+            ],
+        ),
+        (
+            PCCW,
+            [
+                ("ical", Path(dir_path, "data", "pccw", "pccw_ical")),
+            ],
+            [
+                Path(dir_path, "data", "pccw", "pccw_ical_result.json"),
             ],
         ),
         # Seaborn
