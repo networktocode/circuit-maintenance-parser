@@ -8,6 +8,7 @@ import pytest
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import EmailDateParser, ICal
+from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
@@ -93,6 +94,12 @@ class NestedEncoder(json.JSONEncoder):
             ICal,
             Path(dir_path, "data", "ical", "ical7"),
             Path(dir_path, "data", "ical", "ical7_result.json"),
+        ),
+        # Apple
+        (
+            TextParserApple,
+            Path(dir_path, "data", "apple", "apple1.eml"),
+            Path(dir_path, "data", "apple", "apple1_text_parser_result.json"),
         ),
         # AquaComms
         (

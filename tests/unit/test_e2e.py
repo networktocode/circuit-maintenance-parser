@@ -18,6 +18,7 @@ from circuit_maintenance_parser.provider import (
     HGC,
     NTT,
     AquaComms,
+    Apple,
     Arelion,
     Cogent,
     Colt,
@@ -60,6 +61,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
+        # Apple
+        (
+            Apple,
+            [
+                ("email", Path(dir_path, "data", "apple", "apple1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "apple", "apple1_result.json"),
             ],
         ),
         # AquaComms
