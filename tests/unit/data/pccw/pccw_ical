@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+PRODID:-//iCal4j v1.0//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTAMP:20241118T091834Z
+DTSTART:20241126T010000Z
+DTEND:20241126T100000Z
+SUMMARY:Planned Outage Notification of International Service -RPO Reference number R1234\\56B - INC0123456789AB
+DESCRIPTION;ENCODING=QUOTED-PRINTABLE:=0D=0ACustomer Name : Acme Pte Ltd                      =0D=0AFrom : Global Services & Operations Tel : +852-28291567=0D=0ADate : 18/11/2024 07:57:30 GMT (dd/mm/yyyy)=0D=0A=0D=0A=0D=0ADear Sir/Madam,=0D=0A=0D=0A=0D=0APCCW Global wished to advise you that the following network activity that will affect your service. =0D=0A=0D=0A=0D=0ARPO Reference Number : R5030\\24B=0D=0ADate Time : 26/11/2024 01:00:00 to 26/11/2024 10:00:00 GMT (dd/mm/yyyy)=0D=0ADuration : 0 mins=0D=0AService/Circuit Affected :=0D=0ASR654321 / ABC(XXX)-DEF(XXX) EP4321 / =0D=0ASR123456 / ABC(XXX)-DEF(XXX) EP1234 / =0D=0A=0D=0AOutage Description : AAE-1:  PW for Fiber migration works between Ipoh - Bidor (IPH-BID) span within segment L.1, Services =0D=0A=0D=0AImpact : Switching hits=0D=0A=0D=0APCCW Global apologies for all inconveniences caused.=0D=0A=0D=0AShould you have any question or any enquiries, please do not hesitate to contact us by calling our 24x7 customer service hotline at +852-28291567 / 80028291567 (Toll free number)=0D=0A=0D=0A=0D=0ABest Regards,=0D=0A=0D=0AGlobal Services & Operations =0D=0APCCW Global
+UID:20241118T091834Z-uidGen@fe80:0:0:0:42:acff:fe15:6%eth0
+SEQUENCE:0
+X-MAINTNOTE-PROVIDER:PCCW Global
+X-MAINTNOTE-ACCOUNT:Acme Pte Ltd
+X-MAINTNOTE-MAINTENANCE-ID:INC0123456789AB
+X-MAINTNOTE-OBJECT-ID;SR=SR654321:ABC(XXX)-DEF(XXX) EP4321:AAAAAA-654321-
+ELE
+X-MAINTNOTE-OBJECT-ID;SR=SR123456:ABC(XXX)-DEF(XXX) EP1234:AAAAAA-123456-
+ELE
+X-MAINTNOTE-IMPACT:OUTAGE
+X-MAINTNOTE-STATUS:CONFIRMED
+ORGANIZER:mailto:gsoc-planned-event@pccwglobal.com
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR

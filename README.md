@@ -63,10 +63,12 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - EXA (formerly GTT) (\*)
 - NTT
 - PacketFabric
+- PCCW
 - Telstra (\*)
 
 #### Supported providers based on other parsers
 
+- Apple
 - AWS
 - AquaComms
 - BSO
@@ -82,8 +84,10 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - Megaport
 - Momentum
 - Netflix (AS2906 only)
+- PCCW
 - Seaborn
 - Sparkle
+- Tata
 - Telstra (\*)
 - Turkcell
 - Verizon

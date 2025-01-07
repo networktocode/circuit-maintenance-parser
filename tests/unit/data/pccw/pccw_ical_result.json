@@ -1,0 +1,25 @@
+[
+    {
+        "account": "Acme Pte Ltd",
+        "circuits": [
+            {
+                "circuit_id": "ABC(XXX)-DEF(XXX) EP4321:AAAAAA-654321-",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "ABC(XXX)-DEF(XXX) EP1234:AAAAAA-123456-",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1732615200,
+        "maintenance_id": "INC0123456789AB",
+        "organizer": "mailto:gsoc-planned-event@pccwglobal.com",
+        "provider": "PCCW Global",
+        "sequence": 0,
+        "stamp": 1731921514,
+        "start": 1732582800,
+        "status": "CONFIRMED",
+        "summary": "Planned Outage Notification of International Service -RPO Reference number R1234\\56B - INC0123456789AB",
+        "uid": "20241118T091834Z-uidGen@fe80:0:0:0:42:acff:fe15:6%eth0"
+    }
+]

@@ -43,7 +43,7 @@ class Parser(BaseModel):
     def get_data_types(cls) -> List[str]:
         """Return the expected data type."""
         try:
-            return cls._data_types.get_default()
+            return cls._data_types.get_default()  # type: ignore[attr-defined]
         except AttributeError:
             # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
             return cls()._data_types

@@ -1,0 +1,302 @@
+Received: from CO1PR01MB7356.prod.exchangelabs.com (2603:10b6:303:15b::10) by
+ SN7PR01MB7921.prod.exchangelabs.com with HTTPS; Fri, 29 Nov 2024 23:38:57
+ +0000
+Received: from BY3PR05CA0060.namprd05.prod.outlook.com (2603:10b6:a03:39b::35)
+ by CO1PR01MB7356.prod.exchangelabs.com (2603:10b6:303:15b::10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8230.5; Fri, 29 Nov 2024 23:38:52 +0000
+Received: from SJ1PEPF000023D3.namprd21.prod.outlook.com
+ (2603:10b6:a03:39b:cafe::e7) by BY3PR05CA0060.outlook.office365.com
+ (2603:10b6:a03:39b::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.5 via Frontend Transport; Fri,
+ 29 Nov 2024 23:38:51 +0000
+Received: from esa.hc5801-97.iphmx.com (139.138.58.96) by
+ SJ1PEPF000023D3.mail.protection.outlook.com (10.167.244.68) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8230.0 via Frontend Transport; Fri, 29 Nov 2024 23:38:51 +0000
+Received: from mail-wr1-f99.google.com ([209.85.221.99])
+  by esa1.hc5801-97.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Nov 2024 15:38:49 -0800
+Received: by mail-wr1-f99.google.com with SMTP id ffacd0b85a97d-3824aef833bso1722545f8f.0
+        for <xxx@xxx.com>; Fri, 29 Nov 2024 15:38:49 -0800 (PST)
+Received: from ipmx5.pccwglobal.com (ipmx5.pccwglobal.com. [205.252.9.8])
+        by smtp-relay.gmail.com with ESMTPS id d9443c01a7336-215219a572fsm1758115ad.101.2024.11.29.15.38.45
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Fri, 29 Nov 2024 15:38:48 -0800 (PST)
+Received: from smtp-ap-sg-1a.onbmc.com (HELO sg1-smtp-1.onbmc.com) ([18.139.96.40])
+  by ipmx5.pccwglobal.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 29 Nov 2024 23:38:43 +0000
+Received: from platform-fts-0.platform-fts.pccwg-prod.svc.cluster.local (unknown [10.55.19.92])
+	by sg1-smtp-1.onbmc.com (Postfix) with ESMTPA id 5F611FA5C;
+	Fri, 29 Nov 2024 23:38:42 +0000 (GMT)
+From: PCCW Global <gsoc-planned-event@pccwglobal.com>
+Subject: Completion - Planned Outage Notification of International Service -
+ RPO Reference number R1234\56B - INC0123456789AB
+Thread-Topic: Completion - Planned Outage Notification of International
+ Service - RPO Reference number R1234\56B - INC0123456789AB
+Thread-Index: AQHbQrfccNFpr07fV0Odn0FhhN3aeg==
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Fri, 29 Nov 2024 23:38:42 +0000
+Message-ID:
+	<504869413.296659.1732923522331@platform-fts-0.platform-fts.pccwg-prod.svc.cluster.local>
+Reply-To: PCCW Global <gsoc-planned-event@pccwglobal.com>
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource:
+	SJ1PEPF000023D3.namprd21.prod.outlook.com
+X-MS-Has-Attach:
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-Organization-Network-Message-Id:
+	bcbde5b7-e660-46e2-7002-08dd10cefb06
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+received-spf: None (esa.hc5801-97.iphmx.com: no sender  authenticity
+ information available from domain of  postmaster@mail-wr1-f99.google.com)
+ identity=helo;  client-ip=209.85.221.99; receiver=esa.hc5801-97.iphmx.com;
+  envelope-from="gsoc-planned-event@pccwglobal.com";
+  x-sender="postmaster@mail-wr1-f99.google.com";
+  x-conformance=sidf_compatible
+ironport-sdr: 674a508a_v8x4W7lFf7X08lJ1SnuiQXENIZtwkKjpctzsxcBBHzopXLg
+ RO2dqb/VgB+B5WC+DKkkHL/sNZ15ZcGCqAGCiJg==
+x-ironport-av: E=Sophos;i="6.12,197,1728975600";
+    d="scan'208,217";a="99571738"
+x-amp-result: SKIPPED(no attachment in message)
+x-amp-file-uploaded: False
+authentication-results: spf=pass (sender IP is 209.85.221.99)
+ smtp.mailfrom=pccwglobal.com; dkim=pass (signature was verified)
+ header.d=onbmc.com;dmarc=pass action=none
+ header.from=pccwglobal.com;compauth=pass reason=100
+dkim-signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=onbmc.com; s=mail;
+	t=1732923522; bh=qq55NKS1qsTGbwRHRO/dt/lI6M+q0faY3A7UaFS02jU=;
+	h=Date:From:Reply-To:To:Cc:Subject:From;
+	b=Vjw5HpZ+ID5n1OlsdwnLNfEoyJoBEt46vqn9CNo7in4ASoufFa7ksnoshy/ICpX6F
+	 LqWNHKwYlqDVsvuHu53/jOZccUdmz0B5ODhDfzdAWMUUhDVts0cF6fxBMmfrQzNGtw
+	 DOJTkkxOKNhPosZKCkn1rKqIzAd2J4IAj2sjF6b8=
+x-ms-office365-filtering-correlation-id: bcbde5b7-e660-46e2-7002-08dd10cefb06
+x-ms-traffictypediagnostic:
+	SJ1PEPF000023D3:EE_|CO1PR01MB7356:EE_|SN7PR01MB7921:EE_
+x-microsoft-antispam:
+	BCL:2;ARA:13230040|43022699015|69100299015|3072899012|2092899012|12012899012|5062899012|82310400026|4076899003|8096899003;
+x-forefront-antispam-report:
+	CIP:139.138.58.96;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail-wr1-f99.google.com;PTR:mail-wr1-f99.google.com;CAT:NONE;SFS:(13230040)(43022699015)(69100299015)(3072899012)(2092899012)(12012899012)(5062899012)(82310400026)(4076899003)(8096899003);DIR:INB;
+x-ms-exchange-crosstenant-authas: Anonymous
+x-ms-exchange-crosstenant-authsource:
+	SJ1PEPF000023D3.namprd21.prod.outlook.com
+x-ms-exchange-crosstenant-network-message-id:
+	bcbde5b7-e660-46e2-7002-08dd10cefb06
+x-ms-exchange-crosstenant-originalarrivaltime: 29 Nov 2024 23:38:51.7288 (UTC)
+x-ms-exchange-crosstenant-fromentityheader: Internet
+x-ms-exchange-crosstenant-id: dd3dfd2f-6a3b-40d1-9be0-bf8327d81c50
+x-ms-exchange-transport-crosstenantheadersstamped: CO1PR01MB7356
+x-ms-exchange-transport-endtoendlatency: 00:00:06.2351010
+x-ms-exchange-processed-by-bccfoldering: 15.20.8230.000
+ironport-hdrordr: A9a23:f4KIqaw8tnRik2CM7RHvKrPwKL1zdoMgy1knxilNoNJuEvBw9v
+ re+Mjyt3fP4gr5PUtMpTnuAsW9qB/nmqKdgrNhWItKPjOW21dA/LsSi7cKqgeIc0bDH4hmu5
+ uIGJIOauEYY2IasS+A2njeL+od
+authentication-results-original: esa.hc5801-97.iphmx.com; spf=None
+ smtp.pra=gsoc-planned-event@pccwglobal.com; spf=Pass
+ smtp.mailfrom=gsoc-planned-event@pccwglobal.com; spf=None
+ smtp.helo=postmaster@mail-wr1-f99.google.com; dkim=pass (signature verified)
+ header.i=@onbmc.com; dmarc=pass (p=quarantine dis=none) d=pccwglobal.com
+x-eopattributedmessage: 0
+x-eoptenantattributedmessage: dd3dfd2f-6a3b-40d1-9be0-bf8327d81c50:0
+x-tenant: A891CFC00BC182B5C1E6A97
+x-ms-exchange-atpmessageproperties: SA|SL
+x-ironport-anti-spam-filtered: true
+x-ipas-result:
+	A2EaAACLT0pndyhgixJaHAEBAQEBAQcBARIBAQQEAQGBfwcBAQsBgUAKBDGBQYFkA4RTiB2GcYJgiQGLCIM5A4ImgUmBEIFWFIFqDwEBAQEBAQEBAQk7CQQBAQMDAYQ6RopmJzQJDgECBAEBAQEDAgMBAQEBAQEBAQ4BAQEFAQEBAQEBBgQBAQECEAFDSYU1Rg2CRRqBKIEmAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQECCGMBSB0BATUCARQKKA8HAlcIgxQ1gi8UBrBWeoEygQGCDAEBBoFDUwM32jR/AwaBMBgBiEsBKoEyAoQKATuDQngCgQEBgU2BFYF8fYF0eWMBAoElKV6DDoJpgRSBMC2DbFQiJXeED3+CE2iHMoJiiS+ISgcHYVhLMzIBVRMXCwcFgTo8AyKBV4FNgTaBUUOBFQaBMy8bIQuCBYEZGxWBEkY9OYIRaUs6Ag0CNoIkJFmCTYUXgUCCBoEjPoQegktdgwZCHTcJAwttPTcGAgwbS0IdEp8wAQqBG0eCUw4beRVjK3JZWZMlEo9xgTWhYAsyg3KEb5MkiX6EBI0FmUiIAjaQQyKjLAoThT+BZ4IWTSOCHIEbUhkPjiEMFhaBIoIgxkx4AhMnAgcLAQEDCYZIix+BSwEB
+x-ironport-outbreak-status: No, level 0, Unknown - Unknown
+x-mga-submission:
+	MDGWtO7YkJw8HEcDcI7JTXRdeS+1ReAY/4xY7tBhabsbsD1WWF9E4vsj4LZIcs8KBv/0LUG5Of1Z+hRwVEJj6ICsFIonUKwRTcFwV5V1ENu9CaDL221TNzYyxxKN4AD/HkWHNF799d01thOEsq0CH8ATJ3IhvDpVno7gd5zDnPkzew==
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(920097)(930097)(140003)(1420198);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?TzNmeDZ6eXZkU3NqMDF1SDZ3czE4NDVJWmZ2ckpET3lTcUhGQ05XbWdhUmNt?=
+ =?utf-8?B?WDRDd2ZKMUdkb25aUE0yTFErZFVuV3lVZ2RjSUk4cEpKcVprUGhTbkozMGV4?=
+ =?utf-8?B?MUNBV2tPaG5FZGlNRmU0MDdsZWNuU2tZaVB2WUhOWHZoS29yTVlsWEpob1U2?=
+ =?utf-8?B?YUtGTUN1dTZwdkhSbkR6ZTlRcGZSR0pTNEZReXBSQUlFelFxWENEVXRQSEg1?=
+ =?utf-8?B?VnJTWUp2OCtnTnhXOTFIL1BiMEVrWlZtQmlNT3NiS3o4bkpTSEViMXNaR3o0?=
+ =?utf-8?B?c1g4K1B4K204aUo1bXVISW85RXBmdEI1NVlZU2RNbm8xTCs1bUNSTUVFVzVX?=
+ =?utf-8?B?eEdZK2NDWFFrb05KQ3F5NXdlc3FJSUdxVldPY3BZRTYvNGt1OHJoRFowSldZ?=
+ =?utf-8?B?S2wvQzNSSXkwL2VINUVwQ3MvUE45RFhUM29hTk5hVkd1bytHdWQ1OVl6TTJN?=
+ =?utf-8?B?WjdJZXQxYi9COS9xUnA0TThYZjlvbVZYRW5tSGY1TWIyRmozU2YzMUNkakxV?=
+ =?utf-8?B?VCtSYnlQN0ZVdmc4R2cvN0RZQllOclhBUTVZRzlqNVVuSmsyRXBHT2x5UElQ?=
+ =?utf-8?B?SCtKbTBuZHFzU3N5VUdtWTVpSTV2YWp3azNUK0JBYUdQeWQ4L1RKdW5qcEQw?=
+ =?utf-8?B?ZG8yNWRKOGY0YnFTWTVrYnNjTCtaejk0QWxsQm4yMlNMSWhadFJxK2NJa09j?=
+ =?utf-8?B?bzNvUXFJQVRYL25yWUlXTXp4c3pGR0NNc25oaytqc1YrNTU5c3Z6a2h2ejk0?=
+ =?utf-8?B?OVkyTXA5clRWMUV5TTR2VDJDNjFRTHM2VTJXWCt3NXkzRjc2TERkSmRMSVR3?=
+ =?utf-8?B?VDlTK1p0am1waWJ5UmEvQ0hqT2RvRkovLzVTQ0FybFR0eVhKQ0RpRkMxZFFs?=
+ =?utf-8?B?WUM3cGc1VXp2MGI2M3lMd1R0MENUelB3T25JNlFLclBzR2tDSEo4YzNEdDJy?=
+ =?utf-8?B?OS85Q3B2RTRtcWlhRFNlaWw1WEZ3ZkMrNWRFcU9xUU5JOEVTS1M0NC9HbHgy?=
+ =?utf-8?B?Um5FOTh4M2RkVFcyL0QyN0kzaEVvRHN1Mk5uNVNRcGZpMENuQ1Q2S3FVSVcy?=
+ =?utf-8?B?UFd3a1BwNXZEaUxmVXZuNjg0MGxvd1lxYjNnRXV1ZGVCYUxVMzdvVkg5bkdt?=
+ =?utf-8?B?alZCb1FoUHUwNWI5c2dQazJpZEhjTXc3eVF5ZHJzQUMxSi9HUW00YUpUUkZi?=
+ =?utf-8?B?ZkRGcTBjMG0zaE95ZEVJSFFwSmw2bXdyNGZvMW9XcUNhcFpDWFZndGJ6cFNr?=
+ =?utf-8?B?cGJXQkRhVXp2NzNDM2s3cnlvZ2RLYlRkc3hROEN3ZGNkWkFQNWZaS2pCV1pi?=
+ =?utf-8?B?am5zV0NKaW1jNG9JaDdZS1BHWU15Tm1IeUdyMXhMSThLR3cxNzkvdzBiZ09W?=
+ =?utf-8?B?bzFYTTdQb3pjRjJCK2pEdUkzMGNLOHNBRi9KcU5iTXJJOUdDZXFMblpHR2RJ?=
+ =?utf-8?B?Y0pRSlJuUTZiN1hUNHZ1TCswc0Y5RjlIcFBaeHRodlJYK0NscWhaT09QV2x2?=
+ =?utf-8?B?dCtyeUhuVldsOHZoQ05CQ3lzRUhKeEh0QmR2dXMvZUpKL05Tb1pjSzRCS3dt?=
+ =?utf-8?B?bmZIT3MvN2xLZ3V5WjhYK3g2cjdnWjJwU3QrREpTV1FYN3JFdGNvZ3dUTm1i?=
+ =?utf-8?B?eTZZMW84Z1FNaTU5S0UxcHFESUdzVmJFd2ZlQW4wc3Z1eXk1Ujd0dDF1N0FS?=
+ =?utf-8?B?cTdNVStoNTNwWWIrRFVmOS9IcllJUDhZU2hjVS9mdDZWSHN0TUxsM2x6SENr?=
+ =?utf-8?B?TjdPV0llWjVGQjVqUzBVNVI0VDIzQTZZSTZ5Y2lBbkEya2RsbmdSbVVibXpB?=
+ =?utf-8?B?TXpxRXpZVm9pS25Lc1BrMEtZcExwNVFVckxDR29vNU1RaHNpODVFNTNWelgv?=
+ =?utf-8?B?dDZnc2ZEdGtZTlNIYXdkRkczMlgvYlNvN3hIU3lHd01OSkQvcllnQncwSDFp?=
+ =?utf-8?B?Q0QzeGpLcjV3VENzblNyVkNMUU1aWHdrWkRReXNsUUlsR0YwK043R0x5WHRj?=
+ =?utf-8?B?Wm1KTjVHTXhqQm5uSEZpSGdmZlllYWwvTmROVzJyVXNOWlVpSzRhVXdNVkF5?=
+ =?utf-8?B?NUoyQ0N5eTI0dnFyU3dRbFZKbEJYTWRMSUtydnNob2tobWpVZVpzTGJVNGtk?=
+ =?utf-8?B?Z2lRbUk5UXFnYytXTkF5S1JDRndaVmNuaUc2WHJXS2xXZDNYUDJ2M3M4Wk5p?=
+ =?utf-8?B?WmRBdDYzRXVZVm82M1JXNXk5bVU4SjFHc2twMnBaREVmd1VFWW9YZHBSK0sv?=
+ =?utf-8?B?OFlCU21xVHNKbHd2b0I0bjRQc1pKS3VnRzJXY1paQWxIejN6RFdCa0Y3aE15?=
+ =?utf-8?B?UTBVQ0lWc0hWZmdGMVhHQzhEbW1NcXZuUXRkL29aQVhwU1RqeVZuL0ZWSmZ4?=
+ =?utf-8?B?cmFVMStlQWh0eUloWkNqWGFSdkc5clV2YlEyYnIrMkxEZXNPang3WlZ0L1lJ?=
+ =?utf-8?B?cUdDY0lTTVVSUUhaeEZoZjdpVTZyanNuNXFwNVBmZUhHa0hUS2hXREEvUDdt?=
+ =?utf-8?B?bExDYVYwL1U4UFYyVkpDWnRHc1pOMUEzYlg0blo3RUFRZG8raGJlNWhHSmNy?=
+ =?utf-8?B?QTVSbVdUV2RETG9wbFgvZ2wvdzdiZzdWNVhxcHc5QVlTVXBGNkZEVHlmcStt?=
+ =?utf-8?B?bzlDbDF6Nzl6c1FTUURGL0E5MTVpRVRvT2ZGWnVwU0JwUld0NkhDRWpNNzJS?=
+ =?utf-8?B?VEhONXl2WEpmQlBOODlNQjJTTHhHNWN1V1N1MkZRVkQzaEVjYVRvNllLUWl0?=
+ =?utf-8?B?OG51Rjc3Zm9WdStNRkNBTnFOc2h1bXVjanJHaW5zaTBvUlljT3p4bmpyR0ta?=
+ =?utf-8?B?S0g5dHkrYTkvMFMxZUFSYlRNdWhSQ2Y4QmFCOWxUdzBHakpxV2ZVNFdmZWlC?=
+ =?utf-8?B?UHJnTDdSdytuR0pZT1d1NGlRKzJ1OTQzcE05MWNCY1VETGVMRjNaTzZOR2kw?=
+ =?utf-8?Q?HTz81Gwi+PfWZwPj?=
+Content-Type: multipart/alternative;
+	boundary="_000_5048694132966591732923522331platformfts0platformftspccw_"
+MIME-Version: 1.0
+
+--_000_5048694132966591732923522331platformfts0platformftspccw_
+Content-Type: text/plain; charset="utf-8"
+
+CAUTION: This email has been sent from an external source. Do not click links, open attachments, or provide sensitive business information unless you can verify the sender’s legitimacy.
+
+[https://www.pccwglobal.com/wp-content/uploads/notifications/request_planned_outage.jpg]
+
+
+
+Customer Name : Acme Pte Ltd
+From : Global Services & Operations Tel : +852-28291567
+Date : 29/11/2024 23:38:36 GMT (dd/mm/yyyy)
+
+
+Dear Sir/Madam,
+
+
+PCCW Global wished to advise you that the following network activity that will affect your service.
+
+
+RPO Reference Number : R1234\56B
+Date Time : 26/11/2024 01:00:00 to 26/11/2024 10:00:00 GMT (dd/mm/yyyy)
+Duration : 0 mins
+Service/Circuit Affected :
+SR654321 / ABC(XXX)-DEF(XXX) EP4321 /
+SR123456 / ABC(XXX)-DEF(XXX) EP1234 /
+
+Outage Description : AAE-1: PW for Fiber migration works between XXXX - XXXXX (XXX-XXX) span within segment L.1, Services
+
+Impact : Switching hits
+
+PCCW Global apologies for all inconveniences caused.
+
+Should you have any question or any enquiries, please do not hesitate to contact us by calling our 24x7 customer service hotline at +852-28291567 / 80028291567 (Toll free number)
+
+
+Best Regards,
+
+Global Services & Operations
+PCCW Global
+
+--_000_5048694132966591732923522331platformfts0platformftspccw_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <781832C9E64F904FA93B38787D66B293@prod.exchangelabs.com>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>template</title>
+<style type="text/css">
+.ReadMsgBody{width: 100%;}
+.ExternalClass{width: 100%;}
+div, p, a, li, td { -webkit-text-size-adjust:none; }
+a[x-apple-data-detectors]{
+			color: inherit !important;
+			text-decoration: inherit !important;
+			font-size: inherit !important;
+			font-family: inherit !important;
+			font-weight: inherit !i mportant;
+			line-height: inherit !important;
+			}
+</style>
+</head>
+<body>
+<div style="background-color:#FFEB9C; width:100%; padding:2pt; font-size:10pt; line-height:12pt; font-family:'Calibri'; color:Black; text-align: left;">
+<span style="color:#9C6500; font-weight:bold;">CAUTION:</span> This email has been sent from an external source. Do not click links, open attachments, or provide sensitive business information unless you can verify the sender’s legitimacy.
+</div>
+<br>
+<div>
+<table style="width: 720px;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr style="line-height: 0px;">
+<td style="line-height: 0px;"><img src="https://www.pccwglobal.com/wp-content/uploads/notifications/request_planned_outage.jpg" alt="" width="700" height="250"></td>
+</tr>
+</tbody>
+</table>
+<table style="width: 720px;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td align="left" valign="top" height="30">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 11pt; font-family: verdana, geneva;">Customer Name : Acme Pte Ltd
+<br>
+From : Global Services &amp; Operations Tel : +852-28291567<br>
+Date : 29/11/2024 23:38:36 GMT (dd/mm/yyyy)<br>
+<br>
+<br>
+Dear Sir/Madam,<br>
+<br>
+<br>
+PCCW Global wished to advise you that the following network activity that will affect your service.
+<br>
+<br>
+<br>
+RPO Reference Number : R1234\56B<br>
+Date Time : 26/11/2024 01:00:00 to 26/11/2024 10:00:00 GMT (dd/mm/yyyy)<br>
+Duration : 0 mins<br>
+Service/Circuit Affected :<br>
+SR654321 / ABC(XXX)-DEF(XXX) EP4321 / <br>
+SR123456 / ABC(XXX)-DEF(XXX) EP1234 / <br>
+<br>
+Outage Description : AAE-1: PW for Fiber migration works between XXXX - XXXXX (XXX-XXX) span within segment L.1, Services
+<br>
+<br>
+Impact : Switching hits<br>
+<br>
+PCCW Global apologies for all inconveniences caused.<br>
+<br>
+Should you have any question or any enquiries, please do not hesitate to contact us by calling our 24x7 customer service hotline at +852-28291567 / 80028291567 (Toll free number)<br>
+<br>
+<br>
+Best Regards,<br>
+<br>
+Global Services &amp; Operations <br>
+PCCW Global</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 720px;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr style="line-height: 0px;">
+<td style="line-height: 0px;" width="479" height="91"></td>
+</tr>
+</tbody>
+</table>
+<div></div>
+</div>
+</body>
+</html>
+
+--_000_5048694132966591732923522331platformfts0platformftspccw_--

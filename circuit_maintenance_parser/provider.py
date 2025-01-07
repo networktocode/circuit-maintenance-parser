@@ -14,6 +14,8 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.parser import EmailDateParser, ICal
+
+from circuit_maintenance_parser.parsers.apple import SubjectParserApple, TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
@@ -30,6 +32,7 @@ from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.openai import OpenAIParser
+from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -37,6 +40,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
@@ -201,6 +205,15 @@ class GenericProvider(BaseModel):
 ####################
 # PROVIDERS        #
 ####################
+
+
+class Apple(GenericProvider):
+    """Apple provider custom class."""
+
+    _processors: List[GenericProcessor] = [
+        CombinedProcessor(data_parsers=[TextParserApple, SubjectParserApple]),
+    ]
+    _default_organizer = "peering-noc@group.apple.com"
 
 
 class AquaComms(GenericProvider):
@@ -405,6 +418,29 @@ class PacketFabric(GenericProvider):
     _default_organizer = PrivateAttr("support@packetfabric.com")
 
 
+class PCCW(GenericProvider):
+    """PCCW provider custom class."""
+
+    _include_filter = PrivateAttr(
+        {
+            "Icalendar": ["BEGIN"],
+            "ical": ["BEGIN"],
+            EMAIL_HEADER_SUBJECT: [
+                "Completion - Planned Outage Notification",
+                "Completion - Urgent Maintenance Notification",
+            ],
+        }
+    )
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            SimpleProcessor(data_parsers=[ICal]),
+            CombinedProcessor(data_parsers=[HtmlParserPCCW, SubjectParserPCCW, EmailDateParser]),
+        ]
+    )
+    _default_organizer = "mailto:gsoc-planned-event@pccwglobal.com"
+
+
 class Seaborn(GenericProvider):
     """Seaborn provider custom class."""
 
@@ -426,6 +462,19 @@ class Sparkle(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("TISAmericaNOC@tisparkle.com")
+
+
+class Tata(GenericProvider):
+    """Tata provider custom class."""
+
+    _include_filter = PrivateAttr({EMAIL_HEADER_SUBJECT: ["Planned Work Notification"]})
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[HtmlParserTata, SubjectParserTata, EmailDateParser]),
+        ]
+    )
+    _default_organizer = PrivateAttr("planned.activity@tatacommunications.com")
 
 
 class Telia(Arelion):
