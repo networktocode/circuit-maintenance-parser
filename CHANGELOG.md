@@ -1,18 +1,24 @@
 # Changelog
 
-## v2.7.0 - 2024-12-02
+# Changelog
+
+## v2.7.0 - 2025-01-10
 
 ### Added
 
-- [#297](https://github.com/networktocode/circuit-maintenance-parser/pull/297) - Added new parser for Tata Communications.
+- [#303](https://github.com/networktocode/circuit-maintenance-parser/pull/303) - Add new parser for Apple
+- [#302](https://github.com/networktocode/circuit-maintenance-parser/pull/302) - Add support for Python 3.12
+- [#301](https://github.com/networktocode/circuit-maintenance-parser/pull/301) - Add new parser for PCCW
+- [#297](https://github.com/networktocode/circuit-maintenance-parser/pull/297) - Add new parser for Tata Communications
+
+### Changed
+
+- [#302](https://github.com/networktocode/circuit-maintenance-parser/pull/302) - Drop support for Python 3.8
+- [#291](https://github.com/networktocode/circuit-maintenance-parser/pull/291) - Update Windstream Parser for new emails
 
 ### Dependencies
 
 - [#295](https://github.com/networktocode/circuit-maintenance-parser/pull/295) - Remove pydantic dotenv extra
-
-### Changed
-
-- [#291](https://github.com/networktocode/circuit-maintenance-parser/pull/291) - Update Windstream Parser for new emails
 
 ## v2.6.1 - 2024-06-04
 
