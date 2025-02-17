@@ -3,7 +3,7 @@ import copy
 from unittest.mock import patch
 
 import pytest
-from pydantic.error_wrappers import ValidationError
+from pydantic import ValidationError
 
 from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
@@ -139,9 +139,8 @@ def test_combinedprocessor():
 def test_combinedprocessor_missing_data():
     """Tests CombinedProcessor when there is not enough info to create a Maintenance."""
     processor = CombinedProcessor(data_parsers=[FakeParser0, FakeParser1])
-
-    with patch("circuit_maintenance_parser.processor.Maintenance") as mock_maintenance:
-        mock_maintenance.side_effect = ValidationError(errors=["whatever"], model=Maintenance)
+    with patch("circuit_maintenance_parser.processor.Maintenance.validate_status_type") as mock_maintenance:
+        mock_maintenance.side_effect = lambda v: ValidationError(errors=["whatever"], model=Maintenance)
         with pytest.raises(ProcessorError) as e_info:
             # Using the fake_data that returns mutliple maintenances that are not expected in this processor type
             processor.process(fake_data_for_combined, EXTENDED_DATA)

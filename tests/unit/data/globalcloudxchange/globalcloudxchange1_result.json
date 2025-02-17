@@ -1,0 +1,17 @@
+[
+  {
+    "account": "Example Company INC",
+    "circuits": [
+      {
+        "circuit_id": "RGWLS31171",
+        "impact": "REDUCED-REDUNDANCY"
+      }
+    ],
+    "end": 1707757200,
+    "maintenance_id": "PE2024020844407",
+    "stamp": 1707412173,
+    "start": 1707728400,
+    "status": "CONFIRMED",
+    "summary": "Span Loss Rectification"
+  }
+]

@@ -1,58 +1,75 @@
 """Circuit-maintenance-parser init."""
-from typing import Type, Optional
+
+from typing import Optional, Type
 
 from .data import NotificationData
-from .output import Maintenance
 from .errors import NonexistentProviderError, ProviderError
+from .output import Maintenance
 from .provider import (
-    GenericProvider,
-    AquaComms,
-    Arelion,
     AWS,
     BSO,
-    Cogent,
-    Colt,
-    Equinix,
-    EUNetworks,
     GTT,
     HGC,
+    NTT,
+    AquaComms,
+    Apple,
+    Arelion,
+    Cogent,
+    Colt,
+    CrownCastle,
+    Equinix,
+    EUNetworks,
+    GenericProvider,
+    GlobalCloudXchange,
+    Google,
     Lumen,
     Megaport,
     Momentum,
-    NTT,
+    Netflix,
     PacketFabric,
+    PCCW,
     Seaborn,
     Sparkle,
+    Tata,
     Telia,
     Telstra,
     Turkcell,
     Verizon,
+    Windstream,
     Zayo,
 )
 
 SUPPORTED_PROVIDERS = (
     GenericProvider,
+    Apple,
     AquaComms,
     Arelion,
     AWS,
     BSO,
     Cogent,
     Colt,
+    CrownCastle,
     Equinix,
     EUNetworks,
+    GlobalCloudXchange,
+    Google,
     GTT,
     HGC,
     Lumen,
     Megaport,
     Momentum,
+    Netflix,
     NTT,
     PacketFabric,
+    PCCW,
     Seaborn,
     Sparkle,
+    Tata,
     Telia,
     Telstra,
     Turkcell,
     Verizon,
+    Windstream,
     Zayo,
 )
 
@@ -80,7 +97,6 @@ def get_provider_class(provider_name: str) -> Type[GenericProvider]:
         if provider_parser.get_provider_type() == provider_name:
             break
     else:
-
         raise NonexistentProviderError(
             f"{provider_name} is not a currently supported provider. Only {', '.join(SUPPORTED_PROVIDER_NAMES)}"
         )
@@ -90,7 +106,6 @@ def get_provider_class(provider_name: str) -> Type[GenericProvider]:
 
 def get_provider_class_from_sender(email_sender: str) -> Type[GenericProvider]:
     """Returns the notification parser class for an email sender address."""
-
     for provider_parser in SUPPORTED_PROVIDERS:
         if provider_parser.get_default_organizer() == email_sender:
             break

@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Test Account",
+        "circuits": [
+          {
+            "circuit_id": "TEST/WAVE/123456",
+            "impact": "OUTAGE"
+          }
+        ],
+        "end": 1709791200,
+        "maintenance_id": "00223456",
+        "organizer": "mailto:akanksha.ambastha@exainfra.net",
+        "provider": "EXA Infrastructure ",
+        "sequence": 1,
+        "stamp": 1707350400,
+        "start": 1709751600,
+        "status": "CONFIRMED",
+        "summary": "EXA TT#(00223456)\\ Planned Work",
+        "uid": "00223456"
+    }
+]

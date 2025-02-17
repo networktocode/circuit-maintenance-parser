@@ -1,5 +1,6 @@
 """Definition of Mainentance Notification base classes."""
 import logging
+import os
 import base64
 import calendar
 import datetime
@@ -11,7 +12,7 @@ import hashlib
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 
-from pydantic import BaseModel
+from pydantic import BaseModel, PrivateAttr
 from icalendar import Calendar  # type: ignore
 
 from circuit_maintenance_parser.errors import ParserError
@@ -33,7 +34,7 @@ class Parser(BaseModel):
     """
 
     # _data_types are used to match the Parser to to each type of DataPart
-    _data_types = ["text/plain", "plain"]
+    _data_types = PrivateAttr(["text/plain", "plain"])
 
     # TODO: move it to where it is used, Cogent parser
     _geolocator = Geolocator()
@@ -41,7 +42,11 @@ class Parser(BaseModel):
     @classmethod
     def get_data_types(cls) -> List[str]:
         """Return the expected data type."""
-        return cls._data_types
+        try:
+            return cls._data_types.get_default()  # type: ignore[attr-defined]
+        except AttributeError:
+            # TODO: This exception handling is required for Pydantic 1.x compatibility. To be removed when the dependency is deprecated.
+            return cls()._data_types
 
     @classmethod
     def get_name(cls) -> str:
@@ -91,7 +96,7 @@ class ICal(Parser):
     Reference: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-00
     """
 
-    _data_types = ["text/calendar", "ical", "icalendar"]
+    _data_types = PrivateAttr(["text/calendar", "ical", "icalendar"])
 
     def parser_hook(self, raw: bytes, content_type: str):
         """Execute parsing."""
@@ -163,7 +168,7 @@ class ICal(Parser):
 class Html(Parser):
     """Html parser."""
 
-    _data_types = ["text/html", "html"]
+    _data_types = PrivateAttr(["text/html", "html"])
 
     @staticmethod
     def remove_hex_characters(string):
@@ -200,7 +205,11 @@ class Html(Parser):
 class EmailDateParser(Parser):
     """Parser for Email Date."""
 
-    _data_types = [EMAIL_HEADER_DATE]
+    _data_types = PrivateAttr(
+        [
+            EMAIL_HEADER_DATE,
+        ]
+    )
 
     def parser_hook(self, raw: bytes, content_type: str):
         """Execute parsing."""
@@ -213,7 +222,11 @@ class EmailDateParser(Parser):
 class EmailSubjectParser(Parser):
     """Parse data from subject or email."""
 
-    _data_types = [EMAIL_HEADER_SUBJECT]
+    _data_types = PrivateAttr(
+        [
+            EMAIL_HEADER_SUBJECT,
+        ]
+    )
 
     def parser_hook(self, raw: bytes, content_type: str):
         """Execute parsing."""
@@ -235,7 +248,7 @@ class EmailSubjectParser(Parser):
 class Csv(Parser):
     """Csv parser."""
 
-    _data_types = ["application/csv", "text/csv", "application/octet-stream"]
+    _data_types = PrivateAttr(["application/csv", "text/csv", "application/octet-stream"])
 
     def parser_hook(self, raw: bytes, content_type: str):
         """Execute parsing."""
@@ -254,7 +267,11 @@ class Csv(Parser):
 class Text(Parser):
     """Text parser."""
 
-    _data_types = ["text/plain"]
+    _data_types = PrivateAttr(
+        [
+            "text/plain",
+        ]
+    )
 
     def parser_hook(self, raw: bytes, content_type: str):
         """Execute parsing."""
@@ -277,7 +294,7 @@ class Text(Parser):
 class LLM(Parser):
     """LLM parser."""
 
-    _data_types = ["text/html", "html", "text/plain"]
+    _data_types = PrivateAttr(["text/html", "html", "text/plain"])
 
     _llm_question = """Please, could you extract a JSON form without any other comment,
     with the following JSON schema (timestamps in EPOCH and taking into account the GMT offset):
@@ -345,6 +362,23 @@ class LLM(Parser):
             if string in key:
                 return key
         return None
+
+    @property
+    def llm_question(self):
+        """Return the LLM question."""
+        custom_llm_question = os.getenv("PARSER_LLM_QUESTION_STR")
+        if custom_llm_question:
+            return custom_llm_question
+
+        custom_llm_question_path = os.getenv("PARSER_LLM_QUESTION_FILEPATH")
+        if custom_llm_question_path:
+            try:
+                with open(custom_llm_question_path, mode="r", encoding="utf-8") as llm_question_file:
+                    return llm_question_file.read()
+            except OSError as err:
+                logger.warning("The file %s can't be read: %s", custom_llm_question_path, err)
+
+        return self._llm_question
 
     def get_llm_response(self, content):
         """Method to retrieve the response from the LLM for some content."""

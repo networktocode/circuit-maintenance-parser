@@ -1,0 +1,326 @@
+Return-Path: <no-reply@equinix.com>
+Date: Tue, 7 Nov 2023 05:04:09 +0000 (UTC)
+From: Equinix Network Maintenance NO-REPLY <no-reply@equinix.com>
+Reply-To: Equinix Network Maintenance NO-REPLY <no-reply@equinix.com>
+To: "Equinix Network Maintenance.NL" <EquinixNetworkMaintenance.NL@eu.equinix.com>
+Subject: COMPLETED - Scheduled Software Upgrade-AM Metro Area Network Maintenance (SERVICE IMPACTING)-06-NOV-2023 [5-230281950000]
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="----=_Part_333333_222222222.111111111111111111"
+X-Priority: 1
+Organization: Equinix, Inc
+
+------=_Part_333333_222222222.111111111111111111
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+ Geachte Equinix Klant/Dear Equinix Customer,
+
+De hieronder vermelde onderhoudswerkzaamheden zijn inmiddels afgerond.
+
+The maintenance listed below has now been completed.
+
+ =20
+
+Geachte Equinix klant,
+
+DATUM:=09=0906-NOV-2023 - 07-NOV-2023
+
+TIJDSDUUR:=09=0906-NOV-2023 - 07-NOV-2023
+
+LOKALE TIJD:=09=09MAANDAG, 06 NOV 22:00 - DINSDAG, 07 NOV 06:00
+UTC:=09=09MAANDAG, 06 NOV 21:00 - DINSDAG, 07 NOV 05:00
+
+IBX(s): AM1,AM2
+
+BESCHRIJVING:=09
+Please be advised that Equinix engineers will perform a software upgrade on=
+ our Equinix Fabric routers.=20
+The Equinix platform provides redundancy options. To mitigate the impact of=
+ a maintenance event, we recommend customers to setup redundant connections=
+ according to best practices.
+
+EXPECTED SERVICE IMPACT:=20
+For customers without redundancy configured ports and services a downtime i=
+s expected. Customers with redundant configured services will only experien=
+ce a loss of redundancy.
+This work will impact network ports and virtual services listed in the Tabl=
+e below.
+
+EXPECTED DURATION:=20
+Up to 60 minutes in the maintenance window (between 20 to 60 minutes)
+
+PRODUCTEN:EQUINIX CONNECT, EQUINIX FABRIC, EQUINIX INTERNET ACCESS, INTER M=
+ETRO CONNECT, METRO CONNECT
+
+IMPACT:=09Er zullen service onderbrekingen zijn.
+
+
+Equinix Connect =09 =09=09=09 =09=09=09 =09=09=09=09    Account # =09=09=09=
+=09    Product =09=09=09=09    IBX =09=09=09=09    Service Serial # =09=09=
+=09 =09=09=09=09 =09=09=09=09=09=09 333333 =09=09=09=09=09=09 Equinix Conne=
+ct =09=09=09=09=09=09 AM5 =09=09=09=09=09=09 44444.AM1 =09=09=09=09 =09=09=
+=09=09 =09=09=09=09=09=09 333333 =09=09=09=09=09=09 Equinix Connect =09=09=
+=09=09=09=09 AM5 =09=09=09=09=09=09 66666.AM1 =09=09=09=09 =09=09=09 =09
+
+
+
+Onze excuses voor het eventuele ongemak dat u kunt ervaren tijdens deze act=
+iviteit.  Uw medewerking en begrip worden zeer gewaardeerd.
+
+De Equinix SMC is beschikbaar om up-to-date informatie of extra gegevens te=
+ verschaffen. Mocht u vragen hebben over deze activiteit wilt u dan referer=
+en aan 5-230281950685.=20
+
+***************************************************************************=
+***********
+
+Dear Equinix Customer,
+
+DATE:=09=0906-NOV-2023 - 07-NOV-2023
+
+SPAN:=09=0906-NOV-2023 - 07-NOV-2023
+
+LOCAL:=09=09MONDAY, 06 NOV 22:00 - TUESDAY, 07 NOV 06:00
+UTC:=09=09MONDAY, 06 NOV 21:00 - TUESDAY, 07 NOV 05:00
+
+IBX(s): AM1,AM11,AM3,AM5,EN1
+
+
+DESCRIPTION:
+Please be advised that Equinix engineers will perform a software upgrade on=
+ our Equinix Fabric routers.=20
+The Equinix platform provides redundancy options. To mitigate the impact of=
+ a maintenance event, we recommend customers to setup redundant connections=
+ according to best practices.
+
+EXPECTED SERVICE IMPACT:=20
+For customers without redundancy configured ports and services a downtime i=
+s expected. Customers with redundant configured services will only experien=
+ce a loss of redundancy.
+This work will impact network ports and virtual services listed in the Tabl=
+e below.
+
+EXPECTED DURATION:=20
+Up to 60 minutes in the maintenance window (between 20 to 60 minutes)
+
+PRODUCTS:=09EQUINIX CONNECT, EQUINIX FABRIC, EQUINIX INTERNET ACCESS, INTER=
+ METRO CONNECT, METRO CONNECT
+
+IMPACT:=09There will be service interruptions.
+
+=09
+We apologize for any inconvenience you may experience during this activity.=
+  Your cooperation and understanding are greatly appreciated.
+
+The Equinix SMC is available to provide up-to-date status information or ad=
+ditional details, should you have any questions regarding the maintenance. =
+ Please reference 5-230281950000.=20
+
+
+Sincerely,=20
+Equinix SMC=20
+Contacts:
+Please do not reply to this email address. If you have any questions or con=
+cerns regarding this notification, please log a network ticket via the Equi=
+nix Customer Portal, or contact Global Service Desk and quote the the ticke=
+t reference [5-230281950000].=20
+To unsubscribe from notifications, please log in to the Equinix Customer Po=
+rtal  and change your preferences.
+
+------=_Part_333333_222222222.111111111111111111
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<style type="text/css">
+<!--
+
+a:link {
+        color: #215CA1;
+}
+a:visited {
+        color: #215CA1;
+}
+a:hover {
+        color: #215CA1;
+}
+a:active {
+        color: #215CA1;
+}
+ul
+{
+padding: 0px;
+margin: 20px;
+}
+body {
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+}
+-->
+</style>
+<title></title>
+</head>
+<body ><table width="100%" cellspacing="0" cellpadding="0" >
+<tr><td>
+<table width="750" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" ><tr ><td ><div align="center" ><img src="http://info.equinix.com/rs/equinixinc/images/banner-network-maintenance.gif" alt="Meet Equinix" width="100.14%" height="115" border="0" /></div></td></tr><tr ><td ><table width="100%" cellspacing="0" cellpadding="0" ><tr ><td height="0" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr ><td style="border-left:1px solid #cccccc; border-right:1px solid #cccccc; " ><table width="100%" cellspacing="0" cellpadding="0" ><tr>
+
+<td align="center" height="20" colspan="3"></td>
+</tr>
+<tr ><td width="30">&nbsp;</td>
+<td width="642" valign="top" style="border-bottom:1px solid #cccccc; " ><table width="100%" cellspacing="0" cellpadding="0" ><tr ><td valign="top" style="padding-bottom:20px; " ><table width="100%" cellspacing="0" cellpadding="0" >
+<p><span style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; " >
+Geachte Equinix Klant/Dear Equinix Customer,<br />
+<br />
+De hieronder vermelde onderhoudswerkzaamheden zijn inmiddels afgerond.<br />
+<br />
+The maintenance listed below has now been completed.<br />
+<br />
+</p></span>
+<hr>
+<p><span style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; " ><br />
+Geachte Equinix klant,<br />
+<br />
+<b>DATUM:</b>		06-NOV-2023 - 07-NOV-2023<br />
+<br />
+<b>TIJDSDUUR:		06-NOV-2023 - 07-NOV-2023</b><br />
+<br />
+<b>LOKALE TIJD:</b>		MAANDAG, 06 NOV 22:00 - DINSDAG, 07 NOV 06:00<br />
+<b>UTC:</b>		MAANDAG, 06 NOV 21:00 - DINSDAG, 07 NOV 05:00<br />
+<br />
+<b>IBX(s): </b>AM1,AM11,AM3,AM5,EN1<br />
+<br />
+<b>BESCHRIJVING:</b>	<br>Please be advised that Equinix engineers will perform a software upgrade on our Equinix Fabric routers. <br />
+The Equinix platform provides redundancy options. To mitigate the impact of a maintenance event, we recommend customers to setup redundant connections according to best practices.<br />
+<br />
+<b>EXPECTED SERVICE IMPACT: </b><br />
+For customers without redundancy configured ports and services a downtime is expected. Customers with redundant configured services will only experience a loss of redundancy.<br />
+This work will impact network ports and virtual services listed in the Table below.<br />
+<br />
+<b>EXPECTED DURATION: </b><br />
+Up to 60 minutes in the maintenance window (between 20 to 60 minutes)<br />
+<br />
+<b>PRODUCTEN:</b>EQUINIX CONNECT, EQUINIX FABRIC, EQUINIX INTERNET ACCESS, INTER METRO CONNECT, METRO CONNECT<br />
+<br />
+<b>IMPACT:</b>	<font style="background-color: yellow;">Er zullen service onderbrekingen zijn.</font><br />
+</p><br />
+<br/>
+    <b><u>Equinix Connect</u></b>
+	
+
+			<table style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; width:100%;border:1px solid black;border-collapse:collapse;table-layout:fixed">
+			<tr>
+				    <th style="border:1px solid; width:25%">Account #</th>
+				    <th style="border:1px solid; width:25%">Product</th>
+				    <th style="border:1px solid; width:25%">IBX</th>
+				    <th style="border:1px solid; width:25%">Service Serial #</th>
+			</tr>
+				<tr>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">333333</td>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">Equinix Connect</td>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">AM5</td>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">44444.AM1</td>
+				</tr>
+				<tr>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">333333</td>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">Equinix Connect</td>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">AM5</td>
+						 <td align="center" style="border:1px solid;word-wrap: break-word;  width:25%">66666.AM1</td>
+				</tr>
+			</table>
+	<br/>
+<span style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; " ><br />
+<p><span style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; "><br />
+Onze excuses voor het eventuele ongemak dat u kunt ervaren tijdens deze activiteit.  Uw medewerking en begrip worden zeer gewaardeerd.<br />
+<br />
+De Equinix SMC is beschikbaar om up-to-date informatie of extra gegevens te verschaffen. Mocht u vragen hebben over deze activiteit wilt u dan refereren aan 5-230281950000. <br />
+<br />
+**************************************************************************************<br />
+<br />
+Dear Equinix Customer,<br />
+<br />
+<b>DATE:</b>		06-NOV-2023 - 07-NOV-2023<br />
+<br />
+<b>SPAN:		06-NOV-2023 - 07-NOV-2023</b><br />
+<br />
+<b>LOCAL:</b>		MONDAY, 06 NOV 22:00 - TUESDAY, 07 NOV 06:00<br />
+<b>UTC:</b>		MONDAY, 06 NOV 21:00 - TUESDAY, 07 NOV 05:00<br />
+<br />
+<b>IBX(s): </b>AM1,AM11,AM3,AM5,EN1<br />
+<br />
+<Int Desc><br />
+<b>DESCRIPTION:</b><br>Please be advised that Equinix engineers will perform a software upgrade on our Equinix Fabric routers. <br />
+The Equinix platform provides redundancy options. To mitigate the impact of a maintenance event, we recommend customers to setup redundant connections according to best practices.<br />
+<br />
+<b>EXPECTED SERVICE IMPACT: </b><br />
+For customers without redundancy configured ports and services a downtime is expected. Customers with redundant configured services will only experience a loss of redundancy.<br />
+This work will impact network ports and virtual services listed in the Table below.<br />
+<br />
+<b>EXPECTED DURATION: </b><br />
+Up to 60 minutes in the maintenance window (between 20 to 60 minutes)<br />
+<br />
+<b>PRODUCTS:</b>	EQUINIX CONNECT, EQUINIX FABRIC, EQUINIX INTERNET ACCESS, INTER METRO CONNECT, METRO CONNECT<br />
+<br />
+<b>IMPACT:</b>	<font style="background-color: yellow;">There will be service interruptions.</font><br />
+<br />	<br /> We apologize for any inconvenience you may experience during this activity.  Your cooperation and understanding are greatly appreciated.<br /> <br /> The Equinix SMC is available to provide up-to-date status information or additional details, should you have any questions regarding the maintenance.  Please reference 5-230281950000. <br />
+<br />
+<p>Sincerely, <br> Equinix SMC </p> <p><span style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000000; font-weight:bold; ">Contacts:</span></p> <p> Please do not reply to this email address. If you have any questions or concerns regarding this notification, please log a network ticket via the <a href="https://customerportal.equinix.com/">Equinix Customer Portal</a>, or contact <a href="http://www.equinix.com/contact-us/customer-support/">Global Service Desk</a> and quote the the ticket reference [5-230281950000]. </p><tr ><td height="35" valign="top" ><div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#555555; " ><br />
+<center>To unsubscribe from notifications, please log in to the <a href ="https://customerportal.equinix.com/user/notifications" target="_blank">Equinix Customer Portal </a> and change your preferences.</center><br />
+<pre><font face="arial"></font></pre></div>
+ </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td width="30">
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr ><td style="border-left:1px solid #cccccc; border-right:1px solid #cccccc; border-bottom:1px solid #cccccc; " ><table width="700" cellpadding="0" cellspacing="0" ><tr ><td width="95" align="center"><a href="http://www.equinix.com"><img src="http://na-g.marketo.com/rs/equinixinc/images/Equinix-Logo_icon-white.gif" alt="Equinix" width="35" height="23" border="0" /></a></td>
+<td width="597" align="right" ><table border="0" align="right" cellpadding="0" cellspacing="0" ><tr ><td align="right" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#aaaaaa; " ><span style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; color:#555555; font-weight:bold;">How are we doing? Tell Equinix - We're Listening.</span>
+
+</td>
+<td width="10" height="64" align="center">&nbsp;</td>
+<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#aaaaaa; " ><a href="#" target="_blank" style="border:0;"></a><a href="#" target="_blank"></a><a href="https://equinix.qualtrics.com/jfe/form/SV_5tZRNCGwOKna7A1"><img src="http://info.equinix.com/rs/equinixinc/images/FOOTERBUTTON-feedback-en.gif" width="132" height="34" border="0" /></a>
+</td>
+</tr>
+</table>
+</td>
+<td width="30" align="right">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="704" align="center" cellpadding="0" cellspacing="0">
+<tr>
+<td><img src="http://na-g.marketo.com/rs/equinixinc/images/Event_Offering-seperator.jpg" width="704" height="20" /></td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+------=_Part_333333_222222222.111111111111111111--

@@ -1,0 +1,333 @@
+Delivered-To: foobar@example.com
+Date: Tue, 19 Dec 2023 13:54:45 -0800 (PST)
+From: Equinix Network Maintenance <no-reply@equinix.com>
+Reply-To: <no-reply@equinix.com>
+Message-ID: <xxx@xxx.service-now.com>
+Subject: CANCELLED - Remedial 3rd Party Dark Fiber OTDR testing between SV2 and SV8 - SV Metro Area Network Maintenance - 19-DEC-2023 [CHG0031000]
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_123455_12375292.1234567"
+Precedence: bulk
+Auto-Submitted: auto-generated
+X-ServiceNow-Generated: true
+
+------=_Part_123455_12375292.1234567
+Content-Type: multipart/alternative; boundary="----=_Part_123456_54321.1234567"
+
+------=_Part_123456_54321.1234567
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+
+
+
+
+
+
+
+
+=C2=A0=C2=A0=C2=A0
+=C2=A0Dear Equinix Customers,=C2=A0
+=C2=A0
+The notification indicating maintenance on the systems below has been cance=
+lled. Any follow up or new system maintenance requests will follow our stan=
+dard notification protocol.
+=C2=A0=C2=A0=C2=A0
+ **************************************************************************=
+***
+From: Equinix Network Maintenance <no-reply@equinix.com>
+Sent: 2023-12-18 23:23:55
+Subject: Remedial 3rd Party Dark Fiber OTDR testing between SV2 and SV8 - S=
+V Metro Area Network Maintenance - 19-DEC-2023 [CHG0031000]
+=C2=A0=C2=A0=C2=A0
+=C2=A0Dear Equinix Customers,=C2=A0
+=C2=A0
+DATE: 19-DEC-2023 - 19-DEC-2023
+
+SPAN: 19-DEC-2023 - 19-DEC-2023
+
+LOCAL: TUESDAY, 19 DEC 14:00 - TUESDAY, 19 DEC 18:00
+UTC: TUESDAY, 19 DEC 22:00 - WEDNESDAY, 20 DEC 02:00
+
+IBX(s): SV2, SV8
+=C2=A0
+DESCRIPTION: Please be advised that one of our dark fiber providers will be=
+ performing a planned maintenance activity.
+
+EXPECTED SERVICE IMPACT:=20
+1. Unprotected Metro Connect (MC) circuits or Metro Remote ports will exper=
+ience service interruption.
+2. Protected Metro Connect circuits will experience multiple switching hits=
+ as traffic switches to protection path.
+3. One of your Dual Diverse Metro Connect circuits will experience port dow=
+ntime of up to 60 Minutes while Redundant circuits will not be affected.
+4. Equinix Fabric Metro Remote Port will experience service interruption.
+5. Network Edge circuits will experience service interruption.
+
+EXPECTED DURATION:=20
+1.Up to 60 minutes  for Unprotected MC
+2.Up to 15 minutes  for one of your Dual Diverse MC
+3.Up to 15 minutes for Equinix Fabric Metro Remote ports
+4.Up to 15 minutes  for Network Edge circuits=C2=A0
+=C2=A0
+PRODUCTS: Metro Connect=C2=A0
+=C2=A0
+IMPACT: Loss of redundancy to your service
+=C2=A0
+RECOMMENDED ACTION: Please be advised that one of our dark fiber providers =
+will be performing a planned maintenance activity.
+
+EXPECTED SERVICE IMPACT:=20
+1. Unprotected Metro Connect (MC) circuits or Metro Remote ports will exper=
+ience service interruption.
+2. Protected Metro Connect circuits will experience multiple switching hits=
+ as traffic switches to protection path.
+3. One of your Dual Diverse Metro Connect circuits will experience port dow=
+ntime of up to 60 Minutes while Redundant circuits will not be affected.
+4. Equinix Fabric Metro Remote Port will experience service interruption.
+5. Network Edge circuits will experience service interruption.
+
+EXPECTED DURATION:=20
+1.Up to 60 minutes  for Unprotected MC
+2.Up to 15 minutes  for one of your Dual Diverse MC
+3.Up to 15 minutes for Equinix Fabric Metro Remote ports
+4.Up to 15 minutes  for Network Edge circuits
+=C2=A0
+
+Impacted Assets
+
+Equinix Connect
+
+Account #ProductIBXService Serial #
+555555Equinix ConnectSV82345678
+
+=C2=A0
+We apologize for any inconvenience you may experience during this activity.=
+ Your cooperation and understanding are=C2=A0greatly appreciated.
+=C2=A0
+Please do not reply to this email address. If you have any questions or con=
+cerns regarding this notification, please log a network ticket via the Equi=
+nix Customer Portal or contact Global Service Desk and quote the ticket ref=
+erence.
+=C2=A0
+Equinix is available to answer questions, provide up-to-date status informa=
+tion or additional details regarding the maintenance. Please reference CHG0=
+031000.=C2=A0
+=C2=A0=C2=A0=C2=A0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Service Insight | Notification Preferences | Equinix Status Page | Support =
+Case=20
+
+ Glossary of terms | Equinix Customer Portal=20
+
+
+
+
+
+
+
+
+
+
+
+
+Equinix | Legal | Privacy  =20
+  =E2=80=AF =E2=80=AF =E2=80=AF  =20
+
+
+
+
+
+
+------=_Part_123456_54321.1234567
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<html><head></head><body><table style=3D"border-collapse: collapse; margin:=
+ auto;border:1px solid #CFCFCF" border=3D"1" width=3D"700" cellspacing=3D"0=
+" cellpadding=3D"0" align=3D"center"><tbody><tr><td><table border=3D"0" sty=
+le=3D"width: 100%;">
+<tbody>
+<tr>
+<td height=3D"111" style=3D"text-align: center;"><img src=3D"http://info.eq=
+uinix.com/rs/equinixinc/images/banner-network-maintenance.gif" alt=3D"Meet =
+Equinix" width=3D"700" height=3D"115" border=3D"0"></td>
+</tr>
+</tbody>
+</table><table style=3D"border-collapse: collapse; margin: auto;" border=3D=
+"0" width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center"><tbo=
+dy><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td width=3D"3=
+0">&nbsp;</td><td width=3D"642"><span style=3D"font-family: arial, helvetic=
+a, sans-serif; font-size: 10pt;">Dear Equinix Customers,&nbsp;</span><br><s=
+pan style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&=
+nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; f=
+ont-size: 10pt;">The notification indicating maintenance on the systems bel=
+ow has been cancelled. Any follow up or new system maintenance requests wil=
+l follow our standard notification protocol.</span></td></tr><tr style=3D"h=
+eight: 15.4px;"><td style=3D"height: 15.4px;">&nbsp;</td><td style=3D"heigh=
+t: 15.4px;">&nbsp;</td><td style=3D"height: 15.4px;">&nbsp;</td></tr></tbod=
+y></table><table style=3D"margin: auto; word-break: break-word; border-coll=
+apse: collapse; font-family: arial, helvetica, sans-serif; font-size: 10pt;=
+" width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center" bgcolo=
+r=3D"#FFFFFF"><tbody><tr><td width=3D"30">&nbsp;</td><td>******************=
+***********************************************************<br>From: Equini=
+x Network Maintenance &lt;no-reply@equinix.com&gt;<br>Sent: 2023-12-18 23:2=
+3:55<br>Subject: Remedial 3rd Party Dark Fiber OTDR testing between SV2 and=
+ SV8 - SV Metro Area Network Maintenance - 19-DEC-2023 [CHG0031000]</td></t=
+r></tbody></table><table style=3D"border-collapse: collapse; margin: auto; =
+height: 327.85px;" border=3D"0" width=3D"700" cellspacing=3D"0" cellpadding=
+=3D"0" align=3D"center"><tbody><tr style=3D"height: 15.4px;"><td style=3D"h=
+eight: 15.4px; width: 29.7px;">&nbsp;</td><td style=3D"height: 15.4px; widt=
+h: 637.375px;">&nbsp;</td><td style=3D"height: 15.4px; width: 29.725px;">&n=
+bsp;</td></tr><tr style=3D"height: 297.05px;"><td style=3D"height: 297.05px=
+; width: 29.7px;" width=3D"30">&nbsp;</td><td style=3D"height: 297.05px; wi=
+dth: 637.375px;" width=3D"642"><span style=3D"font-family: arial, helvetica=
+, sans-serif; font-size: 10pt;">Dear Equinix Customers,&nbsp;</span><br><sp=
+an style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&n=
+bsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; fo=
+nt-size: 10pt;"><strong>DATE:</strong> 19-DEC-2023 - 19-DEC-2023</span><br>=
+<span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;"=
+><br><b>SPAN: 19-DEC-2023 - 19-DEC-2023</b><br><br><b>LOCAL: </b>TUESDAY, 1=
+9 DEC 14:00 - TUESDAY, 19 DEC 18:00<br><b>UTC: </b>TUESDAY, 19 DEC 22:00 - =
+WEDNESDAY, 20 DEC 02:00<br></span><br><span style=3D"font-family: arial, he=
+lvetica, sans-serif; font-size: 10pt;"><b>IBX(s): </b>SV2, SV8</span><br><s=
+pan style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&=
+nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; f=
+ont-size: 10pt;"><strong>DESCRIPTION:</strong> Please be advised that one o=
+f our dark fiber providers will be performing a planned maintenance activit=
+y.
+<br>
+<br>EXPECTED SERVICE IMPACT:=20
+<br>1. Unprotected Metro Connect (MC) circuits or Metro Remote ports will e=
+xperience service interruption.
+<br>2. Protected Metro Connect circuits will experience multiple switching =
+hits as traffic switches to protection path.
+<br>3. One of your Dual Diverse Metro Connect circuits will experience port=
+ downtime of up to 60 Minutes while Redundant circuits will not be affected=
+.
+<br>4. Equinix Fabric Metro Remote Port will experience service interruptio=
+n.
+<br>5. Network Edge circuits will experience service interruption.
+<br>
+<br>EXPECTED DURATION:=20
+<br>1.Up to 60 minutes  for Unprotected MC
+<br>2.Up to 15 minutes  for one of your Dual Diverse MC
+<br>3.Up to 15 minutes for Equinix Fabric Metro Remote ports
+<br>4.Up to 15 minutes  for Network Edge circuits&nbsp;</span><br><span sty=
+le=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</=
+span><br><span style=3D"font-family: arial, helvetica, sans-serif; font-siz=
+e: 10pt;"><strong>PRODUCTS:</strong> Metro Connect&nbsp;</span><br><span st=
+yle=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;<=
+/span><br><span style=3D"font-family: arial, helvetica, sans-serif; font-si=
+ze: 10pt;"><strong>IMPACT:</strong> Loss of redundancy to your service</spa=
+n><br><span style=3D"font-family: arial, helvetica, sans-serif; font-size: =
+10pt;">&nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-=
+serif; font-size: 10pt;"><strong>RECOMMENDED ACTION:</strong> Please be adv=
+ised that one of our dark fiber providers will be performing a planned main=
+tenance activity.
+<br>
+<br>EXPECTED SERVICE IMPACT:=20
+<br>1. Unprotected Metro Connect (MC) circuits or Metro Remote ports will e=
+xperience service interruption.
+<br>2. Protected Metro Connect circuits will experience multiple switching =
+hits as traffic switches to protection path.
+<br>3. One of your Dual Diverse Metro Connect circuits will experience port=
+ downtime of up to 60 Minutes while Redundant circuits will not be affected=
+.
+<br>4. Equinix Fabric Metro Remote Port will experience service interruptio=
+n.
+<br>5. Network Edge circuits will experience service interruption.
+<br>
+<br>EXPECTED DURATION:=20
+<br>1.Up to 60 minutes  for Unprotected MC
+<br>2.Up to 15 minutes  for one of your Dual Diverse MC
+<br>3.Up to 15 minutes for Equinix Fabric Metro Remote ports
+<br>4.Up to 15 minutes  for Network Edge circuits</span><br><span style=3D"=
+font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span><=
+br><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10p=
+t;"><br><table style=3D"border-collapse: collapse;height:40px;" border=3D"0=
+" cellspacing=3D"0" cellpadding=3D"0"><tbody><tr><td><span style=3D"text-de=
+coration: underline;"><strong>Impacted Assets</strong></span></td></tr></tb=
+ody></table><br><div style=3D"text-decoration:underline;"><b>Equinix Connec=
+t</b></div><br><table style=3D"border-collapse: collapse; width: 99%;" bord=
+er=3D"1"><tbody><tr><th style=3D"width: 25%;">Account #</th><th style=3D"wi=
+dth: 25%;">Product</th><th style=3D"width: 25%;">IBX</th><th style=3D"width=
+: 25%;">Service Serial #</th></tr><tr><td style=3D"text-align: center;">555=
+555</td><td style=3D"text-align: center;">Equinix Connect</td><td style=3D"=
+text-align: center;">SV8</td><td style=3D"text-align: center;">2345678</td=
+></tr></tbody></table></span><br><span style=3D"font-family: arial, helveti=
+ca, sans-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"font-fami=
+ly: arial, helvetica, sans-serif; font-size: 10pt;">We apologize for any in=
+convenience you may experience during this activity. Your cooperation and u=
+nderstanding are&nbsp;greatly appreciated.</span><br><span style=3D"font-fa=
+mily: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span><br><spa=
+n style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">Ple=
+ase do not reply to this email address. If you have any questions or concer=
+ns regarding this notification, please log a network ticket via the Equinix=
+ Customer Portal or contact Global Service Desk and quote the ticket refere=
+nce.</span><br><span style=3D"font-family: arial, helvetica, sans-serif; fo=
+nt-size: 10pt;">&nbsp;</span><br><span style=3D"font-family: arial, helveti=
+ca, sans-serif; font-size: 10pt;">Equinix is available to answer questions,=
+ provide up-to-date status information or additional details regarding the =
+maintenance. Please reference CHG0031000.</span></td><td style=3D"height: 2=
+97.05px; width: 29.725px;" width=3D"30">&nbsp;</td></tr><tr style=3D"height=
+: 15.4px;"><td style=3D"height: 15.4px; width: 29.7px;">&nbsp;</td><td styl=
+e=3D"height: 15.4px; width: 637.375px;">&nbsp;</td><td style=3D"height: 15.=
+4px; width: 29.725px;">&nbsp;</td></tr></tbody></table><table width=3D"700"=
+ cellspacing=3D"0" cellpadding=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td height=3D"20"><img src=3D"http://na-g.marketo.com/rs/equinixinc/images/=
+Event_Offering-seperator.jpg" width=3D"700" height=3D"20" style=3D"display:=
+ block; margin-left: auto; margin-right: auto;"></td>
+</tr>
+</tbody>
+</table>
+<table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td>
+<p style=3D"text-align: center;"></p>
+<p style=3D"text-align: center; font-family: Arial, Helvetica, sans-serif; =
+color: #00a3e0;"><span style=3D"font-size: 10pt; color: #707073;"><a href=
+=3D"https://customerportal.equinix.com/cid/" target=3D"_blank" style=3D"col=
+or: #00a3e0;" rel=3D"noopener">Service Insight </a>| <a href=3D"https://cus=
+tomerportal.equinix.com/ecp/user/notifications" target=3D"_blank" rel=3D"no=
+opener" style=3D"color: #00a3e0;">Notification Preferences</a> | <a href=3D=
+"https://status.equinix.com" target=3D"_blank" rel=3D"noopener" style=3D"co=
+lor: #00a3e0;">Equinix Status Page</a> | <a href=3D"https://customerportal.=
+equinix.com/ecp/casemanagement" target=3D"_blank" rel=3D"noopener" style=3D=
+"color: #00a3e0;">Support Case</a>&nbsp;</span></p>
+<p style=3D"text-align: center; font-family: Arial, Helvetica, sans-serif; =
+color: #707073;"><span style=3D"font-size: 10pt;">&nbsp;<a href=3D"https://=
+www.equinix.com/welcome-guide/glossary" target=3D"_blank" rel=3D"noopener" =
+style=3D"color: #00a3e0;">Glossary of terms</a> | <a href=3D"https://custom=
+erportal.equinix.com" target=3D"_blank" rel=3D"noopener" style=3D"color: #0=
+0a3e0;">Equinix Customer Portal</a>&nbsp;</span></p>
+<p style=3D"text-align: center;"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center" s=
+tyle=3D"height: 22.3958px;">
+<tbody>
+<tr style=3D"height: 22.3958px;">
+<td width=3D"10px;" td=3D""></td>
+<td width=3D"10px;"></td>
+</tr>
+</tbody>
+</table></td></tr></tbody></table></body></html>
+------=_Part_123456_54321.1234567--
+------=_Part_123455_12375292.1234567--

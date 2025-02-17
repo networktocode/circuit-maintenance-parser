@@ -1,0 +1,16 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [
+      {
+        "circuit_id": "666666-WAVE-CCF",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1702551600,
+    "maintenance_id": "CM20231201000",
+    "start": 1702522800,
+    "status": "CONFIRMED",
+    "summary": "A Crown Castle Fiber partner carrier will be conducting an emergency enclosure repair on their network at the above-listed location. Although no impact is expected, your services listed below might experience short-duration impact due to the need to drain the enclosure, and move the cables within the enclosure. We apologize for any resulting inconvenience and assure you of our efforts to minimize any service disruption."
+  }
+]

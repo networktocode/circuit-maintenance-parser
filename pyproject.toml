@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
-version = "2.2.4"
+version = "2.7.0"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code <opensource@networktocode.com>"]
 license = "Apache-2.0"
@@ -10,10 +10,10 @@ readme = "README.md"
 keywords = ["parser", "circuit", "maintenance"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 include = [
     "CHANGELOG.md",
@@ -22,12 +22,12 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 click = ">=7.1, <9.0"
-pydantic = {version = ">= 1.8.0, != 1.9.*, >= 1.10.4, < 2", extras = ["dotenv"]}
+pydantic = ">=1.10.4,<3"
 icalendar = "^5.0.0"
-bs4 = "^0.0.1"
-lxml = "^4.6.2"
+bs4 = "^0.0.2"
+lxml = {version = ">= 4.6.2, < 6"}
 geopy = "^2.1.0"
 timezonefinder = "^6.0.1"
 backoff = "^1.11.1"
@@ -50,7 +50,7 @@ yamllint = "^1.20.0"
 bandit = "^1.6.2"
 invoke = "^2.2.0"
 flake8 = "^5.0.0"
-mypy = "^0.982"
+mypy = "^1.8.0"
 # Dependencies for mypy to correctly analyze code using these libraries
 types-python-dateutil = "^2.8.3"
 types-pytz = "^2022.0.0"
@@ -85,6 +85,9 @@ exclude = '''
 )
 '''
 
+[tool.pylint.master]
+ignore-patterns=[".venv"]
+
 [tool.pylint.basic]
 # No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.
 no-docstring-rgx="^(_|test_|Meta$)"
@@ -114,3 +117,8 @@ build-backend = "poetry.masonry.api"
 [tool.pytest.ini_options]
 python_paths = "./"
 addopts = "-vv --doctest-modules"
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]

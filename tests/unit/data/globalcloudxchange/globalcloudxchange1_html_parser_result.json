@@ -1,0 +1,11 @@
+[
+  {
+    "account": "Example Company INC",
+    "circuits": [
+      {
+        "circuit_id": "RGWLS31171",
+        "impact": "REDUCED-REDUNDANCY"
+      }
+    ]
+  }
+]

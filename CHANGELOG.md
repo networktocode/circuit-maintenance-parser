@@ -1,5 +1,94 @@
 # Changelog
 
+# Changelog
+
+## v2.7.0 - 2025-01-10
+
+### Added
+
+- [#303](https://github.com/networktocode/circuit-maintenance-parser/pull/303) - Add new parser for Apple
+- [#302](https://github.com/networktocode/circuit-maintenance-parser/pull/302) - Add support for Python 3.12
+- [#301](https://github.com/networktocode/circuit-maintenance-parser/pull/301) - Add new parser for PCCW
+- [#297](https://github.com/networktocode/circuit-maintenance-parser/pull/297) - Add new parser for Tata Communications
+
+### Changed
+
+- [#302](https://github.com/networktocode/circuit-maintenance-parser/pull/302) - Drop support for Python 3.8
+- [#291](https://github.com/networktocode/circuit-maintenance-parser/pull/291) - Update Windstream Parser for new emails
+
+### Dependencies
+
+- [#295](https://github.com/networktocode/circuit-maintenance-parser/pull/295) - Remove pydantic dotenv extra
+
+## v2.6.1 - 2024-06-04
+
+### Fixed
+
+- [#288](https://github.com/networktocode/circuit-maintenance-parser/pull/288) - Fixed exceptions under Pydantic 1.x.
+
+### Dependencies
+
+- [#286](https://github.com/networktocode/circuit-maintenance-parser/pull/286) - Added support for `lxml` 5.x.
+
+## v2.6.0 - 2024-04-04
+
+### Added
+
+- [#273](https://github.com/networktocode/circuit-maintenance-parser/pull/273) - Add iCal parsing to GTT/EXA
+- [#280](https://github.com/networktocode/circuit-maintenance-parser/pull/280) - Add new Windstream Parser
+
+### Changed
+
+- [#277](https://github.com/networktocode/circuit-maintenance-parser/pull/277) - Refactor the output validator `validate_empty_circuit`
+- [#281](https://github.com/networktocode/circuit-maintenance-parser/pull/281) Add the ability to support pydantic 1 and 2
+
+### Fixed
+
+- [#272](https://github.com/networktocode/circuit-maintenance-parser/pull/272) - Fix the logic in the output validator `validate_empty_circuit`
+- [#278](https://github.com/networktocode/circuit-maintenance-parser/pull/278) - Increase robustness of Crown Castle parsing
+
+## v2.5.0 - 2024-03-13
+
+### Added
+
+- [#274](https://github.com/networktocode/circuit-maintenance-parser/pull/274) - Add Global Cloud XChange Parser
+
+## v2.4.0 - 2024-02-20
+
+### Added
+
+- [#260](https://github.com/networktocode/circuit-maintenance-parser/pull/260) - Add Google parser
+- [#259](https://github.com/networktocode/circuit-maintenance-parser/pull/259) - Add Crown Castle fiber parser
+- [#258](https://github.com/networktocode/circuit-maintenance-parser/pull/258) - Add Netflix parser
+
+### Changed
+
+- [#264](https://github.com/networktocode/circuit-maintenance-parser/pull/264) - Adopt Pydantic 2.0
+- [#256](https://github.com/networktocode/circuit-maintenance-parser/pull/256) - Improved Equinix parser
+
+### Fixed
+
+- [#257](https://github.com/networktocode/circuit-maintenance-parser/pull/257) - Update incorrect file comment
+- [#255](https://github.com/networktocode/circuit-maintenance-parser/pull/255) -
+  Properly process Amazon emergency maintenance notifications
+
+## v2.3.0 - 2023-12-15
+
+### Added
+
+- [#245](https://github.com/networktocode/circuit-maintenance-parser/pull/245) [#250](https://github.com/networktocode/circuit-maintenance-parser/pull/250) [#252](https://github.com/networktocode/circuit-maintenance-parser/pull/252) - OpenAI parser by @chadell
+
+- [#249](https://github.com/networktocode/circuit-maintenance-parser/pull/249) - Add Metadata to every Maintenance, addresses issue #246 by @chadell
+
+### Changed
+
+- [#237](https://github.com/networktocode/circuit-maintenance-parser/pull/237) - Remove Python 3.7 support by @slyngshede
+
+### Fixed
+
+- [#243](https://github.com/networktocode/circuit-maintenance-parser/pull/243) - Handle broken EUNetworks cancellation messages by @jmaslak
+- [#251](https://github.com/networktocode/circuit-maintenance-parser/pull/251) Add missing Arelion entry to SUPPORTED_PROVIDERS by @glennmatthews
+
 ## v2.2.4 - 2023-07-12
 
 - #230 - Swap out tzwhere for TimezoneFinder

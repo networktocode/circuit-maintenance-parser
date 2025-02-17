@@ -1,37 +1,46 @@
 """Tests for End to End library usage."""
+
 import json
 import os
 from pathlib import Path
 
 import pytest
 
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProviderError
-from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
 # pylint: disable=duplicate-code,too-many-lines
 from circuit_maintenance_parser.provider import (
-    Equinix,
-    GenericProvider,
-    AquaComms,
-    Arelion,
     AWS,
     BSO,
-    Cogent,
-    Colt,
-    EUNetworks,
     GTT,
     HGC,
+    NTT,
+    AquaComms,
+    Apple,
+    Arelion,
+    Cogent,
+    Colt,
+    CrownCastle,
+    Equinix,
+    EUNetworks,
+    GenericProvider,
+    GlobalCloudXchange,
+    Google,
     Lumen,
     Megaport,
-    NTT,
     Momentum,
+    Netflix,
     PacketFabric,
+    PCCW,
     Seaborn,
     Sparkle,
+    Tata,
     Telstra,
     Turkcell,
     Verizon,
+    Windstream,
     Zayo,
 )
 
@@ -52,6 +61,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
+        # Apple
+        (
+            Apple,
+            [
+                ("email", Path(dir_path, "data", "apple", "apple1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "apple", "apple1_result.json"),
             ],
         ),
         # AquaComms
@@ -100,6 +119,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "aws", "aws2_result.json"),
+            ],
+        ),
+        (
+            AWS,
+            [
+                ("email", Path(dir_path, "data", "aws", "aws3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "aws", "aws3_result.json"),
             ],
         ),
         # BSO
@@ -249,6 +277,21 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "colt", "colt7_result.json"),
             ],
         ),
+        # Crown Castle
+        (
+            CrownCastle,
+            [
+                ("email", Path(dir_path, "data", "crowncastle", "crowncastle1.eml")),
+            ],
+            [Path(dir_path, "data", "crowncastle", "crowncastle1_result.json")],
+        ),
+        (
+            CrownCastle,
+            [
+                ("email", Path(dir_path, "data", "crowncastle", "crowncastle7.eml")),
+            ],
+            [Path(dir_path, "data", "crowncastle", "crowncastle7_result.json")],
+        ),
         # Equinix
         (
             Equinix,
@@ -269,6 +312,26 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Equinix,
             [("email", Path(dir_path, "data", "equinix", "equinix5.eml"))],
             [Path(dir_path, "data", "equinix", "equinix5_result_combined.json")],
+        ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix6.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix6_result_combined.json")],
+        ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix7.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix7_result_combined.json")],
+        ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix8.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix8_result_combined.json")],
+        ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix9.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix9_result_combined.json")],
         ),
         # EUNetworks
         (
@@ -362,6 +425,24 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "gtt", "gtt7_result.json"),
             ],
         ),
+        (
+            GTT,
+            [
+                ("ical", Path(dir_path, "data", "gtt", "gtt8")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt8_result.json"),
+            ],
+        ),
+        (
+            GTT,
+            [
+                ("ical", Path(dir_path, "data", "gtt", "gtt9")),
+            ],
+            [
+                Path(dir_path, "data", "gtt", "gtt9_result.json"),
+            ],
+        ),
         # HGC
         (
             HGC,
@@ -372,6 +453,26 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 Path(dir_path, "data", "hgc", "hgc1_result.json"),
                 Path(dir_path, "data", "hgc", "hgc2_result.json"),
+            ],
+        ),
+        # GlobalCloudXchange
+        (
+            GlobalCloudXchange,
+            [
+                ("email", Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "globalcloudxchange", "globalcloudxchange1_result.json"),
+            ],
+        ),
+        # Google
+        (
+            Google,
+            [
+                ("email", Path(dir_path, "data", "google", "google2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "google", "google2_result.json"),
             ],
         ),
         # Lumen
@@ -503,6 +604,25 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "momentum", "momentum1_result.json"),
             ],
         ),
+        # Netflix
+        (
+            Netflix,
+            [
+                ("email", Path(dir_path, "data", "netflix", "netflix1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "netflix", "netflix1_result.json"),
+            ],
+        ),
+        (
+            Netflix,
+            [
+                ("email", Path(dir_path, "data", "netflix", "netflix2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "netflix", "netflix2_result.json"),
+            ],
+        ),
         # NTT
         (
             NTT,
@@ -530,6 +650,25 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 GENERIC_ICAL_RESULT_PATH,
+            ],
+        ),
+        # PCCW
+        (
+            PCCW,
+            [
+                ("email", Path(dir_path, "data", "pccw", "pccw_email.eml")),
+            ],
+            [
+                Path(dir_path, "data", "pccw", "pccw_email_result.json"),
+            ],
+        ),
+        (
+            PCCW,
+            [
+                ("ical", Path(dir_path, "data", "pccw", "pccw_ical")),
+            ],
+            [
+                Path(dir_path, "data", "pccw", "pccw_ical_result.json"),
             ],
         ),
         # Seaborn
@@ -568,6 +707,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "sparkle", "sparkle1_result.json"),
+            ],
+        ),
+        # Tata
+        (
+            Tata,
+            [
+                ("email", Path(dir_path, "data", "tata", "tata_email.eml")),
+            ],
+            [
+                Path(dir_path, "data", "tata", "tata_email_result.json"),
             ],
         ),
         # Telstra
@@ -747,6 +896,21 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
         ),
+        # Windstream
+        (
+            Windstream,
+            [
+                ("email", Path(dir_path, "data", "windstream", "windstream1.eml")),
+            ],
+            [Path(dir_path, "data", "windstream", "windstream1_result.json")],
+        ),
+        (
+            Windstream,
+            [
+                ("email", Path(dir_path, "data", "windstream", "windstream2.eml")),
+            ],
+            [Path(dir_path, "data", "windstream", "windstream2_result.json")],
+        ),
         # Zayo
         (
             Zayo,
@@ -838,7 +1002,6 @@ def test_provider_get_maintenances(
     extended_data = provider_class.get_extended_data()
     default_maintenance_data = {"uid": "0", "sequence": 1, "summary": ""}
     extended_data.update(default_maintenance_data)
-
     data = None
     for data_type, data_file in test_data_files:
         with open(data_file, "rb") as file_obj:
@@ -891,8 +1054,7 @@ def test_provider_get_maintenances(
             """\
 Failed creating Maintenance notification for GenericProvider.
 Details:
-- Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
-""",
+- Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance\naccount\n  Field required""",
         ),
         (
             GenericProvider,
@@ -904,8 +1066,7 @@ Failed creating Maintenance notification for GenericProvider.
 Details:
 - Processor SimpleProcessor from GenericProvider failed due to: 1 validation error for Maintenance
 maintenance_id
-  field required (type=value_error.missing)
-""",
+  Field required""",
         ),
         (
             GenericProvider,
@@ -945,13 +1106,11 @@ Details:
             "ical",
             Path(dir_path, "data", "ical", "ical_no_account"),
             ProviderError,
-            """\
-Failed creating Maintenance notification for Telstra.
-Details:
-- Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  field required (type=value_error.missing)
-- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra2) was matching any of the provided data types (ical).
-- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra1) was matching any of the provided data types (ical).
-""",
+            [
+                "- Processor SimpleProcessor from Telstra failed due to: 1 validation error for Maintenance\naccount\n  Field required",
+                "- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra2) was matching any of the provided data types (ical).",
+                "- Processor CombinedProcessor from Telstra failed due to: None of the supported parsers for processor CombinedProcessor (EmailDateParser, HtmlParserTelstra1) was matching any of the provided data types (ical).",
+            ],
         ),
         # Zayo
         (
@@ -964,8 +1123,7 @@ Failed creating Maintenance notification for Zayo.
 Details:
 - Processor CombinedProcessor from Zayo failed due to: 1 validation error for Maintenance
 maintenance_id
-  String is empty or 'None' (type=value_error)
-""",
+  Value error, String is empty or 'None'""",
         ),
         (
             Zayo,
@@ -998,5 +1156,10 @@ def test_errored_provider_process(provider_class, data_type, data_file, exceptio
     with pytest.raises(exception) as exc:
         provider_class().get_maintenances(data)
 
-    assert len(exc.value.related_exceptions) == len(provider_class._processors)  # pylint: disable=protected-access
-    assert str(exc.value) == error_message
+    assert len(exc.value.related_exceptions) == len(
+        provider_class.get_default_processors()
+    )  # pylint: disable=protected-access
+    if isinstance(error_message, str):
+        error_message = [error_message]
+    for item in error_message:
+        assert item in str(exc.value)

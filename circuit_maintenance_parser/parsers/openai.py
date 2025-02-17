@@ -24,15 +24,15 @@ class OpenAIParser(LLM):
         if not _HAS_OPENAI:
             raise ImportError("openai extra is required to use OpenAIParser.")
 
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+        client = OpenAI(api_key=os.getenv("PARSER_OPENAI_API_KEY"))
+        model = os.getenv("PARSER_OPENAI_MODEL", "gpt-3.5-turbo")
         try:
             response = client.chat.completions.create(
                 model=model,
                 messages=[
                     {  # type: ignore
                         "role": "system",
-                        "content": self._llm_question,
+                        "content": self.llm_question,
                     },
                     {  # type: ignore
                         "role": "user",

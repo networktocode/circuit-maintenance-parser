@@ -24,7 +24,7 @@ You can leverage this library in your automation framework to process circuit ma
 - **provider**: identifies the provider of the service that is the subject of the maintenance notification.
 - **account**: identifies an account associated with the service that is the subject of the maintenance notification.
 - **maintenance_id**: contains text that uniquely identifies (at least within the context of a specific provider) the maintenance that is the subject of the notification.
-- **circuits**: list of circuits affected by the maintenance notification and their specific impact. Note that in a maintenance canceled notification, some providers omit the circuit list, so this may be blank for maintenance notifications with a status of CANCELLED.
+- **circuits**: list of circuits affected by the maintenance notification and their specific impact. Note that in a maintenance canceled or completed notification, some providers omit the circuit list, so this may be blank for maintenance notifications with a status of CANCELLED or COMPLETED.
 - **start**: timestamp that defines the starting date/time of the maintenance in GMT.
 - **end**: timestamp that defines the ending date/time of the maintenance in GMT.
 - **stamp**: timestamp that defines the update date/time of the maintenance in GMT.
@@ -60,35 +60,47 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 
 - Arelion (previously Telia)
 - EuNetworks
+- EXA (formerly GTT) (\*)
 - NTT
 - PacketFabric
-- Telstra
+- PCCW
+- Telstra (\*)
 
 #### Supported providers based on other parsers
 
+- Apple
 - AWS
 - AquaComms
 - BSO
 - Cogent
 - Colt
+- Crown Castle Fiber
 - Equinix
-- EXA (formerly GTT)
+- EXA (formerly GTT) (\*)
 - HGC
+- Global Cloud Xchange
+- Google
 - Lumen
 - Megaport
 - Momentum
+- Netflix (AS2906 only)
+- PCCW
 - Seaborn
 - Sparkle
-- Telstra
+- Tata
+- Telstra (\*)
 - Turkcell
 - Verizon
+- Windstream
 - Zayo
+
+(\*) Providers in both lists, with BCOP standard and nonstandard parsers.
 
 > Note: Because these providers do not support the BCOP standard natively, maybe there are some gaps on the implemented parser that will be refined with new test cases. We encourage you to report related **issues**!
 
 #### LLM-powered Parsers
 
-The library supports an optional parser option leveraging Large Language Model (LLM) to provide best-effort parsing when the specific parsers have not been successful.
+The library supports an optional parser option leveraging Large Language Models (LLM) to provide best-effort parsing when the specific parsers have not been successful.
 
 > Warning: Some of these integrations, such as OpenAI, require of extras installations parameters. Check the [extras section](#extras)
 
@@ -98,9 +110,12 @@ When the appropriate environment variable(s) are set (see below), these LLM pars
 
 These are the currently supported LLM integrations:
 
+- `PARSER_LLM_QUESTION_STR` (Optional), question to overwrite the default one. Change it carefully. It has precedence over `PARSER_LLM_QUESTION_FILEPATH`
+- `PARSER_LLM_QUESTION_FILEPATH` (Optional), a path to a file that contains a question to overwrite the default one.
+
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
-  - `OPENAI_API_KEY` (Required): OpenAI API Key.
-  - `OPENAI_MODEL` (Optional): The LLM model to use, defaults to "gpt-3.5-turbo".
+  - `PARSER_OPENAI_API_KEY` (Required): OpenAI API Key.
+  - `PARSER_OPENAI_MODEL` (Optional): The LLM model to use, defaults to "gpt-3.5-turbo".
 
 ### Metadata
 

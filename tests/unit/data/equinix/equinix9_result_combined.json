@@ -1,0 +1,25 @@
+[   
+    {
+        "account": "333333",
+        "circuits": [
+            {
+                "circuit_id": "44444.AM1",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "66666.AM1",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1699333200,
+        "maintenance_id": "5-230281950000",
+        "organizer": "servicedesk@equinix.com",
+        "provider": "equinix",
+        "sequence": 1,
+        "stamp": 1699333449,
+        "start": 1699304400,
+        "status": "COMPLETED",
+        "summary": "COMPLETED - Scheduled Software Upgrade-AM Metro Area Network Maintenance (SERVICE IMPACTING)-06-NOV-2023 [5-230281950000]",
+        "uid": "0"
+    }
+]

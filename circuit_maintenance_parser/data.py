@@ -3,7 +3,7 @@ import logging
 from typing import List, NamedTuple, Optional, Type, Set
 
 import email
-from pydantic import BaseModel, Extra
+from pydantic import BaseModel
 from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
 
 
@@ -18,7 +18,7 @@ class DataPart(NamedTuple):
     content: bytes
 
 
-class NotificationData(BaseModel, extra=Extra.forbid):
+class NotificationData(BaseModel, extra="forbid"):
     """Base class for Notification Data types."""
 
     data_parts: List[DataPart] = []

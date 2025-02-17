@@ -1,0 +1,15 @@
+[
+    {
+        "account": "N/A",
+        "circuits": [
+            {
+                "circuit_id": "A0123-456-789",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1732278600,
+        "maintenance_id": "CHGP0123456",
+        "organizer": "planned.activity@tatacommunications.com",
+        "start": 1732266000
+    }
+]
