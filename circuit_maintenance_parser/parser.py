@@ -7,6 +7,7 @@ import datetime
 import quopri
 from typing import Dict, List
 from email.utils import parsedate_tz, mktime_tz
+from dateutil.parser import isoparse
 import hashlib
 
 import bs4  # type: ignore
@@ -297,15 +298,15 @@ class LLM(Parser):
     _data_types = PrivateAttr(["text/html", "html", "text/plain"])
 
     _llm_question = """Please, could you extract a JSON form without any other comment,
-    with the following JSON schema (timestamps in EPOCH and taking into account the GMT offset):
+    with the following JSON schema (start and end times are datetime objects and should be displayed in UTC):
     {
     "type": "object",
     "properties": {
         "start": {
-            "type": "int",
+            "type": "datetime",
         },
         "end": {
-            "type": "int",
+            "type": "datetime",
         },
         "account": {
             "type": "string",
@@ -408,6 +409,20 @@ class LLM(Parser):
 
         return circuits
 
+    def _convert_str_datetime_to_epoch(self, time_str):
+        try:
+            # Using isoparse for flexible ISO8601 parsing
+            time_dt = isoparse(time_str).astimezone(datetime.timezone.utc)
+            epoch_time = int(time_dt.timestamp())
+            return epoch_time
+
+        except Exception as e:
+            # Log the error message for debugging
+            print(f"Error parsing dates: {e}")
+            # Optionally, you might raise a custom exception or return None values
+            raise
+
+
     def _get_start(self, generated_json: dict):
         """Method to get the Start Time."""
         return generated_json[self.get_key_with_string(generated_json, "start")]
@@ -459,6 +474,10 @@ class LLM(Parser):
         generated_json = self.get_llm_response(content)
         if not generated_json:
             return []
+
+        if generated_json.get('start') and generated_json.get('end'):
+            generated_json['start'] = self._convert_str_datetime_to_epoch(generated_json['start'])
+            generated_json['end'] = self._convert_str_datetime_to_epoch(generated_json['end'])
 
         impact = self._get_impact(generated_json)
 
