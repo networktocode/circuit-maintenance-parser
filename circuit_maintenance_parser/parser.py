@@ -417,7 +417,7 @@ class LLM(Parser):
             return epoch_time
 
         except Exception as error_received:
-            logger.debug("Error parsing dates: %s", error_received)
+            logger.error("Error parsing dates: %s", error_received)
             raise ParserError from error_received
 
     def _get_start(self, generated_json: dict):
