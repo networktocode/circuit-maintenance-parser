@@ -5,10 +5,10 @@ import base64
 import calendar
 import datetime
 import quopri
+import hashlib
 from typing import Dict, List
 from email.utils import parsedate_tz, mktime_tz
 from dateutil.parser import isoparse
-import hashlib
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
@@ -416,12 +416,11 @@ class LLM(Parser):
             epoch_time = int(time_dt.timestamp())
             return epoch_time
 
-        except Exception as e:
+        except Exception as error_received:
             # Log the error message for debugging
-            print(f"Error parsing dates: {e}")
+            print(f"Error parsing dates: {error_received}")
             # Optionally, you might raise a custom exception or return None values
             raise
-
 
     def _get_start(self, generated_json: dict):
         """Method to get the Start Time."""
@@ -475,9 +474,9 @@ class LLM(Parser):
         if not generated_json:
             return []
 
-        if generated_json.get('start') and generated_json.get('end'):
-            generated_json['start'] = self._convert_str_datetime_to_epoch(generated_json['start'])
-            generated_json['end'] = self._convert_str_datetime_to_epoch(generated_json['end'])
+        if generated_json.get("start") and generated_json.get("end"):
+            generated_json["start"] = self._convert_str_datetime_to_epoch(generated_json["start"])
+            generated_json["end"] = self._convert_str_datetime_to_epoch(generated_json["end"])
 
         impact = self._get_impact(generated_json)
 
