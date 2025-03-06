@@ -33,11 +33,13 @@ timezonefinder = "^6.0.1"
 backoff = "^1.11.1"
 chardet = "^5"
 openai = { version = ">=1.2.4", optional = true }
+openpyxl = { version = "^3.1.5", optional = true }
 pandas = { version = "^2.2.3", optional = true }
 python-dateutil = "^2.9.0"
 
 [tool.poetry.extras]
 xlsx = [
+    "openpyxl",
     "pandas",
 ]
 openai = [
