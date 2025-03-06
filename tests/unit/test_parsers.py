@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.parser import EmailDateParser, ICal
+from circuit_maintenance_parser.parser import EmailDateParser, ICal, Xlsx
 from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
@@ -807,7 +807,7 @@ def test_parsers(parser_class, raw_file, results_file):
         assert parsed_notifications == expected_result
 
 
-@pytest.mark.parametrize("parser_class", [ICal, EmailDateParser, HtmlParserZayo1, SubjectParserZayo1])
+@pytest.mark.parametrize("parser_class", [ICal, EmailDateParser, HtmlParserZayo1, SubjectParserZayo1, Xlsx])
 def test_parser_no_data(parser_class):
     """Test parser with no data."""
     with pytest.raises(ParserError):
