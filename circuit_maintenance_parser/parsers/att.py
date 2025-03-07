@@ -78,8 +78,8 @@ class HtmlParserATT1(Html):
 
             elif match := RE_MAINTENANCE_WINDOW_NO_TIMEZONE.search(text):
                 start_time_text, end_time_text = match.groups()
-                data["start"] = dateutil.parser.parse(start_time_text)
-                data["end"] = dateutil.parser.parse(end_time_text)
+                data["start"] = dateutil.parser.parse(start_time_text + " GMT")
+                data["end"] = dateutil.parser.parse(end_time_text + " GMT")
 
         return data
 

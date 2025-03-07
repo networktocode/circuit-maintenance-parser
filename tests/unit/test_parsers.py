@@ -117,17 +117,17 @@ class NestedEncoder(json.JSONEncoder):
         (
             HtmlParserATT1,
             Path(dir_path, "data", "att", "att1.eml"),
-            Path(dir_path, "data", "att", "att1_html_parser_result.json"),
+            Path(dir_path, "data", "att", "att_html_parser_result.json"),
         ),
         (
             HtmlParserATT1,
             Path(dir_path, "data", "att", "att2.eml"),
-            Path(dir_path, "data", "att", "att2_html_parser_result.json"),
+            Path(dir_path, "data", "att", "att_html_parser_result.json"),
         ),
         (
             HtmlParserATT1,
             Path(dir_path, "data", "att", "att3.eml"),
-            Path(dir_path, "data", "att", "att3_html_parser_result.json"),
+            Path(dir_path, "data", "att", "att_html_parser_result.json"),
         ),
         (
             XlsxParserATT1,
