@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.parser import EmailDateParser, ICal, Xlsx
+from circuit_maintenance_parser.parser import EmailDateParser, ICal, Xlsx, READ_EXCEL_PRESENT
 from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
@@ -825,6 +825,10 @@ def test_parsers(parser_class, raw_file, results_file):
     """Tests various parser."""
     with open(raw_file, "rb") as file_obj:
         raw_data = file_obj.read()
+
+    if issubclass(parser_class, Xlsx) and not READ_EXCEL_PRESENT:
+        # Cannot test Xlsx if optional packages are not installed.
+        return
 
     parsed_notifications = parser_class().parse(raw_data, parser_class.get_data_types()[0])
 
