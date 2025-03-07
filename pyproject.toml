@@ -71,6 +71,7 @@ circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
 
 [tool.poetry.group.dev.dependencies]
 pandas-stubs = "2.2.2.240603"
+coverage = "^7.6.12"
 
 [tool.black]
 line-length = 120
