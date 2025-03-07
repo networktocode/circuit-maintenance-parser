@@ -17,7 +17,7 @@ RE_EVENT = re.compile(
     r"Customer Impact Description: (.*)[ \n]"
     r"Summary: (.*)[ \n]"
     r"Description: (.*)[ \n]"
-    r"Business Risk: (.*)[ \n]"
+    r"Business Risk: (.*)"
 )
 RE_MAINTENANCE_WINDOW_GMT = re.compile(r"Start Time: (.* GMT).*End Time: (.* GMT)")
 RE_MAINTENANCE_WINDOW_NO_TIMEZONE = re.compile(r"Start Time: (.*)[ \n]End Time: (.*)")
