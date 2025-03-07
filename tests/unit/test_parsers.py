@@ -10,6 +10,7 @@ from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import EmailDateParser, ICal, Xlsx
 from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
+from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
 from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
@@ -111,6 +112,37 @@ class NestedEncoder(json.JSONEncoder):
             SubjectParserAquaComms1,
             Path(dir_path, "data", "aquacomms", "aquacomms1.eml"),
             Path(dir_path, "data", "aquacomms", "aquacomms1_subject_parser_result.json"),
+        ),
+        # ATT
+        (
+            HtmlParserATT1,
+            Path(dir_path, "data", "att", "att1.eml"),
+            Path(dir_path, "data", "att", "att1_html_parser_result.json"),
+        ),
+        (
+            HtmlParserATT1,
+            Path(dir_path, "data", "att", "att2.eml"),
+            Path(dir_path, "data", "att", "att2_html_parser_result.json"),
+        ),
+        (
+            HtmlParserATT1,
+            Path(dir_path, "data", "att", "att3.eml"),
+            Path(dir_path, "data", "att", "att3_html_parser_result.json"),
+        ),
+        (
+            XlsxParserATT1,
+            Path(dir_path, "data", "att", "att1.xlsx"),
+            Path(dir_path, "data", "att", "att1_xlsx_parser_result.json"),
+        ),
+        (
+            XlsxParserATT1,
+            Path(dir_path, "data", "att", "att2.xlsx"),
+            Path(dir_path, "data", "att", "att2_xlsx_parser_result.json"),
+        ),
+        (
+            XlsxParserATT1,
+            Path(dir_path, "data", "att", "att3.xlsx"),
+            Path(dir_path, "data", "att", "att3_xlsx_parser_result.json"),
         ),
         # AWS
         (

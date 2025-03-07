@@ -1,0 +1,9 @@
+[
+    {
+        "maintenance_id": "1234567",
+        "summary": "There will be a disruption to services.: Planned Maintenance Replacing faulty equipment.",
+        "start": 1741233600,
+        "end": 1741237200,
+        "status": "CONFIRMED"
+    }
+]

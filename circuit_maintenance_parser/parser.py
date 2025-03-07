@@ -506,7 +506,7 @@ class Xlsx(Parser):
         """Execute parsing."""
         if not READ_EXCEL_PRESENT:
             raise RuntimeError(
-                "Missing import 'pandas' required to read xlsx files." " Install main package with option '[xlsx]'"
+                "Missing import 'pandas' required to read xlsx files. Install main package with option '[xlsx]'"
             )
 
         file_obj = io.BytesIO(raw)
