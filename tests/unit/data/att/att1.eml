@@ -3,16 +3,16 @@ Received: by 2002:a05:6359:5ce0:b0:1de:a135:e43d with SMTP id qo32csp2067009rwb;
         Thu, 6 Mar 2025 19:49:27 -0800 (PST)
 X-Received: by 2002:a2e:bc27:0:b0:308:f4cc:9519 with SMTP id 38308e7fff4ca-30bf44fa65fmr4589241fa.5.1741319367156;
         Thu, 06 Mar 2025 19:49:27 -0800 (PST)
-Return-Path: <no-reply@att.com>
+Return-Path: <g31654@att.com>
 Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
         by mx.google.com with SMTPS id 38308e7fff4ca-30be98f3aefsor5672281fa.5.2025.03.06.19.49.26
         for <customer@example.local>
         (Google Transport Security);
         Thu, 06 Mar 2025 19:49:27 -0800 (PST)
-Received-SPF: pass (google.com: domain of no-reply@att.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Received-SPF: pass (google.com: domain of g31654@att.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
 Authentication-Results: mx.google.com;
        dkim=pass header.i=@gmail.com header.s=20230601 header.b=HZpt0bGz;
-       spf=pass (google.com: domain of no-reply@att.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=no-reply@att.com;
+       spf=pass (google.com: domain of g31654@att.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=g31654@att.com;
        dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
        dara=pass header.i=@gmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
@@ -48,7 +48,7 @@ X-Received: by 2002:a05:6512:2342:b0:549:5769:6ad8 with SMTP id
  2adb3069b0e04-54990e29b17mr558480e87.4.1741319365502; Thu, 06 Mar 2025
  19:49:25 -0800 (PST)
 MIME-Version: 1.0
-From: ATT Maintenance <no-reply@att.com>
+From: ATT Maintenance <g31654@att.com>
 Date: Thu, 6 Mar 2025 22:49:13 -0500
 X-Gm-Features: AQ5f1Jq_YXQmzeY1Gou7sbtme8bMhtf1fbbuvyPnM-NS33DCh206a0vtP1CDCkA
 Message-ID: <CACMOqEq0SdQE+VsSiA73MzVGXTFO-dNu5k9EYjeZNmhTUbR5oA@mail.gmail.com>
@@ -75,9 +75,9 @@ Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><p style=3D"font-size:medium;color:rgb(0,0,0);font-family:=
-monospace">Event ID: 1234567<br>Customer Impact Description: Planned Mainte=
-nance<br>Summary: There will be a disruption to services.<br>Description: R=
-eplacing faulty equipment.<br>Business Risk: Outage<br></p><p style=3D"font=
+monospace">Event ID: 1234567 <br>Customer Impact Description: Planned Mainte=
+nance <br>Summary: There will be a disruption to services. <br>Description: R=
+eplacing faulty equipment. <br>Business Risk: Outage <br></p><p style=3D"font=
 -size:medium;color:rgb(0,0,0);font-family:monospace">Start Time: March 31, =
 2025 14:00 GMT, End Time: March 31, 2025 15:00 GMT</p><p style=3D"font-size=
 :medium;color:rgb(0,0,0);font-family:monospace"><br></p></div>
