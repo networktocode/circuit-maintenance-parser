@@ -1044,7 +1044,7 @@ def test_provider_get_maintenances(
 
     try:
         parsed_notifications = provider_class().get_maintenances(data)
-    except Exception as exc:
+    except ProviderError as exc:
         if "Missing import" in "".join(exc.args):
             # Cannot test feature when optional packages are not installed.
             return
