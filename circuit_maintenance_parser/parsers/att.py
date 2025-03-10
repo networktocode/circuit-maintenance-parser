@@ -32,7 +32,7 @@ class XlsxParserATT1(Xlsx):
         impact = Impact.OUTAGE
         account_name, circuit_id_key = get_account_and_circuit_id_key(records[0])
         circuit_ids = [r[circuit_id_key] for r in records]
-        if "Customer" in records[0]:
+        if "Circuit/Asset" in records[0]:
             circuit_ids = [normalize_lec_circuit_id(cid) for cid in circuit_ids]
         circuits = [CircuitImpact(impact=impact, circuit_id=cid) for cid in circuit_ids]
         data = [
