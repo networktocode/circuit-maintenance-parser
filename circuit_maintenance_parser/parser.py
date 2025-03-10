@@ -529,6 +529,8 @@ class Xlsx(Parser):
         xls = read_excel(file_obj)
         xls = xls.drop_duplicates()
         records = xls.to_dict(orient="records")
+        if not records:
+            raise ParserError("No rows found in attached spreadsheet.")
         results = list(self.parse_xlsx(records))
         return results
 
