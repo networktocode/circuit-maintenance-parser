@@ -69,6 +69,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 #### Supported providers based on other parsers
 
 - Apple
+- ATT
 - AWS
 - AquaComms
 - BSO
@@ -133,6 +134,12 @@ The library is available as a Python package in pypi and can be installed with p
 #### OpenAI
 
 `pip install circuit-maintenance-parser[openai]`
+
+#### Xlsx Spreadsheets
+
+Some providers may attach a spreadsheet in their circuit maintenance notifications. Support for this is provided by installing the optional xlsx package.
+
+`pip install circuit-maintenance-parser[xlsx]`
 
 ## How to use it?
 

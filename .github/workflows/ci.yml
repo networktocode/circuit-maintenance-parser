@@ -1,9 +1,9 @@
 ---
 name: "CI"
-concurrency:  # Cancel any existing runs of this workflow for this same PR
+concurrency: # Cancel any existing runs of this workflow for this same PR
   group: "${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: true
-on:  # yamllint disable
+on: # yamllint disable
   push:
     branches:
       - "main"
@@ -129,7 +129,7 @@ jobs:
         uses: "networktocode/gh-action-setup-poetry-environment@v6"
         with:
           python-version: "${{ matrix.python-version }}"
-          poetry-install-options: "--with dev"
+          poetry-install-options: "--all-extras"
       - name: "Run poetry Install"
         run: "poetry install"
       - name: "Run poetry Install"

@@ -1,4 +1,6 @@
 """Definition of Mainentance Notification base classes."""
+
+import io
 import logging
 import os
 import base64
@@ -12,9 +14,16 @@ from dateutil.parser import isoparse
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
-
 from pydantic import BaseModel, PrivateAttr
 from icalendar import Calendar  # type: ignore
+
+try:
+    from pandas import read_excel
+
+    READ_EXCEL_PRESENT = True
+except ImportError:
+    READ_EXCEL_PRESENT = False
+
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
@@ -497,3 +506,35 @@ class LLM(Parser):
         )
 
         return [data]
+
+
+class Xlsx(Parser):
+    """Xlsx parser."""
+
+    _data_types = PrivateAttr(
+        [
+            "application/octet-stream",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        ]
+    )
+
+    def parser_hook(self, raw: bytes, content_type: str):
+        """Execute parsing."""
+        if not READ_EXCEL_PRESENT:
+            raise RuntimeError(
+                "Missing import 'pandas' required to read xlsx files. Install main package with option '[xlsx]'"
+            )
+
+        file_obj = io.BytesIO(raw)
+        xls = read_excel(file_obj)
+        xls = xls.drop_duplicates()
+        records = xls.to_dict(orient="records")
+        if not records:
+            raise ParserError("No rows found in attached spreadsheet.")
+        results = list(self.parse_xlsx(records))
+        return results
+
+    @staticmethod
+    def parse_xlsx(records: List[Dict]) -> List[Dict]:
+        """Provide placeholder method."""
+        raise NotImplementedError

@@ -1,0 +1,21 @@
+[
+    {
+        "account": "E-Corp",
+        "circuits": [
+            {
+                "circuit_id": "23/HCGS/123456/SC",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1743433200,
+        "maintenance_id": "1234567",
+        "organizer": "g31654@att.com",
+        "provider": "att",
+        "sequence": 1,
+        "stamp": 1741355085,
+        "start": 1743429600,
+        "status": "CONFIRMED",
+        "summary": "There will be a disruption to services.: Planned Maintenance Replacing faulty equipment.",
+        "uid": "0"
+    }
+]

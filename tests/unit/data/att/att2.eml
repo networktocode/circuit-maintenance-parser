@@ -1,0 +1,179 @@
+Delivered-To: customer@example.local
+Received: by 2002:a05:6359:5ce0:b0:1de:a135:e43d with SMTP id qo32csp2067372rwb;
+        Thu, 6 Mar 2025 19:50:25 -0800 (PST)
+X-Received: by 2002:a05:651c:2111:b0:30b:c328:3c9f with SMTP id 38308e7fff4ca-30bf454e814mr4802841fa.20.1741319424937;
+        Thu, 06 Mar 2025 19:50:24 -0800 (PST)
+Return-Path: <g31654@att.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 38308e7fff4ca-30be9a0057esor6962441fa.10.2025.03.06.19.50.24
+        for <customer@example.local>
+        (Google Transport Security);
+        Thu, 06 Mar 2025 19:50:24 -0800 (PST)
+Received-SPF: pass (google.com: domain of g31654@att.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=cI1oGtIr;
+       spf=pass (google.com: domain of g31654@att.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=g31654@att.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1741319423; x=1741924223; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=UyDISX68V509gGYesSKwtz196ykRQuuCpLrKVb4t4xE=;
+        b=cI1oGtIrYngIu3MgOS2mnjnYh45iri1tU9hBCJqHAfvYqbOzd9nVIlNBohbPR14O3j
+         nh3C3uX7a8qROYW+BqfRiD9MrzWOj8Bc/LftqrRFwwSAo0oTQGZ1ptGCcB+kbh076vvg
+         hIHwNTkBWQc3KzlpUdJexqvaS+bMTy4RbYw+LkR1NH4qjXpo68Ofk1sQmgZeM6MYho9S
+         BGGxO/FzPWNzcjdFsi94EWe3NPyk7TiwvzdAdET4aFO2jBi0lUIBQ3KkWFMp3vLRQHaS
+         cSpHjc6Evy2+jI+D+tX76arvWGLkLHY+cITILfBJX4wFyRd6YOiuCzEkiuXaudFWE/Tu
+         GvEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741319423; x=1741924223;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=UyDISX68V509gGYesSKwtz196ykRQuuCpLrKVb4t4xE=;
+        b=civmBsuiUIKpO102hTSns1FH94+E91VdxokcYxIQSTMYmXnxOy6USAzy/DqFSy8fdq
+         E+RRLv8nnst3KLdYU+StlFEytthxjPYfUATSRHt33xLhqdz8p5OflFT2KxYBynWa2mGa
+         6i9W+RtnSmbayPrddBmY0EKxIeYjMDRPy7J7xu3LJ0B/34ETItzGOuS2tX4/MYdhLfP8
+         4/FjY3pLzrf8bD4dNmHggVuy0wSxYxG9tMxxlOzgSTaG2qz/tdPGt4RduZdJ6vAUUv2z
+         ndu0FDzmmyrwk7IihY8NElundHsJRpk5b0Q6NGK0EdlEJSFStcnp4OLFSCEXshXJ2aUo
+         Z+Fw==
+X-Gm-Message-State: AOJu0Yymsq0n2cA0RKHxnH1oqPqfj+8ZYKrYGJLsApMj0TmMTrnLGwZq
+	8mwF75u80bHaAh8HsVJUszLq3+yNmEbEKkOY9R0n/gpWovDMRnJmVUXYNj+g5CGVZmoarKAD3lZ
+	rFLTcoJQ7FJtq7Cm4dxX9HNo+ONBi4PPn
+X-Gm-Gg: ASbGncuClPQiHEkRZ+pZTRwp0GyXjfTVASSOrldKfIW9QtxK5IlSq2+0KGjA2es2661
+	GxP/j3DGw2Xtc0NDNgAekUzcfMkrdWMCGlQlD4hJu6jEfxVUgsGAGVUQX2mTXEfpWl7U/2bGsiK
+	lbVHtvJirvrYlMUxm3UOPS2q5zYA==
+X-Google-Smtp-Source: AGHT+IHuEwhzMD1MuQiaN5meSAaZK/bnzYDPgOb/p+0GC0m6tKu0qW0bR3AqBOMl8Sr+QuOL2RvKypyWWk1FN4zWjCw=
+X-Received: by 2002:a2e:b98f:0:b0:30b:b7c3:ea71 with SMTP id
+ 38308e7fff4ca-30bf452f9a8mr4313541fa.15.1741319423408; Thu, 06 Mar 2025
+ 19:50:23 -0800 (PST)
+MIME-Version: 1.0
+From: ATT Maintenance <g31654@att.com>
+Date: Thu, 6 Mar 2025 22:50:11 -0500
+X-Gm-Features: AQ5f1Jpfaj7ZtrJnC2AwvmoaW6wlygB7es0FxXL244wVlawArO2ZNOOvsxz-Qbk
+Message-ID: <CACMOqEoVZE1HpC34kgf3TPmAvZ1Sy3s0LFvFZLNHQjcMdeCCVQ@mail.gmail.com>
+Subject: Summary of Planned Maintenance
+To: ATT Customer <customer@example.local>
+Content-Type: multipart/mixed; boundary="000000000000ac682c062fb8850f"
+
+--000000000000ac682c062fb8850f
+Content-Type: multipart/alternative; boundary="000000000000ac6829062fb8850d"
+
+--000000000000ac6829062fb8850d
+Content-Type: text/plain; charset="UTF-8"
+
+Event ID: 1234567
+Customer Impact Description: Planned Maintenance
+Summary: There will be a disruption to services.
+Description: Replacing faulty equipment.
+Business Risk: Outage
+
+Start Time: March 31, 2025 14:00, End Time: March 31, 2025 15:00
+
+--000000000000ac6829062fb8850d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><p style=3D"font-size:medium;color:rgb(0,0,0);font-family:=
+monospace">Event ID: 1234567 <br>Customer Impact Description: Planned Mainte=
+nance <br>Summary: There will be a disruption to services. <br>Description: R=
+eplacing faulty equipment. <br>Business Risk: Outage<br></p><p style=3D"font=
+-size:medium;color:rgb(0,0,0);font-family:monospace">Start Time: March 31, =
+2025 14:00, End Time: March 31, 2025 15:00</p><p style=3D"font-size:medium;=
+color:rgb(0,0,0);font-family:monospace"><br></p></div>
+
+--000000000000ac6829062fb8850d--
+--000000000000ac682c062fb8850f
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; 
+	name="att_2.xlsx"
+Content-Disposition: attachment; filename="att_2.xlsx"
+Content-Transfer-Encoding: base64
+Content-ID: <f_m7y8lvv20>
+X-Attachment-Id: f_m7y8lvv20
+
+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
+AAAA
+--000000000000ac682c062fb8850f--
