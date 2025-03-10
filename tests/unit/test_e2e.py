@@ -1042,13 +1042,7 @@ def test_provider_get_maintenances(
             else:
                 data.add_data_part(data_type, file_obj.read())
 
-    try:
-        parsed_notifications = provider_class().get_maintenances(data)
-    except ProviderError as exc:
-        if "Missing import" in "".join(exc.args):
-            # Cannot test feature when optional packages are not installed.
-            return
-
+    parsed_notifications = provider_class().get_maintenances(data)
     notifications_json = []
     for parsed_notification in parsed_notifications:
         notifications_json.append(json.loads(parsed_notification.to_json()))
