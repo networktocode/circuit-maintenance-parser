@@ -63,8 +63,7 @@ class HtmlParserATT1(Html):
         p_tags = soup.find_all("p")
 
         for tag in p_tags:
-            text = tag.text.strip()
-            text = remove_unprintable(text)
+            text = remove_unprintable(tag.text.strip())
 
             if match := RE_EVENT.search(text):
                 event_id, impact, summary, description, _ = match.groups()
