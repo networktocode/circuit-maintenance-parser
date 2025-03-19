@@ -548,6 +548,7 @@ class LLM(Parser):
 
         return data_list  # Returning a list with main and backup windows
 
+
 class Xlsx(Parser):
     """Xlsx parser."""
 
