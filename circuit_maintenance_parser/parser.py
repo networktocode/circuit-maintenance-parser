@@ -521,30 +521,30 @@ class LLM(Parser):
 
         # Process backup windows
         for window in generated_json.get("backup_windows", []):
-                if "start" in window and "end" in window:
-                    backup_start = self._convert_str_datetime_to_epoch(window["start"])
-                    backup_end = self._convert_str_datetime_to_epoch(window["end"])
+            if "start" in window and "end" in window:
+                backup_start = self._convert_str_datetime_to_epoch(window["start"])
+                backup_end = self._convert_str_datetime_to_epoch(window["end"])
 
-                    backup_data = {
-                        "circuits": main_data["circuits"],  # Same circuits
-                        "start": backup_start,
-                        "end": backup_end,
-                        "summary": main_data["summary"],
-                        "status": main_data["status"],
-                        "account": main_data["account"],
-                    }
+                backup_data = {
+                    "circuits": main_data["circuits"],  # Same circuits
+                    "start": backup_start,
+                    "end": backup_end,
+                    "summary": main_data["summary"],
+                    "status": main_data["status"],
+                    "account": main_data["account"],
+                }
 
-                    # Generate a new maintenance ID for the backup window
-                    backup_data["maintenance_id"] = str(
-                        self._get_maintenance_id(
-                            generated_json,
-                            backup_start,
-                            backup_end,
-                            backup_data["circuits"],
-                        )
+                # Generate a new maintenance ID for the backup window
+                backup_data["maintenance_id"] = str(
+                    self._get_maintenance_id(
+                        generated_json,
+                        backup_start,
+                        backup_end,
+                        backup_data["circuits"],
                     )
+                )
 
-                    data_list.append(backup_data)
+                data_list.append(backup_data)
 
         return data_list  # Returning a list with main and backup windows
 
