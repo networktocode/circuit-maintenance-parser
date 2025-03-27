@@ -520,8 +520,7 @@ class LLM(Parser):
         data_list.append(main_data)
 
         # Process backup windows
-        if "backup_windows" in generated_json:
-            for window in generated_json["backup_windows"]:
+        for window in generated_json.get("backup_windows", []):
                 if "start" in window and "end" in window:
                     backup_start = self._convert_str_datetime_to_epoch(window["start"])
                     backup_end = self._convert_str_datetime_to_epoch(window["end"])
