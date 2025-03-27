@@ -341,10 +341,18 @@ class LLM(Parser):
                 "type": "string",
             }
         }
+        "backup_windows": {
+            type: "array",
+            "items": {
+                "type": "datetime",
+            }
+        }
     }
     More context:
     * Circuit IDs are also known as service or order
     * Status could be confirmed, ongoing, cancelled, completed or rescheduled
+    * If you see any other backup windows, create a new list entry for each pair of start/end seen there.
+    * If no backup windows are found. leave the backup_windows list empty.
     """
 
     def parser_hook(self, raw: bytes, content_type: str):
@@ -487,7 +495,10 @@ class LLM(Parser):
 
         impact = self._get_impact(generated_json)
 
-        data = {
+        # Main maintenance entry
+        data_list = []
+
+        main_data = {
             "circuits": self._get_circuit_ids(generated_json, impact),
             "start": int(self._get_start(generated_json)),
             "end": int(self._get_end(generated_json)),
@@ -496,16 +507,46 @@ class LLM(Parser):
             "account": str(self._get_account(generated_json)),
         }
 
-        data["maintenance_id"] = str(
+        # Generate maintenance ID for main window
+        main_data["maintenance_id"] = str(
             self._get_maintenance_id(
                 generated_json,
-                data["start"],
-                data["end"],
-                data["circuits"],
+                main_data["start"],
+                main_data["end"],
+                main_data["circuits"],
             )
         )
 
-        return [data]
+        data_list.append(main_data)
+
+        # Process backup windows
+        for window in generated_json.get("backup_windows", []):
+            if "start" in window and "end" in window:
+                backup_start = self._convert_str_datetime_to_epoch(window["start"])
+                backup_end = self._convert_str_datetime_to_epoch(window["end"])
+
+                backup_data = {
+                    "circuits": main_data["circuits"],  # Same circuits
+                    "start": backup_start,
+                    "end": backup_end,
+                    "summary": main_data["summary"],
+                    "status": main_data["status"],
+                    "account": main_data["account"],
+                }
+
+                # Generate a new maintenance ID for the backup window
+                backup_data["maintenance_id"] = str(
+                    self._get_maintenance_id(
+                        generated_json,
+                        backup_start,
+                        backup_end,
+                        backup_data["circuits"],
+                    )
+                )
+
+                data_list.append(backup_data)
+
+        return data_list  # Returning a list with main and backup windows
 
 
 class Xlsx(Parser):
