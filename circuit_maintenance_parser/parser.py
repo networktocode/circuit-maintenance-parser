@@ -353,6 +353,7 @@ class LLM(Parser):
     * Status could be confirmed, ongoing, cancelled, completed or rescheduled
     * If you see any other backup windows, create a new list entry for each pair of start/end seen there.
     * If no backup windows are found. leave the backup_windows list empty.
+    * Impact should be returned as either "no impact", "partial" or "outage" depending on which best represents the impact information in the email.
     """
 
     def parser_hook(self, raw: bytes, content_type: str):
