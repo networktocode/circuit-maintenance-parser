@@ -1,0 +1,11 @@
+[
+    {
+        "account": "E-Corp",
+        "circuits": [
+            {
+                "circuit_id": "23/HCGS/123456/SC",
+                "impact": "OUTAGE"
+            }
+        ]
+    }
+]

@@ -1,19 +1,29 @@
 """Definition of Mainentance Notification base classes."""
+
+import io
 import logging
 import os
 import base64
 import calendar
 import datetime
 import quopri
+import hashlib
 from typing import Dict, List
 from email.utils import parsedate_tz, mktime_tz
-import hashlib
+from dateutil.parser import isoparse
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
-
 from pydantic import BaseModel, PrivateAttr
 from icalendar import Calendar  # type: ignore
+
+try:
+    from pandas import read_excel
+
+    READ_EXCEL_PRESENT = True
+except ImportError:
+    READ_EXCEL_PRESENT = False
+
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
@@ -297,15 +307,15 @@ class LLM(Parser):
     _data_types = PrivateAttr(["text/html", "html", "text/plain"])
 
     _llm_question = """Please, could you extract a JSON form without any other comment,
-    with the following JSON schema (timestamps in EPOCH and taking into account the GMT offset):
+    with the following JSON schema (start and end times are datetime objects and should be displayed in UTC):
     {
     "type": "object",
     "properties": {
         "start": {
-            "type": "int",
+            "type": "datetime",
         },
         "end": {
-            "type": "int",
+            "type": "datetime",
         },
         "account": {
             "type": "string",
@@ -331,10 +341,19 @@ class LLM(Parser):
                 "type": "string",
             }
         }
+        "backup_windows": {
+            type: "array",
+            "items": {
+                "type": "datetime",
+            }
+        }
     }
     More context:
     * Circuit IDs are also known as service or order
     * Status could be confirmed, ongoing, cancelled, completed or rescheduled
+    * If you see any other backup windows, create a new list entry for each pair of start/end seen there.
+    * If no backup windows are found. leave the backup_windows list empty.
+    * Impact should be returned as either "no impact", "partial" or "outage" depending on which best represents the impact information in the email.
     """
 
     def parser_hook(self, raw: bytes, content_type: str):
@@ -408,6 +427,17 @@ class LLM(Parser):
 
         return circuits
 
+    def _convert_str_datetime_to_epoch(self, time_str):
+        try:
+            # Using isoparse for flexible ISO8601 parsing
+            time_dt = isoparse(time_str).astimezone(datetime.timezone.utc)
+            epoch_time = int(time_dt.timestamp())
+            return epoch_time
+
+        except Exception as error_received:
+            logger.error("Error parsing dates: %s", error_received)
+            raise ParserError from error_received
+
     def _get_start(self, generated_json: dict):
         """Method to get the Start Time."""
         return generated_json[self.get_key_with_string(generated_json, "start")]
@@ -460,9 +490,16 @@ class LLM(Parser):
         if not generated_json:
             return []
 
+        if generated_json.get("start") and generated_json.get("end"):
+            generated_json["start"] = self._convert_str_datetime_to_epoch(generated_json["start"])
+            generated_json["end"] = self._convert_str_datetime_to_epoch(generated_json["end"])
+
         impact = self._get_impact(generated_json)
 
-        data = {
+        # Main maintenance entry
+        data_list = []
+
+        main_data = {
             "circuits": self._get_circuit_ids(generated_json, impact),
             "start": int(self._get_start(generated_json)),
             "end": int(self._get_end(generated_json)),
@@ -471,13 +508,75 @@ class LLM(Parser):
             "account": str(self._get_account(generated_json)),
         }
 
-        data["maintenance_id"] = str(
+        # Generate maintenance ID for main window
+        main_data["maintenance_id"] = str(
             self._get_maintenance_id(
                 generated_json,
-                data["start"],
-                data["end"],
-                data["circuits"],
+                main_data["start"],
+                main_data["end"],
+                main_data["circuits"],
             )
         )
 
-        return [data]
+        data_list.append(main_data)
+
+        # Process backup windows
+        for window in generated_json.get("backup_windows", []):
+            if "start" in window and "end" in window:
+                backup_start = self._convert_str_datetime_to_epoch(window["start"])
+                backup_end = self._convert_str_datetime_to_epoch(window["end"])
+
+                backup_data = {
+                    "circuits": main_data["circuits"],  # Same circuits
+                    "start": backup_start,
+                    "end": backup_end,
+                    "summary": main_data["summary"],
+                    "status": main_data["status"],
+                    "account": main_data["account"],
+                }
+
+                # Generate a new maintenance ID for the backup window
+                backup_data["maintenance_id"] = str(
+                    self._get_maintenance_id(
+                        generated_json,
+                        backup_start,
+                        backup_end,
+                        backup_data["circuits"],
+                    )
+                )
+
+                data_list.append(backup_data)
+
+        return data_list  # Returning a list with main and backup windows
+
+
+class Xlsx(Parser):
+    """Xlsx parser."""
+
+    _data_types = PrivateAttr(
+        [
+            "application/octet-stream",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        ]
+    )
+
+    def parser_hook(self, raw: bytes, content_type: str):
+        """Execute parsing."""
+        if not READ_EXCEL_PRESENT:
+            raise RuntimeError(
+                "Missing import 'pandas' required to read xlsx files. Install main package with option '[xlsx]'"
+            )
+
+        file_obj = io.BytesIO(raw)
+        xls = read_excel(file_obj)
+        xls = xls.drop_duplicates()
+        records = xls.to_dict(orient="records")
+        if not records:
+            raise ParserError("No rows found in attached spreadsheet.")
+        results = list(self.parse_xlsx(records))
+        return results
+
+    @staticmethod
+    def parse_xlsx(records: List[Dict]) -> List[Dict]:
+        """Provide placeholder method."""
+        raise NotImplementedError

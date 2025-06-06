@@ -2,6 +2,18 @@
 
 # Changelog
 
+## v2.8.0 - 2025-06-06
+
+### Added
+
+- [#313](https://github.com/networktocode/circuit-maintenance-parser/pull/313) - Add parsers for provider ATT
+
+### Changed
+
+- [#312](https://github.com/networktocode/circuit-maintenance-parser/pull/312) - Move epoch parser outside of LLM due to inconsistencies
+- [#314](https://github.com/networktocode/circuit-maintenance-parser/pull/314) - Add multi-windows for LLM
+- [#315](https://github.com/networktocode/circuit-maintenance-parser/pull/315) - Return proper impact result for parsing
+
 ## v2.7.0 - 2025-01-10
 
 ### Added

@@ -20,6 +20,7 @@ from circuit_maintenance_parser.provider import (
     AquaComms,
     Apple,
     Arelion,
+    ATT,
     Cogent,
     Colt,
     CrownCastle,
@@ -100,6 +101,34 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "arelion", "arelion2_result.json"),
+            ],
+        ),
+        # ATT
+        (
+            ATT,
+            [
+                ("email", Path(dir_path, "data", "att", "att1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "att", "att1_e2e_result.json"),
+            ],
+        ),
+        (
+            ATT,
+            [
+                ("email", Path(dir_path, "data", "att", "att2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "att", "att2_e2e_result.json"),
+            ],
+        ),
+        (
+            ATT,
+            [
+                ("email", Path(dir_path, "data", "att", "att3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "att", "att3_e2e_result.json"),
             ],
         ),
         # AWS
