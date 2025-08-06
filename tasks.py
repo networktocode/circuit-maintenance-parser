@@ -1,5 +1,6 @@
 """Tasks for use with Invoke."""
 
+import os
 from invoke import Collection, Exit
 from invoke import task as invoke_task
 
@@ -34,7 +35,7 @@ namespace.configure(
         "circuit_maintenance_parser": {
             "project_name": "circuit_maintenance_parser",
             "python_ver": "3.9",
-            "local": False,
+            "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", False)),
             "image_name": "circuit_maintenance_parser",
             "image_ver": "latest",
             "pwd": ".",
