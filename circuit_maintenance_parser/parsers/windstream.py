@@ -1,8 +1,9 @@
 """Windstream parser."""
+
 import logging
 from datetime import timezone
 
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status
 from circuit_maintenance_parser.utils import convert_timezone
 
 # pylint: disable=too-many-nested-blocks, too-many-branches

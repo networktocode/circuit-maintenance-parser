@@ -1,12 +1,14 @@
 """CLI for circuit-maintenance-parser."""
+
+import email
 import logging
 import sys
-import email
+
 import click
 
 from . import SUPPORTED_PROVIDERS, init_provider
-from .provider import ProviderError
 from .data import NotificationData
+from .provider import ProviderError
 
 
 @click.command()

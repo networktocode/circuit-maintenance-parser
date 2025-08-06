@@ -1,10 +1,12 @@
 """Cogent parser."""
+
 import logging
 import re
-from typing import Dict
 from datetime import datetime
-from pytz import timezone, UTC
+from typing import Dict
+
 from bs4.element import ResultSet  # type: ignore
+from pytz import UTC, timezone
 
 from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status, Text
 

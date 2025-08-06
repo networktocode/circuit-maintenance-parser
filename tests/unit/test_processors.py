@@ -1,17 +1,16 @@
 """Tests for Processor."""
+
 import copy
 from unittest.mock import patch
 
 import pytest
 from pydantic import ValidationError
 
-from circuit_maintenance_parser.output import Maintenance, Metadata
-from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
 from circuit_maintenance_parser.data import DataPart, NotificationData
 from circuit_maintenance_parser.errors import ProcessorError
-
-
+from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.parser import Parser
+from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
 
 # pylint: disable=global-variable-undefined
 
@@ -21,6 +20,7 @@ EXTENDED_DATA = {"y": "z", "provider": "required"}
 
 class FakeParser(Parser):
     "Fake class to simulate a Parser."
+
     _parsed_data = PARSED_DATA
     _data_types = ["fake_type"]
 
@@ -33,18 +33,21 @@ class FakeParser(Parser):
 
 class FakeParser0(FakeParser):
     "Fake class to simulate another Parser."
+
     _data_types = ["fake_type_0"]
     _parsed_data = copy.deepcopy([PARSED_DATA[0]])
 
 
 class FakeParser1(FakeParser):
     "Fake class to simulate yet another Parser."
+
     _data_types = ["fake_type_1"]
     _parsed_data = copy.deepcopy([PARSED_DATA[1]])
 
 
 class FakeParserMultiDataType(FakeParser):
     "Fake class to simulate yet another Parser."
+
     _data_types = ["fake_type_0", "fake_type_1"]
     _parsed_data = copy.deepcopy([PARSED_DATA[1]])
 

@@ -1,4 +1,5 @@
 """Tests for Providers."""
+
 import os
 from unittest.mock import patch
 
@@ -6,10 +7,10 @@ import pytest
 
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
-from circuit_maintenance_parser.processor import SimpleProcessor, CombinedProcessor
-from circuit_maintenance_parser.provider import GenericProvider, AquaComms
-from circuit_maintenance_parser.parser import Parser, EmailDateParser
+from circuit_maintenance_parser.parser import EmailDateParser, Parser
 from circuit_maintenance_parser.parsers.openai import OpenAIParser
+from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
+from circuit_maintenance_parser.provider import AquaComms, GenericProvider
 
 # pylint: disable=use-implicit-booleaness-not-comparison
 fake_data = NotificationData.init_from_raw("fake_type", b"fake data")

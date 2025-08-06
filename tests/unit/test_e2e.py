@@ -12,15 +12,16 @@ from circuit_maintenance_parser.errors import ProviderError
 
 # pylint: disable=duplicate-code,too-many-lines
 from circuit_maintenance_parser.provider import (
+    ATT,
     AWS,
     BSO,
     GTT,
     HGC,
     NTT,
-    AquaComms,
+    PCCW,
     Apple,
+    AquaComms,
     Arelion,
-    ATT,
     Cogent,
     Colt,
     CrownCastle,
@@ -34,7 +35,6 @@ from circuit_maintenance_parser.provider import (
     Momentum,
     Netflix,
     PacketFabric,
-    PCCW,
     Seaborn,
     Sparkle,
     Tata,
@@ -1024,9 +1024,7 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         ),
     ],
 )
-def test_provider_get_maintenances(
-    provider_class, test_data_files, result_parse_files
-):  # pylint: disable=too-many-locals,too-many-branches
+def test_provider_get_maintenances(provider_class, test_data_files, result_parse_files):  # pylint: disable=too-many-locals,too-many-branches
     """End to End tests for various Providers."""
     extended_data = provider_class.get_extended_data()
     default_maintenance_data = {"uid": "0", "sequence": 1, "summary": ""}
@@ -1185,9 +1183,7 @@ def test_errored_provider_process(provider_class, data_type, data_file, exceptio
     with pytest.raises(exception) as exc:
         provider_class().get_maintenances(data)
 
-    assert len(exc.value.related_exceptions) == len(
-        provider_class.get_default_processors()
-    )  # pylint: disable=protected-access
+    assert len(exc.value.related_exceptions) == len(provider_class.get_default_processors())  # pylint: disable=protected-access
     if isinstance(error_message, str):
         error_message = [error_message]
     for item in error_message:

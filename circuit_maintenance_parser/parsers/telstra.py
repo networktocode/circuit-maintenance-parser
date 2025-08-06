@@ -1,12 +1,13 @@
 """Telstra parser."""
+
 import logging
-from typing import Dict, List
 import re
-from dateutil import parser
+from typing import Dict, List
+
 from bs4.element import ResultSet  # type: ignore
+from dateutil import parser
 
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
-
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status
 
 # pylint: disable=too-many-branches
 

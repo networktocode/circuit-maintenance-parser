@@ -1,12 +1,13 @@
 """Circuit Maintenance Parser for Equinix Email Notifications."""
-from typing import Any, Dict, List
+
 import re
+from typing import Any, Dict, List
 
 from bs4.element import ResultSet  # type: ignore
 from dateutil import parser
 
 from circuit_maintenance_parser.output import Impact
-from circuit_maintenance_parser.parser import Html, EmailSubjectParser, Status
+from circuit_maintenance_parser.parser import EmailSubjectParser, Html, Status
 
 
 class HtmlParserEquinix(Html):

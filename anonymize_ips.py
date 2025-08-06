@@ -1,18 +1,19 @@
 """Anonymize IPs."""
-import os
-import sys
+
 import argparse
 import fileinput
-import random
+import os
+import secrets
 import string
-from netconan.ip_anonymization import IpAnonymizer, IpV6Anonymizer, anonymize_ip_addr  # type: ignore
+import sys
 
+from netconan.ip_anonymization import IpAnonymizer, IpV6Anonymizer, anonymize_ip_addr  # type: ignore
 
 TEST_DATA_PATH = os.path.join("tests", "unit", "data")
 
 _DEFAULT_SALT_LENGTH = 16
 _CHAR_CHOICES = string.ascii_letters + string.digits
-SALT = "".join(random.choice(_CHAR_CHOICES) for _ in range(_DEFAULT_SALT_LENGTH))  # nosec
+SALT = "".join(secrets.choice(_CHAR_CHOICES) for _ in range(_DEFAULT_SALT_LENGTH))  # nosec
 
 # RFC 5737
 IPV4_DOCUMENTATION_ADDRESSES = ["192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24"]
@@ -66,13 +67,13 @@ def main():
         path = TEST_DATA_PATH
 
     report = ""
-    for (dirpath, _, files) in os.walk(path):
+    for dirpath, _, files in os.walk(path):
         for file in files:
             filename = os.path.join(dirpath, file)
             report += replace(filename)
 
     print(
-        f"{report}" "\nIPv4 and IPv6 addresses have been anonymized.",
+        f"{report}\nIPv4 and IPv6 addresses have been anonymized.",
         " \nPlease, keep in mind that this could uncover some parsing dependencies on white spaces.",
     )
 

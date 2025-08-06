@@ -1,13 +1,14 @@
 """Colt parser."""
 
-import logging
-import re
 import csv
 import io
+import logging
+import re
 
 from dateutil import parser
-from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
-from circuit_maintenance_parser.parser import EmailSubjectParser, Csv
+
+from circuit_maintenance_parser.output import CircuitImpact, Impact, Status
+from circuit_maintenance_parser.parser import Csv, EmailSubjectParser
 
 logger = logging.getLogger(__name__)
 

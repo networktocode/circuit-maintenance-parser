@@ -1,4 +1,5 @@
 """Netflix parser."""
+
 import hashlib
 import logging
 import re
@@ -73,6 +74,6 @@ class TextParserNetflix1(Text):
         # Netflix does not send a maintenance ID, so a hash value is being generated using the start,
         #  end and IDs of all circuits in the notification.
         maintenance_id += str(data["start"]) + "/" + str(data["end"])
-        data["maintenance_id"] = hashlib.md5(maintenance_id.encode("utf-8")).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         data["status"] = status
         return [data]

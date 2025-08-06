@@ -1,17 +1,16 @@
 """Definition of Processor class."""
+
+import itertools
 import logging
 import traceback
-import itertools
-
-from typing import Iterable, Type, Dict, List
+from typing import Dict, Iterable, List, Type
 
 from pydantic import BaseModel, ValidationError
 
-from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import Parser, LLM
 from circuit_maintenance_parser.errors import ParserError, ProcessorError
-
+from circuit_maintenance_parser.output import Maintenance, Metadata
+from circuit_maintenance_parser.parser import LLM, Parser
 
 logger = logging.getLogger(__name__)
 

@@ -12,7 +12,7 @@
             }
         ],
         "end": 1706731200,
-        "maintenance_id": "4a171c65729e191ab8fc3cdd49bc5ea2",
+        "maintenance_id": "c783e2933714bd213668a00c465ad9b3a037f5750400745e7edd48b6abb1b9a9",
         "start": 1706724000,
         "status": "CONFIRMED",
         "summary": "Netflix (AS2906) will be performing scheduled maintenance in Edgeconnex LAS01, at 2024-01-31 18:00:00+00:00 UTC."

@@ -1,9 +1,10 @@
 """Crown Castle Fiber parser."""
+
 import logging
 import re
 from datetime import datetime
 
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
 

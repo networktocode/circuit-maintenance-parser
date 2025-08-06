@@ -16,8 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 include = [
-    "CHANGELOG.md",
-    "CONTRIBUTING.md",
+    "README.md",
     "LICENSE",
 ]
 
@@ -46,58 +45,68 @@ openai = [
     "openai",
 ]
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"
 requests_mock = "^1.7.0"
 pyyaml = "^6.0"
-black = "^22.3.0"
 pylint = "^2.4.4"
-pydocstyle = "^6.0.0"
 yamllint = "^1.20.0"
-bandit = "^1.6.2"
 invoke = "^2.2.0"
-flake8 = "^5.0.0"
-mypy = "^1.8.0"
-# Dependencies for mypy to correctly analyze code using these libraries
+ruff = "*"
 types-python-dateutil = "^2.8.3"
 types-pytz = "^2022.0.0"
 types-toml = "^0.10.1"
 netconan = "^0.12.3"
 toml = "0.10.2"
 types-chardet = "^5.0.4"
+pandas-stubs = "2.2.2.240603"
+coverage = "^7.6.12"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
 
-[tool.poetry.group.dev.dependencies]
-pandas-stubs = "2.2.2.240603"
-coverage = "^7.6.12"
-
-[tool.black]
+[tool.ruff]
 line-length = 120
-target-version = ['py38']
-include = '\.pyi?$'
-exclude = '''
-(
-  /(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-  )/
-  | settings.py     # This is where you define files that should not be stylized by black
-                     # the root of the project
-)
-'''
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "D",  # pydocstyle
+    "F", "E", "W",  # flake8
+    "S",  # bandit
+    "I",  # isort
+]
+ignore = [
+    # warning: `one-blank-line-before-class` (D203) and `no-blank-line-before-class` (D211) are incompatible.
+    "D203", # 1 blank line required before class docstring
+
+    # D212 is enabled by default in google convention, and complains if we have a docstring like:
+    # """
+    # My docstring is on the line after the opening quotes instead of on the same line as them.
+    # """
+    # We've discussed and concluded that we consider this to be a valid style choice.
+    "D212", # Multi-line docstring summary should start at the first line
+    "D213", # Multi-line docstring summary should start at the second line
+
+    # Produces a lot of issues in the current codebase.
+    "D401", # First line of docstring should be in imperative mood
+    "D407", # Missing dashed underline after section
+    "D416", # Section name ends in colon
+    "E501", # Line too long
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "D",
+    "S"
+]
+
 
 [tool.pylint.master]
-ignore-patterns=[".venv"]
+ignore-patterns=[".venv", "tests"]
 
 [tool.pylint.basic]
 # No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.
@@ -107,12 +116,11 @@ extension-pkg-whitelist = [
 ]
 
 [tool.pylint.messages_control]
-# Line length is enforced by Black, so pylint doesn't need to check it.
-# Pylint and Black disagree about how to format multi-line arrays; Black wins.
-disable = """,
-    line-too-long,
-    duplicate-code,
-    """
+disable = [
+    "line-too-long",
+    "duplicate-code",
+    "cyclic-import",
+    ]
 
 [tool.pylint.miscellaneous]
 # Don't flag TODO as a failure, let us commit with things that still need to be done in the code
@@ -122,14 +130,65 @@ notes = """,
     """
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 python_paths = "./"
-addopts = "-vv --doctest-modules"
-
-[tool.mypy]
-plugins = [
-  "pydantic.mypy"
+testpaths = [
+    "tests/"
 ]
+addopts = "-vv --doctest-modules -p no:warnings --ignore-glob='*mock*'"
+
+[tool.towncrier]
+package = "circuit_maintenance_parser"
+directory = "changes"
+filename = "docs/release_notes.md"
+template = "changes/towncrier_template.j2"
+start_string = "<!-- towncrier release notes start -->"
+issue_format = "[#{issue}](https://github.com/networktocode/circuit_maintenance_parser/issues/{issue})"
+
+[[tool.towncrier.type]]
+directory = "security"
+name = "Security"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecated"
+name = "Deprecated"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "removed"
+name = "Removed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "housekeeping"
+name = "Housekeeping"
+showcontent = true
