@@ -342,7 +342,7 @@ Last, but not least, you should update the tests!
 
 ... adding the necessary data samples in `tests/unit/data/abcde/`.
 
-> You can anonymize your IPv4 and IPv6 addresses using the `invoke anonymize-ips --local`. Keep in mind that only IPv4 addresses for documentation purposes (RFC5737: "192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24") are preserved, in case you need to check these IPs in your test output (unlikely)
+> You can anonymize your IPv4 and IPv6 addresses using the `invoke anonymize-ips`. Keep in mind that only IPv4 addresses for documentation purposes (RFC5737: "192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24") are preserved, in case you need to check these IPs in your test output (unlikely)
 
 # Contributing
 
@@ -359,7 +359,9 @@ The project is following Network to Code software development guidelines and is 
 
 - Install `poetry`
 - Install dependencies and library locally: `poetry install`
-- Run CI tests locally: `invoke tests --local`
+- Run CI tests locally: `invoke tests`
+
+> Note: you can run the tasks without Docker by setting the environment variable `INVOKE_PARSER_LOCAL=True`. This will run the tasks directly on your local machine instead of inside a Docker container.
 
 ### How to add a new Circuit Maintenance provider?
 
@@ -377,20 +379,18 @@ The project is following Network to Code software development guidelines and is 
 ====================================================== 99 passed, 174 deselected, 17 warnings in 10.35s ======================================================
 ```
 
-7. Run some final CI tests locally to ensure that there is no linting/formatting issues with your changes. You should look to get a code score of 10/10. See the example below: `invoke tests --local`
+7. Run some final CI tests locally to ensure that there is no linting/formatting issues with your changes. You should look to get a code score of 10/10. See the example below: `invoke tests`
 
 ```
--> % invoke tests --local
-LOCAL - Running command black --check --diff .
-All done! ✨ 🍰 ✨
-41 files would be left unchanged.
-LOCAL - Running command flake8 .
-LOCAL - Running command find . -name "*.py" | xargs pylint
-************* Module tasks
-tasks.py:4:0: W0402: Uses of a deprecated module 'distutils.util' (deprecated-module)
+-> % poetry run invoke tests
+DOCKER - Running command: ruff format --check . container: circuit_maintenance_parser:latest
+52 files already formatted
+DOCKER - Running command: ruff check --output-format concise . container: circuit_maintenance_parser:latest
+All checks passed!
+DOCKER - Running command: find . -name "*.py" | grep -vE "tests/unit" | xargs pylint container: circuit_maintenance_parser:latest
 
---------------------------------------------------------------------
-Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+------------------------------------
+Your code has been rated at 10.00/10
 ```
 
 ### How to debug circuit-maintenance-parser library locally
