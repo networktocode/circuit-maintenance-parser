@@ -38,7 +38,7 @@ namespace.configure(
             "python_ver": "3.9",
             "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", "false")),
             "image_name": "circuit_maintenance_parser",
-            "image_ver": "latest",
+            "image_ver": os.getenv("INVOKE_PARSER_IMAGE_VER", "latest"),
             "pwd": ".",
         }
     }

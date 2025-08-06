@@ -160,6 +160,8 @@ jobs:
             PYTHON_VER=${{ env.PYTHON_VER }}
       - name: "Debug: Show docker images"
         run: "docker image ls"
+      - name: "Expose the Docker tag"
+        run: "echo INVOKE_PARSER_DOCKER_TAG=${{ env.INVOKE_PARSER_IMAGE_NAME }}:${{ env.INVOKE_PARSER_IMAGE_VER }}-py${{ matrix.python-version }} >> $GITHUB_ENV"
       - name: "Run Tests"
         run: "poetry run invoke pytest"
     needs:
