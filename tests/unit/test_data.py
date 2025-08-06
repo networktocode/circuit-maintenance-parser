@@ -1,10 +1,10 @@
 """Tests NotificationData."""
+
+import email
 import os
 from pathlib import Path
-import email
 
 from circuit_maintenance_parser.data import NotificationData
-
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

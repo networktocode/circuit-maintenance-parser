@@ -6,15 +6,16 @@ from .data import NotificationData
 from .errors import NonexistentProviderError, ProviderError
 from .output import Maintenance
 from .provider import (
+    ATT,
     AWS,
     BSO,
     GTT,
     HGC,
     NTT,
-    AquaComms,
+    PCCW,
     Apple,
+    AquaComms,
     Arelion,
-    ATT,
     Cogent,
     Colt,
     CrownCastle,
@@ -28,7 +29,6 @@ from .provider import (
     Momentum,
     Netflix,
     PacketFabric,
-    PCCW,
     Seaborn,
     Sparkle,
     Tata,

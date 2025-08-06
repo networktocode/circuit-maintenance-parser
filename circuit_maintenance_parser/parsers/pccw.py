@@ -1,11 +1,13 @@
 """Circuit maintenance parser for PCCW Email notifications."""
+
 import re
-from typing import List, Dict, Tuple, Any, ClassVar
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List, Tuple
 
 from bs4.element import ResultSet  # type: ignore
+
 from circuit_maintenance_parser.output import Status
-from circuit_maintenance_parser.parser import Html, EmailSubjectParser
+from circuit_maintenance_parser.parser import EmailSubjectParser, Html
 
 
 class HtmlParserPCCW(Html):

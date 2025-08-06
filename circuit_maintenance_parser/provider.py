@@ -14,7 +14,6 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.parser import EmailDateParser, ICal
-
 from circuit_maintenance_parser.parsers.apple import SubjectParserApple, TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1

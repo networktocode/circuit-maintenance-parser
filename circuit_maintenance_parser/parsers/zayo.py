@@ -1,4 +1,5 @@
 """Zayo parser."""
+
 import logging
 import re
 from copy import deepcopy
@@ -6,7 +7,6 @@ from typing import Dict
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
-
 from dateutil import parser
 
 from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status

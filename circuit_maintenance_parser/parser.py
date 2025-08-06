@@ -1,21 +1,21 @@
 """Definition of Mainentance Notification base classes."""
 
-import io
-import logging
-import os
 import base64
 import calendar
 import datetime
-import quopri
 import hashlib
+import io
+import logging
+import os
+import quopri
+from email.utils import mktime_tz, parsedate_tz
 from typing import Dict, List
-from email.utils import parsedate_tz, mktime_tz
-from dateutil.parser import isoparse
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
-from pydantic import BaseModel, PrivateAttr
+from dateutil.parser import isoparse
 from icalendar import Calendar  # type: ignore
+from pydantic import BaseModel, PrivateAttr
 
 try:
     from pandas import read_excel
@@ -25,9 +25,9 @@ except ImportError:
     READ_EXCEL_PRESENT = False
 
 
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
-from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
+from circuit_maintenance_parser.output import CircuitImpact, Impact, Status
 from circuit_maintenance_parser.utils import Geolocator
 
 # pylint: disable=no-member
@@ -364,6 +364,8 @@ class LLM(Parser):
             content = soup.text
         elif content_type in ["text/plain"]:
             content = self.get_text_hook(raw)
+        else:
+            return result
 
         for data in self.parse_content(content):
             result.append(data)
@@ -482,7 +484,7 @@ class LLM(Parser):
             return generated_json["maintenance_id"]
 
         maintenance_id = str(start) + str(end) + "".join(list(circuits))
-        return hashlib.md5(maintenance_id.encode("utf-8")).hexdigest()  # nosec
+        return hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
 
     def parse_content(self, content):
         """Parse content via LLM."""

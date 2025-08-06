@@ -7,6 +7,7 @@ from typing import Dict, List
 
 import dateutil
 from bs4.element import ResultSet  # type: ignore
+
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, Xlsx
 

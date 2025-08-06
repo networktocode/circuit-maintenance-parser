@@ -1,13 +1,13 @@
 """Megaport parser."""
+
 import logging
 import re
 from typing import Dict
 
-from dateutil import parser
 from bs4.element import ResultSet  # type: ignore
+from dateutil import parser
 
-from circuit_maintenance_parser.parser import Html, Impact, CircuitImpact, Status
-
+from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status
 
 logger = logging.getLogger(__name__)
 

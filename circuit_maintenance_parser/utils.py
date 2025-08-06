@@ -1,15 +1,16 @@
 """Utility functions for the library."""
-import os
-import logging
-from typing import Tuple, Dict, Union
+
 import csv
 import datetime
-import pytz
+import logging
+import os
+from typing import Dict, Tuple, Union
 
-from geopy.exc import GeocoderUnavailable, GeocoderTimedOut, GeocoderServiceError  # type: ignore
+import backoff  # type: ignore
+import pytz
+from geopy.exc import GeocoderServiceError, GeocoderTimedOut, GeocoderUnavailable  # type: ignore
 from geopy.geocoders import Nominatim  # type: ignore
 from timezonefinder import TimezoneFinder  # type: ignore
-import backoff  # type: ignore
 
 from .errors import ParserError
 
@@ -80,7 +81,8 @@ class Geolocator:
         country = city.split(", ")[-1]
 
         lat, lng = self.db_location.get(  # pylint: disable=no-member
-            (city_name, country), self.db_location.get(city_name, (None, None))  # pylint: disable=no-member
+            (city_name, country),
+            self.db_location.get(city_name, (None, None)),  # pylint: disable=no-member
         )
         if lat and lng:
             logger.debug("Resolved %s to lat %s, lon %sfrom local locations DB.", city, lat, lng)
@@ -148,7 +150,7 @@ def convert_timezone(time_str):
         "ET": "US/Eastern",
         "CT": "US/Central",
         "MT": "US/Mountain",
-        "PT": "US/Pacific"
+        "PT": "US/Pacific",
         # Add more mappings as needed
     }
 

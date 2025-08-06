@@ -1,6 +1,6 @@
 """Bootstrap Pytest."""
-import os
 
+import os
 
 token_openai = os.getenv("PARSER_OPENAI_API_KEY")
 

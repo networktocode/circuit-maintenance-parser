@@ -1,11 +1,12 @@
 """Definition of Data classes."""
-import logging
-from typing import List, NamedTuple, Optional, Type, Set
 
 import email
-from pydantic import BaseModel
-from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
+import logging
+from typing import List, NamedTuple, Optional, Set, Type
 
+from pydantic import BaseModel
+
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 
 logger = logging.getLogger(__name__)
 

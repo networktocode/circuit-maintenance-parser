@@ -1,9 +1,9 @@
 ---
 name: "CI"
 concurrency: # Cancel any existing runs of this workflow for this same PR
-  group: "${{ github.workflow }}-${{ github.ref }}"
+  group: "${{ '{{ github.workflow }}' }}-${{ '{{ github.ref }}' }}"
   cancel-in-progress: true
-on: # yamllint disable
+on: # yamllint disable-line rule:truthy rule:comments
   push:
     branches:
       - "main"
@@ -11,143 +11,169 @@ on: # yamllint disable
     tags:
       - "v*"
   pull_request: ~
+
+env:
+  INVOKE_PARSER_IMAGE_NAME: "circuit_maintenance_parser"
+  INVOKE_PARSER_IMAGE_VER: "latest"
+
 jobs:
-  black:
+  ruff-format:
     runs-on: "ubuntu-24.04"
     env:
-      INVOKE_LOCAL: "True"
+      INVOKE_PARSER_LOCAL: "True"
     steps:
       - name: "Check out repository code"
-        uses: "actions/checkout@v3"
-      - name: "Setup environment"
-        uses: "networktocode/gh-action-setup-poetry-environment@v6"
-      - name: "Linting: black"
-        run: "poetry run invoke black"
-  bandit:
-    runs-on: "ubuntu-24.04"
-    env:
-      INVOKE_LOCAL: "True"
-    steps:
-      - name: "Check out repository code"
-        uses: "actions/checkout@v3"
-      - name: "Setup environment"
-        uses: "networktocode/gh-action-setup-poetry-environment@v6"
-      - name: "Linting: bandit"
-        run: "poetry run invoke bandit"
-    needs:
-      - "black"
-  pydocstyle:
-    runs-on: "ubuntu-24.04"
-    env:
-      INVOKE_LOCAL: "True"
-    steps:
-      - name: "Check out repository code"
-        uses: "actions/checkout@v3"
-      - name: "Setup environment"
-        uses: "networktocode/gh-action-setup-poetry-environment@v6"
-      - name: "Linting: pydocstyle"
-        run: "poetry run invoke pydocstyle"
-    needs:
-      - "black"
-  flake8:
-    runs-on: "ubuntu-24.04"
-    env:
-      INVOKE_LOCAL: "True"
-    steps:
-      - name: "Check out repository code"
-        uses: "actions/checkout@v3"
-      - name: "Setup environment"
-        uses: "networktocode/gh-action-setup-poetry-environment@v6"
-      - name: "Linting: flake8"
-        run: "poetry run invoke flake8"
-    needs:
-      - "black"
-  mypy:
-    runs-on: "ubuntu-24.04"
-    env:
-      INVOKE_LOCAL: "True"
-    steps:
-      - name: "Check out repository code"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
       - name: "Setup environment"
         uses: "networktocode/gh-action-setup-poetry-environment@v6"
         with:
-          poetry-install-options: "--with dev"
-      - name: "Linting: flake8"
-        run: "poetry run invoke mypy"
+          poetry-version: "1.8.5"
+      - name: "Linting: ruff format"
+        run: "poetry run invoke ruff --action format"
+  ruff-lint:
+    runs-on: "ubuntu-24.04"
+    env:
+      INVOKE_PARSER_LOCAL: "True"
+    steps:
+      - name: "Check out repository code"
+        uses: "actions/checkout@v4"
+      - name: "Setup environment"
+        uses: "networktocode/gh-action-setup-poetry-environment@v6"
+        with:
+          poetry-version: "1.8.5"
+      - name: "Linting: ruff"
+        run: "poetry run invoke ruff --action lint"
+  # Temporarily disabled due to issues with the docs build and needing best practices for NTC python builds.
+  # check-docs-build:
+  #   runs-on: "ubuntu-24.04"
+  #   env:
+  #     INVOKE_PARSER_LOCAL: "True"
+  #   steps:
+  #     - name: "Check out repository code"
+  #       uses: "actions/checkout@v4"
+  #     - name: "Setup environment"
+  #       uses: "networktocode/gh-action-setup-poetry-environment@v6"
+  #       with:
+  #         poetry-version: "1.8.5"
+  #     - name: "Check Docs Build"
+  #       run: "poetry run invoke build-and-check-docs"
+  poetry:
+    runs-on: "ubuntu-24.04"
+    env:
+      INVOKE_PARSER_LOCAL: "True"
+    steps:
+      - name: "Check out repository code"
+        uses: "actions/checkout@v4"
+      - name: "Setup environment"
+        uses: "networktocode/gh-action-setup-poetry-environment@v6"
+        with:
+          poetry-version: "1.8.5"
+      - name: "Checking: poetry lock file"
+        run: "poetry lock --check"
     needs:
-      - "black"
+      - "ruff-format"
+      - "ruff-lint"
+      - "yamllint"
   yamllint:
     runs-on: "ubuntu-24.04"
     env:
-      INVOKE_LOCAL: "True"
+      INVOKE_PARSER_LOCAL: "True"
     steps:
       - name: "Check out repository code"
-        uses: "actions/checkout@v3"
-      - name: "Setup environment"
-        uses: "networktocode/gh-action-setup-poetry-environment@v6"
-      - name: "Linting: yamllint"
-        run: "poetry run invoke yamllint"
-    needs:
-      - "black"
-  pylint:
-    runs-on: "ubuntu-24.04"
-    env:
-      INVOKE_LOCAL: "True"
-    steps:
-      - name: "Check out repository code"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
       - name: "Setup environment"
         uses: "networktocode/gh-action-setup-poetry-environment@v6"
         with:
-          poetry-install-options: "--with dev"
-      - name: "Linting: Pylint"
-        run: "poetry run invoke pylint"
+          poetry-version: "1.8.5"
+      - name: "Linting: yamllint"
+        run: "poetry run invoke yamllint"
     needs:
-      - "bandit"
-      - "pydocstyle"
-      - "flake8"
-      - "yamllint"
-      - "mypy"
-  unittest:
+      - "ruff-format"
+      - "ruff-lint"
+  pylint:
+    runs-on: "ubuntu-24.04"
     strategy:
       fail-fast: true
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
-        pydantic: ["2.x"]
-        include:
-          - python-version: "3.11"
-            pydantic: "1.x"
-    runs-on: "ubuntu-24.04"
     env:
-      INVOKE_LOCAL: "True"
       PYTHON_VER: "${{ matrix.python-version }}"
     steps:
       - name: "Check out repository code"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
       - name: "Setup environment"
         uses: "networktocode/gh-action-setup-poetry-environment@v6"
+      - name: "Get image version"
+        run: "echo INVOKE_PARSER_IMAGE_VER=`poetry version -s`-py$${{ matrix.python-version }} >> $GITHUB_ENV"
+      - name: "Set up Docker Buildx"
+        id: "buildx"
+        uses: "docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2" # v3.10.0
+      - name: "Build"
+        uses: "docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25" # v5.4.0
         with:
-          python-version: "${{ matrix.python-version }}"
-          poetry-install-options: "--all-extras"
-      - name: "Run poetry Install"
-        run: "poetry install"
-      - name: "Run poetry Install"
-        run: "pip install pydantic==1.10.13"
-        if: matrix.pydantic == '1.x'
-      - name: "Run Tests"
-        run: "poetry run invoke pytest --local"
+          builder: "${{ steps.buildx.outputs.name }}"
+          context: "./"
+          push: false
+          load: true
+          tags: "${{ env.INVOKE_PARSER_IMAGE_NAME }}:${{ env.INVOKE_PARSER_IMAGE_VER }}"
+          file: "./Dockerfile"
+          cache-from: "type=gha,scope=${{ env.INVOKE_PARSER_IMAGE_NAME }}-${{ env.INVOKE_PARSER_IMAGE_VER }}-py${{ matrix.python-version }}"
+          cache-to: "type=gha,scope=${{ env.INVOKE_PARSER_IMAGE_NAME }}-${{ env.INVOKE_PARSER_IMAGE_VER }}-py${{ matrix.python-version }}"
+          build-args: |
+            PYTHON_VER=${{ env.PYTHON_VER }}
+      - name: "Debug: Show docker images"
+        run: "docker image ls"
+      - name: "Linting: Pylint"
+        run: "poetry run invoke pylint"
     needs:
-      - "pylint"
+      - "poetry"
+  pytest:
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    runs-on: "ubuntu-24.04"
+    env:
+      PYTHON_VER: "${{ matrix.python-version }}"
+    steps:
+      - name: "Check out repository code"
+        uses: "actions/checkout@v4"
+      - name: "Setup environment"
+        uses: "networktocode/gh-action-setup-poetry-environment@v6"
+      - name: "Get image version"
+        run: "echo INVOKE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
+      - name: "Set up Docker Buildx"
+        id: "buildx"
+        uses: "docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2" # v3.10.0
+      - name: "Build"
+        uses: "docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25" # v5.4.0
+        with:
+          builder: "${{ steps.buildx.outputs.name }}"
+          context: "./"
+          push: false
+          load: true
+          tags: "${{ env.INVOKE_PARSER_IMAGE_NAME }}:${{ env.INVOKE_PARSER_IMAGE_VER }}"
+          file: "./Dockerfile"
+          cache-from: "type=gha,scope=${{ env.INVOKE_PARSER_IMAGE_NAME }}-${{ env.INVOKE_PARSER_IMAGE_VER }}-py${{ matrix.python-version }}"
+          cache-to: "type=gha,scope=${{ env.INVOKE_PARSER_IMAGE_NAME }}-${{ env.INVOKE_PARSER_IMAGE_VER }}-py${{ matrix.python-version }}"
+          build-args: |
+            PYTHON_VER=${{ env.PYTHON_VER }}
+      - name: "Debug: Show docker images"
+        run: "docker image ls"
+      - name: "Run Tests"
+        run: "poetry run invoke pytest"
+    needs:
+      - "poetry"
   publish_gh:
     name: "Publish to GitHub"
     runs-on: "ubuntu-24.04"
-    if: "startsWith(github.ref, 'refs/tags/v')"
+    # yamllint disable-line rule:quoted-strings
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: "Check out repository code"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
       - name: "Set up Python"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.9"
       - name: "Install Python Packages"
@@ -156,27 +182,26 @@ jobs:
         run: "echo RELEASE_VERSION=${GITHUB_REF:10} >> $GITHUB_ENV"
       - name: "Run Poetry Version"
         run: "poetry version $RELEASE_VERSION"
+      - name: "Build Documentation"
+        run: "poetry run invoke build-and-check-docs"
       - name: "Run Poetry Build"
         run: "poetry build"
       - name: "Upload binaries to release"
-        uses: "svenstaro/upload-release-action@v2"
-        with:
-          repo_token: "${{ secrets.NTC_GITHUB_TOKEN }}"
-          file: "dist/*"
-          tag: "${{ github.ref }}"
-          overwrite: true
-          file_glob: true
+        run: "gh release upload ${{ github.ref_name }} dist/*.{tar.gz,whl}"
+        env:
+          GH_TOKEN: "${{ secrets.NTC_GITHUB_TOKEN }}"
     needs:
-      - "unittest"
+      - "pytest"
   publish_pypi:
     name: "Push Package to PyPI"
     runs-on: "ubuntu-24.04"
-    if: "startsWith(github.ref, 'refs/tags/v')"
+    # yamllint disable-line rule:quoted-strings
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: "Check out repository code"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
       - name: "Set up Python"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.9"
       - name: "Install Python Packages"
@@ -188,17 +213,16 @@ jobs:
       - name: "Run Poetry Build"
         run: "poetry build"
       - name: "Push to PyPI"
-        uses: "pypa/gh-action-pypi-publish@release/v1"
+        uses: "pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc" # v1.12.4
         with:
           user: "__token__"
           password: "${{ secrets.PYPI_API_TOKEN }}"
     needs:
-      - "unittest"
+      - "pytest"
   slack-notify:
     needs:
       - "publish_gh"
       - "publish_pypi"
-    name: "Send notification to the Slack"
     runs-on: "ubuntu-24.04"
     env:
       SLACK_WEBHOOK_URL: "${{ secrets.SLACK_WEBHOOK_URL }}"
@@ -211,8 +235,8 @@ jobs:
       - name: "Send a notification to Slack"
         # ENVs cannot be used directly in job.if. This is a workaround to check
         # if SLACK_WEBHOOK_URL is present.
-        if: "${{ env.SLACK_WEBHOOK_URL != '' }}"
-        uses: "slackapi/slack-github-action@v1.23.0"
+        if: "env.SLACK_WEBHOOK_URL != ''"
+        uses: "slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3" # v1.27.1
         with:
           payload: |
             {
