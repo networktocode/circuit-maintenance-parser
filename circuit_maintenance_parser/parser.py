@@ -364,6 +364,8 @@ class LLM(Parser):
             content = soup.text
         elif content_type in ["text/plain"]:
             content = self.get_text_hook(raw)
+        else:
+            return result
 
         for data in self.parse_content(content):
             result.append(data)
