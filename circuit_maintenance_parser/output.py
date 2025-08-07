@@ -113,6 +113,7 @@ class Metadata(BaseModel):
     processor: StrictStr
     parsers: List[StrictStr]
     generated_by_llm: bool = False
+    tokens_used: int = 0
 
 
 class Maintenance(BaseModel, extra="forbid"):

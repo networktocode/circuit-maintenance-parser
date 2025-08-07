@@ -13,6 +13,7 @@ from typing import Dict, List
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
+from charset_normalizer import from_bytes
 from dateutil.parser import isoparse
 from icalendar import Calendar  # type: ignore
 from pydantic import BaseModel, PrivateAttr
@@ -305,6 +306,7 @@ class LLM(Parser):
     """LLM parser."""
 
     _data_types = PrivateAttr(["text/html", "html", "text/plain"])
+    _tokens_used = PrivateAttr(default=0)
 
     _llm_question = """Please, could you extract a JSON form without any other comment,
     with the following JSON schema (start and end times are datetime objects and should be displayed in UTC):
@@ -374,7 +376,18 @@ class LLM(Parser):
     @staticmethod
     def get_text_hook(raw: bytes) -> str:
         """Can be overwritten by subclasses."""
-        return raw.decode()
+        try:
+            # Decode quoted-printable if needed
+            decoded_bytes = quopri.decodestring(raw)
+
+            # Auto-detect and decode
+            result = from_bytes(decoded_bytes).best()
+            if result is not None:
+                return str(result)
+            return decoded_bytes.decode("latin-1", errors="replace")
+        except (UnicodeDecodeError, ValueError, TypeError, AttributeError):
+            # Final fallback if all above methods fail
+            return raw.decode("utf-8", errors="replace")
 
     @staticmethod
     def get_key_with_string(dictionary: dict, string: str):
@@ -400,6 +413,16 @@ class LLM(Parser):
                 logger.warning("The file %s can't be read: %s", custom_llm_question_path, err)
 
         return self._llm_question
+
+    @property
+    def tokens_used(self):
+        """Return the number of tokens used by the LLM."""
+        return self._tokens_used
+
+    @tokens_used.setter
+    def tokens_used(self, value):
+        """Set the number of tokens used by the LLM."""
+        self._tokens_used = value
 
     def get_llm_response(self, content):
         """Method to retrieve the response from the LLM for some content."""
@@ -482,7 +505,6 @@ class LLM(Parser):
         maintenance_key = self.get_key_with_string(generated_json, "maintenance")
         if maintenance_key and generated_json["maintenance_id"] != "N/A":
             return generated_json["maintenance_id"]
-
         maintenance_id = str(start) + str(end) + "".join(list(circuits))
         return hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
 
@@ -508,6 +530,7 @@ class LLM(Parser):
             "summary": str(self._get_summary(generated_json)),
             "status": self._get_status(generated_json),
             "account": str(self._get_account(generated_json)),
+            "_llm_tokens_used": self.tokens_used,
         }
 
         # Generate maintenance ID for main window
