@@ -64,30 +64,30 @@ class TextParserAWS1(Text):
         impact = Impact.OUTAGE
         maintenance_id = ""
         status = Status.CONFIRMED
-        if re.search(r'<!doctype html>', text, re.IGNORECASE):
-            soup = bs4.BeautifulSoup(text, 'html.parser')
+        if re.search(r"<!doctype html>", text, re.IGNORECASE):
+            soup = bs4.BeautifulSoup(text, "html.parser")
             clean_string = soup.get_text()
-            clean_string = re.sub('=20', '', clean_string)
+            clean_string = re.sub("=20", "", clean_string)
             clean_list = clean_string.splitlines()
             cleaner_list = []
             for line in clean_list:
                 newline = line.strip()
                 if newline != "":
                     cleaner_list.append(newline)
-            sumstart = cleaner_list.index('Hello,')
+            sumstart = cleaner_list.index("Hello,")
             try:
-                sumend = cleaner_list.index('[1] https://aws.amazon.com/support')
+                sumend = cleaner_list.index("[1] https://aws.amazon.com/support")
             except ValueError:
                 sumend = len(cleaner_list)
             summary = ""
             for line in cleaner_list[sumstart:sumend]:
-                summary+=f"{line}\n"
+                summary += f"{line}\n"
             if "may become unavailable" in summary.lower():
                 impact = Impact.OUTAGE
             elif "has been cancelled" in summary.lower():
                 status = Status.CANCELLED
-            start_time = cleaner_list[cleaner_list.index('Start time')+1]
-            end_time = cleaner_list[cleaner_list.index('End time')+1]
+            start_time = cleaner_list[cleaner_list.index("Start time") + 1]
+            end_time = cleaner_list[cleaner_list.index("End time") + 1]
             data["start"] = self.dt2ts(parser.parse(start_time))
             data["end"] = self.dt2ts(parser.parse(end_time))
             data["summary"] = summary
