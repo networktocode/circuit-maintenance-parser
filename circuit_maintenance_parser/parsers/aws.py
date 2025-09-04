@@ -91,10 +91,7 @@ class TextParserAWS1(Text):
         """
         impact = Impact.OUTAGE
         for line in text.splitlines():
-            if (
-                "planned maintenance" in line.lower()
-                or "maintenance has been scheduled" in line.lower()
-            ):
+            if "planned maintenance" in line.lower() or "maintenance has been scheduled" in line.lower():
                 data["summary"] = line
             search = re.search(
                 r"([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})",
@@ -1309,7 +1306,5 @@ class TextParserAWS1(Text):
             maintenance_id += circuit.circuit_id
         maintenance_id += str(data["start"])
         maintenance_id += str(data["end"])
-        data["maintenance_id"] = hashlib.sha256(
-            maintenance_id.encode("utf-8")
-        ).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         return [data]
