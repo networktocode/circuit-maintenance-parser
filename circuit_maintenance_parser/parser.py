@@ -500,7 +500,7 @@ class LLM(Parser):
 
         return account
 
-    def _get_maintenance_id(self, generated_json: dict, start, end, circuits):
+    def _get_maintenance_id(self, generated_json: dict, start, end):
         """Method to get the Maintenance ID."""
         maintenance_key = self.get_key_with_string(generated_json, "maintenance")
         if maintenance_key and generated_json["maintenance_id"] != "N/A":
@@ -539,7 +539,6 @@ class LLM(Parser):
                 generated_json,
                 main_data["start"],
                 main_data["end"],
-                main_data["circuits"],
             )
         )
 
@@ -566,7 +565,6 @@ class LLM(Parser):
                         generated_json,
                         backup_start,
                         backup_end,
-                        backup_data["circuits"],
                     )
                 )
 
