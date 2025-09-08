@@ -505,7 +505,7 @@ class LLM(Parser):
         maintenance_key = self.get_key_with_string(generated_json, "maintenance")
         if maintenance_key and generated_json["maintenance_id"] != "N/A":
             return generated_json["maintenance_id"]
-        maintenance_id = str(start) + str(end) + "".join(list(circuits))
+        maintenance_id = str(start) + str(end) + "_" + "-".join(generated_json["circuit_ids"])
         return hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
 
     def parse_content(self, content):
