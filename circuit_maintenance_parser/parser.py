@@ -500,12 +500,12 @@ class LLM(Parser):
 
         return account
 
-    def _get_maintenance_id(self, generated_json: dict, start, end, circuits):
+    def _get_maintenance_id(self, generated_json: dict, start, end):
         """Method to get the Maintenance ID."""
         maintenance_key = self.get_key_with_string(generated_json, "maintenance")
         if maintenance_key and generated_json["maintenance_id"] != "N/A":
             return generated_json["maintenance_id"]
-        maintenance_id = str(start) + str(end) + "".join(list(circuits))
+        maintenance_id = str(start) + str(end) + "_" + "-".join(generated_json["circuit_ids"])
         return hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
 
     def parse_content(self, content):
@@ -539,7 +539,6 @@ class LLM(Parser):
                 generated_json,
                 main_data["start"],
                 main_data["end"],
-                main_data["circuits"],
             )
         )
 
@@ -566,7 +565,6 @@ class LLM(Parser):
                         generated_json,
                         backup_start,
                         backup_end,
-                        backup_data["circuits"],
                     )
                 )
 
