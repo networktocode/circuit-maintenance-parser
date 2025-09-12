@@ -91,7 +91,10 @@ class TextParserAWS1(Text):
         """
         impact = Impact.OUTAGE
         for line in text.splitlines():
-            if "planned maintenance" in line.lower() or "maintenance has been scheduled" in line.lower():
+            if (
+                "planned maintenance" in line.lower()
+                or "maintenance has been scheduled" in line.lower()
+            ):
                 data["summary"] = line
             search = re.search(
                 r"([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})",
@@ -1253,6 +1256,7 @@ class TextParserAWS1(Text):
         soup = bs4.BeautifulSoup(text, "html.parser")
         clean_string = soup.get_text()
         clean_string = re.sub("=20", "", clean_string)
+        clean_string = re.sub("=", "", clean_string)
         clean_list = clean_string.splitlines()
         cleaner_list = []
         for line in clean_list:
@@ -1264,9 +1268,8 @@ class TextParserAWS1(Text):
             sumend = cleaner_list.index("[1] https://aws.amazon.com/support")
         except ValueError:
             sumend = len(cleaner_list)
-        summary = ""
-        for line in cleaner_list[sumstart:sumend]:
-            summary += f"{line}\n"
+        newline = " "
+        summary = newline.join(cleaner_list[sumstart:sumend])
         if "has been cancelled" in summary.lower():
             data["status"] = Status.CANCELLED
         start_time = cleaner_list[cleaner_list.index("Start time") + 1]
@@ -1274,7 +1277,7 @@ class TextParserAWS1(Text):
         data["start"] = self.dt2ts(parser.parse(start_time))
         data["end"] = self.dt2ts(parser.parse(end_time))
         data["summary"] = summary
-        for line in summary.splitlines():
+        for line in cleaner_list[sumstart:sumend]:
             line = line.strip()
             if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
                 data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
@@ -1306,5 +1309,7 @@ class TextParserAWS1(Text):
             maintenance_id += circuit.circuit_id
         maintenance_id += str(data["start"])
         maintenance_id += str(data["end"])
-        data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.sha256(
+            maintenance_id.encode("utf-8")
+        ).hexdigest()  # nosec
         return [data]

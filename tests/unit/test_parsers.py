@@ -170,6 +170,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "aws", "aws3.eml"),
             Path(dir_path, "data", "aws", "aws3_text_parser_result.json"),
         ),
+        (
+            TextParserAWS1,
+            Path(dir_path, "data", "aws", "aws4_html.eml"),
+            Path(dir_path, "data", "aws", "aws4_html_parser_result.json"),
+        ),
         # BSO
         (
             HtmlParserBSO1,
