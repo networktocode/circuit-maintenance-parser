@@ -251,7 +251,7 @@ class AWS(GenericProvider):
 
     _processors: List[GenericProcessor] = PrivateAttr(
         [
-            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserAWS1]),
+            CombinedProcessor(data_parsers=[HtmlParserAWS1]),
             CombinedProcessor(data_parsers=[EmailDateParser, TextParserAWS1, SubjectParserAWS1]),
         ]
     )

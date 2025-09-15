@@ -11,7 +11,7 @@ from circuit_maintenance_parser.parser import EmailDateParser, ICal, Xlsx
 from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
-from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
+from circuit_maintenance_parser.parsers.aws import HtmlParserAWS1, SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
@@ -171,7 +171,7 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "aws", "aws3_text_parser_result.json"),
         ),
         (
-            TextParserAWS1,
+            HtmlParserAWS1,
             Path(dir_path, "data", "aws", "aws4.eml"),
             Path(dir_path, "data", "aws", "aws4_html_parser_result.json"),
         ),

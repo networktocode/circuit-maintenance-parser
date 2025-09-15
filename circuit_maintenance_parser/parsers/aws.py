@@ -8,7 +8,14 @@ import re
 import bs4  # type: ignore
 from dateutil import parser
 
-from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status, Text
+from circuit_maintenance_parser.parser import (
+    CircuitImpact,
+    EmailSubjectParser,
+    Html,
+    Impact,
+    Status,
+    Text,
+)
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
@@ -90,10 +97,7 @@ class TextParserAWS1(Text):
         maintenance_id = ""
         impact = Impact.OUTAGE
         for line in text.splitlines():
-            if (
-                "planned maintenance" in line.lower()
-                or "maintenance has been scheduled" in line.lower()
-            ):
+            if "planned maintenance" in line.lower() or "maintenance has been scheduled" in line.lower():
                 data["summary"] = line
             search = re.search(
                 r"([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3}) to ([A-Z][a-z]{2}, [0-9]{1,2} [A-Z][a-z]{2,9} [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} [A-Z]{2,3})",
@@ -124,10 +128,9 @@ class TextParserAWS1(Text):
             maintenance_id += circuit.circuit_id
         maintenance_id += str(data["start"])
         maintenance_id += str(data["end"])
-        data["maintenance_id"] = hashlib.sha256(
-            maintenance_id.encode("utf-8")
-        ).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         return [data]
+
 
 class HtmlParserAWS1(Html):
     """Notifications Parser for AWS HTML Emails."""
@@ -1262,22 +1265,17 @@ class HtmlParserAWS1(Html):
             </html>
             =20
         """
-        data = {
-            "circuits": [],
-            "status": Status.CONFIRMED,
-        }
+        data = {"circuits": [], "status": Status.CONFIRMED, "stamp": 0}
         maintenance_id = ""
         impact = Impact.OUTAGE
-        soup = bs4.BeautifulSoup(soup, "html.parser")
         clean_string = soup.get_text()
-        clean_string = re.sub("=20", "", clean_string)
-        clean_string = re.sub("=", "", clean_string)
         clean_list = clean_string.splitlines()
         cleaner_list = []
         for line in clean_list:
             newline = line.strip()
             if newline != "":
                 cleaner_list.append(newline)
+        data["stamp"] = self.dt2ts(parser.parse(cleaner_list[2]))
         sumstart = cleaner_list.index("Hello,")
         try:
             sumend = cleaner_list.index("[1] https://aws.amazon.com/support")
@@ -1292,6 +1290,7 @@ class HtmlParserAWS1(Html):
         data["start"] = self.dt2ts(parser.parse(start_time))
         data["end"] = self.dt2ts(parser.parse(end_time))
         data["summary"] = summary
+        data["account"] = cleaner_list[cleaner_list.index("Affected account") + 1]
         for line in cleaner_list[sumstart:sumend]:
             line = line.strip()
             if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
@@ -1300,7 +1299,5 @@ class HtmlParserAWS1(Html):
             maintenance_id += circuit.circuit_id
         maintenance_id += str(data["start"])
         maintenance_id += str(data["end"])
-        data["maintenance_id"] = hashlib.sha256(
-            maintenance_id.encode("utf-8")
-        ).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         return [data]
