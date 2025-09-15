@@ -162,10 +162,10 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (
             AWS,
             [
-                ("email", Path(dir_path, "data", "aws", "aws4_html.eml")),
+                ("html", Path(dir_path, "data", "aws", "aws4.eml")),
             ],
             [
-                Path(dir_path, "data", "aws", "aws4_html_result.json"),
+                Path(dir_path, "data", "aws", "aws4_result.json"),
             ],
         ),
         # BSO

@@ -8,13 +8,7 @@ import re
 import bs4  # type: ignore
 from dateutil import parser
 
-from circuit_maintenance_parser.parser import (
-    CircuitImpact,
-    EmailSubjectParser,
-    Impact,
-    Status,
-    Text,
-)
+from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status, Text
 
 # pylint: disable=too-many-nested-blocks, too-many-branches
 
@@ -45,7 +39,7 @@ class TextParserAWS1(Text):
         soup = bs4.BeautifulSoup(quopri.decodestring(raw), features="lxml")
         return soup.text
 
-    def parse_plaintext(self, text, data):
+    def parse_text(self, text):
         r"""Parse text.
 
         Example:
@@ -89,6 +83,11 @@ class TextParserAWS1(Text):
             Start Time: Wed, 3 Sep 2025 09:00:00 GMT
             End Time: Wed, 3 Sep 2025 13:00:00 GMT
         """
+        data = {
+            "circuits": [],
+            "status": Status.CONFIRMED,
+        }
+        maintenance_id = ""
         impact = Impact.OUTAGE
         for line in text.splitlines():
             if (
@@ -119,16 +118,27 @@ class TextParserAWS1(Text):
                 data["status"] = Status.CANCELLED
             if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
                 data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
-        return data
+        # No maintenance ID found in emails, so a hash value is being generated using the start,
+        #  end and IDs of all circuits in the notification.
+        for circuit in data["circuits"]:
+            maintenance_id += circuit.circuit_id
+        maintenance_id += str(data["start"])
+        maintenance_id += str(data["end"])
+        data["maintenance_id"] = hashlib.sha256(
+            maintenance_id.encode("utf-8")
+        ).hexdigest()  # nosec
+        return [data]
 
-    def parse_html(self, text, data):
+class HtmlParserAWS1(Html):
+    """Notifications Parser for AWS HTML Emails."""
+
+    def parse_html(self, soup):
         """Parses AWS HTML notifications.
 
             Wrapper method to deal with both html and plaintext emails.
 
         Args:
-            text (str): email text.
-            data (dict): the dictionary structure started in wrapper method.
+            soup (str): email text.
 
         Returns:
             data (dict): dictionary structure with maintenance details
@@ -1252,8 +1262,13 @@ class TextParserAWS1(Text):
             </html>
             =20
         """
+        data = {
+            "circuits": [],
+            "status": Status.CONFIRMED,
+        }
+        maintenance_id = ""
         impact = Impact.OUTAGE
-        soup = bs4.BeautifulSoup(text, "html.parser")
+        soup = bs4.BeautifulSoup(soup, "html.parser")
         clean_string = soup.get_text()
         clean_string = re.sub("=20", "", clean_string)
         clean_string = re.sub("=", "", clean_string)
@@ -1281,30 +1296,6 @@ class TextParserAWS1(Text):
             line = line.strip()
             if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
                 data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
-        return data
-
-    def parse_text(self, text):
-        """Parses AWS notifications.
-
-            Wrapper method to deal with both html and plaintext emails.
-
-        Args:
-            text (str): email text.
-
-        Returns:
-            data (dict): dictionary structure with maintenance details
-        """
-        data = {
-            "circuits": [],
-            "status": Status.CONFIRMED,
-        }
-        maintenance_id = ""
-        if re.search(r"<!doctype html>", text, re.IGNORECASE):
-            data = self.parse_html(text, data)
-        else:
-            data = self.parse_plaintext(text, data)
-        # No maintenance ID found in emails, so a hash value is being generated using the start,
-        #  end and IDs of all circuits in the notification.
         for circuit in data["circuits"]:
             maintenance_id += circuit.circuit_id
         maintenance_id += str(data["start"])
