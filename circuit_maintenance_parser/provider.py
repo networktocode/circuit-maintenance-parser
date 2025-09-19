@@ -155,29 +155,27 @@ class GenericProvider(BaseModel):
             related_exceptions=related_exceptions,
         )
 
-
     def add_subject_to_text(self, data: NotificationData):
         """Append the subject to all text/* data_parts if not already present."""
         subject = None
         for part in data.data_parts:
-            if part.type == 'email-header-subject':
-                subject = part.content.decode(errors='ignore')
+            if part.type == "email-header-subject":
+                subject = part.content.decode(errors="ignore")
                 break
         if subject:
             new_data_parts = []
             for part in data.data_parts:
-                if part.type.startswith('text/') or part.type.startswith('html'):
-                    content_str = part.content.decode(errors='ignore')
+                if part.type.startswith("text/") or part.type.startswith("html"):
+                    content_str = part.content.decode(errors="ignore")
                     if subject not in content_str:
                         # Append subject and update content
-                        new_content = (content_str + '\n' + subject).encode()
+                        new_content = (content_str + "\n" + subject).encode()
                         new_data_parts.append(type(part)(part.type, new_content))
                     else:
                         new_data_parts.append(part)
                 else:
                     new_data_parts.append(part)
             data.data_parts = new_data_parts
-
 
     @classmethod
     def get_default_organizer(cls) -> str:
