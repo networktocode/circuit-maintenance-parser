@@ -47,7 +47,7 @@ class TextParserAWS1(Text):
         return soup.text
 
     def parse_text(self, text):
-        r"""Parse text.
+        """Parse text.
 
         Example:
             Hello,
