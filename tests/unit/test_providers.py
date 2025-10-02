@@ -131,3 +131,102 @@ def test_provider_gets_mlparser(provider_class):
     assert provider._processors[-1] == CombinedProcessor(  # pylint: disable=protected-access
         data_parsers=[EmailDateParser, OpenAIParser]
     )
+
+
+def test_add_subject_to_text_appends_subject_to_text_parts():
+    """Test that add_subject_to_text appends subject to text/* and html parts when not already present."""
+    provider = GenericProvider()
+
+    # Create test data with email subject and various content types
+    data = NotificationData()
+    data.add_data_part("email-header-subject", b"Test Maintenance Subject")
+    data.add_data_part("text/plain", b"This is plain text content")
+    data.add_data_part("text/html", b"<html><body>This is HTML content</body></html>")
+    data.add_data_part("html", b"<div>Another HTML content</div>")
+    data.add_data_part("application/pdf", b"binary pdf content")
+
+    # Verify initial state - subject should not be in content
+    text_part = data.data_parts[1]  # text/plain part
+    html_part = data.data_parts[2]  # text/html part
+    html_part2 = data.data_parts[3]  # html part
+
+    assert b"Test Maintenance Subject" not in text_part.content
+    assert b"Test Maintenance Subject" not in html_part.content
+    assert b"Test Maintenance Subject" not in html_part2.content
+
+    # Call the method
+    provider.add_subject_to_text(data)
+
+    # Verify subject was appended to text/* and html parts
+    text_part_after = data.data_parts[1]  # text/plain part
+    html_part_after = data.data_parts[2]  # text/html part
+    html_part2_after = data.data_parts[3]  # html part
+    pdf_part_after = data.data_parts[4]  # application/pdf part
+
+    assert b"Test Maintenance Subject" in text_part_after.content
+    assert text_part_after.content == b"This is plain text content\nTest Maintenance Subject"
+
+    assert b"Test Maintenance Subject" in html_part_after.content
+    assert html_part_after.content == b"<html><body>This is HTML content</body></html>\nTest Maintenance Subject"
+
+    assert b"Test Maintenance Subject" in html_part2_after.content
+    assert html_part2_after.content == b"<div>Another HTML content</div>\nTest Maintenance Subject"
+
+    # PDF part should remain unchanged
+    assert pdf_part_after.content == b"binary pdf content"
+    assert b"Test Maintenance Subject" not in pdf_part_after.content
+
+
+def test_add_subject_to_text_skips_when_subject_already_present():
+    """Test that add_subject_to_text skips parts that already contain the subject."""
+    provider = GenericProvider()
+
+    # Create test data where subject is already in the content
+    data = NotificationData()
+    data.add_data_part("email-header-subject", b"Test Subject")
+    data.add_data_part("text/plain", b"Content with Test Subject already included")
+    data.add_data_part("text/html", b"<html>No subject here</html>")
+
+    # Call the method
+    provider.add_subject_to_text(data)
+
+    # First part should remain unchanged since subject is already there
+    text_part = data.data_parts[1]
+    assert text_part.content == b"Content with Test Subject already included"
+
+    # Second part should have subject appended
+    html_part = data.data_parts[2]
+    assert html_part.content == b"<html>No subject here</html>\nTest Subject"
+
+
+def test_add_subject_to_text_no_subject_header():
+    """Test that add_subject_to_text does nothing when no email-header-subject part exists."""
+    provider = GenericProvider()
+
+    # Create test data without email-header-subject
+    data = NotificationData()
+    data.add_data_part("text/plain", b"This is plain text content")
+    data.add_data_part("text/html", b"<html><body>This is HTML content</body></html>")
+
+    original_text_content = data.data_parts[0].content
+    original_html_content = data.data_parts[1].content
+
+    # Call the method
+    provider.add_subject_to_text(data)
+
+    # Content should remain unchanged
+    assert data.data_parts[0].content == original_text_content
+    assert data.data_parts[1].content == original_html_content
+
+
+def test_add_subject_to_text_handles_decode_errors():
+    """Test that add_subject_to_text handles decode errors gracefully."""
+    provider = GenericProvider()
+
+    # Create test data with invalid UTF-8 sequences
+    data = NotificationData()
+    data.add_data_part("email-header-subject", b"\xff\xfe")  # Invalid UTF-8
+    data.add_data_part("text/plain", b"\x80\x81")  # Invalid UTF-8
+
+    # This should not raise an exception due to errors="ignore" in decode()
+    provider.add_subject_to_text(data)
