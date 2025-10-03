@@ -1,0 +1,36 @@
+    [
+        {
+            "account": "111111111111",
+            "circuits": [
+                {
+                    "circuit_id": "dxcon-abc12345",
+                    "impact": "OUTAGE"
+                },
+                {
+                    "circuit_id": "dxvif-1234hfjd",
+                    "impact": "OUTAGE"
+                },
+                {
+                    "circuit_id": "dxlag-fge11110",
+                    "impact": "OUTAGE"
+                },
+                {
+                    "circuit_id": "dxcon-ffucoreh",
+                    "impact": "OUTAGE"
+                },
+                {
+                    "circuit_id": "dxcon-fg885ug5",
+                    "impact": "OUTAGE"
+                }
+            ],
+            "end": 1757998800,
+            "maintenance_id": "369a433f3071c0837b379bc170d410e35a7a733d61c2efaf51bd95a3a4073d71",
+            "start": 1757984400,
+            "organizer": "aws-account-notifications@amazon.com",
+            "provider": "aws",
+            "sequence": 1,
+            "stamp": 1756771998,
+            "status": "CONFIRMED",
+            "summary": "Hello, Planned maintenance has been scheduled on an AWS Direct Connect endpoint in Sonda Quilicura, Santiago from Tue, 16 Sep 2025 01:00:00 GMT to Tue, 16 Sep 2025 05:00:00 GMT for 4 hours. During this maintenance window, your AWS Direct Connect services listed below may become unavailable. dxcon-abc12345 dxvif-1234hfjd dxlag-fge11110 dxcon-ffucoreh dxcon-fg885ug5 This maintenance is scheduled to avoid disrupting redundant connections at the same time. If you encounter any problems with your connection after the end of this maintenance window, please contact AWS Support[1]."
+        }
+    ]
