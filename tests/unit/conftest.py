@@ -1,5 +1,7 @@
 """Used to setup fixtures to be used through tests"""
+
 import pytest
+
 from circuit_maintenance_parser.output import Metadata
 
 

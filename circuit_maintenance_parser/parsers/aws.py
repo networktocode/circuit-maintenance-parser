@@ -1,11 +1,11 @@
 """AWS parser."""
+
 import hashlib
 import logging
 import quopri
 import re
 
 import bs4  # type: ignore
-
 from dateutil import parser
 
 from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Impact, Status, Text
@@ -85,6 +85,6 @@ class TextParserAWS1(Text):
                 data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
         # No maintenance ID found in emails, so a hash value is being generated using the start,
         #  end and IDs of all circuits in the notification.
-        data["maintenance_id"] = hashlib.md5(maintenace_id.encode("utf-8")).hexdigest()  # nosec
+        data["maintenance_id"] = hashlib.sha256(maintenace_id.encode("utf-8")).hexdigest()  # nosec
         data["status"] = status
         return [data]

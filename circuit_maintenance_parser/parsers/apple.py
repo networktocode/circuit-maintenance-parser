@@ -1,12 +1,12 @@
 """Apple peering parser."""
+
 import email
 import re
-
 from datetime import datetime, timezone
 from typing import Dict, List
 
 from circuit_maintenance_parser.output import Impact, Status
-from circuit_maintenance_parser.parser import EmailSubjectParser, Text, CircuitImpact
+from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Text
 
 
 class SubjectParserApple(EmailSubjectParser):

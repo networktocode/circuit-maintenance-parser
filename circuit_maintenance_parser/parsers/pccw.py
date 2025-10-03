@@ -1,11 +1,13 @@
 """Circuit maintenance parser for PCCW Email notifications."""
+
 import re
-from typing import List, Dict, Tuple, Any, ClassVar
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List, Tuple
 
 from bs4.element import ResultSet  # type: ignore
+
 from circuit_maintenance_parser.output import Status
-from circuit_maintenance_parser.parser import Html, EmailSubjectParser
+from circuit_maintenance_parser.parser import EmailSubjectParser, Html
 
 
 class HtmlParserPCCW(Html):
@@ -36,18 +38,36 @@ class HtmlParserPCCW(Html):
 
     def _extract_account(self, soup: ResultSet) -> str:
         """Extract customer account from soup."""
-        customer_field = soup.find(string=re.compile("Customer Name :", re.IGNORECASE))
-        return customer_field.split(":")[1].strip()
+        for string_node in soup.find_all(string=True):
+            text = str(string_node)
+            if "customer name" in text.lower():
+                # Try to extract just the account name
+                match = re.search(r"Customer Name\s*:\s*(.+)", text, re.IGNORECASE)
+                if match:
+                    return match.group(1).strip()
+
+        # Return a default value if customer name is not found
+        return "Unknown"
 
     def _extract_maintenance_window(self, soup: ResultSet) -> Tuple[datetime, datetime]:
         """Extract start and end times from maintenance window."""
-        datetime_field = soup.find(string=re.compile("Date Time :", re.IGNORECASE))
-        time_parts = (
-            datetime_field.lower().replace("date time :", "-").replace("to", "-").replace("gmt", "-").split("-")
-        )
-        start_time = datetime.strptime(time_parts[1].strip(), self.DATE_TIME_FORMAT)
-        end_time = datetime.strptime(time_parts[2].strip(), self.DATE_TIME_FORMAT)
-        return start_time, end_time
+        for string_node in soup.find_all(string=True):
+            text = str(string_node)
+
+            if "date time" in text.lower():
+                # Match format like: Date Time : 12/06/2025 15:30:00 to 12/06/2025 19:30:00 GMT
+                match = re.search(
+                    r"Date Time\s*:\s*(\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2})\s*to\s*(\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2})",
+                    text,
+                    re.IGNORECASE,
+                )
+                if match:
+                    start_str, end_str = match.groups()
+                    start_time = datetime.strptime(start_str.strip(), self.DATE_TIME_FORMAT)
+                    end_time = datetime.strptime(end_str.strip(), self.DATE_TIME_FORMAT)
+                    return start_time, end_time
+
+        raise ValueError("Could not find 'Date Time :' field or failed to parse timestamps.")
 
 
 class SubjectParserPCCW(EmailSubjectParser):

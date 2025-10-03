@@ -1,10 +1,11 @@
 """Momentum parser."""
+
 import logging
 
 from dateutil import parser
 
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.parser import EmailSubjectParser, Html, Impact, CircuitImpact, Status
+from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status
 
 # pylint: disable=too-many-branches
 

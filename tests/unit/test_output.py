@@ -1,11 +1,11 @@
 """Tests for generic parser."""
+
 import os
 
 import pytest
 from pydantic import ValidationError
 
-from circuit_maintenance_parser.output import Maintenance, CircuitImpact
-
+from circuit_maintenance_parser.output import CircuitImpact, Maintenance
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

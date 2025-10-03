@@ -1,11 +1,13 @@
 # pylint: disable=disallowed-name
 """Circuit maintenance parser for Tata Email notifications."""
-from typing import List, Dict, Any
+
 from datetime import datetime
+from typing import Any, Dict, List
 
 from bs4.element import ResultSet  # type: ignore
+
 from circuit_maintenance_parser.output import Impact, Status
-from circuit_maintenance_parser.parser import Html, EmailSubjectParser
+from circuit_maintenance_parser.parser import EmailSubjectParser, Html
 
 
 class HtmlParserTata(Html):

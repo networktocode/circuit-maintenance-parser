@@ -1,21 +1,22 @@
 """Definition of Mainentance Notification base classes."""
 
-import io
-import logging
-import os
 import base64
 import calendar
 import datetime
-import quopri
 import hashlib
+import io
+import logging
+import os
+import quopri
+from email.utils import mktime_tz, parsedate_tz
 from typing import Dict, List
-from email.utils import parsedate_tz, mktime_tz
-from dateutil.parser import isoparse
 
 import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
-from pydantic import BaseModel, PrivateAttr
+from charset_normalizer import from_bytes
+from dateutil.parser import isoparse
 from icalendar import Calendar  # type: ignore
+from pydantic import BaseModel, PrivateAttr
 
 try:
     from pandas import read_excel
@@ -25,9 +26,9 @@ except ImportError:
     READ_EXCEL_PRESENT = False
 
 
+from circuit_maintenance_parser.constants import EMAIL_HEADER_DATE, EMAIL_HEADER_SUBJECT
 from circuit_maintenance_parser.errors import ParserError
-from circuit_maintenance_parser.output import Status, Impact, CircuitImpact
-from circuit_maintenance_parser.constants import EMAIL_HEADER_SUBJECT, EMAIL_HEADER_DATE
+from circuit_maintenance_parser.output import CircuitImpact, Impact, Status
 from circuit_maintenance_parser.utils import Geolocator
 
 # pylint: disable=no-member
@@ -305,6 +306,7 @@ class LLM(Parser):
     """LLM parser."""
 
     _data_types = PrivateAttr(["text/html", "html", "text/plain"])
+    _tokens_used = PrivateAttr(default=0)
 
     _llm_question = """Please, could you extract a JSON form without any other comment,
     with the following JSON schema (start and end times are datetime objects and should be displayed in UTC):
@@ -364,6 +366,8 @@ class LLM(Parser):
             content = soup.text
         elif content_type in ["text/plain"]:
             content = self.get_text_hook(raw)
+        else:
+            return result
 
         for data in self.parse_content(content):
             result.append(data)
@@ -372,7 +376,18 @@ class LLM(Parser):
     @staticmethod
     def get_text_hook(raw: bytes) -> str:
         """Can be overwritten by subclasses."""
-        return raw.decode()
+        try:
+            # Decode quoted-printable if needed
+            decoded_bytes = quopri.decodestring(raw)
+
+            # Auto-detect and decode
+            result = from_bytes(decoded_bytes).best()
+            if result is not None:
+                return str(result)
+            return decoded_bytes.decode("latin-1", errors="replace")
+        except (UnicodeDecodeError, ValueError, TypeError, AttributeError):
+            # Final fallback if all above methods fail
+            return raw.decode("utf-8", errors="replace")
 
     @staticmethod
     def get_key_with_string(dictionary: dict, string: str):
@@ -398,6 +413,16 @@ class LLM(Parser):
                 logger.warning("The file %s can't be read: %s", custom_llm_question_path, err)
 
         return self._llm_question
+
+    @property
+    def tokens_used(self):
+        """Return the number of tokens used by the LLM."""
+        return self._tokens_used
+
+    @tokens_used.setter
+    def tokens_used(self, value):
+        """Set the number of tokens used by the LLM."""
+        self._tokens_used = value
 
     def get_llm_response(self, content):
         """Method to retrieve the response from the LLM for some content."""
@@ -475,14 +500,13 @@ class LLM(Parser):
 
         return account
 
-    def _get_maintenance_id(self, generated_json: dict, start, end, circuits):
+    def _get_maintenance_id(self, generated_json: dict, start, end):
         """Method to get the Maintenance ID."""
         maintenance_key = self.get_key_with_string(generated_json, "maintenance")
         if maintenance_key and generated_json["maintenance_id"] != "N/A":
             return generated_json["maintenance_id"]
-
-        maintenance_id = str(start) + str(end) + "".join(list(circuits))
-        return hashlib.md5(maintenance_id.encode("utf-8")).hexdigest()  # nosec
+        maintenance_id = str(start) + str(end) + "_" + "-".join(generated_json["circuit_ids"])
+        return hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
 
     def parse_content(self, content):
         """Parse content via LLM."""
@@ -506,6 +530,7 @@ class LLM(Parser):
             "summary": str(self._get_summary(generated_json)),
             "status": self._get_status(generated_json),
             "account": str(self._get_account(generated_json)),
+            "_llm_tokens_used": self.tokens_used,
         }
 
         # Generate maintenance ID for main window
@@ -514,7 +539,6 @@ class LLM(Parser):
                 generated_json,
                 main_data["start"],
                 main_data["end"],
-                main_data["circuits"],
             )
         )
 
@@ -541,7 +565,6 @@ class LLM(Parser):
                         generated_json,
                         backup_start,
                         backup_end,
-                        backup_data["circuits"],
                     )
                 )
 

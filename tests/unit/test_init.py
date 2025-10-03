@@ -1,22 +1,22 @@
 """Tests for generic parser."""
+
 import os
 
 import pytest
 
 from circuit_maintenance_parser import (
-    init_provider,
     get_provider_class,
     get_provider_class_from_sender,
+    init_provider,
 )
 from circuit_maintenance_parser.errors import NonexistentProviderError
 from circuit_maintenance_parser.provider import (
-    GenericProvider,
-    EUNetworks,
     NTT,
+    EUNetworks,
+    GenericProvider,
     PacketFabric,
     Zayo,
 )
-
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 

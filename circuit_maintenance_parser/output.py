@@ -5,7 +5,6 @@ See: https://tools.ietf.org/html/draft-gunter-calext-maintenance-notifications-0
 
 import json
 from enum import Enum
-
 from typing import List
 
 try:
@@ -15,7 +14,7 @@ except ImportError:
     from pydantic import validator as field_validator  # type: ignore
 
 
-from pydantic import BaseModel, StrictStr, StrictInt, PrivateAttr
+from pydantic import BaseModel, PrivateAttr, StrictInt, StrictStr
 
 
 class Impact(str, Enum):
@@ -114,6 +113,7 @@ class Metadata(BaseModel):
     processor: StrictStr
     parsers: List[StrictStr]
     generated_by_llm: bool = False
+    tokens_used: int = 0
 
 
 class Maintenance(BaseModel, extra="forbid"):

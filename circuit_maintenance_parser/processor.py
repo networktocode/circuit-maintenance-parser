@@ -1,17 +1,16 @@
 """Definition of Processor class."""
+
+import itertools
 import logging
 import traceback
-import itertools
-
-from typing import Iterable, Type, Dict, List
+from typing import Dict, Iterable, List, Type
 
 from pydantic import BaseModel, ValidationError
 
-from circuit_maintenance_parser.output import Maintenance, Metadata
 from circuit_maintenance_parser.data import NotificationData
-from circuit_maintenance_parser.parser import Parser, LLM
 from circuit_maintenance_parser.errors import ParserError, ProcessorError
-
+from circuit_maintenance_parser.output import Maintenance, Metadata
+from circuit_maintenance_parser.parser import LLM, Parser
 
 logger = logging.getLogger(__name__)
 
@@ -102,13 +101,14 @@ class GenericProcessor(BaseModel, extra="forbid"):
         """Return the processor name."""
         return cls.__name__
 
-    def generate_metadata(self):
+    def generate_metadata(self, tokens_used=0):
         """Generate the Metadata for the Maintenance."""
         return Metadata(
             parsers=[parser.get_name() for parser in self.data_parsers],
             generated_by_llm=any(issubclass(parser, LLM) for parser in self.data_parsers),
             processor=self.get_name(),
             provider=self.extended_data["provider"],
+            tokens_used=tokens_used,
         )
 
 
@@ -119,7 +119,11 @@ class SimpleProcessor(GenericProcessor):
         """For each data extracted (that can be multiple), we try to build a complete Maintenance."""
         for extracted_data in maintenances_extracted_data:
             self.extend_processor_data(extracted_data)
-            extracted_data["_metadata"] = self.generate_metadata()
+
+            # Extract tokens information if present
+            tokens_used = extracted_data.pop("_llm_tokens_used", 0)
+
+            extracted_data["_metadata"] = self.generate_metadata(tokens_used=tokens_used)
             maintenances_data.append(Maintenance(**extracted_data))
 
 
@@ -157,7 +161,11 @@ class CombinedProcessor(GenericProcessor):
         for maintenance in maintenances:
             try:
                 combined_data = {**self.combined_maintenance_data, **maintenance}
-                combined_data["_metadata"] = self.generate_metadata()
+
+                # Extract tokens information if present
+                tokens_used = combined_data.pop("_llm_tokens_used", 0)
+
+                combined_data["_metadata"] = self.generate_metadata(tokens_used=tokens_used)
                 maintenances_data.append(Maintenance(**combined_data))
             except ValidationError as exc:
                 raise ProcessorError("Not enough information available to create a Maintenance notification.") from exc

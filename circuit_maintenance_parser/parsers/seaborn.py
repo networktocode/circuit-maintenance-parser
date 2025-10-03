@@ -1,10 +1,11 @@
 """Seaborn parser."""
+
 import logging
 import re
 
 from dateutil import parser
 
-from circuit_maintenance_parser.parser import CircuitImpact, Html, Impact, Status, EmailSubjectParser
+from circuit_maintenance_parser.parser import CircuitImpact, EmailSubjectParser, Html, Impact, Status
 
 # pylint: disable=too-many-branches
 

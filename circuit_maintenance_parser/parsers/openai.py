@@ -1,7 +1,8 @@
 """OpenAI Parser."""
-import os
-import logging
+
 import json
+import logging
+import os
 from typing import List, Optional
 
 try:
@@ -46,6 +47,10 @@ class OpenAIParser(LLM):
         except Exception as err:  # pylint: disable=broad-exception-caught
             logger.error(err)
             return None
+
+        # Store the token usage information
+        if hasattr(response, "usage") and hasattr(response.usage, "total_tokens"):
+            self.tokens_used = response.usage.total_tokens
 
         logger.info("Used OpenAI tokens: %s", response.usage)
         generated_text = response.choices[0].message.content

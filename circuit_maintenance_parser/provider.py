@@ -14,7 +14,6 @@ from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
 from circuit_maintenance_parser.output import Maintenance
 from circuit_maintenance_parser.parser import EmailDateParser, ICal
-
 from circuit_maintenance_parser.parsers.apple import SubjectParserApple, TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
@@ -134,6 +133,9 @@ class GenericProvider(BaseModel):
         if os.getenv("PARSER_OPENAI_API_KEY"):
             self._processors.append(CombinedProcessor(data_parsers=[EmailDateParser, OpenAIParser]))
 
+            # Add subject to all html or text/* data_parts if not already present.
+            self.add_subject_to_text(data)
+
         for processor in self._processors:
             try:
                 return processor.process(data, self.get_extended_data())
@@ -152,6 +154,28 @@ class GenericProvider(BaseModel):
             (f"Failed creating Maintenance notification for {provider_name}.\nDetails:\n{error_message}"),
             related_exceptions=related_exceptions,
         )
+
+    def add_subject_to_text(self, data: NotificationData):
+        """Append the subject to all text/* data_parts if not already present."""
+        subject = None
+        for part in data.data_parts:
+            if part.type == "email-header-subject":
+                subject = part.content.decode(errors="ignore")
+                break
+        if subject:
+            new_data_parts = []
+            for part in data.data_parts:
+                if part.type.startswith("text/") or part.type.startswith("html"):
+                    content_str = part.content.decode(errors="ignore")
+                    if subject not in content_str:
+                        # Append subject and update content
+                        new_content = (content_str + "\n" + subject).encode()
+                        new_data_parts.append(type(part)(part.type, new_content))
+                    else:
+                        new_data_parts.append(part)
+                else:
+                    new_data_parts.append(part)
+            data.data_parts = new_data_parts
 
     @classmethod
     def get_default_organizer(cls) -> str:

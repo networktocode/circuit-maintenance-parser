@@ -1,5 +1,7 @@
 """Sparkle parser."""
+
 import logging
+
 from dateutil import parser
 
 from circuit_maintenance_parser.errors import ParserError
