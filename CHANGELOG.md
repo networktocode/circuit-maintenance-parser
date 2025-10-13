@@ -1,5 +1,8 @@
 # Changelog
 
+### Added
+- [#330](https://github.com/networktocode/circuit-maintenance-parser/pull/330) - Add parsers for AWS HTML emails
+
 # Changelog
 
 ## v2.8.0 - 2025-06-06
