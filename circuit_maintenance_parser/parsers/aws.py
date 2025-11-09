@@ -17,7 +17,7 @@ from circuit_maintenance_parser.parser import (
     Text,
 )
 
-# pylint: disable=too-many-nested-blocks, too-many-branches
+# pylint: disable=too-many-nested-blocks, too-many-branches, too-many-lines
 
 logger = logging.getLogger(__name__)
 
@@ -1266,38 +1266,33 @@ class HtmlParserAWS1(Html):
             =20
         """
         data = {"circuits": [], "status": Status.CONFIRMED, "stamp": 0}
-        maintenance_id = ""
-        impact = Impact.OUTAGE
-        clean_string = soup.get_text()
-        clean_list = clean_string.splitlines()
-        cleaner_list = []
-        for line in clean_list:
-            newline = line.strip()
-            if newline != "":
-                cleaner_list.append(newline)
+        # Clean and parse the HTML text
+        cleaner_list = [line.strip() for line in soup.get_text().splitlines() if line.strip()]
         data["stamp"] = self.dt2ts(parser.parse(cleaner_list[2]))
+
+        # Extract summary
         sumstart = cleaner_list.index("Hello,")
         try:
             sumend = cleaner_list.index("[1] https://aws.amazon.com/support")
         except ValueError:
             sumend = len(cleaner_list)
-        newline = " "
-        summary = newline.join(cleaner_list[sumstart:sumend])
+        summary = " ".join(cleaner_list[sumstart:sumend])
         if "has been cancelled" in summary.lower():
             data["status"] = Status.CANCELLED
-        start_time = cleaner_list[cleaner_list.index("Start time") + 1]
-        end_time = cleaner_list[cleaner_list.index("End time") + 1]
-        data["start"] = self.dt2ts(parser.parse(start_time))
-        data["end"] = self.dt2ts(parser.parse(end_time))
+
+        # Parse dates
+        data["start"] = self.dt2ts(parser.parse(cleaner_list[cleaner_list.index("Start time") + 1]))
+        data["end"] = self.dt2ts(parser.parse(cleaner_list[cleaner_list.index("End time") + 1]))
         data["summary"] = summary
         data["account"] = cleaner_list[cleaner_list.index("Affected account") + 1]
+
+        # Extract circuits
+        impact = Impact.OUTAGE
         for line in cleaner_list[sumstart:sumend]:
-            line = line.strip()
-            if re.match(r"[a-z]{5}-[a-z0-9]{8}", line):
-                data["circuits"].append(CircuitImpact(circuit_id=line, impact=impact))
-        for circuit in data["circuits"]:
-            maintenance_id += circuit.circuit_id
-        maintenance_id += str(data["start"])
-        maintenance_id += str(data["end"])
+            if re.match(r"[a-z]{5}-[a-z0-9]{8}", line.strip()):
+                data["circuits"].append(CircuitImpact(circuit_id=line.strip(), impact=impact))
+
+        # Generate maintenance ID
+        maintenance_id = "".join(circuit.circuit_id for circuit in data["circuits"]) + str(data["start"]) + str(data["end"])
         data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         return [data]
