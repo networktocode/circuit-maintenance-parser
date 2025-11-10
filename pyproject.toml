@@ -67,7 +67,7 @@ circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
 
 [tool.ruff]
 line-length = 120
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = [
