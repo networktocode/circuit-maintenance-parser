@@ -1293,6 +1293,8 @@ class HtmlParserAWS1(Html):
                 data["circuits"].append(CircuitImpact(circuit_id=line.strip(), impact=impact))
 
         # Generate maintenance ID
-        maintenance_id = "".join(circuit.circuit_id for circuit in data["circuits"]) + str(data["start"]) + str(data["end"])
+        maintenance_id = (
+            "".join(circuit.circuit_id for circuit in data["circuits"]) + str(data["start"]) + str(data["end"])
+        )
         data["maintenance_id"] = hashlib.sha256(maintenance_id.encode("utf-8")).hexdigest()  # nosec
         return [data]
