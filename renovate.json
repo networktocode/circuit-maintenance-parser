@@ -1,3 +1,24 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "prBodyColumns": [
+    "Package",
+    "Type",
+    "Update",
+    "Change",
+    "Changelog"
+  ],
+  "prBodyDefinitions": {
+    "Changelog": "{{#if logJSON}}[Link]({{logJSON.0.url}}){{/if}}"
+  },
+  "postUpgradeTasks": {
+    "commands": [
+      "echo 'Update {{{depName}}} to {{{newVersion}}}' > changes/{{{prNumber}}}.housekeeping"
+    ],
+    "fileFilters": [
+      "changes/**"
+    ]
+  }
 }
