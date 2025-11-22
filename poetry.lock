@@ -509,6 +509,19 @@ markers = {main = "extra == \"openai\" and python_version < \"3.11\"", dev = "py
 test = ["pytest (>=6)"]
 
 [[package]]
+name = "flatbuffers"
+version = "25.9.23"
+description = "The FlatBuffers serialization format for Python"
+optional = false
+python-versions = "*"
+groups = ["main"]
+markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+files = [
+    {file = "flatbuffers-25.9.23-py2.py3-none-any.whl", hash = "sha256:255538574d6cb6d0a79a17ec8bc0d30985913b87513a01cce8bcdb6b4c44d0e2"},
+    {file = "flatbuffers-25.9.23.tar.gz", hash = "sha256:676f9fa62750bb50cf531b42a0a2a118ad8f7f797a511eda12881c016f093b12"},
+]
+
+[[package]]
 name = "geographiclib"
 version = "2.0"
 description = "The geodesic routines from GeographicLib"
@@ -1852,36 +1865,31 @@ files = [
 
 [[package]]
 name = "timezonefinder"
-version = "6.5.7"
+version = "6.6.3"
 description = "python package for finding the timezone of any point on earth (coordinates) offline"
 optional = false
-python-versions = "<4,>=3.8"
+python-versions = "<4,>=3.9"
 groups = ["main"]
 markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "timezonefinder-6.5.7-cp310-cp310-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl", hash = "sha256:071021fc1759ca8e76247cd8b3691b5581bc43e9dafd2d520106aff1d8a586b4"},
-    {file = "timezonefinder-6.5.7-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:2ba1ccd36e04b16a13e59de6f87d478e5e1f063c3226a221309079a772b30281"},
-    {file = "timezonefinder-6.5.7-cp311-cp311-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dcbb197fb607a7ee12a1a65a39bc1230135c17340d018ce1f84a79cefd9fdf9d"},
-    {file = "timezonefinder-6.5.7-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:324ac25e89eb504554b71a16be56384bc1c33ba45cb8151cdb508650e8202082"},
-    {file = "timezonefinder-6.5.7-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7a83f1f67032d26e73adbe08ccc8b2465f44be9c99023a1df477ebbd1e570e6b"},
-    {file = "timezonefinder-6.5.7-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:ea61bd9c956b986b5dd3489797a21ba9c1769cec03a4f4549e88cdde5a0e4770"},
-    {file = "timezonefinder-6.5.7-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl", hash = "sha256:05fc5ce4386179ddbe792b6b5f4004ac5b5e7960f8e954d9a9af2e0c9faf4372"},
-    {file = "timezonefinder-6.5.7-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:f99f4f84852dd00a339ee9dfcfca680dd592178eacb2ad8609f5b4da73bb68b1"},
-    {file = "timezonefinder-6.5.7-cp38-cp38-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f84ee2b75e31d681a48d807d3458db97d60e51b9b85af9baf0e16e9615c7cb46"},
-    {file = "timezonefinder-6.5.7-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:24c793c13ec7dd0f4b163cf22187c047a778bab2f9214a9cdf73aac940e53cc1"},
-    {file = "timezonefinder-6.5.7-cp39-cp39-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl", hash = "sha256:933975e5720065ff2fcf57e7cf8031123fcec86c2790395ce937756a75c9a565"},
-    {file = "timezonefinder-6.5.7-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:e8ad2f90005ae68d0ed278da2aa385ca704404d168b40a30eac9384b5c9e9614"},
-    {file = "timezonefinder-6.5.7.tar.gz", hash = "sha256:d9f158d9198ef59c651cdd4777d6408d095bf3a06e4511e89ba6db2c78ba6d58"},
+    {file = "timezonefinder-6.6.3-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e5904ddb1db42db58cafb6b8b76088e5e4685e24373a0b6d79e4a564de48cf81"},
+    {file = "timezonefinder-6.6.3-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:643e5e2944c1b8562c325b4692c8568046c1f4d81df96926ecb49fc66e9dc935"},
+    {file = "timezonefinder-6.6.3-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4fc31c175f6982cd201ae20b3c5daf86b90a979e77d28e6b407d6f23e959cf5a"},
+    {file = "timezonefinder-6.6.3-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:73f0f25a14663e9dae1586791da6178bccfd7753651e3cf9c68415823c806db6"},
+    {file = "timezonefinder-6.6.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:44601e225c00040119b6b970c42720f19088259abcd81e5c703dafe9bed4e81d"},
+    {file = "timezonefinder-6.6.3-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:a9a81b9eeb57947a5e19e25f44b2dbd34e6e206cfa8bdf87297ec5afa938ee08"},
+    {file = "timezonefinder-6.6.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0d5bab1715b4960b70d735624be2e7517d4f374c7db48a779039849d3594bc15"},
+    {file = "timezonefinder-6.6.3-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:5b4683ece7ea812b8cfdc0fd718f4510968e136bf58508261597227795228c1a"},
+    {file = "timezonefinder-6.6.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c6823f7448b678357fed67781471b3b9234839b6a9b78dc7ceba3a39f1d476fa"},
+    {file = "timezonefinder-6.6.3-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:822983e2d26c9aec43609511b0adf23dc002fb8fe44e8d0dadd8d4f4160de05b"},
+    {file = "timezonefinder-6.6.3.tar.gz", hash = "sha256:f942afeeb70cdc68dfa06161abec1c98812c13011084ce560741ad5c2db1dad3"},
 ]
 
 [package.dependencies]
 cffi = ">=1.15.1,<2"
+flatbuffers = ">=25.2.10"
 h3 = ">4"
 numpy = {version = ">=1.23,<3", markers = "python_version >= \"3.9\""}
-
-[package.extras]
-numba = ["numba (>=0.56,<1)", "numba (>=0.59,<1)"]
-pytz = ["pytz (>=2022.7.1)"]
 
 [[package]]
 name = "toml"
