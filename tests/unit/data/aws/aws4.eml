@@ -1,0 +1,1307 @@
+Delivered-To: myname@COMPANYNAEME.com
+Received: by 2002:a05:6402:381b:b0:61c:6287:7445 with SMTP id es27csp1474854edb;
+        Mon, 1 Sep 2025 17:13:18 -0700 (PDT)
+X-Forwarded-Encrypted: i=4; AJvYcCVBOolu7HaJFXTiqz1J48lVTgXDgopItvcQsOG2NB5wEqWouzUM2GStoNexTDpd40N/BZHLhuXr@COMPANYNAEME.com
+X-Received: by 2002:a05:6214:478e:b0:714:36b2:a268 with SMTP id 6a1803df08f44-71436b2ab2bmr94495816d6.50.1756771998475;
+        Mon, 01 Sep 2025 17:13:18 -0700 (PDT)
+ARC-Seal: i=3; a=rsa-sha256; t=1756771998; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=cPktlDuAiZspHLxRKm2ek/0olYkdB9rb6Q6NLNs16eyf+/aqSw4yyHzYNlh1fakYJY
+         eRdaYLJJVgfcA39qk1+uJBahPstDabysoWPJEYckCj9fy66c7epvsZ0tD87pIiQFR6ZY
+         4YzCz67UaKIQlyKhttx8HZCEE3o2UL5EcmyV/Lf9BN+qSdneFaEg7UQ3odO3aUuuqWS8
+         q5276sShGB+lkMZGW2/3jPSHCrcWD+hn8I/4LywE23GuroyyZl64AtZ20uRvg8xtZtLk
+         CgHPdbruml/BUGNG3vhJNK+V/6EC7oZvpKv0n86jFbd2DawEbx68m5q3q2cSTazH3BMu
+         5t7Q==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:reply-to:feedback-id:message-id
+         :content-transfer-encoding:mime-version:subject:to:from:date
+         :dkim-signature;
+        bh=5fB5zaNSSsmYxdy6RGsUUC3cK6VOosKb5grQz+R6QnM=;
+        fh=ACW0q7uUsk6zSaemq5vmZ2K0/v+Ovs8/oM2clrq7jUg=;
+        b=lZIvr2XCiKiFFwfi2GjvuF0PqxUNgjtVWz6vhsvt48978zFVT6UhIq/SIMnwQmZJKg
+         Dw6rJgpZ89nNbLvWYQz7rkjfDhsfMW5VWQXLHJCtnC8od30uxy7n4e93zde9MFCRdSyI
+         AfMWG8kmonKiN7gRAoyZRnXarZBsayemJFrw9Oh6vakoyv3K0E6E76BGeFmlUHEQmXeu
+         kiged6FF13GnHvzXormmxvQSiuDNXdqrCi3YNt0nCTW/5ks/Fn6rSQgg/8RFO3P1OscL
+         KxTcnhkGwoJaFFWKs+5SBpvpvvFd4wZKNFy335J+6pjzh3nOonBY9PQtNLWsIhrNrJF5
+         x1uQ==;
+        dara=google.com
+ARC-Authentication-Results: i=3; mx.google.com;
+       dkim=pass header.i=@COMPANYNAEME.com header.s=COMPANYNAEME header.b=U7QrCQWA;
+       arc=pass (i=2 spf=pass spfdomain=user-notifications.email.aws.com dkim=pass dkdomain=aws.com dkim=pass dkdomain=amazonses.com dmarc=pass fromdomain=aws.com);
+       spf=pass (google.com: domain of TEAMEMAIL+bncbcqibrfyzuhrbhpn3dcqmgqewcpexxy@COMPANYNAEME.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=TEAMEMAIL+bncBCQIBRFYZUHRBHPN3DCQMGQEWCPEXXY@COMPANYNAEME.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=COMPANYNAEME.com;
+       dara=pass header.i=@COMPANYNAEME.com
+Return-Path: <TEAMEMAIL+bncBCQIBRFYZUHRBHPN3DCQMGQEWCPEXXY@COMPANYNAEME.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id 6a1803df08f44-720d0b71610sor2315776d6.5.2025.09.01.17.13.18
+        for <myname@COMPANYNAEME.com>
+        (Google Transport Security);
+        Mon, 01 Sep 2025 17:13:18 -0700 (PDT)
+Received-SPF: pass (google.com: domain of TEAMEMAIL+bncbcqibrfyzuhrbhpn3dcqmgqewcpexxy@COMPANYNAEME.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@COMPANYNAEME.com header.s=COMPANYNAEME header.b=U7QrCQWA;
+       arc=pass (i=2 spf=pass spfdomain=user-notifications.email.aws.com dkim=pass dkdomain=aws.com dkim=pass dkdomain=amazonses.com dmarc=pass fromdomain=aws.com);
+       spf=pass (google.com: domain of TEAMEMAIL+bncbcqibrfyzuhrbhpn3dcqmgqewcpexxy@COMPANYNAEME.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=TEAMEMAIL+bncBCQIBRFYZUHRBHPN3DCQMGQEWCPEXXY@COMPANYNAEME.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=COMPANYNAEME.com;
+       dara=pass header.i=@COMPANYNAEME.com
+ARC-Seal: i=2; a=rsa-sha256; t=1756771998; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=cDKoJ/tE2k6YHOAEUDlTHWeL8oCgeuXKh4rvA318C26ci46kwGv26XThi1vbXH2pOH
+         RlDIRDW8amHKoBudi3rLmqGj96OH3QAa5LJQ2cwuoOh5LBfJLiiOFOlDssXcwa2fD3ei
+         bIowzRKxE4HVxH3e/hdGvRkTnkP7Gxeo0dMYjLhGKU0+Nj7d/ItRff+G+LDa1NIn0Y91
+         IPwNyuf2JGf7uAVQ7Hx6UqHlLHFjFxjUgMxhzh+Th6hOkV2SMUh67RJCpu1tkcwHbFsM
+         GAw6257NVJ+41RRWgCdYztBpavYafXeIfFIJajqD6c5wWQxtp2NovviTyq++99JZf0zg
+         0YWA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:reply-to:feedback-id:message-id
+         :content-transfer-encoding:mime-version:subject:to:from:date
+         :dkim-signature;
+        bh=5fB5zaNSSsmYxdy6RGsUUC3cK6VOosKb5grQz+R6QnM=;
+        fh=ACW0q7uUsk6zSaemq5vmZ2K0/v+Ovs8/oM2clrq7jUg=;
+        b=dwWXm0KP1cKr3QBB2Xb47LbYAYnzAJoCUxOVxmlnc0yyqUaLpVqnngYh/VN9lPStMN
+         TY2MInn773OUAfoy2x2g7hw29R0puqfWCu+rd/nDUc+03qWbBtCu27wnRRurK6neoyKO
+         bxIDcVANk/eivcrIqttooDAFjxNswGzdzW2HmaZWVZKiyU+Bu3dmZROc3ONDC+ffkcgA
+         he+qfk9prDHIfsecFCcfevdWkPv6wf3nL6YWnF8ibWpOvVvf/rsqqdFna6tZfHaXCJF3
+         Nq4fOQ0iVsRoxQFDgP9j5onlv2KP8dZfU9KTcJ2A5kzBuWMTt6ZcXVbpiw8z4gfXNdru
+         xm7Q==;
+        darn=COMPANYNAEME.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@aws.com header.s=3qt4u7sb66lrl6cbnrt63xxwvmgzws7o header.b=LbK6bRHB;
+       dkim=pass header.i=@amazonses.com header.s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw header.b=QOxhL6Ey;
+       spf=pass (google.com: domain of 0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com designates 54.240.9.75 as permitted sender) smtp.mailfrom=0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=aws.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=COMPANYNAEME.com; s=COMPANYNAEME; t=1756771998; x=1757376798; darn=COMPANYNAEME.com;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:reply-to:x-original-authentication-results
+         :x-original-sender:feedback-id:message-id:content-transfer-encoding
+         :mime-version:subject:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5fB5zaNSSsmYxdy6RGsUUC3cK6VOosKb5grQz+R6QnM=;
+        b=U7QrCQWAkaiUXtXZHHbShEPbYMRLJpOtawy6A0ypd7R/i4dzduYwNRK9+FJpECsZbr
+         M+oqGmedX18wH/+Hhz2SPV6E5rYMllDXMBE1LrIcGzO3Zt+xhKCUjRmWasW6tGHx0K54
+         1TpEXU4OmP9SOl1T2ShuxQN+tp/qkJXQ3a9M0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756771998; x=1757376798;
+        h=x-spam-checked-in-group:list-unsubscribe:list-archive:list-help
+         :list-post:x-spam-checked-in-group:list-id:mailing-list:precedence
+         :reply-to:x-original-authentication-results:x-original-sender
+         :feedback-id:message-id:content-transfer-encoding:mime-version
+         :subject:to:from:date:x-beenthere:x-beenthere:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=5fB5zaNSSsmYxdy6RGsUUC3cK6VOosKb5grQz+R6QnM=;
+        b=uNDaTBfJ+dLX4EjR0d1zGqtKcY5FP9WbctuOGIggJ9BBoQEi02NpuMVYA1AMZpkuQ9
+         ovyGydEjnyHyG2Ki3DJAD01ZfTtStIPvry3GrZ3dgorAfNmH6SH2cOlucxL4S3RXhNAk
+         /EodtQCWUAI1rJ5wNSgUL7FbqIhgEU7Yw30mOxpS9LxCLDN6eZMVYirXG12JYJhjuZub
+         r4Kfe97op7N6PR29Cc/0G4tuEcYmz6ii06RuVL241+rgYi/Piu46zPUYgx5M8WueqlCU
+         ffZgw3GSYIfZ6+M510HwjLbQAx7GxKP8CNfmNy7nF7GiwHAjJdHHWATDDHYjOoXPOwN9
+         R80g==
+X-Forwarded-Encrypted: i=2; AJvYcCXLyP+hH/ZwXLxI3BcU3H6KcqJZXCDiTqtb+hnCRfNYaf4x/Tc3gowAsk/CxkmgZSmTzNf5Pine@COMPANYNAEME.com
+X-Gm-Message-State: AOJu0Ywoc8aQ4YWO+kn2e4ExY73hrgafOrp3bulPEbmOagzXQ8Xr+N73
+	rYTz0p9qAPV1XzH9A9NaPjovOOVBaK2ygWPZwF8PfVqMNvyHy+n8tFThSZOgyBCtrifn4A==
+X-Google-Smtp-Source: AGHT+IGJ829/4N4yioCblBW1awLp69wCnWB8lTZTKu3h721wL+PlFYLeTzr6FseENO6TIvBBK8064g==
+X-Received: by 2002:a05:6214:230e:b0:70e:b49e:6a8f with SMTP id 6a1803df08f44-70fac8abb74mr123301966d6.45.1756771997654;
+        Mon, 01 Sep 2025 17:13:17 -0700 (PDT)
+X-BeenThere: TEAMEMAIL@COMPANYNAEME.com; h=AZMbMZfEvZ3FaiiEceFCh+MoExR9vriSDUIlzoBgfR8tGu7/Xw==
+Received: by 2002:a05:6214:301b:b0:70d:e7ba:ea21 with SMTP id
+ 6a1803df08f44-70df04b1e47ls76294416d6.1.-pod-prod-09-us; Mon, 01 Sep 2025
+ 17:13:16 -0700 (PDT)
+X-Forwarded-Encrypted: i=2; AJvYcCUSVDy3sVMA/cdfqKOPePF/Rehwvd8xgP8EHSnlX8NgiE5fyWWZuBDURS2SDJfLhUob4Lkvo30=@COMPANYNAEME.com
+X-Received: by 2002:a05:6214:400c:b0:70d:ec97:c4d0 with SMTP id 6a1803df08f44-70fac870228mr110591326d6.41.1756771996823;
+        Mon, 01 Sep 2025 17:13:16 -0700 (PDT)
+X-BeenThere: NOTICYEMAIL@COMPANYNAEME.com; h=AZMbMZf30FJt2RAG+QTsSjkRa6O7S+XYvsIdtXD4IvmfaKE4Sw==
+Received: by 2002:a05:6214:258a:b0:707:4335:5f7 with SMTP id
+ 6a1803df08f44-70df00b19f5ls45007866d6.0.-pod-prod-09-us; Mon, 01 Sep 2025
+ 17:13:16 -0700 (PDT)
+X-Received: by 2002:ad4:5c64:0:b0:70d:f0ff:342d with SMTP id 6a1803df08f44-70fac6f6f89mr120542266d6.14.1756771996007;
+        Mon, 01 Sep 2025 17:13:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1756771995; cv=none;
+        d=google.com; s=arc-20240605;
+        b=BiLU5KCzF0UI1ZbSDSDzPKcVqUe0s9+kXw5WT4HV/dEw7C8OneAWAG2WfFV5cbZrzK
+         u5/vIED6A2MbxetjxOHje8uGE6rHVGXYsY6Dek82+CGkoKzZ/Yt1asBI/pgdv00kzK37
+         MzKkZMoNV0ZyGQXFL1+xtphIg6z/GbwUm2qda9/e7t3OXOmeB/VJQchl6oefVGkvRyzn
+         eF4Qc6brZDW+GufUcupAwwVj2nleoHeR3akYlJg0pLsa+2Emv2gX4piwoeB2s+OLOd8y
+         sSZc11hS7k+aiXX8qM9kHi6Z1dcR566YAkrwPjgQy3MDs/xWDDADuVZZ7Ovi733cKxUr
+         HnYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=feedback-id:message-id:content-transfer-encoding:mime-version
+         :subject:to:from:date:dkim-signature:dkim-signature;
+        bh=5fB5zaNSSsmYxdy6RGsUUC3cK6VOosKb5grQz+R6QnM=;
+        fh=/BZp/CoWS56RYHJk/Nq7+rYFbsXKZMYT25P0V/4q4R8=;
+        b=a3P3BQ1VySb3LriRmN4i+PgpmUDJaz72+xPPC++9PfUKDkEWVOJIuJPd0hQIUs6JzG
+         5xnJAL+W0fL3KNeI0KSD1D5HdZxZpLrBor+C8PSyWyYXSixxVjt/M3RHGg44tfuLFDs8
+         lgLK2HujqboMvMw6K+fjnkVriMbbdFkzpl0a8zM6HwKg2t0nlixIfpYSWWNjr5QtofKD
+         cSYb3drYkDurPlmUpcGX0kFiraKmtfjXXhWBzuhgsEP9DcgaExflqHl1epVGZDHaSwEo
+         BJyN6VLHtffBP/rvgYuQRByK/iZAZnW/jj70UvM9JzjeS7XTBJ7XxbNYII4vC57qSqKK
+         fWEg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@aws.com header.s=3qt4u7sb66lrl6cbnrt63xxwvmgzws7o header.b=LbK6bRHB;
+       dkim=pass header.i=@amazonses.com header.s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw header.b=QOxhL6Ey;
+       spf=pass (google.com: domain of 0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com designates 54.240.9.75 as permitted sender) smtp.mailfrom=0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=aws.com
+Received: from a9-75.smtp-out.amazonses.com (a9-75.smtp-out.amazonses.com. [54.240.9.75])
+        by mx.google.com with ESMTPS id 6a1803df08f44-720b500a9eesi1481246d6.471.2025.09.01.17.13.15
+        for <NOTICYEMAIL@COMPANYNAEME.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 01 Sep 2025 17:13:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com designates 54.240.9.75 as permitted sender) client-ip=54.240.9.75;
+Date: Tue, 2 Sep 2025 00:13:15 +0000
+From: "'Amazon Web Services' via TEAM NAME Notices" <NOTICYEMAIL@COMPANYNAEME.com>
+To: NOTICYEMAIL@COMPANYNAEME.com
+Subject: [NRE] [NOTICYEMAIL] AWS Direct Connect Planned Maintenance
+ Notification [AWS Account: 111111111111]
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-NOTIFICATIONS-NOTIFICATION-EVENT-ARN: arn:aws:notifications::111111111111:managed-notification-configuration/category/AWS-Health/sub-category/Operations/event/a01k43vr7zdhqc4pfztnf2f6ar2
+X-NOTIFICATIONS-EMAIL-CONTACT-ID: arn:aws:notifications-contacts::111111111111:emailcontact/a01k3m4t2hrnt7zwa7r390frs00
+X-NOTIFICATIONS-CLIENT-REQUEST-ID: arn:aws:silverwire:us-east-1:silvermine:AWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED/AWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED_84BDD6BC9D0B29720DC58CBCFB104FBB/f21310c2736a8d55e44b66eb05a95b687299f5096ddcb41a3924bdaad0db550f/UNO-43ce03cc902a71e3c4bc8c35bf83e9c4
+Message-ID: <0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@email.amazonses.com>
+Feedback-ID: ::1.us-east-1.YXthQgddzDZw994cvMHZS9b4qW/Udf7tCUgnW4fvLGk=:AmazonSES
+X-SES-Outgoing: 2025.09.02-54.240.9.75
+X-Original-Sender: health@aws.com
+X-Original-Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@aws.com header.s=3qt4u7sb66lrl6cbnrt63xxwvmgzws7o
+ header.b=LbK6bRHB;       dkim=pass header.i=@amazonses.com
+ header.s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw header.b=QOxhL6Ey;       spf=pass
+ (google.com: domain of 0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com
+ designates 54.240.9.75 as permitted sender) smtp.mailfrom=0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000@user-notifications.email.aws.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=aws.com
+X-Original-From: Amazon Web Services <health@aws.com>
+Reply-To: Amazon Web Services <health@aws.com>
+Precedence: list
+Mailing-list: list TEAMEMAIL@COMPANYNAEME.com; contact TEAMEMAIL+owners@COMPANYNAEME.com
+List-ID: <TEAMEMAIL.COMPANYNAEME.com>
+X-Spam-Checked-In-Group: NOTICYEMAIL@COMPANYNAEME.com
+X-Google-Group-Id: 936915414963
+List-Post: <https://groups.google.com/a/COMPANYNAEME.com/group/TEAMEMAIL/post>, <mailto:TEAMEMAIL@COMPANYNAEME.com>
+List-Help: <https://support.google.com/a/COMPANYNAEME.com/bin/topic.py?topic=25838>,
+ <mailto:TEAMEMAIL+help@COMPANYNAEME.com>
+List-Archive: <https://groups.google.com/a/COMPANYNAEME.com/group/TEAMEMAIL/>
+List-Unsubscribe: <mailto:googlegroups-manage+936915414963+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/COMPANYNAEME.com/group/TEAMEMAIL/subscribe>
+X-Spam-Checked-In-Group: TEAMEMAIL@COMPANYNAEME.com
+
+<!doctype html>
+<html xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-microso=
+ft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office">
+  <head>
+    <title>
+     =20
+    </title>
+    <!--[if !mso]><!-->
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+    <!--<![endif]-->
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
+">
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1">
+    <style type=3D"text/css">
+      #outlook a { padding:0; }
+      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size=
+-adjust:100%; }
+      table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-r=
+space:0pt; }
+      img { border:0;height:auto;line-height:100%; outline:none;text-decora=
+tion:none;-ms-interpolation-mode:bicubic; }
+      p { display:block;margin:13px 0; }
+    </style>
+    <!--[if mso]>
+    <noscript>
+    <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    </noscript>
+    <![endif]-->
+    <!--[if lte mso 11]>
+    <style type=3D"text/css">
+      .mj-outlook-group-fix { width:100% !important; }
+    </style>
+    <![endif]-->
+   =20
+      <!--[if !mso]><!-->
+        <link href=3D"https://fonts.googleapis.com/css?family=3DUbuntu:300,=
+400,500,700" rel=3D"stylesheet" type=3D"text/css">
+        <style type=3D"text/css">
+          @import url(https://fonts.googleapis.com/css?family=3DUbuntu:300,=
+400,500,700);
+        </style>
+      <!--<![endif]-->
+
+   =20
+   =20
+    <style type=3D"text/css">
+      @media only screen and (min-width:480px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+.mj-column-per-70 { width:70% !important; max-width: 70%; }
+.mj-column-per-30 { width:30% !important; max-width: 30%; }
+.mj-column-per-50 { width:50% !important; max-width: 50%; }
+      }
+    </style>
+    <style media=3D"screen and (min-width:480px)">
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width:=
+ 100%; }
+.moz-text-html .mj-column-per-70 { width:70% !important; max-width: 70%; }
+.moz-text-html .mj-column-per-30 { width:30% !important; max-width: 30%; }
+.moz-text-html .mj-column-per-50 { width:50% !important; max-width: 50%; }
+    </style>
+   =20
+ =20
+    <style type=3D"text/css">
+   =20
+   =20
+
+    @media only screen and (max-width:480px) {
+      table.mj-full-width-mobile { width: 100% !important; }
+      td.mj-full-width-mobile { width: auto !important; }
+    }
+ =20
+    </style>
+    <style type=3D"text/css">
+   =20
+    </style>
+   =20
+  </head>
+  <body style=3D"word-spacing:normal;background-color:#E5E5E5;">
+   =20
+   =20
+      <div
+         style=3D"background-color:#E5E5E5;"
+      >
+       =20
+     =20
+      <!--[if mso | IE]><table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" class=3D"" role=3D"presentation" style=3D"width:600px=
+;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-h=
+eight-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"margin:0px auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:0 0 20px 0;te=
+xt-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><![endif]-->
+                 =20
+      <!-- Header -->
+          <!--[if mso | IE]><tr><td class=3D"" width=3D"600px" ><table alig=
+n=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"" ro=
+le=3D"presentation" style=3D"width:600px;" width=3D"600" bgcolor=3D"#232F3E=
+" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exac=
+tly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#232F3E;background-color:#232F3E;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#232F3E;background-color:#232F3=
+E;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:0;text-align:=
+center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" style=3D"width:600p=
+x;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-100 mj-outlook-group-fix" style=3D"font-siz=
+e:0;line-height:0;text-align:left;display:inline-block;width:100%;direction=
+:ltr;"
+      >
+        <!--[if mso | IE]><table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" ><tr><td style=3D"vertical-align:middle;width:=
+420px;" ><![endif]-->
+               =20
+      <div
+         class=3D"mj-column-per-70 mj-outlook-group-fix" style=3D"font-size=
+:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:midd=
+le;width:70%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:middle;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#55575d;"
+      ><p style=3D"text-align: left; font-size:25px;color:#fff;">AWS Health=
+ Event</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+              <!--[if mso | IE]></td><td style=3D"vertical-align:middle;wid=
+th:180px;" ><![endif]-->
+               =20
+      <div
+         class=3D"mj-column-per-30 mj-outlook-group-fix" style=3D"font-size=
+:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:midd=
+le;width:30%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:middle;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"right" style=3D"font-size:0px;padding:10px 25px=
+;word-break:break-word;"
+                >
+                 =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"border-collapse:collapse;border-spacing:0px;"
+      >
+        <tbody>
+          <tr>
+            <td  style=3D"width:50px;">
+             =20
+      <img
+         height=3D"auto" src=3D"https://a0.awsstatic.com/libra-css/images/l=
+ogos/aws_smile-header-desktop-en-white_59x35@2x.png" style=3D"border:0;disp=
+lay:block;outline:none;text-decoration:none;height:auto;width:100%;font-siz=
+e:13px;" width=3D"50"
+      />
+   =20
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+              <!--[if mso | IE]></td></tr></table><![endif]-->
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr><![endif]-->
+        <!-- Body -->
+          <!--[if mso | IE]><tr><td class=3D"" width=3D"600px" ><table alig=
+n=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"" ro=
+le=3D"presentation" style=3D"width:600px;" width=3D"600" bgcolor=3D"#ffffff=
+" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exac=
+tly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#ffffff;background-color:#ffffff;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#ffffff;background-color:#fffff=
+f;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:20px 0;paddin=
+g-bottom:20px;padding-top:20px;text-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" style=3D"vertical-a=
+lign:top;width:600px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-100 mj-outlook-group-fix" style=3D"font-siz=
+e:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top=
+;width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"right" style=3D"font-size:0px;padding:10px 25px=
+;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:14px;font-weight:bold;line-height:1;text-align:right;color:#000000;"
+      ><a href=3Dhttps://lhrrj7lm.r.us-east-1.awstrack.me/L0/https:%2F%2Fco=
+nsole.aws.amazon.com%2Fnotifications%2Fhome%23%2Fnotifications%2FAWS-Health=
+%2FOperations%2Fa01k43vr7zdhqc4pfztnf2f6ar2%2Fdetails/1/0100019907c54f20-82=
+a2d9c4-36e4-4098-9721-f6725fd3359e-000000/DBCwHaN6YJ8W6Bw65pcXzyav64s=3D441=
+ style=3D"color:#545B64">View in Notification Center</a></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:18px;font-weight:bold;line-height:1;text-align:left;color:#000000;"
+      >AWS Direct Connect Planned Maintenance Notification [AWS Account: 11=
+1111111111]</div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" vertical-align=3D"middle" style=3D"font-s=
+ize:0px;padding:10px 25px;padding-top:20px;padding-bottom:20px;word-break:b=
+reak-word;"
+                >
+                 =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"border-collapse:separate;line-height:100%;"
+      >
+        <tbody>
+          <tr>
+            <td
+               align=3D"center" bgcolor=3D"#ff9900" role=3D"presentation" s=
+tyle=3D"border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px=
+;background:#ff9900;" valign=3D"middle"
+            >
+              <a
+                 href=3D"https://lhrrj7lm.r.us-east-1.awstrack.me/L0/https:=
+%2F%2Fhealth.aws.amazon.com%2Fhealth%2Fhome%3Fregion=3Dsa-east-1%23%2Fevent=
+-log%3FeventID=3Darn:aws:health:sa-east-1::event%2FDIRECTCONNECT%2FAWS_DIRE=
+CTCONNECT_MAINTENANCE_SCHEDULED%2FAWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED_8=
+4BDD6BC9D0B29720DC58CBCFB104FBB%26eventTab=3Ddetails%26layout=3Dvertical/1/=
+0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000/BlXevSKdpryJl5=
+Ia3mQzXN_b7z0=3D441" style=3D"display:inline-block;background:#ff9900;color=
+:#16191f;font-family:Helvetica, Arial;font-size:14px;font-weight:bold;line-=
+height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px =
+25px;mso-padding-alt:0px;border-radius:3px;" target=3D"_blank"
+              >
+                View details in service console
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:14px;line-height:22px;text-align:left;color:#000000;"
+      ><mj-raw></mj-raw>
+                Hello,
+<br />
+<br />Planned maintenance has been scheduled on an AWS Direct Connect endpo=
+int in Sonda Quilicura, Santiago from Tue, 16 Sep 2025 01:00:00 GMT to Tue,=
+ 16 Sep 2025 05:00:00 GMT for 4 hours. During this maintenance window, your=
+ AWS Direct Connect services listed below may become unavailable.
+<br />
+<br />dxcon-abc12345
+<br />dxvif-1234hfjd
+<br />dxlag-fge11110
+<br />dxcon-ffucoreh
+<br />dxcon-fg885ug5
+<br />
+<br />This maintenance is scheduled to avoid disrupting redundant connectio=
+ns at the same time.
+<br />
+<br />If you encounter any problems with your connection after the end of t=
+his maintenance window, please contact AWS Support[1].
+<br />
+<br />[1] https://aws.amazon.com/support
+<br />
+<br />.
+              <mj-raw></mj-raw></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr><![endif]-->
+        <!-- Notification title -->
+          <!--[if mso | IE]><tr><td class=3D"" width=3D"600px" ><table alig=
+n=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"" ro=
+le=3D"presentation" style=3D"width:600px;" width=3D"600" bgcolor=3D"#ffffff=
+" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exac=
+tly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#ffffff;background-color:#ffffff;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#ffffff;background-color:#fffff=
+f;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:0;text-align:=
+center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" style=3D"vertical-a=
+lign:top;width:600px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-100 mj-outlook-group-fix" style=3D"font-siz=
+e:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top=
+;width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"center" style=3D"font-size:0px;padding:10px 25p=
+x;word-break:break-word;"
+                >
+                 =20
+      <p
+         style=3D"border-top:solid 1px #D5DBDB;font-size:1px;margin:0px aut=
+o;width:100%;"
+      >
+      </p>
+     =20
+      <!--[if mso | IE]><table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" style=3D"border-top:solid 1px #D5DBDB;font-size:1px;m=
+argin:0px auto;width:550px;" role=3D"presentation" width=3D"550px" ><tr><td=
+ style=3D"height:0;line-height:0;"> &nbsp;
+</td></tr></table><![endif]-->
+   =20
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:18px;font-weight:bold;line-height:1;text-align:left;color:#000000;"
+      >Message metadata</div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr><![endif]-->
+       =20
+          <!--[if mso | IE]><tr><td class=3D"" width=3D"600px" ><table alig=
+n=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"" ro=
+le=3D"presentation" style=3D"width:600px;" width=3D"600" bgcolor=3D"#ffffff=
+" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-height-rule:exac=
+tly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#ffffff;background-color:#ffffff;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#ffffff;background-color:#fffff=
+f;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:20px 0;paddin=
+g-bottom:10px;padding-top:0;text-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><![endif]-->
+      <!-- Left -->
+          <!--[if mso | IE]><td class=3D"" style=3D"vertical-align:top;widt=
+h:300px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-50 mj-outlook-group-fix" style=3D"font-size=
+:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;=
+width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"border-right:1px solid #D5DBDB;vertical-align:top;" width=3D"=
+100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Affected account</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">111111111111</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Event type code</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">AWS_DIRECTCONNECT_MAINTENANCE_SCHEDULED</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Event region</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">sa-east-1</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">End time</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">Tue, 16 Sep 2025 05:00:00 GMT</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td><![endif]-->
+    <!-- right -->
+          <!--[if mso | IE]><td class=3D"" style=3D"vertical-align:top;widt=
+h:300px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-50 mj-outlook-group-fix" style=3D"font-size=
+:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;=
+width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Service</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">DIRECTCONNECT</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Event type category</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">scheduledChange</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Start time</p>
+                    <p style=3D"line-height: 20px; max-width: 250px; word-b=
+reak: break-all;">Tue, 16 Sep 2025 01:00:00 GMT</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+   =20
+   =20
+     =20
+      <!--[if mso | IE]><table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" class=3D"" role=3D"presentation" style=3D"width:600px=
+;" width=3D"600" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-h=
+eight-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"margin:0px auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:0;text-align:=
+center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" width=3D"600px" ><t=
+able align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"" role=3D"presentation" style=3D"width:600px;" width=3D"600" bgcolor=
+=3D"#ffffff" ><tr><td style=3D"line-height:0px;font-size:0px;mso-line-heigh=
+t-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#ffffff;background-color:#ffffff;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#ffffff;background-color:#fffff=
+f;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:20px 0;paddin=
+g-bottom:0;padding-top:20px;text-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" style=3D"vertical-a=
+lign:top;width:600px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-100 mj-outlook-group-fix" style=3D"font-siz=
+e:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top=
+;width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:18px;font-weight:bold;line-height:1;text-align:left;color:#000000;"
+      >AWS managed notification details</div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:12px;line-height:18px;text-align:left;color:#000000;"
+      >AWS Health: Operations events notifications are generated by AWS and=
+ sent to selected account contacts. You can add additional delivery channel=
+s for these notifications using <a href=3D"https://lhrrj7lm.r.us-east-1.aws=
+track.me/L0/https:%2F%2Fus-east-1.console.aws.amazon.com%2Fnotifications%2F=
+home%23%2Fmanaged-notifications/1/0100019907c54f20-82a2d9c4-36e4-4098-9721-=
+f6725fd3359e-000000/da6acDecOAC3pa7eOM1rPpedC0s=3D441">AWS managed notifica=
+tions subscriptions</a>.</div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=3D"" widt=
+h=3D"600px" ><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" class=3D"" role=3D"presentation" style=3D"width:600px;" width=3D=
+"600" bgcolor=3D"#ffffff" ><tr><td style=3D"line-height:0px;font-size:0px;m=
+so-line-height-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#ffffff;background-color:#ffffff;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#ffffff;background-color:#fffff=
+f;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:20px 0;paddin=
+g-bottom:0;padding-top:0;text-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><![endif]-->
+      <!-- Left -->
+          <!--[if mso | IE]><td class=3D"" style=3D"vertical-align:top;widt=
+h:300px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-50 mj-outlook-group-fix" style=3D"font-size=
+:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;=
+width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"border-right:1px solid #D5DBDB;vertical-align:top;" width=3D"=
+100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Event type</p>
+                <p style=3D"line-height: 20px; max-width: 250px; word-break=
+: break-all;">AWS Health Event</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td><![endif]-->
+    <!-- right -->
+          <!--[if mso | IE]><td class=3D"" style=3D"vertical-align:top;widt=
+h:300px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-50 mj-outlook-group-fix" style=3D"font-size=
+:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;=
+width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:13px;line-height:1;text-align:left;color:#000000;"
+      ><p style=3D"color:#545B64; line-height:0">Category</p>
+                  <p style=3D"line-height: 20px; max-width: 250px; word-bre=
+ak: break-all;">Operations</p></div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=3D"" widt=
+h=3D"600px" ><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" class=3D"" role=3D"presentation" style=3D"width:600px;" width=3D=
+"600" bgcolor=3D"#ffffff" ><tr><td style=3D"line-height:0px;font-size:0px;m=
+so-line-height-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"background:#ffffff;background-color:#ffffff;margin:0px=
+ auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"background:#ffffff;background-color:#fffff=
+f;width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:20px 0;paddin=
+g-bottom:20px;padding-top:20px;text-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" style=3D"vertical-a=
+lign:top;width:600px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-100 mj-outlook-group-fix" style=3D"font-siz=
+e:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top=
+;width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"center" style=3D"font-size:0px;padding:10px 25p=
+x;word-break:break-word;"
+                >
+                 =20
+      <p
+         style=3D"border-top:solid 1px #D5DBDB;font-size:1px;margin:0px aut=
+o;width:100%;"
+      >
+      </p>
+     =20
+      <!--[if mso | IE]><table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" style=3D"border-top:solid 1px #D5DBDB;font-size:1px;m=
+argin:0px auto;width:550px;" role=3D"presentation" width=3D"550px" ><tr><td=
+ style=3D"height:0;line-height:0;"> &nbsp;
+</td></tr></table><![endif]-->
+   =20
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-bottom:10px;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:14px;line-height:1;text-align:left;color:#000000;"
+      >Thank you,</div>
+   =20
+                </td>
+              </tr>
+           =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+padding-top:0;word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:14px;line-height:1;text-align:left;color:#000000;"
+      >Amazon Web Services</div>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr><![endif]-->
+        <!-- Footer -->
+          <!--[if mso | IE]><tr><td class=3D"" width=3D"600px" ><table alig=
+n=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"" ro=
+le=3D"presentation" style=3D"width:600px;" width=3D"600" ><tr><td style=3D"=
+line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+   =20
+     =20
+      <div  style=3D"margin:0px auto;max-width:600px;">
+       =20
+        <table
+           align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0=
+" role=3D"presentation" style=3D"width:100%;"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=3D"direction:ltr;font-size:0px;padding:20px 0;paddin=
+g-bottom:20px;padding-top:20px;text-align:center;"
+              >
+                <!--[if mso | IE]><table role=3D"presentation" border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0"><tr><td class=3D"" style=3D"vertical-a=
+lign:top;width:600px;" ><![endif]-->
+           =20
+      <div
+         class=3D"mj-column-per-100 mj-outlook-group-fix" style=3D"font-siz=
+e:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top=
+;width:100%;"
+      >
+       =20
+      <table
+         border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentat=
+ion" style=3D"vertical-align:top;" width=3D"100%"
+      >
+        <tbody>
+         =20
+              <tr>
+                <td
+                   align=3D"left" style=3D"font-size:0px;padding:10px 25px;=
+word-break:break-word;"
+                >
+                 =20
+      <div
+         style=3D"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-siz=
+e:12px;line-height:18px;text-align:left;color:#000000;"
+      >You are receiving this email because NOTICYEMAIL@COMPANYNAEME.com is sub=
+scribed to <a href=3Dhttps://lhrrj7lm.r.us-east-1.awstrack.me/L0/https:%2F%=
+2Fconsole.aws.amazon.com%2Fnotifications%2Fhome%23%2Fmanaged-notifications%=
+2Fcategory%2FAWS-Health%2Fsub-category%2FOperations%2Fdetails/1/0100019907c=
+54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000/zStVe1KodAmtPfO3ere-Chp9i=
+IE=3D441>AWS Health: Operations events notifications</a>. If you do not wis=
+h to receive emails for these AWS managed notifications, you may <a href=3D=
+"https://lhrrj7lm.r.us-east-1.awstrack.me/L0/https:%2F%2Fus-east-1.console.=
+aws.amazon.com%2Fnotifications%2Fhome%23%2Fmanaged-notifications/2/01000199=
+07c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000/EXyHN3Yzi4u-A0z7orNkbG=
+DXmVs=3D441">unsubscribe</a>. If you believe you've received this email by =
+error or are experiencing issues managing email subscription, please <a hre=
+f=3D"https://lhrrj7lm.r.us-east-1.awstrack.me/L0/https:%2F%2Faws.amazon.com=
+%2Fcontact-us%2F/1/0100019907c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-00=
+0000/8at7TBNQfDG8xKFykYOOEZEVVAY=3D441">contact us</a>.
+          </br></br>
+          Amazon Web Services, Inc. is a subsidiary of Amazon.com, Inc. AMA=
+ZON WEB SERVICES AWS, and related logos are trademarks of Amazon Web Servic=
+es, Inc. or its affiliates.
+          </br></br>
+          This message was produced and distributed by Amazon Web Services,=
+ Inc. or its <a href=3D"">affiliates</a> 410 Terry Ave. North, Seattle, WA =
+98109.
+          </br></br>
+          =C2=A9 <mj-raw>2025</mj-raw>, Amazon Web Services, Inc. or its af=
+filiates. All rights reserved. Read our <a href=3D"">Privacy Notice</a>.</d=
+iv>
+   =20
+                </td>
+              </tr>
+           =20
+        </tbody>
+      </table>
+   =20
+      </div>
+   =20
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+       =20
+      </div>
+   =20
+     =20
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+   =20
+   =20
+      </div>
+   =20
+  <img alt=3D"" src=3D"https://lhrrj7lm.r.us-east-1.awstrack.me/I0/01000199=
+07c54f20-82a2d9c4-36e4-4098-9721-f6725fd3359e-000000/wcnjWFcslUssLd1Ed4tt6c=
+0Gov0=3D441" style=3D"display: none; width: 1px; height: 1px;">
+</body>
+</html>
+ =20
+
+

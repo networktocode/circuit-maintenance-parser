@@ -1,7 +1,5 @@
 # Changelog
 
-# Changelog
-
 ## v2.8.0 - 2025-06-06
 
 ### Added

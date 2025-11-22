@@ -15,7 +15,7 @@
             }
         ],
         "end": 1703055600,
-        "maintenance_id": "065ad66cb4e401827f675a56799be7ceb9cd66fc180ee5878c54533f7f196b52",
+        "maintenance_id": "387c99e743b96cf135b8e97d56c2dbbc02a0acda4eaf9637bcfeb23a7ebc96e2",
         "start": 1703041200,
         "status": "CONFIRMED",
         "summary": "Emergency maintenance has been scheduled on an AWS Direct Connect endpoint in Datacenter Foo3, Anywhere, USA from Wed, 20 Dec 2023 03:00:00 GMT to Wed, 20 Dec 2023 07:00:00 GMT for 4 hours. This maintenance will cause a disruption to the following Direct Connect connections you own:"
