@@ -27,7 +27,7 @@ icalendar = "^5.0.0"
 bs4 = "^0.0.2"
 lxml = {version = ">= 4.6.2, < 6"}
 geopy = "^2.1.0"
-timezonefinder = "^6.0.1"
+timezonefinder = ">=6.0.1,<9.0.0"
 backoff = "^2.2.1"
 chardet = "^5"
 openai = { version = ">=1.2.4", optional = true }
