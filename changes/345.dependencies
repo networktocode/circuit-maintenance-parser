@@ -1,1 +1,1 @@
-Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
+Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), timezonefinder (8.2), and type stubs

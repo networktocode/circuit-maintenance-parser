@@ -2048,30 +2048,51 @@ files = [
 
 [[package]]
 name = "timezonefinder"
-version = "6.6.3"
+version = "8.2.0"
 description = "python package for finding the timezone of any point on earth (coordinates) offline"
 optional = false
 python-versions = "<4,>=3.9"
 groups = ["main"]
+markers = "python_version == \"3.10\""
 files = [
-    {file = "timezonefinder-6.6.3-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e5904ddb1db42db58cafb6b8b76088e5e4685e24373a0b6d79e4a564de48cf81"},
-    {file = "timezonefinder-6.6.3-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:643e5e2944c1b8562c325b4692c8568046c1f4d81df96926ecb49fc66e9dc935"},
-    {file = "timezonefinder-6.6.3-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4fc31c175f6982cd201ae20b3c5daf86b90a979e77d28e6b407d6f23e959cf5a"},
-    {file = "timezonefinder-6.6.3-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:73f0f25a14663e9dae1586791da6178bccfd7753651e3cf9c68415823c806db6"},
-    {file = "timezonefinder-6.6.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:44601e225c00040119b6b970c42720f19088259abcd81e5c703dafe9bed4e81d"},
-    {file = "timezonefinder-6.6.3-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:a9a81b9eeb57947a5e19e25f44b2dbd34e6e206cfa8bdf87297ec5afa938ee08"},
-    {file = "timezonefinder-6.6.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0d5bab1715b4960b70d735624be2e7517d4f374c7db48a779039849d3594bc15"},
-    {file = "timezonefinder-6.6.3-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:5b4683ece7ea812b8cfdc0fd718f4510968e136bf58508261597227795228c1a"},
-    {file = "timezonefinder-6.6.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c6823f7448b678357fed67781471b3b9234839b6a9b78dc7ceba3a39f1d476fa"},
-    {file = "timezonefinder-6.6.3-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:822983e2d26c9aec43609511b0adf23dc002fb8fe44e8d0dadd8d4f4160de05b"},
-    {file = "timezonefinder-6.6.3.tar.gz", hash = "sha256:f942afeeb70cdc68dfa06161abec1c98812c13011084ce560741ad5c2db1dad3"},
+    {file = "timezonefinder-8.2.0-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:282ef0571a29b70b92d38f8ca3e444cb0eff9fafd7322e08da0da298a9e35cc8"},
+    {file = "timezonefinder-8.2.0-cp39-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:9ca70a379de6f43013042c36f78c1727dede5b68e8bd00e75fbe6d7ad869d178"},
+    {file = "timezonefinder-8.2.0.tar.gz", hash = "sha256:27b662835ae6e9a820431f5fbc54df05f5744e0a2d2f709f028040231838c05b"},
 ]
 
 [package.dependencies]
-cffi = ">=1.15.1,<2"
+cffi = ">=1.15.1,<3"
 flatbuffers = ">=25.2.10"
 h3 = ">4"
 numpy = {version = ">=1.23,<3", markers = "python_version >= \"3.9\""}
+
+[package.extras]
+numba = ["numba (>=0.56,<1) ; python_version < \"3.12\"", "numba (>=0.59,<1) ; python_version >= \"3.12\""]
+pytz = ["pytz (>=2022.7.1)"]
+
+[[package]]
+name = "timezonefinder"
+version = "8.2.1"
+description = "python package for finding the timezone of any point on earth (coordinates) offline"
+optional = false
+python-versions = "<4,>=3.11"
+groups = ["main"]
+markers = "python_version >= \"3.11\""
+files = [
+    {file = "timezonefinder-8.2.1-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e0dcaa33de1a5dad33db1dd36bead831c19d1865f1dc8c2e14361734293e7727"},
+    {file = "timezonefinder-8.2.1-cp39-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:8d46d82c6a821086a36bf2f8c57c1501dd2cf82f54ea647aca3901d33564ccf5"},
+    {file = "timezonefinder-8.2.1.tar.gz", hash = "sha256:16a8418fc73651b5491af891cf23973b967525ab6f4c8111c27c90fc6e22112d"},
+]
+
+[package.dependencies]
+cffi = ">=1.15.1,<3"
+flatbuffers = ">=25.2.10"
+h3 = ">=4"
+numpy = ">=2"
+
+[package.extras]
+numba = ["numba (>=0.56,<1)"]
+pytz = ["pytz (>=2022.7.1)"]
 
 [[package]]
 name = "toml"
@@ -2326,4 +2347,4 @@ xlsx = ["openpyxl", "pandas"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "719947d46a03692c83893e0c6294feb534fc609fb84bfdb04a6c36698ec2c928"
+content-hash = "3fc308973ee093cba55bdeb3b195333782e795d5bea79f0db9f8bed08a90146d"
