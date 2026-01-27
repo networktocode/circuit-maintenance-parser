@@ -1,0 +1,11 @@
+[
+    {
+        "circuits": [
+            {
+                "circuit_id": "1-877-7",
+                "impact": "OUTAGE"
+            }
+        ],
+        "status": "CONFIRMED"
+    }
+]

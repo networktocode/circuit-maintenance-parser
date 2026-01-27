@@ -11,9 +11,9 @@ from circuit_maintenance_parser.parser import EmailDateParser, ICal, Xlsx
 from circuit_maintenance_parser.parsers.apple import TextParserApple
 from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, SubjectParserAquaComms1
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
-from circuit_maintenance_parser.parsers.aws import SubjectParserAWS1, TextParserAWS1
+from circuit_maintenance_parser.parsers.aws import HtmlParserAWS1, SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
-from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1
+from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
@@ -170,6 +170,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "aws", "aws3.eml"),
             Path(dir_path, "data", "aws", "aws3_text_parser_result.json"),
         ),
+        (
+            HtmlParserAWS1,
+            Path(dir_path, "data", "aws", "aws4.eml"),
+            Path(dir_path, "data", "aws", "aws4_html_parser_result.json"),
+        ),
         # BSO
         (
             HtmlParserBSO1,
@@ -251,6 +256,11 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserCogent1,
             Path(dir_path, "data", "cogent", "cogent2.html"),
             Path(dir_path, "data", "cogent", "cogent2_result.json"),
+        ),
+        (
+            SubjectParserCogent1,
+            Path(dir_path, "data", "cogent", "cogent3.eml"),
+            Path(dir_path, "data", "cogent", "cogent3_subject_result.json"),
         ),
         # Colt
         (
@@ -844,3 +854,108 @@ def test_parser_no_data(parser_class):
     """Test parser with no data."""
     with pytest.raises(ParserError):
         parser_class().parse(b"", parser_class.get_data_types()[0])  # pylint: disable=protected-access
+
+
+def test_openai_parser_import_error():
+    """Test OpenAI parser raises ImportError when openai package is not available."""
+    from unittest.mock import patch
+
+    from circuit_maintenance_parser.parsers.openai import OpenAIParser
+
+    # Mock the absence of openai package
+    with patch("circuit_maintenance_parser.parsers.openai._HAS_OPENAI", False):
+        parser = OpenAIParser()
+        with pytest.raises(ImportError, match="openai extra is required"):
+            parser.get_llm_response("test content")
+
+
+def test_openai_parser_api_success():
+    """Test OpenAI parser with successful API response."""
+    import sys
+    from unittest.mock import MagicMock, patch
+
+    from circuit_maintenance_parser.parsers.openai import OpenAIParser
+
+    # Mock successful API response
+    mock_response = MagicMock()
+    mock_response.usage.total_tokens = 100
+    mock_response.choices = [MagicMock()]
+    mock_response.choices[0].message.content = '{"test": "data"}'
+
+    mock_client = MagicMock()
+    mock_client.chat.completions.create.return_value = mock_response
+
+    # Mock the OpenAI module
+    mock_openai_module = MagicMock()
+    mock_openai_module.OpenAI.return_value = mock_client
+
+    with patch.dict(sys.modules, {"openai": mock_openai_module}):
+        with patch("circuit_maintenance_parser.parsers.openai._HAS_OPENAI", True):
+            # Re-import to get the mocked OpenAI
+            from circuit_maintenance_parser.parsers import openai as openai_parser
+
+            openai_parser.OpenAI = mock_openai_module.OpenAI
+
+            parser = OpenAIParser()
+            result = parser.get_llm_response("test content")
+
+            assert result == {"test": "data"}
+            assert parser.tokens_used == 100
+
+
+def test_openai_parser_api_exception():
+    """Test OpenAI parser handles API exceptions."""
+    import sys
+    from unittest.mock import MagicMock, patch
+
+    from circuit_maintenance_parser.parsers.openai import OpenAIParser
+
+    mock_client = MagicMock()
+    mock_client.chat.completions.create.side_effect = Exception("API Error")
+
+    # Mock the OpenAI module
+    mock_openai_module = MagicMock()
+    mock_openai_module.OpenAI.return_value = mock_client
+
+    with patch.dict(sys.modules, {"openai": mock_openai_module}):
+        with patch("circuit_maintenance_parser.parsers.openai._HAS_OPENAI", True):
+            from circuit_maintenance_parser.parsers import openai as openai_parser
+
+            openai_parser.OpenAI = mock_openai_module.OpenAI
+
+            parser = OpenAIParser()
+            result = parser.get_llm_response("test content")
+
+            assert result is None
+
+
+def test_openai_parser_invalid_json():
+    """Test OpenAI parser handles invalid JSON response."""
+    import sys
+    from unittest.mock import MagicMock, patch
+
+    from circuit_maintenance_parser.parsers.openai import OpenAIParser
+
+    # Mock API response with invalid JSON
+    mock_response = MagicMock()
+    mock_response.usage.total_tokens = 50
+    mock_response.choices = [MagicMock()]
+    mock_response.choices[0].message.content = "not valid json"
+
+    mock_client = MagicMock()
+    mock_client.chat.completions.create.return_value = mock_response
+
+    # Mock the OpenAI module
+    mock_openai_module = MagicMock()
+    mock_openai_module.OpenAI.return_value = mock_client
+
+    with patch.dict(sys.modules, {"openai": mock_openai_module}):
+        with patch("circuit_maintenance_parser.parsers.openai._HAS_OPENAI", True):
+            from circuit_maintenance_parser.parsers import openai as openai_parser
+
+            openai_parser.OpenAI = mock_openai_module.OpenAI
+
+            parser = OpenAIParser()
+            result = parser.get_llm_response("test content")
+
+            assert result is None
