@@ -4,7 +4,16 @@ This document describes all new features and changes in the release. The format 
 
 <!-- towncrier release notes start -->
 
-## [v2.10.0 (2026-01-27)](https://github.com/networktocode/circuit_maintenance_parser/releases/tag/v2.10.0)
+# v2.10 Release Notes
+
+This document describes all new features and changes in the release. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Release Overview
+
+- Major features or milestones
+- Changes to compatibility with Nautobot and/or other apps, libraries etc.
+
+## [v2.10.0 (2026-01-30)](https://github.com/networktocode/circuit_maintenance_parser/releases/tag/v2.10.0)
 
 ### Added
 
@@ -13,6 +22,7 @@ This document describes all new features and changes in the release. The format 
 ### Dependencies
 
 - [#346](https://github.com/networktocode/circuit_maintenance_parser/issues/346) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
+- [#360](https://github.com/networktocode/circuit_maintenance_parser/issues/360) - Updated lxml to include version 6
 - [#361](https://github.com/networktocode/circuit_maintenance_parser/issues/361) - Updated timezonefinder to v8.2.0
 
 ### Housekeeping
@@ -27,7 +37,7 @@ This document describes all new features and changes in the release. The format 
 
 ### Fixed
 
-- [#331](https://github.com/networktocode/circuit_maintenance_parser/issues/331) - Fix bug with maintenance_id generation due to CircuitImpact
+- [#331](https://github.com/networktocode/circuit_maintenance_parser/issues/331) - Fix bug with `maintenance_id` generation due to CircuitImpact
 
 ### Housekeeping
 
