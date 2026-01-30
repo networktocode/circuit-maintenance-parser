@@ -4,46 +4,36 @@ This document describes all new features and changes in the release. The format 
 
 <!-- towncrier release notes start -->
 
-# v2.10 Release Notes
-
-This document describes all new features and changes in the release. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## Release Overview
-
-- Major features or milestones
-- Changes to compatibility with Nautobot and/or other apps, libraries etc.
-
-## [v2.10.0 (2026-01-30)](https://github.com/networktocode/circuit_maintenance_parser/releases/tag/v2.10.0)
+## [v2.10.0 (2026-01-27)](https://github.com/networktocode/circuit-maintenance-parser/releases/tag/v2.10.0)
 
 ### Added
 
-- [#330](https://github.com/networktocode/circuit_maintenance_parser/issues/330) - Add support for parsing AWS HTML format maintenance notification emails
+- [#330](https://github.com/networktocode/circuit-maintenance-parser/issues/330) - Add support for parsing AWS HTML format maintenance notification emails
 
 ### Dependencies
 
-- [#346](https://github.com/networktocode/circuit_maintenance_parser/issues/346) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
-- [#360](https://github.com/networktocode/circuit_maintenance_parser/issues/360) - Updated lxml to include version 6
-- [#361](https://github.com/networktocode/circuit_maintenance_parser/issues/361) - Updated timezonefinder to v8.2.0
+- [#346](https://github.com/networktocode/circuit-maintenance-parser/issues/346) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
+- [#361](https://github.com/networktocode/circuit-maintenance-parser/issues/361) - Updated timezonefinder to v8.2.0
 
 ### Housekeeping
 
-- [#344](https://github.com/networktocode/circuit_maintenance_parser/issues/344) - Updated test coverage for the codebase
+- [#344](https://github.com/networktocode/circuit-maintenance-parser/issues/344) - Updated test coverage for the codebase
 
-## [v2.9.0 (2025-10-07)](https://github.com/networktocode/circuit_maintenance_parser/releases/tag/v2.9.0)
+## [v2.9.0 (2025-10-07)](https://github.com/networktocode/circuit-maintenance-parser/releases/tag/v2.9.0)
 
 ### Added
 
-- [#335](https://github.com/networktocode/circuit_maintenance_parser/issues/335) - Add subject to body of emails for OpenAI parser
+- [#335](https://github.com/networktocode/circuit-maintenance-parser/issues/335) - Add subject to body of emails for OpenAI parser
 
 ### Fixed
 
-- [#331](https://github.com/networktocode/circuit_maintenance_parser/issues/331) - Fix bug with `maintenance_id` generation due to CircuitImpact
+- [#331](https://github.com/networktocode/circuit-maintenance-parser/issues/331) - Fix bug with maintenance_id generation due to CircuitImpact
 
 ### Housekeeping
 
-- [#320](https://github.com/networktocode/circuit_maintenance_parser/issues/320) - Adopt new NTC development standards
-- [#328](https://github.com/networktocode/circuit_maintenance_parser/issues/328) - Add LLM tokens used to MetaData, fix PCCW parser, and text hook improvement
-- [#329](https://github.com/networktocode/circuit_maintenance_parser/issues/329) - Add changelog check in the CI
+- [#320](https://github.com/networktocode/circuit-maintenance-parser/issues/320) - Adopt new NTC development standards
+- [#328](https://github.com/networktocode/circuit-maintenance-parser/issues/328) - Add LLM tokens used to MetaData, fix PCCW parser, and text hook improvement
+- [#329](https://github.com/networktocode/circuit-maintenance-parser/issues/329) - Add changelog check in the CI
 
 # Changelog
 
@@ -56,8 +46,8 @@ This document describes all new features and changes in the release. The format 
 ### Changed
 
 - [#312](https://github.com/networktocode/circuit-maintenance-parser/pull/312) - Move epoch parser outside of LLM due to inconsistencies
-- [#314](https://github.com/networktocode/circuit-maintenance_parser/pull/314) - Add multi-windows for LLM
-- [#315](https://github.com/networktocode/circuit-maintenance_parser/pull/315) - Return proper impact result for parsing
+- [#314](https://github.com/networktocode/circuit-maintenance-parser/pull/314) - Add multi-windows for LLM
+- [#315](https://github.com/networktocode/circuit-maintenance-parser/pull/315) - Return proper impact result for parsing
 
 ## v2.7.0 - 2025-01-10
 
