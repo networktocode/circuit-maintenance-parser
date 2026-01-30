@@ -37,6 +37,10 @@ This document describes all new features and changes in the release. The format 
 - [#328](https://github.com/networktocode/circuit-maintenance-parser/issues/328) - Add LLM tokens used to MetaData, fix PCCW parser, and text hook improvement
 - [#329](https://github.com/networktocode/circuit-maintenance-parser/issues/329) - Add changelog check in the CI
 
+### Dependencies
+
+- [#345](https://github.com/networktocode/circuit_maintenance_parser/issues/345) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), timezonefinder (8.2), and type stubs
+
 # Changelog
 
 ## v2.8.0 - 2025-06-06
