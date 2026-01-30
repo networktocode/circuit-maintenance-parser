@@ -25,6 +25,7 @@ This document describes all new features and changes in the release. The format 
 ### Added
 
 - [#335](https://github.com/networktocode/circuit-maintenance-parser/issues/335) - Add subject to body of emails for OpenAI parser
+- [#330](https://github.com/networktocode/circuit_maintenance_parser/issues/330) - Add support for parsing AWS HTML format maintenance notification emails
 
 ### Fixed
 
