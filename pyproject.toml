@@ -141,7 +141,7 @@ testpaths = [
 addopts = "-vv --doctest-modules -p no:warnings --ignore-glob='*mock*'"
 
 [tool.towncrier]
-package = "circuit_maintenance_parser"
+package = "circuit-maintenance-parser"
 directory = "changes"
 filename = "docs/release_notes.md"
 template = "towncrier_template.j2"
