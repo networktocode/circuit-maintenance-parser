@@ -14,6 +14,7 @@ This document describes all new features and changes in the release. The format 
 
 - [#360](https://github.com/networktocode/circuit-maintenance-parser/issues/360) - Updated lxml to include version 6
 - [#361](https://github.com/networktocode/circuit-maintenance-parser/issues/361) - Updated timezonefinder to v8.2.0
+- [#345](https://github.com/networktocode/circuit_maintenance_parser/issues/345) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
 
 ### Housekeeping
 
@@ -36,10 +37,6 @@ This document describes all new features and changes in the release. The format 
 - [#328](https://github.com/networktocode/circuit-maintenance-parser/issues/328) - Add LLM tokens used to MetaData, fix PCCW parser, and text hook improvement
 - [#329](https://github.com/networktocode/circuit-maintenance-parser/issues/329) - Add changelog check in the CI
 - [#343](https://github.com/networktocode/circuit-maintenance-parser/issues/343) - Updated test coverage for the codebase
-
-### Dependencies
-
-- [#345](https://github.com/networktocode/circuit_maintenance_parser/issues/345) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
 
 # Changelog
 
