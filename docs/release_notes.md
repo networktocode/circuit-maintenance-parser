@@ -25,7 +25,7 @@ This document describes all new features and changes in the release. The format 
 ### Added
 
 - [#335](https://github.com/networktocode/circuit-maintenance-parser/issues/335) - Add subject to body of emails for OpenAI parser
-- [#330](https://github.com/networktocode/circuit_maintenance_parser/issues/330) - Add support for parsing AWS HTML format maintenance notification emails
+- [#330](https://github.com/networktocode/circuit-maintenance-parser/issues/330) - Add support for parsing AWS HTML format maintenance notification emails
 
 ### Fixed
 
@@ -36,7 +36,7 @@ This document describes all new features and changes in the release. The format 
 - [#320](https://github.com/networktocode/circuit-maintenance-parser/issues/320) - Adopt new NTC development standards
 - [#328](https://github.com/networktocode/circuit-maintenance-parser/issues/328) - Add LLM tokens used to MetaData, fix PCCW parser, and text hook improvement
 - [#329](https://github.com/networktocode/circuit-maintenance-parser/issues/329) - Add changelog check in the CI
-- [#343](https://github.com/networktocode/circuit_maintenance_parser/issues/343) - Updated test coverage for the codebase
+- [#343](https://github.com/networktocode/circuit-maintenance-parser/issues/343) - Updated test coverage for the codebase
 
 ### Dependencies
 
