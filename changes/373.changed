@@ -1,0 +1,1 @@
+Updated default OpenAI model from deprecated gpt-3.5-turbo to gpt-4o-mini and removed unreachable dead code in OpenAI parser.
