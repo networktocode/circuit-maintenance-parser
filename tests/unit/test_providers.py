@@ -118,23 +118,22 @@ def test_provider_with_include_and_exclude_filters():
 )
 def test_provider_falls_back_to_openai(provider_class):
     """Test that OpenAI parser is used as last resort when all other processors fail."""
-    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
-    data = NotificationData.init_from_raw("text/plain", b"fake data")
-    data.add_data_part("text/html", b"other data")
+    with patch.dict(os.environ, {"PARSER_OPENAI_API_KEY": "some_api_key"}):
+        data = NotificationData.init_from_raw("text/plain", b"fake data")
+        data.add_data_part("text/html", b"other data")
 
-    provider = provider_class()
-    original_processor_count = len(provider._processors)  # pylint: disable=protected-access
+        provider = provider_class()
+        original_processor_count = len(provider._processors)  # pylint: disable=protected-access
 
-    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
-        # All native processors fail, then OpenAI processor succeeds
-        mock_processor.side_effect = [ProcessorError] * original_processor_count + [[{"a": "b"}]]
-        provider.get_maintenances(data)
-        # Native processors + 1 OpenAI call
-        assert mock_processor.call_count == original_processor_count + 1
+        with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+            # All native processors fail, then OpenAI processor succeeds
+            mock_processor.side_effect = [ProcessorError] * original_processor_count + [[{"a": "b"}]]
+            provider.get_maintenances(data)
+            # Native processors + 1 OpenAI call
+            assert mock_processor.call_count == original_processor_count + 1
 
-    # OpenAI processor should NOT be appended to the provider's processor list
-    assert len(provider._processors) == original_processor_count  # pylint: disable=protected-access
-    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+        # OpenAI processor should NOT be appended to the provider's processor list
+        assert len(provider._processors) == original_processor_count  # pylint: disable=protected-access
 
 
 def test_provider_does_not_use_openai_when_native_succeeds():
