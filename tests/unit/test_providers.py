@@ -116,21 +116,78 @@ def test_provider_with_include_and_exclude_filters():
     "provider_class",
     [GenericProvider, AquaComms],
 )
-def test_provider_gets_mlparser(provider_class):
-    """Test to check the any provider gets a default ML parser when ENV is activated."""
+def test_provider_falls_back_to_openai(provider_class):
+    """Test that OpenAI parser is used as last resort when all other processors fail."""
     os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
     data = NotificationData.init_from_raw("text/plain", b"fake data")
     data.add_data_part("text/html", b"other data")
 
     provider = provider_class()
+    original_processor_count = len(provider._processors)  # pylint: disable=protected-access
+
+    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+        # All native processors fail, then OpenAI processor succeeds
+        mock_processor.side_effect = [ProcessorError] * original_processor_count + [[{"a": "b"}]]
+        provider.get_maintenances(data)
+        # Native processors + 1 OpenAI call
+        assert mock_processor.call_count == original_processor_count + 1
+
+    # OpenAI processor should NOT be appended to the provider's processor list
+    assert len(provider._processors) == original_processor_count  # pylint: disable=protected-access
+    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+
+
+def test_provider_does_not_use_openai_when_native_succeeds():
+    """Test that OpenAI parser is not invoked when a native processor succeeds."""
+    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
+    data = NotificationData.init_from_raw("text/plain", b"fake data")
+
+    provider = GenericProvider()
+
+    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+        mock_processor.return_value = [{"a": "b"}]
+        provider.get_maintenances(data)
+        # Only the native processor should be called
+        assert mock_processor.call_count == 1
+
+    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+
+
+def test_provider_data_not_mutated_when_native_succeeds():
+    """Test that add_subject_to_text is not called when native processors succeed."""
+    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
+    data = NotificationData.init_from_raw("text/plain", b"fake data")
+    data.add_data_part("email-header-subject", b"Test Subject")
+
+    original_content = data.data_parts[0].content
+    provider = GenericProvider()
 
     with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
         mock_processor.return_value = [{"a": "b"}]
         provider.get_maintenances(data)
 
-    assert provider._processors[-1] == CombinedProcessor(  # pylint: disable=protected-access
-        data_parsers=[EmailDateParser, OpenAIParser]
-    )
+    # Data should not have been mutated since native processor succeeded
+    assert data.data_parts[0].content == original_content
+    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+
+
+def test_provider_no_repeated_append_on_multiple_calls():
+    """Test that calling get_maintenances multiple times doesn't grow the processor list."""
+    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
+    data = NotificationData.init_from_raw("text/plain", b"fake data")
+
+    provider = GenericProvider()
+    original_processor_count = len(provider._processors)  # pylint: disable=protected-access
+
+    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+        mock_processor.return_value = [{"a": "b"}]
+        provider.get_maintenances(data)
+        provider.get_maintenances(data)
+        provider.get_maintenances(data)
+
+    # Processor list should never grow
+    assert len(provider._processors) == original_processor_count  # pylint: disable=protected-access
+    os.environ.pop("PARSER_OPENAI_API_KEY", None)
 
 
 def test_add_subject_to_text_appends_subject_to_text_parts():
@@ -230,3 +287,27 @@ def test_add_subject_to_text_handles_decode_errors():
 
     # This should not raise an exception due to errors="ignore" in decode()
     provider.add_subject_to_text(data)
+
+
+def test_add_subject_to_text_skips_text_calendar():
+    """Test that add_subject_to_text does not modify text/calendar parts."""
+    provider = GenericProvider()
+
+    data = NotificationData()
+    data.add_data_part("email-header-subject", b"Planned Work Notification")
+    data.add_data_part(
+        "text/calendar",
+        b"BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nEND:VEVENT\r\nEND:VCALENDAR",
+    )
+    data.add_data_part("text/plain", b"Some plain text content")
+
+    original_calendar_content = data.data_parts[1].content
+
+    provider.add_subject_to_text(data)
+
+    # text/calendar part should remain unchanged
+    assert data.data_parts[1].content == original_calendar_content
+    assert b"Planned Work Notification" not in data.data_parts[1].content
+
+    # text/plain part should have subject appended
+    assert b"Planned Work Notification" in data.data_parts[2].content
