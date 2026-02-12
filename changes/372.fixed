@@ -1,0 +1,1 @@
+Refactored OpenAI parser to be used as a fallback and fixed subject injection to skip text/calendar parts.

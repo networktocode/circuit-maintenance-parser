@@ -7,9 +7,8 @@ import pytest
 
 from circuit_maintenance_parser.data import NotificationData
 from circuit_maintenance_parser.errors import ProcessorError, ProviderError
-from circuit_maintenance_parser.parser import EmailDateParser, Parser
-from circuit_maintenance_parser.parsers.openai import OpenAIParser
-from circuit_maintenance_parser.processor import CombinedProcessor, SimpleProcessor
+from circuit_maintenance_parser.parser import Parser
+from circuit_maintenance_parser.processor import SimpleProcessor
 from circuit_maintenance_parser.provider import AquaComms, GenericProvider
 
 # pylint: disable=use-implicit-booleaness-not-comparison
