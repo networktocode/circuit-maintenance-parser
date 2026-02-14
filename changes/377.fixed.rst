@@ -1,0 +1,1 @@
+Fixed Lumen parser incorrectly marking scheduled future maintenance events as IN-PROCESS instead of CONFIRMED. Bug introduced in commit 737aa4e9 (Aug 2021).
