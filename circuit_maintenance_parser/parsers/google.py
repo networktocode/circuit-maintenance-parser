@@ -38,7 +38,7 @@ class HtmlParserGoogle1(Html):
                 cid = googleaddr + "-" + span.parent.next_sibling.string.strip()
                 data["circuits"].append(CircuitImpact(circuit_id=cid, impact=Impact.OUTAGE))
 
-        # Google sometimes send notifications without End Time specificed
+        # Google sometimes send notifications without End Time specified
         if not end_time_explicit and data["start"]:
             # Since start and end times cannot be equal, manufacturing end date by adding 1hr to start date
             end_time_delta = 3600
