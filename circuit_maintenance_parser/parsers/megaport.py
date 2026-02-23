@@ -30,11 +30,12 @@ class HtmlParserMegaport1(Html):
 
         for tr_elem in table.find("tbody").find_all("tr"):
             td_elem = tr_elem.find("td")
+            p_summary = False
             for p_elem in td_elem.find_all("p"):
-                p_text = p_elem.text
+                p_text = p_elem.text.strip()
                 if not p_text:
                     continue
-                if p_text.startswith("This is a reminder"):
+                if p_text.startswith("This is a reminder") or p_text.startswith("Please be advised that"):
                     data["maintenance_id"] = p_elem.find("b").string
                     data["status"] = Status("CONFIRMED")
                 elif p_text.startswith("Hi "):
@@ -42,12 +43,29 @@ class HtmlParserMegaport1(Html):
                     if re_search is not None:
                         data["account"] = re_search.group(1)
                 elif p_text.startswith("Purpose of Maintenance:"):
-                    data["summary"] = p_text.split("Purpose of Maintenance: ")[-1]
+                    # When p_text only contains "Purpose of Maintenance:"; assume that the purpose is given in the next paragraph
+                    if p_text == "Purpose of Maintenance:":
+                        p_summary = True
+                    else:
+                        data["summary"] = p_text.split("Purpose of Maintenance: ")[-1]
+                elif p_summary:
+                    # This paragraph contains contents for "purpose of maintenance"
+                    data["summary"] = p_text
+                    p_summary = False
                 elif p_text.startswith("Start Date and Time:"):
-                    re_search = re.search("Start Date and Time: (.*) UTC", p_text)
+                    # Megaport uses different formats in their initial maintenance announcement email and reminder email. In their reminder email they split start and end date across paragraphs
+                    re_search = re.search("Start Date and Time: (.*) UTC End Date and Time: (.*) UTC", p_text)
                     if re_search:
                         start = parser.parse(re_search.group(1))
                         data["start"] = self.dt2ts(start)
+                        end = parser.parse(re_search.group(2))
+                        data["end"] = self.dt2ts(end)
+                    # for their reminder email, only look for start date
+                    else:
+                        re_search = re.search("Start Date and Time: (.*) UTC", p_text)
+                        if re_search:
+                            start = parser.parse(re_search.group(1))
+                            data["start"] = self.dt2ts(start)
                 elif p_text.startswith("End Date and Time:"):
                     re_search = re.search("End Date and Time: (.*) UTC", p_text)
                     if re_search:
