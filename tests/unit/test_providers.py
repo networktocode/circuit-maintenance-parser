@@ -137,55 +137,51 @@ def test_provider_falls_back_to_openai(provider_class):
 
 def test_provider_does_not_use_openai_when_native_succeeds():
     """Test that OpenAI parser is not invoked when a native processor succeeds."""
-    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
-    data = NotificationData.init_from_raw("text/plain", b"fake data")
+    with patch.dict(os.environ, {"PARSER_OPENAI_API_KEY": "some_api_key"}):
+        data = NotificationData.init_from_raw("text/plain", b"fake data")
 
-    provider = GenericProvider()
+        provider = GenericProvider()
 
-    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
-        mock_processor.return_value = [{"a": "b"}]
-        provider.get_maintenances(data)
-        # Only the native processor should be called
-        assert mock_processor.call_count == 1
-
-    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+        with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+            mock_processor.return_value = [{"a": "b"}]
+            provider.get_maintenances(data)
+            # Only the native processor should be called
+            assert mock_processor.call_count == 1
 
 
 def test_provider_data_not_mutated_when_native_succeeds():
     """Test that add_subject_to_text is not called when native processors succeed."""
-    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
-    data = NotificationData.init_from_raw("text/plain", b"fake data")
-    data.add_data_part("email-header-subject", b"Test Subject")
+    with patch.dict(os.environ, {"PARSER_OPENAI_API_KEY": "some_api_key"}):
+        data = NotificationData.init_from_raw("text/plain", b"fake data")
+        data.add_data_part("email-header-subject", b"Test Subject")
 
-    original_content = data.data_parts[0].content
-    provider = GenericProvider()
+        original_content = data.data_parts[0].content
+        provider = GenericProvider()
 
-    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
-        mock_processor.return_value = [{"a": "b"}]
-        provider.get_maintenances(data)
+        with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+            mock_processor.return_value = [{"a": "b"}]
+            provider.get_maintenances(data)
 
-    # Data should not have been mutated since native processor succeeded
-    assert data.data_parts[0].content == original_content
-    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+        # Data should not have been mutated since native processor succeeded
+        assert data.data_parts[0].content == original_content
 
 
 def test_provider_no_repeated_append_on_multiple_calls():
     """Test that calling get_maintenances multiple times doesn't grow the processor list."""
-    os.environ["PARSER_OPENAI_API_KEY"] = "some_api_key"
-    data = NotificationData.init_from_raw("text/plain", b"fake data")
+    with patch.dict(os.environ, {"PARSER_OPENAI_API_KEY": "some_api_key"}):
+        data = NotificationData.init_from_raw("text/plain", b"fake data")
 
-    provider = GenericProvider()
-    original_processor_count = len(provider._processors)  # pylint: disable=protected-access
+        provider = GenericProvider()
+        original_processor_count = len(provider._processors)  # pylint: disable=protected-access
 
-    with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
-        mock_processor.return_value = [{"a": "b"}]
-        provider.get_maintenances(data)
-        provider.get_maintenances(data)
-        provider.get_maintenances(data)
+        with patch("circuit_maintenance_parser.processor.GenericProcessor.process") as mock_processor:
+            mock_processor.return_value = [{"a": "b"}]
+            provider.get_maintenances(data)
+            provider.get_maintenances(data)
+            provider.get_maintenances(data)
 
-    # Processor list should never grow
-    assert len(provider._processors) == original_processor_count  # pylint: disable=protected-access
-    os.environ.pop("PARSER_OPENAI_API_KEY", None)
+        # Processor list should never grow
+        assert len(provider._processors) == original_processor_count  # pylint: disable=protected-access
 
 
 def test_add_subject_to_text_appends_subject_to_text_parts():
