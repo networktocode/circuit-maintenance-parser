@@ -130,12 +130,6 @@ class GenericProvider(BaseModel):
             logger.debug("Skipping notification %s due filtering policy for %s.", data, self.__class__.__name__)
             return []
 
-        if os.getenv("PARSER_OPENAI_API_KEY"):
-            self._processors.append(CombinedProcessor(data_parsers=[EmailDateParser, OpenAIParser]))
-
-            # Add subject to all html or text/* data_parts if not already present.
-            self.add_subject_to_text(data)
-
         for processor in self._processors:
             try:
                 return processor.process(data, self.get_extended_data())
@@ -149,6 +143,22 @@ class GenericProvider(BaseModel):
                 error_message += process_error_message % related_exc
                 related_exceptions.append(exc)
                 continue
+
+        # Use OpenAI parser as a last resort if all other processors failed.
+        if os.getenv("PARSER_OPENAI_API_KEY"):
+            self.add_subject_to_text(data)
+            openai_processor = CombinedProcessor(data_parsers=[EmailDateParser, OpenAIParser])
+            try:
+                return openai_processor.process(data, self.get_extended_data())
+            except ProcessorError as exc:
+                process_error_message = (
+                    f"- Processor {openai_processor.__class__.__name__} from {provider_name} failed due to: %s\n"
+                )
+                logger.debug(process_error_message, traceback.format_exc())
+
+                related_exc = rgetattr(exc, "__cause__")
+                error_message += process_error_message % related_exc
+                related_exceptions.append(exc)
 
         raise ProviderError(
             (f"Failed creating Maintenance notification for {provider_name}.\nDetails:\n{error_message}"),
@@ -165,7 +175,7 @@ class GenericProvider(BaseModel):
         if subject:
             new_data_parts = []
             for part in data.data_parts:
-                if part.type.startswith("text/") or part.type.startswith("html"):
+                if (part.type.startswith("text/") or part.type.startswith("html")) and part.type != "text/calendar":
                     content_str = part.content.decode(errors="ignore")
                     if subject not in content_str:
                         # Append subject and update content
