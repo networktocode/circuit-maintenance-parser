@@ -24,7 +24,7 @@ from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParse
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
-from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1
+from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -374,7 +374,7 @@ class Google(GenericProvider):
 
     _processors: List[GenericProcessor] = PrivateAttr(
         [
-            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGoogle1]),
+            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserGoogle1, SubjectParserGoogle1]),
         ]
     )
     _default_organizer = PrivateAttr("noc-noreply@google.com")

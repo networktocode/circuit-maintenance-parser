@@ -18,7 +18,7 @@ from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParse
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
-from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1
+from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
@@ -385,7 +385,22 @@ class NestedEncoder(json.JSONEncoder):
         (
             HtmlParserGoogle1,
             Path(dir_path, "data", "google", "google1.html"),
-            Path(dir_path, "data", "google", "google1_parser_result.json"),
+            Path(dir_path, "data", "google", "google1_html_parser_result.json"),
+        ),
+        (
+            SubjectParserGoogle1,
+            Path(dir_path, "data", "google", "google2_scheduled_subject"),
+            Path(dir_path, "data", "google", "google2_scheduled_subject_parser_result.json"),
+        ),
+        (
+            SubjectParserGoogle1,
+            Path(dir_path, "data", "google", "google3_completed_subject"),
+            Path(dir_path, "data", "google", "google3_completed_subject_parser_result.json"),
+        ),
+        (
+            SubjectParserGoogle1,
+            Path(dir_path, "data", "google", "google4_canceled_subject"),
+            Path(dir_path, "data", "google", "google4_canceled_subject_parser_result.json"),
         ),
         # GTT
         (
