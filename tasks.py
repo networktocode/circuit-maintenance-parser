@@ -197,17 +197,6 @@ def ruff(context, action=None, target=None, fix=False, output_format="concise"):
 
 
 @task
-def pylint(context):
-    """Run pylint for the specified name and Python version.
-
-    Args:
-        context (obj): Used to run specific commands
-    """
-    exec_cmd = 'find . -name "*.py" | grep -vE "tests/unit" | xargs pylint'
-    run_command(context, exec_cmd)
-
-
-@task
 def yamllint(context):
     """Run yamllint to validate formatting adheres to NTC defined YAML standards.
 
@@ -237,7 +226,6 @@ def tests(context):
         context (obj): Used to run specific commands
     """
     ruff(context)
-    pylint(context)
     yamllint(context)
     pytest(context)
 

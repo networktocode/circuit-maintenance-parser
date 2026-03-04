@@ -1,0 +1,1 @@
+Removed pylint from CI and simplified pytest job to local execution, matching the pattern used by ruff and yamllint.
