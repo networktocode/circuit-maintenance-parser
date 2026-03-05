@@ -81,7 +81,7 @@ class HtmlParserSparkle1(Html):
                             ticket["end"] = self.dt2ts(parser.parse(end))
                         else:
                             raise ParserError("Unable to find end time for ticket " + ticket_id)
-                        idx += 2
+                        idx += 2  # noqa: PLW2901
                         data.append(ticket)
                 elif "circuits involved" in td_elements[0].text.lower():
                     self.set_all_tickets(

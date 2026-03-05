@@ -65,7 +65,7 @@ class SubjectParserGcx1(EmailSubjectParser):
         )
         if search:
             data["maintenance_id"] = search.group(1)
-            date_format = date_format = "%d-%b-%Y %H:%M"
+            date_format = "%d-%b-%Y %H:%M"
             data["start"] = self.dt2ts(datetime.strptime(search.group(5), date_format))
             data["end"] = self.dt2ts(datetime.strptime(search.group(6), date_format))
             data["summary"] = search.group(4)
