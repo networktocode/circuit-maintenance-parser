@@ -294,3 +294,17 @@ fabric.properties
 ### vscode ###
 .vscode/*
 *.code-workspace
+
+# Rando
+creds.env
+development/*.txt
+
+# Invoke overrides
+invoke.yml
+
+# Docs
+docs/README.md
+docs/CHANGELOG.md
+public
+/compose.yaml
+/dump.sql
