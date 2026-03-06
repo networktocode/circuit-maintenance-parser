@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 """Circuit-maintenance-parser init."""
 
+from importlib import metadata
 from typing import Optional, Type
 
 from .data import NotificationData
@@ -76,8 +76,15 @@ SUPPORTED_PROVIDERS = (
     Zayo,
 )
 
-SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
-SUPPORTED_ORGANIZER_EMAILS = [provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS]
+
+__version__ = metadata.version(__name__)
+
+SUPPORTED_PROVIDER_NAMES = [
+    provider.get_provider_type() for provider in SUPPORTED_PROVIDERS
+]
+SUPPORTED_ORGANIZER_EMAILS = [
+    provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS
+]
 
 
 def init_provider(provider_type=None) -> Optional[GenericProvider]:
@@ -129,10 +136,3 @@ __all__ = [
     "NonexistentProviderError",
     "Maintenance",
 ]
-=======
-"""Initialization file for library."""
-
-from importlib import metadata
-
-__version__ = metadata.version(__name__)
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)

@@ -1,11 +1,8 @@
 """Tasks for use with Invoke."""
 
 import os
-<<<<<<< HEAD
-=======
 import re
 from pathlib import Path
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 from invoke import Collection, Exit
 from invoke import task as invoke_task
@@ -14,12 +11,7 @@ from invoke import task as invoke_task
 def is_truthy(arg):
     """Convert "truthy" strings into Booleans.
 
-<<<<<<< HEAD
-    Examples
-    --------
-=======
     Examples:
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
         >>> is_truthy('yes')
         True
     Args:
@@ -38,28 +30,17 @@ def is_truthy(arg):
 
 
 # Use pyinvoke configuration for default values, see http://docs.pyinvoke.org/en/stable/concepts/configuration.html
-<<<<<<< HEAD
-# Variables may be overwritten in invoke.yml or by the environment variables INVOKE_PYNAUTOBOT_xxx
-=======
 # Variables may be overwritten in invoke.yml or by the environment variables INVOKE_CIRCUIT-MAINTENANCE-PARSER_xxx
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 namespace = Collection("circuit_maintenance_parser")
 namespace.configure(
     {
         "circuit_maintenance_parser": {
             "project_name": "circuit_maintenance_parser",
             "python_ver": "3.10",
-<<<<<<< HEAD
             "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", "false")),
             "image_name": "circuit_maintenance_parser",
             "image_ver": os.getenv("INVOKE_PARSER_IMAGE_VER", "latest"),
-            "pwd": ".",
-=======
-            "local": is_truthy(os.getenv("INVOKE_CIRCUIT-MAINTENANCE-PARSER_LOCAL", "false")),
-            "image_name": "circuit_maintenance_parser",
-            "image_ver": os.getenv("INVOKE_CIRCUIT-MAINTENANCE-PARSER_IMAGE_VER", "latest"),
             "pwd": Path(__file__).parent,
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
         }
     }
 )
@@ -85,21 +66,14 @@ def task(function=None, *args, **kwargs):
     return task_wrapper
 
 
-<<<<<<< HEAD
-def run_command(context, exec_cmd, port=None):
-=======
 def run_command(context, exec_cmd, port=None, rm=True):
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     """Wrapper to run the invoke task commands.
 
     Args:
         context ([invoke.task]): Invoke task object.
         exec_cmd ([str]): Command to run.
         port (int): Used to serve local docs.
-<<<<<<< HEAD
-=======
         rm (bool): Whether to remove the container after running the command.
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
     Returns:
         result (obj): Contains Invoke result from running task.
@@ -113,32 +87,21 @@ def run_command(context, exec_cmd, port=None, rm=True):
         )
         if port:
             result = context.run(
-<<<<<<< HEAD
-                f"docker run -it -p {port} -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
-=======
                 f"docker run -it {'--rm' if rm else ''} -p {port} -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
                 pty=True,
             )
         else:
             result = context.run(
-<<<<<<< HEAD
-                f"docker run -it -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
-=======
                 f"docker run -it {'--rm' if rm else ''} -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
                 pty=True,
             )
 
     return result
 
 
-<<<<<<< HEAD
-=======
 # ------------------------------------------------------------------------------
 # BUILD
 # ------------------------------------------------------------------------------
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 @task(
     help={
         "cache": "Whether to use Docker's cache when building images (default enabled)",
@@ -148,13 +111,9 @@ def run_command(context, exec_cmd, port=None, rm=True):
 )
 def build(context, cache=True, force_rm=False, hide=False):
     """Build a Docker image."""
-<<<<<<< HEAD
     print(
         f"Building image {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver}"
     )
-=======
-    print(f"Building image {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver}")
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     command = f"docker build --tag {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} --build-arg PYTHON_VER={context.circuit_maintenance_parser.python_ver} -f Dockerfile ."
 
     if not cache:
@@ -170,8 +129,6 @@ def build(context, cache=True, force_rm=False, hide=False):
 
 
 @task
-<<<<<<< HEAD
-=======
 def generate_packages(context):
     """Generate all Python packages inside docker and copy the file locally under dist/."""
     command = "poetry build"
@@ -192,23 +149,17 @@ def lock(context, check=False):
 
 
 @task
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 def clean(context):
     """Remove the project specific image."""
     print(
         f"Attempting to forcefully remove image {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver}"
     )
-<<<<<<< HEAD
     context.run(
         f"docker rmi {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} --force"
     )
     print(
         f"Successfully removed image {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver}"
     )
-=======
-    context.run(f"docker rmi {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} --force")
-    print(f"Successfully removed image {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver}")
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 
 @task
@@ -219,11 +170,6 @@ def rebuild(context):
 
 
 @task
-<<<<<<< HEAD
-def pytest(context, args=""):
-    """Run pytest test cases."""
-    exec_cmd = f"pytest {args}"
-=======
 def coverage(context):
     """Run the coverage report against pytest."""
     exec_cmd = "coverage run --source=circuit_maintenance_parser -m pytest"
@@ -252,7 +198,6 @@ def pytest(context, pattern=None, label=None):
         pytest_cmd += "".join([f" {_label}" for _label in label])
     coverage_cmd = "coverage report"
     exec_cmd = " && ".join([doc_test_cmd, pytest_cmd, coverage_cmd])
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     run_command(context, exec_cmd)
 
 
@@ -334,29 +279,16 @@ def cli(context):
     context.run(f"{dev}", pty=True)
 
 
-<<<<<<< HEAD
-@task
-def tests(context):
-=======
 @task(
     help={
         "lint-only": "Only run linters; unit tests will be excluded. (default: False)",
     }
 )
 def tests(context, lint_only=False):
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     """Run all tests for the specified name and Python version.
 
     Args:
         context (obj): Used to run specific commands
-<<<<<<< HEAD
-    """
-    ruff(context)
-    pylint(context)
-    yamllint(context)
-    pytest(context)
-
-=======
         lint_only (bool): If True, only run linters and skip unit tests.
     """
     # If we are not running locally, start the docker containers so we don't have to for each test
@@ -374,16 +306,10 @@ def tests(context, lint_only=False):
     if not lint_only:
         print("Running unit tests...")
         pytest(context)
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     print("All tests have passed!")
 
 
 @task
-<<<<<<< HEAD
-def docs(context):
-    """Build and serve docs locally for development."""
-    exec_cmd = "mkdocs serve -v --dev-addr=0.0.0.0:8001"
-=======
 def build_and_check_docs(context):
     """Build documentation and test the configuration."""
     command = "mkdocs build --no-directory-urls --strict"
@@ -395,7 +321,13 @@ def build_and_check_docs(context):
     if match:
         major = match.group(1)
         minor = match.group(2)
-        release_notes_file = Path(__file__).parent / "docs" / "admin" / "release_notes" / f"version_{major}.{minor}.md"
+        release_notes_file = (
+            Path(__file__).parent
+            / "docs"
+            / "admin"
+            / "release_notes"
+            / f"version_{major}.{minor}.md"
+        )
         if not release_notes_file.exists():
             print(f"Release notes file `version_{major}.{minor}.md` does not exist.")
             raise Exit(code=1)
@@ -405,7 +337,6 @@ def build_and_check_docs(context):
 def docs(context):
     """Build and serve docs locally for development."""
     exec_cmd = "mkdocs serve -v"
->>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     run_command(context, exec_cmd, port="8001:8001")
 
 
