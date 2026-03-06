@@ -1,40 +1,15 @@
 # v1.0 Release Notes
 
-!!! warning "Developer Note - Remove Me!"
-    Guiding Principles:
+This document describes all new features and changes in the `1.x` release series. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-    - Changelogs are for humans, not machines.
-    - There should be an entry for every single version.
-    - The same types of changes should be grouped.
-    - Versions and sections should be linkable.
-    - The latest version comes first.
-    - The release date of each version is displayed.
-    - Mention whether you follow Semantic Versioning.
+For a complete history of all releases, see the [full changelog](../../release_notes.md).
 
-    Types of changes:
-
-    - `Added` for new features.
-    - `Changed` for changes in existing functionality.
-    - `Deprecated` for soon-to-be removed features.
-    - `Removed` for now removed features.
-    - `Fixed` for any bug fixes.
-    - `Security` in case of vulnerabilities.
-
-
-This document describes all new features and changes in the release `1.0`. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## Release Overview
-
-- Major features or milestones
-- Achieved in this `x.y` release
-- Changes to compatibility with Nautobot and/or other apps, libraries etc.
-
-## [v1.0.0] - 2026-03-05
+## v1.0.2 - 2021-05-05
 
 ### Added
 
-### Changed
+- [#10](https://github.com/networktocode/circuit-maintenance-parser/pull/10) - Added `cli` command to run as a script.
 
-### Fixed
+## v1.0.0 - 2021-04-29
 
-- [#123](https://github.com/networktocode/circuit-maintenance-parser/issues/123) Fixed Tag filtering not working in job launch form.
+Initial release of the circuit-maintenance-parser library with support for parsing circuit maintenance notifications from Network Service Providers using the iCalendar BCOP standard format.

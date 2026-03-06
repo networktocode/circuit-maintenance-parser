@@ -21,15 +21,11 @@ from .provider import ProviderError
 )
 @click.option(
     "--provider-type",
-    type=click.Choice(
-        [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
-    ),
+    type=click.Choice([provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]),
     default="genericprovider",
     help="Provider type.",
 )
-@click.option(
-    "-v", "--verbose", count=True, help="Increase logging verbosity (repeatable)"
-)
+@click.option("-v", "--verbose", count=True, help="Increase logging verbosity (repeatable)")
 def main(provider_type, data_file, data_type, verbose):
     """Entrypoint into CLI app."""
     # Default logging level is WARNING; specifying -v/--verbose repeatedly can lower the threshold.

@@ -131,7 +131,9 @@ nav:
       - Uninstall: "admin/uninstall.md"
       - Release Notes:
           - "admin/release_notes/index.md"
+          - v2.10: "admin/release_notes/version_2.10.md"
           - v1.0: "admin/release_notes/version_1.0.md"
+          - Full Changelog: "release_notes.md"
   - Developer Guide:
       - Extending the Library: "dev/extending.md"
       - Contributing to the Library: "dev/contributing.md"

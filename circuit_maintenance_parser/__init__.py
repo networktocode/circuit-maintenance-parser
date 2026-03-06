@@ -79,12 +79,8 @@ SUPPORTED_PROVIDERS = (
 
 __version__ = metadata.version(__name__)
 
-SUPPORTED_PROVIDER_NAMES = [
-    provider.get_provider_type() for provider in SUPPORTED_PROVIDERS
-]
-SUPPORTED_ORGANIZER_EMAILS = [
-    provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS
-]
+SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
+SUPPORTED_ORGANIZER_EMAILS = [provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS]
 
 
 def init_provider(provider_type=None) -> Optional[GenericProvider]:
