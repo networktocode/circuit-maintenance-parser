@@ -96,3 +96,13 @@ Each command can be executed with `invoke <command>`. Each command also has its 
   tests             Run all tests for the specified name and Python version.
   yamllint          Run yamllint to validate formatting adheres to NTC defined YAML standards.
 ```
+
+## Local Development Environment
+
+### Requirements
+
+- Install `poetry`
+- Install dependencies and library locally: `poetry install`
+- Run CI tests locally: `invoke tests`
+
+> Note: you can run the tasks without Docker by setting the environment variable `INVOKE_PARSER_LOCAL=True`. This will run the tasks directly on your local machine instead of inside a Docker container.
