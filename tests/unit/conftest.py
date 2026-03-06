@@ -1,6 +1,7 @@
 """Used to setup fixtures to be used through tests"""
 
 import pytest
+<<<<<<< HEAD
 
 from circuit_maintenance_parser.output import Metadata
 
@@ -36,3 +37,12 @@ def circuitimpact_data():
         "circuit_id": "1234",
         "impact": "DEGRADED",
     }
+=======
+from click.testing import CliRunner
+
+
+@pytest.fixture
+def cli_runner():
+    """Provide CLI runner for Click tests."""
+    return CliRunner()
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)

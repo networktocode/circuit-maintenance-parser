@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """CLI for circuit-maintenance-parser."""
 
 import email
@@ -56,3 +57,32 @@ def main(provider_type, data_file, data_type, verbose):
         click.secho(parsed_notification.to_json(), fg="yellow")
         click.secho(f"Metadata #{idx}", fg="green", bold=True)
         click.secho(parsed_notification.metadata, fg="blue")
+=======
+"""Example cli using click."""
+
+import logging
+
+import click
+
+from circuit_maintenance_parser.log import initialize_logging
+
+# Import necessary project related things to use in CLI
+
+log = logging.getLogger(__name__)
+
+
+@click.command()
+@click.option("--test", default="Test Output", help="Test argument")
+@click.option(
+    "--log-level",
+    default="INFO",
+    type=click.Choice(["NOTSET", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]),
+    help="Logging level",
+)
+@click.option("--log-file", default=None, help="Log file to output to debug logs to.")
+def main(test, log_level, log_file):
+    """Entrypoint into CLI app."""
+    initialize_logging(level=log_level, filename=log_file)
+    log.info("Entrypoint of the CLI app.")
+    print(test)
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)

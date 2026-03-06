@@ -1,4 +1,5 @@
 [tool.poetry]
+<<<<<<< HEAD
 name = "circuit-maintenance-parser"
 version = "2.10.0"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
@@ -9,10 +10,25 @@ repository = "https://github.com/networktocode/circuit-maintenance-parser"
 readme = "README.md"
 keywords = ["parser", "circuit", "maintenance"]
 classifiers = [
+=======
+name = "circuit_maintenance_parser"
+version = "2.10.0"
+description = "Python library to parse circuit maintenances from network service providers."
+authors = ["Network to Code, LLC <opensource@networktocode.com>"]
+readme = "README.md"
+homepage = "https://circuit-maintenance-parser.readthedocs.io/"
+repository = "https://github.com/networktocode/circuit-maintenance-parser"
+documentation = "https://circuit-maintenance-parser.readthedocs.io/"
+license = "Apache-2.0"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Development Status :: 5 - Production/Stable",
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+<<<<<<< HEAD
 ]
 include = [
     "README.md",
@@ -64,6 +80,62 @@ coverage = "^7.6.12"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
+=======
+    "Programming Language :: Python :: 3.13",
+]
+include = [
+    "LICENSE",
+    "README.md",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.14"
+click = "*"
+
+[tool.poetry.group.dev.dependencies]
+coverage = "*"
+pytest = "*"
+mock = "*"
+pyyaml = "^6.0.1"
+pylint = "^3.1.0"
+yamllint = "^1.35.1"
+invoke = "^2.2.0"
+toml = "^0.10.2"
+attrs = "^23.2.0"
+towncrier = ">=23.6.0,<=24.8.0"
+ruff = "*"
+Markdown = "*"
+
+[tool.poetry.group.docs.dependencies]
+# Rendering docs to HTML
+mkdocs = "1.6.1"
+# Embedding YAML files into Markdown documents as tables
+markdown-data-tables = "1.0.0"
+# Render custom markdown for version added/changed/remove notes
+markdown-version-annotations = "1.0.1"
+# Automatically generate some files as part of mkdocs build
+mkdocs-gen-files = "0.5.0"
+# Image lightboxing in mkdocs
+mkdocs-glightbox = "0.4.0"
+# Use Jinja2 templating in docs - see settings.md
+mkdocs-macros-plugin = "1.3.7"
+# Material for mkdocs theme
+mkdocs-material = "9.6.15"
+# Handle docs redirections
+mkdocs-redirects = "1.2.2"
+# Automatically handle index pages for docs sections
+mkdocs-section-index = "0.3.10"
+# Automatic documentation from sources, for MkDocs
+mkdocstrings = "0.27.0"
+# Python-specific extension to mkdocstrings
+mkdocstrings-python = "1.13.0"
+griffe = "1.1.1"
+
+[tool.poetry.scripts]
+circuit_maintenance_parser = 'circuit_maintenance_parser.cli:main'
+
+
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 [tool.ruff]
 line-length = 120
@@ -106,6 +178,7 @@ convention = "google"
 
 
 [tool.pylint.master]
+<<<<<<< HEAD
 ignore-patterns=[".venv", "tests"]
 
 [tool.pylint.basic]
@@ -114,6 +187,14 @@ no-docstring-rgx="^(_|test_|Meta$)"
 extension-pkg-whitelist = [
     "pydantic",
 ]
+=======
+ignore=[".venv", "tests"]
+
+[tool.pylint.basic]
+# No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.
+no-docstring-rgx = "^(_|test_|Meta$)"
+
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 [tool.pylint.messages_control]
 disable = [
@@ -130,7 +211,11 @@ notes = """,
     """
 
 [build-system]
+<<<<<<< HEAD
 requires = ["poetry_core>=1.0.0"]
+=======
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
@@ -143,10 +228,22 @@ addopts = "-vv --doctest-modules -p no:warnings --ignore-glob='*mock*'"
 [tool.towncrier]
 package = "circuit-maintenance-parser"
 directory = "changes"
+<<<<<<< HEAD
 filename = "docs/release_notes.md"
 template = "towncrier_template.j2"
 start_string = "<!-- towncrier release notes start -->"
 issue_format = "[#{issue}](https://github.com/networktocode/circuit_maintenance_parser/issues/{issue})"
+=======
+filename = "docs/admin/release_notes/version_X.Y.md"
+template = "towncrier_template.j2"
+start_string = "<!-- towncrier release notes start -->"
+issue_format = "[#{issue}](https://github.com/networktocode/circuit-maintenance-parser/issues/{issue})"
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking Changes"
+showcontent = true
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 [[tool.towncrier.type]]
 directory = "security"

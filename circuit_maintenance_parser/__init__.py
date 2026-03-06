@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """Circuit-maintenance-parser init."""
 
 from typing import Optional, Type
@@ -128,3 +129,10 @@ __all__ = [
     "NonexistentProviderError",
     "Maintenance",
 ]
+=======
+"""Initialization file for library."""
+
+from importlib import metadata
+
+__version__ = metadata.version(__name__)
+>>>>>>> 11bbb00 (Cookie initially baked targeting develop by NetworkToCode Cookie Drift Manager Tool)
