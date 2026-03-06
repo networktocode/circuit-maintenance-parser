@@ -1,1 +1,1 @@
-Added Python 3.13 to supported versions and CI matrix.
+Added Python 3.13 and 3.14 to supported versions and CI matrix.
