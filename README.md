@@ -46,12 +46,16 @@ You can leverage this library in your automation framework to process circuit ma
 - **end**: timestamp that defines the ending date/time of the maintenance in GMT.
 - **stamp**: timestamp that defines the update date/time of the maintenance in GMT.
 - **organizer**: defines the contact information included in the original notification.
-- **status**: defines the overall status or confirmation for the maintenance.
+- **status**: defines the overall status or confirmation for the maintenance.¹
 - **summary**: human-readable details about this maintenance notification. May be an empty string.
-- **sequence**: a sequence number for notifications involving this maintenance window. In practice, this is generally redundant with the **stamp** field and will be defaulted to `1` for most non-iCalendar parsed notifications.
+- **sequence**: a sequence number for notifications involving this maintenance window. In practice, this is generally redundant with the **stamp** field and will be defaulted to `1` for most non-iCalendar parsed notifications.²
 - **uid**: a unique (?) identifier for a thread of related notifications. In practice, this is generally redundant with the **maintenance_id** field and will be defaulted to `0` for most non-iCalendar parsed notifications.
 
 > Please, refer to the [BCOP](https://github.com/jda/maintnote-std/blob/master/standard.md) to more details about the standardized meaning of these attributes.
+
+¹ Per the BCOP, the **status** (`X-MAINTNOTE_STATUS`) is an optional field in iCalendar notifications. However, a `Maintenance` object will always contain a `status` value; in the case where an iCalendar notification omits this field, the `status` will be set to `"NO-CHANGE"`, and it's up to the consumer of this library to determine how to appropriately handle this case. Parsers of other notification formats are responsible for setting an appropriate value for this field based on the notification contents, and may or may not include `"NO-CHANGE"` as one of the possible reported values.
+
+² Per the BCOP, the **sequence** is a mandatory field in iCalendar notifications. However, some NSPs have been seen to send notifications which, while otherwise consistent with the BCOP, omit the `SEQUENCE` field; in such cases, this library will report a sequence number of `-1`.
 
 ## Workflow
 
