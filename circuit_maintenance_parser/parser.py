@@ -210,7 +210,7 @@ class Html(Parser):
         try:
             return line.text.strip()
         except AttributeError:
-            return line.strip()
+            return line.strip().replace("\r\n", "\n").replace("\r", "\n")
 
 
 class EmailDateParser(Parser):
