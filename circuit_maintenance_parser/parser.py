@@ -208,7 +208,7 @@ class Html(Parser):
     def clean_line(line):
         """Clean up of undesired characters from Html."""
         try:
-            return line.text.strip()
+            return line.text.strip().replace("\r\n", "\n").replace("\r", "\n")
         except AttributeError:
             return line.strip().replace("\r\n", "\n").replace("\r", "\n")
 
