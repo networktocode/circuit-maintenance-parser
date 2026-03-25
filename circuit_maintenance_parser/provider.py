@@ -40,6 +40,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.summitig import HtmlParserSummitIG
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
@@ -509,6 +510,17 @@ class Sparkle(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("TISAmericaNOC@tisparkle.com")
+
+
+class SummitIG(GenericProvider):
+    """SummitIG provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[HtmlParserSummitIG, EmailDateParser]),
+        ]
+    )
+    _default_organizer = PrivateAttr("outages@summitig.net")
 
 
 class Tata(GenericProvider):
