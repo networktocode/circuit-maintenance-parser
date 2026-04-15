@@ -147,7 +147,7 @@ directory = "changes"
 filename = "docs/release_notes.md"
 template = "towncrier_template.j2"
 start_string = "<!-- towncrier release notes start -->"
-issue_format = "[#{issue}](https://github.com/networktocode/circuit_maintenance_parser/issues/{issue})"
+issue_format = "[#{issue}](https://github.com/networktocode/circuit-maintenance-parser/issues/{issue})"
 
 [[tool.towncrier.type]]
 directory = "security"
