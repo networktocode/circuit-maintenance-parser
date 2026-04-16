@@ -13,8 +13,13 @@
     ],
     "end": 1701839100,
     "maintenance_id": "PCR/123456",
+    "organizer": "noc-noreply@google.com",
+    "provider": "google",
+    "sequence": 1,
+    "stamp": 1701823205,
     "start": 1701809700,
     "status": "CONFIRMED",
-    "summary": "Network Maintenance Notification - Reference PCR/123456"
+    "summary": "Google Planned Network Maintenance Notification - Reference PCR/123456",
+    "uid": "0"
   }
 ]

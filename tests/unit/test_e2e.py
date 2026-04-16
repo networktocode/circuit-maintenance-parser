@@ -507,10 +507,46 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
         (
             Google,
             [
-                ("email", Path(dir_path, "data", "google", "google2.eml")),
+                ("email", Path(dir_path, "data", "google", "google5_scheduled.eml")),
             ],
             [
-                Path(dir_path, "data", "google", "google2_result.json"),
+                Path(dir_path, "data", "google", "google5_scheduled_result.json"),
+            ],
+        ),
+        (
+            Google,
+            [
+                ("email", Path(dir_path, "data", "google", "google6_completed.eml")),
+            ],
+            [
+                Path(dir_path, "data", "google", "google6_completed_result.json"),
+            ],
+        ),
+        (
+            Google,
+            [
+                ("email", Path(dir_path, "data", "google", "google7_canceled.eml")),
+            ],
+            [
+                Path(dir_path, "data", "google", "google7_canceled_result.json"),
+            ],
+        ),
+        (
+            Google,
+            [
+                ("email", Path(dir_path, "data", "google", "google8_scheduled_no_end_time.eml")),
+            ],
+            [
+                Path(dir_path, "data", "google", "google8_scheduled_no_end_time_result.json"),
+            ],
+        ),
+        (
+            Google,
+            [
+                ("email", Path(dir_path, "data", "google", "google9_completed_no_end_time.eml")),
+            ],
+            [
+                Path(dir_path, "data", "google", "google9_completed_no_end_time_result.json"),
             ],
         ),
         # Lumen

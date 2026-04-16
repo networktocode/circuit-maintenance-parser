@@ -60,11 +60,10 @@ class HtmlParserLumen1(Html):
                     for sibling in line.next_siblings:
                         text_sibling = sibling.text.strip() if isinstance(sibling, bs4.element.Tag) else sibling.strip()
                         if text_sibling != "":
-                            if (
-                                "This maintenance is scheduled" in text_sibling
-                                or "The scheduled maintenance work has begun" in text_sibling
-                            ):
+                            if "The scheduled maintenance work has begun" in text_sibling:
                                 data["status"] = Status("IN-PROCESS")
+                            elif "This maintenance is scheduled" in text_sibling:
+                                data["status"] = Status("CONFIRMED")
                             if "GMT" in text_sibling:
                                 stamp = parser.parse(text_sibling.split(" GMT")[0])
                                 data["stamp"] = self.dt2ts(stamp)

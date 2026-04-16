@@ -11,7 +11,7 @@
         "maintenance_id": "123456789",
         "stamp": 1628869538,
         "start": 1629950400,
-        "status": "IN-PROCESS",
+        "status": "CONFIRMED",
         "summary": "Lumen will implement scheduled maintenance as part of a large scale project to upgrade code on the IP platform. This maintenance activity is one of several maintenances taking place across various locations in multiple regions. The upgrade will mitigate an existing defect in the current software version and prevent future network outages."
     }
 ]
