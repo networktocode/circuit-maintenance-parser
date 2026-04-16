@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
-version = "2.10.0"
+version = "2.11.0"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code <opensource@networktocode.com>"]
 license = "Apache-2.0"
@@ -142,12 +142,12 @@ testpaths = [
 addopts = "-vv --doctest-modules -p no:warnings --ignore-glob='*mock*'"
 
 [tool.towncrier]
-package = "circuit-maintenance-parser"
+package = "circuit_maintenance_parser"
 directory = "changes"
 filename = "docs/release_notes.md"
 template = "towncrier_template.j2"
 start_string = "<!-- towncrier release notes start -->"
-issue_format = "[#{issue}](https://github.com/networktocode/circuit_maintenance_parser/issues/{issue})"
+issue_format = "[#{issue}](https://github.com/networktocode/circuit-maintenance-parser/issues/{issue})"
 
 [[tool.towncrier.type]]
 directory = "security"
