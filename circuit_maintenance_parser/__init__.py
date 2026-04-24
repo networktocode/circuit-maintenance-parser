@@ -1,5 +1,6 @@
 """Circuit-maintenance-parser init."""
 
+from importlib import metadata
 from typing import Optional, Type
 
 from .data import NotificationData
@@ -74,6 +75,9 @@ SUPPORTED_PROVIDERS = (
     Windstream,
     Zayo,
 )
+
+
+__version__ = metadata.version(__name__)
 
 SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
 SUPPORTED_ORGANIZER_EMAILS = [provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS]

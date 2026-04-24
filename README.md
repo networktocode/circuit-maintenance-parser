@@ -1,6 +1,23 @@
 # circuit-maintenance-parser
 
+<p align="center">
+  <a href="https://github.com/networktocode/circuit-maintenance-parser/actions"><img src="https://github.com/networktocode/circuit-maintenance-parser/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+  <a href="https://circuit-maintenance-parser.readthedocs.io/en/latest/"><img src="https://readthedocs.org/projects/circuit-maintenance-parser/badge/"></a>
+  <a href="https://pypi.org/project/circuit-maintenance-parser/"><img src="https://img.shields.io/pypi/v/circuit-maintenance-parser"></a>
+  <a href="https://pypi.org/project/circuit-maintenance-parser/"><img src="https://img.shields.io/pypi/dm/circuit-maintenance-parser"></a>
+</p>
+
 `circuit-maintenance-parser` is a Python library that parses circuit maintenance notifications from Network Service Providers (NSPs), converting heterogeneous formats to a well-defined structured format.
+
+## Documentation
+
+Full documentation for this library can be found over on the [Circuit-Maintenance-Parser Docs](https://circuit-maintenance-parser.readthedocs.io/) website:
+
+- [User Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/user/lib_overview/) - Overview, Using the Library, Getting Started.
+- [Administrator Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/admin/install/) - How to Install, Configure, Upgrade, or Uninstall the Library.
+- [Developer Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/dev/contributing/) - Extending the Library, Code Reference, Contribution Guide.
+- [Release Notes / Changelog](https://circuit-maintenance-parser.readthedocs.io/en/latest/admin/release_notes/).
+- [Frequently Asked Questions](https://circuit-maintenance-parser.readthedocs.io/en/latest/user/faq/).
 
 ## Context
 
@@ -280,158 +297,21 @@ Circuit Maintenance Notification #0
 }
 ```
 
-## How to Extend the Library?
+## Contributing
 
-Even though the library aims to include support for as many providers as possible, it's likely that not all the thousands of NSP are supported and you may need to add support for some new one. Adding a new `Provider` is quite straightforward, and in the following example we are adding support for an imaginary provider, ABCDE, that uses HTML notifications.
-
-The first step is creating a new file: `circuit_maintenance_parser/parsers/abcde.py`. This file will contain all the custom parsers needed for the provider and it will import the base classes for each parser type from `circuit_maintenance_parser.parser`. In the example, we only need to import `Html` and in the child class implement the methods required by the class, in this case `parse_html()` which will return a `dict` with all the data that this `Parser` can extract. In this case, we have to helper methods, `_parse_bs` and `_parse_tables` that implement the logic to navigate the notification data.
-
-```python
-from typing import Dict
-import bs4  # type: ignore
-from bs4.element import ResultSet  # type: ignore
-from circuit_maintenance_parser.parser import Html
-
-class HtmlParserABCDE1(Html):
-    def parse_html(self, soup: ResultSet) -> Dict:
-        data = {}
-        self._parse_bs(soup.find_all("b"), data)
-        self._parse_tables(soup.find_all("table"), data)
-        return [data]
-
-    def _parse_bs(self, btags: ResultSet, data: Dict):
-      ...
-
-    def _parse_tables(self, tables: ResultSet, data: Dict):
-      ...
-```
-
-The next step is to create the new `Provider` by defining a new class in `circuit_maintenance_parser/provider.py`. This class that inherits from `GenericProvider` only needs to define two attributes:
-
-- `_processors`: is a `list` of `Processor` instances that uses several data `Parsers`. In this example, we don't need to create a new custom `Processor` because the combined logic serves well (the most likely case), and we only need to use the newly defined `HtmlParserABCDE1` and also the generic `EmailDateParser` that extracts the email date. Also notice that you could have multiple `Processors` with different `Parsers` in this list, supporting several formats.
-- `_default_organizer`: This is a default helper to fill the `organizer` attribute in the `Maintenance` if the information is not part of the original notification.
-
-```python
-class ABCDE(GenericProvider):
-    _processors: List[GenericProcessor] = [
-        CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserABCDE1]),
-    ]
-    _default_organizer = "noc@abcde.com"
-```
-
-And expose the new `Provider` in `circuit_maintenance_parser/__init__.py`:
-
-```python
-from .provider import (
-    GenericProvider,
-    ABCDE,
-    ...
-)
-
-SUPPORTED_PROVIDERS = (
-    GenericProvider,
-    ABCDE,
-    ...
-)
-```
-
-Last, but not least, you should update the tests!
-
-- Test the new `Parser` in `tests/unit/test_parsers.py`
-- Test the new `Provider` logic in `tests/unit/test_e2e.py`
-
-... adding the necessary data samples in `tests/unit/data/abcde/`.
-
-> You can anonymize your IPv4 and IPv6 addresses using the `invoke anonymize-ips`. Keep in mind that only IPv4 addresses for documentation purposes (RFC5737: "192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24") are preserved, in case you need to check these IPs in your test output (unlikely)
-
-# Contributing
-
-Pull requests are welcomed and automatically built and tested against multiple versions of Python through Travis CI.
+Pull requests are welcomed and automatically built and tested through GitHub Actions.
 
 The project is following Network to Code software development guidelines and is leveraging:
 
-- Black, Pylint, Mypy, Bandit and pydocstyle for Python linting and formatting.
+- Ruff for Python linting and formatting.
+- Pylint for additional static analysis.
 - Unit and integration tests to ensure the library is working properly.
 
-## Local Development
-
-### Requirements
-
-- Install `poetry`
-- Install dependencies and library locally: `poetry install`
-- Run CI tests locally: `invoke tests`
-
-> Note: you can run the tasks without Docker by setting the environment variable `INVOKE_PARSER_LOCAL=True`. This will run the tasks directly on your local machine instead of inside a Docker container.
-
-### How to add a new Circuit Maintenance provider?
-
-1. Define the `Parsers`(inheriting from some of the generic `Parsers` or a new one) that will extract the data from the notification, which could contain multiple `DataParts`. The `data_type` of the `Parser` and the `DataPart` have to match. The custom `Parsers` will be placed in the `parsers` folder.
-2. Update the `unit/test_parsers.py` with the new parsers, providing some data to test and validate the extracted data.
-3. Define a new `Provider` inheriting from the `GenericProvider`, defining the `Processors` and the respective `Parsers` to be used. Maybe you can reuse some of the generic `Processors` or maybe you will need to create a custom one. If this is the case, place it in the `processors` folder.
-   - The `Provider` also supports the definition of a `_include_filter` and a `_exclude_filter` to limit the notifications that are actually processed, avoiding false positive errors for notification that are not relevant.
-4. Update the `unit/test_e2e.py` with the new provider, providing some data to test and validate the final `Maintenances` created.
-5. **Expose the new `Provider` class** updating the map `SUPPORTED_PROVIDERS` in `circuit_maintenance_parser/__init__.py` to officially expose the `Provider`.
-6. You can run some tests here to verify that your new unit tests do not cause issues with existing tests, and in general they work as expected. You can do this by running `pytest --log-cli-level=DEBUG --capture=tee-sys`. You can narrow down the tests that you want to execute with the `-k` flag. If successful, your results should look similar to the following:
-
-```
--> % pytest --log-cli-level=DEBUG --capture=tee-sys -k test_parsers
-...omitted debug logs...
-====================================================== 99 passed, 174 deselected, 17 warnings in 10.35s ======================================================
-```
-
-7. Run some final CI tests locally to ensure that there is no linting/formatting issues with your changes. You should look to get a code score of 10/10. See the example below: `invoke tests`
-
-```
--> % poetry run invoke tests
-DOCKER - Running command: ruff format --check . container: circuit_maintenance_parser:latest
-52 files already formatted
-DOCKER - Running command: ruff check --output-format concise . container: circuit_maintenance_parser:latest
-All checks passed!
-DOCKER - Running command: find . -name "*.py" | grep -vE "tests/unit" | xargs pylint container: circuit_maintenance_parser:latest
-
-------------------------------------
-Your code has been rated at 10.00/10
-```
-
-### How to debug circuit-maintenance-parser library locally
-
-1. `poetry install` updates the library and its dependencies locally.
-2. `circuit-maintenance-parser` is now built with your recent local changes.
-
-If you were to add loggers or debuggers to one of the classes:
-
-```python
-class HtmlParserZayo1(Html):
-    def parse_bs(self, btags: ResultSet, data: dict):
-        """Parse B tag."""
-        raise Exception('Debugging exception')
-```
-
-After running `poetry install`:
-
-```
--> % circuit-maintenance-parser --data-file ~/Downloads/zayo.eml --data-type email --provider-type zayo
-Provider processing failed: Failed creating Maintenance notification for Zayo.
-Details:
-- Processor CombinedProcessor from Zayo failed due to: Debugging exception
-```
-
-> Note: `invoke build` will result in an error due to no Dockerfile. This is expected as the library runs simple pytest testing without a container.
-
-```
--> % invoke build
-Building image circuit-maintenance-parser:2.2.2-py3.8
-#1 [internal] load build definition from Dockerfile
-#1 transferring dockerfile: 2B done
-#1 DONE 0.0s
-WARNING: failed to get git remote url: fatal: No remote configured to list refs from.
-ERROR: failed to solve: rpc error: code = Unknown desc = failed to solve with frontend dockerfile.v0: failed to read dockerfile: open /var/lib/docker/tmp/buildkit-mount1243547759/Dockerfile: no such file or directory
-```
+For more details, see the [Contributing Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/dev/contributing/) and [Development Environment Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/dev/dev_environment/).
 
 ## Questions
 
-For any questions or comments, please check the [FAQ](FAQ.md) first and feel free to swing by the [Network to Code slack channel](https://networktocode.slack.com/) (channel #networktocode).
-Sign up [here](http://slack.networktocode.com/)
+For any questions or comments, please check the [FAQ](https://circuit-maintenance-parser.readthedocs.io/en/latest/user/faq/) first. Feel free to also swing by the [Network to Code Slack](https://networktocode.slack.com/) (channel `#networktocode`), sign up [here](http://slack.networktocode.com/) if you don't have an account.
 
 ## License notes
 
