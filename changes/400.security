@@ -1,0 +1,1 @@
+Raised the minimum lxml version to 6.1.0 to address CVE-2026-41066 (XXE via default entity resolution in iterparse and ETCompatXMLParser).
