@@ -1,0 +1,1 @@
+Updated pytest to 9.0.3 to address CVE-2025-71176 (insecure /tmp/pytest-of-{user} tmpdir handling).
