@@ -155,7 +155,6 @@ class SubjectParserEquinix(EmailSubjectParser):
             List[Dict]: Returns the data object with summary and status fields.
         """
         data = {}
-        maintenance_id = subject.split(" - ")
         # Moving forward, maintenance ID's for Equinix are in the format of CHG[0-9]+
         maintenance_id = re.search(r'CHG\d+', subject)
         if maintenance_id:
