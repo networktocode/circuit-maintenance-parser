@@ -149,16 +149,23 @@ class SubjectParserEquinix(EmailSubjectParser):
             subject (str): subject of email
             e.g. 'COMPLETED - Remedial Emergency Maintenance - SG Metro Area Network Maintenance - 04-APR-2026 [CHG0124084]'.
             alternative format: 'Service Impacting - Remedial - Dark Fiber Activity - SG Metro Area - Network Maintenance - 03-MAY-2026 - CHG0125903'
+            older format: 'Scheduled software upgrade in metro connect platform-SG Metro Area Network Maintenance -19-OCT-2021 [5-212760022356]'
 
 
         Returns:
             List[Dict]: Returns the data object with summary and status fields.
         """
         data = {}
-        # Moving forward, maintenance ID's for Equinix are in the format of CHG[0-9]+
-        maintenance_id = re.search(r'CHG\d+', subject)
+        # Try and match mainenance_id for string between brackets, e.g.: [CHG0124084]
+        maintenance_id = re.search(r"\[([^[]*)\]$", subject)
         if maintenance_id:
-            data["maintenance_id"] = maintenance_id.group()
+            data["maintenance_id"] = maintenance_id[1]
+        else:
+            # If not matched between brackets, look for maintenace_id in format of CHG[0-9]+
+            maintenance_id = re.search(r'CHG\d+', subject)
+            if maintenance_id:
+                data["maintenance_id"] = data["maintenance_id"] = maintenance_id.group()
+
         data["summary"] = subject.strip().replace("\n", "")
         if "completed" in subject.lower():
             data["status"] = Status.COMPLETED
