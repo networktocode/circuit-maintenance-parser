@@ -40,7 +40,7 @@ class HtmlParserMegaport1(Html):
                     data["status"] = Status("CONFIRMED")
                 elif p_text.startswith("Hi "):
                     re_search = re.search("Hi (.*)", p_text)
-                    if re_search is not None:
+                    if re_search and re_search.group(1) is not None:
                         data["account"] = re_search.group(1)
                 elif p_text.startswith("Purpose of Maintenance:"):
                     # When p_text only contains "Purpose of Maintenance:"; assume that the purpose is given in the next paragraph
@@ -55,17 +55,18 @@ class HtmlParserMegaport1(Html):
                 elif p_text.startswith("Start Date and Time:"):
                     # Megaport uses different formats in their initial maintenance announcement email and reminder email. In their reminder email they split start and end date across paragraphs
                     re_search = re.search("Start Date and Time: (.*) UTC End Date and Time: (.*) UTC", p_text)
-                    if re_search:
+                    if re_search and re_search.group(1) is not None:
                         data["start"] = self.dt2ts(parser.parse(re_search.group(1)))
+                    if re_search and re_search.group(2) is not None:
                         data["end"] = self.dt2ts(parser.parse(re_search.group(2)))
                     # for their reminder email, only look for start date
                     else:
                         re_search = re.search("Start Date and Time: (.*) UTC", p_text)
-                        if re_search:
+                        if re_search and re_search.group(1) is not None:
                             data["start"] = self.dt2ts(parser.parse(re_search.group(1)))
                 elif p_text.startswith("End Date and Time:"):
                     re_search = re.search("End Date and Time: (.*) UTC", p_text)
-                    if re_search:
+                    if re_search and re_search.group(1) is not None:
                         data["end"] = self.dt2ts(parser.parse(re_search.group(1)))
 
             circuit_table = tr_elem.find("table")
