@@ -375,6 +375,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "equinix", "equinix10.eml"),
             Path(dir_path, "data", "equinix", "equinix10_result.json"),
         ),
+        (
+            SubjectParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix11_subject.eml"),
+            Path(dir_path, "data", "equinix", "equinix11_subject_result.json"),
+        ),
         # Global Cloud Xchange
         (
             HtmlParserGcx1,
