@@ -85,7 +85,7 @@ class SubjectParserRETN1(EmailSubjectParser):
     def parse_subject(self, subject: str) -> List[Dict]:
         """Parse the RETN Email subject for maintenance ID and account.
 
-        Example subject line: [RETN.NET Ticket#PW-40135152]: Planned Works Notification CID#904672
+        Example subject line: [RETN.NET Ticket#PW-40135152]: Planned Works Notification CID#133337
 
         """
         data = {}
