@@ -161,7 +161,7 @@ class SubjectParserEquinix(EmailSubjectParser):
         if maintenance_id:
             data["maintenance_id"] = maintenance_id[1]
         else:
-            # If not matched between brackets, look for maintenace_id in format of CHG[0-9]+
+            # If not matched between brackets, look for maintenance_id in format of CHG[0-9]+
             maintenance_id = re.search(r"CHG\d+", subject)
             if maintenance_id:
                 data["maintenance_id"] = maintenance_id.group()
