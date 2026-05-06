@@ -1,0 +1,16 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "X0013337A",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1776038400,
+        "maintenance_id": "CRQ000001319054",
+        "start": 1775433600,
+        "status": "RE-SCHEDULED",
+        "summary": "Rescheduled 3rd Party Planned Works to perform cable repair work in their partner's network"
+    }
+]

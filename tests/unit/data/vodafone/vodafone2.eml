@@ -1,0 +1,390 @@
+Received: from MW4PR17MB5715.namprd17.prod.outlook.com (2603:10b6:303:12e::21)
+ by CH3PR17MB6987.namprd17.prod.outlook.com with HTTPS; Wed, 25 Mar 2026
+ 14:21:30 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=HeRlsN0Qhbxe1qpzMfeaE5EX2QXsHxygS+jXvpRm2zwoKaAs5SsFDQFBrPVGnVuWqVA9PmDA07XdcnvatscvtADIp5UC7rQT3xTqrgoqQARwLCu9CPKbWclDx/vKT0zOlyH2yW8Sj/J9f3oT0BldE2p29jFdVWe+9xUbm6/aymEOFdtk1+Sm5A9oFRXF9YvmlxKuNSF8B0Ard9IgrXu8vD/pqOOkOdild4b1SNL4boC0hMEl5ongD6rIUyFESYxCHEw/efig6oYymDTacs+CDtbbkzuUyK1KFi454cGh8WAdxma3zTqgCr1KkFC9KQ/NUkVEX5WTEEvKG5vyO4kvAQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=27KlzWLbn6ptVEw/6+2sGCOeIxNt+eHmlLonN19w+HQ=;
+ b=qjQ4XJV2jb7LKwI17gy6Z/HNlT109QsABG5FOIunq/cpcpxq98Z1gROtfnLGZO9oC1CtvBI2Iw2dT56xf9rw6nzmiUVPZpHY2HycDNNwKl/TEG/bRf/ZVwc+osAf7oU2seGhUOBpQxdoR5k0RruKlJj8f9JoQWhEkK99UVqw805s+iy0U1vjdv0xVC6CasvzHqCAvNVTJZwCo2rGvjzlcuo2hALl5KRK7qjkdK3qb92PofnxY/PXuaX5WlHXteLpPmz2CCzQH6tdbyhHl76zGfh4z2l9rCZJvJ4irFm7AZHITFAe8WCtx3ORe5pOiLXOhZE4wV6hrNqA66HxmXYyvQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 2a01:111:f403:c201::1) smtp.rcpttodomain=example.com smtp.mailfrom=vodafone.com;
+ dmarc=pass (p=reject sp=none pct=100) action=none header.from=vodafone.com;
+ dkim=pass (signature was verified) header.d=vodafone.com; arc=pass (0 oda=1
+ ltdi=1 spf=[1,1,smtp.mailfrom=vodafone.com]
+ dmarc=[1,1,header.from=vodafone.com])
+Received: from YQZPR01CA0136.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:c01:87::7)
+ by MW4PR17MB5715.namprd17.prod.outlook.com (2603:10b6:303:12e::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Wed, 25 Mar
+ 2026 14:21:27 +0000
+Received: from QB1PEPF00004E0C.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:87:cafe::a3) by YQZPR01CA0136.outlook.office365.com
+ (2603:10b6:c01:87::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.32 via Frontend Transport; Wed,
+ 25 Mar 2026 14:21:27 +0000
+Authentication-Results: spf=pass (sender IP is 2a01:111:f403:c201::1)
+ smtp.mailfrom=vodafone.com; dkim=pass (signature was verified)
+ header.d=vodafone.com;dmarc=pass action=none
+ header.from=vodafone.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of vodafone.com designates
+ 2a01:111:f403:c201::1 as permitted sender) receiver=protection.outlook.com;
+ client-ip=2a01:111:f403:c201::1;
+ helo=AM0PR83CU005.outbound.protection.outlook.com; pr=C
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (2a01:111:f403:c201::1) by QB1PEPF00004E0C.mail.protection.outlook.com
+ (2603:10b6:c08::114) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.21 via Frontend Transport; Wed,
+ 25 Mar 2026 14:21:26 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QjiA7+6NG1oA/qo6HDSmAJFIJgWa2spkf3MWsqilbiPhCuTzMWq+yaG/97fkaW9X63NHm1+Q4wVaVuksSL/fp/Q+SWS+15GChyHjeOsqPEjuGzwjdAFT2WagXAoIp2pjvZBOSPq04CUMMFy/db0ZIhcgWJbeSjlo6v1XHejB+CDUi2b0CoOuyiHrDMFsrn5EuDp4lo22zYLqKxjNhsh0YhGKIuPpRe1se/yHqpVL5Eosnqdeyg9Me3bY6gs/ud2tKBhMMrLdRWJvmRwW4sQiE+0qaRtMhoX9nJ4wPgj1c1MKseowvnK4BH5Y0JSDcSxos/WiDHLQyWajH1TXT3CIYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=27KlzWLbn6ptVEw/6+2sGCOeIxNt+eHmlLonN19w+HQ=;
+ b=Y3lpe93mjdLLSYe6NA17WhdKnjEoxOjduiyNo+CaXOIiNb1u5cetgirg7uoAqLr52I358X8Rz5FKLZjoHuJJ9jyxNvJJqPjpmnss492TIxUz7jMkbirwelx1Sdl/o5uEcweKzwl1bpXJ0hiWIg9HxtUHMqltHn8tslGgwAos7YwmMGVPghoVedVH0u+E+5g9aBLKnOG1BwwamHkuj/ep+s5NMv9fDA+e7S7Jwi1eSlqKVm84R34JHBV14zMgMA6tmPZ/TMBRVnT2y/omgC/OBLnY/bAEY7Kr4SPwoAUbjIPFRKMGbpV4O3DGw3iWyBXgLQRVpFAiFhlKJaujOuf/Ug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.232.244.48) smtp.rcpttodomain=example.com smtp.mailfrom=vodafone.com;
+ dmarc=pass (p=reject sp=none pct=100) action=none header.from=vodafone.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafone.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=27KlzWLbn6ptVEw/6+2sGCOeIxNt+eHmlLonN19w+HQ=;
+ b=VPzZy/RchiX4iqQj8/mbjT0dhzGZyauj/RK2oCymQ82LkV99Vvv+JOZBaiyT9Mr1czSFDLlyoQ8zL0cuK5Yvsyj7/6VUEJx9p2xggZse3zSFEaOOhxaRJOuRqZ4IFuwHSTKxaHPADJNl/iaBv1ETZsRAej7Em/IYuwJoPD1fMkxYbGFS0G/WAlUoNnIKg53W1GJ35KVXMBCpBk2lT9MBLzYelOsry4hTtLHqWi8sMEANzmEO7ylEniH8lI9F5A7NWxxkDtoabibs7NzU/0rYN2+mLJo2TnWh0KgN2BpMbh3PlQqgiS8HBBduAY4RTt0kIzqU+/zufyugJFDfkEGvXg==
+Received: from DUZPR01CA0214.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b4::19) by AM9PR05MB8828.eurprd05.prod.outlook.com
+ (2603:10a6:20b:437::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Wed, 25 Mar
+ 2026 14:21:21 +0000
+Received: from DU2PEPF00028D06.eurprd03.prod.outlook.com
+ (2603:10a6:10:4b4:cafe::39) by DUZPR01CA0214.outlook.office365.com
+ (2603:10a6:10:4b4::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Wed,
+ 25 Mar 2026 14:21:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.232.244.48)
+ smtp.mailfrom=vodafone.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=vodafone.com;
+Received-SPF: Pass (protection.outlook.com: domain of vodafone.com designates
+ 195.232.244.48 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.232.244.48; helo=VOXE03HW.internal.vodafone.com; pr=C
+Received: from VOXE03HW.internal.vodafone.com (195.232.244.48) by
+ DU2PEPF00028D06.mail.protection.outlook.com (10.167.242.166) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19 via Frontend Transport; Wed, 25 Mar 2026 14:21:21 +0000
+Received: from appsmtp-north.internal.vodafone.com (145.230.101.21) by
+ VOXE03HW.internal.vodafone.com (195.232.244.48) with Microsoft SMTP Server id
+ 15.2.2562.37; Wed, 25 Mar 2026 15:21:20 +0100
+Received: from GBVLS-AS360 ([10.196.150.7]) by appsmtp-north.internal.vodafone.com with Microsoft SMTPSVC(10.0.17763.1697);
+	 Wed, 25 Mar 2026 15:21:16 +0100
+Date: Wed, 25 Mar 2026 14:21:15 +0000
+From: Network Change <networkchangemanagement@vodafone.com>
+Reply-To: Network Change <networkchangemanagement@vodafone.com>
+To: <maintenance@example.com>
+Message-ID: <20012384.98430.1774448475992@GBVLS-AS360>
+Subject: Rescheduled 3rd Party Planned Works CRQ000001319054  Affecting I3
+ NET BV Services
+Content-Type: multipart/alternative;
+	boundary="----=_Part_98429_663222437.1774448475992"
+Return-Path: networkchangemanagement@vodafone.com
+X-OriginalArrivalTime: 25 Mar 2026 14:21:16.0707 (UTC) FILETIME=[A481F730:01DCBC62]
+X-EOPAttributedMessage: 1
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D06:EE_|AM9PR05MB8828:EE_|QB1PEPF00004E0C:EE_|MW4PR17MB5715:EE_|CH3PR17MB6987:EE_
+X-MS-Office365-Filtering-Correlation-Id: 62a244e1-27a0-48f4-c160-08de8a79ccfc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|82310400026|1800799024|376014|36860700016|8096899003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info-Original: kufZtf73CjYfkADRJqx/eEkUwZZNIf1Q42wj7TB7wsDfmTKu138TTEm4Lt5rFSvKrdUoGcE/0oBwmdyC7lZ475G55Ax/8NLaZMXR/kULdSXymHzyMgqtHOKruhsG3ky72Z0SDF+3GQ4//6FTJZ42ZDeTNqVs1RIr7UeIEQcxL3nB8WfGbErS0LK6TPF7CraAhTlv7JiNkyr8QdoUKVFDcBjfXRAPZl+Vhr3VPlF5BjwMusPV4Pk8dUjI7mnbO8lDneXMnKh/UmBLsMJpcy7W+v/A9uqQUlPKQTmz3WotyR4axC6o8k1F1/5J+gNMUvHizvnV1jli9hKd/QgvpmYZzLkSRRzivTvnVirbNqcwDKloEjlM8/Rtm0mp4p7w2DmDkjGdqcLT+TPX7rVYyz28imgduTt9qCttLGCI/eGbVlM/wgQ7DxQz+PQH7WiQj9CuDkUM2fPJAqw8cJpoJTgF4M05DWj3lSOGkV3Sb9qUtEhI4BeNBDN6PRQtI1rsssz6vvi2zqPT/jrRxYOACU8r8LJxAbWBHqvNt6cQeRm6qSiM1MyKUbSRClmr+BOMnAJKs27uL6bKEOT1FQJkgF8azh9T7xGoPADE5faIRW86Ipxo7at/hIXGMiGmJLEh/I7RQkHwqJkVdAo01O2GEXKhtzeVBQQVP+HnPS6qr7q9ILJMwwr//TEZuLYo0C6yfegvVN7db+4/jPkD5GWS3Y5X3AFRTvBly73qZMo4+CCKbtZ1KbESd4HHP0AygSWBr+iuJ8k3t2wahds9bjbowpXtGQ==
+X-Forefront-Antispam-Report-Untrusted: CIP:195.232.244.48;CTRY:IT;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VOXE03HW.internal.vodafone.com;PTR:msedge3.vodafone.com;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(8096899003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-Original-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-Original-0: 9AZAd7vmvRv7Xhc1rvDX3fEnBgBCAXePIsKlN15WkKJ27hVQcbC2HAqFinzi6zubPmYJSBRhKo+tScWBEhA+6dZyCGZy35k09LvK5+d2OtwBy/5KVji09GBAZhytI7HONY3o/y3gaLEBSsOTfXkZXrVBltXM07ca6uiDdX0xZweobZIpjjqhQ9SvYutP5JJMghoD6t3//0EahO6y36dypiHUYDmAPbGbzna+v5R/gHjv7v2U31lFl+zepLrtt+1I/Ly/gBcoVd7JsuXXuhDM1rI+F+DIrYCPXC6TpXa1CloqtTJ/uhLWEeOGdQb1pRA5S0b5ypCGXihW9JOQ8mJaJq+Zr+jzNotLjosoonvfyhY29KnZ/LxhUkN6KVZpj2t1Y6HswT2GSdbmeKFZ9/eJLkK33pxjiGO/kDc1dmFDDAykZH3TGbjrfiLMyqHMKmdi
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR05MB8828
+X-MS-Exchange-Organization-ExpirationStartTime: 25 Mar 2026 14:21:26.7981
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 62a244e1-27a0-48f4-c160-08de8a79ccfc
+X-EOPTenantAttributedMessage: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: QB1PEPF00004E0C.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Transport-CrossTenantHeadersPromoted: QB1PEPF00004E0C.CANPRD01.PROD.OUTLOOK.COM
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource: QB1PEPF00004E0C.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 103f3f26-9e5e-4fe6-f693-08de8a79c99c
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|704161411799003|12012899012|3072899012|2092899012|35042699022|8096899003|55112099003|57112099003|13003099007|19002099003|16102099003|18002099003;
+X-Forefront-Antispam-Report: CIP:2a01:111:f403:c201::1;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR83CU005.outbound.protection.outlook.com;PTR:mail-westeuropeazlp170100001.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704161411799003)(12012899012)(3072899012)(2092899012)(35042699022)(8096899003)(55112099003)(57112099003)(13003099007)(19002099003)(16102099003)(18002099003);DIR:INB;
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 14:21:26.5595
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 62a244e1-27a0-48f4-c160-08de8a79ccfc
+X-MS-Exchange-CrossTenant-Id: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=68283f3b-8487-4c86-adb3-a5228f18b893;Ip=[195.232.244.48];Helo=[VOXE03HW.internal.vodafone.com]
+X-MS-Exchange-CrossTenant-AuthSource: QB1PEPF00004E0C.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR17MB5715
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.9879921
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9723.025
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?dFN1eUFkbmpRZS92TnVtS0xhcC9TLzF5Q0lqUzBRYnBCOEo1cGhmcWRvWGxj?=
+ =?utf-8?B?dXN5L044QytpdGxqZnlGSHk4ZmtpRENJSUZqQ1ZSWWRmMCsvc2Rnekx0bnVz?=
+ =?utf-8?B?TEs3Z2xkSGwrZTExWElLRHBVcGx4RFZ5VXI4cFZqNi9jcitaUHZuQTF4MXYy?=
+ =?utf-8?B?bjdVMEViSHNTMDY3YzJ5NElaU21qaXFzZEIwNzdTZ0xHRU5ZT0tOaXEyNHNZ?=
+ =?utf-8?B?ZUZuVlNYa3JKSzhBTGRTVW1jM2VucGo5emYrWk9oY3liU1UrWVBrZUNHN3VS?=
+ =?utf-8?B?cmx1U2hEcDV6VkI4eG84MXp0d1BUc1hxYndOZTcwWE55bmZ4aDh1aTBndFdn?=
+ =?utf-8?B?QXNkWmJHMnd2eUxiMVk1T2FuQkZHbWlHem1pVFlUYWgrenFtbENTZzdKaVRZ?=
+ =?utf-8?B?c0txOEFud0RPbDB6SDBBQlVlNFY2bDhQUFNYa0U1VW1MbWFLbHcxWGh1b05m?=
+ =?utf-8?B?MVIxcE9jSlg1YXFCTVlmY0RtTEZZMnZZaUkyaFltaEZBaE5uVVZGUjVtN0Zz?=
+ =?utf-8?B?d0VMNHZmaDFyRnZyWktpYk8xMExkSVVrNE5KSWRvaFZSYzEwb1VmOUQyZ0U4?=
+ =?utf-8?B?L2paNk9lbXFZSlptcUFTTWtvNkE5RmNTcXV5WW9Nb3NkOVZYeEM3aksvTUc5?=
+ =?utf-8?B?dHBrWTBVTFJMSFNFTzhwcE1ZOW9jZG1RSGtQOW5xMkhxbjNwOTJ2UWZieHlF?=
+ =?utf-8?B?N0o0Qm9YZUNIVjV1cU9IYmJhZVM2ZnBVZHE1TjR6N1U4dlhhcmQxeGU3dTZ6?=
+ =?utf-8?B?SE9ZVGlMbDAxbGY3ei9kcXQwS2s5WVhKTWxkSkxyd1pHa0d4M0JjeEV5c1Bt?=
+ =?utf-8?B?bGtqaVlpc3VkWStIc2cyM3F3UW1IZGY0V3lHRnlmN29wODNpQW0wVTk4VkdD?=
+ =?utf-8?B?NDhVQ29RNHd5cHVCUjBaR2JoNm1HeVRDNitoYU5uUmpUYVNjbUNNNHI5MzFG?=
+ =?utf-8?B?djRyaXIxZURnZDFyZ05FN2FvVTJkMEV6aEsxcVRZRFc4NDk3Zy9xcDJoa0Vh?=
+ =?utf-8?B?Y3VyaFIxcm14TjZhOHAzYy96ZFZrVGlHazZMODBIa0QrelNlRXhNN0dvdFYw?=
+ =?utf-8?B?b2FaT2wvSkxLZWV1cGIzK3h6WngyYWdYUlc5VklHNjV5V2lFek9FNUpZMXFq?=
+ =?utf-8?B?Y2F0V3YwS0d4SUZQWjR4REIvcFB0Y2Vxb3pmVm5TU3BOTlRWb040aW1pNDJP?=
+ =?utf-8?B?aFp5aHQ5dWlwK0JlREdOZmlnK2lONmhCcmJLOTNlc0FsU3UrSVovSUNOM3p5?=
+ =?utf-8?B?SGNnb3dSSXFXVVdMSEx2Si9pMUNDUldDMElNdFBoSFZzbmpYc3ZwV24xWUxy?=
+ =?utf-8?B?MGluVEtJWWNGdGFMMEhQWGRTYXlBM3FLS3VuT2xWaVJ3OFBKdmpEVkFtS0wv?=
+ =?utf-8?B?SVFLYTBZT24wbUx5RVdwV3FxeU1JZWpNYlJhVFlvM05BT1A2U1FkbHQ5VlB0?=
+ =?utf-8?B?MjVLaUxweWNtenZkVzZFaFRjVzIrWWVzbEU5NGZhWkRkNlBYbkE2MklBYmsw?=
+ =?utf-8?B?dGQyOEFFQXRnTGVjY3AxUTRIYjc3YTQ4RkhqNWdPcm5pV1lqRjkrbkc0MDZj?=
+ =?utf-8?B?aFRNUGFyRzNrYlNINm84WTY4RXVyK1J3K0c0aW1OWUNTaVR3ZUdIbGZoRDlK?=
+ =?utf-8?B?S2RETDBTVDBsTzd6eEZsdVlTczRqcGtFZ3V6TUEwUDh6OEFMM3hXb0l3Ykxr?=
+ =?utf-8?B?MXB4bFJvejY1V1RyU0dEVE5yTUdUNGU3Uldxd1IyVUpCUFFrZm9wVEpERll2?=
+ =?utf-8?B?ZDJsQmhTT0E1YzkzSElrVXhZR0pFWWFqQnlUdHdwbTdNV1FnRHM5M2hlajFa?=
+ =?utf-8?B?WTFqTTFBQ2NDZGRsWHl5Y0RuUzdUckFDdy9TWUl1cjFMR01ja1lVUWpFV09V?=
+ =?utf-8?B?ckdET1ovT0hsVjdlMlUxOSt5R0piT1g2WGVDM0JXS0J4YW85bk5UelRDNkkr?=
+ =?utf-8?B?eUJtdytPc0VDMkRNdnphTkxoWmR0UXNxMlBBTXRCUTlnUlgxL0hEL3NUaFFY?=
+ =?utf-8?B?bmEyNWM5amdrbHU1WkJ4M0pKdU5DTG9abnRCanRDTkNZZWEvOFZuQU5LYmhF?=
+ =?utf-8?B?RUNUMitaV1ZIYm9PRGRjd2U5b01tc0lFbFBUSy81SHpobUtoVm5senBmSkxO?=
+ =?utf-8?B?d1NqakVSOTJQbE0zdDUvcE5sdlpqTjdaS0t1ZXlZTXIrYXJXdDY1aU14NVVR?=
+ =?utf-8?B?WjA1TlhFNmRQbnVBSVluV1gzSFF5cDN1eGt3eE4yNGFKNWJJaUlXbGkxaEtj?=
+ =?utf-8?B?dEd3c1Q3SUhMUUx4OUk1dGE3NVJzbm5oUUV2RDI0ZTk5RnQxWUp3OHZvRXdu?=
+ =?utf-8?B?Z0pZOC9hdmJncjVYUGMyN3FwQUdIeDFuYm4wTGZVTDdrZGxtODA4UHJXd3Fn?=
+ =?utf-8?B?cGhKOGtuQWJ0Zk9MOWtLbE5hUWhxRUQrUUxEN1drNkJVeUlnQ3VkSysrR2pz?=
+ =?utf-8?B?cE9JUG5WcVBLVzNJNkxpZ1g3MkE2ZUdKenh4dk5IVW5nVGFLOStjbmNwVDZS?=
+ =?utf-8?B?WlArWFBmRy9Yb215eHEyQ0xlbXlwUFVwaXo5ZGpBVUdGMjZGNit2QXJqcXkx?=
+ =?utf-8?B?ay9MM3cwZUlmNnQ5OFFsNHIyR2srRC82S0duVnNOSXpmNCtTazMwWmFZOURy?=
+ =?utf-8?B?RXJSYU5hRk5SaGgxaUl1N05PcUl6UkJIaW1PSEVrdkc4V090TGsvNEtJTnBE?=
+ =?utf-8?B?NkdZR1RHUkQrdFFzNlRoYktxSDU0em55OTdhMXZYNkdtVUZJUjYra25Malph?=
+ =?utf-8?B?M3ZqRUVhVlBZVjJNQU9TQUtpOHhVR29oNjdiVTh3WC9mdkoydkNuQ0pOSHJj?=
+ =?utf-8?B?aHUrdktuNk1ldS9kS0VSNUNVUHhHUXhodzhIc015UWU2OERDemlKSEU1MXRh?=
+ =?utf-8?B?T3JEV2FlNWV6ZnFiSjZOeFVJcGwvN2IxZnArWGJNLzZBVnBTRnIweWtwZFlE?=
+ =?utf-8?B?Ymp2c1JVY1AvYWp5K1NaSFhUdXQ5emh0UUlZQ2Z0Wkg3MThvV2pxWGpUK3c3?=
+ =?utf-8?B?MDIra0FTb2o3VnAyeXl4MmhYNDdDZGI0V3R6Y2ZoUUpaSW1UWGVGdm5INlB0?=
+ =?utf-8?B?bG9wYk5odzQ5TEpST1B2a05hRUtKSUI1WjJZSGdtRks5SFc4akxITnZINmI3?=
+ =?utf-8?B?YmNVV2F0SlNYbCtzMWlUZHAvZitLWXZMZjUwVlBxVmg4TndTcnZtT3hOdVBm?=
+ =?utf-8?B?amtqd2gzVU5GNVFEdVZxVVRHWnJtbHpsWnZTYnB0ajRRVThjSHpqL0o1dDJR?=
+ =?utf-8?B?aUhXWi9FLzBhYWlFMytaTWk3M2hMdzZSNE9RckJyTmNGQjY0RHBlSzB1bWhU?=
+ =?utf-8?B?LzgwbUl1TmlGOS8zTnltL3grRldwUklVeHVxNlVBSW43MXlGVFAvSVQ5NHRN?=
+ =?utf-8?B?RXVjWHZFSWE4a2FMdkhNRTUzYXlMdkVpNzM3TFozVEtrUWpIdFgybkhndlhF?=
+ =?utf-8?B?UTJkRmM5VzRlZkJWQmFZWm5rUWIwQnIwSmhEd2t1M1F3S1hFaTVRSHFJSXpZ?=
+ =?utf-8?B?UEZxSXpKU0NUeWJtV3NTVGszY3lSSEppYStaOUVhcStOeUNjRUhmZ2o5Zm5v?=
+ =?utf-8?B?ZmRnV0NRMnBPM2haZENNU1dkYUhDSWJTcWNLbERnSjRDL29veDhzNUMxeERa?=
+ =?utf-8?Q?JdAskYdh3+4Fw8myfKfW1ZqTuJ9I+eF0i?=
+MIME-Version: 1.0
+
+------=_Part_98429_663222437.1774448475992
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Vodafone UK - Technology Operations
+Planned Maintenance Notice
+
+
+Dear ACME CORP,
+
+Please be advised that the Planned Works have been rescheduled: CRQ00000131=
+9054
+
+Detailed Description of Works:
+Rescheduled 3rd Party Planned Works to perform cable repair work in their p=
+artner's network
+
+Original Scheduled Start/End Date & Outage Window:
+07/04/2026 00:00 to 13/04/2026 00:00 UTC
+
+New Scheduled Start/End Date & Outage Window:
+06/04/2026 00:00 to 13/04/2026 00:00 UTC
+
+Impact Assessment:
+Loss of service for complete window
+
+Contingency Date:
+NA
+
+Services Impacted:
+
+Services Affected       Customer        Service Impact  Address Service Typ=
+e    Service Model   Customer Reference      Node
+X0013337A       ACME CORP       Loss of Service SAINT DENIS RUE AMBROISE CR=
+OIZ,114,RUE AMBROISE CROIZAT,SAINT DENIS,,*FR >>> SINGAPORE PIONEER WALK 15=
+,15,PIONEER WALK,SINGAPORE,*SG    160510GLA / STM64       N/A     N/A     S=
+GPSGP004 <> FRASTD003
+
+
+
+Issues regarding circuit identification, please contact your Vodafone appoi=
+nted Service Manager/ Account Manager.
+
+The information given is what is held in our records and should have been p=
+assed to you when the service went live.
+Thanks
+Vodafone UK Fixed
+Change Management Analyst
+Change Management
+Email: networkchangemanagement@vodafone.com
+
+VodafoneThree Holdings Limited is the holding company of Vodafone Limited a=
+nd Hutchison 3G UK Limited and this email is sent on behalf of Vodafone Lim=
+ited and/or Hutchison 3G UK Limited. The message and any attachment(s) are =
+confidential, may be legally privileged and are intended solely for the att=
+ention of the addressee(s).  If you are not the intended recipient or you h=
+ave received this email in error, please notify the sender immediately, del=
+ete it and any attachments from your system and do not copy, disclose or us=
+e its contents for any purpose. This transmission cannot be guaranteed to b=
+e secure or error-free. Any views or opinions expressed in this message are=
+ those of the author only.
+
+Vodafone Limited. Registered in England & Wales | Company no 01471587. Voda=
+fone House, The Connection, Newbury, Berkshire, RG14 2FN. Authorised & Regu=
+lated by the Financial Conduct Authority for consumer credit lending and in=
+surance distribution activity (Financial Services Register No. 712210).
+
+Hutchison 3G UK Limited. Registered in England and Wales | Company number 3=
+885486. Registered Office: 450 Longwater Avenue, Green Park, Reading, Berks=
+hire, RG2 6GF. Authorised & Regulated by the Financial Conduct Authority fo=
+r consumer credit (Financial Services Register No. 738979).
+
+VodafoneThree is a holding company of Vodafone Limited and Hutchison 3G UK =
+Limited, see www.VodafoneThree.com<https://www.vodafonethree.com> to learn =
+more.
+
+------=_Part_98429_663222437.1774448475992
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+</head>
+<body>
+<p class=3D"MsoNormal"><span style=3D"color: #f00000;"><strong><span style=
+=3D"font-size: 20pt;">Vodafone UK - Technology Operations</span></strong></=
+span></p>
+<p class=3D"MsoNormal"><strong><span style=3D"font-size: 15.0pt; font-famil=
+y: 'Arial','sans-serif'; color: #f00000;">Planned Maintenance Notice</span>=
+</strong></p>
+<p class=3D"MsoNormal">&nbsp;</p>
+<p style=3D"font-family: sans-serif;">Dear ACME CORP, <br>
+<br>
+Please be advised that the Planned Works have been rescheduled: CRQ00000131=
+9054 <br>
+<br>
+<b>Detailed Description of Works:</b><br>
+Rescheduled 3rd Party Planned Works to perform cable repair work in their p=
+artner's network
+<br>
+<br>
+<b>Original Scheduled Start/End Date &amp; Outage Window:</b><br>
+07/04/2026 00:00 to 13/04/2026 00:00 UTC <br>
+<br>
+<b>New Scheduled Start/End Date &amp; Outage Window:</b><br>
+06/04/2026 00:00 to 13/04/2026 00:00 UTC <br>
+<br>
+<b>Impact Assessment:</b><br>
+Loss of service for complete window <br>
+<br>
+<b>Contingency Date:</b><br>
+NA <br>
+<br>
+<b>Services Impacted:</b> <br>
+<br>
+<table border=3D"1" cellspacing=3D"0" cellpadding=3D"3" width=3D"100%" styl=
+e=3D"empty-cells: show; border-collapse: collapse; border: 1px solid black;=
+">
+<tbody>
+<tr>
+<th align=3D"left" valign=3D"top">Services Affected</th>
+<th align=3D"left" valign=3D"top">Customer</th>
+<th align=3D"left" valign=3D"top">Service Impact</th>
+<th align=3D"left" valign=3D"top">Address</th>
+<th align=3D"left" valign=3D"top">Service Type</th>
+<th align=3D"left" valign=3D"top">Service Model</th>
+<th align=3D"left" valign=3D"top">Customer Reference</th>
+<th align=3D"left" valign=3D"top">Node</th>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">X0013337A</td>
+<td align=3D"left" valign=3D"top">ACME CORP</td>
+<td align=3D"left" valign=3D"top">Loss of Service</td>
+<td align=3D"left" valign=3D"top">SAINT DENIS RUE AMBROISE CROIZ,114,RUE AM=
+BROISE CROIZAT,SAINT DENIS,,*FR &gt;&gt;&gt; SINGAPORE PIONEER WALK 15,15,P=
+IONEER WALK,SINGAPORE,*SG</td>
+<td align=3D"left" valign=3D"top">160510GLA / STM64</td>
+<td align=3D"left" valign=3D"top">N/A</td>
+<td align=3D"left" valign=3D"top">N/A</td>
+<td align=3D"left" valign=3D"top">SGPSGP004 &lt;&gt; FRASTD003</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<br>
+Issues regarding circuit identification, please contact your Vodafone appoi=
+nted Service Manager/ Account Manager.
+<br>
+<br>
+The information given is what is held in our records and should have been p=
+assed to you when the service went live.
+<br>
+Thanks <br>
+</p>
+<p class=3D"MsoNormal"><span style=3D"color: #f00000;"><strong><span style=
+=3D"font-size: 12pt;">Vodafone UK Fixed</span></strong></span></p>
+Change Management Analyst <br>
+Change Management <br>
+Email: networkchangemanagement@vodafone.com
+<p></p>
+<style>=0A=
+p{color: grey; font-family: verdana; font-size: 65%;}=0A=
+</style>
+<p>VodafoneThree Holdings Limited is the holding company of Vodafone Limite=
+d and Hutchison 3G UK Limited and this email is sent on behalf of Vodafone =
+Limited and/or Hutchison 3G UK Limited. The message and any attachment(s) a=
+re confidential, may be legally
+ privileged and are intended solely for the attention of the addressee(s).&=
+nbsp; If you are not the intended recipient or you have received this email=
+ in error, please notify the sender immediately, delete it and any attachme=
+nts from your system and do not copy,
+ disclose or use its contents for any purpose. This transmission cannot be =
+guaranteed to be secure or error-free. Any views or opinions expressed in t=
+his message are those of the author only.</p>
+<p><strong>Vodafone Limited</strong>. Registered in England &amp; Wales | C=
+ompany no 01471587. Vodafone House, The Connection, Newbury, Berkshire, RG1=
+4 2FN. Authorised &amp; Regulated by the Financial Conduct Authority for co=
+nsumer credit lending and insurance distribution
+ activity (Financial Services Register No. 712210).</p>
+<p><strong>Hutchison 3G UK Limited.</strong> Registered in England and Wale=
+s | Company number 3885486. Registered Office: 450 Longwater Avenue, Green =
+Park, Reading, Berkshire, RG2 6GF. Authorised &amp; Regulated by the Financ=
+ial Conduct Authority for consumer credit
+ (Financial Services Register No. 738979).</p>
+<p><strong>VodafoneThree</strong> is a holding company of Vodafone Limited =
+and Hutchison 3G UK Limited, see
+<a href=3D"https://www.vodafonethree.com">www.VodafoneThree.com</a> to lear=
+n more.</p>
+</body>
+</html>
+
+------=_Part_98429_663222437.1774448475992--
