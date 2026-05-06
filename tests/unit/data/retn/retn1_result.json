@@ -10,8 +10,8 @@
             "impact": "REDUCED-REDUNDANCY"
             }
         ],
-        "end": 1783288800,
-        "start": 1783267200,
+        "end": 1778191200,
+        "start": 1778169600,
         "status": "CONFIRMED",
         "summary": "Planned work on our partner's network in Guangdong. Your service will only experience 50ms switch hit."
     }

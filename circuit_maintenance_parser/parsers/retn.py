@@ -74,9 +74,9 @@ class HtmlParserRETN1(Html):
         """Parse B (bold) elements to find start and end time."""
         for bold in bolds:
             if "planned start time" in bold.text.lower():
-                data["start"] = self.dt2ts(parser.parse(bold.next_sibling.text.strip()))
+                data["start"] = self.dt2ts(parser.parse(bold.next_sibling.text.strip(), dayfirst=True))
             elif "planned end time" in bold.text.lower():
-                data["end"] = self.dt2ts(parser.parse(bold.next_sibling.text.strip()))
+                data["end"] = self.dt2ts(parser.parse(bold.next_sibling.text.strip(), dayfirst=True))
 
 
 class SubjectParserRETN1(EmailSubjectParser):

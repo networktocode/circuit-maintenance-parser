@@ -11,13 +11,13 @@
             "impact": "REDUCED-REDUNDANCY"
             }
         ],
-        "end": 1783288800,
+        "end": 1778191200,
         "maintenance_id": "PW-40135153",
         "organizer": "no-reply@retn.net",
         "provider": "retn",
         "sequence": 1,
         "stamp": 1777284917,
-        "start": 1783267200,
+        "start": 1778169600,
         "status": "CONFIRMED",
         "summary": "Planned work on our partner's network in Guangdong. Your service will only experience 50ms switch hit.",
         "uid": "0"
