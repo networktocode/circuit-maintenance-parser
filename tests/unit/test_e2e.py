@@ -39,6 +39,7 @@ from circuit_maintenance_parser.provider import (
     Sparkle,
     Tata,
     Telstra,
+    Telxius,
     Turkcell,
     Verizon,
     Windstream,
@@ -890,6 +891,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 GENERIC_ICAL_RESULT_PATH,
             ],
+        ),
+        # Telxius
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius1.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius1_result_combined.json")],
+        ),
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius2.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius2_result_combined.json")],
+        ),
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius3.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius3_result_combined.json")],
         ),
         # Turkcell
         (

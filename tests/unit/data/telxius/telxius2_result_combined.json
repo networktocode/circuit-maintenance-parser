@@ -1,0 +1,21 @@
+[
+    {
+    "account": "ACME",
+    "circuits": [
+        {
+        "circuit_id": "CRT-13337",
+        "impact": "OUTAGE"
+        }
+    ],
+    "end": 1777550400,
+    "maintenance_id": "SWX0036396",
+    "organizer": "sworks@telxius.com",
+    "provider": "telxius",
+    "sequence": 1,
+    "stamp": 1777399651,
+    "start": 1777514400,
+    "status": "CONFIRMED",
+    "summary": "An emergency maintenance work will be carried out to perform infrastructure maintenance. // Se realizar\u00e1 un trabajo de emergencia para realizar mantenimiento de infraestructura.",
+    "uid": "0"
+    }
+]

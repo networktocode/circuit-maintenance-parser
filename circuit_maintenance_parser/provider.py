@@ -42,6 +42,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
+from circuit_maintenance_parser.parsers.telxius import HtmlParserTelxius1, SubjectParserTelxius1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
@@ -541,6 +542,17 @@ class Telstra(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("gpen@team.telstra.com")
+
+
+class Telxius(GenericProvider):
+    """Telxius provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserTelxius1, HtmlParserTelxius1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("sworks@telxius.com")
 
 
 class Turkcell(GenericProvider):
