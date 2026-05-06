@@ -1,0 +1,26 @@
+[
+    {
+        "circuits": [
+            {
+            "circuit_id": "CRT-13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1777017600,
+        "maintenance_id": "SWX0036020",
+        "start": 1777006800,
+        "summary": "A Schedule work will be performed due to upgrade device. // Se realizar\u00e1 un trabajo programado con la finalidad de actualizar un equipo"
+    },
+    {
+        "circuits": [
+            {
+            "circuit_id": "CRT-13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1777104000,
+        "maintenance_id": "SWX0036020-2",
+        "start": 1777093200,
+        "summary": "A Schedule work will be performed due to upgrade device. // Se realizar\u00e1 un trabajo programado con la finalidad de actualizar un equipo"
+    }
+]

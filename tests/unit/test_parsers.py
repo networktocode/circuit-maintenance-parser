@@ -35,6 +35,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
+from circuit_maintenance_parser.parsers.telxius import HtmlParserTelxius1, SubjectParserTelxius1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
 from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
@@ -713,6 +714,27 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserTelstra2,
             Path(dir_path, "data", "telstra", "telstra8.html"),
             Path(dir_path, "data", "telstra", "telstra8_result.json"),
+        ),
+        # Telxius
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius1.eml"),
+            Path(dir_path, "data", "telxius", "telxius1_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius2.eml"),
+            Path(dir_path, "data", "telxius", "telxius2_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius3.eml"),
+            Path(dir_path, "data", "telxius", "telxius3_result.json"),
+        ),
+        (
+            SubjectParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius4_subject.eml"),
+            Path(dir_path, "data", "telxius", "telxius4_subject_result.json"),
         ),
         # Turkcell
         (
