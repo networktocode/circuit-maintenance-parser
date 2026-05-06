@@ -104,6 +104,6 @@ class SubjectParserTelxius1(EmailSubjectParser):
             elif parse_subject[1] == "COMPLETED":
                 data["status"] = Status("COMPLETED")
             else:
-                data["status"] = "CONFIRMED"
+                data["status"] = Status("CONFIRMED")
 
         return [data]
