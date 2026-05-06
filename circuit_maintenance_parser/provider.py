@@ -33,6 +33,7 @@ from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, Sub
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.openai import OpenAIParser
 from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
+from circuit_maintenance_parser.parsers.retn import HtmlParserRETN1, SubjectParserRETN1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -487,6 +488,17 @@ class PCCW(GenericProvider):
         ]
     )
     _default_organizer = "mailto:gsoc-planned-event@pccwglobal.com"
+
+
+class RETN(GenericProvider):
+    """RETN provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserRETN1, HtmlParserRETN1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("no-reply@retn.net")
 
 
 class Seaborn(GenericProvider):

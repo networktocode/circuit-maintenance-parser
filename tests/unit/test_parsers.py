@@ -26,6 +26,7 @@ from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
+from circuit_maintenance_parser.parsers.retn import HtmlParserRETN1, SubjectParserRETN1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -575,6 +576,27 @@ class NestedEncoder(json.JSONEncoder):
             SubjectParserPCCW,
             Path(dir_path, "data", "pccw", "pccw_completion2_subject.txt"),
             Path(dir_path, "data", "pccw", "pccw_completion2_subject_result.json"),
+        ),
+        # RETN
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn1.eml"),
+            Path(dir_path, "data", "retn", "retn1_result.json"),
+        ),
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn2.eml"),
+            Path(dir_path, "data", "retn", "retn2_result.json"),
+        ),
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn3.eml"),
+            Path(dir_path, "data", "retn", "retn3_result.json"),
+        ),
+        (
+            SubjectParserRETN1,
+            Path(dir_path, "data", "retn", "retn4_subject.eml"),
+            Path(dir_path, "data", "retn", "retn4_subject_result.json"),
         ),
         # Seaborn
         (

@@ -1,0 +1,14 @@
+[
+    {
+        "circuits": [
+            {
+            "circuit_id": "WL-133337-36.RO.BUH.NXD-UA.KIV.NTL-100G",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1777039200,
+        "start": 1777017600,
+        "status": "CONFIRMED",
+        "summary": "Emergency work on our partner's network. This is a backup date of EW-40134935."
+    }
+]

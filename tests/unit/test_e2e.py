@@ -19,6 +19,7 @@ from circuit_maintenance_parser.provider import (
     HGC,
     NTT,
     PCCW,
+    RETN,
     Apple,
     AquaComms,
     Arelion,
@@ -745,6 +746,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 Path(dir_path, "data", "pccw", "pccw_ical_result.json"),
             ],
+        ),
+        # RETN
+        (
+            RETN,
+            [("email", Path(dir_path, "data", "retn", "retn1.eml"))],
+            [Path(dir_path, "data", "retn", "retn1_result_combined.json")],
+        ),
+        (
+            RETN,
+            [("email", Path(dir_path, "data", "retn", "retn2.eml"))],
+            [Path(dir_path, "data", "retn", "retn2_result_combined.json")],
+        ),
+        (
+            RETN,
+            [("email", Path(dir_path, "data", "retn", "retn3.eml"))],
+            [Path(dir_path, "data", "retn", "retn3_result_combined.json")],
         ),
         # Seaborn
         (
