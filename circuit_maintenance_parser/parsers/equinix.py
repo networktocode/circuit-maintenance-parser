@@ -156,7 +156,7 @@ class SubjectParserEquinix(EmailSubjectParser):
             List[Dict]: Returns the data object with summary and status fields.
         """
         data = {}
-        # Try and match mainenance_id for string between brackets, e.g.: [CHG0124084]
+        # Try and match maintenance_id for string between brackets, e.g.: [CHG0124084]
         maintenance_id = re.search(r"\[([^[]*)\]$", subject)
         if maintenance_id:
             data["maintenance_id"] = maintenance_id[1]
