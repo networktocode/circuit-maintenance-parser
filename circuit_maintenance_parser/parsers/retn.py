@@ -34,7 +34,7 @@ class HtmlParserRETN1(Html):
             elif "New Update" in header.text:
                 data["status"] = Status("IN-PROCESS")
             elif "Rescheduling Update" in header.text:
-                data["status"] = Status("RE-SCHEDULDED")
+                data["status"] = Status("RE-SCHEDULED")
 
         if "status" not in data:
             data["status"] = Status("NO-CHANGE")
