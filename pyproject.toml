@@ -30,7 +30,7 @@ click = ">=7.1, <9.0"
 pydantic = ">=1.10.4,<3"
 icalendar = "^5.0.0"
 bs4 = "^0.0.2"
-lxml = ">=4.6.2,<7"
+lxml = ">=6.1.0,<7"
 geopy = "^2.1.0"
 timezonefinder = ">=6.0.1,<9.0.0"
 backoff = "^2.2.1"
@@ -39,6 +39,8 @@ openai = { version = ">=1.2.4", optional = true }
 openpyxl = { version = "^3.1.5", optional = true }
 pandas = { version = "^2.2.3", optional = true }
 python-dateutil = "^2.9.0"
+requests = ">=2.33.0,<3"
+urllib3 = ">=2.7.0,<3"
 
 [tool.poetry.extras]
 xlsx = [
@@ -66,6 +68,7 @@ towncrier = "^25.8.0"
 types-chardet = "^5.0.4"
 pandas-stubs = "^2.3.2"
 coverage = "^7.6.12"
+pygments = ">=2.20.0,<3"
 
 [tool.poetry.group.docs.dependencies]
 # Rendering docs to HTML

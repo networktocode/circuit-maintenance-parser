@@ -1,0 +1,1 @@
+Bumped `lxml` (>=6.1.0), `urllib3` (>=2.7.0), `requests` (>=2.33.0), and `pygments` (>=2.20.0) to address open Dependabot advisories (XXE in iterparse, sensitive-header forwarding on proxied redirects, decompression-bomb safeguard bypass, insecure temp file reuse, ReDoS).
