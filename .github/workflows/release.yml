@@ -69,7 +69,6 @@ jobs:
         with:
           user: "__token__"
           password: "${{ secrets.PYPI_API_TOKEN }}"
-        # End publish to PyPI job.
 
   slack-notify:
     needs:

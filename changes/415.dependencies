@@ -1,0 +1,1 @@
+Bumped Python dependencies (click, coverage, mkdocs-redirects, netconan, pylint, ruff) and CI action pins (actions/checkout, docker/setup-buildx-action, pypa/gh-action-pypi-publish), and added Python 3.14 to the supported version range.
