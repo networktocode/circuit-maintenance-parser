@@ -41,6 +41,11 @@ pandas = { version = "^2.2.3", optional = true }
 python-dateutil = "^2.9.0"
 requests = ">=2.33.0,<3"
 urllib3 = ">=2.7.0,<3"
+# Floor `numpy` per Python version so 3.11+ (including 3.14) pulls modern wheels while 3.10 stays on the 2.2 line.
+numpy = [
+    { version = ">=1.22.4,<2.3", python = "<3.11" },
+    { version = ">=2.3,<3", python = ">=3.11" },
+]
 
 [tool.poetry.extras]
 xlsx = [
@@ -86,7 +91,7 @@ mkdocs-macros-plugin = "1.3.7"
 # Material for mkdocs theme
 mkdocs-material = "9.6.15"
 # Handle docs redirections
-mkdocs-redirects = "1.2.3"
+mkdocs-redirects = "1.2.2"
 # Automatically handle index pages for docs sections
 mkdocs-section-index = "0.3.10"
 # Automatic documentation from sources, for MkDocs
