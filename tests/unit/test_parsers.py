@@ -13,6 +13,7 @@ from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, S
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
 from circuit_maintenance_parser.parsers.aws import HtmlParserAWS1, SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
+from circuit_maintenance_parser.parsers.cirion import HtmlParserCirion1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
@@ -245,6 +246,17 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserBSO1,
             Path(dir_path, "data", "bso", "bso7_backup_ts.eml"),
             Path(dir_path, "data", "bso", "bso7_result.json"),
+        ),
+        # Cirion
+        (
+            HtmlParserCirion1,
+            Path(dir_path, "data", "cirion", "cirion1.eml"),
+            Path(dir_path, "data", "cirion", "cirion1_result.json"),
+        ),
+        (
+            HtmlParserCirion1,
+            Path(dir_path, "data", "cirion", "cirion2.eml"),
+            Path(dir_path, "data", "cirion", "cirion2_result.json"),
         ),
         # Cogent
         (

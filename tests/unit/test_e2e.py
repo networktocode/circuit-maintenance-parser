@@ -22,6 +22,7 @@ from circuit_maintenance_parser.provider import (
     Apple,
     AquaComms,
     Arelion,
+    Cirion,
     Cogent,
     Colt,
     CrownCastle,
@@ -245,6 +246,17 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "bso", "bso7_result.json"),
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
+        ),
+        # Cirion
+        (
+            Cirion,
+            [("email", Path(dir_path, "data", "cirion", "cirion1.eml"))],
+            [Path(dir_path, "data", "cirion", "cirion1_result_combined.json")],
+        ),
+        (
+            Cirion,
+            [("email", Path(dir_path, "data", "cirion", "cirion2.eml"))],
+            [Path(dir_path, "data", "cirion", "cirion2_result_combined.json")],
         ),
         # Cogent
         (

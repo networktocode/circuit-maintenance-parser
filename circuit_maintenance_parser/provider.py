@@ -19,6 +19,7 @@ from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, S
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
 from circuit_maintenance_parser.parsers.aws import HtmlParserAWS1, SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
+from circuit_maintenance_parser.parsers.cirion import HtmlParserCirion1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1, TextParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
@@ -302,6 +303,17 @@ class BSO(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("network-servicedesk@bso.co")
+
+
+class Cirion(GenericProvider):
+    """Cirion provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserCirion1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("customer-report@ciriontechnologies.com")
 
 
 class Cogent(GenericProvider):
