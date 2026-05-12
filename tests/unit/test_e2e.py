@@ -43,6 +43,7 @@ from circuit_maintenance_parser.provider import (
     Telxius,
     Turkcell,
     Verizon,
+    Vodafone,
     Windstream,
     Zayo,
 )
@@ -1008,6 +1009,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "verizon", "verizon5_result.json"),
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
+        ),
+        # Vodafone
+        (
+            Vodafone,
+            [("email", Path(dir_path, "data", "vodafone", "vodafone1.eml"))],
+            [Path(dir_path, "data", "vodafone", "vodafone1_result_combined.json")],
+        ),
+        (
+            Vodafone,
+            [("email", Path(dir_path, "data", "vodafone", "vodafone2.eml"))],
+            [Path(dir_path, "data", "vodafone", "vodafone2_result_combined.json")],
+        ),
+        (
+            Vodafone,
+            [("email", Path(dir_path, "data", "vodafone", "vodafone3.eml"))],
+            [Path(dir_path, "data", "vodafone", "vodafone3_result_combined.json")],
         ),
         # Windstream
         (
