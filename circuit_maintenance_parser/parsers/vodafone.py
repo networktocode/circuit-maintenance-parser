@@ -2,12 +2,13 @@
 
 import logging
 import re
-from typing import Dict, List
+from typing import Any, Dict, List
 
+from bs4 import BeautifulSoup
 from bs4.element import ResultSet  # type: ignore
 from dateutil import parser
 
-from circuit_maintenance_parser.parser import Html, Impact, Status
+from circuit_maintenance_parser.parser import EmailSubjectParser, Html, Impact, Status
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +16,9 @@ logger = logging.getLogger(__name__)
 class HtmlParserVodafone1(Html):
     """Notifications Parser for Vodafone notifications."""
 
-    def parse_html(self, soup: ResultSet) -> List[Dict]:
+    def parse_html(self, soup: BeautifulSoup) -> List[Dict]:
         """Execute parsing."""
-        data: Dict[str] = {"circuits": []}
+        data: Dict[str, Any] = {"circuits": []}
         self.parse_crq(soup, data)
         self.parse_tables(soup.find_all("table"), data)
         self.parse_bold(soup.find_all("b"), data)
@@ -46,11 +47,11 @@ class HtmlParserVodafone1(Html):
                     elif "Services Affected" in col_mapping and col == col_mapping["Services Affected"]:
                         cid = td_elem.text.strip()
                     elif "Service Impact" in col_mapping and col == col_mapping["Service Impact"]:
-                        # not sure if other impact types exist, can be expanded of need-be
+                        # not sure if other impact types exist, can be expanded of need-be. Default to DEGRADED.
                         if "loss of service" in td_elem.text.lower():
                             impact = Impact("OUTAGE")
                         else:
-                            impact = Impact("OUTAGE")
+                            impact = Impact("DEGRADED")
                     col += 1
 
                 # at the end of the table row, add circuits to list, if defined
@@ -66,10 +67,14 @@ class HtmlParserVodafone1(Html):
         """
         window = 0
         for bold in bolds:
+            text_lower = bold.text.lower()
+
             # find start/end date/time
-            if (
-                data["status"] == Status("RE-SCHEDULED") and "new scheduled start" in bold.text.lower()
-            ) or "scheduled start" in bold.text.lower():
+            # in case the window is re-schedulded, the original and new window are listed; ignore original window
+            if "original scheduled start" in text_lower:
+                continue
+
+            if "scheduled start" in text_lower:
                 window_next = bold.next_sibling
                 while window_next:
                     text = window_next.text.strip()
@@ -77,8 +82,9 @@ class HtmlParserVodafone1(Html):
                         window = text
                         break
                     window_next = window_next.next_sibling
+
             # find summary
-            elif "description" in bold.text.lower():
+            if "description" in text_lower:
                 description_next = bold.next_sibling
                 while description_next:
                     text = description_next.text.strip()
@@ -95,22 +101,33 @@ class HtmlParserVodafone1(Html):
     def parse_crq(self, soup: ResultSet, data: Dict):
         """Vodafone maintenance_id's are in the format of CRQ[0-9] with 12 digits.
 
-        Before mentioning the CRQ, the status of the maintenance can be derived, for example:
-
         Please be advised that the Planned Works have been Completed: CRQ000001312927
         """
         text = soup.get_text(separator=" ")
-        match = re.search(r"\b(.*)[\s:]+(CRQ\d{12})\b", text)
+        match = re.search(r"\bCRQ\d{12}\b", text)
         if match:
-            data["maintenance_id"] = match.group(2)
+            data.setdefault("maintenance_id", match.group(0))
 
-            # derive status
-            if "postponed" in match.group(1).lower():
-                data["status"] = Status("CANCELLED")
-            elif "completed" in match.group(1).lower():
-                data["status"] = Status("COMPLETED")
-            elif "rescheduled" in match.group(1).lower():
-                data["status"] = Status("RE-SCHEDULED")
-            # default status
-            else:
-                data["status"] = Status("CONFIRMED")
+
+class SubjectParserVodafone1(EmailSubjectParser):
+    """Parse status and (when present) the CRQ from the subject line."""
+
+    def parse_subject(self, subject: str) -> List[Dict]:
+        """Parse the email subject."""
+        data: Dict = {}
+        subject_lower = subject.lower()
+
+        if "completed" in subject_lower:
+            data["status"] = Status("COMPLETED")
+        elif "rescheduled" in subject_lower:
+            data["status"] = Status("RE-SCHEDULED")
+        elif "postponed" in subject_lower or "cancelled" in subject_lower:
+            data["status"] = Status("CANCELLED")
+        else:
+            data["status"] = Status("CONFIRMED")
+
+        crq_match = re.search(r"\bCRQ\d{12}\b", subject)
+        if crq_match:
+            data["maintenance_id"] = crq_match.group(0)
+
+        return [data]

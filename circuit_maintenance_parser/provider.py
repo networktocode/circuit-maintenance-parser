@@ -44,7 +44,7 @@ from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParse
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
-from circuit_maintenance_parser.parsers.vodafone import HtmlParserVodafone1
+from circuit_maintenance_parser.parsers.vodafone import HtmlParserVodafone1, SubjectParserVodafone1
 from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 from circuit_maintenance_parser.processor import CombinedProcessor, GenericProcessor, SimpleProcessor
@@ -571,7 +571,7 @@ class Vodafone(GenericProvider):
 
     _processors: List[GenericProcessor] = PrivateAttr(
         [
-            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserVodafone1]),
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserVodafone1, HtmlParserVodafone1]),
         ]
     )
     _default_organizer = PrivateAttr("networkchangemanagement@vodafone.com")
