@@ -34,6 +34,7 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.summitig import HtmlParserSummitIG
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
 from circuit_maintenance_parser.parsers.telxius import HtmlParserTelxius1, SubjectParserTelxius1
@@ -635,6 +636,12 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserSparkle1,
             Path(dir_path, "data", "sparkle", "sparkle1.eml"),
             Path(dir_path, "data", "sparkle", "sparkle1_html_parser_result.json"),
+        ),
+        # SummitIG
+        (
+            HtmlParserSummitIG,
+            Path(dir_path, "data", "summitig", "summitig.eml"),
+            Path(dir_path, "data", "summitig", "summitig_html_parser_result.json"),
         ),
         # Tata
         (

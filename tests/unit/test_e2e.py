@@ -38,6 +38,7 @@ from circuit_maintenance_parser.provider import (
     PacketFabric,
     Seaborn,
     Sparkle,
+    SummitIG,
     Tata,
     Telstra,
     Telxius,
@@ -805,6 +806,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "sparkle", "sparkle1_result.json"),
+            ],
+        ),
+        # SummitIG
+        (
+            SummitIG,
+            [
+                ("email", Path(dir_path, "data", "summitig", "summitig.eml")),
+            ],
+            [
+                Path(dir_path, "data", "summitig", "summitig_result.json"),
             ],
         ),
         # Tata
