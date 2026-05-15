@@ -23,6 +23,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, Subject
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
+from circuit_maintenance_parser.parsers.flag import HtmlParserFlag1, SubjectParserFlag1
 from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -356,6 +357,17 @@ class EUNetworks(GenericProvider):
     """EUNetworks provider custom class."""
 
     _default_organizer = "noc@eunetworks.com"
+
+
+class FLAG(GenericProvider):
+    """FLAG provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserFlag1, HtmlParserFlag1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("change@flagtel.com")
 
 
 class GlobalCloudXchange(GenericProvider):

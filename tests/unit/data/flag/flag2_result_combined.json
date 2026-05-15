@@ -1,0 +1,21 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "RGWLS13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1776420000,
+        "maintenance_id": "PWMR2026040300190",
+        "organizer": "change@flagtel.com",
+        "provider": "flag",
+        "sequence": 1,
+        "stamp": 1776415514,
+        "start": 1776398400,
+        "status": "COMPLETED",
+        "summary": "Our provider has completed planned activity of network maintenance at Westport, Connecticut",
+        "uid": "0"
+    }
+]

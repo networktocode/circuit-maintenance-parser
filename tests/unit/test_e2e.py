@@ -15,6 +15,7 @@ from circuit_maintenance_parser.provider import (
     ATT,
     AWS,
     BSO,
+    FLAG,
     GTT,
     HGC,
     NTT,
@@ -491,6 +492,34 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [
                 Path(dir_path, "data", "hgc", "hgc1_result.json"),
                 Path(dir_path, "data", "hgc", "hgc2_result.json"),
+            ],
+        ),
+        # FLAG
+        (
+            FLAG,
+            [
+                ("email", Path(dir_path, "data", "flag", "flag1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "flag", "flag1_result_combined.json"),
+            ],
+        ),
+        (
+            FLAG,
+            [
+                ("email", Path(dir_path, "data", "flag", "flag2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "flag", "flag2_result_combined.json"),
+            ],
+        ),
+        (
+            FLAG,
+            [
+                ("email", Path(dir_path, "data", "flag", "flag3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "flag", "flag3_result_combined.json"),
             ],
         ),
         # GlobalCloudXchange
