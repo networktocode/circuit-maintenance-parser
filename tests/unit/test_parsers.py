@@ -27,6 +27,7 @@ from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
+from circuit_maintenance_parser.parsers.retn import HtmlParserRETN1, SubjectParserRETN1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -34,10 +35,13 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.summitig import HtmlParserSummitIG
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
+from circuit_maintenance_parser.parsers.telxius import HtmlParserTelxius1, SubjectParserTelxius1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.vodafone import HtmlParserVodafone1, SubjectParserVodafone1
 from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
@@ -607,6 +611,27 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "pccw", "pccw_completion2_subject.txt"),
             Path(dir_path, "data", "pccw", "pccw_completion2_subject_result.json"),
         ),
+        # RETN
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn1.eml"),
+            Path(dir_path, "data", "retn", "retn1_result.json"),
+        ),
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn2.eml"),
+            Path(dir_path, "data", "retn", "retn2_result.json"),
+        ),
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn3.eml"),
+            Path(dir_path, "data", "retn", "retn3_result.json"),
+        ),
+        (
+            SubjectParserRETN1,
+            Path(dir_path, "data", "retn", "retn4_subject.eml"),
+            Path(dir_path, "data", "retn", "retn4_subject_result.json"),
+        ),
         # Seaborn
         (
             HtmlParserSeaborn1,
@@ -633,6 +658,12 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserSparkle1,
             Path(dir_path, "data", "sparkle", "sparkle1.eml"),
             Path(dir_path, "data", "sparkle", "sparkle1_html_parser_result.json"),
+        ),
+        # SummitIG
+        (
+            HtmlParserSummitIG,
+            Path(dir_path, "data", "summitig", "summitig.eml"),
+            Path(dir_path, "data", "summitig", "summitig_html_parser_result.json"),
         ),
         # Tata
         (
@@ -746,6 +777,27 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "telstra", "telstra8.html"),
             Path(dir_path, "data", "telstra", "telstra8_result.json"),
         ),
+        # Telxius
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius1.eml"),
+            Path(dir_path, "data", "telxius", "telxius1_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius2.eml"),
+            Path(dir_path, "data", "telxius", "telxius2_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius3.eml"),
+            Path(dir_path, "data", "telxius", "telxius3_result.json"),
+        ),
+        (
+            SubjectParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius4_subject.eml"),
+            Path(dir_path, "data", "telxius", "telxius4_subject_result.json"),
+        ),
         # Turkcell
         (
             HtmlParserTurkcell1,
@@ -782,6 +834,27 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserVerizon1,
             Path(dir_path, "data", "verizon", "verizon5.html"),
             Path(dir_path, "data", "verizon", "verizon5_result.json"),
+        ),
+        # Vodafone
+        (
+            HtmlParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone1.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone1_result.json"),
+        ),
+        (
+            HtmlParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone2.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone2_result.json"),
+        ),
+        (
+            HtmlParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone3.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone3_result.json"),
+        ),
+        (
+            SubjectParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone4_subject.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone4_subject_result.json"),
         ),
         # Windstream
         (

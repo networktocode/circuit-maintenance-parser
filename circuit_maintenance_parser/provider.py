@@ -34,6 +34,7 @@ from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, Sub
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.openai import OpenAIParser
 from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
+from circuit_maintenance_parser.parsers.retn import HtmlParserRETN1, SubjectParserRETN1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -41,10 +42,13 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.summitig import HtmlParserSummitIG
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
+from circuit_maintenance_parser.parsers.telxius import HtmlParserTelxius1, SubjectParserTelxius1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.vodafone import HtmlParserVodafone1, SubjectParserVodafone1
 from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 from circuit_maintenance_parser.processor import CombinedProcessor, GenericProcessor, SimpleProcessor
@@ -500,6 +504,17 @@ class PCCW(GenericProvider):
     _default_organizer = "mailto:gsoc-planned-event@pccwglobal.com"
 
 
+class RETN(GenericProvider):
+    """RETN provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserRETN1, HtmlParserRETN1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("no-reply@retn.net")
+
+
 class Seaborn(GenericProvider):
     """Seaborn provider custom class."""
 
@@ -521,6 +536,17 @@ class Sparkle(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("TISAmericaNOC@tisparkle.com")
+
+
+class SummitIG(GenericProvider):
+    """SummitIG provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[HtmlParserSummitIG, EmailDateParser]),
+        ]
+    )
+    _default_organizer = PrivateAttr("outages@summitig.net")
 
 
 class Tata(GenericProvider):
@@ -555,6 +581,17 @@ class Telstra(GenericProvider):
     _default_organizer = PrivateAttr("gpen@team.telstra.com")
 
 
+class Telxius(GenericProvider):
+    """Telxius provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserTelxius1, HtmlParserTelxius1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("sworks@telxius.com")
+
+
 class Turkcell(GenericProvider):
     """Turkcell provider custom class."""
 
@@ -575,6 +612,17 @@ class Verizon(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("NO-REPLY-sched-maint@EMEA.verizonbusiness.com")
+
+
+class Vodafone(GenericProvider):
+    """Vodafone provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, SubjectParserVodafone1, HtmlParserVodafone1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("networkchangemanagement@vodafone.com")
 
 
 class Windstream(GenericProvider):

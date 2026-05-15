@@ -1,0 +1,1 @@
+Small fixes for Megaport parser: account for initial announcements and reminder announcements. Fix start and end end data for both initial and reminder announcements. Fix "purpose of maintenance" section.
