@@ -1,0 +1,459 @@
+Received: from CH3PR17MB6243.namprd17.prod.outlook.com (2603:10b6:610:151::14)
+ by CH3PR17MB6987.namprd17.prod.outlook.com with HTTPS; Wed, 22 Apr 2026
+ 00:07:13 +0000
+Received: from YQBPR0101CA0197.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:67::34) by CH3PR17MB6243.namprd17.prod.outlook.com
+ (2603:10b6:610:151::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.18; Wed, 22 Apr
+ 2026 00:07:10 +0000
+Received: from QB1PEPF00004E08.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:67:cafe::21) by YQBPR0101CA0197.outlook.office365.com
+ (2603:10b6:c01:67::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Wed,
+ 22 Apr 2026 00:07:10 +0000
+Authentication-Results: spf=pass (sender IP is 134.128.101.179)
+ smtp.mailfrom=em2485.equinix.com; dkim=pass (signature was verified)
+ header.d=equinix.com;dmarc=pass action=none
+ header.from=equinix.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of em2485.equinix.com
+ designates 134.128.101.179 as permitted sender)
+ receiver=protection.outlook.com; client-ip=134.128.101.179;
+ helo=o3.ptr1247.equinix-gict.cn; pr=C
+Received: from o3.ptr1247.equinix-gict.cn (134.128.101.179) by
+ QB1PEPF00004E08.mail.protection.outlook.com (10.167.240.22) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
+ via Frontend Transport; Wed, 22 Apr 2026 00:07:09 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=equinix.com;
+	h=content-transfer-encoding:content-type:date:from:mime-version:subject:
+	cc:content-type:date:from:subject:to;
+	s=esh; t=1776816428; bh=WvPIrmMMLfK31acGZodnAU9nVIA7kahaP/TrromUr5w=;
+	b=uleLyomyeozy/7c0L6vQ8VtzPy6EJqGueRJlNZQg8vuNJChQk/Y4BlrFVt8edb3i8GWF
+	kRw9tNcgh82v1V3UmaZtQF+ogd+PvQdYWw+X3xMRVWrK9RtvZ/1/u42P+LFpPLkvlNH0x+
+	6u6kvp5XJhEjfCkF8ygW0YlqNZ2v4OnOhjmwB+XCD+QfYfl5qfouUWrXgS7Qb7VdY31JXk
+	Q0uJ1Njn3ReGjbAzPK1TutLlprvvwpnhMgEZBUlmHa2VpRvq9qGPcbXVYWfmTtWmRWCKG2
+	fdYUEXmuaf0kuw+md25RJ8EPAPKhSvVBSG91RiUPJ0D8DGau5/SkFvdFYYPVFgpQ==
+Received: by recvd-6c48bdc6c8-f6c5d with SMTP id recvd-6c48bdc6c8-f6c5d-1-69E8112B-82
+	2026-04-22 00:07:07.721984989 +0000 UTC m=+8572.496221357
+Received: from Mzc4ODY2NDU (unknown)
+	by geopod-ismtpd-17 (SG) with HTTP
+	id f1Wg9qERSRGqwEeFT8rPrA
+	Wed, 22 Apr 2026 00:07:07.674 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Date: Wed, 22 Apr 2026 00:07:08 +0000 (UTC)
+From: Equinix Network Maintenance <no-reply@equinix.com>
+Message-ID: <f1Wg9qERSRGqwEeFT8rPrA@geopod-ismtpd-17>
+Subject: Service Impacting - Remedial - Dark Fiber Activity - SG Metro Area -
+ Network Maintenance - 03-MAY-2026 - CHG0125903
+X-SG-EID: =?us-ascii?Q?u001=2ErpQ2midUyc=2FTl0sLCg1bd5CUZu2SKQ5BZLxfBwLrlJ8zluX8MFgCqwVOC?=
+ =?us-ascii?Q?+W0M6pz5PWgoVP3y7YzRO7ay=2Fbd3z7=2FTAoPh6Cb?=
+ =?us-ascii?Q?v6wBXPcW10LXWdyiJURFC4DzGGkA8DsfaSBYcVI?=
+ =?us-ascii?Q?9MQVPjl7vYN7JkkJeo5p3+NwZgai=2FYHqHHdS=2FMN?=
+ =?us-ascii?Q?NZgi2yCF2hydK1nytoi1aTP=2F78avo4XHZaGXjg2?=
+ =?us-ascii?Q?+OyxvjAn4UsmcIkrSmqlah9qHB5QCs4Sv4dw6eo?= =?us-ascii?Q?EJVu?=
+X-SG-ID: =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BpTL9BgbK5wfSJMJGMsmprDRZ7x=2FG5GIR3o2T?=
+ =?us-ascii?Q?+YSJ2HbrLdJiOYPyudJEfMACrhd91kshU9uGuMa?=
+ =?us-ascii?Q?jZTAbLKf3ddAOo+rmTqnq1XhvcEpCZacwk9k2Kb?=
+ =?us-ascii?Q?cwSwVn=2FscKBv7wQ=3D=3D?=
+BCC: <maintenance@example.com>
+X-Entity-ID: u001.a2Ja/brr/cDB1G983aenFQ==
+Return-Path: bounces+37886645-3e88-maintenance=example.com@em2485.equinix.com
+X-MS-Exchange-Organization-ExpirationStartTime: 22 Apr 2026 00:07:10.4093
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: c99f4fc2-34f4-4d5b-7fee-08dea003195d
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: QB1PEPF00004E08:EE_|CH3PR17MB6243:EE_|CH3PR17MB6987:EE_
+X-MS-Exchange-Organization-AuthSource: QB1PEPF00004E08.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: c99f4fc2-34f4-4d5b-7fee-08dea003195d
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:3;ARA:13230040|5062899012|4092899012|3092899012|3072899012|2092899012|1032899013|13012899012|13102899012|3109299003|29132699027|12012899012|7049299003|7149299003|69100299015|8096899003|2066899003|16102099003|19002099003|57112099003|55112099003;
+X-Forefront-Antispam-Report: CIP:134.128.101.179;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:o3.ptr1247.equinix-gict.cn;PTR:o3.ptr1247.equinix-gict.cn;CAT:NONE;SFS:(13230040)(5062899012)(4092899012)(3092899012)(3072899012)(2092899012)(1032899013)(13012899012)(13102899012)(3109299003)(29132699027)(12012899012)(7049299003)(7149299003)(69100299015)(8096899003)(2066899003)(16102099003)(19002099003)(57112099003)(55112099003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 00:07:09.9455
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c99f4fc2-34f4-4d5b-7fee-08dea003195d
+X-MS-Exchange-CrossTenant-Id: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1
+X-MS-Exchange-CrossTenant-AuthSource: QB1PEPF00004E08.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR17MB6243
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.9567238
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9846.012
+X-Microsoft-Antispam-Mailbox-Delivery:
+	wl:1;pcwl:1;ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(811242)(255002)(410001)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?MkRKWUR1cml1QW4xeEpwZ2FFenF4RlhXNlBJWkl5ZFdGSzR4UUtxWFR6dHF3?=
+ =?utf-8?B?K0o1aGpYRlg1UlNWdnQyZVd3a3RWYnBOdmhTSGd4TmZVWFRlZ3RBZi9SdkxK?=
+ =?utf-8?B?QWkxckdVOXE0U3cxei96YzFhbDJHVDZYeU41RkVEWUljR3FuRUpsZ3RHTDhi?=
+ =?utf-8?B?YloyaFFRNmhwSmRwVThCN3dHS1oraC9iVFNWR2hJYnBHODdGc3JzVi9CZ3Q1?=
+ =?utf-8?B?Z1Z4aENzREZ1bk9TL3VNcXlUQ2Z6bjRWbU43ZXV3TGJZdHRWV0x4LzRtWUNz?=
+ =?utf-8?B?d0hZTytWSkRwZ05UR0trdlhYMFQrbDNvWFVWeGJQUUpiSGlTdDc0TkIyY3lZ?=
+ =?utf-8?B?a2xyT2x6WVFvWlpRbVBMVjJzeGozSVhVSnJpZXdqYng3dDZVYkFFY2xYUFFW?=
+ =?utf-8?B?RlcwR1Z1NER2anRMa1gvcjFVNUdKK0lPM3UvU29yU2w3WFJuTk4vaEhLOXR3?=
+ =?utf-8?B?Nlh1a3ZGdzR4ZE1zL2M5ZDdPOThHVlgzcTBJcEpnOVRrQWY4b29yQzBwU0dO?=
+ =?utf-8?B?cTI0RzJFTjNja2I5NURyM1J4V05hWVp5djBLcUVzb01Ya2Q2MGhHM1gyTWRF?=
+ =?utf-8?B?cmZLcHVha1Zqd0FFQ3Q2a29uMXFFRm5UaitOY3g3dVV3WlZTOWJKQWZaTmYv?=
+ =?utf-8?B?ZVBFbTNicWxzZFFZOHN1MVluNnFHQnJnU1Q5R09yUit1dHhHMnNHU21IYTdu?=
+ =?utf-8?B?ODhHRGVHcXlLQWxuTWtwYTN2RDRqT1JtUW9LbFgydjErTXp1TkQ3RmxtNTVF?=
+ =?utf-8?B?RTJZMWl5MEtqUTdPRDJwNVFOeTRwSW82QXlXa0VMOW80bUU2UXp5WG54NTlS?=
+ =?utf-8?B?SUtvYWxBcCtJS3FubnV4YzIzc2ZZZG1uRzZCaGpYVndmREcrRU02aGY3bDhJ?=
+ =?utf-8?B?Z21aR0JsVWQ5bnZHZVZPemRmVFMyZXA3OXlDUXM4Q1JsK2ZYS28vWWZmekNC?=
+ =?utf-8?B?aVJnM25CSE4wU1lyMkc3dzJXUjlxdURwcnoxclBDdFcraDQzWFRRN1hWRXI1?=
+ =?utf-8?B?THZza3AzTGtCZHJhQVA3Z1ZzVkZkd2w3cEJNcm8yVGg1NWtRdW1YaGpWYmtW?=
+ =?utf-8?B?Y1ZUbDY1QTNQVlVndUJGVmNWVVNIUVl2OU01SVFxUm15d1cwRzRBcXhhQXNL?=
+ =?utf-8?B?NTFVU0l5QVFENlJJU0pkY3NNbCtmVkF2TmpjaUFIWUlpTk5TNU9YdmJCalhJ?=
+ =?utf-8?B?Q3U2Vk9XZjhwQVUzcVk2Q0d5ejc4WnM5bWNqWVI5a2VYZHBpT0FNQVg5Rlo1?=
+ =?utf-8?B?cDd2SjBUaUZ2Y2h1VURnMDYxYVhEL0xwVElPTDAySDBjRHNZNTFBZFNkSmtP?=
+ =?utf-8?B?VGVsT1FGN3VITmhlUlpWeFc5UVZGWXI3R05tS2p5bTNXdmFSM0pVUXpOM2Jv?=
+ =?utf-8?B?MTdzQnVLSVNyYnF1VlQ0TGwzUElIbW5PemlkUGZoUWJnVmkzUzlXbU1lSjE5?=
+ =?utf-8?B?MlJSNm01MXhscWx6NlhEK3hrcitYL0FkMDBURDRTNGdMeUpQbXcrNEtBbjFz?=
+ =?utf-8?B?MlJoWUdWNWpZREFpdUphVVZGc09ndnFWYTVGSHRHRXphUjFDVFBxR3VPKzZQ?=
+ =?utf-8?B?S1lFamJQdDlLd3RhMCttZUFUbXcwN0JQb3h1LzZrZjlDdjJKUUl2WXg1QjRu?=
+ =?utf-8?B?OS9yakZqOEVDNUd6bXM2b1B3eldBOTBEUkhaeUs3N1pYb2NnUlAzbVRaQ21X?=
+ =?utf-8?B?NmtlbXh4c1gySkdkQjlxSDlFOW1vLzE0ZTZwR0RxOU9FdkY4blhENC8rcUNN?=
+ =?utf-8?B?Vi9Xd3pJUmZncWM2OGZBak45cTdVZkg5ZHVJakxFWm52RXdqSnp3eWVRSndy?=
+ =?utf-8?B?L09qN0l1NVZSMWxRbEFkV3RiTmNOakhxckFFYUZiUTdGRTJXamJNY2VmNEdD?=
+ =?utf-8?B?OXNrOGRQSEZLL3Bha0Y4UHgzOFhJNHBUeWNSZHRNQjhyMTRadlNBcWtjalh0?=
+ =?utf-8?B?OGZKTWxBczVFZjFJZXlPL0ZKaDBJd3ZCYjdKelVnYVY4bjJVZFBvK2hGN0xN?=
+ =?utf-8?B?Z3dwb3ZFcGZLQk8wS01oWmdHNUlTOHF3QXJHMkFUcXYxbEV1ZzVTS2NTRnBl?=
+ =?utf-8?B?VXRMQzVsTWI4MlhKYnk2RS9UNlphbFZrK0F1MnRoNWMrTThNU1l3K1dXcTJR?=
+ =?utf-8?B?YzdlSTRjaEYvNm4vQUhydnRSYncwdnFvN3puOWRaQmY4Z3BudkFiMEVVbWp2?=
+ =?utf-8?B?S2F5MUN0S2tYT3JJa0picEpLNEwvd1RmZmNPam9ub3RuUm0rWUorK2pWaTNN?=
+ =?utf-8?B?WnA4aUFCRkFuOW9lUk5kYzZnZWJaWEwzQ3diM0t3TjU1ckwvOXZ0OFVSVTNP?=
+ =?utf-8?B?L0lhcitQOG4yM2ZBT0xnUTFxVDRWQnpDL09NRHUrK2JlaXRmc2YxZzFsY2NW?=
+ =?utf-8?B?NndMbjlUV1NRdmRaQm1qZHdqR0F1R25ocXo4Z1FUelhZa2NnakIrUWN4Y1Jp?=
+ =?utf-8?B?bTZWRUZ5VFlLQStXK0Rqa0Z6VmZLaDRBUlpFU1l2UmtrTC93ZG0yVTZ1cWdz?=
+ =?utf-8?B?WTBWN0RvYjkxdWtiTmdDMGJRSGF2cXNYZjJCU1RFeHA5T2l5TmdhMkl5SVE5?=
+ =?utf-8?B?TXJXMW96UEpGR1g5WnJQRFF0azJ1NGJNcksralRvN2FGNE5BaXo0N0VQenN2?=
+ =?utf-8?B?TFo5a29DUzdTUFluYU1vUHRNanZlQ2UxQXBHV1VIVkVkY3piemREL2pSdUZy?=
+ =?utf-8?B?cUd0Smo1R1NVaEZzMGFtMDkvQzVnZzdmZzhlQWJtOTBEL05ySlFQUmFPSTJF?=
+ =?utf-8?B?TCsrZlFzSTVDQjZ4SlBDYWVNQ0FpMXlhRGxzckJTdmVTMDhGK2RFSTVEeUZV?=
+ =?utf-8?B?bmg4azd5OVZ0dUlrcHdKOFUxWi96YUlSR1BqS1FVZVZwUEdmMkJDL0ZwRUtl?=
+ =?utf-8?B?OCtYRTZhbk5maXVMT0kzL01ML3hnSzJLNkJEWjlnTm0zZXVmcUFFNmpZVG0r?=
+ =?utf-8?B?TlRQNHFoZkhMOGxFVDlWYlREbDRVanY4TGFWTlcwSFFQb0hTNlV4WXo1TVlh?=
+ =?utf-8?B?VElJZWVNdTFnRVhVS3RwaWU5d3IraXdvV2tjQ2ZiQ0JvQjJHNTJPcGFORDNn?=
+ =?utf-8?B?czQzNERvcTZlajh1RmEzY3pxV09FVVhWN29JZ1Z2RnBWanNSTzB5dnRqc1JO?=
+ =?utf-8?B?VmgvVkRBL1hncGEweGxEQ29vRUV2dGhsdHI5UlA2TzdJSnh6ZnJYWjIrMTNZ?=
+ =?utf-8?B?anB6ZXUvZzVtblFGODRGOEl5S1BZRHpnOGMwZlZPSkVyRXA3U3lnN2t2UmR2?=
+ =?utf-8?B?b1VlN0djUTdhUG1pUzZyU2NqelZ6aDZ0OEhLcnNoYTVoV2JvUlkwRGxEdlZU?=
+ =?utf-8?B?cHRqQWNMMHNDekcreFUvcVUzUGpjQU1wajFIeGZjMlJnVGYyMmF2WGN1bk52?=
+ =?utf-8?B?SnEzTnNva3N4R2lIMkNnblBtUUhnckwrTW9JV0dXWmkxcGhRK0hZUkZySkdE?=
+ =?utf-8?B?bUFqT2IvOUdjN3FjV1MxTysvUkhEeG5JaDJkNnNyZURaY1RhYWNZSzdsbDJi?=
+ =?utf-8?B?YnRvaEJuWkloMWc5aWljazJHelRvOEEzbWdvUVVXbVdDTDhoNnhpVGtYNVBi?=
+ =?utf-8?B?bGtkMG9tRFhrNW5uNFl1aVo5MlBPSTJRYmdrVkpsd1VRWVQ5dHBZTktwZ09j?=
+ =?utf-8?B?M0JkZmdHZnBSVG5HSldpc3FPZDdoRGsxdzN5dFVlSEtvcmxnN1Jxd29DVTh0?=
+ =?utf-8?B?Q1Z4QlhWeGlTL3pOZGZKZGZTdHVNL053SmVadVAyeW0xWGVZK24wT3ZqMlNy?=
+ =?utf-8?B?WXYvM0NtYnFxaWIvOXlIUWpFelBBTjNSMkdPY3hINXBkb2oyMmE2Rlg2NzB3?=
+ =?utf-8?Q?O5tkASJTICKEwdVOUVD4VMMVSn?=
+MIME-Version: 1.0
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><t=
+able style=3D"border-collapse: collapse; margin: auto;border:1px solid #CFC=
+FCF" border=3D"1" width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=
+=3D"center"><tbody><tr><td><table border=3D"0" style=3D"width: 100%;">
+<tbody>
+<tr>
+<td height=3D"111" style=3D"text-align: center;"><img src=3D"http://info.eq=
+uinix.com/rs/equinixinc/images/banner-network-maintenance.gif" alt=3D"Meet =
+Equinix" width=3D"700" height=3D"115" border=3D"0"></td>
+</tr>
+</tbody>
+</table><table style=3D"border-collapse: collapse; margin: auto; height: 32=
+7.85px;" border=3D"0" width=3D"700" cellspacing=3D"0" cellpadding=3D"0" ali=
+gn=3D"center"><tbody><tr style=3D"height: 15.4px;"><td style=3D"height: 15.=
+4px; width: 29.7px;">&nbsp;</td><td style=3D"height: 15.4px; width: 637.375=
+px;">&nbsp;</td><td style=3D"height: 15.4px; width: 29.725px;">&nbsp;</td><=
+/tr><tr style=3D"height: 297.05px;"><td style=3D"height: 297.05px; width: 2=
+9.7px;" width=3D"30">&nbsp;</td><td style=3D"height: 297.05px; width: 637.3=
+75px;" width=3D"642">
+<p><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10p=
+t;">Dear Equinix Customers,</span></p>
+<p><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10p=
+t;">To view the change, please use <a href=3D"https://u37886645.ct.sendgrid=
+.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKzwAOyP2gibqmoNIIANPmH-2FQ7=
+v1t6Nz1LW7qctDcSxgIGVPZquZ4b2gibPHl38LrxqA-3D-3DqIZF_S37DCCrSaYtcLTZcuzMRLA=
+cs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJ=
+AkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm=
+62jsorR1K1ZlDuSE8wA7xIb-2BjiHAosQq0umUSXiBP-2Fcrds6S3Dfzt7p8fmTspWIJ9f3pCKE=
+lWljgFZindoFj2DvozfTHoUFfMYzaSv6oust2JwcnOwRg1XgTYNLR43ukyQauHbmKoS6e-2BX1I=
+eW5slHtOGi" rel=3D"nofollow">Service Insight</a></span></p>
+<p><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10p=
+t;"><strong>DATE:</strong> 03-MAY-2026 - 03-MAY-2026</span><br><span style=
+=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;"><br><b>SPA=
+N: 03-MAY-2026 - 03-MAY-2026</b><br><br><b>LOCAL: </b>SUNDAY, 03 MAY 00:00 =
+- SUNDAY, 03 MAY 04:00<br><b>UTC: </b>SATURDAY, 02 MAY 16:00 - SATURDAY, 02=
+ MAY 20:00<br></span><br><span style=3D"font-family: arial, helvetica, sans=
+-serif; font-size: 10pt;"><b>IBX(s): </b>SG1, SG2</span><br><span style=3D"=
+font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span><=
+br><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10p=
+t;"><strong>DESCRIPTION:</strong> Please be advised that one of our dark fi=
+ber providers will be performing a planned maintenance activity.=0D<br>=0D<=
+br>Expected impact on your services:=0D<br>1. Unprotected Metro Connect (MC=
+) circuits or Metro Remote ports will experience service interruption.=0D<b=
+r>2. Protected Metro Connect circuits will experience multiple switching hi=
+ts as traffic switches to protection path.=0D<br>3. One of your Dual Divers=
+e Metro Connect circuits will experience port downtime of up to &lt;&gt; . =
+Redundant circuits will not be affected.=0D<br>4. Equinix Fabric Metro Remo=
+te Port will experience service interruption.=0D<br>5. Network Edge circuit=
+s will experience service interruption.=0D<br>=0D<br>Expected impact durati=
+on would be:=0D<br>1.Up to 4 hours for Unprotected MC=0D<br>2.Up to 4 hours=
+ for one of your Dual Diverse MC=0D<br>3.Up to 4 hours for Equinix Fabric M=
+etro Remote ports=0D<br>4.Up to 4 hours for Network Edge circuits&nbsp;</sp=
+an><br><span style=3D"font-family: arial, helvetica, sans-serif; font-size:=
+ 10pt;">&nbsp;<br><strong>OUTAGE DURATION:</strong> 4 Hours<br>&nbsp;</span=
+><br><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 1=
+0pt;"><strong>PRODUCTS:</strong> Metro Connect&nbsp;</span><br><span style=
+=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</sp=
+an><br><span style=3D"font-family: arial, helvetica, sans-serif; font-size:=
+ 10pt;"><strong>IMPACT:</strong> There will be service interruptions</span>=
+<br><span style=3D"font-family: arial, helvetica, sans-serif; font-size: 10=
+pt;">&nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-se=
+rif; font-size: 10pt;"><strong>RECOMMENDED ACTION:</strong> The Equinix pla=
+tform provides redundancy options. To mitigate the impact of a maintenance =
+event, we recommend customers to setup redundant and test connections accor=
+ding to best practices.</span><br><span style=3D"font-family: arial, helvet=
+ica, sans-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"font-fam=
+ily: arial, helvetica, sans-serif; font-size: 10pt;"><br><table style=3D"bo=
+rder-collapse: collapse;height:40px;" border=3D"0" cellspacing=3D"0" cellpa=
+dding=3D"0"><tbody><tr><td><span style=3D"text-decoration: underline;"><str=
+ong>Impacted Assets</strong></span></td></tr></tbody></table><br><div style=
+=3D"text-decoration:underline;"><b>Metro Connect</b></div><br><table style=
+=3D"border-collapse: collapse; width: 99%;" border=3D"1"><tbody><tr><th sty=
+le=3D"width: 25%;">Account #</th><th style=3D"width: 25%;">Product</th><th =
+style=3D"width: 25%;">IBX</th><th style=3D"width: 25%;">Service Serial #</t=
+h></tr><tr><td style=3D"text-align: center;">133337</td><td style=3D"text-a=
+lign: center;">Metro Connect</td><td style=3D"text-align: center;">SG2</td>=
+<td style=3D"text-align: center;">13333371-A</td></tr><tr><td style=3D"text=
+-align: center;">133337</td><td style=3D"text-align: center;">Metro Connect=
+</td><td style=3D"text-align: center;">SG2</td><td style=3D"text-align: cen=
+ter;">13333372-A</td></tr></tbody></table></span><br><span style=3D"font-fa=
+mily: arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span><br><spa=
+n style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">We =
+apologize for any inconvenience you may experience during this activity. Yo=
+ur cooperation and understanding are&nbsp;greatly appreciated.</span><br><s=
+pan style=3D"font-family: arial, helvetica, sans-serif; font-size: 10pt;">&=
+nbsp;</span><br><span style=3D"font-family: arial, helvetica, sans-serif; f=
+ont-size: 10pt;">Please do not reply to this email address. If you have any=
+ questions or concerns regarding this notification, please log a network ti=
+cket via the Equinix Customer Portal or contact Global Service Desk and quo=
+te the ticket reference.</span><br><span style=3D"font-family: arial, helve=
+tica, sans-serif; font-size: 10pt;">&nbsp;</span><br><span style=3D"font-fa=
+mily: arial, helvetica, sans-serif; font-size: 10pt;">Equinix is available =
+to answer questions, provide up-to-date status information or additional de=
+tails regarding the maintenance. Please reference CHG0125903.</span></p>
+</td><td style=3D"height: 297.05px; width: 29.725px;" width=3D"30">&nbsp;</=
+td></tr><tr style=3D"height: 15.4px;"><td style=3D"height: 15.4px; width: 2=
+9.7px;">&nbsp;</td><td style=3D"height: 15.4px; width: 637.375px;">&nbsp;</=
+td><td style=3D"height: 15.4px; width: 29.725px;">&nbsp;</td></tr></tbody><=
+/table><table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"ce=
+nter">
+<tbody>
+<tr>
+<td height=3D"20"><img src=3D"https://digital.equinix.com/l/1077603/2025-09=
+-17/b4fxr1/1077603/1758139130b8P2lwcK/Event_Offering_seperator.jpg" width=
+=3D"700" height=3D"20" style=3D"display: block; margin-left: auto; margin-r=
+ight: auto;"></td>
+</tr>
+</tbody>
+</table>
+<table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td>
+<p style=3D"text-align: center;"></p>
+<p style=3D"text-align: center; font-family: Arial, Helvetica, sans-serif; =
+color: #00a3e0;"><span style=3D"font-size: 10pt; color: #707073;"><a href=
+=3D"https://u37886645.ct.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-=
+2Fc1RwKzwAOyP2gibqmoNIIANPmH-2FRbQS9ftiT-2BWm11rXxoap9ss0qF_S37DCCrSaYtcLTZ=
+cuzMRLAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqy=
+pc6-2BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEm=
+OcTtpCm62jsoc0Tyw47B1JZhNUa-2FwHJmWHgY0Q0sLc1o9RnQrh4j68PB9O7dpo4NpZtwALNQG=
+BblP-2BTGjvWbi927hAxZB6j48Xbdn9XEzE0npNTj3i-2FCzd9EsEQYInmdf6iksmN3P8sDe3Em=
+3stLYr-2B-2Bf-2BsI-2FuQlZ" target=3D"_blank" style=3D"color: #00a3e0;" rel=
+=3D"noopener">Service Insight </a>| <a href=3D"https://u37886645.ct.sendgri=
+d.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz-2B5L-2FOBIWOVblIZPKAV0N=
+XXoBcdo9kJtozKfIYhC4W8-2FhNUIA476kDtlE4YrC2m6hg0b6wAlRYiJu7XOVaG2Zcg-3D1eVF=
+_S37DCCrSaYtcLTZcuzMRLAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHR=
+DIANPMB3sQPeQeqypc6-2BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ff=
+b9ytAfKKj-2FdHEmOcTtpCm62jsqgk3vKY7NUh2dHon03mutTXr2YYiQvQzjU3ZYvqzPA5L8eVH=
+895QXs3qCaPtmeXI84vrNZTqdij6wrP9gV4uW6mK45Q1WGHIc0S1rZ8BYeA8YCO-2FZoH9Nt-2F=
+hQIZ28b82YTwB-2BUzmcPq25aEpNP3OWy" target=3D"_blank" rel=3D"noopener" style=
+=3D"color: #00a3e0;">Notification Preferences</a> | <a href=3D"https://u378=
+86645.ct.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz0t-2FmTs=
+iEsFviU0THqO-2FlzZ6IsQ-2BZu69syd5-2F1qPD9xEynb3_S37DCCrSaYtcLTZcuzMRLAcs9Sn=
+tESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXs=
+l0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jso=
+Cl4MJWQJy8AS2vFRztIwHT6ZOZINoRtLWLvZaWmpR9hk-2BQmrjzvXZ0N5akB-2BOje-2BQFt1F=
+5foGBoPdvXqVAww090qJA75raO1SfUzT4jNQCrAsW7bjVbjePx5K1l3DwHWb-2FbXORTgr1GS9C=
+lIs9CsK" target=3D"_blank" rel=3D"noopener" style=3D"color: #00a3e0;">Equin=
+ix Status Page</a> | <a href=3D"https://u37886645.ct.sendgrid.net/ls/click?=
+upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz-2B5L-2FOBIWOVblIZPKAV0NXXoBcdo9kJtozKf=
+IYhC4W8-2FQ8uv6GspxQIdOevUxbmQEg-3D-3Dvhwt_S37DCCrSaYtcLTZcuzMRLAcs9SntESCg=
+w9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXsl0iJq=
+dLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jsr-2BW8=
+nQ7q-2BWboBp3y9QxsLz9CS5RL2WHISn4u1oOY6klS-2BQguravALsZ7Glb1h23qWiJXIrdY1nm=
+7M9wew7E-2FupMVSkCkVutr8JqMG3k3WLpqBIOkuFcXlFkwK-2F41xIV-2BINrUWnddmIxNY0No=
+2N1fnh" target=3D"_blank" rel=3D"noopener" style=3D"color: #00a3e0;">Suppor=
+t Case</a>&nbsp;</span></p>
+<p style=3D"text-align: center; font-family: Arial, Helvetica, sans-serif; =
+color: #707073;"><span style=3D"font-size: 10pt;">&nbsp;<a href=3D"https://=
+u37886645.ct.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz2ycE=
+yM2Vk4DhxgkJptf-2FjasBqEMf7ctpZ0e1mjuuF0Ynco4Ce8Q-2B5uFoHuhLW7MBg-3D-3Dx1Oh=
+_S37DCCrSaYtcLTZcuzMRLAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHR=
+DIANPMB3sQPeQeqypc6-2BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ff=
+b9ytAfKKj-2FdHEmOcTtpCm62jsp0dJFM8yMq0S61aLqNJuKiTNUpp6YCJW8I7t3DTRRV3HDNl6=
+om14XQncghRqJfj6Kv72HWphHoetFh2CixaBF5eTmgqROum0p-2BlhKtqZcctCJh5eOT4Rd6wAW=
+mchUi4qtcvLS2hjp5e5yuyxfdzW1r" target=3D"_blank" rel=3D"noopener" style=3D"=
+color: #00a3e0;">Glossary of terms</a> | <a href=3D"https://u37886645.ct.se=
+ndgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz-2B5L-2FOBIWOVblIZP=
+KAV0NXW-2FDp-2BLi6uGoIYEzsV4r1TPXF5-_S37DCCrSaYtcLTZcuzMRLAcs9SntESCgw9NpdA=
+bcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXsl0iJqdLwjVV=
+zNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jsrp5u9qyYCFkY=
+cwTjHHIsK9I56dTvvSK3-2FHiE8bRv1sc-2FyaGizKW14lBLlgx9s5wlF978cVvmrFGrjK22-2B=
+sgsUoExunkBXQZUDZezlarfd5jLNe0d5M1cyuAAOThmRoZjSdddANmU06JXkpmeTak32-2F" ta=
+rget=3D"_blank" rel=3D"noopener" style=3D"color: #00a3e0;">Equinix Customer=
+ Portal</a>&nbsp;</span></p>
+<p style=3D"text-align: center;"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table width=3D"700" cellspacing=3D"0" cellpadding=3D"0" align=3D"center" s=
+tyle=3D"height: 22.3958px;">
+<tbody>
+<tr style=3D"height: 22.3958px;">
+<td width=3D"10px;" td=3D""></td>
+<td><a target=3D"_blank" rel=3D"noopener" href=3D"https://u37886645.ct.send=
+grid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7sq7WJj=
+IIIbX0C4NUd3h8T4VTzDYyMJLBrD76y6ySxDwY-2FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B5q9CQ2=
+SqlqV1DvN-2FlzfwcOP0SctM-2FEf6U64r1eJvY9FMq-2Bacsc8T5Cf9KSul8OXyi-2Bsp3stDU=
+7EiVUoO10l-2BNG-2FrWsGPwQB6CZcuiXj8HeWAqfHZRH8LO8NHyfldBwCMGYkO8KAmbuXxsn9Y=
+wz-2Bw6eHrxKtWaLLUfOD1feWlvALpQ-2FZSR5Btu1ImkAJQsd5WqRxHtxb2RfLXBLTwFBPHTMU=
+0cgdcGpdY42LGizKV4JscmQn1qsS0RChC-2F15PblTIfdKI-3DhDwk_S37DCCrSaYtcLTZcuzMR=
+LAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2=
+BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtp=
+Cm62jsoMO3t8C4XJrQ9-2B5CMG8TjZ7fH5ZIdCXNYIcTRI9QL8QlWgkfZZc12wcnnkqjDrMJ8KW=
+TU907K-2BrWekVkvy0Dt2s-2BBbsYWoWcX8l6DmYTlJQ4rw6PU1n8NTrPZggW4pCj3UAEzPzwXe=
+9KWzEEaPgZlT" style=3D"color: #707073;"><span style=3D"font-size: 10.0pt; f=
+ont-family: Arial, sans-serif; color: #707073;">Equinix</span></a><span sty=
+le=3D"font-size: 10.0pt; font-family: Arial, sans-serif; color: #707073;"> =
+| </span><a target=3D"_blank" rel=3D"noopener" href=3D"https://u37886645.ct=
+.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7s=
+q7WJjIIIbX0C4NUd3h8T4VTzDYyMJLBrD76y6ySxDwY-2FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B5=
+q9A1EyS9-2FWhcz3dpJa9YcYdCIOhMtAVRr05KoXraBeVCdi0YxnFBYDA0-2FhiX6cUu76Ue4rG=
+HiKdAiT4qD6t1XDcl2i3FvtRiiT8oiNQ3SL20hpgQWIIb7Nv-2BBOYQcI9PveSSJ96vHuS-2Fc5=
+DkY7lkCAFffR8KvxdBJN4TPpxrl3hGgeIpnioZoZd3QF9-2FiWzGvVKFa8XyYkz4Bt2eIP1ZxFv=
+7VfJz6VmFu2xxmflOG4f-2BCywwR1DltrK-2BL2COH6qLGRY-3DbDBF_S37DCCrSaYtcLTZcuzM=
+RLAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-=
+2BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTt=
+pCm62jsoaGbs-2BlUtXzNbOcnuNEttjxjRloNVNytGi-2FwZ-2FqfzWqZw-2FGLKhE3WJxRWVYK=
+mr78EsIbGiqcLH-2Bps8YuigIDiM0N2zODFFgegZhkfR18II3NnCeJO7kC-2FoCvW8FR0So2ZhQ=
+bp5a2E86iFm4YWQoXiT" style=3D"color: #707073;"><span style=3D"font-size: 10=
+.0pt; font-family: Arial, sans-serif; color: #707073;">Legal</span></a><spa=
+n style=3D"font-size: 10.0pt; font-family: Arial, sans-serif; color: #70707=
+3;"> | </span><span style=3D"font-size: 10.0pt; font-family: 'Segoe UI', sa=
+ns-serif;"><a target=3D"_blank" href=3D"https://u37886645.ct.sendgrid.net/l=
+s/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7sq7WJjIIIbX0C4NU=
+d3h8T4VTzDYyMJLBrD76y6ySxDwY-2FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B5q9DPrTlZAgnlcp-=
+2BLKW9VXnohiYXsJBcCZOXU2Y4PgAaZSP4hgDDbNLE2XgvMHe5OmUTyHE-2FTXni2EmWeCs3KYq=
+K-2FDQGjShAeeoGfaTL8-2BSLFErgyqlW2-2Fe8CJlqKyr-2B3jIVxCYQNDWVNI9KJF82UJcBOq=
+lTD8J-2BMSnHv541iC72D9k2qbM7PPQ7AxW6JqIR1LyDNM2ftvVdFHcX-2FKdCIKqPiPSYXywNb=
+FgcY2-2FmyEBnV0vZlioGWYaPMo4ZFbFKZZeQ-3DqXsz_S37DCCrSaYtcLTZcuzMRLAcs9SntES=
+Cgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXsl0i=
+JqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jsqKzw=
+NtsFSfzAyZe9q2OmZo8MK73ALTvJx-2BnyjOHFnwIFcP7P58tNqSdPmFL0imw-2FdLct0QlbyAq=
+33tm6x7JkgzB-2Bvwfl-2By4-2FMoX5TXZ-2BPO45-2FZeGnFqIsamx8HS-2FR8cDq6OA1mW9gS=
+B-2FHj0Y3V25mA" rel=3D"noopener" style=3D"color: #707073;"><span style=3D"f=
+ont-size: 10.0pt; font-family: Arial, sans-serif; color: #707073;">Privacy<=
+/span></a></span><span style=3D"font-size: 10.0pt; font-family: Arial, sans=
+-serif; color: #707073;">&nbsp;</span> <span style=3D"margin: 0in; text-ali=
+gn: right; line-height: normal; font-size: 11pt; font-family: Calibri, sans=
+-serif;"> </span></td>
+<td style=3D"text-align: right; height: 22.3958px;"><span style=3D"font-siz=
+e: 12.0pt; font-family: Arial, sans-serif; color: #404040;">&nbsp;</span> <=
+a href=3D"https://u37886645.ct.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z=
+-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7sq7WJjIIIbX0C4NUd3h8T4VTzDYyMJLBrD76y6ySxDwY-2=
+FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B5q9CiUpinuqO4n97XkYNMaQJves1L9XBrP9G4EDo0Ea-2B=
+jMexz5el1ZJEHHK6S0TrkUZJgdJt9Ve-2FRQHO1z5RKV-2FpNCD5nCQhYtr3Y8zIReI91d4lVGT=
+xr8E4y51k-2B7PHWWb-2F8rhXrZ0HVMJaml6OhspFgZn0InEGRzNs2NztF93nAUFt5ZblVlZmjV=
+-2BqMr0-2BTJr-2BryYIjJ8ftoLmx5HYfK1Z-2FWyDIoXezIEVCnWzEP2npo7ILKiQR4fvHqwCi=
+RNzTRtc-3DsNhf_S37DCCrSaYtcLTZcuzMRLAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8t=
+rt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96l=
+BmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jsryX1faovyvIYKPnh8VsQ7-2B5R5u3TVlWq=
+8OV9bqjr3chiBP4lLfoPWPN-2FpTpjQNm0l9Kcz7brvhA1GxuDE-2FJIc0REf4UEZiYvukaJB6A=
+L-2FRQJ061Dpmc5tcwC7-2B5gM41wHxjVdMCUrJxs3kHSOd0-2FAI"><img src=3D"https://=
+info.equinix.com/rs/180-SLL-021/images/FooterPicture1.png" width=3D"17" hei=
+ght=3D"16"></a><span style=3D"font-size: 12.0pt; font-family: Arial, sans-s=
+erif; color: #404040;">=E2=80=AF</span>&nbsp;<a href=3D"https://u37886645.c=
+t.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7=
+sq7WJjIIIbX0C4NUd3h8T4VTzDYyMJLBrD76y6ySxDwY-2FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B=
+5q9B1YcvnKA94AWZNG739aeugHGQf0BTnVFKogtV-2F7KjChOuifm3WNwcD2pTBNjKo2-2FKl33=
+qqrCPBc0eJkx4oCS4as0HdhbvPv-2Fn2SBlt-2FcaZdIguXiy0OCMVr3SSLBqzavXKoc8ztsERE=
+jejNBA3OLZDL6kLfnFrPe2hiMXZy2f56wdxMN6daws0v5bNTF5ifzm4Ezn9fMmTUdkhQCbpNF3S=
+lJ8W5w66R-2B-2BhbxRvVjX89o1k7fncDmmY9o7uq1TAlVA-3DjL_S_S37DCCrSaYtcLTZcuzMR=
+LAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2=
+BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtp=
+Cm62jspzWL11zgrCX2W4f4mdMaCt2cK93LFPZOavUKQ064XmYqMjji1UulYvg8QQNlwetvRiUpA=
+3wFjHlzEa-2FOTsGo7zgsTOpMT5SAiFOSyfkzmnlZzoEK673IuWE5scYKorE87Vygu5TePyhZuv=
+fLoh0YTU"><img src=3D"https://info.equinix.com/rs/180-SLL-021/images/Footer=
+Picture2.png" width=3D"9" height=3D"16"></a><span style=3D"font-size: 12.0p=
+t; font-family: Arial, sans-serif; color: #404040;">=E2=80=AF</span> <a hre=
+f=3D"https://u37886645.ct.sendgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9=
+-2Fc1RwKz52p2Xq8wsi90mc7sq7WJjIIIbX0C4NUd3h8T4VTzDYyMJLBrD76y6ySxDwY-2FHxWG=
+jpd3sJGEYh5-2Bl-2B5gD-2B5q9BciNnJmzN7GB0VFPBuU23Bjd0idulJ3d0mFsMNofklKgjgm8=
+lSCZoAWele4gD-2BiSTuATtdq21ijGHXTAROK9lfafTbERnqxEteEktCQqlO4dhmg7tjq7li3Yp=
+H3Sg2SYEhKgKvcP-2BUSxzX2N7TTZvk5ykvEohgdnLNveyRXY8FuofKB6MVGd4SjuGUXtXJAOtJ=
+-2F2hnZg0s9HWjIrZ7LssApgtHQMV1GyEUi3-2BszFsZD4lyIEekjfOrzA3mtDA9JB8-3DEP4U_=
+S37DCCrSaYtcLTZcuzMRLAcs9SntESCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRD=
+IANPMB3sQPeQeqypc6-2BJAkrXsl0iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb=
+9ytAfKKj-2FdHEmOcTtpCm62jsriE0y1xJ2nfOPXFMmq1LjE6ulOOXRrMqGtuHZLdXehfW8VRNf=
+7clRnQyz8M3rpFG0cQqTI3D-2FV-2BCUSZScjY7Sj1oX-2FS9DfA4tnNGAv-2BNxTbI2RDkJNTo=
+RkwVSViNM16NKOiTd3tmPt0ORoMBA2edbF"><img src=3D"https://info.equinix.com/rs=
+/180-SLL-021/images/FooterPicture3.png" width=3D"20" height=3D"16"></a><spa=
+n style=3D"font-size: 12.0pt; font-family: Arial, sans-serif; color: #40404=
+0;">=E2=80=AF</span> <a href=3D"https://u37886645.ct.sendgrid.net/ls/click?=
+upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7sq7WJjIIIbX0C4NUd3h8T4VT=
+zDYyMJLBrD76y6ySxDwY-2FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B5q9C1N0v28Pxi6O1vb7xd-2B=
+NbbUyOXQB7uSFIb55uTtYquYHhRBoZYINkJcMvWX6o1qJUWdK8SR14z2nbz2xAwPbqTok-2BTAg=
+dVCZnHVpEmsGdhKxpgFnvVyfG6WknNnKQKjWnX7nPl7ZX-2F5FtJOV4P742j1A22jIwOnDcJwcg=
+VK8t4Fu-2FzPmD8b-2FW1IW0Edfco9JvXEYlZtMsU8ZGuFAGm4qoZxO5VvlmDaWhBWDisCTSG-2=
+F1V3XUEmFMC1iqTMXXgvVGA-3DORwl_S37DCCrSaYtcLTZcuzMRLAcs9SntESCgw9NpdAbcMOnF=
+bqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXsl0iJqdLwjVVzNCx80=
+vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jsrRToPvF198oSBuoUHe=
+vYhRfKB6aEqjq-2BNAqzUt5h-2B5tkH3xo195L-2FnhZBnFYK-2FOSlyz7t7Nxh-2BwydK77shW=
+XS5t2HCEFkki8Sj-2BkItxsCrhvaN5mWaF4hxn-2F-2Fhrgr7EjSigsnBtQ-2FspcVZmu-2Fix2=
+XO"><img src=3D"https://info.equinix.com/rs/180-SLL-021/images/FooterPictur=
+e4.png" width=3D"18" height=3D"16"></a> <a href=3D"https://u37886645.ct.sen=
+dgrid.net/ls/click?upn=3Du001.jskXSq4Oq5Z-2Ft9-2Fc1RwKz52p2Xq8wsi90mc7sq7WJ=
+jIIIbX0C4NUd3h8T4VTzDYyMJLBrD76y6ySxDwY-2FHxWGjpd3sJGEYh5-2Bl-2B5gD-2B5q9Ac=
+xpgPLbK4Oicc1etNJHbTxFTZvT7yuqVmquImmfVDjX7rEfRq3USZPIM6gFOPqBWInXP2jJ-2Fa6=
+0B51ambVNP5fplTBJfgwIkP7JVWzmpwwFQZOXId2Jpn2bgAE16JT2lrTuPMDVvanCXqgcDgfmjS=
+3s2EF39GX0I-2F7G1Y-2FOAOk4E2ySnULuTk2FHwlsJ7lblqwYGrQtfRa8YIL1egbfjt1Ae52gE=
+FFgLGiUrh7QU-2BP60P6iKcE4cLlSby0Vnew8w-3Dj5tW_S37DCCrSaYtcLTZcuzMRLAcs9SntE=
+SCgw9NpdAbcMOnFbqB7bv15In8m7I8trt7XeA90Q2scHRDIANPMB3sQPeQeqypc6-2BJAkrXsl0=
+iJqdLwjVVzNCx80vZytlr06OaqnC96lBmyNhOGTzA-2Ffb9ytAfKKj-2FdHEmOcTtpCm62jsoYE=
+itdw5a0aIuTSWNbEin5cuG8G6-2B66PvXHklwG5tJtePJgR-2FtojAI7WZmekGqcMay3vSnuqiL=
+HiIE8we185ikOt4JLj-2BMcyBy-2BwC0-2Fn-2F0kTFJMXF63QgmhgT4BKAI6Up5qGPsClOI0zG=
+VGMn6p3NO"> <img src=3D"https://info.equinix.com/rs/180-SLL-021/images/Foot=
+erPicture5.png" width=3D"14" height=3D"16"></a></td>
+<td width=3D"10px;"></td>
+</tr>
+</tbody>
+</table></td></tr></tbody></table><img src=3D"https://u37886645.ct.sendgrid=
+.net/wf/open?upn=3Du001.cUPCjafJyY3M1FvKsItTzl-2FStAX1vJUK8rjME6SvoclnbCpo5=
+Z2l5glZMebzzY-2BgPH16ZHldOAbbFFZE8pTL1BZ4aMZjRR3zxyliALmCSclZ0lnUeKIFV6II0y=
+4-2FAJgwq9jSv-2FkmCrWJ4pn6NpHwhL1RyY8Ywezu8eZofSbJPNqvYKC13oOX6rqsmgKiGt88Y=
+z1wmdpk3hmQetwfgDxfOB5f5k2UfNDnMV1ayIhJX54Qaunr6-2FG-2Bkhf6aqHoUbiTxxzc3Hr1=
+TXvZFJc9dpebngPVpRsvwjNULYXMobQ6QTeJWW7GXreBdj7ABoeemJez" alt=3D"" width=3D=
+"1" height=3D"1" border=3D"0" style=3D"height:1px !important;width:1px !imp=
+ortant;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !i=
+mportant;margin-right:0 !important;margin-left:0 !important;padding-top:0 !=
+important;padding-bottom:0 !important;padding-right:0 !important;padding-le=
+ft:0 !important;">

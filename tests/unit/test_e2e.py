@@ -20,6 +20,7 @@ from circuit_maintenance_parser.provider import (
     HGC,
     NTT,
     PCCW,
+    RETN,
     Apple,
     AquaComms,
     Arelion,
@@ -38,10 +39,13 @@ from circuit_maintenance_parser.provider import (
     PacketFabric,
     Seaborn,
     Sparkle,
+    SummitIG,
     Tata,
     Telstra,
+    Telxius,
     Turkcell,
     Verizon,
+    Vodafone,
     Windstream,
     Zayo,
 )
@@ -371,6 +375,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Equinix,
             [("email", Path(dir_path, "data", "equinix", "equinix9.eml"))],
             [Path(dir_path, "data", "equinix", "equinix9_result_combined.json")],
+        ),
+        (
+            Equinix,
+            [("email", Path(dir_path, "data", "equinix", "equinix10.eml"))],
+            [Path(dir_path, "data", "equinix", "equinix10_result_combined.json")],
         ),
         # EUNetworks
         (
@@ -774,6 +783,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "pccw", "pccw_ical_result.json"),
             ],
         ),
+        # RETN
+        (
+            RETN,
+            [("email", Path(dir_path, "data", "retn", "retn1.eml"))],
+            [Path(dir_path, "data", "retn", "retn1_result_combined.json")],
+        ),
+        (
+            RETN,
+            [("email", Path(dir_path, "data", "retn", "retn2.eml"))],
+            [Path(dir_path, "data", "retn", "retn2_result_combined.json")],
+        ),
+        (
+            RETN,
+            [("email", Path(dir_path, "data", "retn", "retn3.eml"))],
+            [Path(dir_path, "data", "retn", "retn3_result_combined.json")],
+        ),
         # Seaborn
         (
             Seaborn,
@@ -810,6 +835,16 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "sparkle", "sparkle1_result.json"),
+            ],
+        ),
+        # SummitIG
+        (
+            SummitIG,
+            [
+                ("email", Path(dir_path, "data", "summitig", "summitig.eml")),
+            ],
+            [
+                Path(dir_path, "data", "summitig", "summitig_result.json"),
             ],
         ),
         # Tata
@@ -920,6 +955,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 GENERIC_ICAL_RESULT_PATH,
             ],
         ),
+        # Telxius
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius1.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius1_result_combined.json")],
+        ),
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius2.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius2_result_combined.json")],
+        ),
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius3.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius3_result_combined.json")],
+        ),
         # Turkcell
         (
             Turkcell,
@@ -998,6 +1049,22 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "verizon", "verizon5_result.json"),
                 Path(dir_path, "data", "date", "email_date_1_result.json"),
             ],
+        ),
+        # Vodafone
+        (
+            Vodafone,
+            [("email", Path(dir_path, "data", "vodafone", "vodafone1.eml"))],
+            [Path(dir_path, "data", "vodafone", "vodafone1_result_combined.json")],
+        ),
+        (
+            Vodafone,
+            [("email", Path(dir_path, "data", "vodafone", "vodafone2.eml"))],
+            [Path(dir_path, "data", "vodafone", "vodafone2_result_combined.json")],
+        ),
+        (
+            Vodafone,
+            [("email", Path(dir_path, "data", "vodafone", "vodafone3.eml"))],
+            [Path(dir_path, "data", "vodafone", "vodafone3_result_combined.json")],
         ),
         # Windstream
         (

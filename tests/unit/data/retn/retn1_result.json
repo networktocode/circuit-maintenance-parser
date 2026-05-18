@@ -1,0 +1,18 @@
+[
+    {
+        "circuits": [
+            {
+            "circuit_id": "WLP-133337-1.CN.HKG.EQX-PL.WAW.LIM-40G",
+            "impact": "REDUCED-REDUNDANCY"
+            },
+            {
+            "circuit_id": "WLP-133337-2.CN.HKG.EQX-PL.WAW.LIM-100G",
+            "impact": "REDUCED-REDUNDANCY"
+            }
+        ],
+        "end": 1778191200,
+        "start": 1778169600,
+        "status": "CONFIRMED",
+        "summary": "Planned work on our partner's network in Guangdong. Your service will only experience 50ms switch hit."
+    }
+]
