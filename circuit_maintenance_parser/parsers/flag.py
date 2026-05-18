@@ -34,7 +34,7 @@ class HtmlParserFlag1(Html):
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse table elements to find maintenance windows (start/end) and circuit ID's."""
-        date_format = date_format = "%d-%b-%Y %H:%M"
+        date_format = "%d-%b-%Y %H:%M"
         for table in tables:
             table_type = ""
             for row in table.find_all("tr"):
@@ -62,7 +62,6 @@ class HtmlParserFlag1(Html):
         """Parse paragraph elements to find account and summary."""
         for p in paragraphs:
             for pstring in p.strings:
-                # print(f"hoi: {pstring}")
                 search = re.search("Dear (.*),", pstring)
                 if search:
                     data["account"] = search.group(1).strip()
@@ -90,7 +89,7 @@ class SubjectParserFlag1(EmailSubjectParser):
         """
         data = {}
         search = re.search(
-            r"^FLAG \| ([A-Z0-9]+) \| ([\w\s]+) \| ([\w\s]+)$",
+            r"^FLAG \| ([A-Z0-9]+)\b",
             subject,
         )
         if search:
