@@ -1,0 +1,14 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "RGWLS13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1776420000,
+        "start": 1776398400,
+        "summary": "Our provider has completed planned activity of network maintenance at Westport, Connecticut"
+    }
+]

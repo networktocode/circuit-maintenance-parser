@@ -17,6 +17,7 @@ from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, Subject
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
+from circuit_maintenance_parser.parsers.flag import HtmlParserFlag1, SubjectParserFlag1
 from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -383,6 +384,27 @@ class NestedEncoder(json.JSONEncoder):
             SubjectParserEquinix,
             Path(dir_path, "data", "equinix", "equinix11_subject.eml"),
             Path(dir_path, "data", "equinix", "equinix11_subject_result.json"),
+        ),
+        # FLAG
+        (
+            HtmlParserFlag1,
+            Path(dir_path, "data", "flag", "flag1.eml"),
+            Path(dir_path, "data", "flag", "flag1_result.json"),
+        ),
+        (
+            HtmlParserFlag1,
+            Path(dir_path, "data", "flag", "flag2.eml"),
+            Path(dir_path, "data", "flag", "flag2_result.json"),
+        ),
+        (
+            HtmlParserFlag1,
+            Path(dir_path, "data", "flag", "flag3.eml"),
+            Path(dir_path, "data", "flag", "flag3_result.json"),
+        ),
+        (
+            SubjectParserFlag1,
+            Path(dir_path, "data", "flag", "flag4_subject.eml"),
+            Path(dir_path, "data", "flag", "flag4_subject_result.json"),
         ),
         # Global Cloud Xchange
         (
