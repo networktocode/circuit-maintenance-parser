@@ -1559,25 +1559,24 @@ mkdocstrings = ">=0.26"
 
 [[package]]
 name = "netconan"
-version = "0.12.3"
+version = "0.15.0"
 description = "Netconan network configuration anonymization utilities"
 optional = false
-python-versions = "*"
+python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "netconan-0.12.3-py2.py3-none-any.whl", hash = "sha256:1f7ecf67723633b665630efe5922b189ec2d39ab68709fa6955bfb9dc186aa7b"},
-    {file = "netconan-0.12.3.tar.gz", hash = "sha256:7518cea1e8b7e7c0828e710184c629f2bc78f16726bc80212e549a3b8814d369"},
+    {file = "netconan-0.15.0-py2.py3-none-any.whl", hash = "sha256:4b3992f5e358a19be88af79a8136c1961eb97dfb0c2b6b4df3ddb3f8658d2861"},
+    {file = "netconan-0.15.0.tar.gz", hash = "sha256:15a8a48552ad99152d74a22ee97f60fe7d9915ee42f7f6336826d9ff2a3271d0"},
 ]
 
 [package.dependencies]
 bidict = "<1.0.0"
-configargparse = "<1.0.0"
+configargparse = "<2.0.0"
 passlib = "<2.0.0"
-six = "<2.0.0"
 
 [package.extras]
-dev = ["flake8 (<4.0.0)", "flake8-docstrings (<2.0.0)", "pydocstyle (<4.0.0)"]
-test = ["pytest (>=4.6.0,<5.0.0)", "pytest-cov (<3.0.0)", "requests-mock (<2.0.0)", "testfixtures (<7.0.0)", "zipp (<2.2)"]
+dev = ["flake8 (<8.0.0)", "flake8-docstrings (<2.0.0)", "pydocstyle (<6.0.0)"]
+test = ["pytest (>=7)", "pytest-cov (<6.0.0)", "requests_mock (<2.0.0)", "testfixtures (<7.0.0)"]
 
 [[package]]
 name = "numpy"
@@ -2359,7 +2358,7 @@ version = "1.17.0"
 description = "Python 2 and 3 compatibility utilities"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
-groups = ["main", "dev", "docs"]
+groups = ["main", "docs"]
 files = [
     {file = "six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"},
     {file = "six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"},
@@ -2787,4 +2786,4 @@ xlsx = ["openpyxl", "pandas"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "0f7895e0778609eff2dd15f16f1f958bb7abccfc61c054b470967886e07b1eeb"
+content-hash = "a35274fdb4d03ec62a7d4f3e6462059a31708283ad3c5edb7083367d96310bea"
