@@ -17,6 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 include = [
     "LICENSE",
@@ -24,12 +25,12 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.14"
+python = ">=3.10,<3.15"
 click = ">=7.1, <9.0"
 pydantic = ">=1.10.4,<3"
 icalendar = "^5.0.0"
 bs4 = "^0.0.2"
-lxml = ">=4.6.2,<7"
+lxml = ">=6.1.0,<7"
 geopy = "^2.1.0"
 timezonefinder = ">=6.0.1,<9.0.0"
 backoff = "^2.2.1"
@@ -38,6 +39,13 @@ openai = { version = ">=1.2.4", optional = true }
 openpyxl = { version = "^3.1.5", optional = true }
 pandas = { version = "^2.2.3", optional = true }
 python-dateutil = "^2.9.0"
+requests = ">=2.33.0,<3"
+urllib3 = ">=2.7.0,<3"
+# Floor `numpy` per Python version so 3.11+ (including 3.14) pulls modern wheels while 3.10 stays on the 2.2 line.
+numpy = [
+    { version = ">=1.22.4,<2.3", python = "<3.11" },
+    { version = ">=2.3,<3", python = ">=3.11" },
+]
 
 [tool.poetry.extras]
 xlsx = [
@@ -59,12 +67,13 @@ ruff = "*"
 types-python-dateutil = "^2.8.3"
 types-pytz = "^2025.2.0"
 types-toml = "^0.10.1"
-netconan = "^0.12.3"
+netconan = "^0.15.0"
 toml = "0.10.2"
 towncrier = "^25.8.0"
 types-chardet = "^5.0.4"
 pandas-stubs = "^2.3.2"
 coverage = "^7.6.12"
+pygments = ">=2.20.0,<3"
 
 [tool.poetry.group.docs.dependencies]
 # Rendering docs to HTML

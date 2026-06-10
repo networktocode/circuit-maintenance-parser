@@ -1,0 +1,2 @@
+Bumped Python dependencies (click, coverage, netconan, pylint, ruff, cffi, pymdown-extensions) and CI action pins (actions/checkout, docker/setup-buildx-action, pypa/gh-action-pypi-publish).
+Added Python 3.14 to the supported version range and split `numpy` by Python version (2.2.x on Python 3.10, >=2.3 on 3.11+) so the same lock resolves cleanly across the full supported range.
