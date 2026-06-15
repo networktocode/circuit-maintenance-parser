@@ -1,5 +1,6 @@
 """Circuit-maintenance-parser init."""
 
+from importlib import metadata
 from typing import Optional, Type
 
 from .data import NotificationData
@@ -9,13 +10,16 @@ from .provider import (
     ATT,
     AWS,
     BSO,
+    FLAG,
     GTT,
     HGC,
     NTT,
     PCCW,
+    RETN,
     Apple,
     AquaComms,
     Arelion,
+    Cirion,
     Cogent,
     Colt,
     CrownCastle,
@@ -31,11 +35,14 @@ from .provider import (
     PacketFabric,
     Seaborn,
     Sparkle,
+    SummitIG,
     Tata,
     Telia,
     Telstra,
+    Telxius,
     Turkcell,
     Verizon,
+    Vodafone,
     Windstream,
     Zayo,
 )
@@ -48,11 +55,13 @@ SUPPORTED_PROVIDERS = (
     ATT,
     AWS,
     BSO,
+    Cirion,
     Cogent,
     Colt,
     CrownCastle,
     Equinix,
     EUNetworks,
+    FLAG,
     GlobalCloudXchange,
     Google,
     GTT,
@@ -64,16 +73,23 @@ SUPPORTED_PROVIDERS = (
     NTT,
     PacketFabric,
     PCCW,
+    RETN,
     Seaborn,
     Sparkle,
+    SummitIG,
     Tata,
     Telia,
     Telstra,
+    Telxius,
     Turkcell,
     Verizon,
+    Vodafone,
     Windstream,
     Zayo,
 )
+
+
+__version__ = metadata.version(__name__)
 
 SUPPORTED_PROVIDER_NAMES = [provider.get_provider_type() for provider in SUPPORTED_PROVIDERS]
 SUPPORTED_ORGANIZER_EMAILS = [provider.get_default_organizer() for provider in SUPPORTED_PROVIDERS]

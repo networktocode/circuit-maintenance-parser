@@ -1,0 +1,7 @@
+---
+circuit-maintenance-parser:
+  python_ver: "3.10"
+  local: false
+  # image_name: "circuit-maintenance-parser"
+  # image_ver: "latest"
+  # pwd: "."

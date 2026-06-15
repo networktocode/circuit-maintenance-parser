@@ -1,6 +1,8 @@
 """Tasks for use with Invoke."""
 
 import os
+import re
+from pathlib import Path
 
 from invoke import Collection, Exit
 from invoke import task as invoke_task
@@ -9,8 +11,7 @@ from invoke import task as invoke_task
 def is_truthy(arg):
     """Convert "truthy" strings into Booleans.
 
-    Examples
-    --------
+    Examples:
         >>> is_truthy('yes')
         True
     Args:
@@ -29,7 +30,7 @@ def is_truthy(arg):
 
 
 # Use pyinvoke configuration for default values, see http://docs.pyinvoke.org/en/stable/concepts/configuration.html
-# Variables may be overwritten in invoke.yml or by the environment variables INVOKE_PYNAUTOBOT_xxx
+# Variables may be overwritten in invoke.yml or by the environment variables INVOKE_CIRCUIT-MAINTENANCE-PARSER_xxx
 namespace = Collection("circuit_maintenance_parser")
 namespace.configure(
     {
@@ -39,7 +40,7 @@ namespace.configure(
             "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", "false")),
             "image_name": "circuit_maintenance_parser",
             "image_ver": os.getenv("INVOKE_PARSER_IMAGE_VER", "latest"),
-            "pwd": ".",
+            "pwd": Path(__file__).parent,
         }
     }
 )
@@ -65,13 +66,14 @@ def task(function=None, *args, **kwargs):
     return task_wrapper
 
 
-def run_command(context, exec_cmd, port=None):
+def run_command(context, exec_cmd, port=None, rm=True):
     """Wrapper to run the invoke task commands.
 
     Args:
         context ([invoke.task]): Invoke task object.
         exec_cmd ([str]): Command to run.
         port (int): Used to serve local docs.
+        rm (bool): Whether to remove the container after running the command.
 
     Returns:
         result (obj): Contains Invoke result from running task.
@@ -85,18 +87,21 @@ def run_command(context, exec_cmd, port=None):
         )
         if port:
             result = context.run(
-                f"docker run -it -p {port} -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
+                f"docker run -it {'--rm' if rm else ''} -p {port} -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
                 pty=True,
             )
         else:
             result = context.run(
-                f"docker run -it -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
+                f"docker run -it {'--rm' if rm else ''} -v {context.circuit_maintenance_parser.pwd}:/local {context.circuit_maintenance_parser.image_name}:{context.circuit_maintenance_parser.image_ver} sh -c '{exec_cmd}'",
                 pty=True,
             )
 
     return result
 
 
+# ------------------------------------------------------------------------------
+# BUILD
+# ------------------------------------------------------------------------------
 @task(
     help={
         "cache": "Whether to use Docker's cache when building images (default enabled)",
@@ -124,6 +129,26 @@ def build(context, cache=True, force_rm=False, hide=False):
 
 
 @task
+def generate_packages(context):
+    """Generate all Python packages inside docker and copy the file locally under dist/."""
+    command = "poetry build"
+    run_command(context, command)
+
+
+@task(
+    help={
+        "check": (
+            "If enabled, check for outdated dependencies in the poetry.lock file, "
+            "instead of generating a new one. (default: disabled)"
+        )
+    }
+)
+def lock(context, check=False):
+    """Generate poetry.lock inside the library container."""
+    run_command(context, f"poetry {'check' if check else 'lock --no-update'}")
+
+
+@task
 def clean(context):
     """Remove the project specific image."""
     print(
@@ -145,9 +170,34 @@ def rebuild(context):
 
 
 @task
-def pytest(context, args=""):
+def coverage(context):
+    """Run the coverage report against pytest."""
+    exec_cmd = "coverage run --source=circuit_maintenance_parser -m pytest"
+    run_command(context, exec_cmd)
+    run_command(context, "coverage report")
+    run_command(context, "coverage html")
+
+
+@task(
+    help={
+        "pattern": "Only run tests which match the given substring. Can be used multiple times.",
+        "label": "Module path to run (e.g., tests/unit/test_foo.py). Can be used multiple times.",
+    },
+    iterable=["pattern", "label"],
+)
+def pytest(context, pattern=None, label=None):
     """Run pytest test cases."""
-    exec_cmd = f"pytest {args}"
+    exec_cmd = "pytest -vv --doctest-modules circuit_maintenance_parser/ && coverage run --source=circuit_maintenance_parser -m pytest && coverage report"
+    run_command(context, exec_cmd)
+
+    doc_test_cmd = "pytest -vv --doctest-modules circuit_maintenance_parser/"
+    pytest_cmd = "coverage run --source=circuit_maintenance_parser -m pytest"
+    if pattern:
+        pytest_cmd += "".join([f" -k {_pattern}" for _pattern in pattern])
+    if label:
+        pytest_cmd += "".join([f" {_label}" for _label in label])
+    coverage_cmd = "coverage report"
+    exec_cmd = " && ".join([doc_test_cmd, pytest_cmd, coverage_cmd])
     run_command(context, exec_cmd)
 
 
@@ -229,25 +279,58 @@ def cli(context):
     context.run(f"{dev}", pty=True)
 
 
-@task
-def tests(context):
+@task(
+    help={
+        "lint-only": "Only run linters; unit tests will be excluded. (default: False)",
+    }
+)
+def tests(context, lint_only=False):
     """Run all tests for the specified name and Python version.
 
     Args:
         context (obj): Used to run specific commands
+        lint_only (bool): If True, only run linters and skip unit tests.
     """
+    # If we are not running locally, start the docker containers so we don't have to for each test
+    # Sorted loosely from fastest to slowest
+    print("Running ruff...")
     ruff(context)
-    pylint(context)
+    print("Running yamllint...")
     yamllint(context)
-    pytest(context)
-
+    print("Running poetry check...")
+    lock(context, check=True)
+    print("Running pylint...")
+    pylint(context)
+    print("Running mkdocs...")
+    build_and_check_docs(context)
+    if not lint_only:
+        print("Running unit tests...")
+        pytest(context)
     print("All tests have passed!")
+
+
+@task
+def build_and_check_docs(context):
+    """Build documentation and test the configuration."""
+    command = "mkdocs build --no-directory-urls --strict"
+    run_command(context, command)
+
+    # Check for the existence of a release notes file for the current version if it's not a prerelease.
+    version = context.run("poetry version --short", hide=True)
+    match = re.match(r"^(\d+)\.(\d+)\.\d+$", version.stdout.strip())
+    if match:
+        major = match.group(1)
+        minor = match.group(2)
+        release_notes_file = Path(__file__).parent / "docs" / "admin" / "release_notes" / f"version_{major}.{minor}.md"
+        if not release_notes_file.exists():
+            print(f"Release notes file `version_{major}.{minor}.md` does not exist.")
+            raise Exit(code=1)
 
 
 @task
 def docs(context):
     """Build and serve docs locally for development."""
-    exec_cmd = "mkdocs serve -v --dev-addr=0.0.0.0:8001"
+    exec_cmd = "mkdocs serve -v"
     run_command(context, exec_cmd, port="8001:8001")
 
 

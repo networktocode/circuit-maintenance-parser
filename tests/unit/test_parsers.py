@@ -13,10 +13,12 @@ from circuit_maintenance_parser.parsers.aquacomms import HtmlParserAquaComms1, S
 from circuit_maintenance_parser.parsers.att import HtmlParserATT1, XlsxParserATT1
 from circuit_maintenance_parser.parsers.aws import HtmlParserAWS1, SubjectParserAWS1, TextParserAWS1
 from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
+from circuit_maintenance_parser.parsers.cirion import HtmlParserCirion1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
+from circuit_maintenance_parser.parsers.flag import HtmlParserFlag1, SubjectParserFlag1
 from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
@@ -26,6 +28,7 @@ from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
 from circuit_maintenance_parser.parsers.netflix import TextParserNetflix1
 from circuit_maintenance_parser.parsers.pccw import HtmlParserPCCW, SubjectParserPCCW
+from circuit_maintenance_parser.parsers.retn import HtmlParserRETN1, SubjectParserRETN1
 from circuit_maintenance_parser.parsers.seaborn import (
     HtmlParserSeaborn1,
     HtmlParserSeaborn2,
@@ -33,10 +36,13 @@ from circuit_maintenance_parser.parsers.seaborn import (
     SubjectParserSeaborn2,
 )
 from circuit_maintenance_parser.parsers.sparkle import HtmlParserSparkle1
+from circuit_maintenance_parser.parsers.summitig import HtmlParserSummitIG
 from circuit_maintenance_parser.parsers.tata import HtmlParserTata, SubjectParserTata
 from circuit_maintenance_parser.parsers.telstra import HtmlParserTelstra1, HtmlParserTelstra2
+from circuit_maintenance_parser.parsers.telxius import HtmlParserTelxius1, SubjectParserTelxius1
 from circuit_maintenance_parser.parsers.turkcell import HtmlParserTurkcell1
 from circuit_maintenance_parser.parsers.verizon import HtmlParserVerizon1
+from circuit_maintenance_parser.parsers.vodafone import HtmlParserVodafone1, SubjectParserVodafone1
 from circuit_maintenance_parser.parsers.windstream import HtmlParserWindstream1
 from circuit_maintenance_parser.parsers.zayo import HtmlParserZayo1, SubjectParserZayo1
 
@@ -246,6 +252,17 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "bso", "bso7_backup_ts.eml"),
             Path(dir_path, "data", "bso", "bso7_result.json"),
         ),
+        # Cirion
+        (
+            HtmlParserCirion1,
+            Path(dir_path, "data", "cirion", "cirion1.eml"),
+            Path(dir_path, "data", "cirion", "cirion1_result.json"),
+        ),
+        (
+            HtmlParserCirion1,
+            Path(dir_path, "data", "cirion", "cirion2.eml"),
+            Path(dir_path, "data", "cirion", "cirion2_result.json"),
+        ),
         # Cogent
         (
             HtmlParserCogent1,
@@ -369,6 +386,37 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserEquinix,
             Path(dir_path, "data", "equinix", "equinix9.eml"),
             Path(dir_path, "data", "equinix", "equinix9_result.json"),
+        ),
+        (
+            HtmlParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix10.eml"),
+            Path(dir_path, "data", "equinix", "equinix10_result.json"),
+        ),
+        (
+            SubjectParserEquinix,
+            Path(dir_path, "data", "equinix", "equinix11_subject.eml"),
+            Path(dir_path, "data", "equinix", "equinix11_subject_result.json"),
+        ),
+        # FLAG
+        (
+            HtmlParserFlag1,
+            Path(dir_path, "data", "flag", "flag1.eml"),
+            Path(dir_path, "data", "flag", "flag1_result.json"),
+        ),
+        (
+            HtmlParserFlag1,
+            Path(dir_path, "data", "flag", "flag2.eml"),
+            Path(dir_path, "data", "flag", "flag2_result.json"),
+        ),
+        (
+            HtmlParserFlag1,
+            Path(dir_path, "data", "flag", "flag3.eml"),
+            Path(dir_path, "data", "flag", "flag3_result.json"),
+        ),
+        (
+            SubjectParserFlag1,
+            Path(dir_path, "data", "flag", "flag4_subject.eml"),
+            Path(dir_path, "data", "flag", "flag4_subject_result.json"),
         ),
         # Global Cloud Xchange
         (
@@ -575,6 +623,27 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "pccw", "pccw_completion2_subject.txt"),
             Path(dir_path, "data", "pccw", "pccw_completion2_subject_result.json"),
         ),
+        # RETN
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn1.eml"),
+            Path(dir_path, "data", "retn", "retn1_result.json"),
+        ),
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn2.eml"),
+            Path(dir_path, "data", "retn", "retn2_result.json"),
+        ),
+        (
+            HtmlParserRETN1,
+            Path(dir_path, "data", "retn", "retn3.eml"),
+            Path(dir_path, "data", "retn", "retn3_result.json"),
+        ),
+        (
+            SubjectParserRETN1,
+            Path(dir_path, "data", "retn", "retn4_subject.eml"),
+            Path(dir_path, "data", "retn", "retn4_subject_result.json"),
+        ),
         # Seaborn
         (
             HtmlParserSeaborn1,
@@ -601,6 +670,12 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserSparkle1,
             Path(dir_path, "data", "sparkle", "sparkle1.eml"),
             Path(dir_path, "data", "sparkle", "sparkle1_html_parser_result.json"),
+        ),
+        # SummitIG
+        (
+            HtmlParserSummitIG,
+            Path(dir_path, "data", "summitig", "summitig.eml"),
+            Path(dir_path, "data", "summitig", "summitig_html_parser_result.json"),
         ),
         # Tata
         (
@@ -714,6 +789,27 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "telstra", "telstra8.html"),
             Path(dir_path, "data", "telstra", "telstra8_result.json"),
         ),
+        # Telxius
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius1.eml"),
+            Path(dir_path, "data", "telxius", "telxius1_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius2.eml"),
+            Path(dir_path, "data", "telxius", "telxius2_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius3.eml"),
+            Path(dir_path, "data", "telxius", "telxius3_result.json"),
+        ),
+        (
+            SubjectParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius4_subject.eml"),
+            Path(dir_path, "data", "telxius", "telxius4_subject_result.json"),
+        ),
         # Turkcell
         (
             HtmlParserTurkcell1,
@@ -750,6 +846,27 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserVerizon1,
             Path(dir_path, "data", "verizon", "verizon5.html"),
             Path(dir_path, "data", "verizon", "verizon5_result.json"),
+        ),
+        # Vodafone
+        (
+            HtmlParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone1.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone1_result.json"),
+        ),
+        (
+            HtmlParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone2.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone2_result.json"),
+        ),
+        (
+            HtmlParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone3.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone3_result.json"),
+        ),
+        (
+            SubjectParserVodafone1,
+            Path(dir_path, "data", "vodafone", "vodafone4_subject.eml"),
+            Path(dir_path, "data", "vodafone", "vodafone4_subject_result.json"),
         ),
         # Windstream
         (

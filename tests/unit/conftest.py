@@ -12,7 +12,10 @@ def maintenance_data():
     return {
         "account": "12345000",
         "maintenance_id": "VNOC-1-99999999999",
-        "circuits": [{"circuit_id": "123", "impact": "NO-IMPACT"}, {"circuit_id": "456"}],
+        "circuits": [
+            {"circuit_id": "123", "impact": "NO-IMPACT"},
+            {"circuit_id": "456"},
+        ],
         "organizer": "myemail@example.com",
         "provider": "A random NSP",
         "sequence": 1,
@@ -23,7 +26,9 @@ def maintenance_data():
         "summary": "This is a maintenance notification",
         "uid": "VNOC-1-99999999999",
         "_metadata": Metadata(
-            provider="some provider", processor="some processor", parsers=["some parser 1", "some parser 2"]
+            provider="some provider",
+            processor="some processor",
+            parsers=["some parser 1", "some parser 2"],
         ),
     }
 

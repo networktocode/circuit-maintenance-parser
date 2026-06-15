@@ -14,6 +14,17 @@
         "project_with_config_settings": "no",
         "generate_docs": "yes",
         "version": "2.10.0",
-        "original_publish_year": "2021"
+        "original_publish_year": "2021",
+        "_drift_manager": {
+            "template": "https://github.com/networktocode-llc/cookiecutter-ntc.git",
+            "template_dir": "python",
+            "template_ref": "main",
+            "cookie_dir": "",
+            "pull_request_strategy": "create",
+            "post_actions": [],
+            "draft": false,
+            "baked_commit_ref": "6e239e9b2ba0888f80cf1693318f007a2085d79a",
+            "drift_managed_branch": "develop"
+        }
     }
 }

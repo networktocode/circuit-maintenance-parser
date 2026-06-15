@@ -125,6 +125,7 @@ venv.bak/
 
 # mkdocs documentation
 /site
+/circuit-maintenance-parser/static/
 
 # mypy
 .mypy_cache/
@@ -294,3 +295,17 @@ fabric.properties
 ### vscode ###
 .vscode/*
 *.code-workspace
+
+# Rando
+creds.env
+development/*.txt
+
+# Invoke overrides
+invoke.yml
+
+# Docs
+docs/README.md
+docs/CHANGELOG.md
+public
+/compose.yaml
+/dump.sql

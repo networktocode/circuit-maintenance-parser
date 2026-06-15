@@ -1,0 +1,14 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "RGWLS13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1764640800,
+        "start": 1764626400,
+        "summary": "FLAG has rescheduled planned activity to resolve degradation issue at Khasab"
+    }
+]

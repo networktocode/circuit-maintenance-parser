@@ -1,6 +1,11 @@
-ARG PYTHON_VER="3.9"
+ARG PYTHON_VER="3.10"
 
 FROM python:${PYTHON_VER}-slim
+
+# Install build tooling so dependencies without cp3xx wheels can be source-built (relevant for newest Python versions).
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry manually via its installer script;
 # if we instead used "pip install poetry" it would install its own dependencies globally which may conflict with ours.
@@ -8,7 +13,7 @@ FROM python:${PYTHON_VER}-slim
 # This also makes it so that Poetry will *not* be included in the "final" image since it's not installed to /usr/local/
 ARG POETRY_HOME=/opt/poetry
 ARG POETRY_INSTALLER_PARALLEL=true
-ARG POETRY_VERSION=1.8.2
+ARG POETRY_VERSION=2.1.3
 ARG POETRY_VIRTUALENVS_CREATE=false
 ADD https://install.python-poetry.org /tmp/install-poetry.py
 RUN python /tmp/install-poetry.py
