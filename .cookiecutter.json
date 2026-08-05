@@ -20,7 +20,7 @@
             "template_dir": "python",
             "template_ref": "main",
             "cookie_dir": "",
-            "pull_request_strategy": "create",
+            "pull_request_strategy": "update-or-create",
             "post_actions": [],
             "draft": false,
             "baked_commit_ref": "",
