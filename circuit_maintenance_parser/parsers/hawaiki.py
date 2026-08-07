@@ -10,7 +10,7 @@ from circuit_maintenance_parser.output import CircuitImpact, Impact, Status
 from circuit_maintenance_parser.parser import EmailSubjectParser, Text
 
 logger = logging.getLogger(__name__)
-
+IMPACT_LINE_RE = re.compile(r"^Service impact:\s*(.+)$", re.IGNORECASE | re.MULTILINE)
 
 class SubjectParserHawaiki1(EmailSubjectParser):
     """Extract maintenance_id from Hawaiki email subject."""
@@ -39,12 +39,16 @@ class TextParserHawaiki1(Text):
         data: Dict = {
             "circuits": [],
             "status": Status.CONFIRMED,
-            "account": "Unknown",
+            "account": "Customer info unavailable",
             "summary": "Hawaiki maintenance notification",
         }
 
         lines = text.splitlines()
         in_maintenance_window = False
+
+        # All circuits in a Hawaiki notification share one "Service impact" line, and it appears
+        # after the "Service ID" lines, so resolve it up front.
+        impact = self._parse_impact(text)
 
         for line in lines:
             line = line.strip()
@@ -52,7 +56,7 @@ class TextParserHawaiki1(Text):
             match = re.match(r"Service ID:\s*(.+)", line)
             if match:
                 circuit_id = match.group(1).strip()
-                data["circuits"].append(CircuitImpact(circuit_id=circuit_id, impact=Impact.NO_IMPACT))
+                data["circuits"].append(CircuitImpact(circuit_id=circuit_id, impact=impact))
                 continue
 
             if line == "Maintenance Window":
@@ -71,3 +75,18 @@ class TextParserHawaiki1(Text):
                     continue
 
         return [data]
+
+    @staticmethod
+    def _parse_impact(text: str) -> Impact:
+        """Map the notification's single 'Service impact' line to an Impact."""
+        match = IMPACT_LINE_RE.search(text)
+        if not match:
+            logger.warning("No Hawaiki 'Service impact' line found, defaulting to OUTAGE.")
+            return Impact.OUTAGE
+        impact_text = match.group(1).strip().lower()
+        if "no service impact" in impact_text:
+            return Impact.NO_IMPACT
+        if "redundancy" in impact_text or "re-routed" in impact_text:
+            return Impact.REDUCED_REDUNDANCY
+        logger.warning("Unrecognized Hawaiki service impact %r, defaulting to OUTAGE.", impact_text)
+        return Impact.OUTAGE
