@@ -12,6 +12,7 @@ from circuit_maintenance_parser.parser import EmailSubjectParser, Text
 logger = logging.getLogger(__name__)
 IMPACT_LINE_RE = re.compile(r"^Service impact:\s*(.+)$", re.IGNORECASE | re.MULTILINE)
 
+
 class SubjectParserHawaiki1(EmailSubjectParser):
     """Extract maintenance_id from Hawaiki email subject."""
 
