@@ -28,6 +28,7 @@ from circuit_maintenance_parser.parsers.flag import HtmlParserFlag1, SubjectPars
 from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1, SubjectParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
+from circuit_maintenance_parser.parsers.hawaiki import SubjectParserHawaiki1, TextParserHawaiki1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
@@ -646,6 +647,16 @@ class Windstream(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("wci.maintenance.notifications@windstream.com")
+
+
+class Hawaiki(GenericProvider):
+    """Hawaiki provider custom class."""
+
+    _include_filter = PrivateAttr({"text/plain": ["Maintenance Window"], "text/html": ["Maintenance Window"]})
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [CombinedProcessor(data_parsers=[EmailDateParser, TextParserHawaiki1, SubjectParserHawaiki1])]
+    )
+    _default_organizer = PrivateAttr("support@bw-digital.com")
 
 
 class Zayo(GenericProvider):

@@ -33,6 +33,7 @@ from circuit_maintenance_parser.provider import (
     GenericProvider,
     GlobalCloudXchange,
     Google,
+    Hawaiki,
     Lumen,
     Megaport,
     Momentum,
@@ -597,6 +598,24 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "google", "google9_completed_no_end_time_result.json"),
+            ],
+        ),
+        # Hawaiki - completion/update emails contain no "Maintenance Window" and are filtered to []
+        (
+            Hawaiki,
+            [
+                ("email", Path(dir_path, "data", "hawaiki", "hawaiki_completion.eml")),
+            ],
+            [],
+        ),
+        # Hawaiki - initial maintenance notification with Maintenance Window block
+        (
+            Hawaiki,
+            [
+                ("email", Path(dir_path, "data", "hawaiki", "hawaiki1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "hawaiki", "hawaiki1_result.json"),
             ],
         ),
         # Lumen
