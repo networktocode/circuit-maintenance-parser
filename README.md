@@ -1,6 +1,11 @@
 # circuit-maintenance-parser
 
 <p align="center">
+<<<<<<< HEAD
+=======
+  <img src="https://raw.githubusercontent.com/networktocode/circuit-maintenance-parser/develop/docs/images/icon-circuit-maintenance-parser.png" class="logo" height="200px">
+  <br>
+>>>>>>> 85666b3 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
   <a href="https://github.com/networktocode/circuit-maintenance-parser/actions"><img src="https://github.com/networktocode/circuit-maintenance-parser/actions/workflows/ci.yml/badge.svg?branch=main"></a>
   <a href="https://circuit-maintenance-parser.readthedocs.io/en/latest/"><img src="https://readthedocs.org/projects/circuit-maintenance-parser/badge/"></a>
   <a href="https://pypi.org/project/circuit-maintenance-parser/"><img src="https://img.shields.io/pypi/v/circuit-maintenance-parser"></a>
