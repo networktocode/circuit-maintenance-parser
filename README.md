@@ -11,7 +11,7 @@ To avoid extra work and temporary links, make sure that publishing docs (or merg
 -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/networktocode/circuit-maintenance-parser/develop/docs/images/icon-Circuit-Maintenance-Parser.png" class="logo" height="200px">
+  <img src="https://raw.githubusercontent.com/networktocode/circuit-maintenance-parser/develop/docs/images/icon-circuit-maintenance-parser.png" class="logo" height="200px">
   <br>
   <a href="https://github.com/networktocode/circuit-maintenance-parser/actions"><img src="https://github.com/networktocode/circuit-maintenance-parser/actions/workflows/ci.yml/badge.svg?branch=main"></a>
   <a href="https://circuit-maintenance-parser.readthedocs.io/en/latest/"><img src="https://readthedocs.org/projects/circuit-maintenance-parser/badge/"></a>

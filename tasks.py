@@ -30,16 +30,16 @@ def is_truthy(arg):
 
 
 # Use pyinvoke configuration for default values, see http://docs.pyinvoke.org/en/stable/concepts/configuration.html
-# Variables may be overwritten in invoke.yml or by the environment variables INVOKE_CIRCUIT-MAINTENANCE-PARSER_xxx
+# Variables may be overwritten in invoke.yml or by the environment variables INVOKE_CIRCUIT_MAINTENANCE_PARSER_xxx
 namespace = Collection("circuit_maintenance_parser")
 namespace.configure(
     {
         "circuit_maintenance_parser": {
             "project_name": "circuit_maintenance_parser",
             "python_ver": "3.10",
-            "local": is_truthy(os.getenv("INVOKE_CIRCUIT-MAINTENANCE-PARSER_LOCAL", "false")),
+            "local": is_truthy(os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL", "false")),
             "image_name": "circuit_maintenance_parser",
-            "image_ver": os.getenv("INVOKE_CIRCUIT-MAINTENANCE-PARSER_IMAGE_VER", "latest"),
+            "image_ver": os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER", "latest"),
             "pwd": Path(__file__).parent,
         }
     }
