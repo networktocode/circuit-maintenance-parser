@@ -36,6 +36,7 @@ namespace.configure(
     {
         "circuit_maintenance_parser": {
             "project_name": "circuit_maintenance_parser",
+<<<<<<< HEAD
             "python_ver": "3.10",
 <<<<<<< HEAD
             "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", "false")),
@@ -46,6 +47,12 @@ namespace.configure(
             "image_name": "circuit_maintenance_parser",
             "image_ver": os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER", "latest"),
 >>>>>>> 85666b3 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+            "python_ver": "3.14",
+            "local": is_truthy(os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL", "false")),
+            "image_name": "circuit_maintenance_parser",
+            "image_ver": os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER", "latest"),
+>>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
             "pwd": Path(__file__).parent,
         }
     }
@@ -344,18 +351,21 @@ def docs(context):
     help={
         "version": "Version of circuit_maintenance_parser to generate the release notes for.",
         "date": "Date of the release (default: today).",
+        "keep": "Keep existing release notes files. Useful for testing. (default: False).",
     }
 )
-def generate_release_notes(context, version="", date=""):
+def generate_release_notes(context, version="", date="", keep=False):
     """Generate Release Notes using Towncrier."""
+    command = "poetry run towncrier build"
     if not version:
         version = context.run("poetry version --short", hide=True).stdout.strip()
-
-    version_major_minor = ".".join(version.split(".")[:2])
-    context.run(f"poetry run python bin/ensure_release_notes.py --version {version_major_minor}")
-
-    command = f"poetry run towncrier build --version {version} --yes"
+    command += f" --version {version}"
     if date:
         command += f" --date {date}"
+    command += " --keep" if keep else " --yes"
+
+    version_major_minor = ".".join(version.split(".")[:2])
+    context.run(f"poetry run python development/bin/ensure_release_notes.py --version {version_major_minor}")
+
     # Due to issues with git repo ownership in the containers, this must always run locally.
     context.run(command)

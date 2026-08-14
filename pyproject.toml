@@ -1,10 +1,14 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
 <<<<<<< HEAD
+<<<<<<< HEAD
 version = "2.12.1b1"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 =======
 version = "2.10.0"
+=======
+version = "0.1.0a0"
+>>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 description = "Python library to parse circuit maintenances from network service providers."
 >>>>>>> 85666b3 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 authors = ["Network to Code, LLC <opensource@networktocode.com>"]
@@ -24,9 +28,14 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
 ]
+
 include = [
-    "LICENSE",
-    "README.md",
+    # Poetry by default will exclude files that are in .gitignore
+    { path = "circuit-maintenance-parser/static/circuit-maintenance-parser/docs/**/*", format = ["sdist", "wheel"] }
+]
+
+packages = [
+    { include = "circuit_maintenance_parser" },
 ]
 
 packages = [
@@ -35,6 +44,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
+<<<<<<< HEAD
 click = ">=7.1, <9.0"
 pydantic = ">=1.10.4,<3"
 icalendar = "^5.0.0"
@@ -85,6 +95,11 @@ pandas-stubs = "^2.3.2"
 coverage = "^7.6.12"
 pygments = ">=2.20.0,<3"
 =======
+=======
+click = "*"
+
+[tool.poetry.group.dev.dependencies]
+>>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 coverage = "~7.15.4"
 pytest = "*"
 mock = "*"
@@ -205,7 +220,7 @@ addopts = "-vv --doctest-modules -p no:warnings --ignore-glob='*mock*'"
 package = "circuit_maintenance_parser"
 directory = "changes"
 filename = "docs/admin/release_notes/version_X.Y.md"
-template = "towncrier_template.j2"
+template = "development/towncrier_template.j2"
 start_string = "<!-- towncrier release notes start -->"
 issue_format = "[#{issue}](https://github.com/networktocode/circuit-maintenance-parser/issues/{issue})"
 
