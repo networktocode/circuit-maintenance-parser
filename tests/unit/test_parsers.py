@@ -23,6 +23,7 @@ from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
+from circuit_maintenance_parser.parsers.kpn import XlsxParserKPN1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
@@ -506,6 +507,17 @@ class NestedEncoder(json.JSONEncoder):
             HtmlParserHGC2,
             Path(dir_path, "data", "hgc", "hgc2.eml"),
             Path(dir_path, "data", "hgc", "hgc2_html_result.json"),
+        ),
+        # KPN
+        (
+            XlsxParserKPN1,
+            Path(dir_path, "data", "kpn", "kpn1.xlsx"),
+            Path(dir_path, "data", "kpn", "kpn1_xlsx_parser_result.json"),
+        ),
+        (
+            XlsxParserKPN1,
+            Path(dir_path, "data", "kpn", "kpn2.xlsx"),
+            Path(dir_path, "data", "kpn", "kpn2_xlsx_parser_result.json"),
         ),
         # Lumen
         (

@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Dummy Corp D",
+        "circuits": [
+            {
+                "circuit_id": "A000003",
+                "impact": "NO-IMPACT"
+            }
+        ],
+        "end": 1789880400,
+        "maintenance_id": "CT00000000002",
+        "organizer": "gwc-noreply@kpn.com",
+        "provider": "kpn",
+        "sequence": 1,
+        "stamp": 1789459200,
+        "start": 1789866000,
+        "status": "CANCELLED",
+        "summary": "KPN maintenance CT00000000002 (DUMMY-LINE-03)",
+        "uid": "0"
+    }
+]

@@ -1,0 +1,25 @@
+[
+    {
+        "account": "Dummy Corp A",
+        "circuits": [
+            {
+                "circuit_id": "A000001",
+                "impact": "OUTAGE"
+            },
+            {
+                "circuit_id": "B000002",
+                "impact": "OUTAGE"
+            }
+        ],
+        "end": 1789452000,
+        "maintenance_id": "CT00000000001",
+        "organizer": "gwc-noreply@kpn.com",
+        "provider": "kpn",
+        "sequence": 1,
+        "stamp": 1789459200,
+        "start": 1789437600,
+        "status": "CONFIRMED",
+        "summary": "KPN maintenance CT00000000001 (DUMMY-LINE-01)",
+        "uid": "0"
+    }
+]
