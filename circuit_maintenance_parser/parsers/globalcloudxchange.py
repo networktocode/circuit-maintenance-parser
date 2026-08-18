@@ -51,8 +51,8 @@ class SubjectParserGcx1(EmailSubjectParser):
         """Parse the Global Cloud Xchange Email subject for summary and status.
 
         Args:
-            subject (str): subject of email
-            e.g. 'PE2024020844407 | Emergency | Service Advisory Notice | Span Loss Rectification | 12-Feb-2024 09:00 (GMT) - 12-Feb-2024 17:00 (GMT)'.
+            subject (str): subject of email,
+                e.g. 'PE2024020844407 | Emergency | Service Advisory Notice | Span Loss Rectification | 12-Feb-2024 09:00 (GMT) - 12-Feb-2024 17:00 (GMT)'.
 
 
         Returns:

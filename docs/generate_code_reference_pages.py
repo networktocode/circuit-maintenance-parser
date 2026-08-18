@@ -1,20 +1,15 @@
-"""Generate code reference pages."""
+"""Generate the code reference page."""
 
 from pathlib import Path
 
 import mkdocs_gen_files
 
-for file_path in Path("circuit-maintenance-parser").rglob("*.py"):
-    module_path = file_path.with_suffix("")
-    doc_path = file_path.with_suffix(".md")
-    full_doc_path = Path("code-reference", doc_path)
+PACKAGE = "circuit_maintenance_parser"
 
-    parts = list(module_path.parts)
-    if parts[-1] == "__init__":
-        parts = parts[:-1]
-
-    with mkdocs_gen_files.open(full_doc_path, "w") as fd:
-        identifier = ".".join(parts)
-        print(f"::: {identifier}", file=fd)
-
-    mkdocs_gen_files.set_edit_path(full_doc_path, file_path)
+with mkdocs_gen_files.open("code-reference.md", "w") as fd:
+    print("# Code Reference\n", file=fd)
+    for file_path in sorted(Path(PACKAGE).rglob("*.py")):
+        parts = list(file_path.with_suffix("").parts)
+        if parts[-1] == "__init__":
+            parts = parts[:-1]
+        print(f"::: {'.'.join(parts)}", file=fd)
