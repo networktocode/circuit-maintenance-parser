@@ -11,9 +11,9 @@
                 "impact": "OUTAGE"
             }
         ],
-        "end": 1789452000,
+        "end": 1789444800,
         "maintenance_id": "CT00000000001",
-        "start": 1789437600,
+        "start": 1789430400,
         "status": "CONFIRMED",
         "summary": "KPN maintenance CT00000000001 (DUMMY-LINE-01)"
     }

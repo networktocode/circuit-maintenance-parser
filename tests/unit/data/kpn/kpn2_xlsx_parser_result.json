@@ -7,9 +7,9 @@
                 "impact": "NO-IMPACT"
             }
         ],
-        "end": 1789880400,
+        "end": 1789873200,
         "maintenance_id": "CT00000000002",
-        "start": 1789866000,
+        "start": 1789858800,
         "status": "CANCELLED",
         "summary": "KPN maintenance CT00000000002 (DUMMY-LINE-03)"
     }

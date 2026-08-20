@@ -1,8 +1,9 @@
 """KPN parser."""
 
 import logging
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Dict, List
+from zoneinfo import ZoneInfo
 
 from circuit_maintenance_parser.errors import ParserError
 from circuit_maintenance_parser.output import CircuitImpact, Impact, Status
@@ -32,7 +33,7 @@ _STATUS_MAP = {
 
 
 class XlsxParserKPN1(Xlsx):
-    """Parse KPN XLSX maintenance notification spreadsheets."""
+    """Parse KPN xlsx maintenance notification spreadsheets."""
 
     @staticmethod
     def parse_xlsx(records: List[Dict]) -> List[Dict]:
@@ -80,11 +81,17 @@ def _check_required_columns(row: Dict) -> None:
         raise ParserError(f"KPN spreadsheet missing required columns: {missing}")
 
 
+_KPN_TZ = ZoneInfo("Europe/Amsterdam")
+
+
 def _parse_datetime(date_str: str, time_str: str) -> datetime:
-    """Combine KPN date (DD-MM-YYYY) and time (HH:MM) into a UTC-aware datetime."""
+    """Combine KPN date (DD-MM-YYYY) and time (HH:MM) into a UTC-aware datetime.
+
+    KPN publishes times in CET/CEST (Europe/Amsterdam).
+    """
     try:
         dt = datetime.strptime(f"{date_str} {time_str}", "%d-%m-%Y %H:%M")
-        return dt.replace(tzinfo=timezone.utc)
+        return dt.replace(tzinfo=_KPN_TZ)
     except (ValueError, TypeError) as exc:
         raise ParserError(f"KPN could not parse date/time '{date_str} {time_str}': {exc}") from exc
 

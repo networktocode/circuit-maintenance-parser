@@ -11,13 +11,13 @@
                 "impact": "OUTAGE"
             }
         ],
-        "end": 1789452000,
+        "end": 1789444800,
         "maintenance_id": "CT00000000001",
         "organizer": "gwc-noreply@kpn.com",
         "provider": "kpn",
         "sequence": 1,
         "stamp": 1789459200,
-        "start": 1789437600,
+        "start": 1789430400,
         "status": "CONFIRMED",
         "summary": "KPN maintenance CT00000000001 (DUMMY-LINE-01)",
         "uid": "0"
