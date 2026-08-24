@@ -30,6 +30,7 @@ from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, Subject
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hawaiki import SubjectParserHawaiki1, TextParserHawaiki1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2, SubjectParserHGC1
+from circuit_maintenance_parser.parsers.kpn import XlsxParserKPN1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1, SubjectParserMomentum1
@@ -657,6 +658,15 @@ class Hawaiki(GenericProvider):
         [CombinedProcessor(data_parsers=[EmailDateParser, TextParserHawaiki1, SubjectParserHawaiki1])]
     )
     _default_organizer = PrivateAttr("support@bw-digital.com")
+
+
+class KPN(GenericProvider):
+    """KPN provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [CombinedProcessor(data_parsers=[EmailDateParser, XlsxParserKPN1])]
+    )
+    _default_organizer = PrivateAttr("gwc-noreply@kpn.com")
 
 
 class Zayo(GenericProvider):

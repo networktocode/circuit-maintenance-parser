@@ -18,6 +18,7 @@ from circuit_maintenance_parser.provider import (
     FLAG,
     GTT,
     HGC,
+    KPN,
     NTT,
     PCCW,
     RETN,
@@ -616,6 +617,25 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "hawaiki", "hawaiki1_result.json"),
+            ],
+        ),
+        # KPN
+        (
+            KPN,
+            [
+                ("email", Path(dir_path, "data", "kpn", "kpn1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "kpn", "kpn1_result.json"),
+            ],
+        ),
+        (
+            KPN,
+            [
+                ("email", Path(dir_path, "data", "kpn", "kpn2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "kpn", "kpn2_result.json"),
             ],
         ),
         # Lumen
