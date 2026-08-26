@@ -126,7 +126,7 @@ The library supports an optional parser option leveraging Large Language Models 
 
 When the appropriate environment variable(s) are set (see below), these LLM parsers are automatically appended after all existing processors for each defined Provider.
 
-> These integrations may involve some costs for API usage. Use it carefully! As an order of magnitude, a parsing of an email with OpenAI GPT gpt-3.5-turbo model costs $0.004.
+> These integrations may involve some costs for API usage. Use it carefully! As an order of magnitude, a parsing of an email with OpenAI GPT gpt-4o-mini model costs less than $0.001.
 
 These are the currently supported LLM integrations:
 
@@ -135,7 +135,7 @@ These are the currently supported LLM integrations:
 
 - [OpenAI](https://openai.com/product), these are the supported ENVs:
   - `PARSER_OPENAI_API_KEY` (Required): OpenAI API Key.
-  - `PARSER_OPENAI_MODEL` (Optional): The LLM model to use, defaults to "gpt-3.5-turbo".
+  - `PARSER_OPENAI_MODEL` (Optional): The LLM model to use, defaults to "gpt-4o-mini".
 
 ### Metadata
 
