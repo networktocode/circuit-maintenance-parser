@@ -80,8 +80,8 @@ class SubjectParserFlag1(EmailSubjectParser):
         """Parse the FLAG Email subject for maintenance ID and status.
 
         Args:
-            subject (str): subject of email
-            e.g. 'FLAG | PE2025102750538 | Planned Event | Rescheduled'.
+            subject (str): subject of email,
+                e.g. 'FLAG | PE2025102750538 | Planned Event | Rescheduled'.
 
 
         Returns:

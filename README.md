@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/networktocode/circuit-maintenance-parser/actions"><img src="https://github.com/networktocode/circuit-maintenance-parser/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-  <a href="https://circuit-maintenance-parser.readthedocs.io/en/latest/"><img src="https://readthedocs.org/projects/circuit-maintenance-parser/badge/"></a>
+  <a href="https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/"><img src="https://app.readthedocs.com/projects/circuit-maintenance-parser/badge/"></a>
   <a href="https://pypi.org/project/circuit-maintenance-parser/"><img src="https://img.shields.io/pypi/v/circuit-maintenance-parser"></a>
   <a href="https://pypi.org/project/circuit-maintenance-parser/"><img src="https://img.shields.io/pypi/dm/circuit-maintenance-parser"></a>
 </p>
@@ -11,13 +11,13 @@
 
 ## Documentation
 
-Full documentation for this library can be found over on the [Circuit-Maintenance-Parser Docs](https://circuit-maintenance-parser.readthedocs.io/) website:
+Full documentation for this library can be found over on the [Circuit-Maintenance-Parser Docs](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/) website:
 
-- [User Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/user/lib_overview/) - Overview, Using the Library, Getting Started.
-- [Administrator Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/admin/install/) - How to Install, Configure, Upgrade, or Uninstall the Library.
-- [Developer Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/dev/contributing/) - Extending the Library, Code Reference, Contribution Guide.
-- [Release Notes / Changelog](https://circuit-maintenance-parser.readthedocs.io/en/latest/admin/release_notes/).
-- [Frequently Asked Questions](https://circuit-maintenance-parser.readthedocs.io/en/latest/user/faq/).
+- [User Guide](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/user/lib_overview/) - Overview, Using the Library, Getting Started.
+- [Administrator Guide](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/admin/install/) - How to Install, Configure, Upgrade, or Uninstall the Library.
+- [Developer Guide](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/dev/contributing/) - Extending the Library, Code Reference, Contribution Guide.
+- [Release Notes / Changelog](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/admin/release_notes/).
+- [Frequently Asked Questions](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/user/faq/).
 
 ## Context
 
@@ -309,11 +309,11 @@ The project is following Network to Code software development guidelines and is 
 - Pylint for additional static analysis.
 - Unit and integration tests to ensure the library is working properly.
 
-For more details, see the [Contributing Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/dev/contributing/) and [Development Environment Guide](https://circuit-maintenance-parser.readthedocs.io/en/latest/dev/dev_environment/).
+For more details, see the [Contributing Guide](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/dev/contributing/) and [Development Environment Guide](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/dev/dev_environment/).
 
 ## Questions
 
-For any questions or comments, please check the [FAQ](https://circuit-maintenance-parser.readthedocs.io/en/latest/user/faq/) first. Feel free to also swing by the [Network to Code Slack](https://networktocode.slack.com/) (channel `#networktocode`), sign up [here](http://slack.networktocode.com/) if you don't have an account.
+For any questions or comments, please check the [FAQ](https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/user/faq/) first. Feel free to also swing by the [Network to Code Slack](https://networktocode.slack.com/) (channel `#networktocode`), sign up [here](http://slack.networktocode.com/) if you don't have an account.
 
 ## License notes
 
