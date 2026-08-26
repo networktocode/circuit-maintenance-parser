@@ -13,6 +13,7 @@ on:  # yamllint disable-line rule:truthy rule:comments
 env:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   INVOKE_PARSER_IMAGE_NAME: "circuit_maintenance_parser"
   INVOKE_PARSER_IMAGE_VER: "latest"
 =======
@@ -23,11 +24,16 @@ env:
   INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_NAME: "circuit-maintenance-parser"
   INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER: "latest"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+  INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_NAME: "circuit-maintenance-parser"
+  INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER: "latest"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 jobs:
   ruff-format:
     runs-on: "ubuntu-latest"
     env:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       INVOKE_PARSER_LOCAL: "True"
@@ -37,6 +43,9 @@ jobs:
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -51,6 +60,7 @@ jobs:
     env:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       INVOKE_PARSER_LOCAL: "True"
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
@@ -58,6 +68,9 @@ jobs:
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -72,6 +85,7 @@ jobs:
     env:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       INVOKE_PARSER_LOCAL: "True"
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
@@ -79,6 +93,9 @@ jobs:
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -94,6 +111,7 @@ jobs:
     env:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       INVOKE_PARSER_LOCAL: "True"
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
@@ -101,6 +119,9 @@ jobs:
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -115,6 +136,7 @@ jobs:
     env:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       INVOKE_PARSER_LOCAL: "True"
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
@@ -122,6 +144,9 @@ jobs:
 =======
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL: "True"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -142,6 +167,7 @@ jobs:
       fail-fast: true
       matrix:
 <<<<<<< HEAD
+<<<<<<< HEAD
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     env:
 <<<<<<< HEAD
@@ -154,6 +180,11 @@ jobs:
     env:
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_PYTHON_VER: "${{ matrix.python-version }}"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+        python-version: ["3.10"]
+    env:
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_PYTHON_VER: "${{ matrix.python-version }}"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -164,6 +195,7 @@ jobs:
       - name: "Get image version"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         run: "echo INVOKE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
 =======
         run: "echo INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
@@ -171,6 +203,9 @@ jobs:
 =======
         run: "echo INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+        run: "echo INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
       - name: "Set up Docker Buildx"
         id: "buildx"
         uses: "docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2"  # v3.10.0
@@ -196,6 +231,7 @@ jobs:
       fail-fast: true
       matrix:
 <<<<<<< HEAD
+<<<<<<< HEAD
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     runs-on: "ubuntu-latest"
     env:
@@ -210,6 +246,12 @@ jobs:
     env:
       INVOKE_CIRCUIT_MAINTENANCE_PARSER_PYTHON_VER: "${{ matrix.python-version }}"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+        python-version: ["3.10", "3.14"]
+    runs-on: "ubuntu-latest"
+    env:
+      INVOKE_CIRCUIT_MAINTENANCE_PARSER_PYTHON_VER: "${{ matrix.python-version }}"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
     steps:
       - name: "Check out repository code"
         uses: "actions/checkout@v4"
@@ -220,6 +262,7 @@ jobs:
       - name: "Get image version"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         run: "echo INVOKE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
 =======
         run: "echo INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
@@ -227,6 +270,9 @@ jobs:
 =======
         run: "echo INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+        run: "echo INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER=`poetry version -s`-py${{ matrix.python-version }} >> $GITHUB_ENV"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
       - name: "Set up Docker Buildx"
         id: "buildx"
         uses: "docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2"  # v3.10.0

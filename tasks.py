@@ -37,6 +37,7 @@ namespace.configure(
         "circuit_maintenance_parser": {
             "project_name": "circuit_maintenance_parser",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "python_ver": "3.10",
 <<<<<<< HEAD
             "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", "false")),
@@ -53,6 +54,12 @@ namespace.configure(
             "image_name": "circuit_maintenance_parser",
             "image_ver": os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER", "latest"),
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+            "python_ver": "3.14",
+            "local": is_truthy(os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_LOCAL", "false")),
+            "image_name": "circuit_maintenance_parser",
+            "image_ver": os.getenv("INVOKE_CIRCUIT_MAINTENANCE_PARSER_IMAGE_VER", "latest"),
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
             "pwd": Path(__file__).parent,
         }
     }

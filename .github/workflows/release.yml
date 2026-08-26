@@ -19,12 +19,17 @@ jobs:
         uses: "networktocode/gh-action-setup-poetry-environment@v7"
         with:
 <<<<<<< HEAD
+<<<<<<< HEAD
           poetry-version: "2.1.3"
           python-version: "3.13"
 =======
           poetry-version: "${{ env.POETRY_VERSION }}"
           python-version: "${{ env.PYTHON_VERSION }}"
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+          poetry-version: "${{ env.POETRY_VERSION }}"
+          python-version: "${{ env.PYTHON_VERSION }}"
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
           poetry-install-options: "--no-root"
       - name: "Build Documentation"
         run: "poetry run invoke build-and-check-docs"
@@ -68,12 +73,17 @@ jobs:
     needs: "build"
     environment: "pypi"
 <<<<<<< HEAD
+<<<<<<< HEAD
     # IMPORTANT: this permission is mandatory for trusted publishing.
     permissions:
 =======
     permissions:
       # IMPORTANT: this permission is mandatory for Trusted Publishing
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+    permissions:
+      # IMPORTANT: this permission is mandatory for Trusted Publishing
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
       id-token: "write"
     steps:
       - name: "Retrieve built package from cache"
@@ -86,6 +96,7 @@ jobs:
         uses: "pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e"  # v1.13.0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         ## Used for networktocode org since trusted publisher isn't supported for GitHub Plan.
         with:
           user: "__token__"
@@ -94,6 +105,8 @@ jobs:
 >>>>>>> 85666b3 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 =======
 >>>>>>> 9bea393 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+>>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
   slack-notify:
     needs:
