@@ -55,8 +55,16 @@ class HtmlParserTelxius1(Html):
             text = item.get_text(strip=True)
             # Remove optional notes like "(Backup Window)"
             text = text.split("(")[0].strip()
-            start_str, end_str = text.split(" - ")
-            events.append({"start": self.dt2ts(parser.parse(start_str)), "end": self.dt2ts(parser.parse(end_str))})
+            if "Start Time" in text:
+                start_str = text.split(": ")
+                start = self.dt2ts(parser.parse(start_str[1]))
+            elif "EndTime" in text and start:
+                end_str = text.split(": ")
+                end = self.dt2ts(parser.parse(end_str[1]))
+                events.append({"start": start, "end": end})
+            else:
+                start_str, end_str = text.split(" - ")
+                events.append({"start": self.dt2ts(parser.parse(start_str)), "end": self.dt2ts(parser.parse(end_str))})
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse table element to find circuit ID's."""
@@ -91,7 +99,8 @@ class SubjectParserTelxius1(EmailSubjectParser):
         """Parse the Telxius Email subject for maintenance ID, account and status."""
         data = {}
         parse_subject = re.search(
-            r"(?:\[([A-Z]+)\]\s*)?(?:EMERGENCY )?SCHEDULED Maintenance Notification: ([A-Z0-9]+) - (.*)", subject
+            r"(?:\[([A-Z]+)\]\s*)?(?:EMERGENCY )?(?:SCHEDULED )?Maintenance Notification: ([A-Z0-9]+) - (.*)",
+            subject,
         )
         if parse_subject:
             data["maintenance_id"] = parse_subject[2]
@@ -103,6 +112,8 @@ class SubjectParserTelxius1(EmailSubjectParser):
                 data["status"] = Status("IN-PROCESS")
             elif parse_subject[1] == "COMPLETED":
                 data["status"] = Status("COMPLETED")
+            elif parse_subject[1] == "CANCELLED":
+                data["status"] = Status("CANCELLED")
             else:
                 data["status"] = Status("CONFIRMED")
 
