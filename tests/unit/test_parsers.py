@@ -798,6 +798,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "telxius", "telxius4_subject.eml"),
             Path(dir_path, "data", "telxius", "telxius4_subject_result.json"),
         ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius5.eml"),
+            Path(dir_path, "data", "telxius", "telxius5_result.json"),
+        ),
         # Turkcell
         (
             HtmlParserTurkcell1,

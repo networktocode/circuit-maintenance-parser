@@ -971,6 +971,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             [("email", Path(dir_path, "data", "telxius", "telxius3.eml"))],
             [Path(dir_path, "data", "telxius", "telxius3_result_combined.json")],
         ),
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius5.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius5_result_combined.json")],
+        ),
         # Turkcell
         (
             Turkcell,
