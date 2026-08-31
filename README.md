@@ -107,6 +107,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - PCCW
 - Seaborn
 - Sparkle
+- SummitIG
 - Tata
 - Telstra (\*)
 - Turkcell

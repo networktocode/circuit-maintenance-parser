@@ -129,6 +129,7 @@ def _parse_summit_datetime(date_time: str, timezone: str) -> int:
         "MDT": "America/Denver",
         "PST": "America/Los_Angeles",
         "PDT": "America/Los_Angeles",
+        "UTC": "Etc/UTC",
     }
 
     if timezone not in tz_map:
