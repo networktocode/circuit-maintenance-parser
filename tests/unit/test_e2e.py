@@ -898,6 +898,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "summitig", "summitig_result.json"),
             ],
         ),
+        (
+            SummitIG,
+            [
+                ("email", Path(dir_path, "data", "summitig", "summitig_utc.eml")),
+            ],
+            [
+                Path(dir_path, "data", "summitig", "summitig_utc_result.json"),
+            ],
+        ),
         # Tata
         (
             Tata,

@@ -11,7 +11,7 @@
         "impact": "OUTAGE"
       }
     ],
-    "end": 1740117600
+    "end": 1740117600,
     "maintenance_id": "TEST-EVENT-001",
     "stamp": 1737484521,
     "start": 1740096000,
