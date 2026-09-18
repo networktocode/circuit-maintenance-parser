@@ -689,6 +689,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "summitig", "summitig.eml"),
             Path(dir_path, "data", "summitig", "summitig_html_parser_result.json"),
         ),
+        (
+            HtmlParserSummitIG,
+            Path(dir_path, "data", "summitig", "summitig_utc.eml"),
+            Path(dir_path, "data", "summitig", "summitig_utc_html_parser_result.json"),
+        ),
         # Tata
         (
             HtmlParserTata,
