@@ -51,12 +51,24 @@ class HtmlParserTelxius1(Html):
 
     def parse_list_dates(self, items: ResultSet, events: List):
         """Parse list elements to start and end datetime(s)."""
+        start = None
         for item in items:
             text = item.get_text(strip=True)
             # Remove optional notes like "(Backup Window)"
             text = text.split("(")[0].strip()
-            start_str, end_str = text.split(" - ")
-            events.append({"start": self.dt2ts(parser.parse(start_str)), "end": self.dt2ts(parser.parse(end_str))})
+            # Cancellation notices split the window into separate "Start Time:"/"EndTime:" bullets
+            label, _, value = text.partition(":")
+            label = label.replace(" ", "").lower()
+            if label == "starttime":
+                start = self.dt2ts(parser.parse(value.strip()))
+            elif label == "endtime":
+                if start is None:
+                    raise ValueError(f"Found an end time with no preceding start time: {text}")
+                events.append({"start": start, "end": self.dt2ts(parser.parse(value.strip()))})
+                start = None
+            else:
+                start_str, end_str = text.split(" - ")
+                events.append({"start": self.dt2ts(parser.parse(start_str)), "end": self.dt2ts(parser.parse(end_str))})
 
     def parse_tables(self, tables: ResultSet, data: Dict):
         """Parse table element to find circuit ID's."""
@@ -91,7 +103,8 @@ class SubjectParserTelxius1(EmailSubjectParser):
         """Parse the Telxius Email subject for maintenance ID, account and status."""
         data = {}
         parse_subject = re.search(
-            r"(?:\[([A-Z]+)\]\s*)?(?:EMERGENCY )?SCHEDULED Maintenance Notification: ([A-Z0-9]+) - (.*)", subject
+            r"(?:\[([A-Z]+)\]\s*)?(?:EMERGENCY )?(?:SCHEDULED )?Maintenance Notification: ([A-Z0-9]+) - (.*)",
+            subject,
         )
         if parse_subject:
             data["maintenance_id"] = parse_subject[2]
@@ -103,6 +116,8 @@ class SubjectParserTelxius1(EmailSubjectParser):
                 data["status"] = Status("IN-PROCESS")
             elif parse_subject[1] == "COMPLETED":
                 data["status"] = Status("COMPLETED")
+            elif parse_subject[1] == "CANCELLED":
+                data["status"] = Status("CANCELLED")
             else:
                 data["status"] = Status("CONFIRMED")
 
