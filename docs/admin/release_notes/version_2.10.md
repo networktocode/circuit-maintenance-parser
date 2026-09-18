@@ -12,7 +12,7 @@ This document describes all new features and changes in the `2.10` release serie
 
 - [#360](https://github.com/networktocode/circuit-maintenance-parser/issues/360) - Updated lxml to include version 6
 - [#361](https://github.com/networktocode/circuit-maintenance-parser/issues/361) - Updated timezonefinder to v8.2.0
-- [#345](https://github.com/networktocode/circuit_maintenance_parser/issues/345) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
+- [#345](https://github.com/networktocode/circuit-maintenance-parser/issues/345) - Updated minimum Python version to 3.10 and upgraded dependencies including pytest (9.0), pylint (4.0), towncrier (25.8), backoff (2.2), and type stubs
 
 ### Housekeeping
 

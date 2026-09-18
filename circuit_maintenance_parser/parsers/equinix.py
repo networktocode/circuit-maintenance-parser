@@ -146,10 +146,10 @@ class SubjectParserEquinix(EmailSubjectParser):
         """Parse the Equinix Email subject for summary and status.
 
         Args:
-            subject (str): subject of email
-            e.g. 'COMPLETED - Remedial Emergency Maintenance - SG Metro Area Network Maintenance - 04-APR-2026 [CHG0124084]'.
-            alternative format: 'Service Impacting - Remedial - Dark Fiber Activity - SG Metro Area - Network Maintenance - 03-MAY-2026 - CHG0125903'
-            older format: 'Scheduled software upgrade in metro connect platform-SG Metro Area Network Maintenance -19-OCT-2021 [5-212760022356]'
+            subject (str): subject of email, in one of the following formats:
+                e.g. 'COMPLETED - Remedial Emergency Maintenance - SG Metro Area Network Maintenance - 04-APR-2026 [CHG0124084]'.
+                alternative format: 'Service Impacting - Remedial - Dark Fiber Activity - SG Metro Area - Network Maintenance - 03-MAY-2026 - CHG0125903'
+                older format: 'Scheduled software upgrade in metro connect platform-SG Metro Area Network Maintenance -19-OCT-2021 [5-212760022356]'
 
 
         Returns:
