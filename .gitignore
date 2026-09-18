@@ -309,3 +309,4 @@ docs/CHANGELOG.md
 public
 /compose.yaml
 /dump.sql
+/circuit-maintenance-parser/static/*
