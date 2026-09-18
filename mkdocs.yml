@@ -106,7 +106,7 @@ plugins:
         python:
           paths: ["."]
           options:
-            heading_level: 2
+            heading_level: 1
             show_root_heading: true
             show_root_members_full_path: true
             show_source: false
@@ -141,4 +141,3 @@ nav:
       - Development Environment: "dev/dev_environment.md"
       - Release Checklist: "dev/release_checklist.md"
       - Architecture Design Records: "dev/arch_decision.md"
-      - Code Reference: "code-reference.md"
