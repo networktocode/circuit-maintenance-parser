@@ -4,6 +4,7 @@ name = "circuit-maintenance-parser"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 version = "2.12.1b1"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 =======
@@ -17,6 +18,9 @@ version = "0.1.0a0"
 =======
 version = "0.1.0a0"
 >>>>>>> d140d80 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+version = "0.1.0a0"
+>>>>>>> 34a9265 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 description = "Python library to parse circuit maintenances from network service providers."
 >>>>>>> 85666b3 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 authors = ["Network to Code, LLC <opensource@networktocode.com>"]
@@ -46,6 +50,7 @@ packages = [
     { include = "circuit_maintenance_parser" },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ]
 
 packages = [
@@ -54,10 +59,13 @@ packages = [
 >>>>>>> e9e8933 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 =======
 >>>>>>> d140d80 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+>>>>>>> 34a9265 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 ]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -126,6 +134,11 @@ click = "*"
 
 [tool.poetry.group.dev.dependencies]
 >>>>>>> d140d80 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+click = "*"
+
+[tool.poetry.group.dev.dependencies]
+>>>>>>> 34a9265 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 coverage = "~7.15.4"
 pytest = "*"
 mock = "*"

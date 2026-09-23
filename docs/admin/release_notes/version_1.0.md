@@ -28,6 +28,7 @@ This document describes all new features and changes in the release `1.0`. The f
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## [v1.0.0] - 2026-08-12
 >>>>>>> 85666b3 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 =======
@@ -39,6 +40,9 @@ This document describes all new features and changes in the release `1.0`. The f
 =======
 ## [v1.0.0] - 2026-09-23
 >>>>>>> d140d80 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
+=======
+## [v1.0.0] - 2026-09-23
+>>>>>>> 34a9265 (Cookie updated targeting develop by NetworkToCode Cookie Drift Manager Tool)
 
 ### Added
 
