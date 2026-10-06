@@ -1,0 +1,1 @@
+Updated dependency `urllib3` to `>=2.8.0,<3.0.0` to mitigate CVE-2026-97688.
