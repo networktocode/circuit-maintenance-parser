@@ -31,7 +31,7 @@ pydantic = ">=1.10.4,<3"
 icalendar = "^5.0.0"
 bs4 = "^0.0.2"
 lxml = ">=6.1.0,<7"
-geopy = "^2.1.0"
+geopy = "^2.5.0"
 timezonefinder = ">=6.0.1,<9.0.0"
 backoff = "^2.2.1"
 chardet = "^5"
@@ -40,7 +40,7 @@ openpyxl = { version = "^3.1.5", optional = true }
 pandas = { version = "^2.2.3", optional = true }
 python-dateutil = "^2.9.0"
 requests = ">=2.33.0,<3"
-urllib3 = ">=2.7.0,<3"
+urllib3 = ">=2.8.0,<3"
 # Floor `numpy` per Python version so 3.11+ (including 3.14) pulls modern wheels while 3.10 stays on the 2.2 line.
 numpy = [
     { version = ">=1.22.4,<2.3", python = "<3.11" },

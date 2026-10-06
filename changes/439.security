@@ -1,0 +1,1 @@
+Updated dependency `geopy` to `^2.5.0` to mitigate GHSA-mhvh-fq92-pfmr.
