@@ -40,7 +40,7 @@ openpyxl = { version = "^3.1.5", optional = true }
 pandas = { version = "^2.2.3", optional = true }
 python-dateutil = "^2.9.0"
 requests = ">=2.33.0,<3"
-urllib3 = ">=2.7.0,<3"
+urllib3 = ">=2.8.0,<3"
 # Floor `numpy` per Python version so 3.11+ (including 3.14) pulls modern wheels while 3.10 stays on the 2.2 line.
 numpy = [
     { version = ">=1.22.4,<2.3", python = "<3.11" },
