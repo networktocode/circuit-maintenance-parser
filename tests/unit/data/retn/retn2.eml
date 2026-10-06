@@ -1,0 +1,268 @@
+Received: from MW4PR17MB5516.namprd17.prod.outlook.com (2603:10b6:303:127::9)
+ by CH3PR17MB6987.namprd17.prod.outlook.com with HTTPS; Tue, 21 Apr 2026
+ 08:35:15 +0000
+Received: from YQBPR0101CA0339.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:6b::29) by MW4PR17MB5516.namprd17.prod.outlook.com
+ (2603:10b6:303:127::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
+ 2026 08:35:12 +0000
+Received: from QB1PEPF00004E06.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:6b:cafe::7c) by YQBPR0101CA0339.outlook.office365.com
+ (2603:10b6:c01:6b::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
+ 21 Apr 2026 08:35:12 +0000
+Authentication-Results: spf=pass (sender IP is 217.28.63.37)
+ smtp.mailfrom=retn.net; dkim=pass (signature was verified)
+ header.d=retn.net;dmarc=pass action=none header.from=retn.net;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of retn.net designates
+ 217.28.63.37 as permitted sender) receiver=protection.outlook.com;
+ client-ip=217.28.63.37; helo=r-message.retn.net; pr=C
+Received: from r-message.retn.net (217.28.63.37) by
+ QB1PEPF00004E06.mail.protection.outlook.com (10.167.240.20) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48
+ via Frontend Transport; Tue, 21 Apr 2026 08:35:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=retn.net;
+	s=mail; h=MIME-Version:Content-Type:Message-ID:Date:Subject:CC:To:From:Sender
+	:Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=JS8dplxdIzk4TIx5hztZJDKWpU7CVOukldH6qQ3nopc=; b=MNRy78xJCFxoVoEknsGFW5ChsF
+	PqJOc1XgWbtVASsjb/df9czp5LKmwtqltT55glFGsT5FBSok81iZjHw0mceSkr9gSoUnua/WkHC5i
+	43eQ8Rbi/jj/TS1oVFQsa3mSF8QOIj6xh84dtd296KO+udfuFfVfIbczNvqKUmZqdzFA=;
+Received: from sd.rtc.rix.lv.retn.net ([87.245.213.129] helo=exch-rix-1.corp.retn.net)
+	by r-message.retn.net with esmtp (Exim 4.95 (FreeBSD))
+	(envelope-from <no-reply@retn.net>)
+	id 1wF6UQ-000E9p-FX;
+	Tue, 21 Apr 2026 11:35:09 +0300
+Received: from EXCH-FKT-1.corp.retn.net (172.23.237.141) by
+ exch-rix-1.corp.retn.net (172.23.246.149) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.39; Tue, 21 Apr 2026 11:35:05 +0300
+Received: from EXCH-LON-2.corp.retn.net (172.23.247.12) by
+ EXCH-FKT-1.corp.retn.net (172.23.237.141) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.36; Tue, 21 Apr 2026 10:35:05 +0200
+Received: from EXCH-LON-2.corp.retn.net ([::1]) by EXCH-LON-2.corp.retn.net
+ ([fe80::db4a:d94e:ef33:f9b%16]) with mapi id 15.02.1748.010; Tue, 21 Apr 2026
+ 09:35:04 +0100
+From: _no-reply <no-reply@retn.net>
+To: "maintenance@example.com"
+CC: _rts <rts@retn.net>
+Subject: [RETN.NET Ticket#EW-40134936]: Emergency Works Notification
+ CID#133337
+Thread-Topic: [RETN.NET Ticket#EW-40134936]: Emergency Works Notification
+ CID#133337
+Thread-Index: AQHc0WnAyD9AidF4AEmuzkiSUAUbhw==
+Date: Tue, 21 Apr 2026 08:35:04 +0000
+Message-ID: <b6b59928672b45c4bc3d42bac22efc5c@retn.net>
+Accept-Language: en-US, ru-RU, en-GB
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-rts-id: 69e5e68b3a00003f931b111a
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [172.23.237.2]
+Old-x-esetresult: clean, is OK
+Old-x-esetid: 37303A29C1AB5551647160
+Content-Type: multipart/alternative;
+	boundary="_000_b6b59928672b45c4bc3d42bac22efc5cretnnet_"
+X-EsetResult: clean, is OK
+X-EsetId: 37303A295DB3B15E647160
+Return-Path: no-reply@retn.net
+X-MS-Exchange-Organization-ExpirationStartTime: 21 Apr 2026 08:35:11.6712
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 4263dbeb-0f3d-4005-35d3-08de9f80e733
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: QB1PEPF00004E06:EE_|MW4PR17MB5516:EE_|CH3PR17MB6987:EE_
+X-MS-Exchange-Organization-AuthSource: QB1PEPF00004E06.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 4263dbeb-0f3d-4005-35d3-08de9f80e733
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|704161411799003|69100299015|7049299003|3109299003|1032899013|2092899012|7149299003|12012899012|13003099007|19002099003|16102099003|8096899003|2066899003|4076899003|55112099003|57112099003;
+X-Forefront-Antispam-Report: CIP:217.28.63.37;CTRY:LV;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:r-message.retn.net;PTR:r-message.retn.net;CAT:NONE;SFS:(13230040)(704161411799003)(69100299015)(7049299003)(3109299003)(1032899013)(2092899012)(7149299003)(12012899012)(13003099007)(19002099003)(16102099003)(8096899003)(2066899003)(4076899003)(55112099003)(57112099003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 08:35:11.6648
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4263dbeb-0f3d-4005-35d3-08de9f80e733
+X-MS-Exchange-CrossTenant-Id: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1
+X-MS-Exchange-CrossTenant-AuthSource: QB1PEPF00004E06.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR17MB5516
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.9249370
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9846.012
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?Windows-1252?Q?KRBVgrAVn24I57QC3DLYZ1HquM2hvAP1ukP716+MjOpFtX7vEt0PgY/r?=
+ =?Windows-1252?Q?pF/cHMiLYFVvqZmhK/mTBUDKiRe7r4QxgKZytcEwzv9hFczINB6MVyuG?=
+ =?Windows-1252?Q?takcT17/+SP7WeGBrGIsW2tOJuvGLSpEb6ZmpKLk7eN/ObMBXWaR1d/i?=
+ =?Windows-1252?Q?b6t9njdKehtDt4AtLdCDl+cvs1d9Q7D4bLifyiJQS/nJMV3+PuGNUpbf?=
+ =?Windows-1252?Q?N4KkbK+FfU8IzXY9ykjEF8BC+XRd88n47MmV/n0iBTZf6mHjL/mldk5h?=
+ =?Windows-1252?Q?NsUu8TGLcjOmyKvP/pLGi67/OmWhXc8rUJ3ot0BXSz0Ae2L92fOABSNU?=
+ =?Windows-1252?Q?D2E+Jh0mHo8nMLZHgdq5Gq1PZAmYqUebtgQJ/Wv+Gg+ULKC5NAVx+KDY?=
+ =?Windows-1252?Q?Xlk8CR8LlHEkIvz0E2nmWyZ5QRC42M289ZFD0qjG4HL/AikgqJkmCWWe?=
+ =?Windows-1252?Q?XLtZMluq6B+CGXrO5ZCTnYfnoxOkyfYsiLRibajCjkJnUqpGuWNM/Qhh?=
+ =?Windows-1252?Q?243MLXW0st3HeMlaDq+/hhvcOj8S+K2PCg29yL++PN1J9TnH4AmGhtKc?=
+ =?Windows-1252?Q?Od6L+zpU1UbgXtbu6VYgZRo2/EZ9ZSqQxC2Ij29QJ9Ucbnvp+V/5RMID?=
+ =?Windows-1252?Q?RO5VvD+62eLhO5gw2lX/7lwFic5Oq4o1y8YCqJ1h8l7v+EpwSnAXSckw?=
+ =?Windows-1252?Q?Zp+Wc2KDZN6pDJtedgESCr8GTOXTtRjklqYtp6ITmZbZXq+d/wpximvO?=
+ =?Windows-1252?Q?Pj0ssu8cHddNtU9ooIik89htez/V2+HOC8pRCvqBj7tjKubgfBUXBhPo?=
+ =?Windows-1252?Q?4OnIDa6K3rbe6PNKOnDSFyv8BY6RrAwEx3J3fK1OEXM9bWBaYoAelVra?=
+ =?Windows-1252?Q?xOB+jAFRxtpsWOanI/fGVDRjFuN4f3/VVlKKv3Tx49b9G8GuT2TSlAVA?=
+ =?Windows-1252?Q?4UR2DBdpBKeJZ9VaOQmHcYMd7OJ78ipIcBjt/W13VJHawzIYE3Jgq8vU?=
+ =?Windows-1252?Q?wECkIawCEljT00FBqr3T1ObI3e936VTdo6gUeMur//KuRZ91iCYO8wH5?=
+ =?Windows-1252?Q?7dpmSlBB+oFnDE5nbtOBUz3TovW1XeRwzuxU54Tj4z5Jm2fgpKQTYDHV?=
+ =?Windows-1252?Q?J2mXpxVDu0vK9f1eaPMKGY8F+4CBKnBL4RKuGRk/7XWPY+ynnSR8UDp9?=
+ =?Windows-1252?Q?zl1K6YpFzjM7ZMk4luXmX7JMD4qqt7rLfGIdEwfClSMkmIXChXMh5pq1?=
+ =?Windows-1252?Q?5hBYcMmYSW5k3OlVOFbCPxBhmRAU4KwXVSxqvdXQ+HtRD4+IwNxGrZlS?=
+ =?Windows-1252?Q?3+FhsdwDWBhN1uz8DE5i+Pp2r5rchr7tHuSE/DWKvYqSfUvNENgqbYdM?=
+ =?Windows-1252?Q?QNjxqN3XreCCXQSSAzT794GtyqLdyFzWLnpfzhojn8Ayx96kHMjaEe93?=
+ =?Windows-1252?Q?CxfFWXg4jlx89Okt5HU1+OlKsyvr34hLA5HPZ+5IJwRDoRyHJwSBex3p?=
+ =?Windows-1252?Q?dpc9M9kyfiNe6y2Bdc8HbAfOBDR8RROH6h3Ay19R9A8N9lyzIHybU6is?=
+ =?Windows-1252?Q?JuzuRJpbqTKiNzEeV+5oBzgMKqAcGtzgUqNb5Wjg5ERsSHiN0GswygHi?=
+ =?Windows-1252?Q?R/qCjtmWac9AqPan3N+ahopBGjXk4so4SZygeGt/c0Y+aayLSTpqozN7?=
+ =?Windows-1252?Q?CJxQvwKyZ/blWG9wBJmyOg+8n8/+3IYIENpggyyqNpdyYRskxfgvQJ21?=
+ =?Windows-1252?Q?G1Z2tBiZHcrdQ6nFlZxFPe6w9n6v6aN8kaP2Bu7vS5mdlOJRfBKRWJ+R?=
+ =?Windows-1252?Q?QUYLZLOt3vewgwpMxGDxb8sgukz0CBv0aQw3/PlnMOs8JRZRsPeKMuQN?=
+ =?Windows-1252?Q?GjylMycEGeELEG8eBytXdYy3X/ww0aoMzFEkqdMh0GTCUVHKrjAZNE76?=
+ =?Windows-1252?Q?pvje3O1mt/7dmmpUxaIyRiqtlHswihJc0L/ljuXOq3S1WmkhK6j1a5Nb?=
+ =?Windows-1252?Q?PFzpevvFrUsVkAu7yCLoNGUUKuoIAqZGQYbms0/Ma8wpyGyIrRfnA1Kc?=
+ =?Windows-1252?Q?mK4Kfzf/5idnK6pLkMZoGYrj5fawtDpSRJ2NpHRH6jsthzjLnPQbRFkL?=
+ =?Windows-1252?Q?cHUlgfq87THv4IjOv6ZDbZqcqtZ2Ommdja/818Lwx5idpWNtsnBm0dl+?=
+ =?Windows-1252?Q?BpjGv18wmJyiZ2Cu7k0tLxoWxdZUtTA852AERPm0Mak7zS+6RzV+m2Qf?=
+ =?Windows-1252?Q?WN/EV4FXvJuK1qFswoHswRxoN5Y1qN9qN088k6hq4z14z9Ia4k5emke9?=
+ =?Windows-1252?Q?4fZp32ah56OV57ki2AsZ42MBAEDALPqOQxNXqW1skApDoWd4jb69kiio?=
+ =?Windows-1252?Q?R3RhJCANs8lLtTbmG+Crivc6YUWSzvvNYP48rx5E3264NW+IGDGa3iYT?=
+ =?Windows-1252?Q?DZv2i8DqRSw80CUxbTmcoiPXCMrzZQYiFf/7ZmF3qP4t+VGGuzMf77LE?=
+ =?Windows-1252?Q?wQydTX++cyTegCElCpsLE9fLCCELgwvgRpCtCuBOyNRJ8Wc9ILgQYtk9?=
+ =?Windows-1252?Q?2XoIW3yHCwRVcdNDOQYrBBUr6JyRsaxDjB8fxIFRbn+d8xcHl8KFW95C?=
+ =?Windows-1252?Q?DCCcbP6mt/0HFNAzfe9NY/l/eAdPbU7epFIk1U/x1qphkHHCesXtVPw6?=
+ =?Windows-1252?Q?tiJxaMrTHEmpHsGbyoa0XEZ5eNPkp80PBpgaHqSxyzC6sWj2Z6ddG6DT?=
+ =?Windows-1252?Q?ws+YmY9MmG/cXSu3AjEQ1GpF9QAlvSnMYGEgAmX/JgmwstqN8Fp1nKYv?=
+ =?Windows-1252?Q?aCSX2IvAM7Fsn4fAzpTd91ZkaKCrG7yO3Gyfp0lvoh3uvTcDIEO/mytc?=
+ =?Windows-1252?Q?Oq9lnfAr+R9FLpMTslISXNIzSPt9GPr4KLkGe8yY+gwWd7PaBxjxEUXz?=
+MIME-Version: 1.0
+
+--_000_b6b59928672b45c4bc3d42bac22efc5cretnnet_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+[https://portal.retn.net/en/assets/logo/logo.jpeg] <http://retn.net>    20.=
+04.2026 08:40 GMT
+________________________________
+Emergency Works Notification =97 Ticket Opened
+Dear Customer, Ticket EW-40134936 has been opened for you.
+________________________________
+Planned Start Time: 24.04.2026 08:00 GMT
+
+Planned End Time: 24.04.2026 14:00 GMT
+
+Planned Maintenance window is up to: 2 h
+
+Location: Romania, Bucharest <-> Romania, Iasi
+
+Services, which will be affected (complete loss):
+WL-133337-36.RO.BUH.NXD-UA.KIV.NTL-100G
+Description:
+Emergency work on our partner's network. This is a backup date of EW-401349=
+35.
+
+
+We apologize for any inconvenience this may cause.
+Please send all your questions regarding this maintenance to noc@retn.net
+________________________________
+Phone: https://retn.net/support/noc
+E-mail: noc@retn.net <mailto:noc@retn.net>
+Web: www.retn.net <http://retn.net/>
+Customer Portal: www.portal.retn.net <https://portal.retn.net/en/login/>
+
+
+--_000_b6b59928672b45c4bc3d42bac22efc5cretnnet_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+</head>
+<body>
+<table width=3D"800">
+<tbody>
+<tr>
+<td>
+<div style=3D"font-family: 'Century Gothic', Arial, 'Times New Roman', Time=
+s, sans-serif;">
+<table width=3D"800">
+<tbody>
+<tr>
+<td><a href=3D"http://retn.net"><img style=3D"height: 42px" src=3D"https://=
+portal.retn.net/en/assets/logo/logo.jpeg">
+</a></td>
+<td align=3D"right" valign=3D"bottom"><b style=3D"font-size: 14pt; border-s=
+pacing: 0 ; color:#ff0000">20.04.2026 08:40 GMT</b>
+</td>
+</tr>
+</tbody>
+</table>
+<hr color=3D"#fb4d8a">
+<h3 style=3D"margin-top: 0;"><span style=3D"font-size: 20pt; color:#FF8000;=
+">Emergency Works Notification =97 Ticket Opened</span><br>
+<span style=3D"font-size: 14pt; color:#000000;">Dear Customer, Ticket EW-40=
+134936 has been opened for you.</span>
+</h3>
+<hr noshade=3D"" align=3D"left" width=3D"40%" color=3D"#000000">
+<b>Planned Start Time:</b> 24.04.2026 08:00 GMT <br>
+<br>
+<b>Planned End Time:</b> 24.04.2026 14:00 GMT <br>
+<br>
+<b>Planned Maintenance window is up to:</b> 2 h <br>
+<br>
+<b>Location:</b> Romania, Bucharest &lt;-&gt; Romania, Iasi<br>
+<br>
+<h4 style=3D"margin-bottom: 0;">Services, which will be affected (<font col=
+or=3D"#ff0000">complete loss</font>):</h4>
+WL-133337-36.RO.BUH.NXD-UA.KIV.NTL-100G <br>
+<div style=3D"height: 1.6em;"></div>
+<h4 style=3D"margin: 0;">Description:</h4>
+Emergency work on our partner's network. This is a backup date of EW-401349=
+35. <br>
+<br>
+<br>
+<div style=3D"height: 0.8em;"></div>
+We apologize for any inconvenience this may cause. <br>
+<b style=3D"font-size: 15pt; border-spacing: 0 ; color:#ff0000">Please send=
+ all your questions regarding this maintenance to noc@retn.net
+</b>
+<hr align=3D"center" color=3D"#4a64ea">
+<table width=3D"800" style=3D"font-size:9pt;">
+<tbody>
+<tr>
+<td><span>Phone: <a href=3D"https://retn.net/support/noc">https://retn.net/=
+support/noc
+</a><br>
+E-mail: <a href=3D"mailto:noc@retn.net">noc@retn.net </a><br>
+Web: <a href=3D"http://retn.net/">www.retn.net </a><br>
+Customer Portal: <a href=3D"https://portal.retn.net/en/login/">www.portal.r=
+etn.net </a>
+</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+
+--_000_b6b59928672b45c4bc3d42bac22efc5cretnnet_--

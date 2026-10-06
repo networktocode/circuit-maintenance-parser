@@ -1,0 +1,38 @@
+Date: Wed, 5 Aug 2026 21:34:23 +0000
+From: HAWAIKI NOC <support@bw-digital.com>
+To: noc@example.com
+Subject: Re: [Ticket#2026072290001004] Hawaiki Submarine Cable: Hazardous Condition Notification 2026-Aug-05 20:00 UTC
+Content-Type: multipart/alternative; boundary="----------=_boundary-hawaiki-completion"
+MIME-Version: 1.0
+
+------------=_boundary-hawaiki-completion
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Valued Hawaiki Customer,
+
+Please be informed that the maintenance has been completed. Contingency window
+will not be required.
+
+Ticket Reference:
+2026072290001004
+
+-----
+Best Regards,
+HAWAIKI NOC
+
+------------=_boundary-hawaiki-completion
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body>
+<p>Dear Valued Hawaiki Customer,</p>
+<p>Please be informed that the maintenance has been completed. Contingency window will not be required.</p>
+<p><strong>Ticket Reference:</strong><br />
+2026072290001004</p>
+<p>Best Regards,<br />
+HAWAIKI NOC</p>
+</body></html>
+
+------------=_boundary-hawaiki-completion--

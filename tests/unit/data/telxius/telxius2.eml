@@ -1,0 +1,468 @@
+Received: from PH0PR17MB4815.namprd17.prod.outlook.com (2603:10b6:510:8b::18)
+ by CH3PR17MB6987.namprd17.prod.outlook.com with HTTPS; Tue, 28 Apr 2026
+ 18:09:18 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=O7RbbllYseHFkeFtBlifDtVY7Jetm7+jvUl5p/99FZGCYJDd3OuGOSwH/Dw2XfHlXKE39WBdxi1aJKHfX4k/IcJQes05QvFecQxDK/il9xIWBXxME3HscWCvka/G7qYmDVCWnvcV1eeVxboVwywkuqJeNm6RldPhHWCXlcQpwrIMbAmVr5aR0X3A+Wk34Kd+n0lQZTU+zam9WqFmyx3dNFe2FFNk7nk9OsHba1lHOc46JFgWzko2jWnfuA29r/b0If/P/+iTFcbPGEL5anM5LDvpWdBSiZldkkT7aZin82x995/jCdeeDwUx8B11N9OhyJsvzrGHmFZFLh4BZKzh4w==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iziZccgHG4BzA2tU9o6+E+wjOXIHiUkCJI7EQ3Mklsw=;
+ b=eyTEfpRnG1SyTQ8y1qVkRLtuZm+s4ExcKEO+sOi+ROpaX+Eqy1XcPUPOOIdc+Wb5NFbtzL9e4sRydLaWKuL5cAc2QLCuhL7D1cDdHoNXvj/BEtvCSas8Deug/V5RsmfJHTvnjWXIoNFG1+dSrtsucxK/c17uAu3SYiYLkh2FRnEVGtFWZoNDjjYvOWZBlYEJrPuxRYI5HMotmVtCVk57lzIpacrgVCcRA0AJn/j9IEdKCXlWUR5nqeYFVseVu6yG18u3bv/SqP/EzvG/CJjoZWrnLd9bi4QIkeu+xKuOp1UzC8uLV3+QJ2wIZZHyuS7uqwtaq1/jCDORpSqbz6ZE4Q==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 2a01:111:f403:c201::1) smtp.rcpttodomain=example.com smtp.mailfrom=telxius.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=telxius.com;
+ dkim=pass (signature was verified) header.d=telxius.com; arc=pass (0 oda=1
+ ltdi=1 spf=[1,1,smtp.mailfrom=telxius.com] dkim=[1,1,header.d=telxius.com]
+ dmarc=[1,1,header.from=telxius.com])
+Received: from YT2PR01CA0015.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:38::20)
+ by PH0PR17MB4815.namprd17.prod.outlook.com (2603:10b6:510:8b::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.29; Tue, 28 Apr
+ 2026 18:09:11 +0000
+Received: from YT1PEPF00001E8B.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:38:cafe::a1) by YT2PR01CA0015.outlook.office365.com
+ (2603:10b6:b01:38::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.26 via Frontend Transport; Tue,
+ 28 Apr 2026 18:09:11 +0000
+Authentication-Results: spf=pass (sender IP is 2a01:111:f403:c201::1)
+ smtp.mailfrom=telxius.com; dkim=pass (signature was verified)
+ header.d=telxius.com;dmarc=pass action=none
+ header.from=telxius.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of telxius.com designates
+ 2a01:111:f403:c201::1 as permitted sender) receiver=protection.outlook.com;
+ client-ip=2a01:111:f403:c201::1;
+ helo=AM0PR83CU005.outbound.protection.outlook.com; pr=C
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (2a01:111:f403:c201::1) by YT1PEPF00001E8B.mail.protection.outlook.com
+ (2603:10b6:b08::137) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18 via Frontend Transport; Tue,
+ 28 Apr 2026 18:09:10 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aMgKZ7oZm0d96O3opWZDkqgSg9UONQ4zmaC1Tb0oTGbW2aYO9sdZYfqcUNSvr3U7+f/4VaBrqquPB1p7GAB0+nzgFyzo5I/qDVo20Y+E8YD39p99KY/ce2EjdcbzwMGHyYwg7CkEVvXhmbfZVV/ELsONPv2ig0BfrwIcMqhE7TWh6lGb2panQMmawWnGy1iNoEGFojTaoXxalm3rlZtrVcb2d4cn4fkklb6FQ1eJsidT5G1/1pZzdx3U3Z0+mAlxP+c6z4QV9w2R1RWGnj244kKNQwRnPbuzLkUT5aEYn4G6CYuUx7y2SXxDxYceVrrW087AaBXlm96V4S5QyBFCTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iziZccgHG4BzA2tU9o6+E+wjOXIHiUkCJI7EQ3Mklsw=;
+ b=VRMRp9JdMEjNLzqTeF0DSUKFGgdjfLNJIcmILoLNNEn9jGOYEDmUhJXhciZPeD6gU9hK1MtSHkbV8oB4Nb4QpqQLRvPOA/91S8E4p2RRqE/KNzMKIoeKjJpLV0U8VI4dFd/9bUqYLFaRl2tuO5ec6ldzn49Dd+D1HeLjCitd7YhJxD6lIXC5MQ+FDxofgtfWuneTiaB6wpKWxuYVOTdzW5VH64KXIXk0zbbTxGt7vTyfWkuXwiegoCZQOPNkFtrDf4WyIfVhNbbOAMNERH382pjkYSK5pVrvL7keuD+IQxHG3JhGCdQ9+/D7r6K9CX9Ikz4JN0Zx7JR+FqSzJi9FBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=telxius.com; dmarc=pass action=none header.from=telxius.com;
+ dkim=pass header.d=telxius.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=telxius.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iziZccgHG4BzA2tU9o6+E+wjOXIHiUkCJI7EQ3Mklsw=;
+ b=EKP+aPf0arrmBM7BxLcljCibFnodehXMG+vZ7AY0cp9NzCvllRpKuCOFmlI0qOudxVL4MsiFZIKUPG1kmrgjWfOHIq0CcKynmMG7OMB0tt/cmqJksLDG/Ku/XaZMOkQH/Nej+OgFX2iRTnmi4ANqiFkH/9HCTTexs3b9pTpTlXVukiVe9ohj4YQJ+e80eSzzaMAgkKrX+MkCRJ0R4OJ82+6qlHKTr7kJ+Nj7GEsC2mQrRRWtehExLsiab1IsqIZ+9wc6B7XmpOtxknP/KnDn+08NvZWBQVCY8Y3n4lRSPDzF5rsw9NwYpMJXMKADWhDl4FLvW2p9053EfRNzapQ3xA==
+Received: from VI0PR06MB10287.eurprd06.prod.outlook.com (2603:10a6:800:2e7::8)
+ by OSKPR06MB10051.eurprd06.prod.outlook.com (2603:10a6:e10:9a::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Tue, 28 Apr
+ 2026 18:09:07 +0000
+Received: from VI0PR06MB10287.eurprd06.prod.outlook.com
+ ([fe80::62:8856:95bc:aa97]) by VI0PR06MB10287.eurprd06.prod.outlook.com
+ ([fe80::62:8856:95bc:aa97%5]) with mapi id 15.20.9846.025; Tue, 28 Apr 2026
+ 18:09:07 +0000
+From: Scheduled Works Telxius <sworks@telxius.com>
+To: maintenance@example.com
+Subject: SCHEDULED Maintenance Notification: SWX0036396 - ACME
+Thread-Topic: SCHEDULED Maintenance Notification: SWX0036396 - ACME
+Thread-Index: AQHc1znhDYHFcKasuUSKntDkKolnpA==
+Date: Tue, 28 Apr 2026 18:07:31 +0000
+Message-ID: <VI0PR06MB102875EF917E99D14EAD4E8C6DE372@VI0PR06MB10287.eurprd06.prod.outlook.com>
+Accept-Language: es-PE, en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=telxius.com;
+x-ms-traffictypediagnostic: VI0PR06MB10287:EE_|OSKPR06MB10051:EE_|YT1PEPF00001E8B:EE_|PH0PR17MB4815:EE_|CH3PR17MB6987:EE_
+X-MS-Office365-Filtering-Correlation-Id: 82b6c0fd-23d1-4acb-70e4-08dea5513f46
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|366016|1800799024|6049299003|376014|56012099003|18002099003|38070700021|4053099003|4013099003|8096899003;
+X-Microsoft-Antispam-Message-Info-Original: wxIxls3vkeN9gnEGjW0+NGyqX0AHUZdowK/bdYJ/XDBtR4y5/b2okI0hE6muwHC426KTPTrl3BZazDxJua+rkNZ5wFwjDNDrMf9rjPNsJxnaVVkL290oBQaKJbP5MCjemnoCjolqiNmyfTBZrYKFF0zxqbW/0MNJ3COzxziLS024tOktAq0N69rog/R9wzYZHJanfOcAGs1ll0YPZpMuW4ervUkxDTStud2fu/lLhFDzKACcW7HJd2cVyeovMIiiJUt2s6WZwoUC2wG7ABCa7oweTD8Gmq8yReiQiOQmjabaGAd22mTLeKSD7Rw/iipEszrJXl+fDYNLiWZ2kGETsKBesURkfzYGOvqAaKpS7tGZWQtHXRl56FiiSXyQId6e4F9r/Kgl+xJ5GwMWD6oSnSVyOYZiT5sqLFtAdqEb/J8Zaf6JddcPpNaz1iRGUMpfdSLobswHRH+vhdxF0lu+3pJafqxJsPiGvq047nVGjaYOM+ytHiRQmhB+7GNSI9hlms6mUPkxWK8KZiZHOYEf3tLw/x28zp7g+z+Y69mGRLu5YJYucX53xPZXzlXGojjXdl8kwxuAdeEYbZzGD17PhxJZvs7W4XmU3eiYo7Y9dy61+8GXCvFxqBVjJdGV7dp8StQ/ett42xWziiQnDKzkYhtTlUf4wi13W21sZhWOuSu4CgPcTK7lyEieiAf3Koh/+kbwxNGfcYjzTAIpbcAdEa6TrSL3lUaEtr7ZsOmfHKoT/QU/FVR3fXqtCmiAEZJvX8r8FSXKlNODJw0uEKVyyd9FJd6638Yv9wjigcXCToA=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI0PR06MB10287.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(6049299003)(376014)(56012099003)(18002099003)(38070700021)(4053099003)(4013099003)(8096899003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-Original-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-Original-0: =?us-ascii?Q?Ul0e2oFS/K1eiWHJ1+8WOkw/9QkHrf7DWVzHbkIkLD4dB4Stva94MybsJAuN?=
+ =?us-ascii?Q?87IQ4BkgCS41ELwctxOwPahXelt64hKP4AOokdaQGnM0XGVV28EhJvZP0tlL?=
+ =?us-ascii?Q?MIL8tPoAz9p0hLwjA+3Dvzw02uKm6u1ENgYOpavfL94ArTurhqA8Apzp/vD/?=
+ =?us-ascii?Q?7iSmKhQBU0bYHFqC9lKUSHOCniOL+k3GXB6zqWmKgg9J77iqbuWaqgtDK3Oo?=
+ =?us-ascii?Q?6Zi+Bzy2vYu1aXPfdP2/LRf8WHP0eENc4BvE/NWzQBbCrsFRKLhLOjckD3QA?=
+ =?us-ascii?Q?zMAAQgJIanF8cpYn5uGAz9DGR585G2ZJ4lMC53K/aB0KO1luswwwYg9XDHjS?=
+ =?us-ascii?Q?284DHpRQ3QyqQth/ps0wD5nDu4+0FNUVWH5eN/4YHEUNKPdWMwphO2p93Qpp?=
+ =?us-ascii?Q?+lJGijq8nD9aotqWuV87Zz1YDiEH1ZTGI9NrVh1GPwbSAS76qwZv4or9t9ec?=
+ =?us-ascii?Q?apfTIZvCmg80RSwTxAzVDtQStyHsa4hHbVdEc8Qsq8r/Gyz1d0qrcKfCymjv?=
+ =?us-ascii?Q?lMx5mXdgX3Vsh8R3Nadbe/MdTCC1oVWNvWBcViUVsWL9yj3KHIa942iPnWzR?=
+ =?us-ascii?Q?2kCTEBO+mxQGbbH/AIkjldsiFa62vigdQ4Z4gu6r6CrBg0TPznyTz2htI2I5?=
+ =?us-ascii?Q?rURBLBEvfr4+ZC6Iy5I+EigawWcsS/VFS0BJFMoXzfLDBSs6p6yv8qTpHDr3?=
+ =?us-ascii?Q?KZaiBjzRfl4tNKbGXPOMS3iqZGd8xKALAL31bttnSVRrsMo1KosYRsFndZyG?=
+ =?us-ascii?Q?Sc3fJbUFE8l7sQf5+QHjhcQCCpJbZWw62DYBc4Xyoz1Kvf6/PsjeDFCpm1ZR?=
+ =?us-ascii?Q?sgXRKmLhtizdrEL0eE8p1fAczOOdUiIzN6Nc9J0fynLrg8d9wamBPyj8DcUv?=
+ =?us-ascii?Q?xcNwX1co7tIgQKcjJeO5rnihxsq/wOHCqxV2q7txCg3gvQJgegJu08xbMoXM?=
+ =?us-ascii?Q?g9vDr6EzwXhsvV0MVAXcUV0prRL9x0RLZz3QZ0836cYkQ0kB4Sx0B7CqzwB1?=
+ =?us-ascii?Q?zkFbflAm6u7ctnNpFN/FxBeKyMQxXZS7kRC5vhlabeax7ctPNDSijl+0PJvw?=
+ =?us-ascii?Q?7ZMMocyJUm1LLXQzRAQEWoWDVz+eT5iyQBjU0AMmHn+cAWgb7o1OCBPRnhdf?=
+ =?us-ascii?Q?rUyezXyob78TEWTjUaWbgZPYiMm4nPBJ39fWwOfjymi1z6uTHUmCz9Q3J6Yt?=
+ =?us-ascii?Q?YVkokATbnlUpSMJGeY11XhJgtvEe3GJms3ddNkzeUl/etSxnH1B2PeFGxL4W?=
+ =?us-ascii?Q?Luky5EXFEm96tEvt/1k9tVfA9pnnzpF+an4PllyvZ6sbS20duZ2PNr5fujlV?=
+ =?us-ascii?Q?sRpfqOgngjvhvOPsRen5EtcAdEmIS3dRx6C4sKv8hn5HCoWdxyCw5NqQfQff?=
+ =?us-ascii?Q?AtsCCaYga06S9SLzeKfp05DtlUlhEJXQ7dq5h8z3SUcNy/x583yDmi+BC/MV?=
+ =?us-ascii?Q?zkCx4a6JO6hHIiSLgvVn8WW6GMDZj5kN6t8YNw/9D1BobiNPlY31cvill5Xg?=
+ =?us-ascii?Q?mShE4H9Gyegemt3lsQolYWf0UrFkZrW9V6rEBi4ArnLVF4RH4MxMHhqZQTfP?=
+ =?us-ascii?Q?i6nnbTHBj/RxmwnHOXFHxCEsP68RCNpzGTsHk/baD9R8eFKPUtI+4BZLYvFs?=
+ =?us-ascii?Q?aJBlJCvjOMyTP4AXXCPUHzoqvmdeLs4X0s4CkBMTaFfMKUOx/a0hu7Ffi+5V?=
+ =?us-ascii?Q?pA+LbZvIVMigUd+fDSE3wWamOjnKnZFVZ/yBtm0whxXKXsCl1fn1L9abxlhf?=
+ =?us-ascii?Q?2LITQDdRS74eDZ/5WxdFva2Gk2XYJlSO9DOgfjU84WDFSv/BcJRt?=
+Content-Type: multipart/related;
+	boundary="_004_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_";
+	type="multipart/alternative"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSKPR06MB10051
+Return-Path: sworks@telxius.com
+X-MS-Exchange-Organization-ExpirationStartTime: 28 Apr 2026 18:09:10.5704
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 82b6c0fd-23d1-4acb-70e4-08dea5513f46
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: YT1PEPF00001E8B.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Transport-CrossTenantHeadersPromoted: YT1PEPF00001E8B.CANPRD01.PROD.OUTLOOK.COM
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource: YT1PEPF00001E8B.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs: bc927304-6ea7-43c9-274b-08dea5513d60
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|704161411799003|7149299003|35042699022|6049299003|2092899012|3072899012|12012899012|55112099003|57112099003|16102099003|19002099003|18002099003|8096899003|4076899003|4053099003;
+X-Forefront-Antispam-Report: CIP:2a01:111:f403:c201::1;CTRY:;LANG:es;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR83CU005.outbound.protection.outlook.com;PTR:mail-westeuropeazlp170100001.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704161411799003)(7149299003)(35042699022)(6049299003)(2092899012)(3072899012)(12012899012)(55112099003)(57112099003)(16102099003)(19002099003)(18002099003)(8096899003)(4076899003)(4053099003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2026 18:09:10.3346
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 82b6c0fd-23d1-4acb-70e4-08dea5513f46
+X-MS-Exchange-CrossTenant-Id: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1
+X-MS-Exchange-CrossTenant-AuthSource: YT1PEPF00001E8B.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR17MB4815
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:08.5235163
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9846.012
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?iso-8859-1?Q?4XHC/OJqnxqe4+EuUTbWce26beYUWBQPruCcVttmwJi1O7UpPU7n17tJ8l?=
+ =?iso-8859-1?Q?HH9MBmF7vibXq5ubY9QHSDK0JjTbTc3cgLGon8tBHSOk3WODVjngsxJBeY?=
+ =?iso-8859-1?Q?zq6IMb15bEBuXBN79zWXA9rpaaLzIMqy36cQ7uo9FDYfY07w3oz5ISvbjA?=
+ =?iso-8859-1?Q?Or1z9GAlvnAejiWgiSuz1uiyoMc0NXowd4/TTy5BIAKYK+mpTj/2gklFM+?=
+ =?iso-8859-1?Q?q3xSquX9cWQUgSrxNqRJRNP6V5KwM42aVgiuI2s5K3QqZbrwop7QF5fuPR?=
+ =?iso-8859-1?Q?BB5wJwJ9UYVsAenu3wPSV+mASjhILExRdpJFActxNcVE6+2gS/Vryq1rFg?=
+ =?iso-8859-1?Q?kmSesghjIMB1NREkglNAZSEKicd3MJmZwljxoyNsoDlpwkapyCzJPjPa2u?=
+ =?iso-8859-1?Q?A6J1s7JcVySeKsBm7xP5UjM8JIZJgUl3gV3V3eHJ1c9o70kQ6+D8lKnc6j?=
+ =?iso-8859-1?Q?al13Mkvy3uaI9Fj6qn1MDyx9ZdIsx4ql0BIotG3w4DNeYkalHm64rjwNwd?=
+ =?iso-8859-1?Q?Uzek5Dc4zJPLzgowhQwnxc6MczqpGoBRByBSpy6F5MMQUt+dlXfsOQXKZ/?=
+ =?iso-8859-1?Q?zafFMpCEKZuKK28Z/jOyXyU5fFVDUccCrjv5+cdBbHzoVYmqDjuC0GASwN?=
+ =?iso-8859-1?Q?EUS4TJTJZqRBfcgmfDCLpe5rvh+lUgj7g8uw7EGFj7cgRdMAQ+3ElShGmB?=
+ =?iso-8859-1?Q?b1YMmWpCFuJN3QbNK/vuGxMqsCxnmxQr4aKIolC6xS+4uhyCMzRBw5rYSy?=
+ =?iso-8859-1?Q?OkJ9r0WjXBZGwW+mzUqq8OcFh9RRqcNGleOAP/XCqk/gY6L0tKbJdxwb7a?=
+ =?iso-8859-1?Q?RKdm3RoQMa4fFDBha10FOQbJdOAiGlOaRtQzCZiZxJnIWxKwVU+nsBLdZG?=
+ =?iso-8859-1?Q?uJ0rSDf379DBlste5r4U4Dqpe3qwb+jCrKAsvBcnAuT6H6ogD1H+aiFaHu?=
+ =?iso-8859-1?Q?kfa+AffzSHoyI/oUN7blov3wRWJML5n1I87TkL0zhojrKawV1+cm13i8uN?=
+ =?iso-8859-1?Q?CO71pm8PdCVpYdAPGnJ3IumkO7G5nwz42QA3OsNwrWW28CL5acsK4JMjSw?=
+ =?iso-8859-1?Q?gBhUGX74JbD+eYZamuvZ0gBmWCwQbK0VeyVSRjUHaqPbs+mMovLJW55TJT?=
+ =?iso-8859-1?Q?DipDizP5ouu2RQL6OIELYGrNT4xut95C/4TvOOkJhGoBaPe2YzMiuXruGX?=
+ =?iso-8859-1?Q?9tmgbzJWPmb2YPhClmdcVe3sZHacydQ7sy8+NReXOD+MazvMdxTx/e11D4?=
+ =?iso-8859-1?Q?sAsxhqfaDBV4bDjIF0Jdow3MuTTDwnbVQlZ8qrtYAEVMi21/ILbuCKwOB1?=
+ =?iso-8859-1?Q?+zSFVpNQXOHf5Z0w3ZPAfbFrjZCc4tIABLzMBUBA6d1KN1oTZnRJpLwu4I?=
+ =?iso-8859-1?Q?efOKj7rLj7QsWLScPY/VFyrAVhm1rIxopxwD5iP4PQuyQmNj3Fk9CUEgDF?=
+ =?iso-8859-1?Q?w636Z3c7rHjb166fitAqLj7mJDG6qQll6lGIDd9SHLcoXRnqlbgXpI8Uax?=
+ =?iso-8859-1?Q?b4QzPMIMc4bWc5eRwtmEiPxiWSPuoDlA79o98ojhvS+tD73uu3dju21tzY?=
+ =?iso-8859-1?Q?YLlen9dEOw9HRg1I3Nv0nRikPvwoUwDjcbgTNV/y0a8AMGKSCbd1qJeUMH?=
+ =?iso-8859-1?Q?JrYJBCBNjKnFMxLImHJBTl8JSTlMMQTTPSe465SCsUPdNizOyYZZT5Saa+?=
+ =?iso-8859-1?Q?EHmY15oKYYSSqciL1IsgYxECDtWJq8FGNGITfm9H4x4DlLj2Yh2kN6rxDg?=
+ =?iso-8859-1?Q?h3ddWD3ywgnkVQp6ICXCiIcymH0ORcaB3P5zWfjasO5TVKxInnQcI3TPNl?=
+ =?iso-8859-1?Q?9B6iUdRLEztw+ypOjz5IvLC1bnJ9gWRuKJeFC9FzbzGWzWghTrd+OHPWLw?=
+ =?iso-8859-1?Q?WG7d2oCec2+gUB3q+S/o7p5TKJBgvNbNpatUgE1+Bq5LjHYBddqPbPg2t8?=
+ =?iso-8859-1?Q?zg0nkLSHWYm3Nc8Bx905sip+AvwMFxHNUOfFCLPyD9CQBVdXOAJ3Pzsq//?=
+ =?iso-8859-1?Q?gNFmP0NdfH28ez8rhEAyyA9jbKay4HhO4d0XtaGVPzbqob0PjT8w0QRsHj?=
+ =?iso-8859-1?Q?V31p8oa4cB0Z0UYXDgyNXdAf4c2kRoT1z3Qy30bC7zwYC507BhGcOI/+KC?=
+ =?iso-8859-1?Q?2fgypGG0/YCeGjUtUzHh+r7XPvpl5NQrOse51920QgooqpYG/N50fuTCqT?=
+ =?iso-8859-1?Q?BFBzft7d+VlMWRM3H3d64fGfK1YTUHlCTrKVQImndcVbVdGhRPYGAr89r3?=
+ =?iso-8859-1?Q?CAWL6qJKxgUdvqCaAeO2au5lnAjGyo80NwasM159QJ+mbqao8eBDUGASLa?=
+ =?iso-8859-1?Q?U4N+BitXry9GyapzInJMEe5SMUM7BW3zEzucAMJLspw2+8eEpAxlD6Y03d?=
+ =?iso-8859-1?Q?iNVZvbW3rrdFpZ6+arcrlCH7csFZSTE3X/F+xXhxypdoiLULKKigbtjqSm?=
+ =?iso-8859-1?Q?pilN0SYIi73Zrhn79mYpid5gZzLP5o9qXw6Rb9I6xy5Hlyck/gOgmJ/j+Y?=
+ =?iso-8859-1?Q?Kc9iEppqJ3vHvkPjnG8ajXgDWGsIm/Y+WIRHkm8GAKL5qpFE9PluXnCBUq?=
+ =?iso-8859-1?Q?IvDey1O9RJkpxs/AQlNrAYdS6UAbOQjHm8EoY0Kjepupc+UKigZYHFWomT?=
+ =?iso-8859-1?Q?fnyvXGtTPXk53PWCvbE/UQq1wuk3dL3MQPTv2UwfVtQzyesjwOcTIh2rU3?=
+ =?iso-8859-1?Q?9piYXzq71MxbLonJS8pk4l60wxkKc+KLOVve4Yb5ER+htDsIYwOMblR0ux?=
+ =?iso-8859-1?Q?ZzaJn+JbwEPuNF7dBAyCDAnrQge+ksex8GSPCGOt2uIW8IQhutapwldIJu?=
+ =?iso-8859-1?Q?qgo4esJRMSNkgHEjDZQd?=
+MIME-Version: 1.0
+
+--_004_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_
+Content-Type: multipart/alternative;
+	boundary="_000_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_"
+
+--_000_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Sirs,
+ACME
+
+Please find below our Scheduled Work Notification // Abajo encontrar=E1 nue=
+stra Notificaci=F3n de Trabajo Programado:
+
+NOTIFICATION NUMBER // NUMERO DE NOTIFICACION: SWX0036396
+
+NOTIFICATION TYPE // TIPO DE NOTIFICACION: EMERGENCY
+
+DESCRIPTION // DESCRIPCION: An emergency maintenance work will be carried o=
+ut to perform infrastructure maintenance. // Se realizar=E1 un trabajo de e=
+mergencia para realizar mantenimiento de infraestructura.
+
+SERVICE IMPACT // IMPACTO EN SERVICIOS: PROTECTION LOSS UP TO 10 HOURS
+
+LOCATION // LOCALIDAD: VIRGINIA, UNITED STATES OF AMERICA
+
+SCHEDULE // VENTANA(S) DE TRABAJO (UTC):
+
+  *   30-Apr-2026 02:00 - 30-Apr-2026 12:00
+
+AFFECTED CIRCUITS // CIRCUITOS AFECTADOS:
+CRM Number      CRM Name        CRT
+PAR/TEL-ASH/EQ 100GB S001       CRT-13337
+
+
+
+
+[English] If you experience any problems with your services due to the perf=
+orming of this task, please contact our Capacity Services NOC at +511 411 0=
+070 or emailing customerservice.capacity@telxius.com. We apologize for any =
+inconvenience caused by this maintenance to you and your customers. If you =
+have any additional questions, please do not hesitate to contact us. Our pe=
+rsonnel will be permanently available for you.
+[Espa=F1ol] Si experimenta alg=FAn problema con su servicio debido a la rea=
+lizaci=F3n de esta actividad programada, por favor comun=EDquese con nuestr=
+o NOC de Capacity Services v=EDa el +511 411 0070 o al correo customerservi=
+ce.capacity@telxius.com. Lamentamos los inconvenientes que este mantenimien=
+to pueda causarle a usted o sus clientes. Si tiene alguna otra pregunta, no=
+ dude en contactarnos, nuestro personal estar=E1 permanentemente disponible=
+ para usted.
+
+[Telxius]
+
+Scheduled Works Team
+
+Service Operations | Telxius Cable
+
+Lima - Per=FA
+
+T +51 1 411 0079
+
+sworks@telxius.com | telxius.com
+
+________________________________
+
+Este mensaje y sus adjuntos se dirigen exclusivamente a su destinatario, pu=
+ede contener informaci=F3n privilegiada o confidencial y es para uso exclus=
+ivo de la persona o entidad de destino. Si no es usted. el destinatario ind=
+icado, queda notificado de que la lectura, utilizaci=F3n, divulgaci=F3n y/o=
+ copia sin autorizaci=F3n puede estar prohibida en virtud de la legislaci=
+=F3n vigente. Si ha recibido este mensaje por error, le rogamos que nos lo =
+comunique inmediatamente por esta misma v=EDa y proceda a su destrucci=F3n.
+
+The information contained in this transmission is confidential and privileg=
+ed information intended only for the use of the individual or entity named =
+above. If the reader of this message is not the intended recipient, you are=
+ hereby notified that any dissemination, distribution or copying of this co=
+mmunication is strictly prohibited. If you have received this transmission =
+in error, do not read it. Please immediately reply to the sender that you h=
+ave received this communication in error and then delete it.
+
+Esta mensagem e seus anexos se dirigem exclusivamente ao seu destinat=E1rio=
+, pode conter informa=E7=E3o privilegiada ou confidencial e =E9 para uso ex=
+clusivo da pessoa ou entidade de destino. Se n=E3o =E9 vossa senhoria o des=
+tinat=E1rio indicado, fica notificado de que a leitura, utiliza=E7=E3o, div=
+ulga=E7=E3o e/ou c=F3pia sem autoriza=E7=E3o pode estar proibida em virtude=
+ da legisla=E7=E3o vigente. Se recebeu esta mensagem por erro, rogamos-lhe =
+que nos o comunique imediatamente por esta mesma via e proceda a sua destru=
+i=E7=E3o
+
+--_000_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+</head>
+<body>
+<p style=3D"font-family: sans-serif; color: black;">Dear Sirs, <br>
+<b>ACME</b> </p>
+<p>Please find below our Scheduled Work Notification // Abajo encontrar=E1 =
+nuestra Notificaci=F3n de Trabajo Programado:</p>
+<br>
+<b>NOTIFICATION NUMBER // NUMERO DE NOTIFICACION:</b> SWX0036396 <br>
+<br>
+<b>NOTIFICATION TYPE // TIPO DE NOTIFICACION:</b> EMERGENCY <br>
+<br>
+<b>DESCRIPTION // DESCRIPCION:</b> An emergency maintenance work will be ca=
+rried out to perform infrastructure maintenance. // Se realizar=E1 un traba=
+jo de emergencia para realizar mantenimiento de infraestructura.
+<br>
+<br>
+<b>SERVICE IMPACT // IMPACTO EN SERVICIOS:</b> PROTECTION LOSS UP TO 10 HOU=
+RS <br>
+<br>
+<b>LOCATION // LOCALIDAD:</b> VIRGINIA, UNITED STATES OF AMERICA <br>
+<br>
+<b>SCHEDULE // VENTANA(S) DE TRABAJO (UTC):</b>
+<ul>
+<li>30-Apr-2026 02:00 - 30-Apr-2026 12:00</li></ul>
+<br>
+<b>AFFECTED CIRCUITS // CIRCUITOS AFECTADOS:</b>
+<table style=3D"border: 1px solid black; cellspacing:10px; border-collapse:=
+ collapse; width: 100%;">
+<thead>
+<tr>
+<th style=3D"border: 1px solid black; text-align: center;">CRM Number</th>
+<th style=3D"border: 1px solid black; text-align: center;">CRM Name</th>
+<th style=3D"border: 1px solid black; text-align: center;">CRT</th>
+</tr>
+</thead>
+<tbody style=3D"text-align: center;">
+<tr>
+<td style=3D"border: 1px solid black; padding: 10px;"></td>
+<td style=3D"border: 1px solid black; padding: 10px;">PAR/TEL-ASH/EQ 100GB =
+S001</td>
+<td style=3D"border: 1px solid black; padding: 10px;">CRT-13337</td>
+</tr>
+</tbody>
+</table>
+<br>
+<b><br>
+<br>
+<p style=3D"margin-bottom: 20px;"><small style=3D"color: #8b8b8b;">[English=
+] If you experience any problems with your services due to the performing o=
+f this task, please contact our Capacity Services NOC at +511 411 0070 or e=
+mailing customerservice.capacity@telxius.com.
+ We apologize for any inconvenience caused by this maintenance to you and y=
+our customers. If you have any additional questions, please do not hesitate=
+ to contact us. Our personnel will be permanently available for you.
+<br>
+[Espa=F1ol] Si experimenta alg=FAn problema con su servicio debido a la rea=
+lizaci=F3n de esta actividad programada, por favor comun=EDquese con nuestr=
+o NOC de Capacity Services v=EDa el +511 411 0070 o al correo customerservi=
+ce.capacity@telxius.com. Lamentamos los inconvenientes
+ que este mantenimiento pueda causarle a usted o sus clientes. Si tiene alg=
+una otra pregunta, no dude en contactarnos, nuestro personal estar=E1 perma=
+nentemente disponible para usted.
+</small></p>
+<br>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"margin-top: 2rem;">
+<tbody>
+<tr>
+<td valign=3D"top"><img alt=3D"Telxius" style=3D"height: 25px" data-outlook=
+-trace=3D"F:0|T:1" src=3D"cid:logo">
+</td>
+<td valign=3D"top" width=3D"100%" style=3D"padding-left: 20px;"><span style=
+=3D"font-size: 0.9rem;font-family: sans-serif;color: midnightblue;margin-le=
+ft: 20px;">
+<p style=3D"color: rgb(0,139,149); font-size: 0.9rem;font-weight: bold;marg=
+in-block-start: -1em;">
+Scheduled Works Team</p>
+<p style=3D"color: rgb(0,0,0); font-size: 0.9rem;font-weight: bold;">Servic=
+e Operations | Telxius Cable</p>
+<p style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem;">Lima - =
+Per=FA</p>
+<p style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem;">T +51 1=
+ 411 0079</p>
+<p style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem;"><span s=
+tyle=3D"margin: 0; color: rgb(5,99,193); font-size: 0.8rem;">sworks@telxius=
+.com</span>
+<span style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem;">| te=
+lxius.com</span>
+</p>
+</span></td>
+</tr>
+</tbody>
+</table>
+</b><br>
+<hr>
+<font face=3D"Arial" color=3D"Gray" size=3D"1"><br>
+Este mensaje y sus adjuntos se dirigen exclusivamente a su destinatario, pu=
+ede contener informaci=F3n privilegiada o confidencial y es para uso exclus=
+ivo de la persona o entidad de destino. Si no es usted. el destinatario ind=
+icado, queda notificado de que la
+ lectura, utilizaci=F3n, divulgaci=F3n y/o copia sin autorizaci=F3n puede e=
+star prohibida en virtud de la legislaci=F3n vigente. Si ha recibido este m=
+ensaje por error, le rogamos que nos lo comunique inmediatamente por esta m=
+isma v=EDa y proceda a su destrucci=F3n.<br>
+<br>
+The information contained in this transmission is confidential and privileg=
+ed information intended only for the use of the individual or entity named =
+above. If the reader of this message is not the intended recipient, you are=
+ hereby notified that any dissemination,
+ distribution or copying of this communication is strictly prohibited. If y=
+ou have received this transmission in error, do not read it. Please immedia=
+tely reply to the sender that you have received this communication in error=
+ and then delete it.<br>
+<br>
+Esta mensagem e seus anexos se dirigem exclusivamente ao seu destinat=E1rio=
+, pode conter informa=E7=E3o privilegiada ou confidencial e =E9 para uso ex=
+clusivo da pessoa ou entidade de destino. Se n=E3o =E9 vossa senhoria o des=
+tinat=E1rio indicado, fica notificado de que a
+ leitura, utiliza=E7=E3o, divulga=E7=E3o e/ou c=F3pia sem autoriza=E7=E3o p=
+ode estar proibida em virtude da legisla=E7=E3o vigente. Se recebeu esta me=
+nsagem por erro, rogamos-lhe que nos o comunique imediatamente por esta mes=
+ma via e proceda a sua destrui=E7=E3o<br>
+</font>
+</body>
+</html>
+
+--_000_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_--
+
+--_004_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_
+Content-Type: image/png; name="logo.png"
+Content-Description: logo.png
+Content-Disposition: inline; filename="logo.png"; size=1821;
+	creation-date="Tue, 28 Apr 2026 18:07:31 GMT";
+	modification-date="Tue, 28 Apr 2026 18:07:31 GMT"
+Content-ID: <logo>
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAAHkAAAAVCAYAAABizEFoAAAABmJLR0QA/wD/AP+gvaeTAAAG0klE
+QVRo3t1aC2wURRhe8B4tRRSfaFRUqnC724ZHpNzMXj0wkBANRrSiMfFFlKgYTHwHowQDiDzU3h1a
+EOneWUUUhBAsvlJNRDTiI2owigRRLIIaTECiAq3/v7tHd2Znd2/LXqtMMqHs/vPf7P/9/z//Y6So
+TKfFVLohptA3YT4pSVJfmFJM0R6E/7dGVfq261To4iI9jrhKhsCalfguppD18P/L8Xn/WnIGPNcF
+69+C+ZTU0HCCZBtxVbsC15t86ErkKwUZmeZJUlb/GOYWY2b0WZ70TU0nAV3LUfqcvlKa1Raxk+C3
+uskB9xpRNM1OX1GjXQh7b7G+YQ3/XjTiCp1exMKQSzodcSWunhgHjK6HNc/HFfIerNkCa9piKnkd
+eMyFOVlKJislE0x6AGZncUaUFJWG0hPh7w77c9eppmqLv2swZ99/YgpIu9OLR1Qhl9j3jxtmf4PO
+DQRytvlhAKuTmTl9upC2s7MPvN/I0R8E4PsdpRmePtlPDihs5htkOof7hg2eewZFB7rDDiwEA3hf
+C4D+4o+P9mpRoB3cZidVqXVnlgQwbqSGJLu0nTzN/chW0zLpfV48KlQtzYKsbWWUQNaeCQTykpaB
+ANQuDrj9UrZlsFMh9FsFCrGAoRk2+lR/WZA8b/msItM2zz2D1TkUR6XjHdYua/eWik3RyBDknZxV
+DQ8A8pFKtf5cP5BBi6d48Ojg3fExg2y4bH0iANbBgfcGS7P8bHi+j6P5Tlq8qpKhGzUqCvv43duj
+sd6mHCBHleRo3tp95oemZiTqL4rK5BZwqbdHalKX4jMXkOchTdckt0UTdAy7CTHIeG7jOcuuN3lE
+1CRxuKMwQDaBXuqw0ow+xfb+Je79EXD19UJeSvKUaI02CvbTznyjTBfEEkTl44pygIzxiUC5Nsdl
+cndM1a6CvdwAcp5hHJsyLYCMb3T9PRHIPKCi4QFyoBEayAvyVQDc9xyQuw13nisQh6Vn9Ub/vdEd
+LBDaDLEsymHJdA/ndd/hlavkcdyAjCOnj3WCmW+yImk7wDuk3Kr+/2GQ++DxyPHMdFsuxxXIZnDV
+6HDb7AQlKIwvbW+9Z8kQFO/laP6GlGmmVDuhqhdBpr9B1PmEaMKG78FUrUdAXrGiAoD82gPkZaUr
+YO+BjHm3S4CFaXALxj0YJPY0yH5pxwM9ArJhzYWRAOY/gkCs3Tij/w8g1ySHwfP9PnJtL8m6ewrk
+qEoW9hjIZjQ922nFUDgJdJT0Hsg4sHIG734sQb7fYjrc6yC7CagsIDc2xo3pdNt7pdyKQeUGGQB7
+PwyQi+kcprR+uTscib/2S6TOKjfI7c7c2JwxWWuQFCXWM4EXBFUZfbX5d74OgD3MRdutRnkzVJC1
+RZwstoQGMrOGXAe064wgTAQ25PHlBvmbUKJrlTZ234JfHABA7jSrWfmbrWh7kdNt5+8KE2QoTszi
+Mo0/7M0cxzD7BcFAFlv3IbZYQj4NGWSH9rZ3E+QvOT76MZzDS5n6da5QbTQfsvo2Dug/pSWFoaFZ
+skruEFSnJrtapExf8eoLlDrARS/j+PwQKsgxmTzG17aNkl9wkDdxfLa7uXZfN+2oXzfPdy2SZPTN
+fIux2yDLyRHObhvdE02kRtrpKmvrznF03ay0SFLS/QN+cV+j3cjy+SxckM3zwfFhANp87JUKz2bU
+bq5vCsqyXPDRn8N8FPvfPA9hS87uprvmPqmp0BWImJUvLqXKz3Tr30o12kC+oQPf9hA+F6zoI/BI
+SP8T9teNSBksFZ7tFjV+sJ/AumMlZtFuw46XUa+WyZVY+48kSD0caVOtvjLr8mX6bKggSyNSpwPt
+X8FyZQys6DROWa4OyONIlZIexFW5lgkAnOqsbee3c3SHINpm+tuohL79W8xNedepkglcKfKLSkU7
+z4q+b3KRFeTB5BqeV8WwMecHlauhLNBUCRdk053NCwwynOW8UOH5R4H42C4vQO57maBe3SaMoDP5
+cYJGxVam3diNfjJz28MEep3hfo3LAVj1E/LZ5na8VSTI4G6APM8dqeq6AZ5C9BqG1hsBWJC+52ye
+Dbo00PZ3S8+5bT3prL6JA+2A1Ng8xKO2/Zzz4oAViZd4MwSi6RdcA1LTmvpafFpdlGS9i9u3p1i7
+SpTHQbyogUeGd5Sm0vut+0atqHm+C3jNq62/AM8NK9p7zf1+lPYyuiI3Pua5pT2C/VHgs1awfiPs
+73EOtDlH72uhBbv1iIujqSlqNTGsNaAk2Ipko+WFxp00lzteFQod6+/lUrKVWq0FuXxgBVxr8FJF
+SfKFUiXWF2AfWWwzWnEKBoI/A4+v4N/VRiB4cfo0+7J/AUgYOyMeP0WZAAAAAElFTkSuQmCC
+
+--_004_VI0PR06MB102875EF917E99D14EAD4E8C6DE372VI0PR06MB10287eu_--

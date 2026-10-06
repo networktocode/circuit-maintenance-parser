@@ -1,0 +1,21 @@
+[
+    {
+        "account": "ACME  CORP  (3-1234567890) Argentina",
+        "circuits": [
+            {
+            "circuit_id": "81-EXAMPLE",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1764756000,
+        "maintenance_id": "CHG0082938",
+        "organizer": "customer-report@ciriontechnologies.com",
+        "provider": "cirion",
+        "sequence": 1,
+        "stamp": 1764757215,
+        "start": 1764730800,
+        "status": "COMPLETED",
+        "summary": "",
+        "uid": "0"
+    }
+]

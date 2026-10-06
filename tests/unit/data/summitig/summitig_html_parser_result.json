@@ -1,0 +1,20 @@
+[
+  {
+    "account": "Test Company Inc",
+    "circuits": [
+      {
+        "circuit_id": "TEST-001 Test Company",
+        "impact": "OUTAGE"
+      },
+      {
+        "circuit_id": "TEST-002 Test Company",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1740135600,
+    "maintenance_id": "TEST-EVENT-001",
+    "start": 1740114000,
+    "status": "CONFIRMED",
+    "summary": "Network Maintenance Improvements"
+  }
+]

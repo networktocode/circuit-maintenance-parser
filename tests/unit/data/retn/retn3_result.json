@@ -1,0 +1,14 @@
+[
+    {
+        "circuits": [
+            {
+            "circuit_id": "IPP-133337-3.NL.AMS.NKF",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1774587600,
+        "start": 1774562400,
+        "status": "COMPLETED",
+        "summary": "Planned maintenance on our network for updating JunOS on router and switch."
+    }
+]

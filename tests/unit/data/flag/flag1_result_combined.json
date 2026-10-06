@@ -1,0 +1,21 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "RGWLS13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1780048800,
+        "maintenance_id": "PWMR2026050900470",
+        "organizer": "change@flagtel.com",
+        "provider": "flag",
+        "sequence": 1,
+        "stamp": 1778335143,
+        "start": 1780027260,
+        "status": "CONFIRMED",
+        "summary": "Our provider will be carrying out a planned activity of fiber repair at Milford, Connecticut",
+        "uid": "0"
+    }
+]

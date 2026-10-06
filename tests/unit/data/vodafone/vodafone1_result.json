@@ -1,0 +1,15 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "X0013337A",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1778040000,
+        "maintenance_id": "CRQ000001325565",
+        "start": 1778011200,
+        "summary": "3rd Party Essential Works to carry out maintenance to move their cable to new reroute Due to road construction works"
+    }
+]

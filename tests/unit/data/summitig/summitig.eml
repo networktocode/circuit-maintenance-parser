@@ -1,0 +1,357 @@
+Delivered-To: testuser@example.com
+Received: by 2002:a05:6022:7414:b0:64:350:7ed3 with SMTP id FAKESMTPid12345lab;
+        Tue, 21 Jan 2025 10:35:26 -0800 (PST)
+X-Forwarded-Encrypted: i=4; AJvYcCUoB00tyfj8iSjiwjQR7Vp8/L7ryN16tm3sC4L2L97AB+nCtq4wI3gRcKstzkadHmv6nThxBL7e1qnDYA==@example.com
+X-Google-Smtp-Source: AGHT+IFIzKRaQ/falRau+1TvEYqtBFdDHp844nxkCGgsogssStBuX4YRJ5elxUJHLV2vahs5SszH
+X-Received: by 2002:a05:6830:3914:b0:71d:5a8a:1a29 with SMTP id FAKEID1234567890abcdefghijklmnop;
+        Tue, 21 Jan 2025 10:35:25 -0800 (PST)
+ARC-Seal: i=3; a=rsa-sha256; t=1737484525; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=GrQCUGBJhOps2BoT+YWQ8c0T8osaLL1tsYyKl3CU+zk2/gm8vzpYrH1vT/l/mSTyvY
+         5tz4pZ5b8i4NfNL3IUSIpHKpmItV4e1Hw5tbzh09eWCvm72GRlga4TBPhRhZLxHRTA4P
+         kZFENpXSqHtR9e3WA6Nq9TgB8ROAP4WV5dCEzwy/FB+pvAK2MqXK9XzRHYasRUfb/6Mf
+         3o/bcUnn+2nsbxasAYEB8U683KfQzJeroBMwEaFJBlvKFotrFO7HLK5YGFZ9/8s5I75Z
+         0toSeP1i8qMVZJpW2o5z1MIwxJtpVw0/5ZV+Q2QHYe7xoB6nuXuuA5yNbX+SWPNVtqV7
+         dmXg==
+ARC-Message-Signature: i=3; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:message-id:sender:reply-to:to:from:subject
+         :mime-version:date;
+        bh=tjhIpKrWjWJmrV2yAc56AcL0Vhob2JLznwJUrnheLTM=;
+        fh=9ziL+ecbPFndbrySCBG3djh4L+ypelTN47vqWq7LuHc=;
+        b=Zak8NCoprArn1wr8P/4SKgx6I1/KeCXkQgCyq8EkmkKaz8nl2OQb2cuZBqcgJL3MPd
+         HQgVxfOCqv64g9eKAy2XTISYT+xeUxm+swdGRXJQytHvAO1011vDZmiJLEbbh0rm6dR5
+         2Y30gH8T055lcBmqt6cZ3CvGpXG3mLS2OmstyEwxsR3hxdaINDa+1QS49rdbtabjmNC4
+         sPOVh6/eudpUX3MLjaVAbrsDJyQn3ICU4jot5g9a8W9TZ5YMYagQ2LABDr2Uqt/oKYbs
+         K5wX+ZxIIHeQNQPrqdTG2DZAyY36ZgHa12HKdQCRSRjfG8yQfShqEsch6hqmMmpuYQTB
+         YEwg==;
+        dara=google.com
+ARC-Authentication-Results: i=3; mx.google.com;
+       arc=pass (i=2 spf=pass spfdomain=summitig.net dkim=pass dkdomain=summitig.net);
+       spf=pass (google.com: domain of noc+bncFAKETOKEN123456789abcdefghij@example.com designates 209.85.214.198 as permitted sender) smtp.mailfrom=noc+bncFAKETOKEN123456789ABCDEFGHIJ@example.com;
+       dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=summitig.net;
+       dara=pass header.i=@example.com
+Return-Path: <noc+bncFAKETOKEN123456789ABCDEFGHIJ@example.com>
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com. [209.85.214.198])
+        by mx.google.com with ESMTPS id 46e09a7af769-724d1d83a80si891830a34.163.2025.01.21.10.35.25
+        for <testuser@example.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 21 Jan 2025 10:35:25 -0800 (PST)
+Received-SPF: pass (google.com: domain of noc+bncFAKETOKEN123456789abcdefghij@example.com designates 209.85.214.198 as permitted sender) client-ip=209.85.214.198;
+Authentication-Results: mx.google.com;
+       arc=pass (i=2 spf=pass spfdomain=summitig.net dkim=pass dkdomain=summitig.net);
+       spf=pass (google.com: domain of noc+bncFAKETOKEN123456789abcdefghij@example.com designates 209.85.214.198 as permitted sender) smtp.mailfrom=noc+bncFAKETOKEN123456789ABCDEFGHIJ@example.com;
+       dmarc=fail (p=NONE sp=NONE dis=NONE arc=pass) header.from=summitig.net;
+       dara=pass header.i=@example.com
+Received: by mail-pl1-f198.google.com with SMTP id FAKESMTPSESSION12345fake.session.1
+        for <testuser@example.com>; Tue, 21 Jan 2025 10:35:25 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1737484525; cv=pass;
+        d=google.com; s=arc-20240605;
+        b=Vvt4r9lHotO+bnNJZhMlbUUVkm+YHhNwC6t78LWG2KA9U2JKRXd8chAAsxpz4vTq7i
+         DJ/TuWak2cQtpvq1vJjqu0UR7n8tf02d1K9DMYSx6N8ek3f3TEgSZSG64EbofQPP85/z
+         wlwLdT5TdM8XN/JirBQsEPmvBIgBe1H12v5d05l9eiEEWLUR0gsi3LtGPXXMrbW7aD0S
+         cbMworO0gbI2RtIMDW1e/CRQf/L619gafd6nN5sDQGYJl2J8/P9OPUgcMEHNowst0tsU
+         pIG6Xfitwjibg22gN9kKAfd7xSem2WAvBVR3ckVi5FbApRuYrxief3fBIIW4DND4x9No
+         SEZg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=list-unsubscribe:list-archive:list-help:list-post:list-id
+         :mailing-list:precedence:message-id:sender:reply-to:to:from:subject
+         :mime-version:date;
+        bh=tjhIpKrWjWJmrV2yAc56AcL0Vhob2JLznwJUrnheLTM=;
+        fh=9ziL+ecbPFndbrySCBG3djh4L+ypelTN47vqWq7LuHc=;
+        b=jqdR3b1Rm+VWCpQwBRTn/6FUQFz+7xXZpNrY7UAZsqtONvo6Jf9YVc5VZaZhhjM1/I
+         eWp47UfwsJkynbhQOT9DSC2qyiD8JX4KLxFWlqRgqOjvvPXzlM4/X2d5ojpCKqpudy19
+         oUxgBZnCNAYU6MY5IjpAHg1tHU6yBDnK/vuSq0lQ9UfMmCKfTkrnIdHS9p23qruKgGTZ
+         Uuln1ntmzKgX6YXyOnYPih4q/GmYG4h+pmMsCn1XoSwqdfh8v7TSa5gOh6GDO3QqXCWl
+         VKXGA4CrWdQaVyASuhOeE+McId/dxQh+cf/I1ndU/Dv/rezdbj7jc47Z+UfAczrbLFxU
+         roBQ==;
+        darn=example.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@summitig.net header.s=mx header.b=YuiqjTJW;
+       spf=pass (google.com: domain of bounce+12345.67890-noc=example.com@summitig.net designates 209.61.151.224 as permitted sender) smtp.mailfrom="bounce+12345.67890-noc=example.com@summitig.net"
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1737484525; x=1738089325;
+        h=list-unsubscribe:list-archive:list-help:list-post
+         :x-spam-checked-in-group:list-id:mailing-list:precedence
+         :x-original-authentication-results:x-original-sender:message-id
+         :sender:reply-to:to:from:subject:mime-version:date:x-beenthere
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=tjhIpKrWjWJmrV2yAc56AcL0Vhob2JLznwJUrnheLTM=;
+        b=HogaGY75sIEEXD4DIoi6/UwGjjsvpPCugnFqH020anbmFzbQXc0+TvxHd8kCFO58kb
+         MaOB4gitmOIpBfdsCVOauzo4lQaFAUYSbjEutXy/SFXSJ8DWJO+NDCIeaBZvxZgkapAi
+         bCJBUfszG5nEV5ztr6O1Cc3OJvzCQFLxA91O4fA0SC+Kq3BGRJ8rAE9xVuhCbH3ZOBhK
+         khx7O70Y97qn++ub+bQaQYinSDEhd7FeNfyF5bNgUDxmaL18TNR5e3VkwMeyECGNjx5K
+         kSM5gn8fhf4gqICFYnZ8l7SCPWpNTM+HzEv7jdK55lIQpobzPV8f6NY7fo/l/QfUHdXT
+         tSXQ==
+X-Forwarded-Encrypted: i=2; AJvYcCVxUmvBBLU4RgQvIVqxddlfHSPUd9nAxAVSwjc1bwV/slzkgL3a89ZkNbzgOaAsVCP7r5XxLsgHWI3oeA==@example.com
+X-Gm-Message-State: AOJu0YyKFsVq0Fh+3oYJwVzNr2rTuNJmlm0EqFPa0YTdmFpUpGaNU959
+	dY78ooYguIUUtwHtIke6cELoghul6UYhtiqcP9XHTpcg7oo2uGOjPYytGzw4AW70JrF8+CC8vDj
+	UE060gpJyW5Ylao62FsbCXVKvf3prbWR2aRm7QSPbmqeytB3RJeuBwVOM
+X-Gm-Gg: ASbGncvd3AXF6DXm8Gj8wWirn7/9WFhKqZv9qSG94JODrq6+dCOoNj9L31S4T/o/api
+	nOm/becAbzb9qPgHawT/xDi7zpHQ+PCUNIA==
+X-Received: by 2002:a05:6a20:394a:b0:1db:de38:294b with SMTP id FAKESMTPID12345fake.session.2;
+        Tue, 21 Jan 2025 10:35:25 -0800 (PST)
+X-Received: by 2002:a05:6a20:394a:b0:1db:de38:294b with SMTP id 35fa12345678.fake.session.3;
+        Tue, 21 Jan 2025 10:35:24 -0800 (PST)
+X-BeenThere: noc@example.com
+Received: by 2002:a05:6a00:3a1e:b0:728:e1d1:39e3 with SMTP id
+ FAKESMTPID12345.fake.pod.test.us; Tue, 21 Jan 2025
+ 10:35:24 -0800 (PST)
+X-Received: by 2002:a05:6a00:c92:b0:726:41e:b310 with SMTP id FAKESMTPID12345.fake.session.4;
+        Tue, 21 Jan 2025 10:35:24 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1737484524; cv=none;
+        d=google.com; s=arc-20240605;
+        b=T1UJCXWgs9braezhbgKeSL0fgB5l7gaZGAT21eZCC8h/XxW37DihINrMXfaHPPOcdq
+         GyHfeKNykgGNCqTK8/K2PmNmQWD3VsxwvGjgZrmfKdF/0cqT69YhEcARIFoNvgPDNPuN
+         v5NBjGWEQ6BN+uLvufviOgcGdYBJG5+0t4Gj2/IdAC67keQpNiSaKlb9xvE7Ut2svW0o
+         JPa67Sl+NHiBeN2PNRMgYnM9Dp8YGiF0d9bzz2z1LGsiEcvEgk3L9fWoHL5ffwj8x53D
+         6MyUXZt+d9nzA2FHO0DchCTY9eBDUQUvCfzSDyxT9aIUfzBl2VmpdT/EKD5uL47MrQlM
+         DORg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=message-id:sender:reply-to:to:from:subject:mime-version:date
+         :dkim-signature;
+        bh=tjhIpKrWjWJmrV2yAc56AcL0Vhob2JLznwJUrnheLTM=;
+        fh=riydSgYT/DRez6EtLL0r8OwFur1iVw8rmA4s0L7xKy0=;
+        b=DGOioEOQc452XDshEA6HYztivcSRy+ucgZt0UOu/K0jFINSY0pokOs7j/hyzsObJxD
+         Vb+2eTYuyYyRFlWGhb68KiOKHm2lG4t5jjgM8LRQJePtpus5hadNKX9OFB6UEeJH1u1q
+         xx7xz8P6LpTumT7YOR+jPsrp4QPzwqS1XmwuDk5spIDzxdWypFVicqMqFwDZKBbwEuaN
+         jlWQF5K1eVLPzDFumxawVLd9AZkDguIExy26zhuH1PjpIWTfRsM1gbTAcbBiBC1Re9n3
+         Th90d3v7hixnMmSBotDZGlsyDD9nrNITTrnn5kx3O3Fpq86Z59J1rZjqcXV8H1kfYA5E
+         JVqA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@summitig.net header.s=mx header.b=YuiqjTJW;
+       spf=pass (google.com: domain of bounce+12345.67890-noc=example.com@summitig.net designates 209.61.151.224 as permitted sender) smtp.mailfrom="bounce+12345.67890-noc=example.com@summitig.net"
+Received: from mx0a-001ed902.pphosted.com (mx0a-001ed902.pphosted.com. [205.220.162.87])
+        by mx.google.com with ESMTPS id FAKESMTPID12345.fake.session.5.2025.01.21.10.35.23
+        for <noc@example.com>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 21 Jan 2025 10:35:23 -0800 (PST)
+Received-SPF: pass (google.com: domain of bounce+12345.67890-noc=example.com@summitig.net designates 209.61.151.224 as permitted sender) client-ip=209.61.151.224;
+Received: from pps.filterd (m0123456.ppops.net [127.0.0.1])
+	by mx0a-001ed902.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id FAKEPROOFPOINT123456
+	for <noc@example.com>; Tue, 21 Jan 2025 18:35:23 GMT
+Received: from rs224.mailgun.us (rs224.mailgun.us [209.61.151.224])
+	by mx0a-001ed902.pphosted.com (PPS) with ESMTPS id FAKEMAILGUN12345
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NO)
+	for <noc@example.com>; Tue, 21 Jan 2025 18:35:22 +0000 (GMT)
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sending-Ip-Pool-Name: 
+X-Mailgun-Sending-Ip-Pool: 
+X-Mailgun-Sid: WyJiZTA0MiIsIm5vY0BleGFtcGxlLmNvbSIsImMwOTE5MSJd
+Received: by 233f92db713f with HTTP id FAKEHTTPID1234567890; Tue, 21 Jan 2025
+ 18:35:21 GMT
+Date: Tue, 21 Jan 2025 18:35:21 +0000
+Mime-Version: 1.0
+Content-Type: multipart/mixed;
+ boundary="63c0c0de9b5871df2f262e298098653621bfda5574b81834cd61ac268c02"
+Subject: SummitIG Maintenance Notification
+From: outages@summitig.net
+To: noc@example.com
+Reply-To: SummitigNOC@summitig.com
+Sender: outages@summitig.net
+Message-Id: <20250121183521.FAKE12345678FAKE@summitig.net>
+X-CLX-Response: RAKEDATA123456789FAKEDATA987654321FAKE
+ 
+ 
+ 
+ 
+X-Proofpoint-GUID: FAKEGUID123456789ABCDEF12345678
+X-Proofpoint-ORIG-GUID: FAKEGUID123456789ABCDEF12345678
+X-CLX-Shades: MLX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-21_07,2025-01-21_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=inbound_notspam policy=inbound score=0 mlxscore=0 bulkscore=0
+ unknownsenderscore=20 priorityscore=0 clxscore=180 suspectscore=0
+ adultscore=0 mlxlogscore=592 impostorscore=0 spamscore=0
+ lowpriorityscore=0 malwarescore=0 phishscore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2411120000
+ definitions=main-2501210149 domainage_hfrom=4590 domainage_replyto=4590
+X-Original-Sender: outages@summitig.net
+X-Original-Authentication-Results: mx.google.com;       dkim=pass
+ header.i=@summitig.net header.s=mx header.b=YuiqjTJW;       spf=pass
+ (google.com: domain of bounce+12345.67890-noc=example.com@summitig.net
+ designates 209.61.151.224 as permitted sender) smtp.mailfrom="bounce+12345.67890-noc=example.com@summitig.net"
+Precedence: list
+Mailing-list: list noc@example.com; contact noc+owners@example.com
+List-ID: <noc.example.com>
+X-Spam-Checked-In-Group: noc@example.com
+X-Google-Group-Id: 999888777
+List-Post: <https://groups.google.com/a/example.com/group/noc/post>, <mailto:noc@example.com>
+List-Help: <https://support.google.com/a/example.com/bin/topic.py?topic=25838>,
+ <mailto:noc+help@example.com>
+List-Archive: <https://groups.google.com/a/example.com/group/noc/>
+List-Unsubscribe: <mailto:googlegroups-manage+999888777+unsubscribe@googlegroups.com>,
+ <https://groups.google.com/a/example.com/group/noc/subscribe>
+X-Gm-Internal: True
+
+--63c0c0de9b5871df2f262e298098653621bfda5574b81834cd61ac268c02
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="e9b497c4e0ef455a70787e9cad9758c7e519d1e729151f879f0bc22f458b"
+
+--e9b497c4e0ef455a70787e9cad9758c7e519d1e729151f879f0bc22f458b
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+
+<html>
+            <h1 style=3D"font:bold; font-size:20px; padding-bottom:8px">Eve=
+nt Update</h1><table style=3D"border: 1px solid black; border-collapse: col=
+lapse; ">
+                <tr>
+                    <th style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Event</th>
+                    <td style=3D"border: 1px solid black; border-collapse: =
+collapse; ">TEST-EVENT-001</td>
+                </tr>
+                <tr>
+                    <th style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Company</th>
+                    <td style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Test Company Inc</td>
+                </tr>
+                <tr>
+                    <th style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Type</th>
+                    <td style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Maintenance</td>
+                </tr><tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Start Time (EST)</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">2/21/2025 12:00 AM</td>
+                    </tr><tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">End Time (EST)</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">2/21/2025 6:00 AM</td>
+                    </tr>                 =20
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Description</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Network Maintenance Improvements</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Location</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">38.9072,-77.0369</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Impact</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Outage</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Circuits</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">TEST-001 Test Company,TEST-002 Test Company</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Status</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Scheduled</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Comment</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">The event is estimated to start at the scheduled time.</td>
+                    </tr>
+                </table>
+            </html>
+--e9b497c4e0ef455a70787e9cad9758c7e519d1e729151f879f0bc22f458b
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+
+<html>
+            <h1 style=3D"font:bold; font-size:20px; padding-bottom:8px">Eve=
+nt Update</h1><table style=3D"border: 1px solid black; border-collapse: col=
+lapse; ">
+                <tr>
+                    <th style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Event</th>
+                    <td style=3D"border: 1px solid black; border-collapse: =
+collapse; ">TEST-EVENT-001</td>
+                </tr>
+                <tr>
+                    <th style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Company</th>
+                    <td style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Test Company Inc</td>
+                </tr>
+                <tr>
+                    <th style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Type</th>
+                    <td style=3D"border: 1px solid black; border-collapse: =
+collapse; ">Maintenance</td>
+                </tr><tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Start Time (EST)</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">2/21/2025 12:00 AM</td>
+                    </tr><tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">End Time (EST)</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">2/21/2025 6:00 AM</td>
+                    </tr>                 =20
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Description</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Network Maintenance Improvements</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Location</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">38.9072,-77.0369</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Impact</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Outage</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Circuits</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">TEST-001 Test Company,TEST-002 Test Company</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Status</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Scheduled</td>
+                    </tr>
+                    <tr>
+                        <th style=3D"border: 1px solid black; border-collap=
+se: collapse; ">Comment</th>
+                        <td style=3D"border: 1px solid black; border-collap=
+se: collapse; ">The event is estimated to start at the scheduled time.</td>
+                    </tr>
+                </table>
+            </html>
+--e9b497c4e0ef455a70787e9cad9758c7e519d1e729151f879f0bc22f458b--
+
+--63c0c0de9b5871df2f262e298098653621bfda5574b81834cd61ac268c02
+Content-Type: text/calendar; name="outageWindow.ics"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="outageWindow.ics"
+
+QkVHSU46VkNBTEVOREFSClZFUlNJT046Mi4wClBST0RJRDpzdW1taXRpZy5jb20KQ0FMU0NB
+TEU6R1JFR09SSUFOCk1FVEhPRDpQVUJMSVNICkJFR0lOOlZUSU1FWk9ORQpUWklEOlVUQwpCRUdJ
+TjpTVEFOREFSRApEVFNUQVJUOjE5NzAwMTAxVDAwMDAwMFoKVFpPRkZTRVRGUk9NOiswMDAwClRa
+T0ZGU0VUVE86KzAwMDAKRU5EOlNUQU5EQVJECkVORDpWVElNRVpPTkUKQkVHSU46VkVWRU5UCkRU
+U1RBUlQ7VFpJRD1VVEM6MjAyNTAyMjFUMDUwMDAwWgpEVEVORDtUWklEPVVUQzoyMDI1MDIyMVQx
+MTAwMDBaClNVTU1BUlk6U3VtbWl0IElHIFBsYW5uZWQgT3V0YWdlCkRFU0NSSVBUSU9OOlBsYW5u
+ZWQgb3V0YWdlIGZvciBvdXRhZ2UgSUQ6IFRFU1QtRVZFTlQtMDAxClBSSU9SSVRZOjMKRU5EOlZF
+VkVOVApFTkQ6VkNBTEVOREFSCg==
+--63c0c0de9b5871df2f262e298098653621bfda5574b81834cd61ac268c02--

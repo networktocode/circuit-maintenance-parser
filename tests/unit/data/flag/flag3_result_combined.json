@@ -1,0 +1,21 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "RGWLS13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1764640800,
+        "maintenance_id": "PE2025102750538",
+        "organizer": "change@flagtel.com",
+        "provider": "flag",
+        "sequence": 1,
+        "stamp": 1763361606,
+        "start": 1764626400,
+        "status": "RE-SCHEDULED",
+        "summary": "FLAG has rescheduled planned activity to resolve degradation issue at Khasab",
+        "uid": "0"
+    }
+]

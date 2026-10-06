@@ -1,0 +1,40 @@
+[
+    {
+        "account": "ACME",
+        "circuits": [
+            {
+            "circuit_id": "CRT-13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1776844800,
+        "maintenance_id": "SWX0036020",
+        "organizer": "sworks@telxius.com",
+        "provider": "telxius",
+        "sequence": 1,
+        "stamp": 1775677534,
+        "start": 1776834000,
+        "status": "CONFIRMED",
+        "summary": "A Schedule work will be performed due to upgrade device. // Se realizar\u00e1 un trabajo programado con la finalidad de actualizar un equipo",
+        "uid": "0"
+    },
+    {
+        "account": "ACME",
+        "circuits": [
+            {
+            "circuit_id": "CRT-13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1776931200,
+        "maintenance_id": "SWX0036020-2",
+        "organizer": "sworks@telxius.com",
+        "provider": "telxius",
+        "sequence": 1,
+        "stamp": 1775677534,
+        "start": 1776920400,
+        "status": "CONFIRMED",
+        "summary": "A Schedule work will be performed due to upgrade device. // Se realizar\u00e1 un trabajo programado con la finalidad de actualizar un equipo",
+        "uid": "0"
+    }
+]

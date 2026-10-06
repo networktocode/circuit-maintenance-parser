@@ -1,0 +1,177 @@
+Received: from IA3PR17MB7840.namprd17.prod.outlook.com (2603:10b6:208:542::15)
+ by CH3PR17MB6987.namprd17.prod.outlook.com with HTTPS; Fri, 17 Apr 2026
+ 08:45:19 +0000
+Received: from YT4PR01CA0138.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:d5::8)
+ by IA3PR17MB7840.namprd17.prod.outlook.com (2603:10b6:208:542::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
+ 2026 08:45:17 +0000
+Received: from TO1PEPF00005345.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:d5:cafe::ed) by YT4PR01CA0138.outlook.office365.com
+ (2603:10b6:b01:d5::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Fri,
+ 17 Apr 2026 08:45:16 +0000
+Authentication-Results: spf=pass (sender IP is 62.216.151.5)
+ smtp.mailfrom=flagtel.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=flagtel.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of flagtel.com designates
+ 62.216.151.5 as permitted sender) receiver=protection.outlook.com;
+ client-ip=62.216.151.5; helo=MTA2.GLOBALCLOUDXCHANGE.COM; pr=C
+Received: from MTA2.GLOBALCLOUDXCHANGE.COM (62.216.151.5) by
+ TO1PEPF00005345.mail.protection.outlook.com (10.167.241.5) with Microsoft
+ SMTP Server id 15.20.9769.17 via Frontend Transport; Fri, 17 Apr 2026
+ 08:45:15 +0000
+Message-ID: <edc64e$1fkrjh@MTA2.GLOBALCLOUDXCHANGE.COM>
+IronPort-SDR: WqkSmdmrUEBTr33YvFWsk7f8zQzi8FRv3INnYd7PWi77EdJpuWkNDVAUJfZEAHdYcEyRA4vdHq
+ 09u2V/0UAbTQ==
+Received: from unknown (HELO PORTALS-02) ([10.10.212.99])
+  by MTA2.GLOBALCLOUDXCHANGE.COM with ESMTP; 17 Apr 2026 09:45:14 +0100
+Sensitivity: Normal
+From: "FLAG Change Management" <change@flagtel.com>
+To: <maintenance@example.com>
+Reply-To: change@flagtel.com
+Date: Fri, 17 Apr 2026 09:45:14 +0100
+Subject: FLAG | PWMR2026040300190 | Planned Work | Completed
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Return-Path: change@flagtel.com
+X-MS-Exchange-Organization-ExpirationStartTime: 17 Apr 2026 08:45:16.3844
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 0fa7b70a-77fc-456c-21bb-08de9c5da5fc
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TO1PEPF00005345:EE_|IA3PR17MB7840:EE_|CH3PR17MB6987:EE_
+X-MS-Exchange-Organization-AuthSource: TO1PEPF00005345.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 0fa7b70a-77fc-456c-21bb-08de9c5da5fc
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|704161411799003|69100299015|7049299003|7149299003|3109299003|12012899012|2092899012|3072899012|16102099003|19002099003|55112099003|57112099003|13003099007|8096899003|4076899003;
+X-Forefront-Antispam-Report: CIP:62.216.151.5;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MTA2.GLOBALCLOUDXCHANGE.COM;PTR:gcxsmtp01.gcxworld.com;CAT:NONE;SFS:(13230040)(704161411799003)(69100299015)(7049299003)(7149299003)(3109299003)(12012899012)(2092899012)(3072899012)(16102099003)(19002099003)(55112099003)(57112099003)(13003099007)(8096899003)(4076899003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 08:45:15.7816
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0fa7b70a-77fc-456c-21bb-08de9c5da5fc
+X-MS-Exchange-CrossTenant-Id: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1
+X-MS-Exchange-CrossTenant-AuthSource: TO1PEPF00005345.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR17MB7840
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.2744268
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9818.014
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?TFAvaFdWSGNqYmhkdHlHVGxPVG5qRlppUE5sMlR2czd0bENoNnZVZGtTZGRW?=
+ =?utf-8?B?UDBsTHhnVitSVVRjTzBTWXo4VXdxQm1hTmdyOHplYU5tamZDM01LL1pvWDVD?=
+ =?utf-8?B?K3c1RHBHb3hNaTRmanJydEMzRldzd1Vpb2RmbWowTWhXOXBsTmJGWUdzVlBF?=
+ =?utf-8?B?Skl6a3hCa1BFUlpMQXZmaTRvcjVKRDdSazgyaXZITXhiZ0JmYUdPWUVIN2g5?=
+ =?utf-8?B?am93OERGcmVLRnJ3WHVQZDhKMXd6cHlEUGR1V2ZsS3YraWFqZ3F2NE9VYmpP?=
+ =?utf-8?B?QXcyNXN2MXNva3NTbkUzNW1VV1hpWjBiSUo5aUVwQVRkTkJmZERoUjVEQ1Fx?=
+ =?utf-8?B?eWF6VFBLOTFWNHB2U3FkNVZJT0dZYkNXWE5obXA5RHoxWUtnRkNJLzNYZ1dE?=
+ =?utf-8?B?ZUJvOUh5ZjlsSlNyVGp5U0Z3ZzB3UE9sUEpYaWNmeUExeEdGRmhzZUlsd2x3?=
+ =?utf-8?B?b1FLQVRRQ1BZUjZHZFlDZEJHdzBlbGt4cEptcm5oTi9hYXk2MVFTbzMxRUZo?=
+ =?utf-8?B?Z3BrTDhsbjBTaEh2aVZCWkNCOUI0RkEvYlRoamlabkVzOGNBZllLV3p4T0Y4?=
+ =?utf-8?B?RGszakpwTURDQTE1a2hXR3FKZmt6elZLQlI4bUN0Ynp2VjNPVUl4VXp4UHhD?=
+ =?utf-8?B?ZG1FSEJRYUlYMWIvemI2WFJ6TTVXVVF4ck5oRXI5RHdYemFWNy8vaWZwVUpQ?=
+ =?utf-8?B?RWszMjlIbkdhTDRFM2lRUXFQM3VqUzNEcjNXbXdLUkRTM3FpcFNYclJLQzM5?=
+ =?utf-8?B?WkhtYlpHczloRGQ2STY0N2tNVHA0NWhJMkQ2dDVSeW13SHZ5L2lMUlp1RHlz?=
+ =?utf-8?B?ZERsd3JFV0Y3WEJhbU1mUFF0bWFvMXV4TGJVTTV1M3lBN3lHSlRPY1lja3Nu?=
+ =?utf-8?B?Mm8vWk9MNm1QWGU2S1c2cW51YWhyLzVad0RYcGowTjVRc2xmT0x0ZFFUZHNP?=
+ =?utf-8?B?aWJJeE1aUlAxL0Q2dlBHaDN5UmZIMDZzQVBwTnlFcGYxbk0vaHZiWWdKR3Zi?=
+ =?utf-8?B?aXZqbHF2TXhFUjVmM2ttcy9mTFJ6NGR1M2M3TlE4UWFOVFp0bnFQWnR2SDlD?=
+ =?utf-8?B?V1EwSHU1MThBZTBkMDFkUTU1VGNqTVpMVittSlBJSnZIaWJ2R3FwSnQ2c1B1?=
+ =?utf-8?B?OFRLK0FkYm9ETzVaNTFkV0k5aHhKdDlzd1RFNkFTdldwZDlqR1JNckFoME5a?=
+ =?utf-8?B?eFJVMFBHL1lZL1Y4d09kbG5BeUFpOEwxVExENjRGK291Zi9QNVI0ZGc1RHVw?=
+ =?utf-8?B?YnhMdTRNMG1UeEZ5ak9pbzRNY0FvRVBiUFNORi9aNzYvbWFuMXBtMmREbkhj?=
+ =?utf-8?B?QWRpanNUbmdlQVBOdWZNYTZkREtXeitjVlZkZDcxTUZ3V0ZEdldwaUgyQmhQ?=
+ =?utf-8?B?NmVJTHZHRitrM0dhdUdZYWJUa2NxYU9YcW9kRXJvU0RvS2JVMGZuU3RHWGJr?=
+ =?utf-8?B?cUkwY3FQekRybUw1ZmtlTGtaYUVIeXVXTE5vV1Vjelh3Rko4MVRRQ3NDbU8w?=
+ =?utf-8?B?Qk5oOFVRRWZkSVhjM0xIU2lISU1XbDY2SUZ4Vm1rakx3VFBGU2pBbzUxVUd5?=
+ =?utf-8?B?MnBPTEZlekhHZWxxbVlhcC9OOXhFcjk4Y1U1Z25WdWtCWUV0UXZSQW5FeFM5?=
+ =?utf-8?B?aDlKQ29ybGpNb3A1WVYwQmx1M0lvY0dIUHVTenQrdVJJcFJHSXh6R0U5amU3?=
+ =?utf-8?B?VGVRSXBkeTdRTTFGVHFweVJXbkFnQVFVOG5SMnFvNVk0Y1NuL1JrRjg5S1V0?=
+ =?utf-8?B?cldOSGZ4S1R0TkNuWnQ1WnJzVkxPZVJFd3JJV0JyUUtVSVpUTzdNa2xXbnll?=
+ =?utf-8?B?WThnZ2xZeXFRR1RkeG1FS0Vpa29BSWZMZnU4dGRLckU5aHdBcVcxWURzaVNn?=
+ =?utf-8?B?SzNwSzk4d3l2RFB3TzdRY1BLNGJLNmE1VnN0RHdXWlJxNjc1dkxMSWNsbmE2?=
+ =?utf-8?B?UUhUNjdjWm5ERnVoYXRPcDlQRXZtMUpYd0ZEbUV0QkpveDJqOENNU2J0L0k4?=
+ =?utf-8?B?Mm8yZTZycndKUU5SalUvOEZ0ZWs0RzRQL0ZkT2gwNWJ6WW1SN2ZHZHVnbkg4?=
+ =?utf-8?B?NklNU0hSanJ1aDlPVWw5dGlLUzdRY0lUTStHVXR1dFNUZG1VOXY0eExvRUJJ?=
+ =?utf-8?B?VS9leWtwRG1ocVFmc3NWYWN6ZCtXNU9VQUFGVWd4TFhXck5FZHY3eCtxZmJE?=
+ =?utf-8?B?WDVYY3k1V2duSzI4enlEZkVKcWNSd1NnMGdrMnJaeFF1TXZ4ZW1kVlduNS9R?=
+ =?utf-8?B?TW1MeFByR3pBSWlLdjRMd3c1QlV4NElnYWZCQ3E3RjVlRlRPWXg4SFNJMFky?=
+ =?utf-8?B?a3RBdUZ4STgveXFGUlpQZnMzbnl3alRjUnN1NjZvamNmSWNnU1FQZW5EdEsz?=
+ =?utf-8?B?WisyNkgzNXkvUUxFcmxxNnBydTVNeGNzTExLU3F3RTdKTld5dy9yUnNtSlU2?=
+ =?utf-8?B?eXJlOHlNRzJUUFdqVGxadGtlUlhKZ2xIbURHbjR0bmhmQ2hrdmROdlBZMFIy?=
+ =?utf-8?B?YXpYQ1IxOVlsWUFXVnUrRWEyN3JsR2NXeG5mV1FobTk2Y1VDSjBmUkJ0cjQ3?=
+ =?utf-8?B?ajBoazhPY1lXN2FLMEsrcDZ0eGMvemNJUlVvTVVkcmdiYkhyT0kxSzdnUk1h?=
+ =?utf-8?B?NEVxc3FLVzZRejBmZU9FWnRWMXlTUjMrQTROUTJkOXdYczBZN2Fpb1FoZkdO?=
+ =?utf-8?B?WmNCaytmUGVrZWVzcXBDMmNYSzR3UEFxd3RZUy9QdFZTMFF2Vk5VREZmcHVm?=
+ =?utf-8?B?L3o2UEdCVGtTQVhWUWlNQnJGMkdzeW5WenRjWENDektBaGpQU3UvOTVoOWxl?=
+ =?utf-8?B?QmNzY2NWbkFhVGFEMlp0dGQ4ZmQ5bWVOVE5qZG5SdnJlWW1ZVXN2eU1XZ2t0?=
+ =?utf-8?B?MWk3YzdqTkp1YVFBWHBRTXZkWjMyUCsza0ZTZHVZSzM3TTZWVzNWeHBkN1FN?=
+ =?utf-8?B?K0M4azRPNzVDeGh2S2lkb1lDRTZqeHN1K3ZVYm01bWh0NzZUT1JXTmpsT2I1?=
+ =?utf-8?B?VWhRUXlzRXFoVnVGUEhrOTlHNzlTclZ5VjA4T3ZRMDZtS0pabWFscm1RSDZ3?=
+ =?utf-8?B?QWphV2U3MVBJTGtNelZockY2dmxWQXRLcXJnVnlXeHZIMTVYZkl3SWZjUis5?=
+ =?utf-8?B?ZWdabFdrdXZ5WEp0QkpIYUY4OXUyTFZmWElFRmxTZXlRVmVxbEN2NzRmWC90?=
+ =?utf-8?B?Y1dHOFI4VEVwWG1LMG5hRzlpN01QVWV5ZDNYazgwVDZIMk10TEtTQXV0bmh5?=
+ =?utf-8?B?Q1RYbVo2R0Njc1NkUWpnVTJsNmVNZ1NOTElzSkQvaXJXUWgzQ0tMMWNQRDZC?=
+ =?utf-8?B?U21vTEZkWDl0eG1EaUxDMHFDa2YyK0RmbEJleHVNbUpvUFhCS1ZGUndqSTFJ?=
+ =?utf-8?B?WTJlbDI0SWJtd3pXL2kwVFJjN3p4dlVSdmN2NkdYRmRscjE0L2lRdmowamVF?=
+ =?utf-8?B?REwxQisyWnIyOUtTMWJIRk9hOXM0bkROU3UyWEY0d0dxQ3BZTE5aZ2dIck11?=
+ =?utf-8?B?a242UU5tRkQ3RlBjSzNFckRwMFl2NTJGOFJPZFhvMjdtOUJNdCtGdFNqQ2NL?=
+ =?utf-8?B?Vkh4WkxCOUZlaWh3WlRKcHhvZThLTlF5QjROZEM0RDZpVXpBPT0=?=
+MIME-Version: 1.0
+
+<!DOCTYPE html><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body style="font-family: 'DM Sans', Sans-serif; color: #333333; line-height: 1.6; font-size:11pt!important;">
+
+    <table style="width:100%;background-color:#f4f4f4" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+                <table class="container" cellpadding="20" cellspacing="0" style="background-color:#fff;margin-top: 30px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.1);width:90%">
+                    <tr>
+                        <td>
+                            <p style="text-align:right;background-color:#A1DBDC;padding:20px;margin:-20px -20px 20px -20px;"><img src="https://flagtel.com/wp-content/uploads/2025/03/logo-dark.svg" alt="" width="150"></p> <p>Dear  ACME CORP,</p> <p>Our provider has completed planned activity of network maintenance at Westport, Connecticut
+<br>
+<br></p> <p>  </p>
+
+                            <p>
+                                <table cellpadding="5" cellspacing="0" border-collapse="collapse" style="border: 0.5px solid #7FA9A9;border-collapse:collapse!important; box-shadow: 2px 2px #e7e7e7;"> <tr style="background-color:#A1DBDC"> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Window</td> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Start Date (GMT)</td> <td style="border: 0.5px solid #7FA9A9;text-align:center;">End Date (GMT)</td> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Backup Start Date (GMT)</td> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Backup End Date (GMT)</td> </tr> <tr><td style="border: 1px solid #7FA9A9;text-align:center;">1</td><td style="border: 1px solid #7FA9A9;text-align:center;">17-Apr-2026 04:00</td><td style="border: 1px solid #7FA9A9;text-align:center;">17-Apr-2026 10:00</td><td style="border: 1px solid #7FA9A9;text-align:center;">NA</td><td style="border: 1px solid #7FA9A9;text-align:center;">NA</td></tr> </table>
+                            </p>
+
+                            <!--<p style="margin-top:5px!important; padding-top:2px!important;">-->
+                            <!--&nbsp;-->
+                            <br>
+                            <table cellpadding="5" cellspacing="0" border-collapse="collapse" style="border: 0.5px solid #7FA9A9;border-collapse:collapse!important; box-shadow: 2px 2px #e7e7e7;"> <tr style="background-color:#A1DBDC;"> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Service ID</td> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Impact</td> <td style="border: 0.5px solid #7FA9A9;text-align:center;">Impact Duration</td> </tr> <tr><td align="center" style="border: 0.5px solid #7FA9A9;">RGWLS13337</td><td align="center" style="border: 0.5px solid #7FA9A9;">Service Interruption</td><td align="center" style="border: 0.5px solid #7FA9A9;">04 hours 00 minutes</td></tr> </table>
+                            <!--</p>-->
+                            <br>
+
+                            <span style="font-size:10pt; color:#063c40; font-weight:bold; margin-bottom:0px!important; margin-top:50px!important;">Key Terms</span>
+
+
+                            <table cellpadding="5" cellspacing="0" style="background-color: #f9f9f9; border: 1px solid #dddddd; margin: 0px 0px 0px; margin-top:0px!important; font-size:9pt!important;">
+                                <tr> <td style="border: 1px solid #dddddd;white-space: nowrap;">Service Interruption</td> <td style="border: 1px solid #dddddd;">Services will experience Interruption /Outage.</td> </tr>
+                                <tr> <td style="border: 1px solid #dddddd;white-space: nowrap;">Loss of Resiliency</td> <td style="border: 1px solid #dddddd;">Services will experience loss of resiliency for the &quot;Impact Duration&quot; and may switch to alternate path.</td> </tr>
+                                <tr> <td style="border: 1px solid #dddddd;white-space: nowrap;">No Impact</td> <td style="border: 1px solid #dddddd;">Service will continue to work as normal.</td> </tr>
+                            </table>
+
+
+                            <p> FLAG apologizes for any inconvenience this work may cause you and your customers. </p> <p> Should you require any additional information, please contact us at <a href="mailto:[change@flagtel.com]">change@flagtel.com</a> or by phone at +44(0) 208 282 1599. </p> <p></p> <p><br><span lang="EN-US" style="font-size:14.0pt;font-family:&quot;Arial&quot;,sans-serif;color:#063C40;mso-ansi-language:EN-US">
+<b>Regards,</b><br><b>Vishal Parab</b><br>Change Management, Global Network Operations Center<br>D +91-22 303 86074<br>M:+91 9702427917<br><u>vvparab@flagtel.com</u>
+</span><br><br> <img src="https://flagtel.com/wp-content/uploads/2025/03/logo-dark.svg" width="117" height="35" border="0" alt=""><br> <a href="https://www.linkedin.com/company/flagtel/">LinkedIn</a> | <a href="https://www.youtube.com/@flagtel">YouTube</a> </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+The information contained in this message is likely to be confidential and legally privileged. It is intended only for the person named above. If you have received this message in error, please notify us and delete it. Any copying or use of this message is strictly prohibited. Business e-mails are sent to you subject to our usual terms of business and Acceptable Use Policy. When the content of an e-mail is a personal message, the sender is not acting in his/her capacity as a Director, officer or employee of FLAG. We cannot guarantee the integrity or suitability of this message or that it is virus/worms free, therefore, we accept no liability for any damage caused to your systems. FLAG is a trading name of a number of organisations and legal entities around the world. For full details of the registered offices for each company together with their legal name, country of registration, VAT or equivalent number please contact the sender of this e-mail or visit the corporate website of https://www.flagtel.com.</body>
+</html>

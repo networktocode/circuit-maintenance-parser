@@ -1,0 +1,17 @@
+[
+    {
+        "account": "133337",
+        "circuits": [
+            {
+            "circuit_id": "13333371-A",
+            "impact": "OUTAGE"
+            },
+            {
+            "circuit_id": "13333372-A",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1777752000,
+        "start": 1777737600
+    }
+]

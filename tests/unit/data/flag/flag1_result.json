@@ -1,0 +1,14 @@
+[
+    {
+        "account": "ACME CORP",
+        "circuits": [
+            {
+            "circuit_id": "RGWLS13337",
+            "impact": "OUTAGE"
+            }
+        ],
+        "end": 1780048800,
+        "start": 1780027260,
+        "summary": "Our provider will be carrying out a planned activity of fiber repair at Milford, Connecticut"
+    }
+]

@@ -2,6 +2,11 @@ ARG PYTHON_VER="3.10"
 
 FROM python:${PYTHON_VER}-slim
 
+# Install build tooling so dependencies without cp3xx wheels can be source-built (relevant for newest Python versions).
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install Poetry manually via its installer script;
 # if we instead used "pip install poetry" it would install its own dependencies globally which may conflict with ours.
 # https://python-poetry.org/docs/master/#installing-with-the-official-installer

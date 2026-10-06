@@ -1,0 +1,67 @@
+Date: Wed, 5 Aug 2026 20:00:00 +0000
+From: HAWAIKI NOC <support@bw-digital.com>
+To: noc@example.com
+Subject: [Ticket#2026072290001004] Hawaiki Submarine Cable: Hazardous Condition Notification 2026-Aug-05 20:00 UTC
+Content-Type: multipart/mixed; boundary="----------=_boundary-hawaiki1"
+MIME-Version: 1.0
+
+------------=_boundary-hawaiki1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear valued Hawaiki customer,
+
+Please be advised of maintenance works to be carried out on Hawaiki network.
+This work is NOT EXPECTED to impact your service identified below.
+
+Service ID: HW-CID-12345
+
+Reason for Notification: Maintenance works to be carried out in Hawaiki network
+
+Maintenance Window
+Start: 2026-August-05 20:00 UTC
+End: 2026-August-05 21:00 UTC
+
+Contingency Window
+Start: 2026-August-06 20:00 UTC
+End: 2026-August-06 21:00 UTC
+
+Location of Maintenance: Pacific City
+
+Service impact: No service impact expected
+
+Hawaiki NOC will monitor the progress of works throughout the maintenance
+window, keep you informed of developments as they occur and advise when the
+activity is complete.
+
+Please contact the HAWAIKI SUBMARINE CABLE Network Operations Centre (NOC)
+with any questions of concerns.
+
+-----
+Best Regards,
+HAWAIKI NOC
+
+------------=_boundary-hawaiki1
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body>
+<p>Dear valued Hawaiki customer,</p>
+<p>Please be advised of maintenance works to be carried out on Hawaiki network. This work is NOT EXPECTED to impact your service identified below.</p>
+<p><strong>Service ID:</strong> HW-CID-12345</p>
+<p><strong>Reason for Notification:</strong> Maintenance works to be carried out in Hawaiki network</p>
+<p><strong>Maintenance Window</strong><br />
+Start: 2026-August-05 20:00 UTC<br />
+End: 2026-August-05 21:00 UTC<br />
+<br />
+<strong>Contingency Window</strong><br />
+Start: 2026-August-06 20:00 UTC<br />
+End: 2026-August-06 21:00 UTC<br />
+<br />
+<strong>Location of Maintenance</strong>: Pacific City<br />
+<br />
+<strong>Service impact</strong>: No service impact expected</p>
+<p>Hawaiki NOC will monitor the progress of works throughout the maintenance window.</p>
+</body></html>
+
+------------=_boundary-hawaiki1--

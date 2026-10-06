@@ -1,0 +1,444 @@
+Received: from SN7PR17MB7042.namprd17.prod.outlook.com (2603:10b6:806:2e0::9)
+ by CH3PR17MB6987.namprd17.prod.outlook.com with HTTPS; Mon, 10 Aug 2026
+ 19:45:03 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=ERte1g5fUsFcWtV5WhFVGf5lfIG4IsbYtUR2q+b/RtF0oITgjv/Ixh+Fr3PFGdSFFAPZQn+7YqdeFBoZSSyeQz8SYc4ZTW4iGpvpIZl35z0Mdb6XRxBdiTQLZizNFLYL1z6Zw+KvQSA/oYIKQBcsNSfqW7xDikHBXDCAZV1NZ1Hkc0eBffV91yTylYS//UrKTVXZ5uV3IHgMJoEeJpS1dtOOUcRokXtCFYGYQ0/u5Nui/JqTogQIibMpsD/UwSzwwu23gteu4UAs4p3UnD6CEUwUrYlzbRoZlY9IbaoEOQJpLUwGxrrg4r88M51XObbsuWx5uTtGCkREKW5pfjMWzg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0zUoF6WpplfIsxDug44m/GJRK0mfYGUskjM9vy/Z+0U=;
+ b=u1geWQ4FVnUlExssAZFCoz/6UwWxdMpfolFPRGGE3CT2x6Pns5fz25gexJRc+IcqRTow6sFOAZhro6r1RTyZk34oKfmCYNekhviaHJy4ZJ3LYlbxu/Dfm/xHS6fhwt93zCkFo3bj4BTPpMJtKoBnBBJH4NsUaLE+RDUt1tme9zavYi6obl3gqGa/AheCM2XLVuJ0OcivGODbBYrJ5pD/ikJZttTxInNY4MnlYUuUVp1BCjiXAxBdVQYVfaPY5r8otbLbEOXspwvFKLfJBa4XeQDq8j/68/KEmidE107qUyKomZfRHWV294XbP8MSRGmNN3g88CuTmJJR+WhrywWKsQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 2a01:111:f403:c201::1) smtp.rcpttodomain=acme.corp smtp.mailfrom=telxius.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=telxius.com;
+ dkim=pass (signature was verified) header.d=telxius.com; arc=pass (0 oda=1
+ ltdi=1 spf=[1,1,smtp.mailfrom=telxius.com] dkim=[1,1,header.d=telxius.com]
+ dmarc=[1,1,header.from=telxius.com])
+Received: from YQZPR01CA0028.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:c01:86::14)
+ by SN7PR17MB7042.namprd17.prod.outlook.com (2603:10b6:806:2e0::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 19:45:00 +0000
+Received: from QB1PEPF00004E07.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:86:cafe::88) by YQZPR01CA0028.outlook.office365.com
+ (2603:10b6:c01:86::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.25 via Frontend Transport; Mon,
+ 10 Aug 2026 19:44:59 +0000
+Authentication-Results: spf=pass (sender IP is 2a01:111:f403:c201::1)
+ smtp.mailfrom=telxius.com; dkim=pass (signature was verified)
+ header.d=telxius.com;dmarc=pass action=none
+ header.from=telxius.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of telxius.com designates
+ 2a01:111:f403:c201::1 as permitted sender) receiver=protection.outlook.com;
+ client-ip=2a01:111:f403:c201::1;
+ helo=AM0PR83CU005.outbound.protection.outlook.com; pr=C
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (2a01:111:f403:c201::1) by QB1PEPF00004E07.mail.protection.outlook.com
+ (2603:10b6:c08::125) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.315.6 via Frontend Transport; Mon, 10
+ Aug 2026 19:44:58 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=fMqZmBQWkgjUkKAOoQIJ/nWkhfNjxf4uGt4i/F100FLZbw7LE0xXVUzQdqIRIOaBeI5lb9QZbIEJDAoFvLxmEUWPSrJlREQD+OQJ7yKMKvMXd5Rlw7vemJRrGKIpJwwI0IUoL0YUSchwZbQYCxaZN+vK7ROpQf0RR+tKD9p+15dBpi3XGfieBMZdFefDGvthtlPvJgAZ1ghmddO7xkYGeUObDfgw8XP+HQQr2gvdtwc40O8t4+dZSgcSUV8LyEU98wDwnjINPlpabNP36Yn40KfR5jhfM86DnjtugqO7NflJRqd28cqdC27skT2HSyNsE735kada/PT/6tlLqH3WAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0zUoF6WpplfIsxDug44m/GJRK0mfYGUskjM9vy/Z+0U=;
+ b=Adgk94eSaklat8caerJCOWJAto4JAuAEbsiF+Fy6B1LjCt79Qf/dGQxDovJhtTdtg6RR5ByLjrNFCr6z/sqJjnzKhOtz6KzXvnDJqwLszLnLVhRsPYMFV9HENu4r5Npb2OT2tZlM1S7Op4BJuwooqslSJeqacj2e5hK3Pv+YsFq5cKlIEBzrPy6xM9+OyRJ//iHYJRDNIyMwgRgeNyROI0710Xma1UU5E4pDoWWnUYlSGa2CZcFBeYLoSad2+57mwXOiqdda+KY0zAj3E/v/F445Bm3bYVwHACo9lp2/qHV5BSMINh+KNyZdEttZZ97ahwKpFw+sur8aYLtvsoh5Rw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=telxius.com; dmarc=pass action=none header.from=telxius.com;
+ dkim=pass header.d=telxius.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=telxius.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0zUoF6WpplfIsxDug44m/GJRK0mfYGUskjM9vy/Z+0U=;
+ b=fGAl++4+QAqmdPA99CDW8pWDqrr73gqTsmnhdfJjKDHIcMq0D3YkcMRo7fJFsUqG50jAbClOCFpJP94qKkTYHQeK/zPDzjWWQf+mL9QZsdmZuUDnCnErPwI1MjA1+H1M3nNR2oRfrIU2zJVrqew5EWuYOmQJw4mMu+pSpJUnsypBS2tGtFpkaw6JMK/vUsbuBumRny6aYzaV7jdrGgVxBw9QZ3FotvEWxrvbM9DhNNvw0hw56OxlySgixftUzobtJHhPUkQ6IcIxW1GwSY9E39qFi5sFv3SRJNtWfCYxz8MucE9nlAoDtdlP3ls11vlCosoCvmoxBa55N0tyQ4DHnQ==
+Received: from AS5PR06MB10699.eurprd06.prod.outlook.com
+ (2603:10a6:20b:752::21) by VE1PR06MB7005.eurprd06.prod.outlook.com
+ (2603:10a6:800:1a6::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 19:44:55 +0000
+Received: from AS5PR06MB10699.eurprd06.prod.outlook.com
+ ([fe80::fe62:3661:958f:d254]) by AS5PR06MB10699.eurprd06.prod.outlook.com
+ ([fe80::fe62:3661:958f:d254%3]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
+ 19:44:55 +0000
+From: Scheduled Works Telxius <sworks@telxius.com>
+To: Scheduled Works Telxius <sworks@telxius.com>, "MAINTENANCE@acme.corp"
+	<MAINTENANCE@acme.corp>, "NOC@acme.corp" <NOC@acme.corp>
+Subject: [CANCELLED]  Maintenance Notification: SWX0037366 - acme.corp
+Thread-Topic: [CANCELLED]  Maintenance Notification: SWX0037366 - acme.corp
+Thread-Index: AQHdKQCkPpzM9qz0REOY4Cr9EejAng==
+Date: Mon, 10 Aug 2026 19:44:21 +0000
+Message-ID: <AS5PR06MB106999800A244E3D776F45A10DEDE2@AS5PR06MB10699.eurprd06.prod.outlook.com>
+Accept-Language: es-PE, en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=telxius.com;
+x-ms-traffictypediagnostic: AS5PR06MB10699:EE_|VE1PR06MB7005:EE_|QB1PEPF00004E07:EE_|SN7PR17MB7042:EE_|CH3PR17MB6987:EE_
+X-MS-Office365-Filtering-Correlation-Id: a375e874-c408-45fb-4e1b-08def717dc60
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|1800799024|6049299003|376014|366016|23010399003|18002099003|11063799006|56012099006|8096899003|4053099003|4013099003|38070700021|10067099003;
+X-Microsoft-Antispam-Message-Info-Original: uvjcN6xxVwkR6EuHfDqzs3dcnLRPM7r1OW8wL4AyXo9aQE8WecxT2JUVy9KMftYwAH+Mj7n65dqpKR7M5ockA7+IEd86nODAxP73DoCyezMaVd1sgq7cqWHeG6kVafbg7Dq3ixt+R+IR4sc3KwDUAGvINwvbfP/IMUKOnlGmZzmazTIIOr9nw9sO0f8JnEWoXF7o49qp8jIQidSUlBE37L7YYePcNrZweOvSKUaEOL0NgoQyYDJwFH05gmR75cuBXFsNCOENtwIr2tsBgAcH4QbGSPAYOI+rbnbQ57v076qEP0p6lf8+Lmg8GiAjtR0jEYf6ME8r+aa0FDmoiCv/7NRa4p6fvzFRK6Bfhga5HDiP8xwpFBbR0hylKZ0KJUyN4b+YNO/AVhB9hkFRnljssmfiaLDbZuDc2Ii0xSvHzCoBBw9sYsSyAIb09oeKvBrlNYhhfg0M+M010jF2LehdlOwmRCi2S0cxTjyaOfTqo+ywghSPuiDBqVM6y2TFptMBc0Ovye2503N+tTW0ju26vo+j0FfGuKNe4++MglRzxJdfKKMKCoAWzDfs1Lz2pWcxT4jiNd4V8YTTh2L3aDbvZ3hQBmz0TR2cbn/l7MACHar19TwtdSYjjms8lCWMGtQo6Wm7GE81wPJssK5X9/9GAhBMgPcwglpE3iN9s/gC9iNvzv01eZoYJYyrgXxYWj0OGA2KOXLJ5dkTk06om5WBG7BFM466GBAM/ufByn73/rE=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS5PR06MB10699.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(6049299003)(376014)(366016)(23010399003)(18002099003)(11063799006)(56012099006)(8096899003)(4053099003)(4013099003)(38070700021)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-Original-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-Original-0: =?Windows-1252?Q?X7v1wXXR2U6Qc9b0jt3gu33PhpSDOAiHMEWTQn4dZPz/K8aUWAYR7xHV?=
+ =?Windows-1252?Q?VaUMcJx5bZ9Nva7vZibKxq3rCpgc6CP5BZrlk12irjixeFgBxMZ+VZp2?=
+ =?Windows-1252?Q?oOk14ODw+tebwHgXyVjXQLPPjbtmCb1A2fd9nqRab1azZP3ICpa29Wny?=
+ =?Windows-1252?Q?MY8QvM1MiFUR62kglPJNyQ4XMM+dGFparIt1bmYz/tq8ZlJaI+RaRZgT?=
+ =?Windows-1252?Q?g0ROr3Se9o8NFtUxsHlLRDSoQlapAm+h+FVkZnSmN4je9MR29BqHW1gs?=
+ =?Windows-1252?Q?o5tHUGDb6/NJIc0n+6Ik2tnSNTQ4vwwW3uck38FwTVkG2ynOt+X6yx4z?=
+ =?Windows-1252?Q?/jchNCr0XJcYC3tVvufpwloYYhMq1+wVH/HuDMBuSW8xBEqo0SWNe7p9?=
+ =?Windows-1252?Q?LA443tFyyJn0wIC1oqIySJhvnkb+JPRSfELSX2JiESwBPc/V9OOF1ipk?=
+ =?Windows-1252?Q?AIGxUFt3JGePwxNokcCemzm8MNLPkQuB5lwvrLckcXbCw+u+oGGXUA9b?=
+ =?Windows-1252?Q?0RLRKhROlwrgndCGEUSQzi1MxipQ3kfdiBXv3oxY7jbN20K5m/68C9Ff?=
+ =?Windows-1252?Q?7/U/+QRpyTceWI8LIui/oL9ZdvmbTvvrpDjEUdovR1e6ieKRRiSpdswE?=
+ =?Windows-1252?Q?2DTwee1oBHoLoWWH89Qe8fVveYjwB5/zG0aJYgdOUG8btMQmGkLxKzXm?=
+ =?Windows-1252?Q?wP48fD5nGFSiWWlaHxa9mER861lu6zABlE4aj9Qwc0LUb3exuIqH0txg?=
+ =?Windows-1252?Q?yvQSt+b4NpEuJbBis8O7kytk3Gr+qesMYbLxGrrADsxD97n4/b6wuCeL?=
+ =?Windows-1252?Q?4IYaZ8ElYK2HPmlOlxXQwOD0asoDb3yhFK3A03ZoJVmQhJN/JoLsOPdS?=
+ =?Windows-1252?Q?qPUw/T4pPnm8qYzJJcbsdrrZ+Wh3CbQB6EnSoENfkUnh/iY6gyzH26tv?=
+ =?Windows-1252?Q?Fyp4hO0N7XM93/twNpdibTK+jJXyfmp3JJKsEOSWdfx9/5HQmuTxisxB?=
+ =?Windows-1252?Q?ghAa3DFlqi80zSc/xEE3jb8ivqzXRQjqa2j2AeQu98iEAUzzgZvjqUQn?=
+ =?Windows-1252?Q?QmMuTA7mJEgU4sjTk0tG8r9Xn+DLuwN3dwEdE6Xe8BNJDI8wGsbp0f1a?=
+ =?Windows-1252?Q?JJsOEbfzs888vvt8HMPI4KUP9Z1rcSOJXiAbvPkYJPdtxoDS99ee70Tr?=
+ =?Windows-1252?Q?Bx4xRlYmdZUWE1U4Rsw8BYNUIQdkkp6PMSGA+UIAC3lISncSmPH01Yrq?=
+ =?Windows-1252?Q?qsN3z9YkDVwi+PqOuUiVFCP44Mh3tXYwlNXsjYlf6IJmENDuUsKt2Lq2?=
+ =?Windows-1252?Q?mTuviXc6iE64GU0YJACmui4d1IZXoLxUkgBUKiL/It5DxSGOvoPelltl?=
+ =?Windows-1252?Q?34TcdZBAoMLu/rosNmYyQ64j7lCe/1xqFMgmMBOAgYC3nnujoRGDs2qG?=
+ =?Windows-1252?Q?FmYwzWNW089MqSrEviT3n2VTeizxO8+rhOO2aJywqyKu6HyyvgZ6zOc5?=
+ =?Windows-1252?Q?xcCft7jKfj31bYmhu7sjJB0xoEQajIpBl5EgPwpCzq7BNiVvQHCIcxUh?=
+ =?Windows-1252?Q?acHxF404gwpYqCy2tz90BOGA8OCTNvhA/cBpZxYFpVzOAeCh0Jbkp8YJ?=
+ =?Windows-1252?Q?Wx8D7itCxtjXTPpOPAbYHE+eaO4of0LxN/+XpkQallMYAEGr8RX9q/lS?=
+ =?Windows-1252?Q?fW5h9Per+IZ3WqcvESdhPKgcLYChEJTmGpCwkflBedRrrbGHHMfbWbkK?=
+ =?Windows-1252?Q?cQOw0yP/PFevcE8/gTZBP/8itP3dDUuAN6meZ0Xn1UAPATc99wjLHqfd?=
+ =?Windows-1252?Q?vMUIlRUrFF4NbIAFNypHQtO4iEnuqSsFffT/EvWDTZ1pg0lMb6JwIGs8?=
+ =?Windows-1252?Q?2+QatCfVMtMvPPIsqqd95omYRqDGMfk5nezivyqQ7kLZsxVdkAZRlWqB?=
+Content-Type: multipart/related;
+	boundary="_004_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_";
+	type="multipart/alternative"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR06MB7005
+Return-Path: sworks@telxius.com
+X-MS-Exchange-Organization-ExpirationStartTime: 10 Aug 2026 19:44:58.6796
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: a375e874-c408-45fb-4e1b-08def717dc60
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: QB1PEPF00004E07.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Transport-CrossTenantHeadersPromoted: QB1PEPF00004E07.CANPRD01.PROD.OUTLOOK.COM
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource: QB1PEPF00004E07.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs: f7ec9b69-3ed6-4222-5c14-08def717da73
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|704161411799003|6113799003|12012899012|6073799003|2092899012|3072899012|7149299003|35042699022|6049299003|4053099003|6133799003|19002099009|10067099003|5063699009|11063799006|16102099003|18002099003|57112099003|55112099003|8096899003|4076899003;
+X-Forefront-Antispam-Report: CIP:2a01:111:f403:c201::1;CTRY:;LANG:es;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR83CU005.outbound.protection.outlook.com;PTR:mail-westeuropeazlp170100001.outbound.protection.outlook.com;CAT:NONE;SFS:(13230040)(704161411799003)(6113799003)(12012899012)(6073799003)(2092899012)(3072899012)(7149299003)(35042699022)(6049299003)(4053099003)(6133799003)(19002099009)(10067099003)(5063699009)(11063799006)(16102099003)(18002099003)(57112099003)(55112099003)(8096899003)(4076899003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 19:44:58.4400
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a375e874-c408-45fb-4e1b-08def717dc60
+X-MS-Exchange-CrossTenant-Id: e01bd386-fa51-4210-a2a4-29e5ab6f7ab1
+X-MS-Exchange-CrossTenant-AuthSource: QB1PEPF00004E07.CANPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR17MB7042
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:05.2485333
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0292.011
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?Windows-1252?Q?mYvb3kg6tU+iES8dAHwvYVZSwBK4N7gLJwmO1gcPEW76cjnZ4K3gecFJ?=
+ =?Windows-1252?Q?OEcuvPC+YhydlcItyydm73StHnn8RCDMNM1mYHZLlUHbE6JmNK9Ycjrn?=
+ =?Windows-1252?Q?JsjhBOMKsT8WgLG3k3yKKfwH5SZBb5i8wzLp+bLJPf0zSEKqNIp5H8Hv?=
+ =?Windows-1252?Q?OD/HYnxr9dyuuyNQonCLLbI33q4pNpT93JR3vuRaBBM9N6LioveKjDnz?=
+ =?Windows-1252?Q?8Hw785EMzhhABJzEVsyJTGaLdjjd/rcuTA20qKzMsbHvE4n2yfQsNSMA?=
+ =?Windows-1252?Q?9OSDctJUHYzgZA2jGlUzZV9Ff9083NR/062jnkr+6lWJ9b+wJ/qC6WrH?=
+ =?Windows-1252?Q?BPNaUsze/l09rpirqJPJXt/jSOm0bpOT8Bck1tM3OxbX8XoGJSO86oI2?=
+ =?Windows-1252?Q?Zp4ZNn/khZp7juZ0A7JtjSxIU8oeveqX2PAdbMco+J+A2cNRf6uG0fVq?=
+ =?Windows-1252?Q?NPxamC7LjgtgR3v4z4zbt0HnasSU8XilwO3hcDQz6klxlQEEdk34+Mtj?=
+ =?Windows-1252?Q?uviXZKiI8ZOavhl0THWyyjSGNsM1meUxHZjhoxDzZme6Nv+YO4UuqHvm?=
+ =?Windows-1252?Q?ynqWZJob4G6IOp5OTiT1JEEyusoOOczxjWRZZL4dyZk4lv58Wc8G1idH?=
+ =?Windows-1252?Q?L+SRqG0/LCyXvIsHfCAnMscMam5dRMLHH2o9nTxoHnhFvMTpfBXoPLeu?=
+ =?Windows-1252?Q?BdbGOibmnpPB7tI8IEcDq03AR1Lm5kB9Y9laRm50kIRFVwioXRJ15PIL?=
+ =?Windows-1252?Q?b/56F4ZWQwML27JTFYe+Gof2NyJ7SGBuQRC0EFsRrSyRBILVq4NO/A/l?=
+ =?Windows-1252?Q?mcbfVsY70pfyHUzQ+xgx8NiOe3u/CXVJ21t1hObMG67JzgpO8ynwhiK6?=
+ =?Windows-1252?Q?iz8mqjmn1Uh9wrttFDsGjg/kni7syZ9UY90mNKlHrJrpTtWflfXmS5eZ?=
+ =?Windows-1252?Q?VrThxgruPUr0xZm6CcsmAz7N/C60L60C8cquAVivNaS6Ezoq9yqw47R0?=
+ =?Windows-1252?Q?N3/TLtLbO9/QTserffFyLKY5LK6VFsteAhIrGHi0pVPrh+AICU0l0JFI?=
+ =?Windows-1252?Q?4CG6otsSfvpTUuNvz5ib+IgDFr03KwC3Qm25twNtpsVBmikRvfe0MUsB?=
+ =?Windows-1252?Q?P/nuYkn/dOLiUMDyi3yZDMcS63A2dqeAUnmQCgc835MuziYzbS5vn24R?=
+ =?Windows-1252?Q?FvstixyyST51vQanaR1BMAWCsScGiOwfraQxYMDI3U3j3cgdFah7ndX9?=
+ =?Windows-1252?Q?UDuLM9AwMOXZgJUmyD9WC+RA8R/wsK6HOuIz9lcMs9rhSwNU5877b1pz?=
+ =?Windows-1252?Q?tQDI8N7pt28IZnUjJF1xy1jkFKwXDueFVBGD7oUEssunko/nBXtYNd1C?=
+ =?Windows-1252?Q?KsoQyJZtJI70wiFBFXJKk78Kan0cwHOo3tTtKv3HE1cwdvvDqYs4KNc6?=
+ =?Windows-1252?Q?25CJU50uH40IhFeyKrcXCIDjU1HMh57ou/BHOKH7ujk5KtLHi0qQWVq9?=
+ =?Windows-1252?Q?5Qfj+Yk+VJHEo3+J7x/xQOlOEwuFkdO3S27SusdzNx81TqMHOJAj6Q+O?=
+ =?Windows-1252?Q?7mPCtH1Y4d1LrGlOAlrwR2B5FMC0QjuzInqNfbRUNnBnCWMVDJbVKXbj?=
+ =?Windows-1252?Q?ev8Id8Ro1Fy8iB8V48CK1F5MLeFaYupmlDqtNiyYTT2R2H2vI9YKiXqX?=
+ =?Windows-1252?Q?98d5zaIIW06je/bVS5Hp8S1p4sjcG0ZwBScPc4aBfJ8gSDj4/MV/94nq?=
+ =?Windows-1252?Q?rPq8oJcd4GRDz+o24bvhAahwApxVtiubO5a8yHktt1dY2GfjTN+i6TxT?=
+ =?Windows-1252?Q?N0LgLVYVtgC4rPr5x05x+R15duaJ0G/WYhDpH2rmm1w/nmsVtslSogGg?=
+ =?Windows-1252?Q?/BFPHLjbfIHimfQLkdA5Ez7Xsx/HzfUNP+pf4IDnCUDXH8R7lrESCOGY?=
+ =?Windows-1252?Q?FiIlSZxyAMUQmreWrHP8Su5hRpE0doODm9mInrZ4mYkubrOtU28HFCmo?=
+ =?Windows-1252?Q?bxjwRnOf7ZVYGA8mUC+nnOPp8fxYLu0QzAixTaJzufadrZ9TYZGSUfrR?=
+ =?Windows-1252?Q?LSHZNStu0S/IkXiEm5KMoF4BkoXUs7VpwzoKJ5AqD6Yy9aQXQ7dCZPqa?=
+ =?Windows-1252?Q?Ey/KVRik2MTIl+p7mJPE4hlm9u+mwk0JciXskljkNb5gFJdoaDzMjc8o?=
+ =?Windows-1252?Q?t5p9R0HgJPVrCo4KB0oLjIsa9quLkkn4atR/oROuUhqQg0F2LRE3NRRk?=
+ =?Windows-1252?Q?+RAHvjRZWLB1ug/57mhRvLNH6MlQLmhoqm46ZTNYo5EDnLOE/zUd5d+q?=
+ =?Windows-1252?Q?me47itlQ1J6I42l1ejFhpMbYmINDcXg0+xpccZj4Sj67KS7sAJGiF2og?=
+ =?Windows-1252?Q?/umPr9FxiVAB+AFtDGR1/B2JE6jIy7Q8nY18XFcGO8WhOLHKSBOThXCC?=
+ =?Windows-1252?Q?llSGqQuCiu8JYYQJ+3nSLRDG91DvbHBrneAuDSC2VQpBDHuVNXNXh6jj?=
+ =?Windows-1252?Q?XZ6jVxMQjdCrHOjJMDUK9aw8CgV3Pw=3D=3D?=
+MIME-Version: 1.0
+
+--_004_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_
+Content-Type: multipart/alternative;
+	boundary="_000_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_"
+
+--_000_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Sirs // Estimados Se=F1ores,
+
+acme.corp
+
+We inform you that this scheduled work has been cancelled. // Le informamos=
+ que este trabajo programado ha sido cancelado.
+
+NOTIFICATION NUMBER // NUMERO DE NOTIFICACION: SWX0037366
+
+NOTIFICATION TYPE // TIPO DE NOTIFICACION: Cancelled // Cancelado
+
+SCHEDULE // VENTANA(S) DE TRABAJO (UTC):
+
+  *   Start Time: 12/August/2026 03:30 UTC (Backup Window)
+  *   EndTime: 12/August/2026 09:00 UTC (Backup Window)
+
+
+
+
+[English] If you experience any problems with your services due to the perf=
+orming of this task, please contact our Capacity Services NOC at +511 411 0=
+070 or emailing customerservice.capacity@telxius.com<mailto:customerservice=
+.capacity@telxius.com>. We apologize for any inconvenience caused by this m=
+aintenance to you and your customers. If you have any additional questions,=
+ please do not hesitate to contact us. Our personnel will be permanently av=
+ailable for you.
+[Espa=F1ol] Si experimenta alg=FAn problema con su servicio debido a la rea=
+lizaci=F3n de esta actividad programada, por favor comun=EDquese con nuestr=
+o NOC de Capacity Services v=EDa el +511 411 0070 o al correo customerservi=
+ce.capacity@telxius.com<mailto:customerservice.capacity@telxius.com>. Lamen=
+tamos los inconvenientes que este mantenimiento pueda causarle a usted o su=
+s clientes. Si tiene alguna otra pregunta, no dude en contactarnos, nuestro=
+ personal estar=E1 permanentemente disponible para usted.
+
+[Telxius]
+
+Change Management & Scheduled Works
+
+Customer Care & Operations =96 Network Management
+
+Lima - Per=FA
+
+T +5112439440, +5114110079
+
+M +51 979 255 498
+
+sworks@telxius.com<mailto:sworks@telxius.com> | telxius.com
+
+________________________________
+
+Este mensaje y sus adjuntos se dirigen exclusivamente a su destinatario, pu=
+ede contener informaci=F3n privilegiada o confidencial y es para uso exclus=
+ivo de la persona o entidad de destino. Si no es usted. el destinatario ind=
+icado, queda notificado de que la lectura, utilizaci=F3n, divulgaci=F3n y/o=
+ copia sin autorizaci=F3n puede estar prohibida en virtud de la legislaci=
+=F3n vigente. Si ha recibido este mensaje por error, le rogamos que nos lo =
+comunique inmediatamente por esta misma v=EDa y proceda a su destrucci=F3n.
+
+The information contained in this transmission is confidential and privileg=
+ed information intended only for the use of the individual or entity named =
+above. If the reader of this message is not the intended recipient, you are=
+ hereby notified that any dissemination, distribution or copying of this co=
+mmunication is strictly prohibited. If you have received this transmission =
+in error, do not read it. Please immediately reply to the sender that you h=
+ave received this communication in error and then delete it.
+
+Esta mensagem e seus anexos se dirigem exclusivamente ao seu destinat=E1rio=
+, pode conter informa=E7=E3o privilegiada ou confidencial e =E9 para uso ex=
+clusivo da pessoa ou entidade de destino. Se n=E3o =E9 vossa senhoria o des=
+tinat=E1rio indicado, fica notificado de que a leitura, utiliza=E7=E3o, div=
+ulga=E7=E3o e/ou c=F3pia sem autoriza=E7=E3o pode estar proibida em virtude=
+ da legisla=E7=E3o vigente. Se recebeu esta mensagem por erro, rogamos-lhe =
+que nos o comunique imediatamente por esta mesma via e proceda a sua destru=
+i=E7=E3o
+
+--_000_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+</head>
+<body>
+<p style=3D"font-family: sans-serif; color: black;">Dear Sirs // Estimados =
+Se=F1ores,
+<br>
+<br>
+<b>acme.corp</b> </p>
+<p style=3D"margin-bottom: 20px;">We inform you that this scheduled work ha=
+s been cancelled. // Le informamos que este trabajo programado ha sido canc=
+elado.
+<br>
+<br>
+<b>NOTIFICATION NUMBER // NUMERO DE NOTIFICACION:</b> SWX0037366 <br>
+<br>
+<b>NOTIFICATION TYPE // TIPO DE NOTIFICACION:</b> Cancelled // Cancelado <b=
+r>
+<br>
+<b>SCHEDULE // VENTANA(S) DE TRABAJO (UTC):</b> </p>
+<ul>
+<li>Start Time: 12/August/2026 03:30 UTC (Backup Window)</li><li>EndTime: 1=
+2/August/2026 09:00 UTC (Backup Window)</li></ul>
+<br>
+<p></p>
+<br>
+<br>
+<p style=3D"margin-bottom: 20px;"><small style=3D"color: #8b8b8b;">[English=
+] If you experience any problems with your services due to the performing o=
+f this task, please contact our Capacity Services NOC at +511 411 0070 or e=
+mailing
+<a href=3D"mailto:customerservice.capacity@telxius.com" style=3D"color: rgb=
+(0,139,149); text-decoration: underline;">
+customerservice.capacity@telxius.com</a>. We apologize for any inconvenienc=
+e caused by this maintenance to you and your customers. If you have any add=
+itional questions, please do not hesitate to contact us. Our personnel will=
+ be permanently available for you.
+<br>
+[Espa=F1ol] Si experimenta alg=FAn problema con su servicio debido a la rea=
+lizaci=F3n de esta actividad programada, por favor comun=EDquese con nuestr=
+o NOC de Capacity Services v=EDa el +511 411 0070 o al correo
+<a href=3D"mailto:customerservice.capacity@telxius.com" style=3D"color: rgb=
+(0,139,149); text-decoration: underline;">
+customerservice.capacity@telxius.com</a>. Lamentamos los inconvenientes que=
+ este mantenimiento pueda causarle a usted o sus clientes. Si tiene alguna =
+otra pregunta, no dude en contactarnos, nuestro personal estar=E1 permanent=
+emente disponible para usted.
+</small></p>
+<br>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D"margin-top: 2rem;">
+<tbody>
+<tr>
+<td valign=3D"top" style=3D"font-family: Arial, Helvetica, sans-serif;"><im=
+g alt=3D"Telxius" style=3D"height: 25px; display: block; margin-bottom: 6px=
+;" data-outlook-trace=3D"F:0|T:1" src=3D"cid:logo">
+<p style=3D"color: rgb(0,139,149); font-size: 0.9rem; font-weight: bold; li=
+ne-height: 1.15; margin: 0;">
+Change Management &amp; Scheduled Works </p>
+<p style=3D"color: rgb(0,0,0); font-size: 0.9rem; font-weight: bold; line-h=
+eight: 1.15; margin: 0 0 0 0;">
+Customer Care &amp; Operations =96 Network Management </p>
+<p style=3D"margin: 0 0 3px 0; color: rgb(119,119,119); font-size: 0.8rem; =
+line-height: 1.15;">
+Lima - Per=FA</p>
+<p style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem; line-hei=
+ght: 1.2;">
+T +5112439440, +5114110079</p>
+<p style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem; line-hei=
+ght: 1.15;">
+M +51 979 255 498</p>
+<p style=3D"margin: 0; color: rgb(119,119,119); font-size: 0.8rem; line-hei=
+ght: 1.15;">
+<a href=3D"mailto:sworks@telxius.com" style=3D"color: rgb(0,139,149); text-=
+decoration: underline;">sworks@telxius.com</a>
+<span>| telxius.com</span> </p>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<hr>
+<font face=3D"Arial" color=3D"Gray" size=3D"1"><br>
+Este mensaje y sus adjuntos se dirigen exclusivamente a su destinatario, pu=
+ede contener informaci=F3n privilegiada o confidencial y es para uso exclus=
+ivo de la persona o entidad de destino. Si no es usted. el destinatario ind=
+icado, queda notificado de que la
+ lectura, utilizaci=F3n, divulgaci=F3n y/o copia sin autorizaci=F3n puede e=
+star prohibida en virtud de la legislaci=F3n vigente. Si ha recibido este m=
+ensaje por error, le rogamos que nos lo comunique inmediatamente por esta m=
+isma v=EDa y proceda a su destrucci=F3n.<br>
+<br>
+The information contained in this transmission is confidential and privileg=
+ed information intended only for the use of the individual or entity named =
+above. If the reader of this message is not the intended recipient, you are=
+ hereby notified that any dissemination,
+ distribution or copying of this communication is strictly prohibited. If y=
+ou have received this transmission in error, do not read it. Please immedia=
+tely reply to the sender that you have received this communication in error=
+ and then delete it.<br>
+<br>
+Esta mensagem e seus anexos se dirigem exclusivamente ao seu destinat=E1rio=
+, pode conter informa=E7=E3o privilegiada ou confidencial e =E9 para uso ex=
+clusivo da pessoa ou entidade de destino. Se n=E3o =E9 vossa senhoria o des=
+tinat=E1rio indicado, fica notificado de que a
+ leitura, utiliza=E7=E3o, divulga=E7=E3o e/ou c=F3pia sem autoriza=E7=E3o p=
+ode estar proibida em virtude da legisla=E7=E3o vigente. Se recebeu esta me=
+nsagem por erro, rogamos-lhe que nos o comunique imediatamente por esta mes=
+ma via e proceda a sua destrui=E7=E3o<br>
+</font>
+</body>
+</html>
+
+--_000_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_--
+
+--_004_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_
+Content-Type: image/png; name="logo.png"
+Content-Description: logo.png
+Content-Disposition: inline; filename="logo.png"; size=1821;
+	creation-date="Mon, 10 Aug 2026 19:44:21 GMT";
+	modification-date="Mon, 10 Aug 2026 19:44:21 GMT"
+Content-ID: <logo>
+Content-Transfer-Encoding: base64
+
+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
+
+--_004_AS5PR06MB106999800A244E3D776F45A10DEDE2AS5PR06MB10699eu_--

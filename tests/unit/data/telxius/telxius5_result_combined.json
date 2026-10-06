@@ -1,0 +1,16 @@
+[
+  {
+    "account": "acme.corp",
+    "circuits": [],
+    "end": 1786525200,
+    "maintenance_id": "SWX0037366",
+    "organizer": "sworks@telxius.com",
+    "provider": "telxius",
+    "sequence": 1,
+    "stamp": 1786391061,
+    "start": 1786505400,
+    "status": "CANCELLED",
+    "summary": "",
+    "uid": "0"
+  }
+]
