@@ -1,9 +1,8 @@
 ---
 dev_addr: "127.0.0.1:8001"
-edit_uri: "edit/main/circuit-maintenance-parser/docs"
-site_dir: "circuit-maintenance-parser/static/circuit-maintenance-parser/docs"
+edit_uri: "edit/develop/docs"
 site_name: "Circuit-Maintenance-Parser Documentation"
-site_url: "https://circuit-maintenance-parser.readthedocs.io/en/latest/"
+site_url: "https://docs.networktocode.com/projects/circuit-maintenance-parser/en/latest/"
 repo_url: "https://github.com/networktocode/circuit-maintenance-parser"
 copyright: "Copyright &copy; The Authors"
 theme:

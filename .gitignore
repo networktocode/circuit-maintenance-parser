@@ -125,7 +125,6 @@ venv.bak/
 
 # mkdocs documentation
 /site
-/circuit-maintenance-parser/static/
 
 # mypy
 .mypy_cache/
