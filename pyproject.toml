@@ -25,7 +25,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.15"
+python = ">=3.15,<3.16"
 click = ">=7.1, <9.0"
 pydantic = ">=1.10.4,<3"
 icalendar = "^5.0.0"
