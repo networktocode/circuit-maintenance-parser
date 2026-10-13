@@ -28,6 +28,7 @@ from circuit_maintenance_parser.provider import (
     Cirion,
     Cogent,
     Colt,
+    Comcast,
     CrownCastle,
     Equinix,
     EUNetworks,
@@ -332,6 +333,34 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             ],
             [
                 Path(dir_path, "data", "colt", "colt7_result.json"),
+            ],
+        ),
+        # Comcast
+        (
+            Comcast,
+            [
+                ("email", Path(dir_path, "data", "comcast", "comcast1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "comcast", "comcast1_result.json"),
+            ],
+        ),
+        (
+            Comcast,
+            [
+                ("email", Path(dir_path, "data", "comcast", "comcast2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "comcast", "comcast2_result.json"),
+            ],
+        ),
+        (
+            Comcast,
+            [
+                ("email", Path(dir_path, "data", "comcast", "comcast3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "comcast", "comcast3_result.json"),
             ],
         ),
         # Crown Castle

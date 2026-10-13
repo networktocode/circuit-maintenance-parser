@@ -22,6 +22,7 @@ from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cirion import HtmlParserCirion1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1, TextParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
+from circuit_maintenance_parser.parsers.comcast import HtmlParserComcast1
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.flag import HtmlParserFlag1, SubjectParserFlag1
@@ -345,6 +346,17 @@ class Colt(GenericProvider):
         ]
     )
     _default_organizer = PrivateAttr("PlannedWorks@colt.net")
+
+
+class Comcast(GenericProvider):
+    """Comcast provider custom class."""
+
+    _processors: List[GenericProcessor] = PrivateAttr(
+        [
+            CombinedProcessor(data_parsers=[EmailDateParser, HtmlParserComcast1]),
+        ]
+    )
+    _default_organizer = PrivateAttr("noreply@alerts.comcast.net")
 
 
 class CrownCastle(GenericProvider):
