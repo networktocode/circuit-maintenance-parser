@@ -92,6 +92,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - BSO
 - Cogent
 - Colt
+- Comcast
 - Crown Castle Fiber
 - Equinix
 - EXA (formerly GTT) (\*)
