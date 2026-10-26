@@ -39,6 +39,7 @@ openai = { version = ">=1.2.4", optional = true }
 openpyxl = { version = "^3.1.5", optional = true }
 pandas = { version = ">=2.2.3,<4", optional = true }
 python-dateutil = ">=2.9.0,<4"
+pytz = ">=2023.3"
 requests = ">=2.33.0,<3"
 urllib3 = ">=2.8.0,<3"
 certifi = ">=2026.10.19"

@@ -3085,10 +3085,9 @@ tzdata = "*"
 name = "pytz"
 version = "2026.5"
 description = "World timezone definitions, modern and historical"
-optional = true
+optional = false
 python-versions = "*"
 groups = ["main"]
-markers = "python_version == \"3.10\" and extra == \"xlsx\""
 files = [
     {file = "pytz-2026.5-py2.py3-none-any.whl", hash = "sha256:e658af3757f9e26a9d25dd2aff38335acd92bc9104f890a894b2c1ba28311b03"},
     {file = "pytz-2026.5.tar.gz", hash = "sha256:fa23724b9c486543b9ff54a327ee7569ac83ade54bb9afd0fc18676620401c86"},
@@ -3864,4 +3863,4 @@ xlsx = ["openpyxl", "pandas"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.15"
-content-hash = "83a7227f1195a7a17e7cfcb5ec17394efaadcad8d7d66f2466a9e14f434d0254"
+content-hash = "009ad4076f525dd858784ea1965e03908a1912516bd83b12134639020ed479cb"
