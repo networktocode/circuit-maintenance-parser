@@ -98,7 +98,7 @@ mkdocs-section-index = "0.3.10"
 mkdocstrings = "0.27.0"
 # Python-specific extension to mkdocstrings
 mkdocstrings-python = "1.13.0"
-griffe = "1.1.1"
+griffe = "1.15.0"
 
 [tool.poetry.scripts]
 circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
