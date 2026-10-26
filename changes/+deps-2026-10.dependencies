@@ -1,0 +1,1 @@
+Widened the `icalendar`, `chardet`, `timezonefinder`, `python-dateutil` and `pandas` ranges to allow their latest major versions, and refreshed development and documentation dependencies including ruff 0.17, griffe 1.15, invoke 3 and towncrier 26.

@@ -1,0 +1,1 @@
+Raised the minimum `certifi` (2026.10.19), `idna` (3.15) and `soupsieve` (2.9.0) versions and refreshed the lock file to resolve open Dependabot advisories, including the critical certifi emSign CA advisory.
