@@ -3863,4 +3863,4 @@ xlsx = ["openpyxl", "pandas"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.15"
-content-hash = "009ad4076f525dd858784ea1965e03908a1912516bd83b12134639020ed479cb"
+content-hash = "93aad53403c09f785338ea7ce8df50c2f1d160101e322033f5f1f26a4eaa72df"

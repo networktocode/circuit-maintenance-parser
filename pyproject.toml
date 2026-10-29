@@ -42,9 +42,6 @@ python-dateutil = ">=2.9.0,<4"
 pytz = ">=2023.3"
 requests = ">=2.33.0,<3"
 urllib3 = ">=2.8.0,<3"
-certifi = ">=2026.10.19"
-idna = ">=3.15,<4"
-soupsieve = ">=2.9.0,<4"
 # Floor `numpy` per Python version so 3.11+ (including 3.14) pulls modern wheels while 3.10 stays on the 2.2 line.
 numpy = [
     { version = ">=1.22.4,<2.3", python = "<3.11" },
