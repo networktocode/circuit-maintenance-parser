@@ -132,7 +132,7 @@ class Geolocator:
         raise ParserError("Timezone resolution not properly initalized.")
 
 
-def convert_timezone(time_str):
+def convert_timezone(time_str) -> datetime.datetime:
     """
     Converts a string representing a date/time in the format 'MM/DD/YY HH:MM Timezone' to a datetime object in UTC.
 

@@ -25,11 +25,7 @@ class SubjectParserApple(EmailSubjectParser):
 
 
 class TextParserApple(Text):
-    """Parse the plaintext content of an Apple notification.
-
-    Args:
-        Text (str): Plaintext message
-    """
+    """Parse the plaintext content of an Apple notification."""
 
     def parse_text(self, text: str) -> List[Dict]:
         """Extract attributes from an Apple notification email.
