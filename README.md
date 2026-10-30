@@ -230,6 +230,9 @@ Finally, with we retrieve the maintenances (it is a `List` because a notificatio
 maintenances = generic_provider.get_maintenances(data_to_process)
 
 print(maintenances[0].to_json())
+```
+
+```json
 {
 "account": "137.035999173",
 "circuits": [
