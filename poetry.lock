@@ -2373,15 +2373,15 @@ files = [
 
 [[package]]
 name = "openai"
-version = "3.37.0"
+version = "3.46.0"
 description = "The official Python library for the openai API"
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "extra == \"openai\""
 files = [
-    {file = "openai-3.37.0-py3-none-any.whl", hash = "sha256:d9f5b000f52397a7f9f946012744c5bc4c962eed3c100385252464c273a63e57"},
-    {file = "openai-3.37.0.tar.gz", hash = "sha256:670bd6f699000d43a2073bcf94374a55bb133bfe5de0d084d47eb9bb9f6a8e5d"},
+    {file = "openai-3.46.0-py3-none-any.whl", hash = "sha256:7b650117e9bf539029bf880c2eff94a26f281394f6572284efa5d068d4b1c98e"},
+    {file = "openai-3.46.0.tar.gz", hash = "sha256:fb34cd8cab6809ad0aa8dc42493fa622aaa87c814fd8e67a6fb3fa1f1e5d952d"},
 ]
 
 [package.dependencies]
@@ -2393,7 +2393,7 @@ sniffio = "*"
 typing-extensions = ">=4.14,<5"
 
 [package.extras]
-aiohttp = ["aiohttp (>=3.14.3)"]
+aiohttp = ["aiohttp (>=3.14.4)", "multidict (>=6.9.1)", "yarl (>=1.25.1)"]
 bedrock = ["botocore (>=1.40.0,<2)", "urllib3 (>=2.7.0,<3)"]
 datalib = ["numpy (>=1)", "pandas (>=1.2.3)"]
 realtime = ["websockets (>=13,<16)"]
