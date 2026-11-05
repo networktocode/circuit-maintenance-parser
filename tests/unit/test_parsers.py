@@ -16,6 +16,7 @@ from circuit_maintenance_parser.parsers.bso import HtmlParserBSO1
 from circuit_maintenance_parser.parsers.cirion import HtmlParserCirion1
 from circuit_maintenance_parser.parsers.cogent import HtmlParserCogent1, SubjectParserCogent1
 from circuit_maintenance_parser.parsers.colt import CsvParserColt1, SubjectParserColt1, SubjectParserColt2
+from circuit_maintenance_parser.parsers.comcast import HtmlParserComcast1
 from circuit_maintenance_parser.parsers.crowncastle import HtmlParserCrownCastle1
 from circuit_maintenance_parser.parsers.equinix import HtmlParserEquinix, SubjectParserEquinix
 from circuit_maintenance_parser.parsers.flag import HtmlParserFlag1, SubjectParserFlag1
@@ -23,6 +24,7 @@ from circuit_maintenance_parser.parsers.globalcloudxchange import HtmlParserGcx1
 from circuit_maintenance_parser.parsers.google import HtmlParserGoogle1, SubjectParserGoogle1
 from circuit_maintenance_parser.parsers.gtt import HtmlParserGTT1
 from circuit_maintenance_parser.parsers.hgc import HtmlParserHGC1, HtmlParserHGC2
+from circuit_maintenance_parser.parsers.kpn import XlsxParserKPN1
 from circuit_maintenance_parser.parsers.lumen import HtmlParserLumen1
 from circuit_maintenance_parser.parsers.megaport import HtmlParserMegaport1
 from circuit_maintenance_parser.parsers.momentum import HtmlParserMomentum1
@@ -305,6 +307,22 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "colt", "colt7.eml"),
             Path(dir_path, "data", "colt", "colt7_subject_parser_1_result.json"),
         ),
+        # Comcast
+        (
+            HtmlParserComcast1,
+            Path(dir_path, "data", "comcast", "comcast1.eml"),
+            Path(dir_path, "data", "comcast", "comcast1_html_parser_result.json"),
+        ),
+        (
+            HtmlParserComcast1,
+            Path(dir_path, "data", "comcast", "comcast2.eml"),
+            Path(dir_path, "data", "comcast", "comcast2_html_parser_result.json"),
+        ),
+        (
+            HtmlParserComcast1,
+            Path(dir_path, "data", "comcast", "comcast3.eml"),
+            Path(dir_path, "data", "comcast", "comcast3_html_parser_result.json"),
+        ),
         # Crown Castle Fiber
         (
             HtmlParserCrownCastle1,
@@ -507,6 +525,17 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "hgc", "hgc2.eml"),
             Path(dir_path, "data", "hgc", "hgc2_html_result.json"),
         ),
+        # KPN
+        (
+            XlsxParserKPN1,
+            Path(dir_path, "data", "kpn", "kpn1.xlsx"),
+            Path(dir_path, "data", "kpn", "kpn1_xlsx_parser_result.json"),
+        ),
+        (
+            XlsxParserKPN1,
+            Path(dir_path, "data", "kpn", "kpn2.xlsx"),
+            Path(dir_path, "data", "kpn", "kpn2_xlsx_parser_result.json"),
+        ),
         # Lumen
         (
             HtmlParserLumen1,
@@ -677,6 +706,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "summitig", "summitig.eml"),
             Path(dir_path, "data", "summitig", "summitig_html_parser_result.json"),
         ),
+        (
+            HtmlParserSummitIG,
+            Path(dir_path, "data", "summitig", "summitig_utc.eml"),
+            Path(dir_path, "data", "summitig", "summitig_utc_html_parser_result.json"),
+        ),
         # Tata
         (
             HtmlParserTata,
@@ -809,6 +843,11 @@ class NestedEncoder(json.JSONEncoder):
             SubjectParserTelxius1,
             Path(dir_path, "data", "telxius", "telxius4_subject.eml"),
             Path(dir_path, "data", "telxius", "telxius4_subject_result.json"),
+        ),
+        (
+            HtmlParserTelxius1,
+            Path(dir_path, "data", "telxius", "telxius5.eml"),
+            Path(dir_path, "data", "telxius", "telxius5_result.json"),
         ),
         # Turkcell
         (

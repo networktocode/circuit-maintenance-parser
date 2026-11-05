@@ -18,6 +18,7 @@ from circuit_maintenance_parser.provider import (
     FLAG,
     GTT,
     HGC,
+    KPN,
     NTT,
     PCCW,
     RETN,
@@ -27,12 +28,14 @@ from circuit_maintenance_parser.provider import (
     Cirion,
     Cogent,
     Colt,
+    Comcast,
     CrownCastle,
     Equinix,
     EUNetworks,
     GenericProvider,
     GlobalCloudXchange,
     Google,
+    Hawaiki,
     Lumen,
     Megaport,
     Momentum,
@@ -332,6 +335,34 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "colt", "colt7_result.json"),
             ],
         ),
+        # Comcast
+        (
+            Comcast,
+            [
+                ("email", Path(dir_path, "data", "comcast", "comcast1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "comcast", "comcast1_result.json"),
+            ],
+        ),
+        (
+            Comcast,
+            [
+                ("email", Path(dir_path, "data", "comcast", "comcast2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "comcast", "comcast2_result.json"),
+            ],
+        ),
+        (
+            Comcast,
+            [
+                ("email", Path(dir_path, "data", "comcast", "comcast3.eml")),
+            ],
+            [
+                Path(dir_path, "data", "comcast", "comcast3_result.json"),
+            ],
+        ),
         # Crown Castle
         (
             CrownCastle,
@@ -599,6 +630,43 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "google", "google9_completed_no_end_time_result.json"),
             ],
         ),
+        # Hawaiki - completion/update emails contain no "Maintenance Window" and are filtered to []
+        (
+            Hawaiki,
+            [
+                ("email", Path(dir_path, "data", "hawaiki", "hawaiki_completion.eml")),
+            ],
+            [],
+        ),
+        # Hawaiki - initial maintenance notification with Maintenance Window block
+        (
+            Hawaiki,
+            [
+                ("email", Path(dir_path, "data", "hawaiki", "hawaiki1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "hawaiki", "hawaiki1_result.json"),
+            ],
+        ),
+        # KPN
+        (
+            KPN,
+            [
+                ("email", Path(dir_path, "data", "kpn", "kpn1.eml")),
+            ],
+            [
+                Path(dir_path, "data", "kpn", "kpn1_result.json"),
+            ],
+        ),
+        (
+            KPN,
+            [
+                ("email", Path(dir_path, "data", "kpn", "kpn2.eml")),
+            ],
+            [
+                Path(dir_path, "data", "kpn", "kpn2_result.json"),
+            ],
+        ),
         # Lumen
         (
             Lumen,
@@ -859,6 +927,15 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
                 Path(dir_path, "data", "summitig", "summitig_result.json"),
             ],
         ),
+        (
+            SummitIG,
+            [
+                ("email", Path(dir_path, "data", "summitig", "summitig_utc.eml")),
+            ],
+            [
+                Path(dir_path, "data", "summitig", "summitig_utc_result.json"),
+            ],
+        ),
         # Tata
         (
             Tata,
@@ -982,6 +1059,11 @@ GENERIC_ICAL_RESULT_PATH = Path(dir_path, "data", "ical", "ical1_result.json")
             Telxius,
             [("email", Path(dir_path, "data", "telxius", "telxius3.eml"))],
             [Path(dir_path, "data", "telxius", "telxius3_result_combined.json")],
+        ),
+        (
+            Telxius,
+            [("email", Path(dir_path, "data", "telxius", "telxius5.eml"))],
+            [Path(dir_path, "data", "telxius", "telxius5_result_combined.json")],
         ),
         # Turkcell
         (

@@ -1,0 +1,21 @@
+[
+    {
+        "account": "Customer info unavailable",
+        "circuits": [
+            {
+                "circuit_id": "HW-CID-12345",
+                "impact": "NO-IMPACT"
+            }
+        ],
+        "end": 1785963600,
+        "maintenance_id": "2026072290001004",
+        "organizer": "support@bw-digital.com",
+        "provider": "hawaiki",
+        "sequence": 1,
+        "stamp": 1785960000,
+        "start": 1785960000,
+        "status": "CONFIRMED",
+        "summary": "Hawaiki maintenance notification",
+        "uid": "0"
+    }
+]

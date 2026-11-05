@@ -16,6 +16,7 @@ import bs4  # type: ignore
 from bs4.element import ResultSet  # type: ignore
 from circuit_maintenance_parser.parser import Html
 
+
 class HtmlParserABCDE1(Html):
     def parse_html(self, soup: ResultSet) -> Dict:
         data = {}
@@ -23,11 +24,9 @@ class HtmlParserABCDE1(Html):
         self._parse_tables(soup.find_all("table"), data)
         return [data]
 
-    def _parse_bs(self, btags: ResultSet, data: Dict):
-        ...
+    def _parse_bs(self, btags: ResultSet, data: Dict): ...
 
-    def _parse_tables(self, tables: ResultSet, data: Dict):
-        ...
+    def _parse_tables(self, tables: ResultSet, data: Dict): ...
 ```
 
 ### Step 2: Update Parser Tests
@@ -115,7 +114,7 @@ If you were to add loggers or debuggers to one of the classes:
 class HtmlParserZayo1(Html):
     def parse_bs(self, btags: ResultSet, data: dict):
         """Parse B tag."""
-        raise Exception('Debugging exception')
+        raise Exception("Debugging exception")
 ```
 
 After running `poetry install`:

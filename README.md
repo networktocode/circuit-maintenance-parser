@@ -92,12 +92,15 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - BSO
 - Cogent
 - Colt
+- Comcast
 - Crown Castle Fiber
 - Equinix
 - EXA (formerly GTT) (\*)
 - HGC
 - Global Cloud Xchange
 - Google
+- Hawaiki
+- KPN
 - Lumen
 - Megaport
 - Momentum
@@ -105,6 +108,7 @@ By default, there is a `GenericProvider` that supports a `SimpleProcessor` using
 - PCCW
 - Seaborn
 - Sparkle
+- SummitIG
 - Tata
 - Telstra (\*)
 - Turkcell
@@ -226,6 +230,9 @@ Finally, with we retrieve the maintenances (it is a `List` because a notificatio
 maintenances = generic_provider.get_maintenances(data_to_process)
 
 print(maintenances[0].to_json())
+```
+
+```json
 {
 "account": "137.035999173",
 "circuits": [

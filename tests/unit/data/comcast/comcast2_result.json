@@ -1,0 +1,17 @@
+[
+  {
+    "account": "Example Customer Inc",
+    "circuits": [
+      {
+        "circuit_id": "BBE-0000-00000-0",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1789988400,
+    "maintenance_id": "CHG000000002",
+    "stamp": 1789409472,
+    "start": 1789966800,
+    "status": "CONFIRMED",
+    "summary": "pe01.example NCS5500 System 24.2.21 code upgrade"
+  }
+]

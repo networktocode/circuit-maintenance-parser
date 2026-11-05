@@ -1,0 +1,16 @@
+[
+  {
+    "account": "Example Customer Inc",
+    "circuits": [
+      {
+        "circuit_id": "00000/10G/EXAMPLE/EXAMPLE01",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1792587600,
+    "maintenance_id": "CHG000000001",
+    "start": 1792566000,
+    "status": "CONFIRMED",
+    "summary": "Customer Circuit Migration from pe01.example to pe02.example"
+  }
+]
