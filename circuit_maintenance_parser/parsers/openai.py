@@ -26,7 +26,7 @@ class OpenAIParser(LLM):
             raise ImportError("openai extra is required to use OpenAIParser.")
 
         client = OpenAI(api_key=os.getenv("PARSER_OPENAI_API_KEY"))
-        model = os.getenv("PARSER_OPENAI_MODEL", "gpt-3.5-turbo")
+        model = os.getenv("PARSER_OPENAI_MODEL", "gpt-4o-mini")
         try:
             response = client.chat.completions.create(
                 model=model,
@@ -60,5 +60,3 @@ class OpenAIParser(LLM):
         except ValueError as err:
             logger.error(err)
             return None
-
-        return None
