@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "circuit-maintenance-parser"
-version = "2.13.1b1"
+version = "2.14.0b1"
 description = "Python library to parse Circuit Maintenance notifications and return a structured data back"
 authors = ["Network to Code, LLC <opensource@networktocode.com>"]
 license = "Apache-2.0"
@@ -13,7 +13,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -25,11 +24,11 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.15"
+python = ">=3.11.5,<3.15"
 click = ">=7.1, <9.0"
 pydantic = ">=1.10.4,<3"
 icalendar = ">=5.0.0,<8"
-bs4 = "^0.0.2"
+beautifulsoup4 = "~4.15.0"
 lxml = ">=6.1.0,<7"
 geopy = "^2.5.0"
 timezonefinder = ">=6.0.1,<10.0.0"
@@ -42,11 +41,7 @@ python-dateutil = ">=2.9.0,<4"
 pytz = ">=2023.3"
 requests = ">=2.33.0,<3"
 urllib3 = ">=2.8.0,<3"
-# Floor `numpy` per Python version so 3.11+ (including 3.14) pulls modern wheels while 3.10 stays on the 2.2 line.
-numpy = [
-    { version = ">=1.22.4,<2.3", python = "<3.11" },
-    { version = ">=2.3,<3", python = ">=3.11" },
-]
+numpy = ">=2.3,<3"
 
 [tool.poetry.extras]
 xlsx = [
@@ -106,7 +101,7 @@ circuit-maintenance-parser = "circuit_maintenance_parser.cli:main"
 
 [tool.ruff]
 line-length = 120
-target-version = "py310"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = [
