@@ -4,8 +4,8 @@ about: Report a reproducible bug in the current release of circuit-maintenance-p
 ---
 
 ### Environment
-* Python version:  <!-- Example: 3.10 -->
-* circuit-maintenance-parser version:  <!-- Example: 1.0.0 -->
+* Python version:  <!-- Example: 3.12 -->
+* circuit-maintenance-parser version:  <!-- Example: 2.13.0 -->
 
 <!-- What did you expect to happen? -->
 ### Expected Behavior

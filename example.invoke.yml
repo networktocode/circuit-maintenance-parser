@@ -1,6 +1,6 @@
 ---
 circuit-maintenance-parser:
-  python_ver: "3.10"
+  python_ver: "3.13"
   local: false
   # image_name: "circuit-maintenance-parser"
   # image_ver: "latest"

@@ -36,7 +36,7 @@ namespace.configure(
     {
         "circuit_maintenance_parser": {
             "project_name": "circuit_maintenance_parser",
-            "python_ver": "3.10",
+            "python_ver": "3.13",
             "local": is_truthy(os.getenv("INVOKE_PARSER_LOCAL", "false")),
             "image_name": "circuit_maintenance_parser",
             "image_ver": os.getenv("INVOKE_PARSER_IMAGE_VER", "latest"),

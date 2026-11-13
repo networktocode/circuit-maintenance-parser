@@ -1,0 +1,2 @@
+Dropped support for Python 3.10 as it has reached end-of-life. The minimum required Python version is now 3.11.5.
+Removed dependency on placeholder package `bs4` and replaced it with a direct dependency on `beautifulsoup4`.
