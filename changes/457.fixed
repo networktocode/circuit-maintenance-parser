@@ -1,0 +1,1 @@
+Fixed Crown Castle Fiber notifications sent under the Zayo template failing to parse because the indented "Dear ..." greeting was not recognised as the account.

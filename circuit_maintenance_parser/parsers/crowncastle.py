@@ -23,7 +23,7 @@ class HtmlParserCrownCastle1(Html):
 
         for paragraph in soup.find_all("p"):
             for pstring in paragraph.strings:
-                search = re.match(r"^Dear (.*),", pstring)
+                search = re.match(r"^\s*Dear (.*),", pstring)
                 if search:
                     data["account"] = search.group(1)
 

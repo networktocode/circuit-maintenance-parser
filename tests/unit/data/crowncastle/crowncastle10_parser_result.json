@@ -1,0 +1,20 @@
+[
+  {
+    "account": "Example Customer",
+    "circuits": [
+      {
+        "circuit_id": "000001-WAVE-CCF",
+        "impact": "OUTAGE"
+      },
+      {
+        "circuit_id": "000002-DFBR-CCF",
+        "impact": "OUTAGE"
+      }
+    ],
+    "end": 1795528800,
+    "maintenance_id": "CM20260000001",
+    "start": 1795507200,
+    "status": "RE-SCHEDULED",
+    "summary": "Please note this maintenance has been rescheduled to the dates/times listed above. Zayo Fiber apologizes for any resulting inconvenience and assure you of our efforts to minimize any service disruption."
+  }
+]
