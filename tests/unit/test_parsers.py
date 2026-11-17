@@ -359,6 +359,11 @@ class NestedEncoder(json.JSONEncoder):
             Path(dir_path, "data", "crowncastle", "crowncastle9.html"),
             Path(dir_path, "data", "crowncastle", "crowncastle9_parser_result.json"),
         ),
+        (
+            HtmlParserCrownCastle1,
+            Path(dir_path, "data", "crowncastle", "crowncastle10.html"),
+            Path(dir_path, "data", "crowncastle", "crowncastle10_parser_result.json"),
+        ),
         # Equinix
         (
             HtmlParserEquinix,
