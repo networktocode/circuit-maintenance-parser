@@ -1,0 +1,1 @@
+Removed support for Python 3.10, which has reached end-of-life; the minimum supported Python version is now 3.11.5.
